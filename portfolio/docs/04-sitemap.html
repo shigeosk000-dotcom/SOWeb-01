@@ -1,24 +1,39 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>サイトマップ -  プロジェクトアーカイブ</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+  <title>サイトマップ - プロジェクトアーカイブ</title>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
   <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .tree {
+      background: #faf7f0;
+      border-left: 6px solid #b08d57;
+      border-radius: 12px;
+      padding: 24px 28px;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      white-space: pre-wrap;
+      font-size: 15px;
+      color: #3c342b;
+    }
+  </style>
 </head>
+
 <body>
   <button class="hamburger" aria-label="メニュー">
     <span></span><span></span><span></span>
   </button>
 
   <div class="page-wrapper">
-  <aside class="sidebar" data-nav-level="docs"></aside>
+    <aside class="sidebar" data-nav-level="docs"></aside>
 
     <main class="main-content">
       <header class="doc-header">
         <div class="doc-category">DOCUMENT 04</div>
-        <h1 class="doc-title">サイトマップ</h1>
+        <h1 class="doc-title">サイトマップ（Phase 2 完了時）</h1>
         <div class="doc-meta">
           <span><span class="material-symbols-outlined icon-sm">calendar_today</span> 作成日：2026-XX-XX</span>
           <span><span class="material-symbols-outlined icon-sm">person</span> 作成者：（氏名を入力）</span>
@@ -38,7 +53,8 @@
           </div>
           <div class="external-link-input">
             <input type="text" placeholder="https://docs.google.com/spreadsheets/d/xxxxx" id="external-link-04">
-            <a href="#" class="link-btn" onclick="window.open(document.getElementById('external-link-04').value || 'https://docs.google.com', '_blank'); return false;">
+            <a href="#" class="link-btn"
+              onclick="window.open(document.getElementById('external-link-04').value || 'https://docs.google.com', '_blank'); return false;">
               <span class="material-symbols-outlined">open_in_new</span>
               開く
             </a>
@@ -58,20 +74,152 @@
         <section class="section" id="sec1">
           <h2 class="section-title"><span class="section-icon">1</span> サイト構造図</h2>
 
-        <div class="fill-block">
-          <div class="fill-label">Webサイト構造図 <span class="required">必須</span></div>
-          <div class="fill-hint">トップページから下層ページまでの階層構造をツリー形式で記載</div>
-          <div class="fill-content">
-            <p>（ツリー形式のサイト構造図を記載）</p>
+          <div class="fill-block">
+            <div class="fill-label">Webサイト構造図 <span class="required">必須</span></div>
+            <div class="fill-hint">トップページから下層ページまでの階層構造をツリー形式で記載</div>
+            <div class="fill-content">
+              <div class="tree">トップページ
+                ├── 体験プログラム一覧ページ
+                │ ・ 体験詳細
+                │ ・ 料金・所要時間
+                │ ・ ギャラリー（写真・動画）
+                │
+                ├── 予約ページ
+                │ ├── 日程選択
+                │ ├── 人数・プラン選択
+                │ ├── 顧客情報入力（多言語対応）
+                │ └── 予約完了・確認ページ
+                │
+                ├── コンセプト・サービス紹介ページ
+                │ ・ ブランドストーリー（和香巡りとは）
+                │ ・ 日本素材の紹介（檜・柚子・桜など）
+                │ ・ 体験の流れ（ステップ形式）
+                │
+                ├── ギャラリー・体験紹介ページ
+                │ ・ ユーザー投稿（SNS連携）
+                │ ・ レビュー・口コミ
+                │ ・ 体験風景（動画）
+                │ ・ インフルエンサー体験記事
+                │
+                ├── オンラインショップ（EC）
+                │ ├── 商品一覧（香水・ハンドクリームなど）
+                │ ├── 商品詳細ページ
+                │ │ ├── 香りの説明
+                │ │ ├── 原材料・ストーリー
+                │ │ └── レビュー
+                │ ├── マイページ
+                │ │ ├── 購入履歴
+                │ │ ├── 予約履歴
+                │ │ ├── マイレシピ再購入（体験ユーザー専用）
+                │ │ ├── お気に入り
+                │ │ └── 会員情報・配送先管理
+                │ └── カート・購入ページ
+                │
+                ├── アクセス・店舗情報ページ
+                　 ・ 地図（Google Maps）
+                　 ・ 営業時間・所在地
+                　 ・ よくある質問（FAQ）</div>
+            </div>
           </div>
-        </div>
-        <div class="fill-block">
-          <div class="fill-label">Webアプリケーション構造図 <span class="required">必須</span></div>
-          <div class="fill-hint">Spring Bootアプリケーションの画面構造をツリー形式で記載</div>
-          <div class="fill-content">
-            <p>（ツリー形式のアプリ構造図を記載）</p>
+          <div class="fill-block">
+            <div class="fill-label">Webアプリケーション構造図 <span class="required">必須</span></div>
+            <div class="fill-hint">Spring Bootアプリケーションの画面構造をツリー形式で記載</div>
+            <div class="fill-content">
+              <div class="tree">管理システム
+                ├── ログイン前
+                │ ├── ログイン画面
+                │ │ ├── メールアドレス入力
+                │ │ ├── パスワード入力
+                │ │ └── ログイン実行
+                │ ├── パスワード再設定画面
+                │ │ ├── メールアドレス入力
+                │ │ └── 再設定メール送信
+                │ └── エラー画面
+                │ ├── ログイン失敗
+                │ ├── 403
+                │ └── 404
+                │
+                └── ログイン後
+                ├── ダッシュボード
+                │ ├── 予約状況サマリー
+                │ ├── 顧客数サマリー
+                │ ├── 注文状況サマリー
+                │ └── 在庫状況サマリー
+                │
+                ├── 予約管理機能
+                │ ├── 予約一覧
+                │ │ ├── 検索
+                │ │ └── 予約状況絞り込み
+                │ ├── 予約詳細
+                │ ├── 予約登録
+                │ ├── 予約編集
+                │ └── 予約削除
+                │
+                ├── 顧客情報管理機能
+                │ ├── 顧客一覧
+                │ │ ├── 検索
+                │ │ └── 国籍・利用履歴絞り込み
+                │ ├── 顧客詳細
+                │ ├── 顧客登録
+                │ ├── 顧客編集
+                │ └── 顧客削除
+                │
+                ├── 香りレシピ管理機能
+                │ ├── レシピ一覧
+                │ │ ├── 検索
+                │ │ └── 顧客別表示
+                │ ├── レシピ詳細
+                │ ├── レシピ登録
+                │ ├── レシピ編集
+                │ └── レシピ削除
+                │
+                ├── 商品・在庫管理機能
+                │ ├── 商品一覧
+                │ │ ├── 検索
+                │ │ └── カテゴリ絞り込み
+                │ ├── 商品詳細
+                │ ├── 商品登録
+                │ ├── 商品編集
+                │ ├── 商品削除
+                │ ├── 在庫一覧
+                │ ├── 在庫更新
+                │ └── 在庫アラート確認
+                │
+                ├── EC注文管理機能
+                │ ├── 注文一覧
+                │ │ ├── 検索
+                │ │ └── 注文状況絞り込み
+                │ ├── 注文詳細
+                │ ├── 配送先確認
+                │ ├── 発送状況更新
+                │ └── 決済状況確認
+                │
+                ├── 多言語対応管理機能
+                │ ├── 予約確認メール管理
+                │ ├── 案内文管理
+                │ └── 管理画面文言管理
+                │
+                ├── レビュー・口コミ管理機能
+                │ ├── レビュー一覧
+                │ │ ├── 検索
+                │ │ └── 評価絞り込み
+                │ ├── レビュー詳細
+                │ ├── 公開設定
+                │ └── レビュー削除
+                │
+                ├── アカウント設定
+                │ ├── 管理者情報確認
+                │ ├── パスワード変更
+                │ └── ログアウト
+                │
+                └── 共通機能
+                ├── 検索結果一覧
+                ├── 新規登録完了
+                ├── 編集完了
+                ├── 削除確認
+                └── 削除完了</div>
+            </div>
           </div>
-        </div>
 
         </section>
 
@@ -80,29 +228,323 @@
 
           <div class="fill-block">
             <div class="fill-label">Webサイト ページ一覧 <span class="required">必須</span></div>
-        <table class="doc-table">
-          <thead><tr><th>No.</th><th>ページ名</th><th>ページの目的</th><th>主要コンテンツ</th></tr></thead>
-          <tbody>
-          <tr class="template-row"><td>1</td><td>（トップページ）</td><td>（サービスの魅力を伝え、各ページへ誘導）</td><td>（ヒーロー、サービス紹介、CTA等）</td></tr>
-          <tr class="template-row"><td>2</td><td>（ページ名）</td><td>（目的を記載）</td><td>（コンテンツを記載）</td></tr>
-          <tr class="template-row"><td>3</td><td>（ページ名）</td><td>（目的を記載）</td><td>（コンテンツを記載）</td></tr>
-          <tr class="template-row"><td>…</td><td>…</td><td>…</td><td>…</td></tr>
-          </tbody>
-        </table>
+            <table class="doc-table">
+              <thead>
+                <tr>
+                  <th>No.</th>
+                  <th>ページ名</th>
+                  <th>ページの目的</th>
+                  <th>主要コンテンツ</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>トップページ</td>
+                  <td>サービスの魅力を直感的に伝え、予約・詳細ページへ誘導する</td>
+                  <td>キャッチコピー、体験イメージ写真、サービス概要、予約ボタン、口コミ抜粋</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>体験プログラム一覧ページ</td>
+                  <td>提供している体験プログラムを一覧で見せ、興味のある詳細ページへ導く</td>
+                  <td>体験プログラム一覧、概要、所要時間、料金概要、詳細リンク</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>体験詳細ページ</td>
+                  <td>体験内容を具体的に理解させ、予約への不安を解消する</td>
+                  <td>体験の流れ、料金、所要時間、使用素材、完成品イメージ、FAQ、予約導線</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>予約ページ</td>
+                  <td>スムーズに予約完了まで導き、CVを最大化する</td>
+                  <td>日程選択、人数・プラン選択、多言語対応フォーム、注意事項、予約確認</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>予約完了・確認ページ</td>
+                  <td>予約完了を通知し、来店までの不安を減らす</td>
+                  <td>予約内容確認、来店案内、注意事項、確認メール案内</td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td>コンセプト・サービス紹介ページ</td>
+                  <td>ブランドの世界観やストーリーを伝え、共感を生む</td>
+                  <td>ブランドストーリー、和香巡りとは、日本素材の紹介、体験の流れ</td>
+                </tr>
+                <tr>
+                  <td>7</td>
+                  <td>ギャラリー・体験紹介ページ</td>
+                  <td>体験の魅力を視覚的に伝え、SNS拡散を促す</td>
+                  <td>写真、動画、体験風景、ユーザー投稿、レビュー・口コミ、インフルエンサー体験記事</td>
+                </tr>
+                <tr>
+                  <td>8</td>
+                  <td>オンラインショップ（EC）トップ</td>
+                  <td>体験後の継続購入につなげる</td>
+                  <td>商品カテゴリ一覧、おすすめ商品、再購入導線、ログイン導線</td>
+                </tr>
+                <tr>
+                  <td>9</td>
+                  <td>商品一覧ページ</td>
+                  <td>販売商品を一覧で見せ、商品詳細へ導く</td>
+                  <td>香水、ハンドクリームなどの商品一覧、カテゴリ、価格、絞り込み</td>
+                </tr>
+                <tr>
+                  <td>10</td>
+                  <td>商品詳細ページ</td>
+                  <td>商品の魅力を伝え、購入判断を後押しする</td>
+                  <td>香りの説明、原材料、ストーリー、価格、レビュー、購入ボタン</td>
+                </tr>
+                <tr>
+                  <td>11</td>
+                  <td>カート・購入ページ</td>
+                  <td>商品購入を完了させる</td>
+                  <td>カート内容、数量変更、配送先入力、決済情報入力、注文確定</td>
+                </tr>
+                <tr>
+                  <td>12</td>
+                  <td>マイページ</td>
+                  <td>購入・予約・再購入を一元管理し、継続利用を促す</td>
+                  <td>購入履歴、予約履歴、マイレシピ再購入、お気に入り、会員情報・配送先管理</td>
+                </tr>
+                <tr>
+                  <td>13</td>
+                  <td>アクセス・店舗情報ページ</td>
+                  <td>来店ハードルを下げ、安心して訪問できるようにする</td>
+                  <td>地図、最寄駅、営業時間、所在地、多言語案内、よくある質問(FAQ)</td>
+                </tr>
+              </tbody>
+            </table>
 
           </div>
 
           <div class="fill-block">
             <div class="fill-label">Webアプリ 画面一覧 <span class="required">必須</span></div>
-        <table class="doc-table">
-          <thead><tr><th>No.</th><th>画面名</th><th>画面の目的</th><th>主要機能</th></tr></thead>
-          <tbody>
-          <tr class="template-row"><td>1</td><td>（ログイン画面）</td><td>（ユーザー認証）</td><td>（メールアドレス/パスワード入力）</td></tr>
-          <tr class="template-row"><td>2</td><td>（一覧画面）</td><td>（データの一覧表示）</td><td>（検索・ソート・ページネーション）</td></tr>
-          <tr class="template-row"><td>3</td><td>（登録画面）</td><td>（新規データ登録）</td><td>（入力フォーム・バリデーション）</td></tr>
-          <tr class="template-row"><td>…</td><td>…</td><td>…</td><td>…</td></tr>
-          </tbody>
-        </table>
+            <table class="doc-table">
+              <thead>
+                <tr>
+                  <th>No.</th>
+                  <th>画面名</th>
+                  <th>画面の目的</th>
+                  <th>主要機能</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>ログイン画面</td>
+                  <td>管理者・運営担当者が安全にシステムへアクセスする</td>
+                  <td>メールアドレス入力、パスワード入力、ログインボタン</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>パスワード再設定画面</td>
+                  <td>ログインできないユーザーの再設定を支援する</td>
+                  <td>メールアドレス入力、再設定メール送信</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>ダッシュボード</td>
+                  <td>運営状況をひと目で確認し、主要機能へ遷移する</td>
+                  <td>予約状況サマリー、顧客数サマリー、注文状況サマリー、在庫状況サマリー</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>予約一覧画面</td>
+                  <td>予約情報を一覧で確認し、検索・絞り込み・詳細確認を行う</td>
+                  <td>予約一覧、検索フォーム、予約状況絞り込み、詳細リンク</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>予約詳細画面</td>
+                  <td>個別予約の内容を確認し、運営対応に活用する</td>
+                  <td>来店日時、人数、体験コース、予約状況、顧客情報</td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td>予約登録画面</td>
+                  <td>予約情報を新規登録する</td>
+                  <td>来店日時入力、人数入力、体験コース選択、顧客情報入力</td>
+                </tr>
+                <tr>
+                  <td>7</td>
+                  <td>予約編集画面</td>
+                  <td>既存予約を更新し、変更・調整に対応する</td>
+                  <td>予約内容編集フォーム、更新ボタン、ステータス変更</td>
+                </tr>
+                <tr>
+                  <td>8</td>
+                  <td>予約削除確認画面</td>
+                  <td>予約削除前の確認を行い、誤操作を防ぐ</td>
+                  <td>予約情報確認、削除確認メッセージ、削除実行ボタン</td>
+                </tr>
+                <tr>
+                  <td>9</td>
+                  <td>顧客一覧画面</td>
+                  <td>顧客情報を一覧で確認し、検索・絞り込みを行う</td>
+                  <td>顧客一覧、検索フォーム、国籍絞り込み、利用履歴絞り込み</td>
+                </tr>
+                <tr>
+                  <td>10</td>
+                  <td>顧客詳細画面</td>
+                  <td>顧客の基本情報や利用履歴を確認する</td>
+                  <td>氏名、国籍、連絡先、利用履歴、購入履歴</td>
+                </tr>
+                <tr>
+                  <td>11</td>
+                  <td>顧客登録画面</td>
+                  <td>新規顧客情報を登録する</td>
+                  <td>氏名、国籍、メールアドレス、電話番号、備考入力</td>
+                </tr>
+                <tr>
+                  <td>12</td>
+                  <td>顧客編集画面</td>
+                  <td>顧客情報を更新し、最新状態を維持する</td>
+                  <td>顧客情報編集フォーム、保存ボタン</td>
+                </tr>
+                <tr>
+                  <td>13</td>
+                  <td>顧客削除確認画面</td>
+                  <td>顧客削除前の確認を行う</td>
+                  <td>顧客情報確認、削除確認メッセージ、削除実行ボタン</td>
+                </tr>
+                <tr>
+                  <td>14</td>
+                  <td>香りレシピ一覧画面</td>
+                  <td>体験で作成された香りレシピを一覧で確認・検索する</td>
+                  <td>レシピ一覧、検索フォーム、顧客別表示、詳細リンク</td>
+                </tr>
+                <tr>
+                  <td>15</td>
+                  <td>香りレシピ詳細画面</td>
+                  <td>個別レシピの配合情報を確認し、再制作や再注文に活用する</td>
+                  <td>レシピ名、香り配合データ、作成日、紐づく顧客情報</td>
+                </tr>
+                <tr>
+                  <td>16</td>
+                  <td>香りレシピ登録画面</td>
+                  <td>新しい香りレシピを登録する</td>
+                  <td>顧客選択、レシピ名入力、香り素材入力、配合情報入力</td>
+                </tr>
+                <tr>
+                  <td>17</td>
+                  <td>香りレシピ編集画面</td>
+                  <td>既存レシピを修正する</td>
+                  <td>レシピ情報編集フォーム、保存ボタン</td>
+                </tr>
+                <tr>
+                  <td>18</td>
+                  <td>香りレシピ削除確認画面</td>
+                  <td>レシピ削除前の確認を行う</td>
+                  <td>レシピ情報確認、削除確認メッセージ、削除実行ボタン</td>
+                </tr>
+                <tr>
+                  <td>19</td>
+                  <td>商品一覧画面</td>
+                  <td>販売商品を一覧で確認し、管理対象を探しやすくする</td>
+                  <td>商品一覧、検索フォーム、カテゴリ絞り込み、詳細リンク</td>
+                </tr>
+                <tr>
+                  <td>20</td>
+                  <td>商品詳細画面</td>
+                  <td>商品の基本情報と販売状態を確認する</td>
+                  <td>商品名、カテゴリ、価格、説明、在庫情報</td>
+                </tr>
+                <tr>
+                  <td>21</td>
+                  <td>商品登録画面</td>
+                  <td>新しい商品を登録する</td>
+                  <td>商品名、カテゴリ、価格、説明、画像、公開設定</td>
+                </tr>
+                <tr>
+                  <td>22</td>
+                  <td>商品編集画面</td>
+                  <td>既存商品の情報を更新する</td>
+                  <td>商品情報編集フォーム、保存ボタン</td>
+                </tr>
+                <tr>
+                  <td>23</td>
+                  <td>商品削除確認画面</td>
+                  <td>商品削除前の確認を行う</td>
+                  <td>商品情報確認、削除確認メッセージ、削除実行ボタン</td>
+                </tr>
+                <tr>
+                  <td>24</td>
+                  <td>在庫一覧画面</td>
+                  <td>在庫状況を一覧で確認し、欠品リスクを把握する</td>
+                  <td>在庫一覧、在庫数、しきい値、アラート表示</td>
+                </tr>
+                <tr>
+                  <td>25</td>
+                  <td>在庫更新画面</td>
+                  <td>入庫・出庫を反映し、在庫数を正確に保つ</td>
+                  <td>対象商品選択、在庫数入力、更新理由入力</td>
+                </tr>
+                <tr>
+                  <td>26</td>
+                  <td>注文一覧画面</td>
+                  <td>EC注文を一覧で確認し、進行状況を管理する</td>
+                  <td>注文一覧、検索フォーム、注文状況絞り込み、詳細リンク</td>
+                </tr>
+                <tr>
+                  <td>27</td>
+                  <td>注文詳細画面</td>
+                  <td>個別注文の内容を確認し、発送対応につなげる</td>
+                  <td>注文商品、数量、配送先、注文状況、決済状況</td>
+                </tr>
+                <tr>
+                  <td>28</td>
+                  <td>注文ステータス更新画面</td>
+                  <td>注文の進行状況を更新する</td>
+                  <td>注文ステータス変更、発送状況更新、メモ入力</td>
+                </tr>
+                <tr>
+                  <td>29</td>
+                  <td>多言語対応管理画面</td>
+                  <td>予約確認メールや案内文などの多言語文言を管理する</td>
+                  <td>言語選択、予約確認メール文面、案内文、管理画面文言</td>
+                </tr>
+                <tr>
+                  <td>30</td>
+                  <td>レビュー一覧画面</td>
+                  <td>投稿されたレビュー・口コミを確認し、管理する</td>
+                  <td>レビュー一覧、検索フォーム、評価絞り込み、詳細リンク</td>
+                </tr>
+                <tr>
+                  <td>31</td>
+                  <td>レビュー詳細画面</td>
+                  <td>個別レビューの内容を確認し、公開判断を行う</td>
+                  <td>評価、コメント、投稿日時、紐づく予約情報</td>
+                </tr>
+                <tr>
+                  <td>32</td>
+                  <td>レビュー公開設定画面</td>
+                  <td>レビューの公開・非公開を切り替える</td>
+                  <td>公開状態表示、切替ボタン、管理メモ</td>
+                </tr>
+                <tr>
+                  <td>33</td>
+                  <td>アカウント設定画面</td>
+                  <td>管理者自身の情報や認証情報を管理する</td>
+                  <td>管理者情報、パスワード変更、通知設定、ログアウト導線</td>
+                </tr>
+                <tr>
+                  <td>34</td>
+                  <td>共通完了画面</td>
+                  <td>登録・編集・削除などの処理完了をユーザーに伝える</td>
+                  <td>完了メッセージ、戻るボタン、一覧へ戻るリンク</td>
+                </tr>
+                <tr>
+                  <td>35</td>
+                  <td>エラー画面</td>
+                  <td>権限不足やページ未存在時に適切な案内を行う</td>
+                  <td>403メッセージ、404メッセージ、トップへ戻るリンク</td>
+                </tr>
+              </tbody>
+            </table>
 
           </div>
         </section>
@@ -110,20 +552,124 @@
         <section class="section" id="sec3">
           <h2 class="section-title"><span class="section-icon">3</span> ユーザーフロー</h2>
 
-        <div class="fill-block">
-          <div class="fill-label">メインシナリオ <span class="required">必須</span></div>
-          <div class="fill-hint">ペルソナがサイトに訪問してから目的を達成するまでの動線（メインの行動パターン）</div>
-          <div class="fill-content">
-            <p>（メインのユーザーフローを記載）</p>
+          <div class="fill-block">
+            <div class="fill-label">メインシナリオ <span class="required">必須</span></div>
+            <div class="fill-hint">ペルソナがサイトに訪問してから目的を達成するまでの動線（メインの行動パターン）</div>
+            <div class="fill-content">
+
+              <div class="info-box">
+                <strong>目的：</strong>香りづくり体験予約から体験、帰国して作った香りのECサイト購入
+              </div>
+
+              <h2>行動フロー一覧</h2>
+
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>ステップ</th>
+                      <th>行動</th>
+                      <th>表示ページ</th>
+                      <th>次のアクション</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1. 認知・流入</td>
+                      <td>SNSや検索からサービスを見つける</td>
+                      <td>トップページ</td>
+                      <td>サービスに興味を持ち、詳細を確認する</td>
+                    </tr>
+                    <tr>
+                      <td>2. 興味・理解</td>
+                      <td>サービス内容やブランドの世界観を知る</td>
+                      <td>コンセプト・サービス紹介ページ</td>
+                      <td>体験内容を具体的に理解する</td>
+                    </tr>
+                    <tr>
+                      <td>3. 体験内容の確認</td>
+                      <td>料金や流れ、使用素材を確認する</td>
+                      <td>体験詳細ページ</td>
+                      <td>予約したいか判断する</td>
+                    </tr>
+                    <tr>
+                      <td>4. 比較・検討</td>
+                      <td>他の体験サービスと比較し、信頼性を確認する</td>
+                      <td>ギャラリー・レビュー・口コミページ</td>
+                      <td>予約を決意する</td>
+                    </tr>
+                    <tr>
+                      <td>5. 予約</td>
+                      <td>日程・人数・プランを選んで予約する</td>
+                      <td>予約ページ</td>
+                      <td>入力内容を確認して送信する</td>
+                    </tr>
+                    <tr>
+                      <td>6. 予約完了</td>
+                      <td>予約内容を確認し、来店準備を行う</td>
+                      <td>予約完了・確認ページ</td>
+                      <td>当日の来店行動につなげる</td>
+                    </tr>
+                    <tr>
+                      <td>7. 来店・体験</td>
+                      <td>店舗に来店し、香りづくり体験に参加する</td>
+                      <td>オフライン体験</td>
+                      <td>自分だけの香りを完成させる</td>
+                    </tr>
+                    <tr>
+                      <td>8. 共有・記録</td>
+                      <td>SNSに投稿し、体験を記録する</td>
+                      <td>ギャラリー・SNS</td>
+                      <td>ブランドを記憶し、周囲に共有する</td>
+                    </tr>
+                    <tr>
+                      <td>9. 再訪</td>
+                      <td>帰国後にサイトへ再訪し、自分の香りを思い出す</td>
+                      <td>マイページ</td>
+                      <td>レシピや購入履歴を確認する</td>
+                    </tr>
+                    <tr>
+                      <td>10. 商品探索</td>
+                      <td>同じ香りや関連商品を探す</td>
+                      <td>ECトップ / 商品一覧ページ</td>
+                      <td>購入したい商品を選ぶ</td>
+                    </tr>
+                    <tr>
+                      <td>11. 購入判断</td>
+                      <td>商品の内容や価格、ストーリーを確認する</td>
+                      <td>商品詳細ページ</td>
+                      <td>購入を決定する</td>
+                    </tr>
+                    <tr>
+                      <td>12. EC購入</td>
+                      <td>商品をカートに入れ、決済する</td>
+                      <td>カート・購入ページ</td>
+                      <td>購入完了へ進む</td>
+                    </tr>
+                    <tr>
+                      <td>13. 継続利用</td>
+                      <td>商品を受け取り、再び利用・共有する</td>
+                      <td>購入完了ページ / マイページ</td>
+                      <td>リピート購入や口コミ投稿につなげる</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="summary">
+                <strong>まとめ：</strong>
+                本サービスの行動フローは、「認知 → 理解 → 比較検討 → 予約 → 体験 → SNS共有 → 再訪 → EC購入 →
+                継続利用」という流れで設計されている。体験を入口に、記憶と再購入へつなげることが本サービスの価値である。
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="fill-block">
-          <div class="fill-label">サブシナリオ <span class="optional">任意</span></div>
-          <div class="fill-hint">その他の行動パターン（1〜2パターン）</div>
-          <div class="fill-content">
-            <p>（サブシナリオを記載）</p>
+          <div class="fill-block">
+            <div class="fill-label">サブシナリオ <span class="optional">任意</span></div>
+            <div class="fill-hint">その他の行動パターン（1〜2パターン）</div>
+            <div class="fill-content">
+              <p>（サブシナリオを記載）</p>
+            </div>
           </div>
-        </div>
 
         </section>
 
@@ -132,19 +678,719 @@
 
           <div class="fill-block">
             <div class="fill-label">URL一覧 <span class="required">必須</span></div>
-        <table class="doc-table">
-          <thead><tr><th>URL</th><th>HTTPメソッド</th><th>画面/機能</th><th>説明</th></tr></thead>
-          <tbody>
-          <tr class="template-row"><td>/</td><td>GET</td><td>トップページ</td><td>Webサイトのトップ</td></tr>
-          <tr class="template-row"><td>/about</td><td>GET</td><td>概要ページ</td><td>サービスの概要</td></tr>
-          <tr class="template-row"><td>/app/login</td><td>GET</td><td>ログイン画面</td><td>ログインフォーム表示</td></tr>
-          <tr class="template-row"><td>/app/login</td><td>POST</td><td>ログイン処理</td><td>認証処理</td></tr>
-          <tr class="template-row"><td>/app/items</td><td>GET</td><td>一覧画面</td><td>データ一覧表示</td></tr>
-          <tr class="template-row"><td>/app/items/new</td><td>GET</td><td>新規登録画面</td><td>登録フォーム表示</td></tr>
-          <tr class="template-row"><td>/app/items</td><td>POST</td><td>新規登録処理</td><td>データ保存</td></tr>
-          <tr class="template-row"><td>…</td><td>…</td><td>…</td><td>…</td></tr>
-          </tbody>
-        </table>
+            <h2>Webサイト部分</h2>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>URL</th>
+                    <th>HTTPメソッド</th>
+                    <th>画面/機能</th>
+                    <th>説明</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>/</code></td>
+                    <td>GET</td>
+                    <td>トップページ</td>
+                    <td>サービス概要、予約導線、口コミ抜粋を表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/experiences</code></td>
+                    <td>GET</td>
+                    <td>体験プログラム一覧</td>
+                    <td>体験プログラム一覧を表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/experiences/{experienceId}</code></td>
+                    <td>GET</td>
+                    <td>体験詳細ページ</td>
+                    <td>個別体験の詳細、料金、所要時間、素材、FAQを表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/reservations/new</code></td>
+                    <td>GET</td>
+                    <td>予約ページ</td>
+                    <td>新規予約フォームを表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/reservations</code></td>
+                    <td>POST</td>
+                    <td>予約登録</td>
+                    <td>予約情報を送信して登録する</td>
+                  </tr>
+                  <tr>
+                    <td><code>/reservations/{reservationId}/confirmation</code></td>
+                    <td>GET</td>
+                    <td>予約完了・確認ページ</td>
+                    <td>登録済み予約の確認内容を表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/concept</code></td>
+                    <td>GET</td>
+                    <td>コンセプト・サービス紹介ページ</td>
+                    <td>ブランドストーリー、和香巡りとは、日本素材紹介を表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/gallery</code></td>
+                    <td>GET</td>
+                    <td>ギャラリー・体験紹介ページ</td>
+                    <td>写真、動画、ユーザー投稿、体験記事を表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/shop</code></td>
+                    <td>GET</td>
+                    <td>ECトップページ</td>
+                    <td>オンラインショップのトップを表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/shop/products</code></td>
+                    <td>GET</td>
+                    <td>商品一覧ページ</td>
+                    <td>香水やハンドクリームなどの商品一覧を表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/shop/products/{productId}</code></td>
+                    <td>GET</td>
+                    <td>商品詳細ページ</td>
+                    <td>個別商品の香り説明、原材料、レビューを表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/cart</code></td>
+                    <td>GET</td>
+                    <td>カートページ</td>
+                    <td>カート内容を表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/cart/items</code></td>
+                    <td>POST</td>
+                    <td>カート追加</td>
+                    <td>商品をカートに追加する</td>
+                  </tr>
+                  <tr>
+                    <td><code>/cart/items/{cartItemId}</code></td>
+                    <td>PATCH</td>
+                    <td>カート更新</td>
+                    <td>数量変更などカート内容を更新する</td>
+                  </tr>
+                  <tr>
+                    <td><code>/cart/items/{cartItemId}</code></td>
+                    <td>DELETE</td>
+                    <td>カート削除</td>
+                    <td>カート内商品を削除する</td>
+                  </tr>
+                  <tr>
+                    <td><code>/orders/new</code></td>
+                    <td>GET</td>
+                    <td>購入ページ</td>
+                    <td>配送先・決済情報入力画面を表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/orders</code></td>
+                    <td>POST</td>
+                    <td>注文登録</td>
+                    <td>商品注文を登録する</td>
+                  </tr>
+                  <tr>
+                    <td><code>/orders/{orderId}/confirmation</code></td>
+                    <td>GET</td>
+                    <td>購入完了ページ</td>
+                    <td>注文完了内容を表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/mypage</code></td>
+                    <td>GET</td>
+                    <td>マイページ</td>
+                    <td>購入履歴、予約履歴、マイレシピなどの入口を表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/mypage/orders</code></td>
+                    <td>GET</td>
+                    <td>購入履歴</td>
+                    <td>ユーザーの購入履歴一覧を表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/mypage/reservations</code></td>
+                    <td>GET</td>
+                    <td>予約履歴</td>
+                    <td>ユーザーの予約履歴一覧を表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/mypage/recipes</code></td>
+                    <td>GET</td>
+                    <td>マイレシピ一覧</td>
+                    <td>体験で作成した香りレシピ一覧を表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/mypage/recipes/{recipeId}</code></td>
+                    <td>GET</td>
+                    <td>マイレシピ詳細</td>
+                    <td>香りレシピ詳細を表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/mypage/recipes/{recipeId}/reorders/new</code></td>
+                    <td>GET</td>
+                    <td>マイレシピ再購入ページ</td>
+                    <td>レシピから再購入画面へ遷移</td>
+                  </tr>
+                  <tr>
+                    <td><code>/mypage/favorites</code></td>
+                    <td>GET</td>
+                    <td>お気に入り一覧</td>
+                    <td>お気に入り商品一覧を表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/mypage/profile</code></td>
+                    <td>GET</td>
+                    <td>会員情報・配送先管理画面</td>
+                    <td>会員情報、配送先情報を表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/mypage/profile</code></td>
+                    <td>PATCH</td>
+                    <td>会員情報更新</td>
+                    <td>会員情報を更新する</td>
+                  </tr>
+                  <tr>
+                    <td><code>/mypage/addresses</code></td>
+                    <td>POST</td>
+                    <td>配送先登録</td>
+                    <td>配送先を追加登録する</td>
+                  </tr>
+                  <tr>
+                    <td><code>/mypage/addresses/{addressId}</code></td>
+                    <td>PATCH</td>
+                    <td>配送先更新</td>
+                    <td>配送先情報を更新する</td>
+                  </tr>
+                  <tr>
+                    <td><code>/access</code></td>
+                    <td>GET</td>
+                    <td>アクセス・店舗情報ページ</td>
+                    <td>地図、最寄駅、営業時間、FAQを表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/login</code></td>
+                    <td>GET</td>
+                    <td>ログインページ</td>
+                    <td>EC/マイページ用ログイン画面を表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/login</code></td>
+                    <td>POST</td>
+                    <td>ログイン処理</td>
+                    <td>ユーザーログインを実行する</td>
+                  </tr>
+                  <tr>
+                    <td><code>/logout</code></td>
+                    <td>POST</td>
+                    <td>ログアウト処理</td>
+                    <td>ユーザーログアウトを実行する</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h2>Spring Bootアプリ部分</h2>
+
+            <h3>共通・認証</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>URL</th>
+                    <th>HTTPメソッド</th>
+                    <th>画面/機能</th>
+                    <th>説明</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>/admin/login</code></td>
+                    <td>GET</td>
+                    <td>管理ログイン画面</td>
+                    <td>管理者ログイン画面を表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/login</code></td>
+                    <td>POST</td>
+                    <td>管理ログイン処理</td>
+                    <td>管理者ログインを実行</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/password-resets/new</code></td>
+                    <td>GET</td>
+                    <td>パスワード再設定画面</td>
+                    <td>再設定メール送信用画面を表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/password-resets</code></td>
+                    <td>POST</td>
+                    <td>パスワード再設定メール送信</td>
+                    <td>再設定メールを送信</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/logout</code></td>
+                    <td>POST</td>
+                    <td>管理ログアウト処理</td>
+                    <td>管理者ログアウトを実行</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin</code></td>
+                    <td>GET</td>
+                    <td>ダッシュボード</td>
+                    <td>予約、顧客、注文、在庫のサマリーを表示</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>予約管理</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>URL</th>
+                    <th>HTTPメソッド</th>
+                    <th>画面/機能</th>
+                    <th>説明</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>/admin/reservations</code></td>
+                    <td>GET</td>
+                    <td>予約一覧</td>
+                    <td>予約一覧、検索、絞り込みを表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/reservations/new</code></td>
+                    <td>GET</td>
+                    <td>予約登録画面</td>
+                    <td>新規予約登録画面を表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/reservations</code></td>
+                    <td>POST</td>
+                    <td>予約登録</td>
+                    <td>予約を登録する</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/reservations/{reservationId}</code></td>
+                    <td>GET</td>
+                    <td>予約詳細</td>
+                    <td>個別予約の詳細を表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/reservations/{reservationId}/edit</code></td>
+                    <td>GET</td>
+                    <td>予約編集画面</td>
+                    <td>予約編集画面を表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/reservations/{reservationId}</code></td>
+                    <td>PATCH</td>
+                    <td>予約更新</td>
+                    <td>予約内容を更新する</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/reservations/{reservationId}/delete</code></td>
+                    <td>GET</td>
+                    <td>予約削除確認画面</td>
+                    <td>削除確認画面を表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/reservations/{reservationId}</code></td>
+                    <td>DELETE</td>
+                    <td>予約削除</td>
+                    <td>予約を削除する</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>顧客情報管理</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>URL</th>
+                    <th>HTTPメソッド</th>
+                    <th>画面/機能</th>
+                    <th>説明</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>/admin/customers</code></td>
+                    <td>GET</td>
+                    <td>顧客一覧</td>
+                    <td>顧客一覧、検索、国籍絞り込みを表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/customers/new</code></td>
+                    <td>GET</td>
+                    <td>顧客登録画面</td>
+                    <td>新規顧客登録画面を表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/customers</code></td>
+                    <td>POST</td>
+                    <td>顧客登録</td>
+                    <td>顧客を登録する</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/customers/{customerId}</code></td>
+                    <td>GET</td>
+                    <td>顧客詳細</td>
+                    <td>顧客詳細、利用履歴、購入履歴を表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/customers/{customerId}/edit</code></td>
+                    <td>GET</td>
+                    <td>顧客編集画面</td>
+                    <td>顧客編集画面を表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/customers/{customerId}</code></td>
+                    <td>PATCH</td>
+                    <td>顧客更新</td>
+                    <td>顧客情報を更新する</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/customers/{customerId}/delete</code></td>
+                    <td>GET</td>
+                    <td>顧客削除確認画面</td>
+                    <td>削除確認画面を表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/customers/{customerId}</code></td>
+                    <td>DELETE</td>
+                    <td>顧客削除</td>
+                    <td>顧客情報を削除する</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>香りレシピ管理</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>URL</th>
+                    <th>HTTPメソッド</th>
+                    <th>画面/機能</th>
+                    <th>説明</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>/admin/recipes</code></td>
+                    <td>GET</td>
+                    <td>レシピ一覧</td>
+                    <td>レシピ一覧、検索、顧客別表示を行う</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/recipes/new</code></td>
+                    <td>GET</td>
+                    <td>レシピ登録画面</td>
+                    <td>新規レシピ登録画面を表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/recipes</code></td>
+                    <td>POST</td>
+                    <td>レシピ登録</td>
+                    <td>レシピを登録する</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/recipes/{recipeId}</code></td>
+                    <td>GET</td>
+                    <td>レシピ詳細</td>
+                    <td>レシピ詳細を表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/recipes/{recipeId}/edit</code></td>
+                    <td>GET</td>
+                    <td>レシピ編集画面</td>
+                    <td>レシピ編集画面を表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/recipes/{recipeId}</code></td>
+                    <td>PATCH</td>
+                    <td>レシピ更新</td>
+                    <td>レシピを更新する</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/recipes/{recipeId}/delete</code></td>
+                    <td>GET</td>
+                    <td>レシピ削除確認画面</td>
+                    <td>削除確認画面を表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/recipes/{recipeId}</code></td>
+                    <td>DELETE</td>
+                    <td>レシピ削除</td>
+                    <td>レシピを削除する</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>商品・在庫管理</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>URL</th>
+                    <th>HTTPメソッド</th>
+                    <th>画面/機能</th>
+                    <th>説明</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>/admin/products</code></td>
+                    <td>GET</td>
+                    <td>商品一覧</td>
+                    <td>商品一覧、検索、カテゴリ絞り込みを表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/products/new</code></td>
+                    <td>GET</td>
+                    <td>商品登録画面</td>
+                    <td>新規商品登録画面を表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/products</code></td>
+                    <td>POST</td>
+                    <td>商品登録</td>
+                    <td>商品を登録する</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/products/{productId}</code></td>
+                    <td>GET</td>
+                    <td>商品詳細</td>
+                    <td>商品詳細を表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/products/{productId}/edit</code></td>
+                    <td>GET</td>
+                    <td>商品編集画面</td>
+                    <td>商品編集画面を表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/products/{productId}</code></td>
+                    <td>PATCH</td>
+                    <td>商品更新</td>
+                    <td>商品を更新する</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/products/{productId}/delete</code></td>
+                    <td>GET</td>
+                    <td>商品削除確認画面</td>
+                    <td>削除確認画面を表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/products/{productId}</code></td>
+                    <td>DELETE</td>
+                    <td>商品削除</td>
+                    <td>商品を削除する</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/inventories</code></td>
+                    <td>GET</td>
+                    <td>在庫一覧</td>
+                    <td>在庫一覧、在庫アラートを表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/inventories/{inventoryId}</code></td>
+                    <td>GET</td>
+                    <td>在庫詳細</td>
+                    <td>在庫詳細を表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/inventories/{inventoryId}/edit</code></td>
+                    <td>GET</td>
+                    <td>在庫更新画面</td>
+                    <td>在庫更新画面を表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/inventories/{inventoryId}</code></td>
+                    <td>PATCH</td>
+                    <td>在庫更新</td>
+                    <td>在庫数を更新する</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>EC注文管理</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>URL</th>
+                    <th>HTTPメソッド</th>
+                    <th>画面/機能</th>
+                    <th>説明</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>/admin/orders</code></td>
+                    <td>GET</td>
+                    <td>注文一覧</td>
+                    <td>注文一覧、検索、注文状況絞り込みを表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/orders/{orderId}</code></td>
+                    <td>GET</td>
+                    <td>注文詳細</td>
+                    <td>注文内容、配送先、決済状況を表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/orders/{orderId}/edit</code></td>
+                    <td>GET</td>
+                    <td>注文ステータス更新画面</td>
+                    <td>注文進行状況更新画面を表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/orders/{orderId}</code></td>
+                    <td>PATCH</td>
+                    <td>注文更新</td>
+                    <td>注文ステータス、発送状況、決済状況を更新する</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>多言語対応管理</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>URL</th>
+                    <th>HTTPメソッド</th>
+                    <th>画面/機能</th>
+                    <th>説明</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>/admin/localizations</code></td>
+                    <td>GET</td>
+                    <td>多言語対応管理画面</td>
+                    <td>予約確認メール、案内文、管理画面文言の一覧を表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/localizations/{localizationId}</code></td>
+                    <td>GET</td>
+                    <td>多言語詳細</td>
+                    <td>個別文言の詳細を表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/localizations/{localizationId}/edit</code></td>
+                    <td>GET</td>
+                    <td>多言語編集画面</td>
+                    <td>文言編集画面を表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/localizations/{localizationId}</code></td>
+                    <td>PATCH</td>
+                    <td>多言語更新</td>
+                    <td>文言を更新する</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>レビュー・口コミ管理</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>URL</th>
+                    <th>HTTPメソッド</th>
+                    <th>画面/機能</th>
+                    <th>説明</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>/admin/reviews</code></td>
+                    <td>GET</td>
+                    <td>レビュー一覧</td>
+                    <td>レビュー一覧、検索、評価絞り込みを表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/reviews/{reviewId}</code></td>
+                    <td>GET</td>
+                    <td>レビュー詳細</td>
+                    <td>個別レビュー内容を表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/reviews/{reviewId}/edit</code></td>
+                    <td>GET</td>
+                    <td>レビュー公開設定画面</td>
+                    <td>公開/非公開設定画面を表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/reviews/{reviewId}</code></td>
+                    <td>PATCH</td>
+                    <td>レビュー更新</td>
+                    <td>公開状態などを更新する</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/reviews/{reviewId}/delete</code></td>
+                    <td>GET</td>
+                    <td>レビュー削除確認画面</td>
+                    <td>削除確認画面を表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/reviews/{reviewId}</code></td>
+                    <td>DELETE</td>
+                    <td>レビュー削除</td>
+                    <td>レビューを削除する</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>アカウント設定</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>URL</th>
+                    <th>HTTPメソッド</th>
+                    <th>画面/機能</th>
+                    <th>説明</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><code>/admin/account</code></td>
+                    <td>GET</td>
+                    <td>アカウント設定画面</td>
+                    <td>管理者情報、パスワード設定画面を表示</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/account</code></td>
+                    <td>PATCH</td>
+                    <td>アカウント更新</td>
+                    <td>管理者情報を更新する</td>
+                  </tr>
+                  <tr>
+                    <td><code>/admin/account/password</code></td>
+                    <td>PATCH</td>
+                    <td>パスワード変更</td>
+                    <td>管理者パスワードを変更する</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
 
           </div>
         </section>
@@ -155,4 +1401,5 @@
 
   <script src="../js/main.js"></script>
 </body>
+
 </html>

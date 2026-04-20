@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ペルソナシート - プロジェクトアーカイブ</title>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+  <link rel="stylesheet" href="../css/style.css">
+
+  <style>
+    /* カスタマージャーニー表：PCは表、スマホはカード表示 */
+    .journey-table-wrap {
+      width: 100%;
+    }
+
+    .journey-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      background: #fff;
+    }
+
+    .journey-table th,
+    .journey-table td {
+      border: 1px solid #e6dcc7;
+      padding: 14px 12px;
+      text-align: left;
+      vertical-align: top;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+      white-space: normal;
+    }
+
+    .journey-table th {
+      background: #f4efe6;
+      color: #3c342b;
+      font-weight: 700;
+    }
+
+    .journey-table td.stage {
+      width: 90px;
+      background: #fcf8f1;
+      font-weight: 700;
+      color: #5a4a3a;
+    }
+
+    @media (max-width: 768px) {
+
+      .journey-table,
+      .journey-table thead,
+      .journey-table tbody,
+      .journey-table th,
+      .journey-table td,
+      .journey-table tr {
+        display: block;
+      }
+
+      .journey-table thead {
+        display: none;
+      }
+
+      .journey-table tr {
+        margin-bottom: 20px;
+        border: 1px solid #e6dcc7;
+        border-radius: 12px;
+        background: #fff;
+        overflow: hidden;
+      }
+
+      .journey-table td {
+        border: none;
+        border-bottom: 1px solid #f0e8d8;
+        padding: 12px 16px;
+        width: auto;
+        background: transparent;
+      }
+
+      .journey-table td:last-child {
+        border-bottom: none;
+      }
+
+      .journey-table td::before {
+        display: block;
+        font-weight: 700;
+        color: #5a4a3a;
+        margin-bottom: 6px;
+      }
+
+      .journey-table td:nth-child(1)::before {
+        content: "段階";
+      }
+
+      .journey-table td:nth-child(2)::before {
+        content: "行動";
+      }
+
+      .journey-table td:nth-child(3)::before {
+        content: "接点";
+      }
+
+      .journey-table td:nth-child(4)::before {
+        content: "感情";
+      }
+
+      .journey-table td:nth-child(5)::before {
+        content: "課題・機会";
+      }
+
+      .journey-table td.stage {
+        background: #fcf8f1;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+  <button class="hamburger" aria-label="メニュー">
+    <span></span><span></span><span></span>
+  </button>
+
+  <div class="page-wrapper">
+    <aside class="sidebar" data-nav-level="docs"></aside>
+
+    <main class="main-content">
+      <header class="doc-header">
+        <div class="doc-category">DOCUMENT 03</div>
+        <h1 class="doc-title">ペルソナシート</h1>
+        <div class="doc-meta">
+          <span><span class="material-symbols-outlined icon-sm">calendar_today</span> 作成日：2026-XX-XX</span>
+          <span><span class="material-symbols-outlined icon-sm">person</span> 作成者：（氏名を入力）</span>
+          <span><span class="material-symbols-outlined icon-sm">push_pin</span> Ver 1.0</span>
+        </div>
+      </header>
+
+      <div class="doc-body">
+
+        <div class="external-link-box">
+          <div class="external-link-box-title">
+            <span class="material-symbols-outlined">link</span>
+            詳細ドキュメント（Google スプレッドシート）
+          </div>
+          <div class="external-link-box-desc">
+            このページは概要のみを記載しています。詳細なペルソナシートは以下のリンクからご確認ください。
+          </div>
+          <div class="external-link-input">
+            <input type="text" placeholder="https://docs.google.com/spreadsheets/d/xxxxx" id="external-link-03">
+            <a href="#" class="link-btn"
+              onclick="window.open(document.getElementById('external-link-03').value || 'https://docs.google.com', '_blank'); return false;">
+              <span class="material-symbols-outlined">open_in_new</span>
+              開く
+            </a>
+          </div>
+        </div>
+
+        <div class="toc">
+          <div class="toc-title">目次</div>
+          <ol class="toc-list">
+            <li><a href="#sec1">基本プロフィール</a></li>
+            <li><a href="#sec2">ライフスタイル</a></li>
+            <li><a href="#sec3">デジタル行動</a></li>
+            <li><a href="#sec4">課題とニーズ</a></li>
+            <li><a href="#sec5">カスタマージャーニーマップ</a></li>
+          </ol>
+        </div>
+
+
+        <section class="section" id="sec1">
+          <h2 class="section-title"><span class="section-icon">1</span> 基本プロフィール</h2>
+
+          <div class="fill-block">
+            <div class="fill-label">ペルソナ基本情報 <span class="required">必須</span></div>
+            <div class="fill-hint">架空の人物として具体的に設定してください</div>
+            <div class="fill-content">
+              <h2>1. 基本情報</h2>
+              <table>
+                <tr>
+                  <th>名前</th>
+                  <td>Emily Carter（エミリー・カーター）</td>
+                </tr>
+                <tr>
+                  <th>年齢</th>
+                  <td>29歳</td>
+                </tr>
+                <tr>
+                  <th>性別</th>
+                  <td>女性</td>
+                </tr>
+                <tr>
+                  <th>職業</th>
+                  <td>Google LLC / Marketing Department / Digital Marketing Specialist（デジタルマーケティング担当）</td>
+                </tr>
+                <tr>
+                  <th>居住地</th>
+                  <td>アメリカ・カリフォルニア州 サンフランシスコ</td>
+                </tr>
+                <tr>
+                  <th>年収</th>
+                  <td>約95,000ドル（約1,400万円）</td>
+                </tr>
+                <tr>
+                  <th>家族構成</th>
+                  <td>独身（恋人あり・同棲中）</td>
+                </tr>
+                <tr>
+                  <th>学歴</th>
+                  <td>カリフォルニア大学バークレー校 卒業（マーケティング専攻）</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+
+        </section>
+
+        <section class="section" id="sec2">
+          <h2 class="section-title"><span class="section-icon">2</span> ライフスタイル</h2>
+
+          <div class="fill-block">
+            <div class="fill-label">平日のタイムスケジュール <span class="required">必須</span></div>
+            <div class="fill-hint">朝起きてから寝るまでの1日の流れ</div>
+            <div class="fill-content">
+              <table>
+                <tr>
+                  <th>7:00</th>
+                  <td>起床。スマートフォンでInstagram、Slack、ニュースアプリを確認しながら朝食をとる。</td>
+                </tr>
+                <tr>
+                  <th>8:00</th>
+                  <td>出勤または在宅勤務開始。コーヒーを飲みながらメールとタスクを整理する。</td>
+                </tr>
+                <tr>
+                  <th>9:00〜12:00</th>
+                  <td>マーケティング会議、広告運用、SNS分析、企画書作成などの業務を行う。</td>
+                </tr>
+                <tr>
+                  <th>12:00</th>
+                  <td>同僚とランチ。人気カフェや話題のフードスポットを選ぶことが多い。</td>
+                </tr>
+                <tr>
+                  <th>13:00〜18:00</th>
+                  <td>クライアント対応、レポート作成、キャンペーン運用。移動や隙間時間にTikTokやPinterestを見る。</td>
+                </tr>
+                <tr>
+                  <th>19:00</th>
+                  <td>仕事終わりにジム、ヨガ、友人とのディナー、または恋人と外食。</td>
+                </tr>
+                <tr>
+                  <th>21:00</th>
+                  <td>自宅でスキンケア。ECサイトや旅行系サービスを眺め、次の旅行先や体験を探す。</td>
+                </tr>
+                <tr>
+                  <th>23:00</th>
+                  <td>ベッドでSNSを見ながら就寝。保存した投稿を次の旅行計画の参考にする。</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="fill-block">
+            <div class="fill-label">休日の過ごし方 <span class="required">必須</span></div>
+            <div class="fill-hint">休日にどのように過ごしているか</div>
+            <div class="fill-content">
+              <ul>
+                <li>ブランチ、ギャラリー巡り、マーケット、ホテルラウンジなど「少し特別な日常」を楽しむ。</li>
+                <li>旅行前は、Google Map、Instagram、TikTokを使って「行きたい場所リスト」を作る。</li>
+                <li>旅先では定番観光よりも、ローカルな体験やクラフト系ワークショップを優先して選ぶ。</li>
+                <li>休日の様子は写真や短い動画で記録し、SNSに投稿する。</li>
+              </ul>
+            </div>
+          </div>
+          <div class="fill-block">
+            <div class="fill-label">趣味・関心事 <span class="required">必須</span></div>
+            <div class="fill-hint">興味のある分野・趣味</div>
+            <div class="fill-content">
+              <div>
+                <span class="tag">海外旅行</span>
+                <span class="tag">カフェ巡り</span>
+                <span class="tag">ホテルステイ</span>
+                <span class="tag">香り・コスメ</span>
+                <span class="tag">ヨガ・ウェルネス</span>
+                <span class="tag">写真撮影</span>
+                <span class="tag">SNS発信</span>
+                <span class="tag">ローカル文化体験</span>
+                <span class="tag">サステナブル商品</span>
+              </div>
+              <p>特に「自分らしさを感じられる体験」や「誰かに共有したくなる体験」に強く惹かれる。</p>
+            </div>
+          </div>
+
+        </section>
+
+        <section class="section" id="sec3">
+          <h2 class="section-title"><span class="section-icon">3</span> デジタル行動</h2>
+
+          <div class="fill-block">
+            <div class="fill-label">使用デバイス・サービス <span class="required">必須</span></div>
+            <div class="fill-hint">日常的に使用するデバイス、SNS、Webサービス</div>
+            <div class="fill-content">
+              <ul>
+                <li>iPhone（メイン端末）</li>
+                <li>MacBook Pro（仕事・予約・情報収集）</li>
+                <li>Apple Watch（健康管理・通知確認）</li>
+              </ul>
+
+              <h3>SNS</h3>
+              <ul>
+                <li>Instagram：写真・リール投稿、保存、情報収集</li>
+                <li>TikTok：体験動画、旅行先の雰囲気確認</li>
+                <li>Pinterest：世界観や旅先イメージの収集</li>
+                <li>X：トレンドやリアルタイム情報の確認</li>
+              </ul>
+
+              <h3>Webサービス</h3>
+              <ul>
+                <li>Google Maps：場所検索、レビュー確認</li>
+                <li>Tripadvisor：観光体験の比較</li>
+                <li>Airbnb / Booking.com：旅行計画</li>
+                <li>Notion：旅の予定整理</li>
+                <li>Shopify系ECサイト：商品購入</li>
+              </ul>
+            </div>
+          </div>
+
+        </section>
+
+        <section class="section" id="sec4">
+          <h2 class="section-title"><span class="section-icon">4</span> 課題とニーズ</h2>
+
+          <div class="fill-block">
+            <div class="fill-label">抱えている課題・悩み <span class="required">必須</span></div>
+            <div class="fill-hint">このペルソナが日常で抱えている課題（サービスに関連するもの）</div>
+            <div class="fill-content">
+              <ul>
+                <li>観光体験の選択肢が多く、どれが「自分に合う特別な体験」なのか見極めにくい。</li>
+                <li>予約前に、体験の雰囲気や完成イメージが十分に分からないと不安を感じる。</li>
+                <li>旅行中は時間が限られているため、アクセスのしやすさや所要時間を重視する。</li>
+                <li>体験がその場限りで終わると、帰国後に価値が残りにくいと感じる。</li>
+                <li>SNSでシェアしたくなる要素が少ないサービスには魅力を感じにくい。</li>
+              </ul>
+            </div>
+          </div>
+          <div class="fill-block">
+            <div class="fill-label">サービスに期待すること <span class="required">必須</span></div>
+            <div class="fill-hint">このペルソナが本サービスに期待する価値</div>
+            <div class="fill-content">
+              <ul>
+                <li>日本らしさを感じられる、他ではできない特別な体験。</li>
+                <li>自分だけの香りを作ることで、旅の記憶を具体的な形で持ち帰れること。</li>
+                <li>写真や動画に収めたくなる、洗練された空間や演出。</li>
+                <li>英語で迷わず予約でき、体験内容が直感的に分かる分かりやすいWebサイト。</li>
+                <li>帰国後もECで同じ香りを再購入できる継続性。</li>
+              </ul>
+            </div>
+          </div>
+
+        </section>
+
+        <section class="section" id="sec5">
+          <h2 class="section-title"><span class="section-icon">5</span> カスタマージャーニーマップ</h2>
+
+          <div class="fill-block">
+            <div class="fill-label">カスタマージャーニーマップ <span class="required">必須</span></div>
+            <div class="fill-hint">ペルソナがサービスを認知してから利用・共有するまでの行動を時系列で記載</div>
+
+            <h2>各段階のジャーニー整理</h2>
+            <div class="journey-table-wrap">
+              <table class="journey-table">
+                <thead>
+                  <tr>
+                    <th>段階</th>
+                    <th>行動</th>
+                    <th>接点</th>
+                    <th>感情</th>
+                    <th>課題・機会</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="stage">1. 認知</td>
+                    <td>
+                      <ul>
+                        <li>InstagramやTikTokで「Tokyo experience」を検索する</li>
+                        <li>旅行系インフルエンサーの投稿を見る</li>
+                      </ul>
+                    </td>
+                    <td>
+                      <ul>
+                        <li>Instagram / TikTok</li>
+                        <li>ハッシュタグ検索（#TokyoTrip #JapanExperience）</li>
+                      </ul>
+                    </td>
+                    <td>
+                      <ul>
+                        <li>「日本っぽくて素敵！」</li>
+                        <li>「こういう体験をしてみたい」</li>
+                      </ul>
+                    </td>
+                    <td>
+                      <ul>
+                        <li><strong>課題：</strong>情報量が多く、投稿が埋もれやすい</li>
+                        <li><strong>機会：</strong>印象的な写真・短尺動画で直感的に惹きつける</li>
+                      </ul>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td class="stage">2. 興味</td>
+                    <td>
+                      <ul>
+                        <li>投稿を保存し、プロフィールからサイトへ遷移する</li>
+                        <li>Googleでサービス名やレビューを検索する</li>
+                      </ul>
+                    </td>
+                    <td>
+                      <ul>
+                        <li>公式サイト</li>
+                        <li>Google検索</li>
+                        <li>口コミサイト（Tripadvisorなど）</li>
+                      </ul>
+                    </td>
+                    <td>
+                      <ul>
+                        <li>「どんな体験なんだろう？」</li>
+                        <li>「自分にもできるかな？」</li>
+                      </ul>
+                    </td>
+                    <td>
+                      <ul>
+                        <li><strong>課題：</strong>体験内容や完成イメージが分からないと不安になる</li>
+                        <li><strong>機会：</strong>写真・動画・ストーリー・レビューで具体的に伝える</li>
+                      </ul>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td class="stage">3. 比較検討</td>
+                    <td>
+                      <ul>
+                        <li>他の体験サービス（茶道、香水作りなど）と比較する</li>
+                        <li>価格、レビュー、場所、所要時間をチェックする</li>
+                      </ul>
+                    </td>
+                    <td>
+                      <ul>
+                        <li>Google Maps</li>
+                        <li>比較サイト</li>
+                        <li>SNSレビュー</li>
+                      </ul>
+                    </td>
+                    <td>
+                      <ul>
+                        <li>「これにするか迷う」</li>
+                        <li>「失敗したくない」</li>
+                      </ul>
+                    </td>
+                    <td>
+                      <ul>
+                        <li><strong>課題：</strong>他サービスとの違いが伝わりにくい</li>
+                        <li><strong>機会：</strong>「日本素材」「香りを持ち帰れる」「EC再購入可能」を明確に訴求する</li>
+                      </ul>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td class="stage">4. 行動</td>
+                    <td>
+                      <ul>
+                        <li>スマホで予約する</li>
+                        <li>店舗を訪れ、香りづくり体験に参加する</li>
+                        <li>完成した香りを持ち帰る</li>
+                      </ul>
+                    </td>
+                    <td>
+                      <ul>
+                        <li>予約ページ</li>
+                        <li>店舗スタッフ</li>
+                        <li>体験空間</li>
+                      </ul>
+                    </td>
+                    <td>
+                      <ul>
+                        <li>「楽しい！」</li>
+                        <li>「特別な体験ができた」</li>
+                        <li>「旅の思い出になる」</li>
+                      </ul>
+                    </td>
+                    <td>
+                      <ul>
+                        <li><strong>課題：</strong>言語面や予約操作に不安がある</li>
+                        <li><strong>機会：</strong>多言語対応、分かりやすい導線、SNS映えする演出で満足度を高める</li>
+                      </ul>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td class="stage">5. 共有・継続</td>
+                    <td>
+                      <ul>
+                        <li>Instagramにストーリーやリールを投稿する</li>
+                        <li>友人へシェアする</li>
+                        <li>ECで同じ香りを再購入する</li>
+                      </ul>
+                    </td>
+                    <td>
+                      <ul>
+                        <li>SNS</li>
+                        <li>ECサイト</li>
+                        <li>メールやリマインド通知</li>
+                      </ul>
+                    </td>
+                    <td>
+                      <ul>
+                        <li>「いい体験だった！」</li>
+                        <li>「また使いたい」</li>
+                        <li>「誰かに勧めたい」</li>
+                      </ul>
+                    </td>
+                    <td>
+                      <ul>
+                        <li><strong>課題：</strong>体験後の接点がないとブランドを忘れやすい</li>
+                        <li><strong>機会：</strong>レシピ保存、再購入導線、SNS投稿促進で口コミとLTVを伸ばせる</li>
+                      </ul>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="summary">
+              <strong>まとめ：</strong>
+              本サービスは、「認知 → 興味 → 比較検討 → 利用 → 共有・継続」の流れの中で、SNSでの発見性、体験内容の可視化、日本文化ならではの差別化、そして体験後の再購入導線を一貫して設計することが重要である。
+            </div>
+
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/main.js"></script>
+</body>
+
+</html>
