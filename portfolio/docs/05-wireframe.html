@@ -1,34 +1,37 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ワイヤーフレーム -  プロジェクトアーカイブ</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+  <title>ワイヤーフレーム - プロジェクトアーカイブ</title>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
   <link rel="stylesheet" href="../css/style.css">
 </head>
+
 <body>
   <button class="hamburger" aria-label="メニュー">
     <span></span><span></span><span></span>
   </button>
 
   <div class="page-wrapper">
-  <aside class="sidebar" data-nav-level="docs"></aside>
+    <aside class="sidebar" data-nav-level="docs"></aside>
 
     <main class="main-content">
       <header class="doc-header">
         <div class="doc-category">DOCUMENT 05</div>
         <h1 class="doc-title">ワイヤーフレーム</h1>
         <div class="doc-meta">
-          <span><span class="material-symbols-outlined icon-sm">calendar_today</span> 作成日：2026-XX-XX</span>
-          <span><span class="material-symbols-outlined icon-sm">person</span> 作成者：（氏名を入力）</span>
+          <span><span class="material-symbols-outlined icon-sm">calendar_today</span> 作成日：2026-05-07</span>
+          <span><span class="material-symbols-outlined icon-sm">person</span> 作成者：尾坂 成紀</span>
           <span><span class="material-symbols-outlined icon-sm">push_pin</span> Ver 1.0</span>
         </div>
       </header>
 
       <div class="doc-body">
 
-        <div class="external-link-box">
+        <!-- <div class="external-link-box">
           <div class="external-link-box-title">
             <span class="material-symbols-outlined">link</span>
             詳細ドキュメント（Google スプレッドシート）
@@ -38,12 +41,13 @@
           </div>
           <div class="external-link-input">
             <input type="text" placeholder="https://docs.google.com/spreadsheets/d/xxxxx" id="external-link-05">
-            <a href="#" class="link-btn" onclick="window.open(document.getElementById('external-link-05').value || 'https://docs.google.com', '_blank'); return false;">
+            <a href="#" class="link-btn"
+              onclick="window.open(document.getElementById('external-link-05').value || 'https://docs.google.com', '_blank'); return false;">
               <span class="material-symbols-outlined">open_in_new</span>
               開く
             </a>
           </div>
-        </div>
+        </div> -->
 
         <div class="toc">
           <div class="toc-title">目次</div>
@@ -58,77 +62,129 @@
 
         <section class="section" id="sec1">
           <h2 class="section-title"><span class="section-icon">1</span> ワイヤーフレーム作成方法</h2>
-
-
+          <div class="fill-content">
+            <p>AIに対して本サービスの各ページのワイヤーフレームの構成を提案するよう指示。</p>
+            <p>提示されたものをFigmaにて実装。</p>
+          </div>
         </section>
 
         <section class="section" id="sec2">
           <h2 class="section-title"><span class="section-icon">2</span> トップページ</h2>
 
-        <div class="fill-block">
-          <div class="fill-label">トップページ ワイヤーフレーム（PC版） <span class="required">必須</span></div>
-          <div class="fill-hint">Figmaで作成したワイヤーフレームのスクリーンショットを配置</div>
-          <div class="fill-content">
-            <p>（ここにワイヤーフレーム画像を配置）
-&lt;img src=&quot;../images/wireframe/top-pc.png&quot; alt=&quot;トップページ PC版 ワイヤーフレーム&quot;&gt;</p>
+          <div class="fill-block">
+            <!-- <div class="fill-label">トップページ ワイヤーフレーム（PC版） <span class="required">必須</span></div> -->
+            <div class="fill-label">トップページ ワイヤーフレーム（PC版）</div>
+            <div class="fill-hint">Figmaで作成したワイヤーフレームのスクリーンショットを配置</div>
+            <div class="fill-content">
+              <img src="../images/wireframe/top-pc.png" alt="トップページ PC版 ワイヤーフレーム">
+            </div>
           </div>
-        </div>
-        <div class="fill-block">
-          <div class="fill-label">配置意図の説明 <span class="required">必須</span></div>
-          <div class="fill-hint">各セクションの配置理由とユーザーへの効果</div>
-          <div class="fill-content">
-            <p>（各セクションの配置意図を記載）</p>
+          <div class="fill-block">
+            <!-- <div class="fill-label">配置意図の説明 <span class="required">必須</span></div> -->
+            <div class="fill-label">配置意図の説明</div>
+            <div class="fill-hint">各セクションの配置理由とユーザーへの効果</div>
+            <div class="fill-content">
+              <p>香りづくり体験によって得られる付加価値は何？</p>
+              <p>を訴求するために、まずは先頭にスライドとキャッチコピーを提示。</p>
+              <p>その後、ブランドコンセプトと素材で興味を喚起。</p>
+              <p>体験の流れとレビューで不安感を払しょくし、</p>
+              <p>予約へ導く流れを意図。</p>
+            </div>
           </div>
-        </div>
 
         </section>
 
         <section class="section" id="sec3">
           <h2 class="section-title"><span class="section-icon">3</span> 下層ページ</h2>
 
-        <div class="fill-block">
-          <div class="fill-label">下層ページ ワイヤーフレーム <span class="required">必須</span></div>
-          <div class="fill-hint">各下層ページのワイヤーフレームを順に配置</div>
-          <div class="fill-content">
-            <p>（ここに各下層ページのワイヤーフレーム画像と説明を配置）
-
-【ページ名1】
-&lt;img src=&quot;../images/wireframe/page1-pc.png&quot; alt=&quot;ページ名1 ワイヤーフレーム&quot;&gt;
-配置意図：（説明）
-
-【ページ名2】
-&lt;img src=&quot;../images/wireframe/page2-pc.png&quot; alt=&quot;ページ名2 ワイヤーフレーム&quot;&gt;
-配置意図：（説明）</p>
+          <div class="fill-block">
+            <!-- <div class="fill-label">下層ページ ワイヤーフレーム <span class="required">必須</span></div> -->
+            <div class="fill-label">下層ページ ワイヤーフレーム</div>
+            <div class="fill-hint">各下層ページのワイヤーフレームを順に配置</div>
+            <div class="fill-content">
+              <p>【コンセプト】</p>
+              <img src="../images/wireframe/concept-pc.png" alt="コンセプト ワイヤーフレーム">
+              <p> 配置意図：同様のサービスとの差別化要因を説明することで、本サービスの選択を促す</p>
+              <br>
+              <p>【体験詳細】</p>
+              <img src="../images/wireframe/experience-pc.png" alt="体験詳細 ワイヤーフレーム">
+              <p> 配置意図：体験内容を詳しく説明することで、申し込みに対する不安感を取り除く</p>
+              <br>
+              <p>【予約】</p>
+              <img src="../images/wireframe/reserve-pc.png" alt="予約 ワイヤーフレーム">
+              <p> 配置意図：入力情報を最小限にすることで離脱を防ぐとともに、要望欄を設けることでユーザーの懸案事項を当方に伝える手段とする</p>
+              <br>
+              <p>【予約確認】</p>
+              <img src="../images/wireframe/reserve-complete-pc.png" alt="予約完了 ワイヤーフレーム">
+              <p> 配置意図：「ちゃんと申し込みが完了したのか？」というユーザーの不安を取り除く</p>
+            </div>
           </div>
-        </div>
 
         </section>
 
         <section class="section" id="sec4">
           <h2 class="section-title"><span class="section-icon">4</span> Webアプリケーション画面</h2>
 
-        <div class="fill-block">
-          <div class="fill-label">Webアプリ画面 ワイヤーフレーム <span class="required">必須</span></div>
-          <div class="fill-hint">主要な画面（ログイン・一覧・登録・詳細・編集）のワイヤーフレーム</div>
-          <div class="fill-content">
-            <p>（ここにWebアプリ画面のワイヤーフレーム画像を配置）</p>
+          <div class="fill-block">
+            <!-- <div class="fill-label">Webアプリ画面 ワイヤーフレーム <span class="required">必須</span></div> -->
+            <div class="fill-label">Webアプリ画面 ワイヤーフレーム</div>
+            <div class="fill-hint">主要な画面（ログイン・一覧・登録・詳細・編集）のワイヤーフレーム</div>
+            <div class="fill-content">
+              <p>【ログイン】</p>
+              <img src="../images/wireframe/webapl-login-pc.png" alt="管理機能ログイン ワイヤーフレーム">
+              <br><br>
+              <p>【顧客一覧】</p>
+              <img src="../images/wireframe/webapl-customerlist-pc.png" alt="管理機能/顧客一覧 ワイヤーフレーム">
+              <br><br>
+              <p>【顧客新規登録】</p>
+              <img src="../images/wireframe/webapl-customercreate-pc.png" alt="管理機能/顧客新規登録 ワイヤーフレーム">
+              <br><br>
+              <p>【顧客編集】</p>
+              <img src="../images/wireframe/webapl-customeredit-pc.png" alt="管理機能/顧客編集 ワイヤーフレーム">
+              <br><br>
+              <p>【顧客詳細】</p>
+              <img src="../images/wireframe/webapl-customerdetail-pc.png" alt="管理機能/顧客詳細 ワイヤーフレーム">
+              <br><br>
+              <p>【香りレシピ一覧】</p>
+              <img src="../images/wireframe/webapl-recipelist-pc.png" alt="管理機能/香りレシピ一覧 ワイヤーフレーム">
+              <br><br>
+              <p>【香りレシピ新規登録】</p>
+              <img src="../images/wireframe/webapl-recipecreate-pc.png" alt="管理機能/香りレシピ新規登録 ワイヤーフレーム">
+              <br><br>
+              <p>【香りレシピ編集】</p>
+              <img src="../images/wireframe/webapl-recipeedit-pc.png" alt="管理機能/香りレシピ編集 ワイヤーフレーム">
+              <br><br>
+              <p>【香りレシピ詳細】</p>
+              <img src="../images/wireframe/webapl-recipedetail-pc.png" alt="管理機能/香りレシピ詳細 ワイヤーフレーム">
+              <br><br>
+              <p>【在庫一覧】</p>
+              <img src="../images/wireframe/webapl-inventorylist-pc.png" alt="管理機能/在庫一覧 ワイヤーフレーム">
+              <br><br>
+              <p>【在庫新規登録】</p>
+              <img src="../images/wireframe/webapl-inventorycreate-pc.png" alt="管理機能/在庫新規登録 ワイヤーフレーム">
+              <br><br>
+              <p>【在庫編集】</p>
+              <img src="../images/wireframe/webapl-inventoryedit-pc.png" alt="管理機能/在庫編集 ワイヤーフレーム">
+              <br><br>
+              <p>【在庫詳細】</p>
+              <img src="../images/wireframe/webapl-inventorydetail-pc.png" alt="管理機能/在庫詳細 ワイヤーフレーム">
+            </div>
           </div>
-        </div>
 
         </section>
 
-        <section class="section" id="sec5">
+        <!-- <section class="section" id="sec5">
           <h2 class="section-title"><span class="section-icon">5</span> スマートフォン版</h2>
 
-        <div class="fill-block">
-          <div class="fill-label">スマートフォン版 ワイヤーフレーム <span class="optional">任意</span></div>
-          <div class="fill-hint">主要ページのスマートフォン版ワイヤーフレーム</div>
-          <div class="fill-content">
-            <p>（ここにスマートフォン版のワイヤーフレーム画像を配置）</p>
+          <div class="fill-block">
+            <div class="fill-label">スマートフォン版 ワイヤーフレーム <span class="optional">任意</span></div>
+            <div class="fill-hint">主要ページのスマートフォン版ワイヤーフレーム</div>
+            <div class="fill-content">
+              <p>（ここにスマートフォン版のワイヤーフレーム画像を配置）</p>
+            </div>
           </div>
-        </div>
 
-        </section>
+        </section> -->
 
       </div>
     </main>
@@ -136,4 +192,5 @@
 
   <script src="../js/main.js"></script>
 </body>
+
 </html>

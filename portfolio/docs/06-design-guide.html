@@ -1,34 +1,169 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>デザインガイドライン -  プロジェクトアーカイブ</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+  <title>デザインガイドライン - プロジェクトアーカイブ</title>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
   <link rel="stylesheet" href="../css/style.css">
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    th,
+    td {
+      border: 1px solid #e8dccb;
+      padding: 12px;
+      vertical-align: top;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    th {
+      background: #faf6ef;
+      text-align: left;
+    }
+
+    code {
+      display: block;
+      background: #f4f4f4;
+      padding: 8px;
+      border-radius: 6px;
+      white-space: pre-wrap;
+      font-size: 13px;
+    }
+
+    /* ===== 共通 ===== */
+    .section {
+      margin-bottom: 60px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    /* ===== カード ===== */
+    .card {
+      background: #fff;
+      border: 1px solid #e8dccb;
+      border-radius: 16px;
+      overflow: hidden;
+      width: 320px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .card-body {
+      padding: 16px;
+    }
+
+    .card h3 {
+      margin: 0 0 8px;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: #6d645a;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 10px 16px;
+      background: #b08d57;
+      color: #fff;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    /* ===== テーブル ===== */
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+    }
+
+    .table th,
+    .table td {
+      padding: 12px;
+      border: 1px solid #e8dccb;
+      text-align: left;
+    }
+
+    .table th {
+      background: #faf6ef;
+    }
+
+    .table tr:nth-child(even) {
+      background: #f9f7f3;
+    }
+
+    /* ===== アラート ===== */
+    .alert {
+      padding: 16px;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      font-size: 14px;
+    }
+
+    .alert-info {
+      background: #eef5ff;
+      border: 1px solid #bcd4ff;
+    }
+
+    .alert-success {
+      background: #edf8f2;
+      border: 1px solid #b7e2c7;
+    }
+
+    .alert-warning {
+      background: #fff6e6;
+      border: 1px solid #ffd699;
+    }
+
+    .alert-error {
+      background: #ffecec;
+      border: 1px solid #ffb3b3;
+    }
+  </style>
+
 </head>
+
 <body>
   <button class="hamburger" aria-label="メニュー">
     <span></span><span></span><span></span>
   </button>
 
   <div class="page-wrapper">
-  <aside class="sidebar" data-nav-level="docs"></aside>
+    <aside class="sidebar" data-nav-level="docs"></aside>
 
     <main class="main-content">
       <header class="doc-header">
         <div class="doc-category">DOCUMENT 06</div>
         <h1 class="doc-title">デザインガイドライン</h1>
         <div class="doc-meta">
-          <span><span class="material-symbols-outlined icon-sm">calendar_today</span> 作成日：2026-XX-XX</span>
-          <span><span class="material-symbols-outlined icon-sm">person</span> 作成者：（氏名を入力）</span>
+          <span><span class="material-symbols-outlined icon-sm">calendar_today</span> 作成日：2026-05-07</span>
+          <span><span class="material-symbols-outlined icon-sm">person</span> 作成者：尾坂 成紀</span>
           <span><span class="material-symbols-outlined icon-sm">push_pin</span> Ver 1.0</span>
         </div>
       </header>
 
       <div class="doc-body">
 
-        <div class="external-link-box">
+        <!-- <div class="external-link-box">
           <div class="external-link-box-title">
             <span class="material-symbols-outlined">link</span>
             詳細ドキュメント（Google スプレッドシート）
@@ -38,12 +173,13 @@
           </div>
           <div class="external-link-input">
             <input type="text" placeholder="https://docs.google.com/spreadsheets/d/xxxxx" id="external-link-06">
-            <a href="#" class="link-btn" onclick="window.open(document.getElementById('external-link-06').value || 'https://docs.google.com', '_blank'); return false;">
+            <a href="#" class="link-btn"
+              onclick="window.open(document.getElementById('external-link-06').value || 'https://docs.google.com', '_blank'); return false;">
               <span class="material-symbols-outlined">open_in_new</span>
               開く
             </a>
           </div>
-        </div>
+        </div> -->
 
         <div class="toc">
           <div class="toc-title">目次</div>
@@ -59,13 +195,22 @@
         <section class="section" id="sec1">
           <h2 class="section-title"><span class="section-icon">1</span> デザインコンセプト</h2>
 
-        <div class="fill-block">
-          <div class="fill-label">デザインキーワード <span class="required">必須</span></div>
-          <div class="fill-hint">デザインの方向性を表すキーワード3つとその説明</div>
-          <div class="fill-content">
-            <p>（デザインキーワード3つとその説明を記載）</p>
+          <div class="fill-block">
+            <!-- <div class="fill-label">デザインキーワード <span class="required">必須</span></div> -->
+            <div class="fill-label">デザインキーワード </div>
+            <!-- <div class="fill-hint">デザインの方向性を表すキーワード3つとその説明</div> -->
+            <div class="fill-content">
+              <p>余白のある上質さ：</p>
+              <p>　全体的に要素を詰め込みすぎず、「安く見せない」「体験価値を高く見せる」設計としている</p>
+              <BR>
+              <p>ストーリーで魅せる体験設計：</p>
+              <p>　TOP → コンセプト → 体験 → 予約 の流れが明確になる設計としている</p>
+              <BR>
+              <p>五感に訴えるリアリティ：</p>
+              <p>　本サービスの本質は「香り＝体験」。体験者の写真により視覚だけでなく“想像させる設計”にしている</p>
+              <BR>
+            </div>
           </div>
-        </div>
 
         </section>
 
@@ -73,20 +218,70 @@
           <h2 class="section-title"><span class="section-icon">2</span> カラーパレット</h2>
 
           <div class="fill-block">
-            <div class="fill-label">カラーパレット <span class="required">必須</span></div>
-            <div class="fill-hint">各色のHEXコード・使用場面を記載し、実際の色見本も表示してください</div>
+            <!-- <div class="fill-label">カラーパレット <span class="required">必須</span></div> -->
+            <div class="fill-label">カラーパレット </div>
+            <!-- <div class="fill-hint">各色のHEXコード・使用場面を記載し、実際の色見本も表示してください</div> -->
 
-        <table class="doc-table">
-          <thead><tr><th>色の種類</th><th>カラーコード</th><th>色見本</th><th>使用場面</th></tr></thead>
-          <tbody>
-          <tr class="template-row"><td>メインカラー</td><td>#（コードを入力）</td><td>（CSSで色見本を表示）</td><td>ヘッダー、ボタン、見出し</td></tr>
-          <tr class="template-row"><td>サブカラー</td><td>#（コードを入力）</td><td>（CSSで色見本を表示）</td><td>背景、カード、セクション区切り</td></tr>
-          <tr class="template-row"><td>アクセントカラー</td><td>#（コードを入力）</td><td>（CSSで色見本を表示）</td><td>CTA、リンク、強調</td></tr>
-          <tr class="template-row"><td>背景色</td><td>#（コードを入力）</td><td>（CSSで色見本を表示）</td><td>ページ背景</td></tr>
-          <tr class="template-row"><td>テキスト色</td><td>#（コードを入力）</td><td>（CSSで色見本を表示）</td><td>本文テキスト</td></tr>
-          <tr class="template-row"><td>テキスト色（薄）</td><td>#（コードを入力）</td><td>（CSSで色見本を表示）</td><td>補助テキスト、注釈</td></tr>
-          </tbody>
-        </table>
+            <table class="doc-table">
+              <thead>
+                <tr>
+                  <th>色の種類</th>
+                  <th>カラーコード</th>
+                  <th>色見本</th>
+                  <th>使用場面</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="template-row">
+                  <td>メインカラー</td>
+                  <td>#b08d57</td>
+                  <td><span
+                      style="display:inline-block;width:80px;height:20px;background:#b08d57;border-radius:4px;"></span>
+                  </td>
+                  <td>予約ボタン、強調要素</td>
+                </tr>
+                <tr class="template-row">
+                  <td>サブカラー</td>
+                  <td>#8c6a36</td>
+                  <td><span
+                      style="display:inline-block;width:80px;height:20px;background:#8c6a36;border-radius:4px;"></span>
+                  </td>
+                  <td>小見出し、ラベル、補助アクセント</td>
+                </tr>
+                <tr class="template-row">
+                  <td>アクセントカラー</td>
+                  <td>#faf6ef</td>
+                  <td><span
+                      style="display:inline-block;width:80px;height:20px;background:#faf6ef;border:1px solid #ddd;border-radius:4px;"></span>
+                  </td>
+                  <td>タグ、カード内背景、注意枠</td>
+                </tr>
+                <tr class="template-row">
+                  <td>背景色</td>
+                  <td>#f7f5f2</td>
+                  <td><span
+                      style="display:inline-block;width:80px;height:20px;background:#f7f5f2;border:1px solid #ddd;border-radius:4px;"></span>
+                  </td>
+                  <td>ページ背景</td>
+                </tr>
+                <tr class="template-row">
+                  <td>テキスト色</td>
+                  <td>#1f1b17</td>
+                  <td><span
+                      style="display:inline-block;width:80px;height:20px;background:#1f1b17;border-radius:4px;"></span>
+                  </td>
+                  <td>見出し、本文の主要テキスト</td>
+                </tr>
+                <tr class="template-row">
+                  <td>テキスト色（サブ）</td>
+                  <td>#6d645a</td>
+                  <td><span
+                      style="display:inline-block;width:80px;height:20px;background:#6d645a;border-radius:4px;"></span>
+                  </td>
+                  <td>説明文、補足文、ナビ</td>
+                </tr>
+              </tbody>
+            </table>
 
           </div>
         </section>
@@ -95,18 +290,70 @@
           <h2 class="section-title"><span class="section-icon">3</span> タイポグラフィ</h2>
 
           <div class="fill-block">
-            <div class="fill-label">フォント設定 <span class="required">必須</span></div>
-        <table class="doc-table">
-          <thead><tr><th>要素</th><th>フォント名</th><th>サイズ</th><th>太さ</th><th>行間</th><th>用途</th></tr></thead>
-          <tbody>
-          <tr class="template-row"><td>h1（大見出し）</td><td>（フォント名）</td><td>（px）</td><td>（bold等）</td><td>（倍率）</td><td>ページタイトル</td></tr>
-          <tr class="template-row"><td>h2（中見出し）</td><td>（フォント名）</td><td>（px）</td><td>（bold等）</td><td>（倍率）</td><td>セクション見出し</td></tr>
-          <tr class="template-row"><td>h3（小見出し）</td><td>（フォント名）</td><td>（px）</td><td>（bold等）</td><td>（倍率）</td><td>サブセクション</td></tr>
-          <tr class="template-row"><td>本文</td><td>（フォント名）</td><td>（px）</td><td>（regular等）</td><td>（倍率）</td><td>通常テキスト</td></tr>
-          <tr class="template-row"><td>キャプション</td><td>（フォント名）</td><td>（px）</td><td>（regular等）</td><td>（倍率）</td><td>画像の説明等</td></tr>
-          <tr class="template-row"><td>ボタン</td><td>（フォント名）</td><td>（px）</td><td>（bold等）</td><td>—</td><td>ボタンテキスト</td></tr>
-          </tbody>
-        </table>
+            <!-- <div class="fill-label">フォント設定 <span class="required">必須</span></div> -->
+            <div class="fill-label">フォント設定 </div>
+            <table class="doc-table">
+              <thead>
+                <tr>
+                  <th>要素</th>
+                  <th>フォント名</th>
+                  <th>サイズ(px)</th>
+                  <th>太さ</th>
+                  <th>行間</th>
+                  <th>用途</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="template-row">
+                  <td>h1（大見出し）</td>
+                  <td>Noto Sans JP / 游ゴシック</td>
+                  <td>40</td>
+                  <td>700（Bold）</td>
+                  <td>1.4</td>
+                  <td>ファーストビューのキャッチコピー</td>
+                </tr>
+                <tr class="template-row">
+                  <td>h2（中見出し）</td>
+                  <td>Noto Sans JP / 游ゴシック</td>
+                  <td>28</td>
+                  <td>600（SemiBold）</td>
+                  <td>1.5</td>
+                  <td>セクションタイトル（ブランドストーリーなど）</td>
+                </tr>
+                <tr class="template-row">
+                  <td>h3（小見出し）</td>
+                  <td>Noto Sans JP / 游ゴシック</td>
+                  <td>20</td>
+                  <td>600（SemiBold）</td>
+                  <td>1.6</td>
+                  <td>カード内タイトル、ステップ見出し</td>
+                </tr>
+                <tr class="template-row">
+                  <td>本文</td>
+                  <td>Noto Sans JP / 游ゴシック</td>
+                  <td>16</td>
+                  <td>400（Regular）</td>
+                  <td>1.8</td>
+                  <td>説明文、コンテンツ本文</td>
+                </tr>
+                <tr class="template-row">
+                  <td>キャプション</td>
+                  <td>Noto Sans JP / 游ゴシック</td>
+                  <td>14</td>
+                  <td>400（Regular）</td>
+                  <td>1.7</td>
+                  <td>補足説明、注釈、タグ下テキスト</td>
+                </tr>
+                <tr class="template-row">
+                  <td>ボタン</td>
+                  <td>Noto Sans JP / 游ゴシック</td>
+                  <td>15</td>
+                  <td>600（SemiBold）</td>
+                  <td>1.4</td>
+                  <td>ナビゲーション</td>
+                </tr>
+              </tbody>
+            </table>
 
           </div>
         </section>
@@ -115,40 +362,363 @@
           <h2 class="section-title"><span class="section-icon">4</span> UIコンポーネント</h2>
 
 
-        <div class="fill-block">
-          <div class="fill-label">ボタン <span class="required">必須</span></div>
-          <div class="fill-hint">プライマリ・セカンダリ・デンジャーの3種類のボタンスタイル（実物のHTMLサンプル付き）</div>
-          <div class="fill-content">
-            <p>（ここにボタンの実物サンプルとCSSコードを記載）</p>
+          <div class="fill-block">
+            <!-- <div class="fill-label">ボタン <span class="required">必須</span></div> -->
+            <div class="fill-label">ボタン </div>
+            <!-- <div class="fill-hint">プライマリ・セカンダリ・デンジャーの3種類のボタンスタイル（実物のHTMLサンプル付き）</div> -->
+            <div class="fill-content">
+              <h1>ボタンコンポーネント一覧</h1>
+
+              <table>
+                <tr>
+                  <th>UIコンポーネント</th>
+                  <th>用途</th>
+                  <th>HTMLサンプル</th>
+                  <th>CSSコード</th>
+                </tr>
+
+                <tr>
+                  <td>プライマリボタン</td>
+                  <td>主要CTA</td>
+                  <td><code>&lt;a class="btn"&gt;予約する&lt;/a&gt;</code></td>
+                  <td><code>.btn {
+  background:#b08d57;
+  color:#fff;
+  padding:14px 20px;
+  border-radius:999px;
+}</code></td>
+                </tr>
+
+                <tr>
+                  <td>セカンダリボタン</td>
+                  <td>補助導線</td>
+                  <td><code>&lt;a class="btn secondary"&gt;詳しく見る&lt;/a&gt;</code></td>
+                  <td><code>.btn.secondary {
+  background:#fff;
+  border:1px solid #e8dccb;
+}</code></td>
+                </tr>
+
+                <tr>
+                  <td>言語切替ボタン風ラベル</td>
+                  <td>EN / JP 表示</td>
+                  <td>
+                    <code>&lt;a class="lang"&gt;EN / JP&lt;/a&gt;</code>
+                  </td>
+                  <td>
+                    <code>.lang { padding:8px 10px; border:1px solid #e8dccb; border-radius:999px; background:#fff; }</code>
+                  </td>
+                </tr>
+
+
+              </table>
+
+            </div>
           </div>
-        </div>
-        <div class="fill-block">
-          <div class="fill-label">フォーム要素 <span class="required">必須</span></div>
-          <div class="fill-hint">テキスト入力・セレクト・テキストエリア・チェックボックス・ラジオボタン（実物のHTMLサンプル付き）</div>
-          <div class="fill-content">
-            <p>（ここにフォーム要素の実物サンプルとCSSコードを記載）</p>
+          <div class="fill-block">
+            <!-- <div class="fill-label">フォーム要素 <span class="required">必須</span></div> -->
+            <div class="fill-label">フォーム要素 </div>
+            <!-- <div class="fill-hint">テキスト入力・セレクト・テキストエリア・チェックボックス・ラジオボタン（実物のHTMLサンプル付き）</div> -->
+            <div class="fill-content">
+              <h1>UIコンポーネント一覧</h1>
+
+              <table>
+                <tr>
+                  <th>UIコンポーネント</th>
+                  <th>用途</th>
+                  <th>HTMLサンプル</th>
+                  <th>CSSコード</th>
+                </tr>
+
+
+                <tr>
+                  <td>ピル（タグ）</td>
+                  <td>素材表示</td>
+                  <td><code>&lt;span class="pill"&gt;ひば&lt;/span&gt;</code></td>
+                  <td><code>.pill {
+  background:#faf6ef;
+  border-radius:999px;
+  padding:6px 10px;
+}</code></td>
+                </tr>
+
+                <tr>
+                  <td>テキスト入力</td>
+                  <td>ユーザー入力</td>
+                  <td><code>&lt;input type="text"&gt;</code></td>
+                  <td><code>input {
+  border:1px solid #e8dccb;
+  padding:14px;
+}</code></td>
+                </tr>
+
+                <tr>
+                  <td>セレクトボックス</td>
+                  <td>選択入力</td>
+                  <td><code>&lt;select&gt;&lt;/select&gt;</code></td>
+                  <td><code>select {
+  border:1px solid #e8dccb;
+  padding:14px;
+}</code></td>
+                </tr>
+
+                <tr>
+                  <td>テキストエリア</td>
+                  <td>備考入力</td>
+                  <td><code>&lt;textarea&gt;&lt;/textarea&gt;</code></td>
+                  <td><code>textarea {
+  min-height:120px;
+  border:1px solid #e8dccb;
+}</code></td>
+                </tr>
+                <!--
+                <tr>
+                  <td>チェックボックス</td>
+                  <td>同意確認</td>
+                  <td><code>&lt;input type="checkbox"&gt;</code></td>
+                  <td><code>input[type="checkbox"] {
+  accent-color:#b08d57;
+}</code></td>
+                </tr>
+
+                <tr>
+                  <td>ラジオボタン</td>
+                  <td>プラン選択</td>
+                  <td><code>&lt;input type="radio"&gt;</code></td>
+                  <td><code>input[type="radio"] {
+  accent-color:#b08d57;
+}</code></td>
+                </tr> -->
+
+              </table>
+            </div>
           </div>
-        </div>
-        <div class="fill-block">
-          <div class="fill-label">カード・テーブル・その他 <span class="required">必須</span></div>
-          <div class="fill-hint">カードコンポーネント・テーブルスタイル・アラート等（実物のHTMLサンプル付き）</div>
-          <div class="fill-content">
-            <p>（ここにコンポーネントの実物サンプルとCSSコードを記載）</p>
+          <div class="fill-block">
+            <!-- <div class="fill-label">カード・テーブル・その他 <span class="required">必須</span></div> -->
+            <div class="fill-label">カード・テーブル・その他 </div>
+            <!-- <div class="fill-hint">カードコンポーネント・テーブルスタイル・アラート等（実物のHTMLサンプル付き）</div> -->
+            <div class="fill-content">
+              <h1>UIコンポーネント一覧</h1>
+
+              <!-- ===== カード ===== -->
+
+              <div class="section">
+                <h2>カードコンポーネント</h2>
+
+                <div class="card">
+                  <img src="https://picsum.photos/400/200" alt="">
+                  <div class="card-body">
+                    <h3>香りづくり体験</h3>
+                    <p>日本の素材を使った特別な調香体験。</p>
+                    <a href="#" class="btn">詳細を見る</a>
+                  </div>
+                </div>
+
+                <pre><code>
+&lt;div class="card"&gt;
+  &lt;img src="image.jpg"&gt;
+  &lt;div class="card-body"&gt;
+    &lt;h3&gt;タイトル&lt;/h3&gt;
+    &lt;p&gt;説明文&lt;/p&gt;
+    &lt;a class="btn"&gt;ボタン&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+              </div>
+
+              <!-- ===== テーブル ===== -->
+
+              <div class="section">
+                <h2>テーブル（ストライプ）</h2>
+
+                <table class="table">
+                  <tr>
+                    <th>項目</th>
+                    <th>内容</th>
+                  </tr>
+                  <tr>
+                    <td>所要時間</td>
+                    <td>60分</td>
+                  </tr>
+                  <tr>
+                    <td>料金</td>
+                    <td>¥8,000</td>
+                  </tr>
+                </table>
+
+                <pre><code>
+&lt;table class="table"&gt;
+  &lt;tr&gt;
+    &lt;th&gt;項目&lt;/th&gt;
+    &lt;th&gt;内容&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;所要時間&lt;/td&gt;
+    &lt;td&gt;60分&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+</code></pre>
+
+              </div>
+
+              <!-- ===== アラート ===== -->
+
+              <div class="section">
+                <h2>アラート</h2>
+
+                <div class="alert alert-info">情報メッセージ</div>
+                <div class="alert alert-success">成功メッセージ</div>
+                <div class="alert alert-warning">警告メッセージ</div>
+                <div class="alert alert-error">エラーメッセージ</div>
+
+                <pre><code>
+&lt;div class="alert alert-info"&gt;情報&lt;/div&gt;
+&lt;div class="alert alert-success"&gt;成功&lt;/div&gt;
+&lt;div class="alert alert-warning"&gt;警告&lt;/div&gt;
+&lt;div class="alert alert-error"&gt;エラー&lt;/div&gt;
+</code></pre>
+
+              </div>
+            </div>
           </div>
-        </div>
 
         </section>
 
         <section class="section" id="sec5">
           <h2 class="section-title"><span class="section-icon">5</span> レイアウトルール</h2>
 
-        <div class="fill-block">
-          <div class="fill-label">レイアウト基本ルール <span class="required">必須</span></div>
-          <div class="fill-hint">グリッド・余白・角丸・シャドウ等の数値ルール</div>
-          <div class="fill-content">
-            <p>（レイアウトルールを記載）</p>
+          <div class="fill-block">
+            <!-- <div class="fill-label">レイアウト基本ルール <span class="required">必須</span></div> -->
+            <div class="fill-label">レイアウト基本ルール </div>
+            <!-- <div class="fill-hint">グリッド・余白・角丸・シャドウ等の数値ルール</div> -->
+            <div class="fill-content">
+              <h1>レイアウトルール一覧</h1>
+
+              <table>
+                <tr>
+                  <th>項目</th>
+                  <th>推奨値</th>
+                  <th>CSS例</th>
+                  <th>用途・意図</th>
+                </tr>
+
+                <tr>
+                  <td>コンテンツ最大幅</td>
+                  <td>1120px</td>
+                  <td><code>.container { width: min(1120px, calc(100% - 32px)); }</code></td>
+                  <td>横に広がりすぎず上質な読みやすさを確保</td>
+                </tr>
+
+                <tr>
+                  <td>左右余白</td>
+                  <td>16px〜32px</td>
+                  <td><code>calc(100% - 32px)</code></td>
+                  <td>スマホでも端に寄りすぎない余白設計</td>
+                </tr>
+
+                <tr>
+                  <td>グリッド</td>
+                  <td>2カラム / 3カラム</td>
+                  <td><code>.grid-2 { grid-template-columns: 1fr 1fr; }</code></td>
+                  <td>ヒーロー・カード表示に使用</td>
+                </tr>
+
+                <tr>
+                  <td>ガター幅</td>
+                  <td>16px〜24px</td>
+                  <td><code>gap: 16px;</code></td>
+                  <td>要素間の適切な距離感を保つ</td>
+                </tr>
+
+                <tr>
+                  <td>セクション余白</td>
+                  <td>40px〜56px</td>
+                  <td><code>.section { padding: 40px 0; }</code></td>
+                  <td>セクションの区切りを明確にする</td>
+                </tr>
+
+                <tr>
+                  <td>要素間余白</td>
+                  <td>8px〜16px</td>
+                  <td><code>margin-bottom: 8px;</code></td>
+                  <td>テキストやボタンの間隔</td>
+                </tr>
+
+                <tr>
+                  <td>カード内余白</td>
+                  <td>24px</td>
+                  <td><code>.card { padding: 24px; }</code></td>
+                  <td>情報を読みやすく整理</td>
+                </tr>
+
+                <tr>
+                  <td>角丸（大）</td>
+                  <td>18px</td>
+                  <td><code>border-radius: 18px;</code></td>
+                  <td>カード・画像枠</td>
+                </tr>
+
+                <tr>
+                  <td>角丸（中）</td>
+                  <td>16px</td>
+                  <td><code>border-radius: 16px;</code></td>
+                  <td>カードコンポーネント</td>
+                </tr>
+
+                <tr>
+                  <td>角丸（小）</td>
+                  <td>14px</td>
+                  <td><code>border-radius: 14px;</code></td>
+                  <td>入力欄・フォーム</td>
+                </tr>
+
+                <tr>
+                  <td>ピル・ボタン角丸</td>
+                  <td>999px</td>
+                  <td><code>border-radius: 999px;</code></td>
+                  <td>ボタン・タグの柔らかさ演出</td>
+                </tr>
+
+                <tr>
+                  <td>シャドウ</td>
+                  <td>0 8px 24px rgba(0,0,0,.08)</td>
+                  <td><code>box-shadow: 0 8px 24px rgba(0,0,0,.08);</code></td>
+                  <td>軽い浮き感で上質な印象を演出</td>
+                </tr>
+
+                <tr>
+                  <td>境界線</td>
+                  <td>1px #e8dccb</td>
+                  <td><code>border: 1px solid #e8dccb;</code></td>
+                  <td>柔らかい区切り線</td>
+                </tr>
+
+                <tr>
+                  <td>PCブレークポイント</td>
+                  <td>901px以上</td>
+                  <td><code>@media (min-width: 901px)</code></td>
+                  <td>2〜3カラム表示</td>
+                </tr>
+
+                <tr>
+                  <td>タブレット</td>
+                  <td>601px〜900px</td>
+                  <td><code>@media (max-width: 900px)</code></td>
+                  <td>1カラム化開始</td>
+                </tr>
+
+                <tr>
+                  <td>スマートフォン</td>
+                  <td>600px以下</td>
+                  <td><code>@media (max-width: 600px)</code></td>
+                  <td>完全モバイルレイアウト</td>
+                </tr>
+
+              </table>
+
+            </div>
           </div>
-        </div>
 
         </section>
 
@@ -158,4 +728,5 @@
 
   <script src="../js/main.js"></script>
 </body>
+
 </html>
