@@ -24,7 +24,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           # 指定された階層を公開ルートに設定
-          path: './AromaTrip/main'
+          path: 'AromaTrip/main'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
