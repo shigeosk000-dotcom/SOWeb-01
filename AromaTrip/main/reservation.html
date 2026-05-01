@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>予約ページ</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+  <header class="header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">Aroma Trip Nippon｜和香巡り</a>
+      <nav class="nav">
+        <a href="concept.html">コンセプト</a>
+        <a href="experience.html">体験詳細</a>
+        <a href="reservation.html">予約</a>
+      </nav>
+      <div style="display:flex;gap:10px;align-items:center">
+        <span class="lang">EN / JP</span>
+        <a class="btn" href="reservation.html">Book Experience</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="breadcrumbs"><a href="index.html">トップ</a> / <a href="experience.html">体験詳細</a> / <span>予約</span></div>
+    <section class="hero">
+      <div class="grid-2">
+        <div class="card form-card">
+          <div class="kicker">BOOKING</div>
+          <h1>予約フォーム</h1>
+          <p class="lead">日程と人数を選択し、来店に必要な情報を入力してください。</p>
+          <form action="reservation-complete.html" method="get">
+            <div class="field"><label for="date">日程</label><input id="date" type="date" /></div>
+            <div class="field"><label for="time">時間</label><select id="time">
+                <option>10:00</option>
+                <option>13:00</option>
+                <option>16:00</option>
+              </select></div>
+            <div class="field"><label for="people">人数</label><select id="people">
+                <option>1名</option>
+                <option>2名</option>
+                <option>3名</option>
+                <option>4名</option>
+              </select></div>
+            <div class="field"><label for="name">お名前</label><input id="name" type="text" placeholder="Your name" />
+            </div>
+            <div class="field"><label for="email">メールアドレス</label><input id="email" type="email"
+                placeholder="name@example.com" /></div>
+            <div class="field"><label for="lang">言語</label><select id="lang">
+                <option>English</option>
+                <option>日本語</option>
+              </select></div>
+            <div class="field"><label for="request">ご要望・備考</label>
+              <!-- <input id="request" type="textarea" placeholder="Please enter your request here." /></div> -->
+              <textarea id="request" cols="50" rows="3" placeholder="Please enter your request here."></textarea>
+            </div>
+            <div class="spacer"></div>
+            <button class="btn" type="submit">予約を確定する</button>
+          </form>
+        </div>
+        <div class="card form-card">
+          <h2>予約内容</h2>
+          <div class="review" style="margin-bottom:16px"><span class="pill">プラン</span>
+            <h3>香りづくり体験</h3>
+            <p class="text">約90分 / ¥5,500〜 / EN・JP対応</p>
+          </div>
+          <div class="review" style="margin-bottom:16px"><span class="pill">含まれる内容</span>
+            <p class="text">素材説明、調合体験、完成品持ち帰り、再購入用レシピ保存</p>
+          </div>
+          <div class="review"><span class="pill">注意事項</span>
+            <ul class="list">
+              <li>予約時間の10分前までにご来店ください</li>
+              <li>香りに敏感な方は事前にご相談ください</li>
+              <li>英語対応可能です</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div><strong>Booking Mockup</strong></div>
+      <div><a href="experience.html">Experience</a></div>
+      <div><a href="reservation-complete.html">Complete</a></div>
+    </div>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+</body>
+
+</html>
+
