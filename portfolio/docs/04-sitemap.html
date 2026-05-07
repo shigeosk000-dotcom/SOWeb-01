@@ -10,14 +10,34 @@
   <link rel="stylesheet" href="../css/style.css">
   <style>
     .tree {
-      background: #faf7f0;
-      border-left: 6px solid #b08d57;
-      border-radius: 12px;
-      padding: 24px 28px;
-      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      font-family: inherit;
       white-space: pre-wrap;
-      font-size: 15px;
-      color: #3c342b;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text);
+    }
+
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    .table-wrap .doc-table {
+      min-width: 720px;
+    }
+
+    .fill-block>.subsection-title {
+      margin-top: 28px;
+    }
+
+    .fill-block>.subsection-title:first-of-type {
+      margin-top: 0;
     }
   </style>
 </head>
@@ -561,10 +581,10 @@
                 <strong>目的：</strong>香りづくり体験予約から体験、帰国して作った香りのECサイト購入
               </div>
 
-              <h2>行動フロー一覧</h2>
+              <h3 class="subsection-title">行動フロー一覧</h3>
 
               <div class="table-wrap">
-                <table>
+                <table class="doc-table">
                   <thead>
                     <tr>
                       <th>ステップ</th>
@@ -678,9 +698,9 @@
 
           <div class="fill-block">
             <div class="fill-label">URL一覧 <span class="required">必須</span></div>
-            <h2>Webサイト部分</h2>
+            <h3 class="subsection-title">Webサイト部分</h3>
             <div class="table-wrap">
-              <table>
+              <table class="doc-table">
                 <thead>
                   <tr>
                     <th>URL</th>
@@ -892,11 +912,11 @@
               </table>
             </div>
 
-            <h2>Spring Bootアプリ部分</h2>
+            <h3 class="subsection-title">Spring Bootアプリ部分</h3>
 
-            <h3>共通・認証</h3>
+            <h3 class="subsection-title">共通・認証</h3>
             <div class="table-wrap">
-              <table>
+              <table class="doc-table">
                 <thead>
                   <tr>
                     <th>URL</th>
@@ -946,9 +966,9 @@
               </table>
             </div>
 
-            <h3>予約管理</h3>
+            <h3 class="subsection-title">予約管理</h3>
             <div class="table-wrap">
-              <table>
+              <table class="doc-table">
                 <thead>
                   <tr>
                     <th>URL</th>
@@ -1010,9 +1030,9 @@
               </table>
             </div>
 
-            <h3>顧客情報管理</h3>
+            <h3 class="subsection-title">顧客情報管理</h3>
             <div class="table-wrap">
-              <table>
+              <table class="doc-table">
                 <thead>
                   <tr>
                     <th>URL</th>
@@ -1074,9 +1094,9 @@
               </table>
             </div>
 
-            <h3>香りレシピ管理</h3>
+            <h3 class="subsection-title">香りレシピ管理</h3>
             <div class="table-wrap">
-              <table>
+              <table class="doc-table">
                 <thead>
                   <tr>
                     <th>URL</th>
@@ -1138,9 +1158,9 @@
               </table>
             </div>
 
-            <h3>商品・在庫管理</h3>
+            <h3 class="subsection-title">商品・在庫管理</h3>
             <div class="table-wrap">
-              <table>
+              <table class="doc-table">
                 <thead>
                   <tr>
                     <th>URL</th>
@@ -1226,9 +1246,9 @@
               </table>
             </div>
 
-            <h3>EC注文管理</h3>
+            <h3 class="subsection-title">EC注文管理</h3>
             <div class="table-wrap">
-              <table>
+              <table class="doc-table">
                 <thead>
                   <tr>
                     <th>URL</th>
@@ -1266,9 +1286,9 @@
               </table>
             </div>
 
-            <h3>多言語対応管理</h3>
+            <h3 class="subsection-title">多言語対応管理</h3>
             <div class="table-wrap">
-              <table>
+              <table class="doc-table">
                 <thead>
                   <tr>
                     <th>URL</th>
@@ -1306,9 +1326,9 @@
               </table>
             </div>
 
-            <h3>レビュー・口コミ管理</h3>
+            <h3 class="subsection-title">レビュー・口コミ管理</h3>
             <div class="table-wrap">
-              <table>
+              <table class="doc-table">
                 <thead>
                   <tr>
                     <th>URL</th>
@@ -1358,9 +1378,9 @@
               </table>
             </div>
 
-            <h3>アカウント設定</h3>
+            <h3 class="subsection-title">アカウント設定</h3>
             <div class="table-wrap">
-              <table>
+              <table class="doc-table">
                 <thead>
                   <tr>
                     <th>URL</th>
