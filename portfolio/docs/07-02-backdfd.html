@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>バックエンド In/Out データフロー図</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 40px;
+      font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+      background: #f7f5f2;
+      color: #1f1b17;
+      line-height: 1.7;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 28px;
+      letter-spacing: 0.04em;
+    }
+
+    .box {
+      background: #ffffff;
+      border: 2px solid #d8dccb;
+      border-radius: 18px;
+      padding: 28px 36px;
+      margin: 24px 0;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    .main-box {
+      border-color: #b08d57;
+      background: #fffaf2;
+    }
+
+    .system-box {
+      border-color: #8c6a36;
+      background: #fbf7ef;
+    }
+
+    .db-box {
+      border-color: #6d645a;
+      background: #fdfdfc;
+      text-align: center;
+    }
+
+    .box-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #1f1b17;
+    }
+
+    .box-subtitle {
+      font-size: 15px;
+      color: #6d645a;
+      margin-bottom: 6px;
+    }
+
+    .section-title {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: #faf6ef;
+      color: #8c6a36;
+      font-weight: 700;
+      margin-bottom: 18px;
+      border: 1px solid #e8dccb;
+    }
+
+    ul {
+      margin: 8px 0 18px 0;
+      padding-left: 24px;
+    }
+
+    li {
+      margin-bottom: 4px;
+    }
+
+    .data-group {
+      margin-bottom: 24px;
+    }
+
+    .data-group h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+      padding-left: 12px;
+      border-left: 5px solid #b08d57;
+    }
+
+    .arrow {
+      text-align: center;
+      font-weight: 700;
+      color: #8c6a36;
+      margin: 12px 0;
+    }
+
+    .arrow-symbol {
+      font-size: 36px;
+      line-height: 1;
+    }
+
+    .arrow-text {
+      font-size: 15px;
+      margin-top: 4px;
+    }
+
+    .flow-label {
+      text-align: center;
+      color: #6d645a;
+      font-weight: 600;
+      margin: 8px 0;
+    }
+
+    .out-box {
+      border-left: 8px solid #8c6a36;
+    }
+
+    .in-box {
+      border-left: 8px solid #b08d57;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      margin-right: 8px;
+    }
+
+    .badge-out {
+      background: #f0eadf;
+      color: #6d4f24;
+    }
+
+    .badge-in {
+      background: #f6ead8;
+      color: #7a4f18;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 20px;
+      }
+
+      .box {
+        padding: 22px;
+      }
+
+      h1 {
+        font-size: 22px;
+      }
+
+      .box-title {
+        font-size: 19px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <h1>バックエンド In / Out データフロー図</h1>
+
+    <div class="box main-box">
+      <div class="box-title">バックエンド：管理システム</div>
+      <div class="box-subtitle">HTML / CSS / JavaScript / Thymeleaf</div>
+      <div class="box-subtitle">利用者：店舗運営者・管理者</div>
+    </div>
+
+    <div class="arrow">
+      <div class="arrow-symbol">▼</div>
+      <div class="arrow-text">管理画面表示時にDBから取得するデータ（Out）</div>
+    </div>
+
+    <div class="box out-box">
+      <div class="section-title">
+        <span class="badge badge-out">Out</span>
+        取得するデータ
+      </div>
+
+      <div class="data-group">
+        <h3>予約情報</h3>
+        <ul>
+          <li>予約一覧</li>
+          <li>来店日時</li>
+          <li>人数</li>
+          <li>体験コース</li>
+          <li>予約状況</li>
+          <li>顧客情報</li>
+        </ul>
+      </div>
+
+      <div class="data-group">
+        <h3>顧客情報</h3>
+        <ul>
+          <li>氏名</li>
+          <li>国籍</li>
+          <li>連絡先</li>
+          <li>利用履歴</li>
+          <li>購入履歴</li>
+        </ul>
+      </div>
+
+      <div class="data-group">
+        <h3>香りレシピ情報</h3>
+        <ul>
+          <li>レシピ名</li>
+          <li>香りの配合データ</li>
+          <li>作成日</li>
+          <li>紐づく顧客情報</li>
+        </ul>
+      </div>
+
+      <div class="data-group">
+        <h3>商品・在庫情報</h3>
+        <ul>
+          <li>商品名</li>
+          <li>カテゴリ</li>
+          <li>価格</li>
+          <li>説明</li>
+          <li>在庫数</li>
+          <li>在庫アラート</li>
+        </ul>
+      </div>
+
+      <div class="data-group">
+        <h3>EC注文情報</h3>
+        <ul>
+          <li>注文内容</li>
+          <li>数量</li>
+          <li>配送先</li>
+          <li>注文状況</li>
+          <li>発送状況</li>
+          <li>決済状況</li>
+        </ul>
+      </div>
+
+      <div class="data-group">
+        <h3>レビュー／口コミ情報</h3>
+        <ul>
+          <li>評価</li>
+          <li>コメント</li>
+          <li>公開状態</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="arrow">
+      <div class="arrow-symbol">▲</div>
+      <div class="arrow-text">管理者操作によりDBへ登録・更新するデータ（In）</div>
+    </div>
+
+    <div class="box in-box">
+      <div class="section-title">
+        <span class="badge badge-in">In</span>
+        登録・更新するデータ
+      </div>
+
+      <div class="data-group">
+        <h3>予約管理データ</h3>
+        <ul>
+          <li>新規予約</li>
+          <li>予約内容の変更</li>
+          <li>予約ステータス</li>
+          <li>キャンセル情報</li>
+        </ul>
+      </div>
+
+      <div class="data-group">
+        <h3>顧客管理データ</h3>
+        <ul>
+          <li>新規顧客情報</li>
+          <li>顧客情報の修正</li>
+          <li>備考</li>
+        </ul>
+      </div>
+
+      <div class="data-group">
+        <h3>香りレシピ管理データ</h3>
+        <ul>
+          <li>新規レシピ</li>
+          <li>配合情報</li>
+          <li>顧客との紐づけ</li>
+          <li>レシピ修正・削除</li>
+        </ul>
+      </div>
+
+      <div class="data-group">
+        <h3>商品・在庫管理データ</h3>
+        <ul>
+          <li>新規商品</li>
+          <li>商品説明</li>
+          <li>価格</li>
+          <li>公開設定</li>
+          <li>在庫数</li>
+          <li>入出庫情報</li>
+        </ul>
+      </div>
+
+      <div class="data-group">
+        <h3>EC注文管理データ</h3>
+        <ul>
+          <li>注文ステータス</li>
+          <li>発送状況</li>
+          <li>決済状況</li>
+          <li>管理メモ</li>
+        </ul>
+      </div>
+
+      <div class="data-group">
+        <h3>多言語・レビュー管理データ</h3>
+        <ul>
+          <li>予約確認メール文面</li>
+          <li>案内文</li>
+          <li>レビュー公開／非公開状態</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="arrow">
+      <div class="arrow-symbol">▼</div>
+      <div class="arrow-text">登録・取得処理</div>
+    </div>
+
+    <div class="box system-box">
+      <div class="box-title">Spring Boot</div>
+      <div class="flow-label">Controller → Service → Repository</div>
+    </div>
+
+    <div class="arrow">
+      <div class="arrow-symbol">▼</div>
+      <div class="arrow-text">DBへ登録・DBから取得</div>
+    </div>
+
+    <div class="box db-box">
+      <div class="box-title">H2 Database</div>
+      <p>予約情報・顧客情報・香りレシピ情報・商品在庫情報・注文情報・レビュー情報などを保存</p>
+    </div>
+
+  </div>
+</body>
+</html>

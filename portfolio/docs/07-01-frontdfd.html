@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>フロントエンド In/Out データフロー図</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 40px;
+      font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+      background: #f7f5f2;
+      color: #1f1b17;
+      line-height: 1.7;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 28px;
+      letter-spacing: 0.04em;
+    }
+
+    .box {
+      background: #ffffff;
+      border: 2px solid #d8dccb;
+      border-radius: 18px;
+      padding: 28px 36px;
+      margin: 24px 0;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    }
+
+    .main-box {
+      border-color: #b08d57;
+      background: #fffaf2;
+    }
+
+    .system-box {
+      border-color: #8c6a36;
+      background: #fbf7ef;
+    }
+
+    .db-box {
+      border-color: #6d645a;
+      background: #fdfdfc;
+      text-align: center;
+    }
+
+    .box-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #1f1b17;
+    }
+
+    .box-subtitle {
+      font-size: 15px;
+      color: #6d645a;
+      margin-bottom: 6px;
+    }
+
+    .section-title {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: #faf6ef;
+      color: #8c6a36;
+      font-weight: 700;
+      margin-bottom: 18px;
+      border: 1px solid #e8dccb;
+    }
+
+    ul {
+      margin: 8px 0 18px 0;
+      padding-left: 24px;
+    }
+
+    li {
+      margin-bottom: 4px;
+    }
+
+    .data-group {
+      margin-bottom: 24px;
+    }
+
+    .data-group h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+      padding-left: 12px;
+      border-left: 5px solid #b08d57;
+    }
+
+    .arrow {
+      text-align: center;
+      font-weight: 700;
+      color: #8c6a36;
+      margin: 12px 0;
+    }
+
+    .arrow-symbol {
+      font-size: 36px;
+      line-height: 1;
+    }
+
+    .arrow-text {
+      font-size: 15px;
+      margin-top: 4px;
+    }
+
+    .flow-label {
+      text-align: center;
+      color: #6d645a;
+      font-weight: 600;
+      margin: 8px 0;
+    }
+
+    .two-way {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .out-box {
+      border-left: 8px solid #8c6a36;
+    }
+
+    .in-box {
+      border-left: 8px solid #b08d57;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      margin-right: 8px;
+    }
+
+    .badge-out {
+      background: #f0eadf;
+      color: #6d4f24;
+    }
+
+    .badge-in {
+      background: #f6ead8;
+      color: #7a4f18;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 20px;
+      }
+
+      .box {
+        padding: 22px;
+      }
+
+      h1 {
+        font-size: 22px;
+      }
+
+      .box-title {
+        font-size: 19px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <h1>フロントエンド In / Out データフロー図</h1>
+
+    <div class="box main-box">
+      <div class="box-title">フロントエンド：Webサイト</div>
+      <div class="box-subtitle">HTML / CSS / JavaScript / Thymeleaf</div>
+      <div class="box-subtitle">利用者：訪日外国人旅行者・体験ユーザー</div>
+    </div>
+
+    <div class="arrow">
+      <div class="arrow-symbol">▼</div>
+      <div class="arrow-text">画面表示時にDBから取得するデータ（Out）</div>
+    </div>
+
+    <div class="box out-box">
+      <div class="section-title">
+        <span class="badge badge-out">Out</span>
+        取得するデータ
+      </div>
+
+      <div class="data-group">
+        <h3>体験プログラム情報</h3>
+        <ul>
+          <li>体験名</li>
+          <li>体験内容</li>
+          <li>所要時間</li>
+          <li>料金</li>
+          <li>使用素材</li>
+        </ul>
+      </div>
+
+      <div class="data-group">
+        <h3>商品情報</h3>
+        <ul>
+          <li>商品名</li>
+          <li>カテゴリ</li>
+          <li>価格</li>
+          <li>商品説明</li>
+          <li>在庫状況</li>
+        </ul>
+      </div>
+
+      <div class="data-group">
+        <h3>レビュー／口コミ情報</h3>
+        <ul>
+          <li>評価</li>
+          <li>コメント</li>
+          <li>投稿日時</li>
+        </ul>
+      </div>
+
+      <div class="data-group">
+        <h3>マイページ情報</h3>
+        <ul>
+          <li>予約履歴</li>
+          <li>購入履歴</li>
+          <li>マイ香りレシピ</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="arrow">
+      <div class="arrow-symbol">▲</div>
+      <div class="arrow-text">ユーザー操作によりDBへ登録するデータ（In）</div>
+    </div>
+
+    <div class="box in-box">
+      <div class="section-title">
+        <span class="badge badge-in">In</span>
+        登録するデータ
+      </div>
+
+      <div class="data-group">
+        <h3>予約情報</h3>
+        <ul>
+          <li>来店日時</li>
+          <li>人数</li>
+          <li>体験コース</li>
+          <li>氏名</li>
+          <li>メールアドレス</li>
+          <li>国籍</li>
+          <li>予約状況</li>
+        </ul>
+      </div>
+
+      <div class="data-group">
+        <h3>会員／顧客情報</h3>
+        <ul>
+          <li>氏名</li>
+          <li>国籍</li>
+          <li>連絡先</li>
+          <li>配送先</li>
+        </ul>
+      </div>
+
+      <div class="data-group">
+        <h3>EC注文情報</h3>
+        <ul>
+          <li>注文商品</li>
+          <li>数量</li>
+          <li>配送先</li>
+          <li>決済状況</li>
+          <li>注文状況</li>
+        </ul>
+      </div>
+
+      <div class="data-group">
+        <h3>レビュー情報</h3>
+        <ul>
+          <li>評価</li>
+          <li>コメント</li>
+          <li>対象体験／商品</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="arrow">
+      <div class="arrow-symbol">▼</div>
+      <div class="arrow-text">登録・取得処理</div>
+    </div>
+
+    <div class="box system-box">
+      <div class="box-title">Spring Boot</div>
+      <div class="flow-label">Controller → Service → Repository</div>
+    </div>
+
+    <div class="arrow">
+      <div class="arrow-symbol">▼</div>
+      <div class="arrow-text">DBへ登録・DBから取得</div>
+    </div>
+
+    <div class="box db-box">
+      <div class="box-title">H2 Database</div>
+      <p>予約情報・顧客情報・商品情報・注文情報・レビュー情報などを保存</p>
+    </div>
+
+  </div>
+</body>
+</html>
