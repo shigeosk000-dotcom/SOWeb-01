@@ -27,6 +27,167 @@
     .embedded-doc-link:last-of-type {
       margin-bottom: 0;
     }
+
+    .screen-transition {
+      --st-paper: #fff;
+      --st-ink: #1f1b17;
+      --st-muted: #6d645a;
+      --st-line: #ddd6c8;
+      --st-accent: #b08d57;
+      --st-accent-dark: #8c6a36;
+      --st-soft: #fbf7ef;
+      max-width: 1160px;
+      margin: 0 auto;
+      color: var(--st-ink);
+      line-height: 1.7;
+    }
+
+    .screen-transition * {
+      box-sizing: border-box;
+    }
+
+    .screen-transition header {
+      margin-bottom: 36px;
+      padding: 32px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, #fffaf2, #ffffff);
+      border: 1px solid var(--st-line);
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.06);
+    }
+
+    .screen-transition h1 {
+      margin: 0 0 10px;
+      font-size: 30px;
+      line-height: 1.4;
+      letter-spacing: 0.04em;
+    }
+
+    .screen-transition .lead {
+      margin: 0;
+      color: var(--st-muted);
+      font-size: 15px;
+    }
+
+    .screen-transition h2 {
+      margin: 56px 0 18px;
+      padding-left: 14px;
+      border-left: 6px solid var(--st-accent);
+      font-size: 24px;
+      line-height: 1.5;
+    }
+
+    .screen-transition .note {
+      margin: 0 0 18px;
+      padding: 14px 18px;
+      border-radius: 14px;
+      background: var(--st-soft);
+      border: 1px solid var(--st-line);
+      color: var(--st-muted);
+      font-size: 14px;
+    }
+
+    .screen-transition .diagram-block {
+      margin: 18px 0 28px;
+      padding: 22px;
+      border-radius: 18px;
+      background: var(--st-paper);
+      border: 1px solid var(--st-line);
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.055);
+      overflow-x: auto;
+    }
+
+    .screen-transition pre {
+      margin: 0;
+      padding: 20px;
+      border-radius: 14px;
+      background: #1f1b17;
+      color: #fffaf2;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 14px;
+      line-height: 1.65;
+      white-space: pre;
+      overflow-x: auto;
+      tab-size: 2;
+    }
+
+    .screen-transition .caption {
+      margin: 0 0 12px;
+      color: var(--st-accent-dark);
+      font-weight: 700;
+      font-size: 16px;
+    }
+
+    .screen-transition .table-wrap {
+      overflow-x: auto;
+      margin: 18px 0 44px;
+      border-radius: 16px;
+      border: 1px solid var(--st-line);
+      background: var(--st-paper);
+    }
+
+    .screen-transition table {
+      width: 100%;
+      min-width: 780px;
+      border-collapse: collapse;
+      background: var(--st-paper);
+      font-size: 14px;
+    }
+
+    .screen-transition th,
+    .screen-transition td {
+      padding: 12px 14px;
+      border-right: 1px solid var(--st-line);
+      border-bottom: 1px solid var(--st-line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .screen-transition th {
+      background: #f7f2e9;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .screen-transition tr:last-child td {
+      border-bottom: none;
+    }
+
+    .screen-transition th:last-child,
+    .screen-transition td:last-child {
+      border-right: none;
+    }
+
+    .screen-transition .tag {
+      display: inline-block;
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+      background: #fff4df;
+      color: #7a4f18;
+      border: 1px solid #e5c88e;
+    }
+
+    .screen-transition .tag.phase2 {
+      background: #eef5f0;
+      color: #48694d;
+      border-color: #aec7b2;
+    }
+
+    @media (max-width: 720px) {
+      .screen-transition header {
+        padding: 24px;
+      }
+
+      .screen-transition h1 {
+        font-size: 24px;
+      }
+
+      .screen-transition pre {
+        font-size: 12px;
+      }
+    }
   </style>
 </head>
 
@@ -130,7 +291,7 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>1</td>
+                  <td>FR-01</td>
                   <td>トップページ表示</td>
                   <td>サービスの魅力、体験イメージ、概要を表示し、予約や詳細ページへ誘導する。</td>
                   <td>トップページ</td>
@@ -138,7 +299,7 @@
                   <td>Phase1</td>
                 </tr>
                 <tr>
-                  <td>2</td>
+                  <td>FR-02</td>
                   <td>体験詳細表示</td>
                   <td>体験内容、流れ、所要時間、料金、使用素材、FAQを表示する。</td>
                   <td>体験詳細ページ</td>
@@ -146,7 +307,7 @@
                   <td>Phase1</td>
                 </tr>
                 <tr>
-                  <td>3</td>
+                  <td>FR-03</td>
                   <td>コンセプト表示</td>
                   <td>「香りで日本を巡る」というブランドストーリーや素材のこだわりを表示する。</td>
                   <td>コンセプト・サービス紹介ページ</td>
@@ -154,7 +315,7 @@
                   <td>Phase1</td>
                 </tr>
                 <tr>
-                  <td>4</td>
+                  <td>FR-04</td>
                   <td>口コミ・レビュー表示</td>
                   <td>体験者の評価やコメントを表示し、予約前の安心感を高める。</td>
                   <td>トップページ、ギャラリー、商品詳細ページ</td>
@@ -162,7 +323,7 @@
                   <td>Phase1</td>
                 </tr>
                 <tr>
-                  <td>5</td>
+                  <td>FR-05</td>
                   <td>予約フォーム表示</td>
                   <td>日程、人数、プラン、顧客情報を入力して予約できるようにする。</td>
                   <td>予約ページ</td>
@@ -170,7 +331,7 @@
                   <td>Phase1</td>
                 </tr>
                 <tr>
-                  <td>6</td>
+                  <td>FR-06</td>
                   <td>予約登録</td>
                   <td>入力された予約情報をDBへ登録する。</td>
                   <td>予約ページ</td>
@@ -178,7 +339,7 @@
                   <td>Phase2</td>
                 </tr>
                 <tr>
-                  <td>7</td>
+                  <td>FR-07</td>
                   <td>予約完了・確認表示</td>
                   <td>登録済み予約の内容を表示し、来店前の不安を軽減する。</td>
                   <td>予約完了・確認ページ</td>
@@ -186,7 +347,7 @@
                   <td>Phase2</td>
                 </tr>
                 <tr>
-                  <td>8</td>
+                  <td>FR-08</td>
                   <td>多言語対応フォーム</td>
                   <td>訪日外国人が予約しやすいように多言語入力・案内に対応する。</td>
                   <td>予約ページ</td>
@@ -194,7 +355,7 @@
                   <td>Phase2</td>
                 </tr>
                 <tr>
-                  <td>9</td>
+                  <td>FR-09</td>
                   <td>アクセス・店舗情報表示</td>
                   <td>地図、最寄駅、営業時間、FAQを表示し、来店ハードルを下げる。</td>
                   <td>アクセス・店舗情報ページ</td>
@@ -202,7 +363,7 @@
                   <td>Phase2</td>
                 </tr>
                 <tr>
-                  <td>10</td>
+                  <td>FR-10</td>
                   <td>ギャラリー表示</td>
                   <td>写真、動画、ユーザー作品、体験風景を表示し、体験価値を視覚的に伝える。</td>
                   <td>ギャラリー・体験紹介ページ</td>
@@ -210,7 +371,7 @@
                   <td>Phase2</td>
                 </tr>
                 <tr>
-                  <td>11</td>
+                  <td>FR-11</td>
                   <td>SNS投稿・連携表示</td>
                   <td>SNS投稿やハッシュタグを表示し、拡散導線を作る。</td>
                   <td>ギャラリー・体験紹介ページ</td>
@@ -218,7 +379,7 @@
                   <td>Phase2</td>
                 </tr>
                 <tr>
-                  <td>12</td>
+                  <td>FR-12</td>
                   <td>ECトップ表示</td>
                   <td>体験後の再購入につなげるため、オンラインショップ入口を表示する。</td>
                   <td>オンラインショップトップ</td>
@@ -226,7 +387,7 @@
                   <td>Phase2</td>
                 </tr>
                 <tr>
-                  <td>13</td>
+                  <td>FR-13</td>
                   <td>カート機能</td>
                   <td>商品をカートに追加し、数量変更や削除を行う。</td>
                   <td>カート・購入ページ</td>
@@ -234,7 +395,7 @@
                   <td>Phase2</td>
                 </tr>
                 <tr>
-                  <td>14</td>
+                  <td>FR-14</td>
                   <td>注文登録</td>
                   <td>配送先や注文内容を登録し、EC購入を完了させる。</td>
                   <td>カート・購入ページ</td>
@@ -242,7 +403,7 @@
                   <td>Phase2</td>
                 </tr>
                 <tr>
-                  <td>15</td>
+                  <td>FR-15</td>
                   <td>マイページ表示</td>
                   <td>購入履歴、予約履歴、マイ香りレシピを一元的に確認できる。</td>
                   <td>マイページ</td>
@@ -250,7 +411,7 @@
                   <td>Phase2</td>
                 </tr>
                 <tr>
-                  <td>16</td>
+                  <td>FR-16</td>
                   <td>マイ香りレシピ表示</td>
                   <td>体験で作成した香りレシピを確認し、再購入につなげる。</td>
                   <td>マイページ</td>
@@ -258,7 +419,7 @@
                   <td>Phase2</td>
                 </tr>
                 <tr>
-                  <td>17</td>
+                  <td>FR-17</td>
                   <td>お気に入り機能</td>
                   <td>気になる商品を保存し、再訪問・再購入を促す。</td>
                   <td>マイページ、お気に入り一覧</td>
@@ -283,23 +444,15 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>1</td>
+                  <td>BK-01</td>
                   <td>管理者ログイン</td>
                   <td>管理者・運営担当者が安全に管理システムへアクセスする。</td>
                   <td>ログイン画面</td>
                   <td>Must</td>
                   <td>Phase1</td>
                 </tr>
-                <!-- <tr>
-        <td>2</td>
-        <td>パスワード再設定</td>
-        <td>ログインできない管理者がパスワードを再設定できる。</td>
-        <td>パスワード再設定画面</td>
-        <td>Should</td>
-        <td>Phase1</td>
-      </tr> -->
                 <tr>
-                  <td>2</td>
+                  <td>BK-02</td>
                   <td>ダッシュボード</td>
                   <td>予約、顧客、注文、在庫の状況を一覧で確認する。</td>
                   <td>ダッシュボード</td>
@@ -307,7 +460,7 @@
                   <td>Phase1</td>
                 </tr>
                 <tr>
-                  <td>3</td>
+                  <td>BK-03</td>
                   <td>予約一覧表示</td>
                   <td>予約情報を一覧で確認し、検索・絞り込みを行う。</td>
                   <td>予約一覧画面</td>
@@ -315,7 +468,7 @@
                   <td>Phase1</td>
                 </tr>
                 <tr>
-                  <td>4</td>
+                  <td>BK-04</td>
                   <td>予約詳細表示</td>
                   <td>来店日時、人数、体験コース、顧客情報、予約状況を確認する。</td>
                   <td>予約詳細画面</td>
@@ -323,7 +476,7 @@
                   <td>Phase1</td>
                 </tr>
                 <tr>
-                  <td>5</td>
+                  <td>BK-05</td>
                   <td>予約登録</td>
                   <td>電話・店頭受付などの予約を担当者が新規登録する。</td>
                   <td>予約登録画面</td>
@@ -331,7 +484,7 @@
                   <td>Phase1</td>
                 </tr>
                 <tr>
-                  <td>6</td>
+                  <td>BK-06</td>
                   <td>予約編集</td>
                   <td>既存予約の日時、人数、体験コース、ステータスを変更する。</td>
                   <td>予約編集画面</td>
@@ -339,7 +492,7 @@
                   <td>Phase1</td>
                 </tr>
                 <tr>
-                  <td>7</td>
+                  <td>BK-07</td>
                   <td>予約削除</td>
                   <td>誤登録やキャンセル済み予約を削除する。</td>
                   <td>予約削除確認画面</td>
@@ -347,7 +500,7 @@
                   <td>Phase1</td>
                 </tr>
                 <tr>
-                  <td>8</td>
+                  <td>BK-08</td>
                   <td>顧客一覧表示</td>
                   <td>顧客情報を一覧で確認し、国籍や利用履歴で検索・絞り込みする。</td>
                   <td>顧客一覧画面</td>
@@ -355,7 +508,7 @@
                   <td>Phase1</td>
                 </tr>
                 <tr>
-                  <td>9</td>
+                  <td>BK-09</td>
                   <td>顧客詳細表示</td>
                   <td>氏名、国籍、連絡先、利用履歴、購入履歴を確認する。</td>
                   <td>顧客詳細画面</td>
@@ -363,7 +516,7 @@
                   <td>Phase1</td>
                 </tr>
                 <tr>
-                  <td>10</td>
+                  <td>BK-10</td>
                   <td>顧客登録</td>
                   <td>新規顧客情報を管理者が登録する。</td>
                   <td>顧客登録画面</td>
@@ -371,7 +524,7 @@
                   <td>Phase1</td>
                 </tr>
                 <tr>
-                  <td>11</td>
+                  <td>BK-11</td>
                   <td>顧客編集</td>
                   <td>顧客情報を更新し、最新状態を維持する。</td>
                   <td>顧客編集画面</td>
@@ -379,7 +532,7 @@
                   <td>Phase1</td>
                 </tr>
                 <tr>
-                  <td>12</td>
+                  <td>BK-12</td>
                   <td>顧客削除</td>
                   <td>不要な顧客データを削除する。</td>
                   <td>顧客削除確認画面</td>
@@ -387,7 +540,7 @@
                   <td>Phase1</td>
                 </tr>
                 <tr>
-                  <td>13</td>
+                  <td>BK-13</td>
                   <td>香りレシピ一覧表示</td>
                   <td>体験で作成された香りレシピを一覧で確認・検索する。</td>
                   <td>香りレシピ一覧画面</td>
@@ -395,7 +548,7 @@
                   <td>Phase1</td>
                 </tr>
                 <tr>
-                  <td>14</td>
+                  <td>BK-14</td>
                   <td>香りレシピ詳細表示</td>
                   <td>配合データ、作成日、紐づく顧客情報を確認する。</td>
                   <td>香りレシピ詳細画面</td>
@@ -403,7 +556,7 @@
                   <td>Phase1</td>
                 </tr>
                 <tr>
-                  <td>15</td>
+                  <td>BK-15</td>
                   <td>香りレシピ登録</td>
                   <td>新しい香りレシピを顧客情報と紐づけて登録する。</td>
                   <td>香りレシピ登録画面</td>
@@ -411,7 +564,7 @@
                   <td>Phase1</td>
                 </tr>
                 <tr>
-                  <td>16</td>
+                  <td>BK-16</td>
                   <td>香りレシピ編集</td>
                   <td>既存レシピの配合情報を修正する。</td>
                   <td>香りレシピ編集画面</td>
@@ -419,7 +572,7 @@
                   <td>Phase1</td>
                 </tr>
                 <tr>
-                  <td>17</td>
+                  <td>BK-17</td>
                   <td>香りレシピ削除</td>
                   <td>不要なレシピを削除する。</td>
                   <td>香りレシピ削除確認画面</td>
@@ -427,7 +580,7 @@
                   <td>Phase1</td>
                 </tr>
                 <tr>
-                  <td>18</td>
+                  <td>BK-18</td>
                   <td>商品一覧表示</td>
                   <td>販売商品/香りづくり素材を一覧で確認し、カテゴリ検索・絞り込みを行う。</td>
                   <td>商品一覧画面</td>
@@ -435,7 +588,7 @@
                   <td>Phase1</td>
                 </tr>
                 <tr>
-                  <td>19</td>
+                  <td>BK-19</td>
                   <td>商品詳細表示</td>
                   <td>商品名、カテゴリ、価格、説明、在庫情報を確認する。</td>
                   <td>商品詳細画面</td>
@@ -443,7 +596,7 @@
                   <td>Phase1</td>
                 </tr>
                 <tr>
-                  <td>20</td>
+                  <td>BK-20</td>
                   <td>商品登録</td>
                   <td>新しい販売商品/香りづくり素材を登録する。</td>
                   <td>商品登録画面</td>
@@ -451,7 +604,7 @@
                   <td>Phase1</td>
                 </tr>
                 <tr>
-                  <td>21</td>
+                  <td>BK-21</td>
                   <td>商品編集</td>
                   <td>商品情報、原価、売価などを更新する。</td>
                   <td>商品編集画面</td>
@@ -459,7 +612,7 @@
                   <td>Phase1</td>
                 </tr>
                 <tr>
-                  <td>22</td>
+                  <td>BK-22</td>
                   <td>商品削除</td>
                   <td>販売終了商品などを削除する。</td>
                   <td>商品削除確認画面</td>
@@ -467,7 +620,7 @@
                   <td>Phase1</td>
                 </tr>
                 <tr>
-                  <td>23</td>
+                  <td>BK-23</td>
                   <td>在庫一覧表示</td>
                   <td>在庫数やしきい値、欠品リスクを一覧で確認する。</td>
                   <td>在庫一覧画面</td>
@@ -475,7 +628,7 @@
                   <td>Phase1</td>
                 </tr>
                 <tr>
-                  <td>24</td>
+                  <td>BK-24</td>
                   <td>在庫更新</td>
                   <td>入庫・出庫を反映し、在庫数を更新する。</td>
                   <td>在庫更新画面</td>
@@ -483,7 +636,7 @@
                   <td>Phase1</td>
                 </tr>
                 <tr>
-                  <td>25</td>
+                  <td>BK-25</td>
                   <td>アカウント設定</td>
                   <td>管理者/担当者のアカウント情報、パスワードを管理する。</td>
                   <td>アカウント設定画面</td>
@@ -491,7 +644,7 @@
                   <td>Phase1</td>
                 </tr>
                 <tr>
-                  <td>26</td>
+                  <td>BK-26</td>
                   <td>共通完了・エラー表示</td>
                   <td>登録・編集・削除完了、403/404等のエラーを表示する。</td>
                   <td>共通完了画面、エラー画面</td>
@@ -499,7 +652,7 @@
                   <td>Phase1</td>
                 </tr>
                 <tr>
-                  <td>27</td>
+                  <td>BK-27</td>
                   <td>在庫アラート確認</td>
                   <td>在庫不足や欠品リスクを確認する。</td>
                   <td>在庫一覧画面、ダッシュボード</td>
@@ -507,7 +660,7 @@
                   <td>Phase2</td>
                 </tr>
                 <tr>
-                  <td>28</td>
+                  <td>BK-28</td>
                   <td>EC注文一覧表示</td>
                   <td>EC注文を一覧で確認し、注文状況で検索・絞り込みする。</td>
                   <td>注文一覧画面</td>
@@ -515,7 +668,7 @@
                   <td>Phase2</td>
                 </tr>
                 <tr>
-                  <td>29</td>
+                  <td>BK-29</td>
                   <td>EC注文詳細表示</td>
                   <td>注文内容、配送先、注文状況、発送状況、決済状況を確認する。</td>
                   <td>注文詳細画面</td>
@@ -523,7 +676,7 @@
                   <td>Phase2</td>
                 </tr>
                 <tr>
-                  <td>30</td>
+                  <td>BK-30</td>
                   <td>注文ステータス更新</td>
                   <td>注文進行状況、発送状況、決済状況を更新する。</td>
                   <td>注文ステータス変更画面</td>
@@ -531,7 +684,7 @@
                   <td>Phase2</td>
                 </tr>
                 <tr>
-                  <td>31</td>
+                  <td>BK-31</td>
                   <td>多言語文言管理</td>
                   <td>予約確認メール、案内文、管理画面文言を管理する。</td>
                   <td>多言語対応管理画面</td>
@@ -539,7 +692,7 @@
                   <td>Phase2</td>
                 </tr>
                 <tr>
-                  <td>32</td>
+                  <td>BK-32</td>
                   <td>レビュー一覧表示</td>
                   <td>投稿されたレビュー・口コミを一覧で確認する。</td>
                   <td>レビュー一覧画面</td>
@@ -547,7 +700,7 @@
                   <td>Phase2</td>
                 </tr>
                 <tr>
-                  <td>33</td>
+                  <td>BK-33</td>
                   <td>レビュー詳細表示</td>
                   <td>評価、コメント、投稿日、紐づく予約情報を確認する。</td>
                   <td>レビュー詳細画面</td>
@@ -555,7 +708,7 @@
                   <td>Phase2</td>
                 </tr>
                 <tr>
-                  <td>34</td>
+                  <td>BK-34</td>
                   <td>レビュー公開設定</td>
                   <td>レビューの公開・非公開を切り替える。</td>
                   <td>レビュー公開設定画面</td>
@@ -574,7 +727,712 @@
             <div class="fill-label">画面遷移図 <span class="required">必須</span></div>
             <div class="fill-hint">各画面間の遷移関係を図示</div>
             <div class="fill-content">
-              <p>（画面遷移図を記載）</p>
+              <div class="screen-transition">
+                <header>
+                  <h1>Phase別 画面遷移図</h1>
+                  <p class="lead">
+                    フロントエンド、バックエンド（管理）それぞれについて、Phase1時点とPhase2まで対応時の画面遷移を
+                    整理しています。矢印部分に遷移トリガーを記載しています。
+                  </p>
+                </header>
+
+                <section>
+                  <h2>1. フロントエンド画面遷移図：Phase1時点</h2>
+                  <p class="note">
+                    Phase1では、サービス理解から予約完了までの導線を中心に構成します。
+                  </p>
+
+                  <div class="diagram-block">
+                    <p class="caption">テキストベース遷移図</p>
+                    <pre>┌──────────────────────┐
+│ トップページ           │
+│ サービス概要・予約CTA  │
+└──────────┬───────────┘
+           │「体験詳細」
+┌──────────────────────┐
+│ 体験詳細ページ         │
+│ 流れ・料金・素材・FAQ  │
+└──────────┬───────────┘
+           │「予約する」
+           ▼
+┌──────────────────────┐
+│ 予約ページ             │
+│ 日時・人数・顧客情報   │
+└──────────┬───────────┘
+           │「予約内容を確認」
+           ▼
+┌──────────────────────┐
+│ 予約確認ページ         │
+│ 入力内容確認           │
+└──────────┬───────────┘
+           │「予約を確定」
+           ▼
+┌──────────────────────┐
+│ 予約完了ページ         │
+│ 予約番号・来店案内     │
+└──────────┬───────────┘
+           │「トップへ戻る」
+           ▼
+┌──────────────────────┐
+│ トップページ           │
+└──────────────────────┘
+
+
+【補助導線】
+
+┌──────────────────────┐
+│ トップページ           │
+└──────────┬───────────┘
+           │「コンセプトを見る」
+           ▼
+┌──────────────────────┐
+│ コンセプトページ       │
+│ 香りで日本を巡る世界観 │
+└──────────┬───────────┘
+           │「体験を予約する」
+           ▼
+┌──────────────────────┐
+│ 予約ページ             │
+└──────────────────────┘
+
+
+┌──────────────────────┐
+│ トップページ           │
+└──────────┬───────────┘
+           │「アクセス」
+           ▼
+┌──────────────────────┐
+│ アクセス・店舗情報     │
+│ 地図・営業時間・最寄駅 │
+└──────────┬───────────┘
+           │「予約する」
+           ▼
+┌──────────────────────┐
+│ 予約ページ             │
+└──────────────────────┘
+</pre>
+                  </div>
+
+                  <div class="table-wrap">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>No.</th>
+                          <th>遷移元</th>
+                          <th>遷移先</th>
+                          <th>トリガー</th>
+                          <th>Phase</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>1</td>
+                          <td>トップページ</td>
+                          <td>体験プログラム一覧</td>
+                          <td>「体験を見る」リンク押下</td>
+                          <td><span class="tag">Phase1</span></td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td>体験詳細ページ</td>
+                          <td>予約ページ</td>
+                          <td>「予約する」ボタン押下</td>
+                          <td><span class="tag">Phase1</span></td>
+                        </tr>
+                        <tr>
+                          <td>3</td>
+                          <td>予約ページ</td>
+                          <td>予約確認ページ</td>
+                          <td>「予約内容を確認」ボタン押下</td>
+                          <td><span class="tag">Phase1</span></td>
+                        </tr>
+                        <tr>
+                          <td>4</td>
+                          <td>予約確認ページ</td>
+                          <td>予約完了ページ</td>
+                          <td>「予約を確定」ボタン押下</td>
+                          <td><span class="tag">Phase1</span></td>
+                        </tr>
+                        <tr>
+                          <td>5</td>
+                          <td>トップページ</td>
+                          <td>コンセプトページ</td>
+                          <td>「コンセプトを見る」リンク押下</td>
+                          <td><span class="tag">Phase1</span></td>
+                        </tr>
+                        <tr>
+                          <td>6</td>
+                          <td>トップページ</td>
+                          <td>アクセス・店舗情報</td>
+                          <td>「アクセス」リンク押下</td>
+                          <td><span class="tag">Phase1</span></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </section>
+
+                <section>
+                  <h2>2. フロントエンド画面遷移図：Phase2まで対応時</h2>
+                  <p class="note">
+                    Phase2では、ギャラリー、EC再購入、マイページ、マイ香りレシピの導線を追加します。
+                  </p>
+
+                  <div class="diagram-block">
+                    <p class="caption">テキストベース遷移図</p>
+                    <pre>【Phase1の予約導線】
+
+┌──────────────┐
+│ トップページ │
+└──────┬───────┘
+       │「体験詳細」
+       ▼
+┌────────────────────┐
+│ 体験詳細ページ       │
+└──────┬─────────────┘
+       │「予約する」
+       ▼
+┌──────────────┐
+│ 予約ページ   │
+└──────┬───────┘
+       │「予約を確定」
+       ▼
+┌──────────────┐
+│ 予約完了     │
+└──────────────┘
+
+
+【Phase2追加：ギャラリー・SNS導線】
+
+┌──────────────┐
+│ トップページ │
+└──────┬───────┘
+       │「ギャラリーを見る」
+       ▼
+┌────────────────────────┐
+│ ギャラリー・体験事例     │
+│ 写真・動画・口コミ・SNS  │
+└──────┬─────────────────┘
+       │「この体験を予約」
+       ▼
+┌──────────────┐
+│ 予約ページ   │
+└──────────────┘
+
+
+【Phase2追加：EC再購入導線】
+
+┌──────────────┐
+│ トップページ │
+└──────┬───────┘
+       │「オンラインショップ」
+       ▼
+┌──────────────┐
+│ ECトップ      │
+└──────┬───────┘
+       │「商品を見る」
+       ▼
+┌──────────────┐
+│ 商品一覧      │
+└──────┬───────┘
+       │「詳細を見る」
+       ▼
+┌──────────────┐
+│ 商品詳細      │
+└──────┬───────┘
+       │「カートに入れる」
+       ▼
+┌──────────────┐
+│ カート・購入  │
+└──────┬───────┘
+       │「注文を確定」
+       ▼
+┌──────────────┐
+│ 注文完了      │
+└──────────────┘
+
+
+【Phase2追加：マイページ・マイ香りレシピ導線】
+
+┌──────────────┐
+│ トップページ │
+└──────┬───────┘
+       │「ログイン / マイページ」
+       ▼
+┌──────────────┐
+│ ログイン      │
+└──────┬───────┘
+       │「ログイン」
+       ▼
+┌────────────────────┐
+│ マイページ           │
+│ 予約履歴・購入履歴   │
+└──────┬─────────────┘
+       │「マイ香りレシピを見る」
+       ▼
+┌────────────────────┐
+│ マイ香りレシピ       │
+│ 体験時の配合データ   │
+└──────┬─────────────┘
+       │「同じ香りを再注文」
+       ▼
+┌──────────────┐
+│ カート・購入  │
+└──────────────┘
+</pre>
+                  </div>
+
+                  <div class="table-wrap">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>No.</th>
+                          <th>遷移元</th>
+                          <th>遷移先</th>
+                          <th>トリガー</th>
+                          <th>Phase</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>1</td>
+                          <td>トップページ</td>
+                          <td>ギャラリー・体験事例</td>
+                          <td>「ギャラリーを見る」リンク押下</td>
+                          <td><span class="tag phase2">Phase2</span></td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td>ギャラリー・体験事例</td>
+                          <td>予約ページ</td>
+                          <td>「この体験を予約」ボタン押下</td>
+                          <td><span class="tag phase2">Phase2</span></td>
+                        </tr>
+                        <tr>
+                          <td>3</td>
+                          <td>トップページ</td>
+                          <td>ECトップ</td>
+                          <td>「オンラインショップ」リンク押下</td>
+                          <td><span class="tag phase2">Phase2</span></td>
+                        </tr>
+                        <tr>
+                          <td>4</td>
+                          <td>ECトップ</td>
+                          <td>商品一覧</td>
+                          <td>「商品を見る」ボタン押下</td>
+                          <td><span class="tag phase2">Phase2</span></td>
+                        </tr>
+                        <tr>
+                          <td>5</td>
+                          <td>商品一覧</td>
+                          <td>商品詳細</td>
+                          <td>「詳細を見る」ボタン押下</td>
+                          <td><span class="tag phase2">Phase2</span></td>
+                        </tr>
+                        <tr>
+                          <td>6</td>
+                          <td>商品詳細</td>
+                          <td>カート・購入</td>
+                          <td>「カートに入れる」ボタン押下</td>
+                          <td><span class="tag phase2">Phase2</span></td>
+                        </tr>
+                        <tr>
+                          <td>7</td>
+                          <td>カート・購入</td>
+                          <td>注文完了</td>
+                          <td>「注文を確定」ボタン押下</td>
+                          <td><span class="tag phase2">Phase2</span></td>
+                        </tr>
+                        <tr>
+                          <td>8</td>
+                          <td>トップページ</td>
+                          <td>ログイン</td>
+                          <td>「ログイン / マイページ」リンク押下</td>
+                          <td><span class="tag phase2">Phase2</span></td>
+                        </tr>
+                        <tr>
+                          <td>9</td>
+                          <td>ログイン</td>
+                          <td>マイページ</td>
+                          <td>「ログイン」ボタン押下</td>
+                          <td><span class="tag phase2">Phase2</span></td>
+                        </tr>
+                        <tr>
+                          <td>10</td>
+                          <td>マイページ</td>
+                          <td>マイ香りレシピ</td>
+                          <td>「マイ香りレシピを見る」リンク押下</td>
+                          <td><span class="tag phase2">Phase2</span></td>
+                        </tr>
+                        <tr>
+                          <td>11</td>
+                          <td>マイ香りレシピ</td>
+                          <td>カート・購入</td>
+                          <td>「同じ香りを再注文」ボタン押下</td>
+                          <td><span class="tag phase2">Phase2</span></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </section>
+
+                <section>
+                  <h2>3. バックエンド（管理）画面遷移図：Phase1時点</h2>
+                  <p class="note">
+                    Phase1では、予約・顧客・香りレシピ・商品・在庫管理を中心に構成します。
+                  </p>
+
+                  <div class="diagram-block">
+                    <p class="caption">テキストベース遷移図</p>
+                    <pre>┌──────────────────┐
+                         │ 管理者ログイン     │
+                         └────────┬─────────┘
+                                  │「ログイン」
+                                  ▼
+                         ┌──────────────────┐
+                         │ ダッシュボード     │
+                         └───┬────────┬─────┬────────┐
+                             │        │     │        │
+                             │        │     │        │
+                             │        │     │        │
+                             ▼        ▼     ▼        ▼
+                         ┌──────────┐ ┌──────────┐ ┌──────────────┐ ┌──────────┐
+                         │ 予約一覧 │ │ 顧客一覧 │ │ 香りレシピ一覧 │ │ 商品一覧 │
+                         └────┬─────┘ └────┬─────┘ └──────┬───────┘ └────┬─────┘
+                              │「詳細」    │「詳細」      │「詳細」       │「詳細」
+                              ▼           ▼             ▼              ▼
+                         ┌──────────┐ ┌──────────┐ ┌──────────────┐ ┌──────────┐
+                         │ 予約詳細 │ │ 顧客詳細 │ │ 香りレシピ詳細 │ │ 商品詳細 │
+                         └────┬─────┘ └────┬─────┘ └──────┬───────┘ └────┬─────┘
+                              │「編集」    │「編集」      │「編集」       │「編集」
+                              ▼           ▼             ▼              ▼
+                         ┌──────────┐ ┌──────────┐ ┌──────────────┐ ┌──────────┐
+                         │ 予約編集 │ │ 顧客編集 │ │ レシピ編集     │ │ 商品編集 │
+                         └────┬─────┘ └────┬─────┘ └──────┬───────┘ └────┬─────┘
+                              │「保存」    │「保存」      │「保存」       │「保存」
+                              ▼           ▼             ▼              ▼
+                         ┌──────────────────────────────────────────────┐
+                         │ 完了画面                                      │
+                         └──────────────────────────────────────────────┘
+
+
+                         【在庫管理導線】
+
+                         ┌──────────────────┐
+                         │ ダッシュボード     │
+                         └────────┬─────────┘
+                                  │「在庫管理」
+                                  ▼
+                         ┌──────────────────┐
+                         │ 在庫一覧           │
+                         └────────┬─────────┘
+                                  │「在庫数を更新」
+                                  ▼
+                         ┌──────────────────┐
+                         │ 在庫更新           │
+                         └────────┬─────────┘
+                                  │「保存」
+                                  ▼
+                         ┌──────────────────┐
+                         │ 完了画面           │
+                         └──────────────────┘
+                        </pre>
+                  </div>
+
+                  <div class="table-wrap">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>No.</th>
+                          <th>遷移元</th>
+                          <th>遷移先</th>
+                          <th>トリガー</th>
+                          <th>Phase</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>1</td>
+                          <td>管理者ログイン</td>
+                          <td>ダッシュボード</td>
+                          <td>「ログイン」ボタン押下</td>
+                          <td><span class="tag">Phase1</span></td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td>ダッシュボード</td>
+                          <td>予約一覧</td>
+                          <td>「予約管理」メニュー押下</td>
+                          <td><span class="tag">Phase1</span></td>
+                        </tr>
+                        <tr>
+                          <td>3</td>
+                          <td>予約一覧</td>
+                          <td>予約詳細</td>
+                          <td>「詳細」ボタン押下</td>
+                          <td><span class="tag">Phase1</span></td>
+                        </tr>
+                        <tr>
+                          <td>4</td>
+                          <td>予約詳細</td>
+                          <td>予約編集</td>
+                          <td>「編集」ボタン押下</td>
+                          <td><span class="tag">Phase1</span></td>
+                        </tr>
+                        <tr>
+                          <td>5</td>
+                          <td>ダッシュボード</td>
+                          <td>顧客一覧</td>
+                          <td>「顧客管理」メニュー押下</td>
+                          <td><span class="tag">Phase1</span></td>
+                        </tr>
+                        <tr>
+                          <td>6</td>
+                          <td>顧客一覧</td>
+                          <td>顧客詳細</td>
+                          <td>「詳細」ボタン押下</td>
+                          <td><span class="tag">Phase1</span></td>
+                        </tr>
+                        <tr>
+                          <td>7</td>
+                          <td>顧客詳細</td>
+                          <td>顧客編集</td>
+                          <td>「編集」ボタン押下</td>
+                          <td><span class="tag">Phase1</span></td>
+                        </tr>
+                        <tr>
+                          <td>8</td>
+                          <td>ダッシュボード</td>
+                          <td>香りレシピ一覧</td>
+                          <td>「香りレシピ管理」メニュー押下</td>
+                          <td><span class="tag">Phase1</span></td>
+                        </tr>
+                        <tr>
+                          <td>9</td>
+                          <td>香りレシピ一覧</td>
+                          <td>香りレシピ詳細</td>
+                          <td>「詳細」ボタン押下</td>
+                          <td><span class="tag">Phase1</span></td>
+                        </tr>
+                        <tr>
+                          <td>10</td>
+                          <td>ダッシュボード</td>
+                          <td>商品一覧</td>
+                          <td>「商品管理」メニュー押下</td>
+                          <td><span class="tag">Phase1</span></td>
+                        </tr>
+                        <tr>
+                          <td>11</td>
+                          <td>ダッシュボード</td>
+                          <td>在庫一覧</td>
+                          <td>「在庫管理」メニュー押下</td>
+                          <td><span class="tag">Phase1</span></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </section>
+
+                <section>
+                  <h2>4. バックエンド（管理）画面遷移図：Phase2まで対応時</h2>
+                  <p class="note">
+                    Phase2では、EC注文管理・多言語文言管理・レビュー管理を追加します。
+                  </p>
+
+                  <div class="diagram-block">
+                    <p class="caption">テキストベース遷移図</p>
+                    <pre>【Phase1管理導線】
+
+┌──────────────────┐
+│ 管理者ログイン     │
+└────────┬─────────┘
+         │「ログイン」
+         ▼
+┌──────────────────┐
+│ ダッシュボード     │
+└──────────────────┘
+         │
+         ├─「予約管理」──────────────▶ 予約一覧 → 予約詳細 → 予約編集 → 完了画面
+         │
+         ├─「顧客管理」──────────────▶ 顧客一覧 → 顧客詳細 → 顧客編集 → 完了画面
+         │
+         ├─「香りレシピ管理」────────▶ レシピ一覧 → レシピ詳細 → レシピ編集 → 完了画面
+         │
+         ├─「商品管理」──────────────▶ 商品一覧 → 商品詳細 → 商品編集 → 完了画面
+         │
+         └─「在庫管理」──────────────▶ 在庫一覧 → 在庫更新 → 完了画面
+
+
+【Phase2追加：EC注文管理】
+
+┌──────────────────┐
+│ ダッシュボード     │
+└────────┬─────────┘
+         │「注文管理」
+         ▼
+┌──────────────────┐
+│ EC注文一覧         │
+└────────┬─────────┘
+         │「詳細」
+         ▼
+┌──────────────────┐
+│ EC注文詳細         │
+└────────┬─────────┘
+         │「ステータス変更」
+         ▼
+┌──────────────────┐
+│ 注文ステータス変更 │
+└────────┬─────────┘
+         │「更新する」
+         ▼
+┌──────────────────┐
+│ 完了画面           │
+└──────────────────┘
+
+
+【Phase2追加：多言語対応管理】
+
+┌──────────────────┐
+│ ダッシュボード     │
+└────────┬─────────┘
+         │「多言語管理」
+         ▼
+┌──────────────────┐
+│ 多言語文言一覧     │
+└────────┬─────────┘
+         │「編集」
+         ▼
+┌──────────────────┐
+│ 多言語文言編集     │
+└────────┬─────────┘
+         │「保存する」
+         ▼
+┌──────────────────┐
+│ 完了画面           │
+└──────────────────┘
+
+
+【Phase2追加：レビュー管理】
+
+┌──────────────────┐
+│ ダッシュボード     │
+└────────┬─────────┘
+         │「レビュー管理」
+         ▼
+┌──────────────────┐
+│ レビュー一覧       │
+└────────┬─────────┘
+         │「詳細」
+         ▼
+┌──────────────────┐
+│ レビュー詳細       │
+└────────┬─────────┘
+         │「公開 / 非公開を変更」
+         ▼
+┌──────────────────┐
+│ レビュー公開設定   │
+└────────┬─────────┘
+         │「更新する」
+         ▼
+┌──────────────────┐
+│ 完了画面           │
+└──────────────────┘</pre>
+                  </div>
+
+                  <div class="table-wrap">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>No.</th>
+                          <th>遷移元</th>
+                          <th>遷移先</th>
+                          <th>トリガー</th>
+                          <th>Phase</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>1</td>
+                          <td>ダッシュボード</td>
+                          <td>EC注文一覧</td>
+                          <td>「注文管理」メニュー押下</td>
+                          <td><span class="tag phase2">Phase2</span></td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td>EC注文一覧</td>
+                          <td>EC注文詳細</td>
+                          <td>「詳細」ボタン押下</td>
+                          <td><span class="tag phase2">Phase2</span></td>
+                        </tr>
+                        <tr>
+                          <td>3</td>
+                          <td>EC注文詳細</td>
+                          <td>注文ステータス変更</td>
+                          <td>「ステータス変更」ボタン押下</td>
+                          <td><span class="tag phase2">Phase2</span></td>
+                        </tr>
+                        <tr>
+                          <td>4</td>
+                          <td>注文ステータス変更</td>
+                          <td>完了画面</td>
+                          <td>「更新する」ボタン押下</td>
+                          <td><span class="tag phase2">Phase2</span></td>
+                        </tr>
+                        <tr>
+                          <td>5</td>
+                          <td>ダッシュボード</td>
+                          <td>多言語文言一覧</td>
+                          <td>「多言語管理」メニュー押下</td>
+                          <td><span class="tag phase2">Phase2</span></td>
+                        </tr>
+                        <tr>
+                          <td>6</td>
+                          <td>多言語文言一覧</td>
+                          <td>多言語文言編集</td>
+                          <td>「編集」ボタン押下</td>
+                          <td><span class="tag phase2">Phase2</span></td>
+                        </tr>
+                        <tr>
+                          <td>7</td>
+                          <td>多言語文言編集</td>
+                          <td>完了画面</td>
+                          <td>「保存する」ボタン押下</td>
+                          <td><span class="tag phase2">Phase2</span></td>
+                        </tr>
+                        <tr>
+                          <td>8</td>
+                          <td>ダッシュボード</td>
+                          <td>レビュー一覧</td>
+                          <td>「レビュー管理」メニュー押下</td>
+                          <td><span class="tag phase2">Phase2</span></td>
+                        </tr>
+                        <tr>
+                          <td>9</td>
+                          <td>レビュー一覧</td>
+                          <td>レビュー詳細</td>
+                          <td>「詳細」ボタン押下</td>
+                          <td><span class="tag phase2">Phase2</span></td>
+                        </tr>
+                        <tr>
+                          <td>10</td>
+                          <td>レビュー詳細</td>
+                          <td>レビュー公開設定</td>
+                          <td>「公開 / 非公開を変更」ボタン押下</td>
+                          <td><span class="tag phase2">Phase2</span></td>
+                        </tr>
+                        <tr>
+                          <td>11</td>
+                          <td>レビュー公開設定</td>
+                          <td>完了画面</td>
+                          <td>「更新する」ボタン押下</td>
+                          <td><span class="tag phase2">Phase2</span></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </section>
+              </div>
             </div>
           </div>
 
