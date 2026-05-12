@@ -1,0 +1,162 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>コンセプト</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+  <header class="header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">
+        <img class="brand-logo" src="assets/images/LOGO.png" alt="Aroma Trip Nippon" />
+      </a>
+      <nav class="nav">
+        <a href="concept.html">コンセプト</a>
+        <a href="experience.html">体験詳細</a>
+        <a href="reservation.html">予約</a>
+      </nav>
+      <div style="display:flex;gap:10px;align-items:center">
+        <!-- <span class="lang">EN / JP</span> -->
+        <a class="btn" href="reservation.html">Book Experience</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="breadcrumbs"><a href="index.html">トップ</a> / <span>コンセプト</span></div>
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="card" style="padding:32px">
+          <div class="kicker">ABOUT / CONCEPT</div>
+          <h1>和香巡りとは</h1>
+          <p class="lead">日本各地の天然素材を使い、自分だけの香りを作る体験型サービスを、より多くの訪日客へ届けるためのサイトです。</p>
+          <p class="text">旅の思い出を香りに閉じ込め、帰国後もオンラインで再購入できることが特徴です。東京観光の特別なひとときを提供します。</p>
+        </div>
+        <div class="card" style="padding:0;overflow:hidden">
+          <div class="pro-slider concept-box" data-interval="5000" aria-label="コンセプトページ 地域イメージスライド">
+            <div class="pro-slider__slide is-active">
+              <img src="assets/images/concept_edo.png" alt="コンセプトページ 地域イメージスライド 1" class="pro-slider__media" />
+            </div>
+            <div class="pro-slider__slide">
+              <img src="assets/images/concept_kanazawa.png" alt="コンセプトページ 地域イメージスライド 2" class="pro-slider__media" />
+            </div>
+            <div class="pro-slider__slide">
+              <img src="assets/images/concept_noto.png" alt="コンセプトページ 地域イメージスライド 3" class="pro-slider__media" />
+            </div>
+            <div class="pro-slider__slide">
+              <img src="assets/images/concept_tosa.png" alt="コンセプトページ 地域イメージスライド 4" class="pro-slider__media" />
+            </div>
+            <button class="pro-slider__nav pro-slider__nav--prev" type="button" aria-label="前へ"></button>
+            <button class="pro-slider__nav pro-slider__nav--next" type="button" aria-label="次へ"></button>
+            <div class="pro-slider__dots"><button class="pro-slider__dot is-active" type="button" aria-label="スライド1"
+                aria-selected="true"></button><button class="pro-slider__dot" type="button" aria-label="スライド2"
+                aria-selected="false"></button><button class="pro-slider__dot" type="button" aria-label="スライド3"
+                aria-selected="false"></button><button class="pro-slider__dot" type="button" aria-label="スライド4"
+                aria-selected="false"></button></div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="grid-2">
+        <div class="card" style="padding:24px">
+          <h2>コンセプト</h2>
+          <p class="quote">日本の香りを巡る旅</p>
+          <p class="text">日本各地の天然素材を使い、自分だけの香りを作る体験型サービス。</p>
+        </div>
+        <div class="card" style="padding:24px">
+          <h2>素材のこだわり</h2>
+          <p class="text">ひば・ゆず・薄荷など、日本らしさを感じられる素材を中心に構成しています。</p>
+        </div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="card" style="padding:24px">
+        <h2>地域ストーリー</h2>
+        <p class="text">香りそのものだけでなく、背景にある文化や情景まで含めて体験してもらうことを重視しています。能登、土佐、岐阜などの地域を象徴する世界観を、香りの物語として再構成します。</p>
+        <div class="spacer"></div>
+        <a class="btn" href="experience.html">体験詳細を見る</a>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div><strong>Concept Page</strong></div>
+      <div><a href="experience.html">Experience</a></div>
+      <div><a href="reservation.html">Booking</a></div>
+    </div>
+  </footer>
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const sliders = document.querySelectorAll('.pro-slider');
+
+      sliders.forEach((slider) => {
+        const slides = Array.from(slider.querySelectorAll('.pro-slider__slide'));
+        const prev = slider.querySelector('.pro-slider__nav--prev');
+        const next = slider.querySelector('.pro-slider__nav--next');
+        const dots = Array.from(slider.querySelectorAll('.pro-slider__dot'));
+        const intervalMs = Number(slider.dataset.interval || 5000);
+        let index = 0;
+        let timer = null;
+
+        function render(newIndex) {
+          index = (newIndex + slides.length) % slides.length;
+          slides.forEach((slide, i) => slide.classList.toggle('is-active', i === index));
+          dots.forEach((dot, i) => {
+            dot.classList.toggle('is-active', i === index);
+            dot.setAttribute('aria-selected', i === index ? 'true' : 'false');
+          });
+        }
+
+        function start() {
+          stop();
+          timer = window.setInterval(() => render(index + 1), intervalMs);
+        }
+
+        function stop() {
+          if (timer) window.clearInterval(timer);
+          timer = null;
+        }
+
+        if (slides.length <= 1) return;
+
+        prev?.addEventListener('click', () => {
+          render(index - 1);
+          start();
+        });
+
+        next?.addEventListener('click', () => {
+          render(index + 1);
+          start();
+        });
+
+        dots.forEach((dot, i) => {
+          dot.addEventListener('click', () => {
+            render(i);
+            start();
+          });
+        });
+
+        slider.addEventListener('mouseenter', stop);
+        slider.addEventListener('mouseleave', start);
+        slider.addEventListener('focusin', stop);
+        slider.addEventListener('focusout', start);
+
+        render(0);
+        start();
+      });
+    });
+  </script>
+
+  <script src="js/main.js" defer></script>
+</body>
+
+</html>

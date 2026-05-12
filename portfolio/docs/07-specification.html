@@ -204,15 +204,15 @@
         <div class="doc-category">DOCUMENT 07</div>
         <h1 class="doc-title">仕様書（機能仕様書）</h1>
         <div class="doc-meta">
-          <span><span class="material-symbols-outlined icon-sm">calendar_today</span> 作成日：2026-XX-XX</span>
-          <span><span class="material-symbols-outlined icon-sm">person</span> 作成者：（氏名を入力）</span>
+          <span><span class="material-symbols-outlined icon-sm">calendar_today</span> 作成日：2026-05-12</span>
+          <span><span class="material-symbols-outlined icon-sm">person</span> 作成者：尾坂 成紀</span>
           <span><span class="material-symbols-outlined icon-sm">push_pin</span> Ver 1.0</span>
         </div>
       </header>
 
       <div class="doc-body">
 
-        <div class="external-link-box">
+        <!-- <div class="external-link-box">
           <div class="external-link-box-title">
             <span class="material-symbols-outlined">link</span>
             詳細ドキュメント（Google スプレッドシート）
@@ -228,7 +228,7 @@
               開く
             </a>
           </div>
-        </div>
+        </div> -->
 
         <div class="toc">
           <div class="toc-title">目次</div>
@@ -246,7 +246,7 @@
 
           <div class="fill-block">
             <div class="fill-label">システムの目的 <span class="required">必須</span></div>
-            <div class="fill-hint">このシステムが解決する課題と提供する価値</div>
+            <!-- <div class="fill-hint">このシステムが解決する課題と提供する価値</div> -->
             <div class="fill-content">
               <h3>フロントエンドシステム</h3>
               <p>観光客（主に訪日外国人旅行者）が、日本各地の天然素材で自分だけの香りを作る体験を知り、予約・EC再購入まで行えるサイト。旅の思い出を香りとして持ち帰り、SNS共有や継続購入につなげる価値を提供する。</p>
@@ -256,7 +256,7 @@
           </div>
           <div class="fill-block">
             <div class="fill-label">システム構成図 <span class="required">必須</span></div>
-            <div class="fill-hint">フロントエンド ↔ バックエンド ↔ データベースの関係を図示</div>
+            <!-- <div class="fill-hint">フロントエンド ↔ バックエンド ↔ データベースの関係を図示</div> -->
             <div class="fill-content">
               <iframe class="embedded-html-frame" src="07-01-frontdfd.html" title="フロントエンド In / Out データフロー図"></iframe>
               <p class="embedded-doc-link">
@@ -276,6 +276,7 @@
 
           <div class="fill-block">
             <div class="fill-label">機能一覧表 <span class="required">必須</span></div>
+            <!-- <div class="fill-hint">フロントエンドシステムの機能一覧</div> -->
             <h2>フロントエンドシステム機能一覧</h2>
 
             <table class="doc-table">
@@ -1440,49 +1441,179 @@
 
         <section class="section" id="sec4">
           <h2 class="section-title"><span class="section-icon">4</span> 機能詳細仕様</h2>
-
-
           <div class="subsection">
-            <h3 class="subsection-title">機能仕様テンプレート（コピーして使用）</h3>
-
+            <h3 class="subsection-title">機能詳細仕様書一覧（クリックで各仕様書表示）</h3>
             <div class="fill-block">
-              <div class="fill-label">機能名：（機能名を入力） <span class="required">必須</span></div>
-              <div class="fill-hint">機能ID：F-XXX</div>
-              <div class="fill-content">
-                <p>（機能の詳細仕様を記載）</p>
-              </div>
-            </div>
-
-            <div class="fill-block">
-              <div class="fill-label">入力項目一覧 <span class="required">必須</span></div>
               <table class="doc-table">
                 <thead>
                   <tr>
-                    <th>項目名</th>
-                    <th>データ型</th>
-                    <th>必須</th>
-                    <th>バリデーション</th>
-                    <th>備考</th>
+                    <th>ID</th>
+                    <th>詳細仕様書名</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="template-row">
-                    <td>（項目名）</td>
-                    <td>（String / Integer / Date 等）</td>
-                    <td>（○ / —）</td>
-                    <td>（必須チェック / 文字数制限 等）</td>
-                    <td>（備考）</td>
+                  <tr>
+                    <td>FR01</td>
+                    <td><a href="機能仕様書/FR01_トップページ.html">トップページ</a></td>
                   </tr>
-                  <tr class="template-row">
-                    <td>…</td>
-                    <td>…</td>
-                    <td>…</td>
-                    <td>…</td>
-                    <td>…</td>
+                  <tr>
+                    <td>FR02</td>
+                    <td><a href="機能仕様書/FR02_体験詳細ページ.html">体験詳細ページ</a></td>
+                  </tr>
+                  <tr>
+                    <td>FR03</td>
+                    <td><a href="機能仕様書/FR03_コンセプトページ.html">コンセプトページ</a></td>
+                  </tr>
+                  <tr>
+                    <td>FR05-06</td>
+                    <td><a href="機能仕様書/FR05-06_予約フォーム_予約登録.html">予約フォーム_予約登録</a></td>
+                  </tr>
+                  <tr>
+                    <td>FR07</td>
+                    <td><a href="機能仕様書/FR07_予約完了ページ.html">予約完了ページ</a></td>
+                  </tr>
+                  <tr>
+                    <td>FR07</td>
+                    <td><a href="機能仕様書/FR07_予約確認ページ表示.html">予約確認ページ表示</a></td>
+                  </tr>
+                  <tr>
+                    <td>FR09</td>
+                    <td><a href="機能仕様書/FR09_アクセス_店舗情報表示.html">アクセス_店舗情報表示</a></td>
+                  </tr>
+                  <tr>
+                    <td>FR10</td>
+                    <td><a href="機能仕様書/FR10_ギャラリー_体験事例表示.html">ギャラリー_体験事例表示</a></td>
+                  </tr>
+                  <tr>
+                    <td>FR12</td>
+                    <td><a href="機能仕様書/FR12_EC注文管理.html">EC注文管理</a></td>
+                  </tr>
+                  <tr>
+                    <td>FR13</td>
+                    <td><a href="機能仕様書/FR13_商品詳細_カート追加.html">商品詳細_カート追加</a></td>
+                  </tr>
+                  <tr>
+                    <td>FR14</td>
+                    <td><a href="機能仕様書/FR14_カート_購入_注文登録.html">カート_購入_注文登録</a></td>
+                  </tr>
+                  <tr>
+                    <td>FR16</td>
+                    <td><a href="機能仕様書/FR16_マイページ_マイ香りレシピ.html">マイページ_マイ香りレシピ</a></td>
+                  </tr>
+                  <tr>
+                    <td>BK01</td>
+                    <td><a href="機能仕様書/BK01_管理者ログイン.html">管理者ログイン</a></td>
+                  </tr>
+                  <tr>
+                    <td>BK02</td>
+                    <td><a href="機能仕様書/BK02_ダッシュボード表示.html">ダッシュボード表示</a></td>
+                  </tr>
+                  <tr>
+                    <td>BK03</td>
+                    <td><a href="機能仕様書/BK03_予約管理一覧表示.html">予約管理一覧表示</a></td>
+                  </tr>
+                  <tr>
+                    <td>BK04</td>
+                    <td><a href="機能仕様書/BK04_予約詳細表示.html">予約詳細表示</a></td>
+                  </tr>
+                  <tr>
+                    <td>BK05,BK06</td>
+                    <td><a href="機能仕様書/BK05,BK06_予約登録_編集.html">予約登録_編集</a></td>
+                  </tr>
+                  <tr>
+                    <td>BK08</td>
+                    <td><a href="機能仕様書/BK08_顧客一覧表示_検索.html">顧客一覧表示_検索</a></td>
+                  </tr>
+                  <tr>
+                    <td>BK09</td>
+                    <td><a href="機能仕様書/BK09_顧客詳細表示.html">顧客詳細表示</a></td>
+                  </tr>
+                  <tr>
+                    <td>BK10</td>
+                    <td><a href="機能仕様書/BK10_顧客新規登録.html">顧客新規登録</a></td>
+                  </tr>
+                  <tr>
+                    <td>BK11</td>
+                    <td><a href="機能仕様書/BK11_顧客編集.html">顧客編集</a></td>
+                  </tr>
+                  <tr>
+                    <td>BK13</td>
+                    <td><a href="機能仕様書/BK13_香りレシピ一覧表示_検索.html">香りレシピ一覧表示_検索</a></td>
+                  </tr>
+                  <tr>
+                    <td>BK14</td>
+                    <td><a href="機能仕様書/BK14_香りレシピ詳細表示.html">香りレシピ詳細表示</a></td>
+                  </tr>
+                  <tr>
+                    <td>BK15</td>
+                    <td><a href="機能仕様書/BK15_香りレシピ登録.html">香りレシピ登録</a></td>
+                  </tr>
+                  <tr>
+                    <td>BK16</td>
+                    <td><a href="機能仕様書/BK16_香りレシピ編集.html">香りレシピ編集</a></td>
+                  </tr>
+                  <tr>
+                    <td>BK18</td>
+                    <td><a href="機能仕様書/BK18_オンラインショップ_商品一覧表示.html">オンラインショップ_商品一覧表示</a></td>
+                  </tr>
+                  <tr>
+                    <td>BK18</td>
+                    <td><a href="機能仕様書/BK18_商品管理一覧表示.html">商品管理一覧表示</a></td>
+                  </tr>
+                  <tr>
+                    <td>BK19</td>
+                    <td><a href="機能仕様書/BK19_商品詳細表示.html">商品詳細表示</a></td>
+                  </tr>
+                  <tr>
+                    <td>BK20,21</td>
+                    <td><a href="機能仕様書/BK20,21_商品登録_編集.html">商品登録_編集</a></td>
+                  </tr>
+                  <tr>
+                    <td>BK23</td>
+                    <td><a href="機能仕様書/BK23_在庫一覧表示_検索.html">在庫一覧表示_検索</a></td>
+                  </tr>
+                  <tr>
+                    <td>BK24</td>
+                    <td><a href="機能仕様書/BK24_在庫更新.html">在庫更新</a></td>
+                  </tr>
+                  <tr>
+                    <td>BK24</td>
+                    <td><a href="機能仕様書/BK24_在庫登録.html">在庫登録</a></td>
+                  </tr>
+                  <tr>
+                    <td>BK24</td>
+                    <td><a href="機能仕様書/BK24_在庫編集.html">在庫編集</a></td>
+                  </tr>
+                  <tr>
+                    <td>BK24</td>
+                    <td><a href="機能仕様書/BK24_在庫詳細表示.html">在庫詳細表示</a></td>
+                  </tr>
+                  <tr>
+                    <td>BK25</td>
+                    <td><a href="機能仕様書/BK25_アカウント設定.html">アカウント設定</a></td>
+                  </tr>
+                  <tr>
+                    <td>BK31</td>
+                    <td><a href="機能仕様書/BK31_多言語文言管理.html">多言語文言管理</a></td>
+                  </tr>
+                  <tr>
+                    <td>BK32,33,34</td>
+                    <td><a href="機能仕様書/BK32,33,34_レビュー管理.html">レビュー管理</a></td>
+                  </tr>
+                  <tr>
+                    <td>01</td>
+                    <td><a href="機能仕様書/01_体験プログラム一覧表示.html">体験プログラム一覧表示</a></td>
+                  </tr>
+                  <tr>
+                    <td>03</td>
+                    <td><a href="機能仕様書/03_共通エラー表示.html">共通エラー表示</a></td>
+                  </tr>
+                  <tr>
+                    <td>12</td>
+                    <td><a href="機能仕様書/12_共通完了表示.html">共通完了表示</a></td>
                   </tr>
                 </tbody>
               </table>
-
             </div>
           </div>
         </section>
@@ -1494,16 +1625,249 @@
             <div class="fill-label">セキュリティ要件 <span class="required">必須</span></div>
             <div class="fill-hint">認証・認可・データ保護に関する要件</div>
             <div class="fill-content">
-              <p>（セキュリティ要件を記載）</p>
+              <section id="security-requirements">
+                <!-- <h2>Spring Bootアプリケーション セキュリティ要件一覧</h2> -->
+
+                <table class="spec-table">
+                  <thead>
+                    <tr>
+                      <th>No.</th>
+                      <th>区分</th>
+                      <th>要件</th>
+                      <th>対応方針</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>認証方式</td>
+                      <td>Spring Securityによるフォームログイン認証を導入する</td>
+                      <td>管理画面はログイン必須とし、未認証ユーザーはログイン画面へリダイレクトする。フロント画面は原則公開、管理画面は認証必須とする。</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>認証対象</td>
+                      <td>管理画面とユーザー画面で認証要否を分ける</td>
+                      <td>トップ、コンセプト、体験詳細、予約、商品一覧などは公開画面とする。マイページ、注文履歴、マイ香りレシピ、管理画面はログイン必須とする。</td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>認可制御</td>
+                      <td>URL単位でアクセス権限を制御する</td>
+                      <td><code>/management/**</code> は管理者のみ、<code>/mypage/**</code> はログインユーザーのみ、公開ページは全ユーザーが参照可能とする。
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>4</td>
+                      <td>パスワード暗号化</td>
+                      <td>パスワードは平文保存せず、BCryptでハッシュ化する</td>
+                      <td>Spring Securityの <code>BCryptPasswordEncoder</code> を使用し、DBにはハッシュ化済みパスワードのみ保存する。</td>
+                    </tr>
+                    <tr>
+                      <td>5</td>
+                      <td>パスワード管理</td>
+                      <td>初期パスワードや仮パスワードをソースコードに直接記載しない</td>
+                      <td>開発用の固定パスワードや平文パスワードを本番環境に残さない。環境変数や初期データ登録処理で管理する。</td>
+                    </tr>
+                    <tr>
+                      <td>6</td>
+                      <td>CSRF対策</td>
+                      <td>Spring SecurityのCSRF保護を有効化する</td>
+                      <td>予約登録、注文登録、レビュー投稿、顧客登録、在庫更新など、POST / PUT / DELETE処理を行うフォームにはCSRFトークンを付与する。</td>
+                    </tr>
+                    <tr>
+                      <td>7</td>
+                      <td>CSRF対象外制御</td>
+                      <td>不要にCSRFを無効化しない</td>
+                      <td>管理画面、予約、注文、レビュー、在庫更新などはCSRF対策を必須とする。除外が必要な場合は対象URLを限定する。</td>
+                    </tr>
+                    <tr>
+                      <td>8</td>
+                      <td>XSS対策</td>
+                      <td>画面表示時にHTMLエスケープを行う</td>
+                      <td>Thymeleafでは原則 <code>th:text</code> を使用し、ユーザー入力値をそのままHTMLとして出力しない。</td>
+                    </tr>
+                    <tr>
+                      <td>9</td>
+                      <td>XSS対策</td>
+                      <td><code>th:utext</code> の使用を原則禁止する</td>
+                      <td>レビューコメント、予約備考、顧客メモ、管理メモ、多言語文言などはHTMLとして出力せず、必ずエスケープして表示する。</td>
+                    </tr>
+                    <tr>
+                      <td>10</td>
+                      <td>XSS対策</td>
+                      <td>セキュリティヘッダーを設定する</td>
+                      <td>
+                        <code>Content-Security-Policy</code>、<code>X-Content-Type-Options</code>、<code>X-Frame-Options</code>
+                        などを設定し、ブラウザ側の攻撃対策を強化する。
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>11</td>
+                      <td>SQLインジェクション対策</td>
+                      <td>SQL文字列を直接連結しない</td>
+                      <td>Repository層ではSpring Data JPA、JPA Criteria、またはプレースホルダ付きクエリを使用する。検索条件にユーザー入力を使う場合もSQL文字列連結は行わない。
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>12</td>
+                      <td>SQLインジェクション対策</td>
+                      <td>入力値の型・桁数・許可値を検証する</td>
+                      <td>IDは数値、日付は日付型、ステータスは許可値のみ、メールはメール形式など、ControllerまたはFormクラスでバリデーションする。</td>
+                    </tr>
+                    <tr>
+                      <td>13</td>
+                      <td>セッション管理</td>
+                      <td>ログイン後にセッションIDを再生成する</td>
+                      <td>セッション固定攻撃を防ぐため、認証成功時にセッションIDを変更する。Spring Securityのセッション固定攻撃対策を有効にする。</td>
+                    </tr>
+                    <tr>
+                      <td>14</td>
+                      <td>セッション管理</td>
+                      <td>セッションタイムアウトを設定する</td>
+                      <td>一定時間操作がない場合は自動ログアウトする。管理画面は短めに設定し、例として30分程度を目安とする。</td>
+                    </tr>
+                    <tr>
+                      <td>15</td>
+                      <td>セッション管理</td>
+                      <td>ログアウト時にセッションを破棄する</td>
+                      <td>ログアウト時にセッション無効化、認証情報削除、必要に応じて <code>JSESSIONID</code> Cookie削除を行う。</td>
+                    </tr>
+                    <tr>
+                      <td>16</td>
+                      <td>Cookie設定</td>
+                      <td>セッションCookieに安全属性を設定する</td>
+                      <td>本番環境では <code>HttpOnly</code>、<code>Secure</code>、<code>SameSite=Lax</code> または
+                        <code>Strict</code> を設定する。
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>17</td>
+                      <td>入力バリデーション</td>
+                      <td>画面ごとに入力値を検証する</td>
+                      <td>予約、注文、レビュー、顧客、香りレシピ、在庫、商品、管理者設定など、すべての登録・更新画面で必須、文字数、形式、範囲、許可値を検証する。</td>
+                    </tr>
+                    <tr>
+                      <td>18</td>
+                      <td>エラー制御</td>
+                      <td>詳細な例外情報を画面に表示しない</td>
+                      <td>SQLエラー、スタックトレース、内部パス、クラス名などは画面に表示しない。画面には共通エラー文言のみ表示し、詳細はログに出力する。</td>
+                    </tr>
+                    <tr>
+                      <td>19</td>
+                      <td>ログ管理</td>
+                      <td>認証・更新系操作をログに残す</td>
+                      <td>ログイン成功・失敗、予約更新、在庫更新、注文ステータス変更、レビュー公開状態変更などを監査ログとして記録する。</td>
+                    </tr>
+                    <tr>
+                      <td>20</td>
+                      <td>H2 Database</td>
+                      <td>本番ではH2 Consoleを無効化する</td>
+                      <td>開発用にH2 Consoleを使う場合でも、本番では <code>/h2-console</code> を無効化する。利用する場合は開発環境限定、認証必須、アクセス元制限を行う。</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
             </div>
           </div>
           <div class="fill-block">
             <div class="fill-label">対応環境 <span class="required">必須</span></div>
             <div class="fill-hint">対応ブラウザ・デバイス</div>
             <div class="fill-content">
-              <p>・対応ブラウザ：Chrome（最新版）/ Firefox（最新版）/ Edge（最新版）
-                ・対応デバイス：PC / タブレット / スマートフォン
-                （自分の実際の対応範囲に合わせて編集してください）</p>
+              <p>本システムのフロントエンドは、訪日外国人旅行者がスマートフォンから利用することを主想定とし、スマートフォン、タブレット、PCに対応する。対応ブラウザは、Google
+                Chrome、Safari、Microsoft Edgeの最新版を基本とする。</p>
+              <p>
+                バックエンド管理システムは、店舗・運営担当者がPCから利用することを主想定とし、1366×768px以上の解像度での利用を推奨する。タブレットでの簡易確認には対応するが、スマートフォンでの管理操作は原則非推奨とする。
+              </p>
+              <BR>
+
+              <section id="supported-environments">
+                <h2>利用想定デバイス・ブラウザ・解像度一覧</h2>
+
+                <table class="spec-table">
+                  <thead>
+                    <tr>
+                      <th>区分</th>
+                      <th>対応デバイス</th>
+                      <th>対応ブラウザ</th>
+                      <th>想定解像度</th>
+                      <th>対応方針</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>フロントエンド</td>
+                      <td>スマートフォン</td>
+                      <td>Safari / Chrome</td>
+                      <td>375×667px 以上</td>
+                      <td>訪日外国人旅行者の利用を想定し、スマートフォン表示を最優先とする。</td>
+                    </tr>
+                    <tr>
+                      <td>フロントエンド</td>
+                      <td>スマートフォン</td>
+                      <td>Safari / Chrome</td>
+                      <td>390×844px / 393×852px</td>
+                      <td>iPhone標準サイズを想定し、予約・閲覧操作が問題なく行えるようレスポンシブ対応する。</td>
+                    </tr>
+                    <tr>
+                      <td>フロントエンド</td>
+                      <td>スマートフォン</td>
+                      <td>Chrome</td>
+                      <td>360×800px / 412×915px</td>
+                      <td>Android端末でも閲覧、予約、商品確認、マイページ操作ができること。</td>
+                    </tr>
+                    <tr>
+                      <td>フロントエンド</td>
+                      <td>タブレット</td>
+                      <td>Safari / Chrome</td>
+                      <td>768×1024px 以上</td>
+                      <td>旅行中のタブレット利用や店舗内案内端末での表示を想定する。</td>
+                    </tr>
+                    <tr>
+                      <td>フロントエンド</td>
+                      <td>PC</td>
+                      <td>Chrome / Safari / Edge</td>
+                      <td>1280×720px 以上</td>
+                      <td>旅行前の事前確認、商品閲覧、予約確認に対応する。</td>
+                    </tr>
+                    <tr>
+                      <td>フロントエンド</td>
+                      <td>PC</td>
+                      <td>Chrome / Safari / Edge</td>
+                      <td>1366×768px / 1440×900px / 1920×1080px</td>
+                      <td>一般的なノートPC・デスクトップ環境でレイアウト崩れがないこと。</td>
+                    </tr>
+                    <tr>
+                      <td>バックエンド管理</td>
+                      <td>PC</td>
+                      <td>Chrome / Edge</td>
+                      <td>1366×768px 以上</td>
+                      <td>店舗・運営担当者の管理業務を想定し、PC利用を基本とする。</td>
+                    </tr>
+                    <tr>
+                      <td>バックエンド管理</td>
+                      <td>PC</td>
+                      <td>Chrome / Edge</td>
+                      <td>1440×900px / 1920×1080px</td>
+                      <td>一覧画面、検索条件、フォーム入力、テーブル表示を快適に利用できること。</td>
+                    </tr>
+                    <tr>
+                      <td>バックエンド管理</td>
+                      <td>タブレット</td>
+                      <td>Safari / Chrome</td>
+                      <td>768×1024px 以上</td>
+                      <td>店舗内での予約確認、顧客確認、在庫確認などの簡易確認用途として補助的に対応する。</td>
+                    </tr>
+                    <tr>
+                      <td>バックエンド管理</td>
+                      <td>スマートフォン</td>
+                      <td>Safari / Chrome</td>
+                      <td>390×844px 以上</td>
+                      <td>原則非推奨。ただしログイン、予約確認、簡易閲覧程度は大きな崩れなく表示する。</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
             </div>
           </div>
 

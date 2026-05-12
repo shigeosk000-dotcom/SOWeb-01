@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>機能詳細仕様書：トップページ表示（モックアップ準拠）</title>
+  <style>
+    :root {
+      --bg: #f7f5f2;
+      --paper: #ffffff;
+      --ink: #1f1b17;
+      --muted: #6d645a;
+      --line: #e8dccb;
+      --accent: #b08d57;
+      --accent-dark: #8c6a36;
+      --soft: #faf6ef;
+      --shadow: 0 8px 24px rgba(0,0,0,.08);
+      --error: #8f3f2f;
+      --ok: #48694d;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 40px 24px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.75;
+    }
+
+    .page {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 32px;
+      margin-bottom: 36px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, #fffaf2, #ffffff);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: 30px;
+      letter-spacing: 0.04em;
+    }
+
+    .meta {
+      margin: 0 0 8px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      margin-right: 8px;
+      border-radius: 999px;
+      background: #fff4df;
+      border: 1px solid #e5c88e;
+      color: #7a4f18;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    section {
+      margin: 36px 0;
+      padding: 28px;
+      border-radius: 20px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    h2 {
+      margin: 0 0 18px;
+      padding-left: 14px;
+      border-left: 6px solid var(--accent);
+      font-size: 22px;
+    }
+
+    h3 {
+      margin: 24px 0 12px;
+      font-size: 17px;
+      color: var(--accent-dark);
+    }
+
+    p { margin: 0 0 12px; }
+
+    ul, ol {
+      margin: 8px 0 0;
+      padding-left: 24px;
+    }
+
+    li { margin-bottom: 6px; }
+
+    .note {
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: var(--soft);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
+    .layout-box {
+      overflow-x: auto;
+      padding: 18px;
+      border-radius: 16px;
+      background: #1f1b17;
+      color: #fffaf2;
+      margin-top: 16px;
+    }
+
+    pre {
+      margin: 0;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 13px;
+      line-height: 1.6;
+      white-space: pre;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+      margin-top: 14px;
+    }
+
+    table {
+      width: 100%;
+      min-width: 1060px;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    th, td {
+      padding: 12px 14px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+      text-align: left;
+    }
+
+    th {
+      background: #f7f2e9;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    tr:last-child td { border-bottom: none; }
+    th:last-child, td:last-child { border-right: none; }
+
+    .flow {
+      padding: 18px;
+      border-radius: 16px;
+      background: var(--soft);
+      border: 1px solid var(--line);
+    }
+
+    .flow-step {
+      margin: 0;
+      padding: 12px 0;
+      border-bottom: 1px dashed #d1c6b7;
+    }
+
+    .flow-step:last-child { border-bottom: none; }
+
+    .label {
+      display: inline-block;
+      min-width: 120px;
+      font-weight: 700;
+      color: var(--accent-dark);
+    }
+
+    .error-box,
+    .ok-box {
+      padding: 16px;
+      border-radius: 14px;
+      margin-top: 16px;
+    }
+
+    .error-box {
+      background: #fff7f4;
+      border: 1px solid #e6c5bd;
+    }
+
+    .ok-box {
+      background: #f5faf6;
+      border: 1px solid #bdd3c1;
+    }
+
+    .error-box h3 { color: var(--error); margin-top: 0; }
+    .ok-box h3 { color: var(--ok); margin-top: 0; }
+
+    .small {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 720px) {
+      body { padding: 22px 14px; }
+      header, section { padding: 22px; }
+      h1 { font-size: 24px; }
+      pre { font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <h1>機能詳細仕様書：トップページ表示（モックアップ準拠）</h1>
+      <p class="meta">
+        <span class="badge">フロントエンド</span>
+        <span class="badge">user / index.html</span>
+        <span class="badge">Phase1</span>
+        <span class="badge">Must</span>
+      </p>
+      <p class="meta">
+        機能概要：添付モックアップの <strong>mockup/user/index.html</strong> をベースに、訪日外国人旅行者・体験ユーザーへサービスの世界観、素材、体験の流れ、口コミ、予約導線を表示する。
+      </p>
+    </header>
+
+    <section>
+      <h2>1. 画面レイアウト</h2>
+      <p class="note">
+        添付モックアップでは、トップページは「ヘッダー → ヒーロー → ブランドストーリー → 日本素材の紹介 → 体験の流れ・レビュー → 予約CTA → フッター」の順で構成されている。
+        不足と思われる項目として、画像取得失敗時の代替表示、スライダー操作状態、外部リンクの安全制御、予約導線への引き継ぎ値を仕様上追加する。
+      </p>
+
+      <div class="layout-box">
+<pre>┌────────────────────────────────────────────────────────────┐
+│ Frame 01：ヘッダー                                          │
+│ [1] ブランドロゴ / サイト名                                  │
+│ [2] ナビ：コンセプト / 体験詳細 / 予約                       │
+│ [3] 言語表示：EN / JP                                       │
+│ [4] CTA：Book Experience                                    │
+├────────────────────────────────────────────────────────────┤
+│ Frame 02：ヒーロー                                           │
+│ 左：[1] ヒーロースライダー                                   │
+│     [2] スライド画像01 / 02 / 03                             │
+│     [3] 前へボタン / 次へボタン                              │
+│     [4] ドットナビ：スライド1 / 2 / 3                        │
+│ 右：[5] キッカー STORY-FIRST LANDING / PHASE 1               │
+│     [6] メインコピー「香りで、日本を巡る。」                  │
+│     [7] リード文1「旅の記憶を、香りとして持ち帰る。」          │
+│     [8] リード文2「地域素材の物語とともに...」                │
+│     [9] CTA：予約する                                        │
+│     [10] CTA：コンセプトを読む                               │
+├────────────────────────────────────────────────────────────┤
+│ Frame 03：ブランドストーリー                                 │
+│ 左：[1] 見出し「ブランドストーリー」                          │
+│     [2] サブコピー                                           │
+│     [3] 説明文                                               │
+│     [4] CTA：詳しく見る                                      │
+│ 右：[5] 体験イメージ画像                                     │
+├────────────────────────────────────────────────────────────┤
+│ Frame 04：日本素材の紹介                                     │
+│ [1] 見出し「日本素材の紹介」                                  │
+│ [2] サブコピー                                               │
+│ [3] 素材カード01：ひば画像 / 見出し / 説明                    │
+│ [4] 素材カード02：ゆず画像 / 見出し / 説明                    │
+│ [5] 素材カード03：薄荷画像 / 見出し / 説明                    │
+├────────────────────────────────────────────────────────────┤
+│ Frame 05：体験の流れ・レビュー                                │
+│ 左：[1] 見出し「体験の流れ」                                  │
+│     [2] サブコピー                                           │
+│     [3] Step 1 素材を知る                                    │
+│     [4] Step 2 自分の香りを作る                              │
+│     [5] Step 3 思い出として持ち帰る                          │
+│ 右：[6] 見出し「レビュー / 体験の声」                         │
+│     [7] レビュー01                                           │
+│     [8] レビュー02                                           │
+├────────────────────────────────────────────────────────────┤
+│ Frame 06：予約CTA帯                                          │
+│ [1] 見出し「東京で、自分だけの香りを作る」                    │
+│ [2] 説明文                                                   │
+│ [3] CTA：予約ページへ進む                                    │
+├────────────────────────────────────────────────────────────┤
+│ Frame 07：フッター                                           │
+│ [1] Concept / About説明                                      │
+│ [2] Experienceリンク                                         │
+│ [3] Conceptリンク                                            │
+│ [4] Bookingリンク                                            │
+│ [5] Instagram / Contact / Booking                            │
+└────────────────────────────────────────────────────────────┘</pre>
+      </div>
+
+      <h3>フレーム別 配置項目・表示順</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Frame</th>
+              <th>配置エリア</th>
+              <th>表示順</th>
+              <th>項目</th>
+              <th>モックアップ上の要素</th>
+              <th>種別</th>
+              <th>配置位置</th>
+              <th>補足・追加仕様</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>01</td><td>ヘッダー</td><td>1</td><td>ブランドロゴ / サイト名</td><td>Aroma Trip Nippon｜和香巡り</td><td>リンク</td><td>左</td><td>押下時 index.html へ遷移。</td></tr>
+            <tr><td>01</td><td>ヘッダー</td><td>2</td><td>グローバルナビ</td><td>コンセプト / 体験詳細 / 予約</td><td>リンク群</td><td>中央</td><td>モックアップの順序を維持。</td></tr>
+            <tr><td>01</td><td>ヘッダー</td><td>3</td><td>言語表示</td><td>EN / JP</td><td>表示ラベル</td><td>右</td><td>将来の言語切替を想定。現時点では表示のみ。</td></tr>
+            <tr><td>01</td><td>ヘッダー</td><td>4</td><td>予約CTA</td><td>Book Experience</td><td>ボタン</td><td>右端</td><td>reservation.html へ遷移。</td></tr>
+
+            <tr><td>02</td><td>ヒーロー左</td><td>1</td><td>ヒーロースライダー</td><td>pro-slider</td><td>画像スライダー</td><td>左カラム</td><td>5秒間隔で自動切替。</td></tr>
+            <tr><td>02</td><td>ヒーロー左</td><td>2</td><td>スライド画像01</td><td>assets/index_hero_01.png</td><td>画像</td><td>スライダー内</td><td>alt属性あり。画像取得失敗時は代替テキスト表示。</td></tr>
+            <tr><td>02</td><td>ヒーロー左</td><td>3</td><td>スライド画像02</td><td>assets/index_hero_02.png</td><td>画像</td><td>スライダー内</td><td>2枚目のスライド。</td></tr>
+            <tr><td>02</td><td>ヒーロー左</td><td>4</td><td>スライド画像03</td><td>assets/index_hero_03.png</td><td>画像</td><td>スライダー内</td><td>3枚目のスライド。</td></tr>
+            <tr><td>02</td><td>ヒーロー左</td><td>5</td><td>前へ / 次へ</td><td>pro-slider__nav</td><td>ボタン</td><td>スライダー左右</td><td>押下時、表示スライドを前後に切替。</td></tr>
+            <tr><td>02</td><td>ヒーロー左</td><td>6</td><td>ドットナビ</td><td>pro-slider__dot</td><td>ボタン</td><td>スライダー下部</td><td>押下時、指定スライドへ切替。</td></tr>
+
+            <tr><td>02</td><td>ヒーロー右</td><td>7</td><td>キッカー</td><td>STORY-FIRST LANDING / PHASE 1</td><td>テキスト</td><td>右カラム上部</td><td>ページの位置づけを表示。</td></tr>
+            <tr><td>02</td><td>ヒーロー右</td><td>8</td><td>メインコピー</td><td>香りで、日本を巡る。</td><td>見出し</td><td>キッカー下</td><td>最重要コピー。</td></tr>
+            <tr><td>02</td><td>ヒーロー右</td><td>9</td><td>リード文1</td><td>旅の記憶を、香りとして持ち帰る。</td><td>テキスト</td><td>見出し下</td><td>価値を短く提示。</td></tr>
+            <tr><td>02</td><td>ヒーロー右</td><td>10</td><td>リード文2</td><td>地域素材の物語とともに...</td><td>テキスト</td><td>リード文1下</td><td>体験内容を補足。</td></tr>
+            <tr><td>02</td><td>ヒーロー右</td><td>11</td><td>予約する</td><td>予約する</td><td>ボタン</td><td>actions 左</td><td>reservation.html へ遷移。</td></tr>
+            <tr><td>02</td><td>ヒーロー右</td><td>12</td><td>コンセプトを読む</td><td>コンセプトを読む</td><td>ボタン</td><td>actions 右</td><td>concept.html へ遷移。</td></tr>
+
+            <tr><td>03</td><td>ブランドストーリー</td><td>1</td><td>見出し</td><td>ブランドストーリー</td><td>見出し</td><td>左カラム上部</td><td>セクションの主題。</td></tr>
+            <tr><td>03</td><td>ブランドストーリー</td><td>2</td><td>サブコピー</td><td>日本各地の天然素材をテーマに...</td><td>テキスト</td><td>見出し下</td><td>サービス内容を要約。</td></tr>
+            <tr><td>03</td><td>ブランドストーリー</td><td>3</td><td>説明文</td><td>単なる調香ではなく...</td><td>テキスト</td><td>サブコピー下</td><td>ストーリー性を説明。</td></tr>
+            <tr><td>03</td><td>ブランドストーリー</td><td>4</td><td>詳しく見る</td><td>詳しく見る</td><td>ボタン</td><td>説明文下</td><td>concept.html へ遷移。</td></tr>
+            <tr><td>03</td><td>ブランドストーリー</td><td>5</td><td>体験イメージ画像</td><td>assets/index_group_large2.png</td><td>画像</td><td>右カラム</td><td>画像取得失敗時は代替表示。</td></tr>
+
+            <tr><td>04</td><td>日本素材の紹介</td><td>1</td><td>見出し</td><td>日本素材の紹介</td><td>見出し</td><td>上部</td><td>素材紹介セクション。</td></tr>
+            <tr><td>04</td><td>日本素材の紹介</td><td>2</td><td>サブコピー</td><td>体験で出会える香りの一部をご紹介します。</td><td>テキスト</td><td>見出し下</td><td>セクション説明。</td></tr>
+            <tr><td>04</td><td>日本素材の紹介</td><td>3</td><td>素材カード：ひば</td><td>material_hiba2.png / 落ち着きと静けさ</td><td>カード</td><td>3カラム左</td><td>画像、見出し、説明文。</td></tr>
+            <tr><td>04</td><td>日本素材の紹介</td><td>4</td><td>素材カード：ゆず</td><td>material_yuzu2.png / 明るく爽やかな余韻</td><td>カード</td><td>3カラム中央</td><td>画像、見出し、説明文。</td></tr>
+            <tr><td>04</td><td>日本素材の紹介</td><td>5</td><td>素材カード：薄荷</td><td>material_hakka2.png / やわらかく記憶に残る</td><td>カード</td><td>3カラム右</td><td>画像、見出し、説明文。</td></tr>
+
+            <tr><td>05</td><td>体験の流れ</td><td>1</td><td>見出し</td><td>体験の流れ</td><td>見出し</td><td>左カラム上部</td><td>体験ステップを示す。</td></tr>
+            <tr><td>05</td><td>体験の流れ</td><td>2</td><td>サブコピー</td><td>初めてでも安心できるステップ設計</td><td>テキスト</td><td>見出し下</td><td>安心感を訴求。</td></tr>
+            <tr><td>05</td><td>体験の流れ</td><td>3</td><td>Step 1</td><td>素材を知る</td><td>カード</td><td>左カラム</td><td>素材背景と香りの違いを学ぶ。</td></tr>
+            <tr><td>05</td><td>体験の流れ</td><td>4</td><td>Step 2</td><td>自分の香りを作る</td><td>カード</td><td>左カラム</td><td>香りを選びレシピ化。</td></tr>
+            <tr><td>05</td><td>体験の流れ</td><td>5</td><td>Step 3</td><td>思い出として持ち帰る</td><td>カード</td><td>左カラム</td><td>EC再購入はPhase2想定。</td></tr>
+            <tr><td>05</td><td>レビュー</td><td>6</td><td>見出し</td><td>レビュー / 体験の声</td><td>見出し</td><td>右カラム上部</td><td>信頼性補強。</td></tr>
+            <tr><td>05</td><td>レビュー</td><td>7</td><td>レビュー01</td><td>“体験そのものに意味があった”</td><td>カード</td><td>右カラム</td><td>レビュー文を表示。</td></tr>
+            <tr><td>05</td><td>レビュー</td><td>8</td><td>レビュー02</td><td>“大人っぽくて落ち着いた雰囲気”</td><td>カード</td><td>右カラム</td><td>レビュー文を表示。</td></tr>
+
+            <tr><td>06</td><td>予約CTA帯</td><td>1</td><td>見出し</td><td>東京で、自分だけの香りを作る</td><td>見出し</td><td>CTA帯上部</td><td>予約行動を促す。</td></tr>
+            <tr><td>06</td><td>予約CTA帯</td><td>2</td><td>説明文</td><td>世界観に共感したら...</td><td>テキスト</td><td>見出し下</td><td>予約誘導の補足。</td></tr>
+            <tr><td>06</td><td>予約CTA帯</td><td>3</td><td>予約ページへ進む</td><td>予約ページへ進む</td><td>ボタン</td><td>説明文下</td><td>reservation.html へ遷移。</td></tr>
+
+            <tr><td>07</td><td>フッター</td><td>1</td><td>Concept / About</td><td>和香巡りとは...</td><td>テキスト</td><td>左カラム</td><td>サイト概要。</td></tr>
+            <tr><td>07</td><td>フッター</td><td>2</td><td>内部リンク</td><td>Experience / Concept / Booking</td><td>リンク群</td><td>中央カラム</td><td>各ページへ遷移。</td></tr>
+            <tr><td>07</td><td>フッター</td><td>3</td><td>補助リンク</td><td>Instagram / Contact / Booking</td><td>テキスト / リンク想定</td><td>右カラム</td><td>InstagramとContactはURL設定が必要。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>2. 入力項目一覧</h2>
+      <p class="note">
+        トップページには予約フォームのような直接入力欄は存在しないため、「ユーザーが操作・選択する項目」と
+        「画面表示時に受け取る値」を入力項目として整理する。各バリデーションは、チェック実施タイミングを明示する。
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>対象フレーム</th>
+              <th>項目名</th>
+              <th>データ型</th>
+              <th>データサイズ</th>
+              <th>必須/任意</th>
+              <th>バリデーションルール</th>
+              <th>チェック実施タイミング</th>
+              <th>エラー時の扱い</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Frame 01</td>
+              <td>遷移先URL：ロゴ</td>
+              <td>String</td>
+              <td>最大255文字</td>
+              <td>必須</td>
+              <td>内部リンクであること。想定値：index.html。</td>
+              <td>画面描画前、リンク押下時</td>
+              <td>不正な場合はhrefをindex.htmlに補正する。</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Frame 01</td>
+              <td>遷移先URL：コンセプト</td>
+              <td>String</td>
+              <td>最大255文字</td>
+              <td>必須</td>
+              <td>内部リンクであること。想定値：concept.html。</td>
+              <td>画面描画前、リンク押下時</td>
+              <td>不正な場合はリンクを非活性または非表示にする。</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Frame 01</td>
+              <td>遷移先URL：体験詳細</td>
+              <td>String</td>
+              <td>最大255文字</td>
+              <td>必須</td>
+              <td>内部リンクであること。想定値：experience.html。</td>
+              <td>画面描画前、リンク押下時</td>
+              <td>不正な場合はリンクを非活性または非表示にする。</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Frame 01 / 02 / 06</td>
+              <td>遷移先URL：予約</td>
+              <td>String</td>
+              <td>最大255文字</td>
+              <td>必須</td>
+              <td>内部リンクであること。想定値：reservation.html。</td>
+              <td>画面描画前、CTA押下時</td>
+              <td>不正な場合はエラー画面ではなく、ボタンを非活性にする。</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>Frame 01</td>
+              <td>表示言語ラベル</td>
+              <td>String</td>
+              <td>最大20文字</td>
+              <td>任意</td>
+              <td>許可された表示文字のみ。想定値：EN / JP。</td>
+              <td>画面描画前</td>
+              <td>未設定または不正な場合は「EN / JP」を表示する。</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>Frame 02</td>
+              <td>スライダー表示間隔</td>
+              <td>Integer</td>
+              <td>1000〜10000 ms</td>
+              <td>任意</td>
+              <td>数値であること。1000ms以上10000ms以下。未指定時は5000ms。</td>
+              <td>DOMContentLoaded時、スライダー初期化時</td>
+              <td>不正値の場合は5000msとして処理する。</td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td>Frame 02</td>
+              <td>スライド画像パス</td>
+              <td>String</td>
+              <td>最大255文字</td>
+              <td>必須</td>
+              <td>assets/配下の画像パスであること。拡張子はpng / jpg / webp。</td>
+              <td>画面描画前、画像読込時</td>
+              <td>画像読込失敗時はaltテキストを表示し、スライダー処理は継続する。</td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td>Frame 02</td>
+              <td>スライド番号</td>
+              <td>Integer</td>
+              <td>1〜3</td>
+              <td>任意</td>
+              <td>1以上、スライド件数以下であること。</td>
+              <td>前へ / 次へ / ドット押下時</td>
+              <td>範囲外の場合は循環処理により先頭または末尾へ移動する。</td>
+            </tr>
+            <tr>
+              <td>9</td>
+              <td>Frame 03</td>
+              <td>ブランドストーリー画像パス</td>
+              <td>String</td>
+              <td>最大255文字</td>
+              <td>必須</td>
+              <td>assets/配下の画像パスであること。拡張子はpng / jpg / webp。</td>
+              <td>画面描画前、画像読込時</td>
+              <td>画像読込失敗時は代替テキストを表示する。</td>
+            </tr>
+            <tr>
+              <td>10</td>
+              <td>Frame 04</td>
+              <td>素材カード画像パス</td>
+              <td>String</td>
+              <td>最大255文字</td>
+              <td>必須</td>
+              <td>assets/配下の画像パスであること。拡張子はpng / jpg / webp。</td>
+              <td>画面描画前、画像読込時</td>
+              <td>画像読込失敗時は対象カードの画像領域に代替表示を行う。</td>
+            </tr>
+            <tr>
+              <td>11</td>
+              <td>Frame 05</td>
+              <td>レビュー表示テキスト</td>
+              <td>String</td>
+              <td>最大500文字</td>
+              <td>任意</td>
+              <td>HTMLタグをエスケープすること。空の場合はカードを非表示。</td>
+              <td>画面描画前</td>
+              <td>不正なHTMLはエスケープし、テキストとして表示する。</td>
+            </tr>
+            <tr>
+              <td>12</td>
+              <td>Frame 07</td>
+              <td>外部リンクURL：Instagram</td>
+              <td>String</td>
+              <td>最大255文字</td>
+              <td>任意</td>
+              <td>https://から始まるURLのみ許可。</td>
+              <td>画面描画前、リンク押下時</td>
+              <td>未設定または不正な場合はテキスト表示のみとする。</td>
+            </tr>
+            <tr>
+              <td>13</td>
+              <td>Frame 07</td>
+              <td>お問い合わせリンクURL</td>
+              <td>String</td>
+              <td>最大255文字</td>
+              <td>任意</td>
+              <td>内部リンクまたはhttps://URLのみ許可。</td>
+              <td>画面描画前、リンク押下時</td>
+              <td>未設定または不正な場合はテキスト表示のみとする。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>3. 処理フロー</h2>
+      <div class="flow">
+        <p class="flow-step"><span class="label">ユーザー操作</span>ブラウザで <strong>user/index.html</strong> にアクセスする。</p>
+        <p class="flow-step"><span class="label">画面読込</span>HTML、styles.css、画像アセットを読み込む。</p>
+        <p class="flow-step"><span class="label">初期化処理</span>DOMContentLoaded後、.pro-slider を取得し、スライド一覧、前後ボタン、ドットボタン、表示間隔を初期化する。</p>
+        <p class="flow-step"><span class="label">入力チェック</span>スライダー表示間隔、スライド件数、画像パス、リンクURLの妥当性を確認する。</p>
+        <p class="flow-step"><span class="label">表示処理</span>ヘッダー、ヒーロー、ブランドストーリー、日本素材、体験の流れ、レビュー、予約CTA、フッターを順に表示する。</p>
+        <p class="flow-step"><span class="label">ユーザー操作</span>「予約する」「Book Experience」「コンセプトを読む」「詳しく見る」「予約ページへ進む」等を押下する。</p>
+        <p class="flow-step"><span class="label">遷移処理</span>クリックされたリンクのhrefに従い、concept.html、experience.html、reservation.html等へ遷移する。</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>4. 正常時の動作</h2>
+      <div class="ok-box">
+        <h3>正常表示</h3>
+        <ul>
+          <li>トップページアクセス時、ヘッダーからフッターまでモックアップと同じ順序で表示する。</li>
+          <li>ヒーロースライダーは初期表示で1枚目を表示し、5秒間隔で次スライドへ自動切替する。</li>
+          <li>前へ / 次へボタン押下時、スライドを前後に切替し、自動切替タイマーを再起動する。</li>
+          <li>ドットナビ押下時、指定されたスライドへ切替し、aria-selectedを更新する。</li>
+          <li>「予約する」「Book Experience」「予約ページへ進む」押下時、reservation.htmlへ遷移する。</li>
+          <li>「コンセプト」「コンセプトを読む」「詳しく見る」押下時、concept.htmlへ遷移する。</li>
+          <li>「体験詳細」押下時、experience.htmlへ遷移する。</li>
+          <li>レビュー、素材カード、体験ステップは固定コンテンツとして表示する。</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>5. エラー時の動作</h2>
+
+      <div class="error-box">
+        <h3>バリデーションエラー</h3>
+        <ul>
+          <li>リンクURLが想定外の場合、画面描画前に該当リンクを非活性または非表示にする。</li>
+          <li>スライダー表示間隔が数値でない場合、DOMContentLoaded時にデフォルト値5000msを使用する。</li>
+          <li>スライド番号が範囲外の場合、スライダー操作時に循環処理で先頭または末尾に補正する。</li>
+          <li>外部SNS URLがhttps://以外の場合、画面描画前にリンク化せずテキスト表示にする。</li>
+          <li>レビュー文や表示文言にHTMLタグが含まれる場合、画面描画前にエスケープして表示する。</li>
+        </ul>
+      </div>
+
+      <div class="error-box">
+        <h3>システムエラー・読込エラー</h3>
+        <ul>
+          <li>CSS読込に失敗した場合、ブラウザ標準表示になるが、HTML構造とリンク遷移は維持する。</li>
+          <li>画像読込に失敗した場合、altテキストを表示し、ページ全体の表示は継続する。</li>
+          <li>JavaScript実行時エラーが発生した場合、スライダーの自動切替は停止するが、初期表示とリンク遷移は利用可能とする。</li>
+          <li>リンク先HTMLが存在しない場合、ブラウザの404またはファイル未検出画面を表示する。</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>6. 画面遷移先</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>遷移元フレーム</th>
+              <th>トリガー</th>
+              <th>遷移先</th>
+              <th>遷移条件</th>
+              <th>引き継ぎ値</th>
+              <th>備考</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>Frame 01</td><td>ブランドロゴ押下</td><td>index.html</td><td>常時</td><td>なし</td><td>トップへ戻る。</td></tr>
+            <tr><td>2</td><td>Frame 01</td><td>「コンセプト」押下</td><td>concept.html</td><td>リンクURLが正常であること</td><td>なし</td><td>コンセプトページへ遷移。</td></tr>
+            <tr><td>3</td><td>Frame 01</td><td>「体験詳細」押下</td><td>experience.html</td><td>リンクURLが正常であること</td><td>なし</td><td>体験詳細ページへ遷移。</td></tr>
+            <tr><td>4</td><td>Frame 01</td><td>「予約」押下</td><td>reservation.html</td><td>リンクURLが正常であること</td><td>なし</td><td>予約ページへ遷移。</td></tr>
+            <tr><td>5</td><td>Frame 01</td><td>「Book Experience」押下</td><td>reservation.html</td><td>リンクURLが正常であること</td><td>なし</td><td>予約CTA。</td></tr>
+            <tr><td>6</td><td>Frame 02</td><td>「予約する」押下</td><td>reservation.html</td><td>リンクURLが正常であること</td><td>なし</td><td>ヒーローCTA。</td></tr>
+            <tr><td>7</td><td>Frame 02</td><td>「コンセプトを読む」押下</td><td>concept.html</td><td>リンクURLが正常であること</td><td>なし</td><td>ヒーロー補助CTA。</td></tr>
+            <tr><td>8</td><td>Frame 03</td><td>「詳しく見る」押下</td><td>concept.html</td><td>リンクURLが正常であること</td><td>なし</td><td>ブランドストーリー詳細へ遷移。</td></tr>
+            <tr><td>9</td><td>Frame 06</td><td>「予約ページへ進む」押下</td><td>reservation.html</td><td>リンクURLが正常であること</td><td>なし</td><td>下部CTA。</td></tr>
+            <tr><td>10</td><td>Frame 07</td><td>「Experience」押下</td><td>experience.html</td><td>リンクURLが正常であること</td><td>なし</td><td>フッターリンク。</td></tr>
+            <tr><td>11</td><td>Frame 07</td><td>「Concept」押下</td><td>concept.html</td><td>リンクURLが正常であること</td><td>なし</td><td>フッターリンク。</td></tr>
+            <tr><td>12</td><td>Frame 07</td><td>「Booking」押下</td><td>reservation.html</td><td>リンクURLが正常であること</td><td>なし</td><td>フッターリンク。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

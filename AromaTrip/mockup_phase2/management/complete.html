@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>完了｜Aroma Trip Nippon管理画面</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700;800&display=swap');
+:root{--bg:#f6f8fb;--surface:#fff;--surface2:#f1f5f9;--line:#dbe3ea;--text:#1f2937;--muted:#64748b;--primary:#4f46e5;--primary2:#4338ca;--danger:#dc2626;--shadow:0 14px 34px rgba(15,23,42,.08);--radius:18px;--fs-sm:12px;--fs-md:14px;--fs-lg:18px;--fs-xl:26px}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:'Noto Sans',sans-serif;color:var(--text);font-size:var(--fs-md)}a{text-decoration:none;color:inherit}.app{display:grid;grid-template-columns:88px 1fr;min-height:100vh}.side{background:#111827;color:#fff;padding:18px 12px;display:flex;flex-direction:column;gap:12px}.logo,.icon{width:48px;height:48px;border-radius:16px;display:grid;place-items:center;margin:0 auto;font-weight:800}.logo{background:var(--primary);margin-bottom:8px}.icon{background:#1f2937;color:#e5e7eb}.icon.active{background:var(--primary);color:#fff}.logout{margin-top:auto}.main{padding:28px}.top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:22px}.top h1{font-size:var(--fs-xl);line-height:1.25;margin:0 0 6px}.top p{margin:0;color:var(--muted)}.user{display:flex;align-items:center;gap:10px;color:var(--muted);white-space:nowrap}.avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#dbeafe,#fef3c7)}.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px}.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}.filters{display:flex;gap:10px;flex-wrap:wrap}input,select,textarea{font-family:inherit;font-size:var(--fs-md);border:1px solid var(--line);border-radius:12px;background:#fff;padding:10px 12px;min-height:42px;color:var(--text)}textarea{min-height:108px;resize:vertical}.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:42px;padding:10px 14px;border-radius:12px;border:1px solid transparent;font-weight:700;cursor:pointer}.primary{background:var(--primary);color:#fff}.light{background:var(--surface2);color:#334155}.danger{background:#fee2e2;color:#991b1b}.actions{display:flex;justify-content:flex-end;gap:10px;margin-top:18px}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}.stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px}.stat span{display:block;color:var(--muted);font-size:var(--fs-sm);font-weight:700}.stat b{display:block;font-size:var(--fs-xl);margin-top:6px}table{width:100%;border-collapse:collapse}th{font-size:var(--fs-sm);color:var(--muted);text-align:left;padding:12px;border-bottom:1px solid var(--line);white-space:nowrap}td{padding:13px 12px;border-bottom:1px solid #edf2f7;vertical-align:middle}.badge{display:inline-flex;border-radius:999px;padding:5px 10px;font-size:var(--fs-sm);font-weight:800}.ok{background:#dcfce7;color:#166534}.warn{background:#fef3c7;color:#92400e}.ng{background:#fee2e2;color:#991b1b}.info{background:#e0e7ff;color:#3730a3}.pager{display:flex;justify-content:flex-end;gap:8px;margin-top:14px}.pager a{padding:8px 11px;border-radius:10px;background:var(--surface2);font-weight:700}.form{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.field{display:grid;gap:6px}.field.full{grid-column:1/-1}.field label{font-size:var(--fs-sm);font-weight:800;color:var(--muted)}.required{color:var(--danger)}.detail{display:grid;grid-template-columns:180px 1fr;border:1px solid var(--line);border-radius:14px;overflow:hidden}.detail dt,.detail dd{margin:0;padding:14px;border-bottom:1px solid var(--line)}.detail dt{background:var(--surface2);font-weight:800;color:#475569}.detail dd{background:#fff}.section-title{font-size:var(--fs-lg);margin:0 0 12px}.breadcrumbs{font-size:var(--fs-sm);color:var(--muted);margin-bottom:12px}.two{display:grid;grid-template-columns:1fr 340px;gap:18px}.mini-list{display:grid;gap:10px}.mini-item{padding:12px;border:1px solid var(--line);border-radius:14px;background:#fff}.mini-item b{display:block;margin-bottom:4px}.mini-item span{color:var(--muted);font-size:var(--fs-sm)}@media(max-width:980px){.app{grid-template-columns:1fr}.side{display:none}.main{padding:18px}.grid4,.form,.two{grid-template-columns:1fr}.top{flex-direction:column}.table-wrap{overflow:auto}}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <a class="logo" href="dashboard.html">AT</a>
+    <a class="icon active" href="dashboard.html">D</a>
+    <a class="icon" href="reservation_list.html">予</a>
+    <a class="icon" href="customer_list.html">顧</a>
+    <a class="icon" href="recipe_list.html">香</a>
+    <a class="icon" href="inventory_list.html">在</a>
+    <a class="icon" href="product_list.html">商</a>
+    <a class="icon" href="order_list.html">注</a>
+    <a class="icon" href="localization_list.html">言</a>
+    <a class="icon" href="review_list.html">口</a>
+    <a class="icon" href="account.html">設</a>
+    <a class="icon logout" href="login.html">出</a>
+  </aside>
+  <main class="main"><div class="top"><div><h1>処理が完了しました</h1><p>登録・更新処理が正常に完了しました。</p></div><div class="user"><span>Admin</span><span class="avatar"></span></div></div>
+<section class="panel"><div class="actions"><a class="btn light" href="dashboard.html">ダッシュボードへ</a><a class="btn primary" href="javascript:history.back()">前の画面へ</a></div></section>
+</main>
+</div>
+</body>
+</html>

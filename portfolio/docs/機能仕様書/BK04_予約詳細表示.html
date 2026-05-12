@@ -1,0 +1,31 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>予約詳細表示 詳細仕様</title><style>
+:root{--bg:#f7f5f2;--paper:#fff;--ink:#1f1b17;--muted:#6d645a;--line:#e8dccb;--accent:#b08d57;--accent-dark:#8c6a36;--soft:#faf6ef;--error:#8f3f2f;--ok:#48694d}
+*{box-sizing:border-box}body{margin:0;padding:40px 24px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;background:var(--bg);color:var(--ink);line-height:1.75}
+.page{max-width:1180px;margin:0 auto}header,.screen{padding:30px;border-radius:22px;background:var(--paper);border:1px solid var(--line);box-shadow:0 8px 24px rgba(0,0,0,.06);margin-bottom:30px}
+header{background:linear-gradient(135deg,#fffaf2,#fff)}h1{margin:0 0 10px;font-size:30px}h2{margin:0 0 18px;padding-left:14px;border-left:6px solid var(--accent);font-size:24px}
+h3{margin:28px 0 12px;font-size:18px;color:var(--accent-dark)}p{margin:0 0 12px}.meta{color:var(--muted);font-size:14px}
+.badge{display:inline-block;padding:4px 10px;margin-right:8px;border-radius:999px;background:#fff4df;border:1px solid #e5c88e;color:#7a4f18;font-size:12px;font-weight:700}
+.note{padding:14px 16px;border-radius:14px;background:var(--soft);border:1px solid var(--line);color:var(--muted);font-size:14px;margin-bottom:18px}
+pre{margin:0;padding:18px;border-radius:16px;background:#1f1b17;color:#fffaf2;font-family:"SFMono-Regular",Consolas,monospace;font-size:13px;line-height:1.6;white-space:pre;overflow-x:auto}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:#fff;margin:14px 0 22px}table{width:100%;min-width:1040px;border-collapse:collapse;font-size:14px}
+th,td{padding:12px 14px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);vertical-align:top;text-align:left}th{background:#f7f2e9;white-space:nowrap}
+tr:last-child td{border-bottom:none}th:last-child,td:last-child{border-right:none}.flow{padding:18px;border-radius:16px;background:var(--soft);border:1px solid var(--line)}
+.flow p{padding:10px 0;border-bottom:1px dashed #d1c6b7;margin:0}.flow p:last-child{border-bottom:none}.label{display:inline-block;min-width:120px;font-weight:700;color:var(--accent-dark)}
+ul{margin:8px 0 0;padding-left:24px}li{margin-bottom:6px}@media(max-width:800px){body{padding:22px 14px}header,.screen{padding:22px}pre{font-size:12px}}
+</style></head>
+<body><main class="page"><header><h1>予約詳細表示 詳細仕様</h1><p class="meta"><span class="badge">バックエンド管理</span><span class="badge">Phase1</span><span class="badge">Must</span><span class="badge">management/reservation_detail.html</span></p><p class="meta">予約の来店日時、人数、体験コース、顧客情報、予約状況を表示する。</p></header>
+<section class="screen"><h2>1. 画面レイアウト</h2><p class="note">画面遷移図上に存在し、既存詳細仕様またはモックアップで不足していた画面です。既存モックアップのテイストに合わせてFrame単位で配置順を定義します。</p><pre>┌────────────────────────────────────────────────────────────┐
+│ Frame 01：管理ナビ                                          │
+├────────────────────────────────────────────────────────────┤
+│ Frame 02：ページヘッダー：予約詳細                          │
+│ [1] 一覧へ戻る [2] 編集                                     │
+├────────────────────────────────────────────────────────────┤
+│ Frame 03：予約情報                                          │
+│ [1] 日時 [2] 人数 [3] コース [4] 状況 [5] 顧客情報           │
+└────────────────────────────────────────────────────────────┘</pre><div class='table-wrap'><table><thead><tr><th>No.</th><th>配置フレーム</th><th>表示順・項目</th><th>種別</th><th>配置位置</th><th>補足</th></tr></thead><tbody><tr><td>1</td><td>Frame 1</td><td>[1] 一覧へ戻る [2] 編集</td><td>画面要素</td><td>上から順</td><td>遷移図に基づき追加</td></tr><tr><td>2</td><td>Frame 2</td><td>[1] 日時 [2] 人数 [3] コース [4] 状況 [5] 顧客情報</td><td>画面要素</td><td>上から順</td><td>遷移図に基づき追加</td></tr></tbody></table></div>
+<h2>2. 入力項目一覧</h2><div class='table-wrap'><table><thead><tr><th>No.</th><th>項目名</th><th>データ型</th><th>データサイズ</th><th>必須/任意</th><th>バリデーションルール</th><th>チェック実施タイミング</th><th>エラー時の扱い</th></tr></thead><tbody><tr><td>1</td><td>予約ID</td><td>Long</td><td>整数</td><td>必須</td><td>存在する予約ID</td><td>初期表示時</td><td>不正時は一覧へ</td></tr><tr><td>2</td><td>顧客ID</td><td>Long</td><td>整数</td><td>任意</td><td>存在する顧客ID</td><td>顧客リンク押下時</td><td>リンク非表示</td></tr></tbody></table></div>
+<h2>3. 処理フロー</h2><div class="flow"><p><span class="label">Step 1</span>予約詳細へアクセスする。</p><p><span class="label">Step 2</span>予約IDで予約情報を取得する。</p><p><span class="label">Step 3</span>予約情報を読み取り専用で表示する。</p></div>
+<h2>4. 正常時の動作</h2><ul><li>予約詳細が表示される。</li><li>編集ボタンで予約編集へ遷移する。</li><li>顧客リンクで顧客詳細へ遷移する。</li></ul>
+<h2>5. エラー時の動作</h2><ul><li>予約ID不正時は一覧へ戻す。</li><li>取得失敗時はエラー画面を表示。</li></ul>
+<h2>6. 画面遷移先</h2><div class='table-wrap'><table><thead><tr><th>No.</th><th>遷移元フレーム</th><th>トリガー</th><th>遷移先</th><th>遷移条件</th><th>引き継ぎ値</th><th>備考</th></tr></thead><tbody><tr><td>1</td><td>Frame 02</td><td>一覧へ戻る</td><td>reservation_list.html</td><td>常時</td><td>なし</td><td>一覧へ</td></tr><tr><td>2</td><td>Frame 02</td><td>編集</td><td>reservation_edit.html</td><td>予約ID正常</td><td>予約ID</td><td>編集へ</td></tr><tr><td>3</td><td>Frame 03</td><td>顧客名</td><td>customer_detail.html</td><td>顧客ID正常</td><td>顧客ID</td><td>顧客詳細へ</td></tr></tbody></table></div>
+</section></main></body></html>

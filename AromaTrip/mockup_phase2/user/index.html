@@ -1,0 +1,278 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>トップページ</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+  <header class="header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">
+        <img class="brand-logo" src="assets/images/LOGO.png" alt="Aroma Trip Nippon" />
+      </a>
+      <nav class="nav">
+        <a href="concept.html">コンセプト</a>
+        <a href="experience.html">体験詳細</a>
+        <a href="reservation.html">予約</a>
+      </nav>
+      <div style="display:flex;gap:10px;align-items:center">
+        <!-- <span class="lang">EN / JP</span> -->
+        <a class="btn" href="reservation.html">Book Experience</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="card" style="padding:0;overflow:hidden">
+          <div class="pro-slider hero-box" data-interval="5000" aria-label="トップページ ヒーロースライド">
+            <div class="pro-slider__slide is-active">
+              <img src="assets/images/index_hero_01.png" alt="トップページ ヒーロースライド 1" class="pro-slider__media" />
+            </div>
+            <div class="pro-slider__slide">
+              <img src="assets/images/index_hero_02.png" alt="トップページ ヒーロースライド 2" class="pro-slider__media" />
+            </div>
+            <div class="pro-slider__slide">
+              <img src="assets/images/index_hero_03.png" alt="トップページ ヒーロースライド 3" class="pro-slider__media" />
+            </div>
+
+            <button class="pro-slider__nav pro-slider__nav--prev" type="button" aria-label="前へ"></button>
+            <button class="pro-slider__nav pro-slider__nav--next" type="button" aria-label="次へ"></button>
+
+            <div class="pro-slider__dots">
+              <button class="pro-slider__dot is-active" type="button" aria-label="スライド1" aria-selected="true"></button>
+              <button class="pro-slider__dot" type="button" aria-label="スライド2" aria-selected="false"></button>
+              <button class="pro-slider__dot" type="button" aria-label="スライド3" aria-selected="false"></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-copy card">
+          <div class="kicker">STORY-FIRST LANDING / PHASE 1</div>
+          <h1>香りで、<BR>日本を巡る。</h1>
+          <p class="lead">旅の記憶を、香りとして持ち帰る。</p>
+          <p class="lead">地域素材の物語とともに、自分だけのフレグランスを作る東京の体験。</p>
+          <div class="actions">
+            <a class="btn" href="reservation.html">予約する</a>
+            <a class="btn secondary" href="concept.html">コンセプトを読む</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container grid-2">
+        <div class="card" style="padding:24px">
+          <h2>ブランドストーリー</h2>
+          <p class="sub">日本各地の天然素材をテーマに、地域ごとの香りを組み合わせて作る体験型サービス。</p>
+          <p class="text">単なる調香ではなく、日本を巡るストーリーを香りに宿し、観光の思い出を持ち帰る設計です。</p>
+          <div class="spacer"></div>
+          <a class="btn secondary" href="concept.html">詳しく見る</a>
+        </div>
+        <div class="media-stack">
+          <img src="assets/images/index_group_large2.png" alt="香りづくり体験に熱中する3〜4人のイメージ" class="large" />
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>日本素材の紹介</h2>
+        <p class="sub">体験で出会える香りの一部をご紹介します。</p>
+        <div class="grid-3">
+          <div class="material">
+            <img src="assets/images/material_hiba2.png" alt="ひばの素材イメージ" class="material-thumb" />
+            <span class="pill">能登ひば</span>
+            <h3>落ち着きと静けさ</h3>
+            <p class="text">森の空気感を思わせる、ひばの上品で深い香り。</p>
+          </div>
+          <div class="material">
+            <img src="assets/images/material_yuzu2.png" alt="ゆずの素材イメージ" class="material-thumb" />
+            <span class="pill">国造ゆず</span>
+            <h3>明るく爽やかな余韻</h3>
+            <p class="text">旅の高揚感と相性のよい、ゆずの軽やかな印象。</p>
+          </div>
+          <div class="material">
+            <img src="assets/images/material_hakka2.png" alt="薄荷の素材イメージ" class="material-thumb" />
+            <span class="pill">和薄荷</span>
+            <h3>やわらかく記憶に残る</h3>
+            <p class="text">清涼感のある和薄荷の香りが、心をリフレッシュさせます。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container grid-2">
+        <div class="card" style="padding:24px">
+          <h2>体験の流れ</h2>
+          <p class="sub">初めてでも安心できるステップ設計</p>
+          <div class="flow-list">
+            <div class="step">
+              <h3>1. 素材を知る</h3>
+              <p class="text">素材の背景と香りの違いを学ぶ。</p>
+            </div>
+            <div class="step">
+              <h3>2. 自分の香りを作る</h3>
+              <p class="text">香りを選び、レシピとして完成させる。</p>
+            </div>
+            <div class="step">
+              <h3>3. 思い出として持ち帰る</h3>
+              <p class="text">帰国後もECで同じ香りを再購入可能。</p>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="padding:24px">
+          <h2>レビュー / 体験の声</h2>
+          <div class="review-list">
+            <div class="review">
+              <h3>“体験そのものに意味があった”</h3>
+              <p class="text">日本文化の背景まで感じられて、ただのワークショップ以上だった。</p>
+            </div>
+            <div class="review">
+              <h3>“大人っぽくて落ち着いた雰囲気”</h3>
+              <p class="text">特別感があり、旅の記念として満足度が高かった。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="cta-band">
+          <h2 style="margin-top:0;color:white">東京で、自分だけの香りを作る</h2><BR>
+          <!-- <p style="margin:0 0 14px;color:rgba(255,255,255,.9)">世界観に共感したら、そのまま予約へ進める設計。</p> -->
+          <a class="btn secondary" href="reservation.html">予約ページへ進む</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container grid-2 access-section">
+        <div class="card access-info">
+          <div class="badge">Access</div>
+          <h2>JapaneseAroma 香作</h2>
+          <dl class="shop-info">
+            <div>
+              <dt>住所</dt>
+              <dd>東京都台東区浅草１</dd>
+            </div>
+            <div>
+              <dt>電話</dt>
+              <dd><a href="tel:03-000-0000">03-000-0000</a></dd>
+            </div>
+          </dl>
+        </div>
+        <div class="card access-map">
+          <div class="shop-map">
+            <iframe
+              title="JapaneseAroma 香作の地図"
+              src="https://maps.google.com/maps?q=%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%8F%B0%E6%9D%B1%E5%8C%BA%E6%B5%85%E8%8D%89%EF%BC%91&output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+<section class="section" aria-label="Phase2追加導線">
+  <div class="container">
+    <div class="cta-band">
+      <span class="kicker">PHASE 2 NAVIGATION</span>
+      <h2>Phase2追加導線</h2>
+      <p>追加画面を含めた画面遷移確認用の導線です。</p>
+      <div class="actions">
+        <a class="btn secondary" href="experience-list.html">体験一覧</a>
+        <a class="btn secondary" href="gallery.html">ギャラリー</a>
+        <a class="btn secondary" href="shop.html">ショップ</a>
+        <a class="btn secondary" href="login.html">マイページログイン</a>
+        <a class="btn secondary" href="access.html">アクセス</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+    <div class="container footer-grid">
+      <div><strong>Concept / About</strong><br>和香巡りとは・素材のこだわり・地域ストーリー</div>
+      <div><a href="experience.html">Experience</a><br><a href="concept.html">Concept</a><br><a
+          href="reservation.html">Booking</a></div>
+      <div>Instagram<br>Contact<br>Booking</div>
+    </div>
+  </footer>
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const sliders = document.querySelectorAll('.pro-slider');
+
+      sliders.forEach((slider) => {
+        const slides = Array.from(slider.querySelectorAll('.pro-slider__slide'));
+        const prev = slider.querySelector('.pro-slider__nav--prev');
+        const next = slider.querySelector('.pro-slider__nav--next');
+        const dots = Array.from(slider.querySelectorAll('.pro-slider__dot'));
+        const intervalMs = Number(slider.dataset.interval || 5000);
+        let index = 0;
+        let timer = null;
+
+        function render(newIndex) {
+          index = (newIndex + slides.length) % slides.length;
+          slides.forEach((slide, i) => slide.classList.toggle('is-active', i === index));
+          dots.forEach((dot, i) => {
+            dot.classList.toggle('is-active', i === index);
+            dot.setAttribute('aria-selected', i === index ? 'true' : 'false');
+          });
+        }
+
+        function start() {
+          stop();
+          timer = window.setInterval(() => render(index + 1), intervalMs);
+        }
+
+        function stop() {
+          if (timer) window.clearInterval(timer);
+          timer = null;
+        }
+
+        if (slides.length <= 1) return;
+
+        prev?.addEventListener('click', () => {
+          render(index - 1);
+          start();
+        });
+
+        next?.addEventListener('click', () => {
+          render(index + 1);
+          start();
+        });
+
+        dots.forEach((dot, i) => {
+          dot.addEventListener('click', () => {
+            render(i);
+            start();
+          });
+        });
+
+        slider.addEventListener('mouseenter', stop);
+        slider.addEventListener('mouseleave', start);
+        slider.addEventListener('focusin', stop);
+        slider.addEventListener('focusout', start);
+
+        render(0);
+        start();
+      });
+    });
+  </script>
+
+  <script src="js/main.js" defer></script>
+</body>
+
+</html>

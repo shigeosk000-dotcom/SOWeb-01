@@ -450,6 +450,47 @@ a:hover {
   background: var(--gray-100);
 }
 
+#sec3 .fill-block {
+  overflow: hidden;
+}
+
+#sec3 .doc-table {
+  table-layout: fixed;
+}
+
+#sec3 .doc-table th,
+#sec3 .doc-table td {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  line-break: strict;
+  padding-inline: 12px;
+}
+
+#sec3 .doc-table th:nth-child(1),
+#sec3 .doc-table td:nth-child(1) {
+  width: 18%;
+}
+
+#sec3 .doc-table th:nth-child(2),
+#sec3 .doc-table td:nth-child(2) {
+  width: 24%;
+}
+
+#sec3 .doc-table th:nth-child(3),
+#sec3 .doc-table td:nth-child(3) {
+  width: 18%;
+}
+
+#sec3 .doc-table th:nth-child(4),
+#sec3 .doc-table td:nth-child(4) {
+  width: 11%;
+}
+
+#sec3 .doc-table th:nth-child(5),
+#sec3 .doc-table td:nth-child(5) {
+  width: 29%;
+}
+
 /* template row */
 .doc-table .template-row td {
   color: var(--text-muted);
@@ -848,4 +889,85 @@ a:hover {
   .doc-header {
     border-bottom: 2px solid #000;
   }
+}
+
+.spec-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #d9d9d9;
+}
+
+.spec-table th,
+.spec-table td {
+  border: 1px solid #e5e5e5;
+  padding: 8px 10px;
+  vertical-align: top;
+}
+
+.spec-table th {
+  background-color: #f7f7f7;
+  font-weight: 600;
+}
+
+.spec-table pre {
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+#sec2 .fill-block {
+  overflow: hidden;
+}
+
+#sec2 h3 {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+#sec2 .spec-table {
+  table-layout: fixed;
+  margin-bottom: 24px;
+}
+
+#sec2 .spec-table th,
+#sec2 .spec-table td {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  line-break: strict;
+  padding-inline: 8px;
+}
+
+#sec2 .spec-table th:nth-child(1),
+#sec2 .spec-table td:nth-child(1) {
+  width: 16%;
+}
+
+#sec2 .spec-table th:nth-child(2),
+#sec2 .spec-table td:nth-child(2) {
+  width: 14%;
+}
+
+#sec2 .spec-table th:nth-child(3),
+#sec2 .spec-table td:nth-child(3) {
+  width: 15%;
+}
+
+#sec2 .spec-table th:nth-child(4),
+#sec2 .spec-table td:nth-child(4) {
+  width: 9%;
+}
+
+#sec2 .spec-table th:nth-child(5),
+#sec2 .spec-table td:nth-child(5) {
+  width: 14%;
+}
+
+#sec2 .spec-table th:nth-child(6),
+#sec2 .spec-table td:nth-child(6) {
+  width: 12%;
+}
+
+#sec2 .spec-table th:nth-child(7),
+#sec2 .spec-table td:nth-child(7) {
+  width: 20%;
 }
