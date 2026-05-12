@@ -1,0 +1,8 @@
+<!DOCTYPE html><html lang="ja" xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>香りレシピフォーム</title><link rel="stylesheet" th:href="@{/css/app.css}"></head>
+<body class="admin-body"><div class="admin-layout"><div th:replace="~{management/fragments :: sidebar}"></div><main class="admin-main"><div class="page-head"><h1 th:text="${recipe.id == null ? '香りレシピ登録' : '香りレシピ編集'}"></h1><a class="btn" th:href="@{/management/recipes}">一覧へ戻る</a></div>
+<form class="panel" th:action="${recipe.id == null} ? @{/management/recipes} : @{/management/recipes/{id}(id=${recipe.id})}" method="post" th:object="${recipe}"><div class="form-grid">
+<label>顧客<select name="customerId" required><option th:each="c : ${customers}" th:value="${c.id}" th:selected="${recipe.customer != null and recipe.customer.id == c.id}" th:text="${c.name}"></option></select></label>
+<label>レシピ名<input th:field="*{recipeName}" required></label><label class="full">コンセプト<input th:field="*{concept}"></label>
+<label th:if="${recipe.id == null}">素材<select name="materialId"><option th:each="i : ${items}" th:value="${i.id}" th:text="${i.itemName}"></option></select></label><label th:if="${recipe.id == null}">配合率<input name="blendRatio" type="number" step="0.1" value="100"></label>
+<label class="full">メモ<textarea th:field="*{memo}"></textarea></label></div><button class="primary">保存</button></form>
+</main></div></body></html>

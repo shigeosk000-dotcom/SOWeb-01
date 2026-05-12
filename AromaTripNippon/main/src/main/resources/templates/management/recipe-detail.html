@@ -1,0 +1,6 @@
+<!DOCTYPE html><html lang="ja" xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>香りレシピ詳細</title><link rel="stylesheet" th:href="@{/css/app.css}"></head>
+<body class="admin-body"><div class="admin-layout"><div th:replace="~{management/fragments :: sidebar}"></div><main class="admin-main"><div class="page-head"><h1>香りレシピ詳細</h1><div class="actions"><a class="btn" th:href="@{/management/recipes}">一覧</a><a class="btn primary" th:href="@{/management/recipes/{id}/edit(id=${recipe.id})}">編集</a></div></div>
+<section class="panel"><table class="table"><tr><th>ID</th><td th:text="${recipe.id}"></td></tr><tr><th>レシピ名</th><td th:text="${recipe.recipeName}"></td></tr><tr><th>顧客</th><td th:text="${recipe.customer.name}"></td></tr><tr><th>コンセプト</th><td th:text="${recipe.concept}"></td></tr></table>
+<h2>素材</h2><table class="table"><tr><th>素材</th><th>配合率</th></tr><tr th:each="m : ${recipe.materials}"><td th:text="${m.inventoryItem.itemName}"></td><td th:text="${m.blendRatio}"></td></tr></table>
+<form th:action="@{/management/recipes/{id}/delete(id=${recipe.id})}" method="post"><button class="danger">論理削除</button></form></section>
+</main></div></body></html>

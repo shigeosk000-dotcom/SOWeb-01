@@ -1,0 +1,5 @@
+<!DOCTYPE html><html lang="ja" xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>香りレシピ管理</title><link rel="stylesheet" th:href="@{/css/app.css}"></head>
+<body class="admin-body"><div class="admin-layout"><div th:replace="~{management/fragments :: sidebar}"></div><main class="admin-main"><div class="page-head"><h1>香りレシピ管理</h1><a class="btn primary" th:href="@{/management/recipes/new}">新規登録</a></div>
+<form class="panel" th:action="@{/management/recipes}" method="get"><input name="q" th:value="${q}" placeholder="レシピ名で検索"></form>
+<table class="table"><tr><th>ID</th><th>レシピ名</th><th>顧客</th><th>操作</th></tr><tr th:each="r : ${recipes}"><td th:text="${r.id}"></td><td th:text="${r.recipeName}"></td><td th:text="${r.customer.name}"></td><td><a th:href="@{/management/recipes/{id}(id=${r.id})}">詳細</a> / <a th:href="@{/management/recipes/{id}/edit(id=${r.id})}">編集</a></td></tr></table>
+</main></div></body></html>

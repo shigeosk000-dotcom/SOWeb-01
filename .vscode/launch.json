@@ -1,0 +1,20 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "AromaTripNippon Phase1",
+      "request": "launch",
+      "mainClass": "com.aromatripnippon.AromaTripNipponApplication",
+      "projectName": "aromatripnippon-phase1",
+      "cwd": "${workspaceFolder}/AromaTripNippon/main"
+    },
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Open AromaTripNippon",
+      "url": "http://localhost:8080",
+      "webRoot": "${workspaceFolder}/AromaTripNippon/main"
+    }
+  ]
+}

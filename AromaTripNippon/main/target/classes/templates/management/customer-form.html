@@ -1,0 +1,6 @@
+<!DOCTYPE html><html lang="ja" xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>顧客フォーム</title><link rel="stylesheet" th:href="@{/css/app.css}"></head>
+<body class="admin-body"><div class="admin-layout"><div th:replace="~{management/fragments :: sidebar}"></div><main class="admin-main">
+<div class="page-head"><h1 th:text="${customer.id == null ? '顧客登録' : '顧客編集'}"></h1><a class="btn" th:href="@{/management/customers}">一覧へ戻る</a></div>
+<form class="panel" th:action="${customer.id == null} ? @{/management/customers} : @{/management/customers/{id}(id=${customer.id})}" method="post" th:object="${customer}"><div class="form-grid">
+<label>氏名<input th:field="*{name}" required></label><label>メール<input type="email" th:field="*{email}" required></label><label>電話<input th:field="*{phone}"></label><label>国籍<input th:field="*{nationality}"></label><label>希望言語<input th:field="*{preferredLanguage}"></label><label>利用目的<input th:field="*{purpose}"></label><label class="full">備考<textarea th:field="*{notes}"></textarea></label></div><button class="primary">保存</button></form>
+</main></div></body></html>

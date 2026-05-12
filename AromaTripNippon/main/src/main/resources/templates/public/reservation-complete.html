@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>予約完了</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a class="brand" th:href="@{/}"><img class="brand-logo" th:src="@{/assets/images/LOGO.png}" alt="Aroma Trip Nippon" /></a>
+      <nav class="nav"><a th:href="@{/concept}">コンセプト</a><a th:href="@{/experience}">体験詳細</a><a th:href="@{/reservation}">予約</a></nav>
+      <div style="display:flex;gap:10px;align-items:center"><a class="btn" th:href="@{/reservation}">Book Experience</a></div>
+    </div>
+  </header>
+  <main class="container">
+    <div class="breadcrumbs"><a th:href="@{/}">トップ</a> / <a th:href="@{/reservation}">予約</a> / <span>予約完了</span></div>
+    <section class="hero">
+      <div class="card complete-card">
+        <div class="badge">Reservation Complete</div>
+        <h1>ご予約ありがとうございました</h1>
+        <p class="lead">予約内容を登録しました。予約当日は、受付でお名前をお伝えください。</p>
+        <div class="grid-2" style="text-align:left;margin:24px 0">
+          <div class="info-card">
+            <h3>予約内容</h3>
+            <p class="text" th:if="${reservation != null}">
+              予約ID：<span th:text="${reservation.id}"></span><br>
+              体験名：<span th:text="${reservation.experienceProgram.name}"></span><br>
+              日時：<span th:text="${reservation.visitDate}"></span> <span th:text="${reservation.timeSlot}"></span><br>
+              人数：<span th:text="${reservation.guestCount}"></span>名<br>
+              氏名：<span th:text="${reservation.customer.name}"></span>
+            </p>
+            <p class="text" th:if="${reservation == null}">予約情報を表示できませんでした。</p>
+          </div>
+          <div class="info-card">
+            <h3>来店場所</h3>
+            <p class="text shop-name">JapaneseAroma 香作</p>
+            <dl class="shop-info"><div><dt>住所</dt><dd>東京都台東区浅草１</dd></div><div><dt>電話</dt><dd><a href="tel:03-000-0000">03-000-0000</a></dd></div></dl>
+            <div class="shop-map"><iframe title="JapaneseAroma 香作の地図" src="https://maps.google.com/maps?q=%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%8F%B0%E6%9D%B1%E5%8C%BA%E6%B5%85%E8%8D%89%EF%BC%91&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+          </div>
+        </div>
+        <div class="notice" style="text-align:left;margin-bottom:20px">英語案内も可能です。予約完了メール送信はPhase1では行いません。</div>
+        <div class="actions" style="justify-content:center"><a class="btn" th:href="@{/}">トップへ戻る</a><a class="btn secondary" th:href="@{/concept}">コンセプトを見る</a></div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer"><div class="container footer-grid"><div><strong>Complete</strong></div><div><a th:href="@{/}">Top</a></div><div><a th:href="@{/experience}">Experience</a></div></div></footer>
+</body>
+</html>

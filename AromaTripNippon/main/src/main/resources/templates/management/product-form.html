@@ -1,0 +1,7 @@
+<!DOCTYPE html><html lang="ja" xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>商品フォーム</title><link rel="stylesheet" th:href="@{/css/app.css}"></head>
+<body class="admin-body"><div class="admin-layout"><div th:replace="~{management/fragments :: sidebar}"></div><main class="admin-main"><div class="page-head"><h1 th:text="${product.id == null ? '商品登録' : '商品編集'}"></h1><a class="btn" th:href="@{/management/products}">一覧へ戻る</a></div>
+<form class="panel" th:action="${product.id == null} ? @{/management/products} : @{/management/products/{id}(id=${product.id})}" method="post" th:object="${product}"><div class="form-grid">
+<label>在庫品目<select name="inventoryItemId" required><option th:each="i : ${items}" th:value="${i.id}" th:selected="${product.inventoryItem != null and product.inventoryItem.id == i.id}" th:text="${i.itemName}"></option></select></label>
+<label>商品名<input th:field="*{productName}" required></label><label>カテゴリ<input th:field="*{category}" required></label><label>価格<input type="number" step="1" th:field="*{price}" required></label>
+<label>画像パス<input th:field="*{imagePath}" placeholder="/assets/images/material_yuzu.png"></label><label>公開<input type="checkbox" th:field="*{published}"></label><label class="full">説明<textarea th:field="*{description}"></textarea></label></div><button class="primary">保存</button></form>
+</main></div></body></html>

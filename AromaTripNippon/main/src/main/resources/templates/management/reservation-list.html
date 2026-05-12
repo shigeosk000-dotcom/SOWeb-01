@@ -1,0 +1,6 @@
+<!DOCTYPE html><html lang="ja" xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>予約管理</title><link rel="stylesheet" th:href="@{/css/app.css}"></head>
+<body class="admin-body"><div class="admin-layout"><div th:replace="~{management/fragments :: sidebar}"></div><main class="admin-main">
+<div class="page-head"><h1>予約管理</h1><a class="btn primary" th:href="@{/management/reservations/new}">新規登録</a></div>
+<table class="table"><tr><th>ID</th><th>日時</th><th>顧客</th><th>人数</th><th>状況</th><th>操作</th></tr>
+<tr th:each="r : ${reservations}"><td th:text="${r.id}"></td><td><span th:text="${r.visitDate}"></span> <span th:text="${r.timeSlot}"></span></td><td th:text="${r.customer.name}"></td><td th:text="${r.guestCount}"></td><td th:text="${r.status}"></td><td><a th:href="@{/management/reservations/{id}(id=${r.id})}">詳細</a> / <a th:href="@{/management/reservations/{id}/edit(id=${r.id})}">編集</a></td></tr>
+</table></main></div></body></html>
