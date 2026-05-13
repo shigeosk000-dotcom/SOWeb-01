@@ -6,10 +6,14 @@ import com.aromatripnippon.entity.Reservation;
 import com.aromatripnippon.repository.CustomerRepository;
 import com.aromatripnippon.repository.ExperienceProgramRepository;
 import com.aromatripnippon.repository.ReservationRepository;
+import jakarta.validation.Valid;
+import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.annotation.Validated;
 
 @Service
+@Validated
 public class ReservationService {
   private final CustomerRepository customers;
   private final ExperienceProgramRepository programs;
@@ -22,8 +26,16 @@ public class ReservationService {
     this.reservations = reservations;
   }
 
+  public List<Reservation> findActiveReservations() {
+    return reservations.findByDeletedAtIsNullOrderByVisitDateDescTimeSlotAsc();
+  }
+
+  public Reservation findActive(Long id) {
+    return reservations.findByIdAndDeletedAtIsNull(id).orElseThrow();
+  }
+
   @Transactional
-  public Reservation createReservation(Reservation reservation, Customer customer) {
+  public Reservation createReservation(Reservation reservation, @Valid Customer customer) {
     Customer savedCustomer = customers.save(customer);
     ExperienceProgram program = programs.findFirstByDeletedAtIsNullAndActiveTrueOrderById()
         .orElseThrow(() -> new IllegalStateException("Active experience program is not configured."));
@@ -31,5 +43,17 @@ public class ReservationService {
     reservation.setExperienceProgram(program);
     reservation.setStatus("RESERVED");
     return reservations.save(reservation);
+  }
+
+  @Transactional
+  public Reservation save(@Valid Reservation reservation) {
+    return reservations.save(reservation);
+  }
+
+  @Transactional
+  public void softDelete(Long id) {
+    Reservation reservation = findActive(id);
+    reservation.softDelete();
+    reservations.save(reservation);
   }
 }

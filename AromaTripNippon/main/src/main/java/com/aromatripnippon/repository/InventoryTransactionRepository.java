@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface InventoryTransactionRepository extends JpaRepository<InventoryTransaction, Long> {
   List<InventoryTransaction> findByDeletedAtIsNullOrderByIdDesc();
+  List<InventoryTransaction> findByDeletedAtIsNullAndInventoryItemIdOrderByTransactionDateDescIdDesc(Long inventoryItemId);
 }

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 
 <head>
@@ -15,22 +15,33 @@
       <a class="brand" href="index.html">
         <img class="brand-logo" src="assets/images/LOGO.png" alt="Aroma Trip Nippon" />
       </a>
-      <nav class="nav">
+      <nav class="nav" aria-label="グローバルナビゲーション">
         <a href="concept.html">コンセプト</a>
         <a href="experience.html">体験詳細</a>
         <a href="reservation.html">予約</a>
       </nav>
-      <div style="display:flex;gap:10px;align-items:center">
+      <div class="header-actions">
         <!-- <span class="lang">EN / JP</span> -->
-        <a class="btn" href="reservation.html">Book Experience</a>
+        <a class="btn header-book" href="reservation.html">Book Experience</a>
+        <button class="menu-toggle" type="button" aria-label="メニューを開く" aria-controls="mobile-nav" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
+      <nav class="mobile-nav" id="mobile-nav" aria-label="モバイルナビゲーション" hidden>
+        <a href="concept.html">コンセプト</a>
+        <a href="experience.html">体験詳細</a>
+        <a href="reservation.html">予約</a>
+        <a class="btn" href="reservation.html">Book Experience</a>
+      </nav>
     </div>
   </header>
 
   <main>
     <section class="hero">
       <div class="container hero-grid">
-        <div class="card" style="padding:0;overflow:hidden">
+        <div class="card card--flush">
           <div class="pro-slider hero-box" data-interval="5000" aria-label="トップページ ヒーロースライド">
             <div class="pro-slider__slide is-active">
               <img src="assets/images/index_hero_01.png" alt="トップページ ヒーロースライド 1" class="pro-slider__media" />
@@ -68,7 +79,7 @@
 
     <section class="section">
       <div class="container grid-2">
-        <div class="card" style="padding:24px">
+        <div class="card card--pad-md">
           <h2>ブランドストーリー</h2>
           <p class="sub">日本各地の天然素材をテーマに、地域ごとの香りを組み合わせて作る体験型サービス。</p>
           <p class="text">単なる調香ではなく、日本を巡るストーリーを香りに宿し、観光の思い出を持ち帰る設計です。</p>
@@ -110,7 +121,7 @@
 
     <section class="section">
       <div class="container grid-2">
-        <div class="card" style="padding:24px">
+        <div class="card card--pad-md">
           <h2>体験の流れ</h2>
           <p class="sub">初めてでも安心できるステップ設計</p>
           <div class="flow-list">
@@ -128,7 +139,7 @@
             </div>
           </div>
         </div>
-        <div class="card" style="padding:24px">
+        <div class="card card--pad-md">
           <h2>レビュー / 体験の声</h2>
           <div class="review-list">
             <div class="review">
@@ -147,8 +158,8 @@
     <section class="section">
       <div class="container">
         <div class="cta-band">
-          <h2 style="margin-top:0;color:white">東京で、自分だけの香りを作る</h2><BR>
-          <!-- <p style="margin:0 0 14px;color:rgba(255,255,255,.9)">世界観に共感したら、そのまま予約へ進める設計。</p> -->
+          <h2 class="cta-band__title">東京で、自分だけの香りを作る</h2><BR>
+          <!-- <p class="cta-band__text">世界観に共感したら、そのまま予約へ進める設計。</p> -->
           <a class="btn secondary" href="reservation.html">予約ページへ進む</a>
         </div>
       </div>
@@ -190,69 +201,6 @@
       <div>Instagram<br>Contact<br>Booking</div>
     </div>
   </footer>
-
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const sliders = document.querySelectorAll('.pro-slider');
-
-      sliders.forEach((slider) => {
-        const slides = Array.from(slider.querySelectorAll('.pro-slider__slide'));
-        const prev = slider.querySelector('.pro-slider__nav--prev');
-        const next = slider.querySelector('.pro-slider__nav--next');
-        const dots = Array.from(slider.querySelectorAll('.pro-slider__dot'));
-        const intervalMs = Number(slider.dataset.interval || 5000);
-        let index = 0;
-        let timer = null;
-
-        function render(newIndex) {
-          index = (newIndex + slides.length) % slides.length;
-          slides.forEach((slide, i) => slide.classList.toggle('is-active', i === index));
-          dots.forEach((dot, i) => {
-            dot.classList.toggle('is-active', i === index);
-            dot.setAttribute('aria-selected', i === index ? 'true' : 'false');
-          });
-        }
-
-        function start() {
-          stop();
-          timer = window.setInterval(() => render(index + 1), intervalMs);
-        }
-
-        function stop() {
-          if (timer) window.clearInterval(timer);
-          timer = null;
-        }
-
-        if (slides.length <= 1) return;
-
-        prev?.addEventListener('click', () => {
-          render(index - 1);
-          start();
-        });
-
-        next?.addEventListener('click', () => {
-          render(index + 1);
-          start();
-        });
-
-        dots.forEach((dot, i) => {
-          dot.addEventListener('click', () => {
-            render(i);
-            start();
-          });
-        });
-
-        slider.addEventListener('mouseenter', stop);
-        slider.addEventListener('mouseleave', start);
-        slider.addEventListener('focusin', stop);
-        slider.addEventListener('focusout', start);
-
-        render(0);
-        start();
-      });
-    });
-  </script>
 
   <script src="js/main.js" defer></script>
 </body>

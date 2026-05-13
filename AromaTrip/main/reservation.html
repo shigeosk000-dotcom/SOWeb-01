@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 
 <head>
@@ -15,15 +15,26 @@
       <a class="brand" href="index.html">
         <img class="brand-logo" src="assets/images/LOGO.png" alt="Aroma Trip Nippon" />
       </a>
-      <nav class="nav">
+      <nav class="nav" aria-label="グローバルナビゲーション">
         <a href="concept.html">コンセプト</a>
         <a href="experience.html">体験詳細</a>
         <a href="reservation.html">予約</a>
       </nav>
-      <div style="display:flex;gap:10px;align-items:center">
+      <div class="header-actions">
         <!-- <span class="lang">EN / JP</span> -->
-        <a class="btn" href="reservation.html">Book Experience</a>
+        <a class="btn header-book" href="reservation.html">Book Experience</a>
+        <button class="menu-toggle" type="button" aria-label="メニューを開く" aria-controls="mobile-nav" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
+      <nav class="mobile-nav" id="mobile-nav" aria-label="モバイルナビゲーション" hidden>
+        <a href="concept.html">コンセプト</a>
+        <a href="experience.html">体験詳細</a>
+        <a href="reservation.html">予約</a>
+        <a class="btn" href="reservation.html">Book Experience</a>
+      </nav>
     </div>
   </header>
 
@@ -66,11 +77,11 @@
         </div>
         <div class="card form-card">
           <h2>予約内容</h2>
-          <div class="review" style="margin-bottom:16px"><span class="pill">プラン</span>
+          <div class="review review--spaced"><span class="pill">プラン</span>
             <h3>香りづくり体験</h3>
             <p class="text">約90分 / ¥5,500〜 / EN・JP対応</p>
           </div>
-          <div class="review" style="margin-bottom:16px"><span class="pill">含まれる内容</span>
+          <div class="review review--spaced"><span class="pill">含まれる内容</span>
             <p class="text">素材説明、調合体験、完成品持ち帰り、再購入用レシピ保存</p>
           </div>
           <div class="review"><span class="pill">注意事項</span>

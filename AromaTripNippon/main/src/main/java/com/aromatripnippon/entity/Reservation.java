@@ -1,7 +1,9 @@
 package com.aromatripnippon.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.FutureOrPresent;
@@ -15,19 +17,30 @@ import java.time.LocalDate;
 @Table(name = "reservations")
 public class Reservation extends BaseEntity {
   @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "customer_id", nullable = false)
+  @NotNull
   private Customer customer;
   @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "experience_program_id", nullable = false)
+  @NotNull
   private ExperienceProgram experienceProgram;
   @FutureOrPresent
   @NotNull
+  @Column(name = "reservation_date", nullable = false)
   private LocalDate visitDate;
   @NotBlank
+  @Column(name = "reservation_time", nullable = false)
   private String timeSlot;
   @Min(1)
   @Max(4)
+  @NotNull
+  @Column(name = "number_of_people", nullable = false)
   private Integer guestCount;
+  @Column(name = "preferred_language")
   private String preferredLanguage = "English";
+  @Column(name = "request_note", length = 1000)
   private String requestNote;
+  @NotBlank
   private String status = "RESERVED";
 
   public Customer getCustomer() { return customer; }

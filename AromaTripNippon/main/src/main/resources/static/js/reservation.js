@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.querySelector("[data-reservation-form]");
   if (!form) return;
+
   form.addEventListener("submit", (event) => {
     const data = new FormData(form);
     const lines = [
@@ -14,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
       "",
       "登録してよろしいですか？"
     ];
+
     if (!window.confirm(lines.join("\n"))) {
       event.preventDefault();
     }

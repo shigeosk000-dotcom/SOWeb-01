@@ -1,7 +1,9 @@
 package com.aromatripnippon.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -9,10 +11,15 @@ import jakarta.persistence.Table;
 @Table(name = "audit_logs")
 public class AuditLog extends BaseEntity {
   @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "admin_user_id")
   private AdminUser adminUser;
+  @Column(name = "action_type")
   private String actionType;
+  @Column(name = "target_table")
   private String targetTable;
+  @Column(name = "target_id")
   private Long targetId;
+  @Column(name = "description", length = 1000)
   private String detail;
 
   public AdminUser getAdminUser() { return adminUser; }

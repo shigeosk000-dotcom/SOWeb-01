@@ -1,8 +1,11 @@
 package com.aromatripnippon.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import java.math.BigDecimal;
 
 @Entity
@@ -10,10 +13,18 @@ import java.math.BigDecimal;
 public class ExperienceProgram extends BaseEntity {
   @NotBlank
   private String name;
+  @Column(length = 1000)
   private String description;
+  @NotNull
+  @Positive
+  @Column(name = "duration_minutes")
   private Integer durationMinutes;
+  @NotNull
+  @Positive
   private BigDecimal price;
+  @Column(name = "material_summary", length = 1000)
   private String materialsSummary;
+  @Column(name = "is_active")
   private Boolean active = true;
 
   public String getName() { return name; }

@@ -1,5 +1,6 @@
 package com.aromatripnippon.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
@@ -10,13 +11,15 @@ import jakarta.validation.constraints.NotBlank;
 public class Customer extends BaseEntity {
   @NotBlank
   private String name;
+  private String nationality;
   @Email
   @NotBlank
   private String email;
   private String phone;
-  private String nationality;
+  @Column(name = "preferred_language")
   private String preferredLanguage = "English";
   private String purpose;
+  @Column(name = "note", length = 1000)
   private String notes;
 
   public String getName() { return name; }

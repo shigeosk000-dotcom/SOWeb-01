@@ -5,5 +5,7 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ExperienceProgramRepository extends JpaRepository<ExperienceProgram, Long> {
+  Optional<ExperienceProgram> findByIdAndDeletedAtIsNull(Long id);
+  java.util.List<ExperienceProgram> findByDeletedAtIsNullOrderById();
   Optional<ExperienceProgram> findFirstByDeletedAtIsNullAndActiveTrueOrderById();
 }
