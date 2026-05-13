@@ -1,8 +1,76 @@
-<!DOCTYPE html><html lang="ja" xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>香りレシピフォーム</title><link rel="stylesheet" th:href="@{/css/app.css}"></head>
-<body class="admin-body"><div class="admin-layout"><div th:replace="~{management/fragments :: sidebar}"></div><main class="admin-main"><div class="page-head"><h1 th:text="${recipe.id == null ? '香りレシピ登録' : '香りレシピ編集'}"></h1><a class="btn" th:href="@{/management/recipes}">一覧へ戻る</a></div>
-<form class="panel" th:action="${recipe.id == null} ? @{/management/recipes} : @{/management/recipes/{id}(id=${recipe.id})}" method="post" th:object="${recipe}"><div class="form-grid">
-<label>顧客<select name="customerId" required><option th:each="c : ${customers}" th:value="${c.id}" th:selected="${recipe.customer != null and recipe.customer.id == c.id}" th:text="${c.name}"></option></select></label>
-<label>レシピ名<input th:field="*{recipeName}" required></label><label class="full">コンセプト<input th:field="*{concept}"></label>
-<label th:if="${recipe.id == null}">素材<select name="materialId"><option th:each="i : ${items}" th:value="${i.id}" th:text="${i.itemName}"></option></select></label><label th:if="${recipe.id == null}">配合率<input name="blendRatio" type="number" step="0.1" value="100"></label>
-<label class="full">メモ<textarea th:field="*{memo}"></textarea></label></div><button class="primary">保存</button></form>
-</main></div></body></html>
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>香りレシピフォーム</title>
+  <link rel="stylesheet" th:href="@{/css/app.css}">
+</head>
+<body class="admin-body">
+  <div class="admin-layout">
+    <div th:replace="~{management/fragments :: sidebar}"></div>
+    <main class="admin-main">
+      <div class="page-head">
+        <h1 th:text="${recipe.id == null ? '香りレシピ登録' : '香りレシピ編集'}"></h1>
+        <a class="btn" th:href="@{/management/recipes}">一覧へ戻る</a>
+      </div>
+      <p th:if="${errorMessage}" class="errors" th:text="${errorMessage}"></p>
+
+      <form class="panel"
+            th:action="${recipe.id == null} ? @{/management/recipes} : @{/management/recipes/{id}(id=${recipe.id})}"
+            method="post"
+            th:object="${recipe}">
+        <div class="form-grid">
+          <label>
+            顧客
+            <select name="customerId" required>
+              <option th:each="c : ${customers}"
+                      th:value="${c.id}"
+                      th:selected="${recipe.customer != null and recipe.customer.id == c.id}"
+                      th:text="${c.name}"></option>
+            </select>
+          </label>
+
+          <label>
+            レシピ名
+            <input th:field="*{recipeName}" required>
+          </label>
+
+          <label class="full">
+            コンセプト
+            <input th:field="*{concept}">
+          </label>
+
+          <th:block th:each="idx : ${#numbers.sequence(1, 5)}">
+            <label>
+              <span th:text="|素材 ${idx}|"></span>
+              <select name="materialId" th:required="${idx == 1}">
+                <option value="" th:text="${idx == 1 ? '選択してください' : '未選択'}"></option>
+                <option th:each="i : ${items}"
+                        th:value="${i.id}"
+                        th:selected="${(materialIds != null and #lists.size(materialIds) >= idx and materialIds[idx - 1] != null and materialIds[idx - 1] == i.id) or (materialIds == null and recipe.materials != null and recipe.materials.size() >= idx and recipe.materials[idx - 1].inventoryItem.id == i.id)}"
+                        th:text="${i.itemName}"></option>
+              </select>
+            </label>
+            <label>
+              <span th:text="|配合率 ${idx}|"></span>
+              <input name="blendRatio"
+                     type="number"
+                     step="5"
+                     min="5"
+                     th:value="${materialIds != null ? (#lists.size(blendRatios) >= idx ? blendRatios[idx - 1] : '') : (recipe.materials != null and recipe.materials.size() >= idx ? recipe.materials[idx - 1].blendRatio : (idx == 1 ? '100' : ''))}"
+                     th:required="${idx == 1}">
+            </label>
+          </th:block>
+
+          <label class="full">
+            メモ
+            <textarea th:field="*{memo}"></textarea>
+          </label>
+        </div>
+        <button class="primary">保存</button>
+      </form>
+    </main>
+  </div>
+</body>
+</html>

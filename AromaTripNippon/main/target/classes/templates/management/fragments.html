@@ -3,6 +3,7 @@
 <body>
 <aside class="sidebar" th:fragment="sidebar">
   <div class="brand">AromaTripNippon</div>
+  <p class="errors" th:if="${errorMessage}" th:text="${errorMessage}"></p>
   <a th:href="@{/management/dashboard}">ダッシュボード</a>
   <a th:href="@{/management/reservations}">予約管理</a>
   <a th:href="@{/management/customers}">顧客管理</a>
@@ -10,7 +11,9 @@
   <a th:href="@{/management/products}">商品管理</a>
   <a th:href="@{/management/inventory}">在庫管理</a>
   <a th:href="@{/management/account}">アカウント設定</a>
-  <form th:action="@{/management/logout}" method="post"><button type="submit">ログアウト</button></form>
+  <form th:action="@{/management/logout}" method="post">
+    <button type="submit">ログアウト</button>
+  </form>
 </aside>
 </body>
 </html>

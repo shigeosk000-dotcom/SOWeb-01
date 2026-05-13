@@ -70,7 +70,14 @@ public class PublicController {
     reservation.setGuestCount(reservationRequest.getGuestCount());
     reservation.setPreferredLanguage(reservationRequest.getPreferredLanguage());
     reservation.setRequestNote(reservationRequest.getRequestNote());
-    Reservation saved = reservationService.createReservation(reservation, customer);
+    Reservation saved;
+    try {
+      saved = reservationService.createReservation(reservation, customer);
+    } catch (IllegalArgumentException ex) {
+      model.addAttribute("program", programs.findFirstByDeletedAtIsNullAndActiveTrueOrderById().orElse(null));
+      model.addAttribute("errorMessage", ex.getMessage());
+      return "public/reservation";
+    }
     redirectAttributes.addAttribute("id", saved.getId());
     return "redirect:/reservation/complete/{id}";
   }

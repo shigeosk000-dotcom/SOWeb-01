@@ -23,6 +23,7 @@
           <div class="kicker">BOOKING</div>
           <h1>予約フォーム</h1>
           <p class="lead">日程と人数を選択し、来店に必要な情報を入力してください。</p>
+          <p class="notice" th:if="${errorMessage}" th:text="${errorMessage}"></p>
           <form th:action="@{/reservation}" th:object="${reservationRequest}" method="post" data-reservation-form>
             <div class="field"><label for="date">日程</label><input id="date" type="date" th:field="*{visitDate}" required /></div>
             <div class="field"><label for="time">時間</label><select id="time" th:field="*{timeSlot}" required><option value="10:00">10:00</option><option value="13:00">13:00</option><option value="16:00">16:00</option></select></div>

@@ -18,8 +18,11 @@ import com.aromatripnippon.repository.InventoryTransactionRepository;
 import com.aromatripnippon.repository.ProductRepository;
 import com.aromatripnippon.repository.ReservationRepository;
 import com.aromatripnippon.service.AuditService;
+import jakarta.transaction.Transactional;
 import java.math.BigDecimal;
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +31,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class ManagementController {
@@ -211,14 +215,18 @@ public class ManagementController {
   }
 
   @PostMapping("/management/recipes")
+  @Transactional
   public String recipeCreate(@ModelAttribute FragranceRecipe recipe, @RequestParam Long customerId,
-      @RequestParam Long materialId, @RequestParam BigDecimal blendRatio, Principal principal) {
+      @RequestParam(name = "materialId", required = false) List<Long> materialIds,
+      @RequestParam(name = "blendRatio", required = false) List<BigDecimal> blendRatios, Principal principal,
+      RedirectAttributes redirectAttributes) {
     recipe.setCustomer(customers.findById(customerId).orElseThrow());
-    FragranceRecipeMaterial material = new FragranceRecipeMaterial();
-    material.setFragranceRecipe(recipe);
-    material.setInventoryItem(inventory.findById(materialId).orElseThrow());
-    material.setBlendRatio(blendRatio);
-    recipe.getMaterials().add(material);
+    try {
+      recipe.getMaterials().addAll(buildRecipeMaterials(recipe, materialIds, blendRatios));
+    } catch (IllegalArgumentException ex) {
+      redirectAttributes.addFlashAttribute("errorMessage", ex.getMessage());
+      return "redirect:/management/recipes/new";
+    }
     FragranceRecipe saved = recipes.save(recipe);
     audit.record(principal, "CREATE", "fragrance_recipes", saved.getId(), "香りレシピを登録");
     return "redirect:/management/recipes/" + saved.getId();
@@ -239,13 +247,31 @@ public class ManagementController {
   }
 
   @PostMapping("/management/recipes/{id}")
+  @Transactional
   public String recipeUpdate(@PathVariable Long id, @ModelAttribute FragranceRecipe form,
-      @RequestParam Long customerId, Principal principal) {
+      @RequestParam Long customerId,
+      @RequestParam(name = "materialId", required = false) List<Long> materialIds,
+      @RequestParam(name = "blendRatio", required = false) List<BigDecimal> blendRatios, Principal principal,
+      RedirectAttributes redirectAttributes, Model model) {
     FragranceRecipe recipe = recipes.findById(id).orElseThrow();
     recipe.setRecipeName(form.getRecipeName());
     recipe.setConcept(form.getConcept());
     recipe.setMemo(form.getMemo());
     recipe.setCustomer(customers.findById(customerId).orElseThrow());
+    List<FragranceRecipeMaterial> newMaterials;
+    try {
+      newMaterials = buildRecipeMaterials(recipe, materialIds, blendRatios);
+    } catch (IllegalArgumentException ex) {
+      model.addAttribute("errorMessage", ex.getMessage());
+      model.addAttribute("recipe", recipe);
+      model.addAttribute("customers", customers.findByDeletedAtIsNullOrderByIdDesc());
+      model.addAttribute("items", inventory.findByDeletedAtIsNullOrderByIdDesc());
+      model.addAttribute("materialIds", materialIds);
+      model.addAttribute("blendRatios", blendRatios);
+      return "management/recipe-form";
+    }
+    recipe.getMaterials().clear();
+    recipe.getMaterials().addAll(newMaterials);
     recipes.save(recipe);
     audit.record(principal, "UPDATE", "fragrance_recipes", id, "香りレシピを更新");
     return "redirect:/management/recipes/" + id;
@@ -420,5 +446,44 @@ public class ManagementController {
     admins.save(admin);
     audit.record(principal, "UPDATE", "admin_users", admin.getId(), "アカウント設定を更新");
     return "redirect:/management/account?updated";
+  }
+
+  private List<FragranceRecipeMaterial> buildRecipeMaterials(FragranceRecipe recipe, List<Long> materialIds,
+      List<BigDecimal> blendRatios) {
+    List<FragranceRecipeMaterial> materials = new ArrayList<>();
+    BigDecimal totalBlendRatio = BigDecimal.ZERO;
+    if (materialIds != null && blendRatios != null) {
+      int count = Math.min(Math.min(materialIds.size(), blendRatios.size()), 5);
+      for (int i = 0; i < count; i++) {
+        Long materialId = materialIds.get(i);
+        BigDecimal blendRatio = blendRatios.get(i);
+        if (materialId == null || blendRatio == null) {
+          continue;
+        }
+        if (blendRatio.compareTo(BigDecimal.ZERO) <= 0) {
+          throw new IllegalArgumentException("配合率は0より大きい値を入力してください");
+        }
+        if (blendRatio.stripTrailingZeros().scale() > 0) {
+          throw new IllegalArgumentException("配合率は整数で入力してください");
+        }
+        if (blendRatio.remainder(new BigDecimal("5")).compareTo(BigDecimal.ZERO) != 0) {
+          throw new IllegalArgumentException("配合率は5刻みで入力してください");
+        }
+        FragranceRecipeMaterial material = new FragranceRecipeMaterial();
+        material.setFragranceRecipe(recipe);
+        material.setInventoryItem(inventory.findById(materialId).orElseThrow());
+        material.setBlendRatio(blendRatio);
+        material.setDisplayOrder(i + 1);
+        materials.add(material);
+        totalBlendRatio = totalBlendRatio.add(blendRatio);
+      }
+    }
+    if (materials.isEmpty()) {
+      throw new IllegalArgumentException("素材を1件以上入力してください");
+    }
+    if (totalBlendRatio.compareTo(new BigDecimal("100")) != 0) {
+      throw new IllegalArgumentException("配合率は合計１００になるようにしてください");
+    }
+    return materials;
   }
 }

@@ -7,7 +7,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>4.0.6</version>
+    <version>3.5.13</version>
     <relativePath/>
   </parent>
 
@@ -17,7 +17,7 @@
   <name>AromaTripNippon Phase1</name>
 
   <properties>
-    <java.version>25</java.version>
+    <java.version>17</java.version>
   </properties>
 
   <dependencies>
@@ -56,6 +56,11 @@
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-test</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <build>
@@ -65,7 +70,7 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.12.0</version>
         <configuration>
-          <release>25</release>
+          <release>17</release>
         </configuration>
       </plugin>
       <plugin>

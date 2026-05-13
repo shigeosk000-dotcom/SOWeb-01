@@ -7,6 +7,7 @@ import com.aromatripnippon.repository.CustomerRepository;
 import com.aromatripnippon.repository.ExperienceProgramRepository;
 import com.aromatripnippon.repository.ReservationRepository;
 import jakarta.validation.Valid;
+import java.time.LocalDate;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,6 +37,9 @@ public class ReservationService {
 
   @Transactional
   public Reservation createReservation(Reservation reservation, @Valid Customer customer) {
+    if (reservation.getVisitDate() == null || reservation.getVisitDate().isBefore(LocalDate.now())) {
+      throw new IllegalArgumentException("予約日は本日以降を選択してください。");
+    }
     Customer savedCustomer = customers.save(customer);
     ExperienceProgram program = programs.findFirstByDeletedAtIsNullAndActiveTrueOrderById()
         .orElseThrow(() -> new IllegalStateException("Active experience program is not configured."));
