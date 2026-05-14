@@ -70,166 +70,93 @@
                 <h2>ER図（Phase1時点 / Phase2時点）</h2>
                 <BR>
                 <section id="phase1-er-diagram">
-                  <h3>Phase1時点 ER図</h3>
+                  <h3>Phase1（更新後）ER図</h3>
                   <p>
-                    Phase1では、体験予約、顧客管理、香りレシピ管理、商品・在庫管理を中心とした構成とする。
-                    フロントエンドでは体験閲覧・予約、バックエンドでは予約・顧客・レシピ・在庫を管理する。
+                    Phase1のDB構造を、カテゴリーマスタ導入・商品/在庫1:1運用に合わせて更新したERです。
+                    香りレシピ素材は「素材カテゴリの商品」のみ選択可能とし、在庫更新は履歴で追跡します。
                   </p>
                   <BR>
-                  <pre><code>【Phase1：主要リレーション】
+                  <pre><code>【Phase1（更新後）主要リレーション】
 
-[customers] 1 ──── * [reservations]
-  id (PK)               id (PK)
-  name                  customer_id (FK)
-  nationality           experience_program_id (FK)
-  email                 reservation_date
-  phone                 reservation_time
-  preferred_language    number_of_people
-  purpose               status
-  note                  request_note
-  created_at            created_at
-  updated_at            updated_at
+[customers] 1 ──── * [reservations] * ──── 1 [experience_programs]
+  id (PK)                id (PK)                    id (PK)
+  name                   customer_id (FK)           program_name
+  email                  experience_program_id (FK) duration_minutes
+  ...                    reservation_date           price
+                         reservation_time           ...
+                         ...
 
+[customers] 1 ──── * [fragrance_recipes] 1 ──── * [fragrance_recipe_materials]
+  id (PK)                id (PK)                    id (PK)
+                         customer_id (FK)           fragrance_recipe_id (FK)
+                         recipe_name                product_id (FK)
+                         ...                        material_name_snapshot
+                                                    blend_ratio
+                                                    display_order
+                                                    ...
 
-[experience_programs] 1 ──── * [reservations]
-  id (PK)                    id (PK)
-  name                       customer_id (FK)
-  description                experience_program_id (FK)
-  duration_minutes           reservation_date
-  price                      reservation_time
-  material_summary           number_of_people
-  is_active                  status
-  created_at                 created_at
-  updated_at                 updated_at
-
-
-[customers] 1 ──── * [fragrance_recipes]
-  id (PK)                    id (PK)
-  name                       customer_id (FK)
-  nationality                recipe_name
-  email                      concept_note
-  phone                      total_amount
-  preferred_language         created_at
-  purpose                    updated_at
-  note
-
-
-[fragrance_recipes] 1 ──── * [fragrance_recipe_materials] * ──── 1 [inventory_items]
-  id (PK)                         id (PK)                              id (PK)
-  customer_id (FK)                fragrance_recipe_id (FK)             item_name
-  recipe_name                     inventory_item_id (FK)               category
-  concept_note                    material_name_snapshot               stock_quantity
-  total_amount                    blend_ratio                          unit
-  created_at                      amount                               threshold_quantity
-  updated_at                      display_order                        storage_location
-                                  created_at                           supplier
-                                                                       last_stocked_date
-                                                                       note
-                                                                       created_at
-                                                                       updated_at
-
-
-[inventory_items] 1 ──── * [inventory_transactions]
-  id (PK)                     id (PK)
-  item_name                   inventory_item_id (FK)
-  category                    transaction_type
-  stock_quantity              quantity
-  unit                        reason
-  threshold_quantity          transaction_date
-  storage_location            created_by
-  supplier                    created_at
-  last_stocked_date
-  note
-  created_at
-  updated_at
-
-
-[products] * ──── 1 [inventory_items]
-  id (PK)              id (PK)
-  inventory_item_id    item_name
-  product_name         category
-  category             stock_quantity
-  price                unit
-  description          threshold_quantity
-  is_active            storage_location
-  created_at           supplier
-  updated_at           last_stocked_date
-                       note
-
+[category_master] 1 ──── * [products] 1 ──── 1 [inventory_items] 1 ──── * [inventory_transactions]
+  id (PK)                id (PK)                    id (PK)                 id (PK)
+  category_name          category_id (FK)           product_id (FK, UNIQUE) inventory_item_id (FK)
+  comment                master_id                  stock_quantity           transaction_type
+                         product_name               threshold_quantity       quantity
+                         price                      storage_location         reason
+                         image_path                 supplier                 transaction_date
+                         is_active                  last_stocked_date        created_by
+                         ...                        ...                      ...
 
 [admin_users] 1 ──── * [audit_logs]
   id (PK)                id (PK)
   login_id               admin_user_id (FK)
-  name                   action_type
-  email                  target_table
-  password_hash          target_id
-  role                   description
-  is_active              created_at
-  created_at
-  updated_at</code></pre>
+  password_hash          action_type
+  ...                    target_table
+                         target_id
+                         ...</code></pre>
                   <BR>
-                  <h4>Phase1 テーブル概要</h4>
+                  <h4>Phase1（更新後）テーブル要約</h4>
                   <table class="spec-table">
                     <thead>
                       <tr>
                         <th>テーブル名</th>
                         <th>用途</th>
-                        <th>主なリレーション</th>
+                        <th>主な関連</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <td><code>customers</code></td>
-                        <td>予約者・体験参加者・顧客情報を管理する。</td>
-                        <td><code>reservations</code>、<code>fragrance_recipes</code> と 1対多。</td>
-                      </tr>
-                      <tr>
-                        <td><code>experience_programs</code></td>
-                        <td>体験プログラムの名称、内容、所要時間、料金、使用素材概要を管理する。</td>
-                        <td><code>reservations</code> と 1対多。</td>
-                      </tr>
-                      <tr>
-                        <td><code>reservations</code></td>
-                        <td>来店予約情報を管理する。</td>
-                        <td><code>customers</code>、<code>experience_programs</code> に多対1。</td>
-                      </tr>
-                      <tr>
-                        <td><code>fragrance_recipes</code></td>
-                        <td>体験で作成した香りレシピの基本情報を管理する。</td>
-                        <td><code>customers</code> と多対1、<code>fragrance_recipe_materials</code> と1対多。</td>
-                      </tr>
-                      <tr>
-                        <td><code>fragrance_recipe_materials</code></td>
-                        <td>香りレシピに含まれる素材と配合率を管理する中間テーブル。</td>
-                        <td><code>fragrance_recipes</code> と <code>inventory_items</code> の多対多を表現する。</td>
-                      </tr>
-                      <tr>
-                        <td><code>inventory_items</code></td>
-                        <td>香料、容器、素材などの在庫品目を管理する。</td>
-                        <td>
-                          <code>fragrance_recipe_materials</code>、<code>inventory_transactions</code>、<code>products</code>
-                          と関連。
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><code>inventory_transactions</code></td>
-                        <td>入庫・出庫などの在庫更新履歴を管理する。</td>
-                        <td><code>inventory_items</code> と多対1。</td>
+                        <td><code>category_master</code></td>
+                        <td>商品カテゴリ（カテゴリID、カテゴリ名、コメント）を管理。</td>
+                        <td><code>products</code> と 1対多。</td>
                       </tr>
                       <tr>
                         <td><code>products</code></td>
-                        <td>店頭または将来のEC販売用の商品情報を管理する。</td>
+                        <td>商品マスタ。商品IDは <code>master_id</code>、業務ユニークは <code>(category_id, master_id)</code>。</td>
+                        <td><code>category_master</code> と多対1、<code>inventory_items</code> と1対1。</td>
+                      </tr>
+                      <tr>
+                        <td><code>inventory_items</code></td>
+                        <td>商品単位の在庫実体（在庫数、閾値、保管場所、仕入先、最終入荷日、コメント）。</td>
+                        <td><code>products</code> と1対1、<code>inventory_transactions</code> と1対多。</td>
+                      </tr>
+                      <tr>
+                        <td><code>inventory_transactions</code></td>
+                        <td>在庫増減履歴を記録。</td>
                         <td><code>inventory_items</code> と多対1。</td>
                       </tr>
                       <tr>
-                        <td><code>admin_users</code></td>
-                        <td>管理画面にログインする管理者情報を管理する。</td>
-                        <td><code>audit_logs</code> と1対多。</td>
+                        <td><code>fragrance_recipe_materials</code></td>
+                        <td>レシピ素材明細。選択可能素材は「素材カテゴリの商品」に限定。</td>
+                        <td><code>fragrance_recipes</code> と多対1、<code>products</code> と多対1。</td>
                       </tr>
                       <tr>
-                        <td><code>audit_logs</code></td>
-                        <td>管理画面での登録・更新・ログインなどの操作履歴を管理する。</td>
-                        <td><code>admin_users</code> と多対1。</td>
+                        <td><code>customers</code> / <code>reservations</code></td>
+                        <td>顧客情報と予約情報を管理。</td>
+                        <td>顧客1件に対して予約は複数。</td>
+                      </tr>
+                      <tr>
+                        <td><code>admin_users</code> / <code>audit_logs</code></td>
+                        <td>管理者認証・監査ログ管理。</td>
+                        <td>管理者1件に対して監査ログは複数。</td>
                       </tr>
                     </tbody>
                   </table>
@@ -3117,6 +3044,60 @@
                   パスワードは BCrypt ハッシュ化済みの値を設定する。
                 </p>
 
+
+                <h3>更新後INSERT文（優先）</h3>
+                <p>以下はDB更新後構造（category_master、products の category_id+master_id、商品/在庫1:1）に対応した初期データ例です。</p>
+                <table class="spec-table">
+                  <thead>
+                    <tr>
+                      <th>テーブル名</th>
+                      <th>INSERT文（更新後）</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><code>category_master</code></td>
+                      <td>
+                        <pre><code>INSERT INTO category_master (id, category_name, comment, created_at, updated_at) VALUES
+(1, '素材', '香りレシピ用素材', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(2, '容器', 'ボトル等の資材', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(3, '商品', '販売用商品', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);</code></pre>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>products</code></td>
+                      <td>
+                        <pre><code>INSERT INTO products (
+  id, category_id, master_id, product_name, price, image_path, is_active, description, created_at, updated_at
+) VALUES
+(1, 1, 'MAT-001', 'Yuzu essential oil', 3200, '/assets/images/material_yuzu.png', TRUE, '高知産ゆずの精油', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(2, 1, 'MAT-002', 'Aomori hiba essential oil', 3400, '/assets/images/material_hiba.png', TRUE, '青森ひばの精油', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(3, 2, 'CON-001', 'Glass bottle 30ml', 800, '/assets/images/material_hakka.png', TRUE, '30mlガラスボトル', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);</code></pre>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>inventory_items</code></td>
+                      <td>
+                        <pre><code>INSERT INTO inventory_items (
+  id, product_id, stock_quantity, threshold_quantity, storage_location, supplier, last_stocked_date, memo, created_at, updated_at
+) VALUES
+(1, 1, 500, 100, 'Shelf A', 'Kyushu Botanicals', CURRENT_DATE, '初期在庫', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(2, 2, 420, 80,  'Shelf A', 'Aomori Wood Lab', CURRENT_DATE, '初期在庫', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(3, 3, 120, 30,  'Shelf B', 'Tokyo Bottle Works', CURRENT_DATE, '初期在庫', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);</code></pre>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>fragrance_recipe_materials</code></td>
+                      <td>
+                        <pre><code>INSERT INTO fragrance_recipe_materials (
+  id, fragrance_recipe_id, product_id, material_name_snapshot, blend_ratio, amount, display_order, created_at, updated_at
+) VALUES
+(1, 1, 1, 'Yuzu essential oil', 60.00, 60.00, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(2, 1, 2, 'Aomori hiba essential oil', 40.00, 40.00, 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);</code></pre>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
                 <table class="spec-table">
                   <thead>
                     <tr>
@@ -3141,7 +3122,7 @@
   deleted_at
 ) VALUES (
   1,
-  'admin',
+  'AromaTripAdm01',
   '管理者ユーザー',
   'admin@example.com',
   '$2a$10$7EqJtq98hPqEX7fNZaFWoOHiY7B2TjVq1oyWvN0T0mD7xQe4UoF9K',

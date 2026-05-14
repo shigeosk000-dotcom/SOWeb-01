@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>予約確認ページ表示 詳細仕様</title><style>
+﻿<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>莠育ｴ・｢ｺ隱阪・繝ｼ繧ｸ陦ｨ遉ｺ 隧ｳ邏ｰ莉墓ｧ・/title><style>
 :root{--bg:#f7f5f2;--paper:#fff;--ink:#1f1b17;--muted:#6d645a;--line:#e8dccb;--accent:#b08d57;--accent-dark:#8c6a36;--soft:#faf6ef;--error:#8f3f2f;--ok:#48694d}
 *{box-sizing:border-box}body{margin:0;padding:40px 24px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;background:var(--bg);color:var(--ink);line-height:1.75}
 .page{max-width:1180px;margin:0 auto}header,.screen{padding:30px;border-radius:22px;background:var(--paper);border:1px solid var(--line);box-shadow:0 8px 24px rgba(0,0,0,.06);margin-bottom:30px}
@@ -13,22 +13,31 @@ tr:last-child td{border-bottom:none}th:last-child,td:last-child{border-right:non
 .flow p{padding:10px 0;border-bottom:1px dashed #d1c6b7;margin:0}.flow p:last-child{border-bottom:none}.label{display:inline-block;min-width:120px;font-weight:700;color:var(--accent-dark)}
 ul{margin:8px 0 0;padding-left:24px}li{margin-bottom:6px}@media(max-width:800px){body{padding:22px 14px}header,.screen{padding:22px}pre{font-size:12px}}
 </style></head>
-<body><main class="page"><header><h1>予約確認ページ表示 詳細仕様</h1><p class="meta"><span class="badge">フロントエンド</span><span class="badge">Phase1</span><span class="badge">Must</span><span class="badge">user/reservation-confirm.html</span></p><p class="meta">予約フォーム入力後、確定前に日時・人数・氏名・メールなどを確認する。</p></header>
-<section class="screen"><h2>1. 画面レイアウト</h2><p class="note">画面遷移図上に存在し、既存詳細仕様またはモックアップで不足していた画面です。既存モックアップのテイストに合わせてFrame単位で配置順を定義します。</p><pre>┌────────────────────────────────────────────────────────────┐
-│ Frame 01：ヘッダー                                          │
-├────────────────────────────────────────────────────────────┤
-│ Frame 02：ページ見出し                                      │
-│ [1] パンくず [2] 予約内容確認                               │
-├────────────────────────────────────────────────────────────┤
-│ Frame 03：予約内容サマリー                                  │
-│ [1] 体験名 [2] 来店日 [3] 時間帯 [4] 人数 [5] 氏名 [6] Mail │
-├────────────────────────────────────────────────────────────┤
-│ Frame 04：操作                                              │
-│ [1] 入力に戻る [2] 予約を確定                               │
-└────────────────────────────────────────────────────────────┘</pre><div class='table-wrap'><table><thead><tr><th>No.</th><th>配置フレーム</th><th>表示順・項目</th><th>種別</th><th>配置位置</th><th>補足</th></tr></thead><tbody><tr><td>1</td><td>Frame 1</td><td>[1] パンくず [2] 予約内容確認</td><td>画面要素</td><td>上から順</td><td>遷移図に基づき追加</td></tr><tr><td>2</td><td>Frame 2</td><td>[1] 体験名 [2] 来店日 [3] 時間帯 [4] 人数 [5] 氏名 [6] Mail</td><td>画面要素</td><td>上から順</td><td>遷移図に基づき追加</td></tr><tr><td>3</td><td>Frame 3</td><td>[1] 入力に戻る [2] 予約を確定</td><td>画面要素</td><td>上から順</td><td>遷移図に基づき追加</td></tr></tbody></table></div>
-<h2>2. 入力項目一覧</h2><div class='table-wrap'><table><thead><tr><th>No.</th><th>項目名</th><th>データ型</th><th>データサイズ</th><th>必須/任意</th><th>バリデーションルール</th><th>チェック実施タイミング</th><th>エラー時の扱い</th></tr></thead><tbody><tr><td>1</td><td>来店日</td><td>Date</td><td>YYYY-MM-DD</td><td>必須</td><td>本日以降、休業日不可</td><td>画面初期表示時、確定押下時</td><td>不正時は予約フォームへ戻す</td></tr><tr><td>2</td><td>メール</td><td>String</td><td>最大255文字</td><td>必須</td><td>メール形式</td><td>画面初期表示時、確定押下時</td><td>不正時は予約フォームへ戻す</td></tr><tr><td>3</td><td>予約確認トークン</td><td>String</td><td>最大100文字</td><td>必須</td><td>サーバー発行値と一致</td><td>確定押下時</td><td>不正時はエラー表示</td></tr></tbody></table></div>
-<h2>3. 処理フロー</h2><div class="flow"><p><span class="label">Step 1</span>予約フォームから確認ページへ遷移する。</p><p><span class="label">Step 2</span>入力済み内容をサマリー表示する。</p><p><span class="label">Step 3</span>予約を確定押下で再検証する。</p><p><span class="label">Step 4</span>正常時は予約完了へ遷移する。</p></div>
-<h2>4. 正常時の動作</h2><ul><li>予約内容が読み取り専用で表示される。</li><li>入力に戻るでフォームへ戻る。</li><li>予約を確定でreservation-complete.htmlへ遷移する。</li></ul>
-<h2>5. エラー時の動作</h2><ul><li>確認トークン不正時はエラー表示。</li><li>予約枠が埋まった場合は予約フォームへ戻し再選択を促す。</li><li>必須情報欠落時はフォームへ戻す。</li></ul>
-<h2>6. 画面遷移先</h2><div class='table-wrap'><table><thead><tr><th>No.</th><th>遷移元フレーム</th><th>トリガー</th><th>遷移先</th><th>遷移条件</th><th>引き継ぎ値</th><th>備考</th></tr></thead><tbody><tr><td>1</td><td>Frame 04</td><td>入力に戻る</td><td>reservation.html</td><td>常時</td><td>入力済み値</td><td>フォームへ戻る</td></tr><tr><td>2</td><td>Frame 04</td><td>予約を確定</td><td>reservation-complete.html</td><td>入力値/枠正常</td><td>予約情報</td><td>完了へ</td></tr></tbody></table></div>
+<body><main class="page"><header><h1>莠育ｴ・｢ｺ隱阪・繝ｼ繧ｸ陦ｨ遉ｺ 隧ｳ邏ｰ莉墓ｧ・/h1><p class="meta"><span class="badge">繝輔Ο繝ｳ繝医お繝ｳ繝・/span><span class="badge">Phase1</span><span class="badge">Must</span><span class="badge">user/reservation-confirm.html</span></p><p class="meta">莠育ｴ・ヵ繧ｩ繝ｼ繝蜈･蜉帛ｾ後∫｢ｺ螳壼燕縺ｫ譌･譎ゅ・莠ｺ謨ｰ繝ｻ豌丞錐繝ｻ繝｡繝ｼ繝ｫ縺ｪ縺ｩ繧堤｢ｺ隱阪☆繧九・/p></header>
+<section class="screen"><h2>1. 逕ｻ髱｢繝ｬ繧､繧｢繧ｦ繝・/h2><p class="note">逕ｻ髱｢驕ｷ遘ｻ蝗ｳ荳翫↓蟄伜惠縺励∵里蟄倩ｩｳ邏ｰ莉墓ｧ倥∪縺溘・繝｢繝・け繧｢繝・・縺ｧ荳崎ｶｳ縺励※縺・◆逕ｻ髱｢縺ｧ縺吶よ里蟄倥Δ繝・け繧｢繝・・縺ｮ繝・う繧ｹ繝医↓蜷医ｏ縺帙※Frame蜊倅ｽ阪〒驟咲ｽｮ鬆・ｒ螳夂ｾｩ縺励∪縺吶・/p><pre>笏娯楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏・
+笏・Frame 01・壹・繝・ム繝ｼ                                          笏・
+笏懌楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏､
+笏・Frame 02・壹・繝ｼ繧ｸ隕句・縺・                                     笏・
+笏・[1] 繝代Φ縺上★ [2] 莠育ｴ・・螳ｹ遒ｺ隱・                              笏・
+笏懌楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏､
+笏・Frame 03・壻ｺ育ｴ・・螳ｹ繧ｵ繝槭Μ繝ｼ                                  笏・
+笏・[1] 菴馴ｨ灘錐 [2] 譚･蠎玲律 [3] 譎る俣蟶ｯ [4] 莠ｺ謨ｰ [5] 豌丞錐 [6] Mail 笏・
+笏懌楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏､
+笏・Frame 04・壽桃菴・                                             笏・
+笏・[1] 蜈･蜉帙↓謌ｻ繧・[2] 莠育ｴ・ｒ遒ｺ螳・                              笏・
+笏披楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏・/pre><div class='table-wrap'><table><thead><tr><th>No.</th><th>驟咲ｽｮ繝輔Ξ繝ｼ繝</th><th>陦ｨ遉ｺ鬆・・鬆・岼</th><th>遞ｮ蛻･</th><th>驟咲ｽｮ菴咲ｽｮ</th><th>陬懆ｶｳ</th></tr></thead><tbody><tr><td>1</td><td>Frame 1</td><td>[1] 繝代Φ縺上★ [2] 莠育ｴ・・螳ｹ遒ｺ隱・/td><td>逕ｻ髱｢隕∫ｴ</td><td>荳翫°繧蛾・/td><td>驕ｷ遘ｻ蝗ｳ縺ｫ蝓ｺ縺･縺崎ｿｽ蜉</td></tr><tr><td>2</td><td>Frame 2</td><td>[1] 菴馴ｨ灘錐 [2] 譚･蠎玲律 [3] 譎る俣蟶ｯ [4] 莠ｺ謨ｰ [5] 豌丞錐 [6] Mail</td><td>逕ｻ髱｢隕∫ｴ</td><td>荳翫°繧蛾・/td><td>驕ｷ遘ｻ蝗ｳ縺ｫ蝓ｺ縺･縺崎ｿｽ蜉</td></tr><tr><td>3</td><td>Frame 3</td><td>[1] 蜈･蜉帙↓謌ｻ繧・[2] 莠育ｴ・ｒ遒ｺ螳・/td><td>逕ｻ髱｢隕∫ｴ</td><td>荳翫°繧蛾・/td><td>驕ｷ遘ｻ蝗ｳ縺ｫ蝓ｺ縺･縺崎ｿｽ蜉</td></tr></tbody></table></div>
+<h2>2. 蜈･蜉幃・岼荳隕ｧ</h2><div class='table-wrap'><table><thead><tr><th>No.</th><th>鬆・岼蜷・/th><th>繝・・繧ｿ蝙・/th><th>繝・・繧ｿ繧ｵ繧､繧ｺ</th><th>蠢・・莉ｻ諢・/th><th>繝舌Μ繝・・繧ｷ繝ｧ繝ｳ繝ｫ繝ｼ繝ｫ</th><th>繝√ぉ繝・け螳滓命繧ｿ繧､繝溘Φ繧ｰ</th><th>繧ｨ繝ｩ繝ｼ譎ゅ・謇ｱ縺・/th></tr></thead><tbody><tr><td>1</td><td>譚･蠎玲律</td><td>Date</td><td>YYYY-MM-DD</td><td>蠢・・/td><td>譛ｬ譌･莉･髯阪∽ｼ第･ｭ譌･荳榊庄</td><td>逕ｻ髱｢蛻晄悄陦ｨ遉ｺ譎ゅ∫｢ｺ螳壽款荳区凾</td><td>荳肴ｭ｣譎ゅ・莠育ｴ・ヵ繧ｩ繝ｼ繝縺ｸ謌ｻ縺・/td></tr><tr><td>2</td><td>繝｡繝ｼ繝ｫ</td><td>String</td><td>譛螟ｧ255譁・ｭ・/td><td>蠢・・/td><td>繝｡繝ｼ繝ｫ蠖｢蠑・/td><td>逕ｻ髱｢蛻晄悄陦ｨ遉ｺ譎ゅ∫｢ｺ螳壽款荳区凾</td><td>荳肴ｭ｣譎ゅ・莠育ｴ・ヵ繧ｩ繝ｼ繝縺ｸ謌ｻ縺・/td></tr><tr><td>3</td><td>莠育ｴ・｢ｺ隱阪ヨ繝ｼ繧ｯ繝ｳ</td><td>String</td><td>譛螟ｧ100譁・ｭ・/td><td>蠢・・/td><td>繧ｵ繝ｼ繝舌・逋ｺ陦悟､縺ｨ荳閾ｴ</td><td>遒ｺ螳壽款荳区凾</td><td>荳肴ｭ｣譎ゅ・繧ｨ繝ｩ繝ｼ陦ｨ遉ｺ</td></tr></tbody></table></div>
+<h2>3. 蜃ｦ逅・ヵ繝ｭ繝ｼ</h2><div class="flow"><p><span class="label">Step 1</span>莠育ｴ・ヵ繧ｩ繝ｼ繝縺九ｉ遒ｺ隱阪・繝ｼ繧ｸ縺ｸ驕ｷ遘ｻ縺吶ｋ縲・/p><p><span class="label">Step 2</span>蜈･蜉帶ｸ医∩蜀・ｮｹ繧偵し繝槭Μ繝ｼ陦ｨ遉ｺ縺吶ｋ縲・/p><p><span class="label">Step 3</span>莠育ｴ・ｒ遒ｺ螳壽款荳九〒蜀肴､懆ｨｼ縺吶ｋ縲・/p><p><span class="label">Step 4</span>豁｣蟶ｸ譎ゅ・莠育ｴ・ｮ御ｺ・∈驕ｷ遘ｻ縺吶ｋ縲・/p></div>
+<h2>4. 豁｣蟶ｸ譎ゅ・蜍穂ｽ・/h2><ul><li>莠育ｴ・・螳ｹ縺瑚ｪｭ縺ｿ蜿悶ｊ蟆ら畑縺ｧ陦ｨ遉ｺ縺輔ｌ繧九・/li><li>蜈･蜉帙↓謌ｻ繧九〒繝輔か繝ｼ繝縺ｸ謌ｻ繧九・/li><li>莠育ｴ・ｒ遒ｺ螳壹〒reservation-complete.html縺ｸ驕ｷ遘ｻ縺吶ｋ縲・/li></ul>
+<h2>5. 繧ｨ繝ｩ繝ｼ譎ゅ・蜍穂ｽ・/h2><ul><li>遒ｺ隱阪ヨ繝ｼ繧ｯ繝ｳ荳肴ｭ｣譎ゅ・繧ｨ繝ｩ繝ｼ陦ｨ遉ｺ縲・/li><li>莠育ｴ・棧縺悟沂縺ｾ縺｣縺溷ｴ蜷医・莠育ｴ・ヵ繧ｩ繝ｼ繝縺ｸ謌ｻ縺怜・驕ｸ謚槭ｒ菫・☆縲・/li><li>蠢・域ュ蝣ｱ谺關ｽ譎ゅ・繝輔か繝ｼ繝縺ｸ謌ｻ縺吶・/li></ul>
+<h2>6. 逕ｻ髱｢驕ｷ遘ｻ蜈・/h2><div class='table-wrap'><table><thead><tr><th>No.</th><th>驕ｷ遘ｻ蜈・ヵ繝ｬ繝ｼ繝</th><th>繝医Μ繧ｬ繝ｼ</th><th>驕ｷ遘ｻ蜈・/th><th>驕ｷ遘ｻ譚｡莉ｶ</th><th>蠑輔″邯吶℃蛟､</th><th>蛯呵・/th></tr></thead><tbody><tr><td>1</td><td>Frame 04</td><td>蜈･蜉帙↓謌ｻ繧・/td><td>reservation.html</td><td>蟶ｸ譎・/td><td>蜈･蜉帶ｸ医∩蛟､</td><td>繝輔か繝ｼ繝縺ｸ謌ｻ繧・/td></tr><tr><td>2</td><td>Frame 04</td><td>莠育ｴ・ｒ遒ｺ螳・/td><td>reservation-complete.html</td><td>蜈･蜉帛､/譫豁｣蟶ｸ</td><td>莠育ｴ・ュ蝣ｱ</td><td>螳御ｺ・∈</td></tr></tbody></table></div>
+<h2>7. DB螟画峩蜿肴丐繝｡繝｢・・026-05-14・・/h2><p class="note">遒ｺ螳壽凾縺ｫ謇ｱ縺・ｿ晏ｭ伜・縺ｯ <code>reservations</code> 縺ｨ <code>customers</code>縲ら｢ｺ隱咲判髱｢縺ｧ縺ｯ蜀肴､懆ｨｼ繧定｡後＞縲・℃蜴ｻ譌･縺ｮ譚･蠎玲律縺ｯ蜿励￠莉倥￠縺ｪ縺・１hase2豕ｨ譁・ｳｻ繝・・繝悶Ν縺ｯ蜿ら・蟇ｾ雎｡螟悶・/p><h3>7. DB変更反映メモ（2026-05-14）</h3>
+<div class="note">
+  <ul>
+    <li>商品マスタは <code>category_master</code> を参照し、<code>products</code> は <code>category_id + master_id</code> を業務キーとして扱う。</li>
+    <li>在庫は商品と1:1（<code>inventory_items.product_id</code>）で管理し、増減履歴は <code>inventory_transactions</code> に記録する。</li>
+    <li>予約/顧客は <code>reservations</code> と <code>customers</code> の紐づきを前提とし、Phase2対象テーブル（<code>orders</code>/<code>order_items</code>/<code>reviews</code> 等）はPhase1機能では使用しない。</li>
+  </ul>
+</div>
 </section></main></body></html>
+

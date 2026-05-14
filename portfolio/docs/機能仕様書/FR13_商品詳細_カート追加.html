@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>3. 商品詳細・カート追加｜Phase2機能 詳細仕様書</title>
+  <title>3. 蝠・刀隧ｳ邏ｰ繝ｻ繧ｫ繝ｼ繝郁ｿｽ蜉・弃hase2讖溯・ 隧ｳ邏ｰ莉墓ｧ俶嶌</title>
   <style>
 :root{--bg:#f7f5f2;--paper:#fff;--ink:#1f1b17;--muted:#6d645a;--line:#e8dccb;--accent:#b08d57;--accent-dark:#8c6a36;--soft:#faf6ef;--error:#8f3f2f;--ok:#48694d}
 *{box-sizing:border-box}
@@ -33,36 +33,53 @@ tr:last-child td{border-bottom:none}th:last-child,td:last-child{border-right:non
 <body>
   <main class="page">
     <header>
-      <h1>3. 商品詳細・カート追加</h1>
-      <p class="meta">分割元：Phase2機能 詳細仕様書</p>
+      <h1>3. 蝠・刀隧ｳ邏ｰ繝ｻ繧ｫ繝ｼ繝郁ｿｽ蜉</h1>
+      <p class="meta">蛻・牡蜈・ｼ啀hase2讖溯・ 隧ｳ邏ｰ莉墓ｧ俶嶌</p>
     </header>
     <section class="screen" id="spec-03">
-<h2>3. 商品詳細・カート追加</h2>
-<p class="meta"><span class="badge">フロントエンド</span><span class="badge">user/product-detail.html</span><span class="badge">Phase2</span><span class="badge">Should</span></p>
-<p>商品説明、価格、原材料、レビュー、数量、香り選択を表示し、カートへ追加する。</p>
-<h3>1. 画面レイアウト</h3>
-<p class="note">Phase1モックアップと同じトーンを前提に、カード、テーブル、フォーム、CTAを配置します。下記はフレーム単位の配置順です。</p>
-<pre>┌────────────────────────────────────────────────────────────┐
-│ Frame 01：ヘッダー                                          │
-├────────────────────────────────────────────────────────────┤
-│ Frame 02：商品詳細                                          │
-│ [1] 商品画像 [2] カテゴリ [3] 商品名 [4] 説明 [5] 価格      │
-│ [6] 数量 [7] 香り選択 [8] カートに入れる [9] マイレシピ      │
-├────────────────────────────────────────────────────────────┤
-│ Frame 03：レビュー・配送情報                                │
-└────────────────────────────────────────────────────────────┘</pre>
-<div class='table-wrap'><table><thead><tr><th>No.</th><th>配置フレーム</th><th>表示順・項目</th><th>種別</th><th>配置位置</th><th>補足</th></tr></thead><tbody><tr><td>5</td><td>Frame 5</td><td>[1] 商品画像 [2] カテゴリ [3] 商品名 [4] 説明 [5] 価格</td><td>画面要素</td><td>上から順</td><td>モックアップに反映</td></tr><tr><td>6</td><td>Frame 6</td><td>[6] 数量 [7] 香り選択 [8] カートに入れる [9] マイレシピ</td><td>画面要素</td><td>上から順</td><td>モックアップに反映</td></tr></tbody></table></div>
-<h3>2. 入力項目一覧</h3>
-<div class='table-wrap'><table><thead><tr><th>No.</th><th>項目名</th><th>データ型</th><th>データサイズ</th><th>必須/任意</th><th>バリデーションルール</th><th>チェック実施タイミング</th><th>エラー時の扱い</th></tr></thead><tbody><tr><td>1</td><td>商品ID</td><td>Long</td><td>整数</td><td>必須</td><td>存在する公開商品ID</td><td>ページ初期表示時</td><td>不正時はエラーメッセージ表示または補正</td></tr><tr><td>2</td><td>数量</td><td>Integer</td><td>1〜10</td><td>必須</td><td>1以上10以下</td><td>選択変更時、カート追加時</td><td>不正時はエラーメッセージ表示または補正</td></tr><tr><td>3</td><td>香り選択</td><td>String</td><td>最大100文字</td><td>必須</td><td>定番またはマイレシピID</td><td>選択変更時、カート追加時</td><td>不正時はエラーメッセージ表示または補正</td></tr></tbody></table></div>
-<h3>3. 処理フロー</h3>
-<div class='flow'><p><span class='label'>Step 1</span>product-detail.htmlにアクセスする。</p><p><span class='label'>Step 2</span>商品情報を表示する。</p><p><span class='label'>Step 3</span>数量・香りを選択する。</p><p><span class='label'>Step 4</span>カートに入れる押下でcart.htmlへ遷移する。</p></div>
-<h3>4. 正常時の動作</h3>
-<ul><li>商品情報、価格、レビュー、配送情報が表示される。</li><li>数量と香りが妥当な場合カートへ遷移する。</li></ul>
-<h3>5. エラー時の動作</h3>
-<ul><li>商品ID不正時はshop.htmlへ戻す。</li><li>数量範囲外の場合は1に補正する。</li><li>香り未選択時はカート追加不可。</li></ul>
-<h3>6. 画面遷移先</h3>
-<div class='table-wrap'><table><thead><tr><th>No.</th><th>遷移元フレーム</th><th>トリガー</th><th>遷移先</th><th>遷移条件</th><th>引き継ぎ値</th><th>備考</th></tr></thead><tbody><tr><td>1</td><td>Frame 02</td><td>カートに入れる</td><td>cart.html</td><td>入力値正常</td><td>商品ID/数量/香り</td><td>カートへ</td></tr><tr><td>2</td><td>Frame 02</td><td>マイレシピを見る</td><td>mypage-recipes.html</td><td>ログイン済み</td><td>なし</td><td>レシピへ</td></tr></tbody></table></div>
+<h2>3. 蝠・刀隧ｳ邏ｰ繝ｻ繧ｫ繝ｼ繝郁ｿｽ蜉</h2>
+<p class="meta"><span class="badge">繝輔Ο繝ｳ繝医お繝ｳ繝・/span><span class="badge">user/product-detail.html</span><span class="badge">Phase2</span><span class="badge">Should</span></p>
+<p>蝠・刀隱ｬ譏弱∽ｾ｡譬ｼ縲∝次譚先侭縲√Ξ繝薙Η繝ｼ縲∵焚驥上・ｦ吶ｊ驕ｸ謚槭ｒ陦ｨ遉ｺ縺励√き繝ｼ繝医∈霑ｽ蜉縺吶ｋ縲・/p>
+<h3>1. 逕ｻ髱｢繝ｬ繧､繧｢繧ｦ繝・/h3>
+<p class="note">Phase1繝｢繝・け繧｢繝・・縺ｨ蜷後§繝医・繝ｳ繧貞燕謠舌↓縲√き繝ｼ繝峨√ユ繝ｼ繝悶Ν縲√ヵ繧ｩ繝ｼ繝縲，TA繧帝・鄂ｮ縺励∪縺吶ゆｸ玖ｨ倥・繝輔Ξ繝ｼ繝蜊倅ｽ阪・驟咲ｽｮ鬆・〒縺吶・/p>
+<pre>笏娯楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏・
+笏・Frame 01・壹・繝・ム繝ｼ                                          笏・
+笏懌楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏､
+笏・Frame 02・壼膚蜩∬ｩｳ邏ｰ                                          笏・
+笏・[1] 蝠・刀逕ｻ蜒・[2] 繧ｫ繝・ざ繝ｪ [3] 蝠・刀蜷・[4] 隱ｬ譏・[5] 萓｡譬ｼ      笏・
+笏・[6] 謨ｰ驥・[7] 鬥吶ｊ驕ｸ謚・[8] 繧ｫ繝ｼ繝医↓蜈･繧後ｋ [9] 繝槭う繝ｬ繧ｷ繝・     笏・
+笏懌楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏､
+笏・Frame 03・壹Ξ繝薙Η繝ｼ繝ｻ驟埼∵ュ蝣ｱ                                笏・
+笏披楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏・/pre>
+<div class='table-wrap'><table><thead><tr><th>No.</th><th>驟咲ｽｮ繝輔Ξ繝ｼ繝</th><th>陦ｨ遉ｺ鬆・・鬆・岼</th><th>遞ｮ蛻･</th><th>驟咲ｽｮ菴咲ｽｮ</th><th>陬懆ｶｳ</th></tr></thead><tbody><tr><td>5</td><td>Frame 5</td><td>[1] 蝠・刀逕ｻ蜒・[2] 繧ｫ繝・ざ繝ｪ [3] 蝠・刀蜷・[4] 隱ｬ譏・[5] 萓｡譬ｼ</td><td>逕ｻ髱｢隕∫ｴ</td><td>荳翫°繧蛾・/td><td>繝｢繝・け繧｢繝・・縺ｫ蜿肴丐</td></tr><tr><td>6</td><td>Frame 6</td><td>[6] 謨ｰ驥・[7] 鬥吶ｊ驕ｸ謚・[8] 繧ｫ繝ｼ繝医↓蜈･繧後ｋ [9] 繝槭う繝ｬ繧ｷ繝・/td><td>逕ｻ髱｢隕∫ｴ</td><td>荳翫°繧蛾・/td><td>繝｢繝・け繧｢繝・・縺ｫ蜿肴丐</td></tr></tbody></table></div>
+<h3>2. 蜈･蜉幃・岼荳隕ｧ</h3>
+<div class='table-wrap'><table><thead><tr><th>No.</th><th>鬆・岼蜷・/th><th>繝・・繧ｿ蝙・/th><th>繝・・繧ｿ繧ｵ繧､繧ｺ</th><th>蠢・・莉ｻ諢・/th><th>繝舌Μ繝・・繧ｷ繝ｧ繝ｳ繝ｫ繝ｼ繝ｫ</th><th>繝√ぉ繝・け螳滓命繧ｿ繧､繝溘Φ繧ｰ</th><th>繧ｨ繝ｩ繝ｼ譎ゅ・謇ｱ縺・/th></tr></thead><tbody><tr><td>1</td><td>蝠・刀ID</td><td>Long</td><td>謨ｴ謨ｰ</td><td>蠢・・/td><td>蟄伜惠縺吶ｋ蜈ｬ髢句膚蜩！D</td><td>繝壹・繧ｸ蛻晄悄陦ｨ遉ｺ譎・/td><td>荳肴ｭ｣譎ゅ・繧ｨ繝ｩ繝ｼ繝｡繝・そ繝ｼ繧ｸ陦ｨ遉ｺ縺ｾ縺溘・陬懈ｭ｣</td></tr><tr><td>2</td><td>謨ｰ驥・/td><td>Integer</td><td>1縲・0</td><td>蠢・・/td><td>1莉･荳・0莉･荳・/td><td>驕ｸ謚槫､画峩譎ゅ√き繝ｼ繝郁ｿｽ蜉譎・/td><td>荳肴ｭ｣譎ゅ・繧ｨ繝ｩ繝ｼ繝｡繝・そ繝ｼ繧ｸ陦ｨ遉ｺ縺ｾ縺溘・陬懈ｭ｣</td></tr><tr><td>3</td><td>鬥吶ｊ驕ｸ謚・/td><td>String</td><td>譛螟ｧ100譁・ｭ・/td><td>蠢・・/td><td>螳夂分縺ｾ縺溘・繝槭う繝ｬ繧ｷ繝祢D</td><td>驕ｸ謚槫､画峩譎ゅ√き繝ｼ繝郁ｿｽ蜉譎・/td><td>荳肴ｭ｣譎ゅ・繧ｨ繝ｩ繝ｼ繝｡繝・そ繝ｼ繧ｸ陦ｨ遉ｺ縺ｾ縺溘・陬懈ｭ｣</td></tr></tbody></table></div>
+<h3>3. 蜃ｦ逅・ヵ繝ｭ繝ｼ</h3>
+<div class='flow'><p><span class='label'>Step 1</span>product-detail.html縺ｫ繧｢繧ｯ繧ｻ繧ｹ縺吶ｋ縲・/p><p><span class='label'>Step 2</span>蝠・刀諠・ｱ繧定｡ｨ遉ｺ縺吶ｋ縲・/p><p><span class='label'>Step 3</span>謨ｰ驥上・鬥吶ｊ繧帝∈謚槭☆繧九・/p><p><span class='label'>Step 4</span>繧ｫ繝ｼ繝医↓蜈･繧後ｋ謚ｼ荳九〒cart.html縺ｸ驕ｷ遘ｻ縺吶ｋ縲・/p></div>
+<h3>4. 豁｣蟶ｸ譎ゅ・蜍穂ｽ・/h3>
+<ul><li>蝠・刀諠・ｱ縲∽ｾ｡譬ｼ縲√Ξ繝薙Η繝ｼ縲・・騾∵ュ蝣ｱ縺瑚｡ｨ遉ｺ縺輔ｌ繧九・/li><li>謨ｰ驥上→鬥吶ｊ縺悟ｦ･蠖薙↑蝣ｴ蜷医き繝ｼ繝医∈驕ｷ遘ｻ縺吶ｋ縲・/li></ul>
+<h3>5. 繧ｨ繝ｩ繝ｼ譎ゅ・蜍穂ｽ・/h3>
+<ul><li>蝠・刀ID荳肴ｭ｣譎ゅ・shop.html縺ｸ謌ｻ縺吶・/li><li>謨ｰ驥冗ｯ・峇螟悶・蝣ｴ蜷医・1縺ｫ陬懈ｭ｣縺吶ｋ縲・/li><li>鬥吶ｊ譛ｪ驕ｸ謚樊凾縺ｯ繧ｫ繝ｼ繝郁ｿｽ蜉荳榊庄縲・/li></ul>
+<h3>6. 逕ｻ髱｢驕ｷ遘ｻ蜈・/h3>
+<div class='table-wrap'><table><thead><tr><th>No.</th><th>驕ｷ遘ｻ蜈・ヵ繝ｬ繝ｼ繝</th><th>繝医Μ繧ｬ繝ｼ</th><th>驕ｷ遘ｻ蜈・/th><th>驕ｷ遘ｻ譚｡莉ｶ</th><th>蠑輔″邯吶℃蛟､</th><th>蛯呵・/th></tr></thead><tbody><tr><td>1</td><td>Frame 02</td><td>繧ｫ繝ｼ繝医↓蜈･繧後ｋ</td><td>cart.html</td><td>蜈･蜉帛､豁｣蟶ｸ</td><td>蝠・刀ID/謨ｰ驥・鬥吶ｊ</td><td>繧ｫ繝ｼ繝医∈</td></tr><tr><td>2</td><td>Frame 02</td><td>繝槭う繝ｬ繧ｷ繝斐ｒ隕九ｋ</td><td>mypage-recipes.html</td><td>繝ｭ繧ｰ繧､繝ｳ貂医∩</td><td>縺ｪ縺・/td><td>繝ｬ繧ｷ繝斐∈</td></tr></tbody></table></div>
+<h3>7. DB螟画峩蜿肴丐繝｡繝｢・・026-05-14・・/h3>
+<div class="note">
+  <ul>
+    <li>蝠・刀隧ｳ邏ｰ陦ｨ遉ｺ縺ｯ蝠・刀繝槭せ繧ｿ・・code>products</code>・峨・ <code>category_id + master_id</code> 繧貞渕貅悶↓蜿ら・縺吶ｋ縲・/li>
+    <li>繧ｫ繝・ざ繝ｪ陦ｨ遉ｺ縺ｯ <code>category_master</code> 縺ｮ繧ｫ繝・ざ繝ｪ繝ｼ蜷阪ｒ菴ｿ逕ｨ縺吶ｋ縲・/li>
+    <li>蝨ｨ蠎ｫ蜿ｯ蜷ｦ縺ｯ蝠・刀縺ｨ1:1縺ｮ <code>inventory_items</code> 騾｣謳ｺ繧貞燕謠舌→縺吶ｋ縲・/li>
+  </ul>
+</div>
+<h3>7. DB変更反映メモ（2026-05-14）</h3>
+<div class="note">
+  <ul>
+    <li>商品マスタは <code>category_master</code> を参照し、<code>products</code> は <code>category_id + master_id</code> を業務キーとして扱う。</li>
+    <li>在庫は商品と1:1（<code>inventory_items.product_id</code>）で管理し、増減履歴は <code>inventory_transactions</code> に記録する。</li>
+    <li>予約/顧客は <code>reservations</code> と <code>customers</code> の紐づきを前提とし、Phase2対象テーブル（<code>orders</code>/<code>order_items</code>/<code>reviews</code> 等）はPhase1機能では使用しない。</li>
+  </ul>
+</div>
 </section>
   </main>
 </body>
 </html>
+

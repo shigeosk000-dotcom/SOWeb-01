@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>10. アカウント設定｜Phase2機能 詳細仕様書</title>
+  <title>10. 繧｢繧ｫ繧ｦ繝ｳ繝郁ｨｭ螳夲ｽ弃hase2讖溯・ 隧ｳ邏ｰ莉墓ｧ俶嶌</title>
   <style>
 :root{--bg:#f7f5f2;--paper:#fff;--ink:#1f1b17;--muted:#6d645a;--line:#e8dccb;--accent:#b08d57;--accent-dark:#8c6a36;--soft:#faf6ef;--error:#8f3f2f;--ok:#48694d}
 *{box-sizing:border-box}
@@ -33,34 +33,43 @@ tr:last-child td{border-bottom:none}th:last-child,td:last-child{border-right:non
 <body>
   <main class="page">
     <header>
-      <h1>10. アカウント設定</h1>
-      <p class="meta">分割元：Phase2機能 詳細仕様書</p>
+      <h1>10. 繧｢繧ｫ繧ｦ繝ｳ繝郁ｨｭ螳・/h1>
+      <p class="meta">蛻・牡蜈・ｼ啀hase2讖溯・ 隧ｳ邏ｰ莉墓ｧ俶嶌</p>
     </header>
     <section class="screen" id="spec-10">
-<h2>10. アカウント設定</h2>
-<p class="meta"><span class="badge">バックエンド管理</span><span class="badge">management/account.html</span><span class="badge">Phase2</span><span class="badge">Must</span></p>
-<p>管理者情報、メールアドレス、通知設定、表示言語、パスワードを更新する。</p>
-<h3>1. 画面レイアウト</h3>
-<p class="note">Phase1モックアップと同じトーンを前提に、カード、テーブル、フォーム、CTAを配置します。下記はフレーム単位の配置順です。</p>
-<pre>┌────────────────────────────────────────────────────────────┐
-│ Frame 01：管理ナビ                                          │
-├────────────────────────────────────────────────────────────┤
-│ Frame 02：アカウントフォーム                                │
-│ [1] 管理者名 [2] メール [3] 通知設定 [4] 表示言語            │
-│ [5] 新パスワード [6] 確認用パスワード [7] 保存              │
-└────────────────────────────────────────────────────────────┘</pre>
-<div class='table-wrap'><table><thead><tr><th>No.</th><th>配置フレーム</th><th>表示順・項目</th><th>種別</th><th>配置位置</th><th>補足</th></tr></thead><tbody><tr><td>5</td><td>Frame 5</td><td>[1] 管理者名 [2] メール [3] 通知設定 [4] 表示言語</td><td>画面要素</td><td>上から順</td><td>モックアップに反映</td></tr><tr><td>6</td><td>Frame 6</td><td>[5] 新パスワード [6] 確認用パスワード [7] 保存</td><td>画面要素</td><td>上から順</td><td>モックアップに反映</td></tr></tbody></table></div>
-<h3>2. 入力項目一覧</h3>
-<div class='table-wrap'><table><thead><tr><th>No.</th><th>項目名</th><th>データ型</th><th>データサイズ</th><th>必須/任意</th><th>バリデーションルール</th><th>チェック実施タイミング</th><th>エラー時の扱い</th></tr></thead><tbody><tr><td>1</td><td>管理者名</td><td>String</td><td>1〜100文字</td><td>必須</td><td>空不可</td><td>入力時、保存時</td><td>不正時はエラーメッセージ表示または補正</td></tr><tr><td>2</td><td>メール</td><td>String</td><td>最大255文字</td><td>必須</td><td>メール形式</td><td>blur時、保存時</td><td>不正時はエラーメッセージ表示または補正</td></tr><tr><td>3</td><td>通知設定</td><td>String</td><td>最大30文字</td><td>必須</td><td>許可値のみ</td><td>変更時、保存時</td><td>不正時はエラーメッセージ表示または補正</td></tr><tr><td>4</td><td>表示言語</td><td>String</td><td>最大20文字</td><td>必須</td><td>日本語/Englishのみ</td><td>変更時、保存時</td><td>不正時はエラーメッセージ表示または補正</td></tr><tr><td>5</td><td>新パスワード</td><td>String</td><td>8〜100文字</td><td>任意</td><td>8文字以上</td><td>入力時、保存時</td><td>不正時はエラーメッセージ表示または補正</td></tr><tr><td>6</td><td>確認用パスワード</td><td>String</td><td>8〜100文字</td><td>任意</td><td>新パスワードと一致</td><td>入力時、保存時</td><td>不正時はエラーメッセージ表示または補正</td></tr></tbody></table></div>
-<h3>3. 処理フロー</h3>
-<div class='flow'><p><span class='label'>Step 1</span>account.htmlにアクセスする。</p><p><span class='label'>Step 2</span>管理者情報を表示する。</p><p><span class='label'>Step 3</span>必要項目を修正する。</p><p><span class='label'>Step 4</span>保存する押下で入力チェックを行い保存する。</p></div>
-<h3>4. 正常時の動作</h3>
-<ul><li>管理者情報が保存される。</li><li>パスワード入力が空の場合は変更しない。</li></ul>
-<h3>5. エラー時の動作</h3>
-<ul><li>メール形式不正時は保存不可。</li><li>パスワード不一致時は保存不可。</li><li>保存失敗時はフォーム上部にエラー表示。</li></ul>
-<h3>6. 画面遷移先</h3>
-<div class='table-wrap'><table><thead><tr><th>No.</th><th>遷移元フレーム</th><th>トリガー</th><th>遷移先</th><th>遷移条件</th><th>引き継ぎ値</th><th>備考</th></tr></thead><tbody><tr><td>1</td><td>Frame 02</td><td>保存する</td><td>account.html</td><td>入力値正常</td><td>管理者情報</td><td>同画面再表示</td></tr><tr><td>2</td><td>Frame 01</td><td>出</td><td>login.html</td><td>常時</td><td>なし</td><td>ログアウト</td></tr></tbody></table></div>
+<h2>10. 繧｢繧ｫ繧ｦ繝ｳ繝郁ｨｭ螳・/h2>
+<p class="meta"><span class="badge">繝舌ャ繧ｯ繧ｨ繝ｳ繝臥ｮ｡逅・/span><span class="badge">management/account.html</span><span class="badge">Phase2</span><span class="badge">Must</span></p>
+<p>邂｡逅・・ュ蝣ｱ縲√Γ繝ｼ繝ｫ繧｢繝峨Ξ繧ｹ縲・夂衍險ｭ螳壹∬｡ｨ遉ｺ險隱槭√ヱ繧ｹ繝ｯ繝ｼ繝峨ｒ譖ｴ譁ｰ縺吶ｋ縲・/p>
+<h3>1. 逕ｻ髱｢繝ｬ繧､繧｢繧ｦ繝・/h3>
+<p class="note">Phase1繝｢繝・け繧｢繝・・縺ｨ蜷後§繝医・繝ｳ繧貞燕謠舌↓縲√き繝ｼ繝峨√ユ繝ｼ繝悶Ν縲√ヵ繧ｩ繝ｼ繝縲，TA繧帝・鄂ｮ縺励∪縺吶ゆｸ玖ｨ倥・繝輔Ξ繝ｼ繝蜊倅ｽ阪・驟咲ｽｮ鬆・〒縺吶・/p>
+<pre>笏娯楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏・
+笏・Frame 01・夂ｮ｡逅・リ繝・                                         笏・
+笏懌楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏､
+笏・Frame 02・壹い繧ｫ繧ｦ繝ｳ繝医ヵ繧ｩ繝ｼ繝                                笏・
+笏・[1] 邂｡逅・・錐 [2] 繝｡繝ｼ繝ｫ [3] 騾夂衍險ｭ螳・[4] 陦ｨ遉ｺ險隱・           笏・
+笏・[5] 譁ｰ繝代せ繝ｯ繝ｼ繝・[6] 遒ｺ隱咲畑繝代せ繝ｯ繝ｼ繝・[7] 菫晏ｭ・             笏・
+笏披楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏・/pre>
+<div class='table-wrap'><table><thead><tr><th>No.</th><th>驟咲ｽｮ繝輔Ξ繝ｼ繝</th><th>陦ｨ遉ｺ鬆・・鬆・岼</th><th>遞ｮ蛻･</th><th>驟咲ｽｮ菴咲ｽｮ</th><th>陬懆ｶｳ</th></tr></thead><tbody><tr><td>5</td><td>Frame 5</td><td>[1] 邂｡逅・・錐 [2] 繝｡繝ｼ繝ｫ [3] 騾夂衍險ｭ螳・[4] 陦ｨ遉ｺ險隱・/td><td>逕ｻ髱｢隕∫ｴ</td><td>荳翫°繧蛾・/td><td>繝｢繝・け繧｢繝・・縺ｫ蜿肴丐</td></tr><tr><td>6</td><td>Frame 6</td><td>[5] 譁ｰ繝代せ繝ｯ繝ｼ繝・[6] 遒ｺ隱咲畑繝代せ繝ｯ繝ｼ繝・[7] 菫晏ｭ・/td><td>逕ｻ髱｢隕∫ｴ</td><td>荳翫°繧蛾・/td><td>繝｢繝・け繧｢繝・・縺ｫ蜿肴丐</td></tr></tbody></table></div>
+<h3>2. 蜈･蜉幃・岼荳隕ｧ</h3>
+<div class='table-wrap'><table><thead><tr><th>No.</th><th>鬆・岼蜷・/th><th>繝・・繧ｿ蝙・/th><th>繝・・繧ｿ繧ｵ繧､繧ｺ</th><th>蠢・・莉ｻ諢・/th><th>繝舌Μ繝・・繧ｷ繝ｧ繝ｳ繝ｫ繝ｼ繝ｫ</th><th>繝√ぉ繝・け螳滓命繧ｿ繧､繝溘Φ繧ｰ</th><th>繧ｨ繝ｩ繝ｼ譎ゅ・謇ｱ縺・/th></tr></thead><tbody><tr><td>1</td><td>邂｡逅・・錐</td><td>String</td><td>1縲・00譁・ｭ・/td><td>蠢・・/td><td>遨ｺ荳榊庄</td><td>蜈･蜉帶凾縲∽ｿ晏ｭ俶凾</td><td>荳肴ｭ｣譎ゅ・繧ｨ繝ｩ繝ｼ繝｡繝・そ繝ｼ繧ｸ陦ｨ遉ｺ縺ｾ縺溘・陬懈ｭ｣</td></tr><tr><td>2</td><td>繝｡繝ｼ繝ｫ</td><td>String</td><td>譛螟ｧ255譁・ｭ・/td><td>蠢・・/td><td>繝｡繝ｼ繝ｫ蠖｢蠑・/td><td>blur譎ゅ∽ｿ晏ｭ俶凾</td><td>荳肴ｭ｣譎ゅ・繧ｨ繝ｩ繝ｼ繝｡繝・そ繝ｼ繧ｸ陦ｨ遉ｺ縺ｾ縺溘・陬懈ｭ｣</td></tr><tr><td>3</td><td>騾夂衍險ｭ螳・/td><td>String</td><td>譛螟ｧ30譁・ｭ・/td><td>蠢・・/td><td>險ｱ蜿ｯ蛟､縺ｮ縺ｿ</td><td>螟画峩譎ゅ∽ｿ晏ｭ俶凾</td><td>荳肴ｭ｣譎ゅ・繧ｨ繝ｩ繝ｼ繝｡繝・そ繝ｼ繧ｸ陦ｨ遉ｺ縺ｾ縺溘・陬懈ｭ｣</td></tr><tr><td>4</td><td>陦ｨ遉ｺ險隱・/td><td>String</td><td>譛螟ｧ20譁・ｭ・/td><td>蠢・・/td><td>譌･譛ｬ隱・English縺ｮ縺ｿ</td><td>螟画峩譎ゅ∽ｿ晏ｭ俶凾</td><td>荳肴ｭ｣譎ゅ・繧ｨ繝ｩ繝ｼ繝｡繝・そ繝ｼ繧ｸ陦ｨ遉ｺ縺ｾ縺溘・陬懈ｭ｣</td></tr><tr><td>5</td><td>譁ｰ繝代せ繝ｯ繝ｼ繝・/td><td>String</td><td>8縲・00譁・ｭ・/td><td>莉ｻ諢・/td><td>8譁・ｭ嶺ｻ･荳・/td><td>蜈･蜉帶凾縲∽ｿ晏ｭ俶凾</td><td>荳肴ｭ｣譎ゅ・繧ｨ繝ｩ繝ｼ繝｡繝・そ繝ｼ繧ｸ陦ｨ遉ｺ縺ｾ縺溘・陬懈ｭ｣</td></tr><tr><td>6</td><td>遒ｺ隱咲畑繝代せ繝ｯ繝ｼ繝・/td><td>String</td><td>8縲・00譁・ｭ・/td><td>莉ｻ諢・/td><td>譁ｰ繝代せ繝ｯ繝ｼ繝峨→荳閾ｴ</td><td>蜈･蜉帶凾縲∽ｿ晏ｭ俶凾</td><td>荳肴ｭ｣譎ゅ・繧ｨ繝ｩ繝ｼ繝｡繝・そ繝ｼ繧ｸ陦ｨ遉ｺ縺ｾ縺溘・陬懈ｭ｣</td></tr></tbody></table></div>
+<h3>3. 蜃ｦ逅・ヵ繝ｭ繝ｼ</h3>
+<div class='flow'><p><span class='label'>Step 1</span>account.html縺ｫ繧｢繧ｯ繧ｻ繧ｹ縺吶ｋ縲・/p><p><span class='label'>Step 2</span>邂｡逅・・ュ蝣ｱ繧定｡ｨ遉ｺ縺吶ｋ縲・/p><p><span class='label'>Step 3</span>蠢・ｦ・・岼繧剃ｿｮ豁｣縺吶ｋ縲・/p><p><span class='label'>Step 4</span>菫晏ｭ倥☆繧区款荳九〒蜈･蜉帙メ繧ｧ繝・け繧定｡後＞菫晏ｭ倥☆繧九・/p></div>
+<h3>4. 豁｣蟶ｸ譎ゅ・蜍穂ｽ・/h3>
+<ul><li>邂｡逅・・ュ蝣ｱ縺御ｿ晏ｭ倥＆繧後ｋ縲・/li><li>繝代せ繝ｯ繝ｼ繝牙・蜉帙′遨ｺ縺ｮ蝣ｴ蜷医・螟画峩縺励↑縺・・/li></ul>
+<h3>5. 繧ｨ繝ｩ繝ｼ譎ゅ・蜍穂ｽ・/h3>
+<ul><li>繝｡繝ｼ繝ｫ蠖｢蠑丈ｸ肴ｭ｣譎ゅ・菫晏ｭ倅ｸ榊庄縲・/li><li>繝代せ繝ｯ繝ｼ繝我ｸ堺ｸ閾ｴ譎ゅ・菫晏ｭ倅ｸ榊庄縲・/li><li>菫晏ｭ伜､ｱ謨玲凾縺ｯ繝輔か繝ｼ繝荳企Κ縺ｫ繧ｨ繝ｩ繝ｼ陦ｨ遉ｺ縲・/li></ul>
+<h3>6. 逕ｻ髱｢驕ｷ遘ｻ蜈・/h3>
+<div class='table-wrap'><table><thead><tr><th>No.</th><th>驕ｷ遘ｻ蜈・ヵ繝ｬ繝ｼ繝</th><th>繝医Μ繧ｬ繝ｼ</th><th>驕ｷ遘ｻ蜈・/th><th>驕ｷ遘ｻ譚｡莉ｶ</th><th>蠑輔″邯吶℃蛟､</th><th>蛯呵・/th></tr></thead><tbody><tr><td>1</td><td>Frame 02</td><td>菫晏ｭ倥☆繧・/td><td>account.html</td><td>蜈･蜉帛､豁｣蟶ｸ</td><td>邂｡逅・・ュ蝣ｱ</td><td>蜷檎判髱｢蜀崎｡ｨ遉ｺ</td></tr><tr><td>2</td><td>Frame 01</td><td>蜃ｺ</td><td>login.html</td><td>蟶ｸ譎・/td><td>縺ｪ縺・/td><td>繝ｭ繧ｰ繧｢繧ｦ繝・/td></tr></tbody></table></div>
+<h3>7. DB変更反映メモ（2026-05-14）</h3>
+<div class="note">
+  <ul>
+    <li>商品マスタは <code>category_master</code> を参照し、<code>products</code> は <code>category_id + master_id</code> を業務キーとして扱う。</li>
+    <li>在庫は商品と1:1（<code>inventory_items.product_id</code>）で管理し、増減履歴は <code>inventory_transactions</code> に記録する。</li>
+    <li>予約/顧客は <code>reservations</code> と <code>customers</code> の紐づきを前提とし、Phase2対象テーブル（<code>orders</code>/<code>order_items</code>/<code>reviews</code> 等）はPhase1機能では使用しない。</li>
+  </ul>
+</div>
 </section>
   </main>
 </body>
 </html>
+

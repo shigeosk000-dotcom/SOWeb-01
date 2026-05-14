@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>1. コンセプトページ表示｜残り機能 詳細仕様書（モックアップ準拠）</title>
+  <title>1. 繧ｳ繝ｳ繧ｻ繝励ヨ繝壹・繧ｸ陦ｨ遉ｺ・懈ｮ九ｊ讖溯・ 隧ｳ邏ｰ莉墓ｧ俶嶌・医Δ繝・け繧｢繝・・貅匁侠・・/title>
   <style>
 :root{--bg:#f7f5f2;--paper:#fff;--ink:#1f1b17;--muted:#6d645a;--line:#e8dccb;--accent:#b08d57;--accent-dark:#8c6a36;--soft:#faf6ef;--error:#8f3f2f;--ok:#48694d}
 *{box-sizing:border-box}body{margin:0;padding:40px 24px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;background:var(--bg);color:var(--ink);line-height:1.75}.page{max-width:1180px;margin:0 auto}
@@ -15,43 +15,52 @@ h1{margin:0 0 10px;font-size:30px}h2{margin:0 0 16px;padding-left:14px;border-le
 <body>
   <main class="page">
     <header>
-      <h1>1. コンセプトページ表示</h1>
-      <p class="meta">分割元：残り機能 詳細仕様書（モックアップ準拠）</p>
+      <h1>1. 繧ｳ繝ｳ繧ｻ繝励ヨ繝壹・繧ｸ陦ｨ遉ｺ</h1>
+      <p class="meta">蛻・牡蜈・ｼ壽ｮ九ｊ讖溯・ 隧ｳ邏ｰ莉墓ｧ俶嶌・医Δ繝・け繧｢繝・・貅匁侠・・/p>
     </header>
     <section class="screen" id="spec-01">
-<h2>1. コンセプトページ表示</h2>
+<h2>1. 繧ｳ繝ｳ繧ｻ繝励ヨ繝壹・繧ｸ陦ｨ遉ｺ</h2>
 <p class="meta"><span class="badge">user/concept.html</span><span class="badge">Phase1</span><span class="badge">Must</span></p>
-<p>和香巡りのブランドコンセプト、素材のこだわり、地域ストーリーを表示し、体験詳細・予約へ誘導する。</p>
-<h3>1. 画面レイアウト</h3>
-<p class="note">添付モックアップのレイアウト・項目をベースに、必要に応じて代替表示、リンク不正時の扱い、入力補助・エラー表示を追加仕様として整理しています。</p>
-<div class="layout-box"><pre>┌─ Frame 01：ヘッダー──────────────────────────────┐
-│ 1. ロゴ 2. ナビ（コンセプト/体験詳細/予約）3. EN/JP 4. Book Experience
-└────────────────────────────────────────────────────────┘
-┌─ Frame 02：ページヒーロー──────────────────────────────┐
-│ 1. パンくず 2. 見出し「和香巡りとは」3. リード文
-└────────────────────────────────────────────────────────┘
-┌─ Frame 03：コンセプト──────────────────────────────┐
-│ 1. 見出し 2. 説明文 3. 体験詳細を見るCTA
-└────────────────────────────────────────────────────────┘
-┌─ Frame 04：素材のこだわり──────────────────────────────┐
-│ 1. 見出し 2. 素材カード群
-└────────────────────────────────────────────────────────┘
-┌─ Frame 05：地域ストーリー──────────────────────────────┐
-│ 1. 見出し 2. 地域カード/操作ボタン
-└────────────────────────────────────────────────────────┘
-┌─ Frame 06：フッター──────────────────────────────┐
-│ 1. Experience 2. Booking 3. その他リンク
-└────────────────────────────────────────────────────────┘</pre></div>
-<h4>フレーム別 配置項目・表示順</h4>
-<div class="table-wrap"><table><thead><tr><th>Frame</th><th>配置エリア</th><th>表示順</th><th>項目</th><th>モックアップ上の要素</th><th>種別</th><th>配置位置</th><th>補足・追加仕様</th></tr></thead><tbody><tr><td>Frame 01</td><td>ヘッダー</td><td>1</td><td>1. ロゴ 2. ナビ（コンセプト/体験詳細/予約）3. EN/JP 4. Book Experience</td><td>1. ロゴ 2. ナビ（コンセプト/体験詳細/予約）3. EN/JP 4. Book Experience</td><td>表示/リンク/入力</td><td>モックアップ順</td><td>不足項目は代替表示・リンク不正時制御として追加</td></tr><tr><td>Frame 02</td><td>ページヒーロー</td><td>1</td><td>1. パンくず 2. 見出し「和香巡りとは」3. リード文</td><td>1. パンくず 2. 見出し「和香巡りとは」3. リード文</td><td>表示/リンク/入力</td><td>モックアップ順</td><td>不足項目は代替表示・リンク不正時制御として追加</td></tr><tr><td>Frame 03</td><td>コンセプト</td><td>1</td><td>1. 見出し 2. 説明文 3. 体験詳細を見るCTA</td><td>1. 見出し 2. 説明文 3. 体験詳細を見るCTA</td><td>表示/リンク/入力</td><td>モックアップ順</td><td>不足項目は代替表示・リンク不正時制御として追加</td></tr><tr><td>Frame 04</td><td>素材のこだわり</td><td>1</td><td>1. 見出し 2. 素材カード群</td><td>1. 見出し 2. 素材カード群</td><td>表示/リンク/入力</td><td>モックアップ順</td><td>不足項目は代替表示・リンク不正時制御として追加</td></tr><tr><td>Frame 05</td><td>地域ストーリー</td><td>1</td><td>1. 見出し 2. 地域カード/操作ボタン</td><td>1. 見出し 2. 地域カード/操作ボタン</td><td>表示/リンク/入力</td><td>モックアップ順</td><td>不足項目は代替表示・リンク不正時制御として追加</td></tr><tr><td>Frame 06</td><td>フッター</td><td>1</td><td>1. Experience 2. Booking 3. その他リンク</td><td>1. Experience 2. Booking 3. その他リンク</td><td>表示/リンク/入力</td><td>モックアップ順</td><td>不足項目は代替表示・リンク不正時制御として追加</td></tr></tbody></table></div>
-<h3>2. 入力項目一覧</h3>
-<div class="table-wrap"><table><thead><tr><th>No.</th><th>対象フレーム</th><th>項目名</th><th>データ型</th><th>データサイズ</th><th>必須/任意</th><th>バリデーションルール</th><th>チェック実施タイミング</th><th>エラー時の扱い</th></tr></thead><tbody><tr><td>1</td><td>Frame 01/06</td><td>遷移先URL</td><td>String</td><td>最大255</td><td>必須</td><td>内部リンク（index/concept/experience/reservation.html）であること</td><td>画面描画前・リンク押下時</td><td>不正時はリンク非活性</td></tr><tr><td>2</td><td>Frame 05</td><td>地域カード番号</td><td>Integer</td><td>1〜カード数</td><td>任意</td><td>1以上カード件数以下</td><td>地域カード操作時</td><td>範囲外は先頭へ補正</td></tr><tr><td>3</td><td>Frame 04/05</td><td>画像パス</td><td>String</td><td>最大255</td><td>必須</td><td>assets/配下、png/jpg/webpのみ</td><td>画面描画前・画像読込時</td><td>alt表示</td></tr><tr><td>4</td><td>Frame 03〜05</td><td>表示文言</td><td>String</td><td>最大1000</td><td>必須</td><td>HTMLタグをエスケープ</td><td>画面描画前</td><td>テキストとして表示</td></tr></tbody></table></div>
-<h3>3. 処理フロー</h3><div class="flow"><p class="flow-step"><span class="label">Step 1</span>concept.htmlにアクセス</p><p class="flow-step"><span class="label">Step 2</span>リンクURL・画像パス・地域カード番号をチェック</p><p class="flow-step"><span class="label">Step 3</span>コンセプト、素材、地域ストーリーを表示</p><p class="flow-step"><span class="label">Step 4</span>体験詳細/予約/トップへ遷移</p></div>
-<h3>4. 正常時の動作</h3><div class="ok"><ul><li>全Frameをモックアップ順で表示する</li><li>素材カードと地域ストーリーを表示する</li><li>CTA押下で体験詳細・予約へ遷移する</li></ul></div>
-<h3>5. エラー時の動作</h3><div class="err"><ul><li>画像取得失敗時はalt表示</li><li>リンク不正時はリンク非活性</li><li>地域カード番号範囲外は先頭表示</li></ul></div>
-<h3>6. 画面遷移先</h3>
-<div class="table-wrap"><table><thead><tr><th>No.</th><th>遷移元フレーム</th><th>トリガー</th><th>遷移先</th><th>遷移条件</th><th>引き継ぎ値</th><th>備考</th></tr></thead><tbody><tr><td>1</td><td>Frame 01</td><td>ロゴ</td><td>index.html</td><td>常時</td><td>なし</td><td>トップへ</td></tr><tr><td>2</td><td>Frame 03</td><td>体験詳細を見る</td><td>experience.html</td><td>URL正常</td><td>なし</td><td>体験詳細へ</td></tr><tr><td>3</td><td>Frame 01/06</td><td>Booking</td><td>reservation.html</td><td>URL正常</td><td>なし</td><td>予約へ</td></tr></tbody></table></div>
+<p>蜥碁ｦ吝ｷ｡繧翫・繝悶Λ繝ｳ繝峨さ繝ｳ繧ｻ繝励ヨ縲∫ｴ譚舌・縺薙□繧上ｊ縲∝慍蝓溘せ繝医・繝ｪ繝ｼ繧定｡ｨ遉ｺ縺励∽ｽ馴ｨ楢ｩｳ邏ｰ繝ｻ莠育ｴ・∈隱伜ｰ弱☆繧九・/p>
+<h3>1. 逕ｻ髱｢繝ｬ繧､繧｢繧ｦ繝・/h3>
+<p class="note">豺ｻ莉倥Δ繝・け繧｢繝・・縺ｮ繝ｬ繧､繧｢繧ｦ繝医・鬆・岼繧偵・繝ｼ繧ｹ縺ｫ縲∝ｿ・ｦ√↓蠢懊§縺ｦ莉｣譖ｿ陦ｨ遉ｺ縲√Μ繝ｳ繧ｯ荳肴ｭ｣譎ゅ・謇ｱ縺・∝・蜉幄｣懷勧繝ｻ繧ｨ繝ｩ繝ｼ陦ｨ遉ｺ繧定ｿｽ蜉莉墓ｧ倥→縺励※謨ｴ逅・＠縺ｦ縺・∪縺吶・/p>
+<div class="layout-box"><pre>笏娯楳 Frame 01・壹・繝・ム繝ｼ笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏・
+笏・1. 繝ｭ繧ｴ 2. 繝翫ン・医さ繝ｳ繧ｻ繝励ヨ/菴馴ｨ楢ｩｳ邏ｰ/莠育ｴ・ｼ・. EN/JP 4. Book Experience
+笏披楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏・
+笏娯楳 Frame 02・壹・繝ｼ繧ｸ繝偵・繝ｭ繝ｼ笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏・
+笏・1. 繝代Φ縺上★ 2. 隕句・縺励悟柱鬥吝ｷ｡繧翫→縺ｯ縲・. 繝ｪ繝ｼ繝画枚
+笏披楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏・
+笏娯楳 Frame 03・壹さ繝ｳ繧ｻ繝励ヨ笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏・
+笏・1. 隕句・縺・2. 隱ｬ譏取枚 3. 菴馴ｨ楢ｩｳ邏ｰ繧定ｦ九ｋCTA
+笏披楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏・
+笏娯楳 Frame 04・夂ｴ譚舌・縺薙□繧上ｊ笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏・
+笏・1. 隕句・縺・2. 邏譚舌き繝ｼ繝臥ｾ､
+笏披楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏・
+笏娯楳 Frame 05・壼慍蝓溘せ繝医・繝ｪ繝ｼ笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏・
+笏・1. 隕句・縺・2. 蝨ｰ蝓溘き繝ｼ繝・謫堺ｽ懊・繧ｿ繝ｳ
+笏披楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏・
+笏娯楳 Frame 06・壹ヵ繝・ち繝ｼ笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏・
+笏・1. Experience 2. Booking 3. 縺昴・莉悶Μ繝ｳ繧ｯ
+笏披楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏・/pre></div>
+<h4>繝輔Ξ繝ｼ繝蛻･ 驟咲ｽｮ鬆・岼繝ｻ陦ｨ遉ｺ鬆・/h4>
+<div class="table-wrap"><table><thead><tr><th>Frame</th><th>驟咲ｽｮ繧ｨ繝ｪ繧｢</th><th>陦ｨ遉ｺ鬆・/th><th>鬆・岼</th><th>繝｢繝・け繧｢繝・・荳翫・隕∫ｴ</th><th>遞ｮ蛻･</th><th>驟咲ｽｮ菴咲ｽｮ</th><th>陬懆ｶｳ繝ｻ霑ｽ蜉莉墓ｧ・/th></tr></thead><tbody><tr><td>Frame 01</td><td>繝倥ャ繝繝ｼ</td><td>1</td><td>1. 繝ｭ繧ｴ 2. 繝翫ン・医さ繝ｳ繧ｻ繝励ヨ/菴馴ｨ楢ｩｳ邏ｰ/莠育ｴ・ｼ・. EN/JP 4. Book Experience</td><td>1. 繝ｭ繧ｴ 2. 繝翫ン・医さ繝ｳ繧ｻ繝励ヨ/菴馴ｨ楢ｩｳ邏ｰ/莠育ｴ・ｼ・. EN/JP 4. Book Experience</td><td>陦ｨ遉ｺ/繝ｪ繝ｳ繧ｯ/蜈･蜉・/td><td>繝｢繝・け繧｢繝・・鬆・/td><td>荳崎ｶｳ鬆・岼縺ｯ莉｣譖ｿ陦ｨ遉ｺ繝ｻ繝ｪ繝ｳ繧ｯ荳肴ｭ｣譎ょ宛蠕｡縺ｨ縺励※霑ｽ蜉</td></tr><tr><td>Frame 02</td><td>繝壹・繧ｸ繝偵・繝ｭ繝ｼ</td><td>1</td><td>1. 繝代Φ縺上★ 2. 隕句・縺励悟柱鬥吝ｷ｡繧翫→縺ｯ縲・. 繝ｪ繝ｼ繝画枚</td><td>1. 繝代Φ縺上★ 2. 隕句・縺励悟柱鬥吝ｷ｡繧翫→縺ｯ縲・. 繝ｪ繝ｼ繝画枚</td><td>陦ｨ遉ｺ/繝ｪ繝ｳ繧ｯ/蜈･蜉・/td><td>繝｢繝・け繧｢繝・・鬆・/td><td>荳崎ｶｳ鬆・岼縺ｯ莉｣譖ｿ陦ｨ遉ｺ繝ｻ繝ｪ繝ｳ繧ｯ荳肴ｭ｣譎ょ宛蠕｡縺ｨ縺励※霑ｽ蜉</td></tr><tr><td>Frame 03</td><td>繧ｳ繝ｳ繧ｻ繝励ヨ</td><td>1</td><td>1. 隕句・縺・2. 隱ｬ譏取枚 3. 菴馴ｨ楢ｩｳ邏ｰ繧定ｦ九ｋCTA</td><td>1. 隕句・縺・2. 隱ｬ譏取枚 3. 菴馴ｨ楢ｩｳ邏ｰ繧定ｦ九ｋCTA</td><td>陦ｨ遉ｺ/繝ｪ繝ｳ繧ｯ/蜈･蜉・/td><td>繝｢繝・け繧｢繝・・鬆・/td><td>荳崎ｶｳ鬆・岼縺ｯ莉｣譖ｿ陦ｨ遉ｺ繝ｻ繝ｪ繝ｳ繧ｯ荳肴ｭ｣譎ょ宛蠕｡縺ｨ縺励※霑ｽ蜉</td></tr><tr><td>Frame 04</td><td>邏譚舌・縺薙□繧上ｊ</td><td>1</td><td>1. 隕句・縺・2. 邏譚舌き繝ｼ繝臥ｾ､</td><td>1. 隕句・縺・2. 邏譚舌き繝ｼ繝臥ｾ､</td><td>陦ｨ遉ｺ/繝ｪ繝ｳ繧ｯ/蜈･蜉・/td><td>繝｢繝・け繧｢繝・・鬆・/td><td>荳崎ｶｳ鬆・岼縺ｯ莉｣譖ｿ陦ｨ遉ｺ繝ｻ繝ｪ繝ｳ繧ｯ荳肴ｭ｣譎ょ宛蠕｡縺ｨ縺励※霑ｽ蜉</td></tr><tr><td>Frame 05</td><td>蝨ｰ蝓溘せ繝医・繝ｪ繝ｼ</td><td>1</td><td>1. 隕句・縺・2. 蝨ｰ蝓溘き繝ｼ繝・謫堺ｽ懊・繧ｿ繝ｳ</td><td>1. 隕句・縺・2. 蝨ｰ蝓溘き繝ｼ繝・謫堺ｽ懊・繧ｿ繝ｳ</td><td>陦ｨ遉ｺ/繝ｪ繝ｳ繧ｯ/蜈･蜉・/td><td>繝｢繝・け繧｢繝・・鬆・/td><td>荳崎ｶｳ鬆・岼縺ｯ莉｣譖ｿ陦ｨ遉ｺ繝ｻ繝ｪ繝ｳ繧ｯ荳肴ｭ｣譎ょ宛蠕｡縺ｨ縺励※霑ｽ蜉</td></tr><tr><td>Frame 06</td><td>繝輔ャ繧ｿ繝ｼ</td><td>1</td><td>1. Experience 2. Booking 3. 縺昴・莉悶Μ繝ｳ繧ｯ</td><td>1. Experience 2. Booking 3. 縺昴・莉悶Μ繝ｳ繧ｯ</td><td>陦ｨ遉ｺ/繝ｪ繝ｳ繧ｯ/蜈･蜉・/td><td>繝｢繝・け繧｢繝・・鬆・/td><td>荳崎ｶｳ鬆・岼縺ｯ莉｣譖ｿ陦ｨ遉ｺ繝ｻ繝ｪ繝ｳ繧ｯ荳肴ｭ｣譎ょ宛蠕｡縺ｨ縺励※霑ｽ蜉</td></tr></tbody></table></div>
+<h3>2. 蜈･蜉幃・岼荳隕ｧ</h3>
+<div class="table-wrap"><table><thead><tr><th>No.</th><th>蟇ｾ雎｡繝輔Ξ繝ｼ繝</th><th>鬆・岼蜷・/th><th>繝・・繧ｿ蝙・/th><th>繝・・繧ｿ繧ｵ繧､繧ｺ</th><th>蠢・・莉ｻ諢・/th><th>繝舌Μ繝・・繧ｷ繝ｧ繝ｳ繝ｫ繝ｼ繝ｫ</th><th>繝√ぉ繝・け螳滓命繧ｿ繧､繝溘Φ繧ｰ</th><th>繧ｨ繝ｩ繝ｼ譎ゅ・謇ｱ縺・/th></tr></thead><tbody><tr><td>1</td><td>Frame 01/06</td><td>驕ｷ遘ｻ蜈・RL</td><td>String</td><td>譛螟ｧ255</td><td>蠢・・/td><td>蜀・Κ繝ｪ繝ｳ繧ｯ・・ndex/concept/experience/reservation.html・峨〒縺ゅｋ縺薙→</td><td>逕ｻ髱｢謠冗判蜑阪・繝ｪ繝ｳ繧ｯ謚ｼ荳区凾</td><td>荳肴ｭ｣譎ゅ・繝ｪ繝ｳ繧ｯ髱樊ｴｻ諤ｧ</td></tr><tr><td>2</td><td>Frame 05</td><td>蝨ｰ蝓溘き繝ｼ繝臥分蜿ｷ</td><td>Integer</td><td>1縲懊き繝ｼ繝画焚</td><td>莉ｻ諢・/td><td>1莉･荳翫き繝ｼ繝我ｻｶ謨ｰ莉･荳・/td><td>蝨ｰ蝓溘き繝ｼ繝画桃菴懈凾</td><td>遽・峇螟悶・蜈磯ｭ縺ｸ陬懈ｭ｣</td></tr><tr><td>3</td><td>Frame 04/05</td><td>逕ｻ蜒上ヱ繧ｹ</td><td>String</td><td>譛螟ｧ255</td><td>蠢・・/td><td>assets/驟堺ｸ九｝ng/jpg/webp縺ｮ縺ｿ</td><td>逕ｻ髱｢謠冗判蜑阪・逕ｻ蜒剰ｪｭ霎ｼ譎・/td><td>alt陦ｨ遉ｺ</td></tr><tr><td>4</td><td>Frame 03縲・5</td><td>陦ｨ遉ｺ譁・ｨ</td><td>String</td><td>譛螟ｧ1000</td><td>蠢・・/td><td>HTML繧ｿ繧ｰ繧偵お繧ｹ繧ｱ繝ｼ繝・/td><td>逕ｻ髱｢謠冗判蜑・/td><td>繝・く繧ｹ繝医→縺励※陦ｨ遉ｺ</td></tr></tbody></table></div>
+<h3>3. 蜃ｦ逅・ヵ繝ｭ繝ｼ</h3><div class="flow"><p class="flow-step"><span class="label">Step 1</span>concept.html縺ｫ繧｢繧ｯ繧ｻ繧ｹ</p><p class="flow-step"><span class="label">Step 2</span>繝ｪ繝ｳ繧ｯURL繝ｻ逕ｻ蜒上ヱ繧ｹ繝ｻ蝨ｰ蝓溘き繝ｼ繝臥分蜿ｷ繧偵メ繧ｧ繝・け</p><p class="flow-step"><span class="label">Step 3</span>繧ｳ繝ｳ繧ｻ繝励ヨ縲∫ｴ譚舌∝慍蝓溘せ繝医・繝ｪ繝ｼ繧定｡ｨ遉ｺ</p><p class="flow-step"><span class="label">Step 4</span>菴馴ｨ楢ｩｳ邏ｰ/莠育ｴ・繝医ャ繝励∈驕ｷ遘ｻ</p></div>
+<h3>4. 豁｣蟶ｸ譎ゅ・蜍穂ｽ・/h3><div class="ok"><ul><li>蜈ｨFrame繧偵Δ繝・け繧｢繝・・鬆・〒陦ｨ遉ｺ縺吶ｋ</li><li>邏譚舌き繝ｼ繝峨→蝨ｰ蝓溘せ繝医・繝ｪ繝ｼ繧定｡ｨ遉ｺ縺吶ｋ</li><li>CTA謚ｼ荳九〒菴馴ｨ楢ｩｳ邏ｰ繝ｻ莠育ｴ・∈驕ｷ遘ｻ縺吶ｋ</li></ul></div>
+<h3>5. 繧ｨ繝ｩ繝ｼ譎ゅ・蜍穂ｽ・/h3><div class="err"><ul><li>逕ｻ蜒丞叙蠕怜､ｱ謨玲凾縺ｯalt陦ｨ遉ｺ</li><li>繝ｪ繝ｳ繧ｯ荳肴ｭ｣譎ゅ・繝ｪ繝ｳ繧ｯ髱樊ｴｻ諤ｧ</li><li>蝨ｰ蝓溘き繝ｼ繝臥分蜿ｷ遽・峇螟悶・蜈磯ｭ陦ｨ遉ｺ</li></ul></div>
+<h3>6. 逕ｻ髱｢驕ｷ遘ｻ蜈・/h3>
+<div class="table-wrap"><table><thead><tr><th>No.</th><th>驕ｷ遘ｻ蜈・ヵ繝ｬ繝ｼ繝</th><th>繝医Μ繧ｬ繝ｼ</th><th>驕ｷ遘ｻ蜈・/th><th>驕ｷ遘ｻ譚｡莉ｶ</th><th>蠑輔″邯吶℃蛟､</th><th>蛯呵・/th></tr></thead><tbody><tr><td>1</td><td>Frame 01</td><td>繝ｭ繧ｴ</td><td>index.html</td><td>蟶ｸ譎・/td><td>縺ｪ縺・/td><td>繝医ャ繝励∈</td></tr><tr><td>2</td><td>Frame 03</td><td>菴馴ｨ楢ｩｳ邏ｰ繧定ｦ九ｋ</td><td>experience.html</td><td>URL豁｣蟶ｸ</td><td>縺ｪ縺・/td><td>菴馴ｨ楢ｩｳ邏ｰ縺ｸ</td></tr><tr><td>3</td><td>Frame 01/06</td><td>Booking</td><td>reservation.html</td><td>URL豁｣蟶ｸ</td><td>縺ｪ縺・/td><td>莠育ｴ・∈</td></tr></tbody></table></div>
+<h3>7. DB変更反映メモ（2026-05-14）</h3>
+<div class="note">
+  <ul>
+    <li>商品マスタは <code>category_master</code> を参照し、<code>products</code> は <code>category_id + master_id</code> を業務キーとして扱う。</li>
+    <li>在庫は商品と1:1（<code>inventory_items.product_id</code>）で管理し、増減履歴は <code>inventory_transactions</code> に記録する。</li>
+    <li>予約/顧客は <code>reservations</code> と <code>customers</code> の紐づきを前提とし、Phase2対象テーブル（<code>orders</code>/<code>order_items</code>/<code>reviews</code> 等）はPhase1機能では使用しない。</li>
+  </ul>
+</div>
 </section>
   </main>
 </body>
 </html>
+
