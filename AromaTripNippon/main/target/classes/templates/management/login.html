@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>管理ログイン</title>
   <link rel="stylesheet" th:href="@{/css/app.css}">
 </head>
+
 <body class="admin-body">
-<main class="login">
-  <section class="panel">
-    <h1>管理ログイン</h1>
-    <p>初期アカウント: Adm01 / password</p>
-    <p class="errors" th:if="${param.error}">IDまたはパスワードが違います。</p>
-    <p th:if="${param.logout}">ログアウトしました。</p>
-    <form th:action="@{/management/login}" method="post">
-      <label>管理者ID<input name="username" required autofocus></label>
-      <label>パスワード<input type="password" name="password" required></label>
-      <button class="primary" type="submit">ログイン</button>
-    </form>
-  </section>
-</main>
+  <main class="login">
+    <section class="panel">
+      <h1>管理ログイン</h1>
+      <!-- <p>初期アカウント: Adm01 / password</p> -->
+      <p class="errors" th:if="${param.error}">IDまたはパスワードが違います。</p>
+      <p th:if="${param.logout}">ログアウトしました。</p>
+      <form th:action="@{/management/login}" method="post">
+        <label>管理者ID<input name="username" required autofocus></label>
+        <label>パスワード<input type="password" name="password" required></label>
+        <button class="primary" type="submit">ログイン</button>
+      </form>
+    </section>
+  </main>
 </body>
+
 </html>

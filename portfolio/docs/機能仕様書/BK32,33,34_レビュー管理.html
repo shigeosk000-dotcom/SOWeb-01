@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>9. 繝ｬ繝薙Η繝ｼ邂｡逅・ｽ弃hase2讖溯・ 隧ｳ邏ｰ莉墓ｧ俶嶌</title>
+  <title>9. レビュー管理｜Phase2機能 詳細仕様書</title>
   <style>
 :root{--bg:#f7f5f2;--paper:#fff;--ink:#1f1b17;--muted:#6d645a;--line:#e8dccb;--accent:#b08d57;--accent-dark:#8c6a36;--soft:#faf6ef;--error:#8f3f2f;--ok:#48694d}
 *{box-sizing:border-box}
@@ -33,38 +33,39 @@ tr:last-child td{border-bottom:none}th:last-child,td:last-child{border-right:non
 <body>
   <main class="page">
     <header>
-      <h1>9. 繝ｬ繝薙Η繝ｼ邂｡逅・/h1>
-      <p class="meta">蛻・牡蜈・ｼ啀hase2讖溯・ 隧ｳ邏ｰ莉墓ｧ俶嶌</p>
+      <h1>9. レビュー管理</h1>
+      <p class="meta">分割元：Phase2機能 詳細仕様書</p>
     </header>
     <section class="screen" id="spec-09">
-<h2>9. 繝ｬ繝薙Η繝ｼ邂｡逅・/h2>
-<p class="meta"><span class="badge">繝舌ャ繧ｯ繧ｨ繝ｳ繝臥ｮ｡逅・/span><span class="badge">management/review_list.html / review_detail.html / review_edit.html</span><span class="badge">Phase2</span><span class="badge">Should</span></p>
-<p>謚慕ｨｿ繝ｬ繝薙Η繝ｼ繧剃ｸ隕ｧ繝ｻ隧ｳ邏ｰ遒ｺ隱阪＠縲∝・髢狗憾諷九ｄ邂｡逅・Γ繝｢繧呈峩譁ｰ縺吶ｋ縲・/p>
-<h3>1. 逕ｻ髱｢繝ｬ繧､繧｢繧ｦ繝・/h3>
-<p class="note">Phase1繝｢繝・け繧｢繝・・縺ｨ蜷後§繝医・繝ｳ繧貞燕謠舌↓縲√き繝ｼ繝峨√ユ繝ｼ繝悶Ν縲√ヵ繧ｩ繝ｼ繝縲，TA繧帝・鄂ｮ縺励∪縺吶ゆｸ玖ｨ倥・繝輔Ξ繝ｼ繝蜊倅ｽ阪・驟咲ｽｮ鬆・〒縺吶・/p>
-<pre>笏娯楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏・
-笏・Frame 01・夂ｮ｡逅・リ繝・                                         笏・
-笏懌楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏､
-笏・Frame 02・壹Ξ繝薙Η繝ｼ荳隕ｧ                                      笏・
-笏・[1] 讀懃ｴ｢ [2] 隧穂ｾ｡ [3] 蜈ｬ髢狗憾諷・[4] 荳隕ｧ                     笏・
-笏懌楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏､
-笏・Frame 03・壹Ξ繝薙Η繝ｼ隧ｳ邏ｰ                                      笏・
-笏・[1] 謚慕ｨｿ閠・[2] 隧穂ｾ｡ [3] 繧ｳ繝｡繝ｳ繝・[4] 謚慕ｨｿ譌･ [5] 蜈ｬ髢狗憾諷・    笏・
-笏懌楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏､
-笏・Frame 04・壼・髢玖ｨｭ螳・                                         笏・
-笏・[1] 蜈ｬ髢狗憾諷・[2] 邂｡逅・ち繧ｰ [3] 邂｡逅・Γ繝｢ [4] 譖ｴ譁ｰ              笏・
-笏披楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏・/pre>
-<div class='table-wrap'><table><thead><tr><th>No.</th><th>驟咲ｽｮ繝輔Ξ繝ｼ繝</th><th>陦ｨ遉ｺ鬆・・鬆・岼</th><th>遞ｮ蛻･</th><th>驟咲ｽｮ菴咲ｽｮ</th><th>陬懆ｶｳ</th></tr></thead><tbody><tr><td>5</td><td>Frame 5</td><td>[1] 讀懃ｴ｢ [2] 隧穂ｾ｡ [3] 蜈ｬ髢狗憾諷・[4] 荳隕ｧ</td><td>逕ｻ髱｢隕∫ｴ</td><td>荳翫°繧蛾・/td><td>繝｢繝・け繧｢繝・・縺ｫ蜿肴丐</td></tr><tr><td>8</td><td>Frame 8</td><td>[1] 謚慕ｨｿ閠・[2] 隧穂ｾ｡ [3] 繧ｳ繝｡繝ｳ繝・[4] 謚慕ｨｿ譌･ [5] 蜈ｬ髢狗憾諷・/td><td>逕ｻ髱｢隕∫ｴ</td><td>荳翫°繧蛾・/td><td>繝｢繝・け繧｢繝・・縺ｫ蜿肴丐</td></tr><tr><td>11</td><td>Frame 11</td><td>[1] 蜈ｬ髢狗憾諷・[2] 邂｡逅・ち繧ｰ [3] 邂｡逅・Γ繝｢ [4] 譖ｴ譁ｰ</td><td>逕ｻ髱｢隕∫ｴ</td><td>荳翫°繧蛾・/td><td>繝｢繝・け繧｢繝・・縺ｫ蜿肴丐</td></tr></tbody></table></div>
-<h3>2. 蜈･蜉幃・岼荳隕ｧ</h3>
-<div class='table-wrap'><table><thead><tr><th>No.</th><th>鬆・岼蜷・/th><th>繝・・繧ｿ蝙・/th><th>繝・・繧ｿ繧ｵ繧､繧ｺ</th><th>蠢・・莉ｻ諢・/th><th>繝舌Μ繝・・繧ｷ繝ｧ繝ｳ繝ｫ繝ｼ繝ｫ</th><th>繝√ぉ繝・け螳滓命繧ｿ繧､繝溘Φ繧ｰ</th><th>繧ｨ繝ｩ繝ｼ譎ゅ・謇ｱ縺・/th></tr></thead><tbody><tr><td>1</td><td>讀懃ｴ｢繧ｭ繝ｼ繝ｯ繝ｼ繝・/td><td>String</td><td>譛螟ｧ100譁・ｭ・/td><td>莉ｻ諢・/td><td>HTML繧ｿ繧ｰ荳榊庄</td><td>讀懃ｴ｢譎・/td><td>荳肴ｭ｣譎ゅ・繧ｨ繝ｩ繝ｼ繝｡繝・そ繝ｼ繧ｸ陦ｨ遉ｺ縺ｾ縺溘・陬懈ｭ｣</td></tr><tr><td>2</td><td>隧穂ｾ｡</td><td>Integer</td><td>1縲・</td><td>莉ｻ諢・/td><td>1莉･荳・莉･荳・/td><td>讀懃ｴ｢譎・/td><td>荳肴ｭ｣譎ゅ・繧ｨ繝ｩ繝ｼ繝｡繝・そ繝ｼ繧ｸ陦ｨ遉ｺ縺ｾ縺溘・陬懈ｭ｣</td></tr><tr><td>3</td><td>蜈ｬ髢狗憾諷・/td><td>String</td><td>譛螟ｧ20譁・ｭ・/td><td>蠢・・/td><td>蜈ｬ髢・髱槫・髢・遒ｺ隱堺ｸｭ縺ｮ縺ｿ</td><td>螟画峩譎ゅ∵峩譁ｰ譎・/td><td>荳肴ｭ｣譎ゅ・繧ｨ繝ｩ繝ｼ繝｡繝・そ繝ｼ繧ｸ陦ｨ遉ｺ縺ｾ縺溘・陬懈ｭ｣</td></tr><tr><td>4</td><td>邂｡逅・ち繧ｰ</td><td>String</td><td>譛螟ｧ50譁・ｭ・/td><td>莉ｻ諢・/td><td>HTML繧ｿ繧ｰ荳榊庄</td><td>蜈･蜉帶凾縲∵峩譁ｰ譎・/td><td>荳肴ｭ｣譎ゅ・繧ｨ繝ｩ繝ｼ繝｡繝・そ繝ｼ繧ｸ陦ｨ遉ｺ縺ｾ縺溘・陬懈ｭ｣</td></tr><tr><td>5</td><td>邂｡逅・Γ繝｢</td><td>String</td><td>譛螟ｧ1000譁・ｭ・/td><td>莉ｻ諢・/td><td>HTML繧ｿ繧ｰ繧偵お繧ｹ繧ｱ繝ｼ繝・/td><td>蜈･蜉帶凾縲∵峩譁ｰ譎・/td><td>荳肴ｭ｣譎ゅ・繧ｨ繝ｩ繝ｼ繝｡繝・そ繝ｼ繧ｸ陦ｨ遉ｺ縺ｾ縺溘・陬懈ｭ｣</td></tr></tbody></table></div>
-<h3>3. 蜃ｦ逅・ヵ繝ｭ繝ｼ</h3>
-<div class='flow'><p><span class='label'>Step 1</span>review_list.html縺ｫ繧｢繧ｯ繧ｻ繧ｹ縺吶ｋ縲・/p><p><span class='label'>Step 2</span>繝ｬ繝薙Η繝ｼ繧呈､懃ｴ｢繝ｻ邨槭ｊ霎ｼ縺ｿ縺吶ｋ縲・/p><p><span class='label'>Step 3</span>隧ｳ邏ｰ謚ｼ荳九〒review_detail.html縺ｸ驕ｷ遘ｻ縺吶ｋ縲・/p><p><span class='label'>Step 4</span>蜈ｬ髢玖ｨｭ螳壹ｒ螟画峩縺励∵峩譁ｰ縺吶ｋ縲・/p></div>
-<h3>4. 豁｣蟶ｸ譎ゅ・蜍穂ｽ・/h3>
-<ul><li>繝ｬ繝薙Η繝ｼ荳隕ｧ縺ｨ隧ｳ邏ｰ縺瑚｡ｨ遉ｺ縺輔ｌ繧九・/li><li>蜈ｬ髢狗憾諷九ｒ譖ｴ譁ｰ縺ｧ縺阪ｋ縲・/li><li>譖ｴ譁ｰ蠕後∬ｩｳ邏ｰ逕ｻ髱｢縺ｸ謌ｻ繧九・/li></ul>
-<h3>5. 繧ｨ繝ｩ繝ｼ譎ゅ・蜍穂ｽ・/h3>
-<ul><li>繝ｬ繝薙Η繝ｼID荳肴ｭ｣譎ゅ・荳隕ｧ縺ｸ謌ｻ縺吶・/li><li>蜈ｬ髢狗憾諷倶ｸ肴ｭ｣蛟､縺ｯ譖ｴ譁ｰ荳榊庄縲・/li><li>邂｡逅・Γ繝｢譁・ｭ玲焚雜・℃譎ゅ・菫晏ｭ倅ｸ榊庄縲・/li></ul>
-<h3>6. 逕ｻ髱｢驕ｷ遘ｻ蜈・/h3>
-<div class='table-wrap'><table><thead><tr><th>No.</th><th>驕ｷ遘ｻ蜈・ヵ繝ｬ繝ｼ繝</th><th>繝医Μ繧ｬ繝ｼ</th><th>驕ｷ遘ｻ蜈・/th><th>驕ｷ遘ｻ譚｡莉ｶ</th><th>蠑輔″邯吶℃蛟､</th><th>蛯呵・/th></tr></thead><tbody><tr><td>1</td><td>Frame 02</td><td>隧ｳ邏ｰ</td><td>review_detail.html</td><td>繝ｬ繝薙Η繝ｼID豁｣蟶ｸ</td><td>繝ｬ繝薙Η繝ｼID</td><td>隧ｳ邏ｰ縺ｸ</td></tr><tr><td>2</td><td>Frame 03</td><td>蜈ｬ髢玖ｨｭ螳壹ｒ螟画峩</td><td>review_edit.html</td><td>繝ｬ繝薙Η繝ｼID豁｣蟶ｸ</td><td>繝ｬ繝薙Η繝ｼID</td><td>邱ｨ髮・∈</td></tr><tr><td>3</td><td>Frame 04</td><td>譖ｴ譁ｰ縺吶ｋ</td><td>review_detail.html</td><td>蜈･蜉帛､豁｣蟶ｸ</td><td>蜈ｬ髢玖ｨｭ螳・/td><td>隧ｳ邏ｰ縺ｸ</td></tr></tbody></table></div>
+<h2>9. レビュー管理</h2>
+<p class="meta"><span class="badge">バックエンド管理</span><span class="badge">management/review_list.html / review_detail.html / review_edit.html</span><span class="badge">Phase2</span><span class="badge">Should</span></p>
+<p>投稿レビューを一覧・詳細確認し、公開状態や管理メモを更新する。</p>
+<h3>1. 画面レイアウト</h3>
+<p class="note">Phase1モックアップと同じトーンを前提に、カード、テーブル、フォーム、CTAを配置します。下記はフレーム単位の配置順です。</p>
+<pre>┌────────────────────────────────────────────────────────────┐
+│ Frame 01：管理ナビ                                          │
+├────────────────────────────────────────────────────────────┤
+│ Frame 02：レビュー一覧                                      │
+│ [1] 検索 [2] 評価 [3] 公開状態 [4] 一覧                     │
+├────────────────────────────────────────────────────────────┤
+│ Frame 03：レビュー詳細                                      │
+│ [1] 投稿者 [2] 評価 [3] コメント [4] 投稿日 [5] 公開状態     │
+├────────────────────────────────────────────────────────────┤
+│ Frame 04：公開設定                                          │
+│ [1] 公開状態 [2] 管理タグ [3] 管理メモ [4] 更新              │
+└────────────────────────────────────────────────────────────┘</pre>
+<div class='table-wrap'><table><thead><tr><th>No.</th><th>配置フレーム</th><th>表示順・項目</th><th>種別</th><th>配置位置</th><th>補足</th></tr></thead><tbody><tr><td>5</td><td>Frame 5</td><td>[1] 検索 [2] 評価 [3] 公開状態 [4] 一覧</td><td>画面要素</td><td>上から順</td><td>モックアップに反映</td></tr><tr><td>8</td><td>Frame 8</td><td>[1] 投稿者 [2] 評価 [3] コメント [4] 投稿日 [5] 公開状態</td><td>画面要素</td><td>上から順</td><td>モックアップに反映</td></tr><tr><td>11</td><td>Frame 11</td><td>[1] 公開状態 [2] 管理タグ [3] 管理メモ [4] 更新</td><td>画面要素</td><td>上から順</td><td>モックアップに反映</td></tr></tbody></table></div>
+<h3>2. 入力項目一覧</h3>
+<div class='table-wrap'><table><thead><tr><th>No.</th><th>項目名</th><th>データ型</th><th>データサイズ</th><th>必須/任意</th><th>バリデーションルール</th><th>チェック実施タイミング</th><th>エラー時の扱い</th></tr></thead><tbody><tr><td>1</td><td>検索キーワード</td><td>String</td><td>最大100文字</td><td>任意</td><td>HTMLタグ不可</td><td>検索時</td><td>不正時はエラーメッセージ表示または補正</td></tr><tr><td>2</td><td>評価</td><td>Integer</td><td>1〜5</td><td>任意</td><td>1以上5以下</td><td>検索時</td><td>不正時はエラーメッセージ表示または補正</td></tr><tr><td>3</td><td>公開状態</td><td>String</td><td>最大20文字</td><td>必須</td><td>公開/非公開/確認中のみ</td><td>変更時、更新時</td><td>不正時はエラーメッセージ表示または補正</td></tr><tr><td>4</td><td>管理タグ</td><td>String</td><td>最大50文字</td><td>任意</td><td>HTMLタグ不可</td><td>入力時、更新時</td><td>不正時はエラーメッセージ表示または補正</td></tr><tr><td>5</td><td>管理メモ</td><td>String</td><td>最大1000文字</td><td>任意</td><td>HTMLタグをエスケープ</td><td>入力時、更新時</td><td>不正時はエラーメッセージ表示または補正</td></tr></tbody></table></div>
+<h3>3. 処理フロー</h3>
+<div class='flow'><p><span class='label'>Step 1</span>review_list.htmlにアクセスする。</p><p><span class='label'>Step 2</span>レビューを検索・絞り込みする。</p><p><span class='label'>Step 3</span>詳細押下でreview_detail.htmlへ遷移する。</p><p><span class='label'>Step 4</span>公開設定を変更し、更新する。</p></div>
+<h3>4. 正常時の動作</h3>
+<ul><li>レビュー一覧と詳細が表示される。</li><li>公開状態を更新できる。</li><li>更新後、詳細画面へ戻る。</li></ul>
+<h3>5. エラー時の動作</h3>
+<ul><li>レビューID不正時は一覧へ戻す。</li><li>公開状態不正値は更新不可。</li><li>管理メモ文字数超過時は保存不可。</li></ul>
+<h3>6. 画面遷移先</h3>
+<div class='table-wrap'><table><thead><tr><th>No.</th><th>遷移元フレーム</th><th>トリガー</th><th>遷移先</th><th>遷移条件</th><th>引き継ぎ値</th><th>備考</th></tr></thead><tbody><tr><td>1</td><td>Frame 02</td><td>詳細</td><td>review_detail.html</td><td>レビューID正常</td><td>レビューID</td><td>詳細へ</td></tr><tr><td>2</td><td>Frame 03</td><td>公開設定を変更</td><td>review_edit.html</td><td>レビューID正常</td><td>レビューID</td><td>編集へ</td></tr><tr><td>3</td><td>Frame 04</td><td>更新する</td><td>review_detail.html</td><td>入力値正常</td><td>公開設定</td><td>詳細へ</td></tr></tbody></table></div>
+
 <h3>7. DB変更反映メモ（2026-05-14）</h3>
 <div class="note">
   <ul>
@@ -77,4 +78,3 @@ tr:last-child td{border-bottom:none}th:last-child,td:last-child{border-right:non
   </main>
 </body>
 </html>
-

@@ -1,0 +1,635 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>讖溯・隧ｳ邏ｰ莉墓ｧ俶嶌・壹ヨ繝・・繝壹・繧ｸ陦ｨ遉ｺ・医Δ繝・け繧｢繝・・貅匁侠・・/title>
+  <style>
+    :root {
+      --bg: #f7f5f2;
+      --paper: #ffffff;
+      --ink: #1f1b17;
+      --muted: #6d645a;
+      --line: #e8dccb;
+      --accent: #b08d57;
+      --accent-dark: #8c6a36;
+      --soft: #faf6ef;
+      --shadow: 0 8px 24px rgba(0,0,0,.08);
+      --error: #8f3f2f;
+      --ok: #48694d;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 40px 24px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.75;
+    }
+
+    .page {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 32px;
+      margin-bottom: 36px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, #fffaf2, #ffffff);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: 30px;
+      letter-spacing: 0.04em;
+    }
+
+    .meta {
+      margin: 0 0 8px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      margin-right: 8px;
+      border-radius: 999px;
+      background: #fff4df;
+      border: 1px solid #e5c88e;
+      color: #7a4f18;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    section {
+      margin: 36px 0;
+      padding: 28px;
+      border-radius: 20px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    h2 {
+      margin: 0 0 18px;
+      padding-left: 14px;
+      border-left: 6px solid var(--accent);
+      font-size: 22px;
+    }
+
+    h3 {
+      margin: 24px 0 12px;
+      font-size: 17px;
+      color: var(--accent-dark);
+    }
+
+    p { margin: 0 0 12px; }
+
+    ul, ol {
+      margin: 8px 0 0;
+      padding-left: 24px;
+    }
+
+    li { margin-bottom: 6px; }
+
+    .note {
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: var(--soft);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
+    .layout-box {
+      overflow-x: auto;
+      padding: 18px;
+      border-radius: 16px;
+      background: #1f1b17;
+      color: #fffaf2;
+      margin-top: 16px;
+    }
+
+    pre {
+      margin: 0;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 13px;
+      line-height: 1.6;
+      white-space: pre;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+      margin-top: 14px;
+    }
+
+    table {
+      width: 100%;
+      min-width: 1060px;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    th, td {
+      padding: 12px 14px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+      text-align: left;
+    }
+
+    th {
+      background: #f7f2e9;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    tr:last-child td { border-bottom: none; }
+    th:last-child, td:last-child { border-right: none; }
+
+    .flow {
+      padding: 18px;
+      border-radius: 16px;
+      background: var(--soft);
+      border: 1px solid var(--line);
+    }
+
+    .flow-step {
+      margin: 0;
+      padding: 12px 0;
+      border-bottom: 1px dashed #d1c6b7;
+    }
+
+    .flow-step:last-child { border-bottom: none; }
+
+    .label {
+      display: inline-block;
+      min-width: 120px;
+      font-weight: 700;
+      color: var(--accent-dark);
+    }
+
+    .error-box,
+    .ok-box {
+      padding: 16px;
+      border-radius: 14px;
+      margin-top: 16px;
+    }
+
+    .error-box {
+      background: #fff7f4;
+      border: 1px solid #e6c5bd;
+    }
+
+    .ok-box {
+      background: #f5faf6;
+      border: 1px solid #bdd3c1;
+    }
+
+    .error-box h3 { color: var(--error); margin-top: 0; }
+    .ok-box h3 { color: var(--ok); margin-top: 0; }
+
+    .small {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 720px) {
+      body { padding: 22px 14px; }
+      header, section { padding: 22px; }
+      h1 { font-size: 24px; }
+      pre { font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <h1>讖溯・隧ｳ邏ｰ莉墓ｧ俶嶌・壹ヨ繝・・繝壹・繧ｸ陦ｨ遉ｺ・医Δ繝・け繧｢繝・・貅匁侠・・/h1>
+      <p class="meta">
+        <span class="badge">繝輔Ο繝ｳ繝医お繝ｳ繝・/span>
+        <span class="badge">user / index.html</span>
+        <span class="badge">Phase1</span>
+        <span class="badge">Must</span>
+      </p>
+      <p class="meta">
+        讖溯・讎りｦ・ｼ壽ｷｻ莉倥Δ繝・け繧｢繝・・縺ｮ <strong>mockup/user/index.html</strong> 繧偵・繝ｼ繧ｹ縺ｫ縲∬ｨｪ譌･螟門嵜莠ｺ譌・｡瑚・・菴馴ｨ薙Θ繝ｼ繧ｶ繝ｼ縺ｸ繧ｵ繝ｼ繝薙せ縺ｮ荳也阜隕ｳ縲∫ｴ譚舌∽ｽ馴ｨ薙・豬√ｌ縲∝哨繧ｳ繝溘∽ｺ育ｴ・ｰ守ｷ壹ｒ陦ｨ遉ｺ縺吶ｋ縲・
+      </p>
+    </header>
+
+    <section>
+      <h2>1. 逕ｻ髱｢繝ｬ繧､繧｢繧ｦ繝・/h2>
+      <p class="note">
+        豺ｻ莉倥Δ繝・け繧｢繝・・縺ｧ縺ｯ縲√ヨ繝・・繝壹・繧ｸ縺ｯ縲後・繝・ム繝ｼ 竊・繝偵・繝ｭ繝ｼ 竊・繝悶Λ繝ｳ繝峨せ繝医・繝ｪ繝ｼ 竊・譌･譛ｬ邏譚舌・邏ｹ莉・竊・菴馴ｨ薙・豬√ｌ繝ｻ繝ｬ繝薙Η繝ｼ 竊・莠育ｴГTA 竊・繝輔ャ繧ｿ繝ｼ縲阪・鬆・〒讒区・縺輔ｌ縺ｦ縺・ｋ縲・
+        荳崎ｶｳ縺ｨ諤昴ｏ繧後ｋ鬆・岼縺ｨ縺励※縲∫判蜒丞叙蠕怜､ｱ謨玲凾縺ｮ莉｣譖ｿ陦ｨ遉ｺ縲√せ繝ｩ繧､繝繝ｼ謫堺ｽ懃憾諷九∝､夜Κ繝ｪ繝ｳ繧ｯ縺ｮ螳牙・蛻ｶ蠕｡縲∽ｺ育ｴ・ｰ守ｷ壹∈縺ｮ蠑輔″邯吶℃蛟､繧剃ｻ墓ｧ倅ｸ願ｿｽ蜉縺吶ｋ縲・
+      </p>
+
+      <div class="layout-box">
+<pre>笏娯楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏・
+笏・Frame 01・壹・繝・ム繝ｼ                                          笏・
+笏・[1] 繝悶Λ繝ｳ繝峨Ο繧ｴ / 繧ｵ繧､繝亥錐                                  笏・
+笏・[2] 繝翫ン・壹さ繝ｳ繧ｻ繝励ヨ / 菴馴ｨ楢ｩｳ邏ｰ / 莠育ｴ・                      笏・
+笏・[3] 險隱櫁｡ｨ遉ｺ・哘N / JP                                       笏・
+笏・[4] CTA・咤ook Experience                                    笏・
+笏懌楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏､
+笏・Frame 02・壹ヲ繝ｼ繝ｭ繝ｼ                                           笏・
+笏・蟾ｦ・喙1] 繝偵・繝ｭ繝ｼ繧ｹ繝ｩ繧､繝繝ｼ                                   笏・
+笏・    [2] 繧ｹ繝ｩ繧､繝臥判蜒・1 / 02 / 03                             笏・
+笏・    [3] 蜑阪∈繝懊ち繝ｳ / 谺｡縺ｸ繝懊ち繝ｳ                              笏・
+笏・    [4] 繝峨ャ繝医リ繝難ｼ壹せ繝ｩ繧､繝・ / 2 / 3                        笏・
+笏・蜿ｳ・喙5] 繧ｭ繝・き繝ｼ STORY-FIRST LANDING / PHASE 1               笏・
+笏・    [6] 繝｡繧､繝ｳ繧ｳ繝斐・縲碁ｦ吶ｊ縺ｧ縲∵律譛ｬ繧貞ｷ｡繧九ゅ・                 笏・
+笏・    [7] 繝ｪ繝ｼ繝画枚1縲梧羅縺ｮ險俶・繧偵・ｦ吶ｊ縺ｨ縺励※謖√■蟶ｰ繧九ゅ・         笏・
+笏・    [8] 繝ｪ繝ｼ繝画枚2縲悟慍蝓溽ｴ譚舌・迚ｩ隱槭→縺ｨ繧ゅ↓...縲・               笏・
+笏・    [9] CTA・壻ｺ育ｴ・☆繧・                                       笏・
+笏・    [10] CTA・壹さ繝ｳ繧ｻ繝励ヨ繧定ｪｭ繧                               笏・
+笏懌楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏､
+笏・Frame 03・壹ヶ繝ｩ繝ｳ繝峨せ繝医・繝ｪ繝ｼ                                 笏・
+笏・蟾ｦ・喙1] 隕句・縺励後ヶ繝ｩ繝ｳ繝峨せ繝医・繝ｪ繝ｼ縲・                         笏・
+笏・    [2] 繧ｵ繝悶さ繝斐・                                           笏・
+笏・    [3] 隱ｬ譏取枚                                               笏・
+笏・    [4] CTA・夊ｩｳ縺励￥隕九ｋ                                      笏・
+笏・蜿ｳ・喙5] 菴馴ｨ薙う繝｡繝ｼ繧ｸ逕ｻ蜒・                                    笏・
+笏懌楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏､
+笏・Frame 04・壽律譛ｬ邏譚舌・邏ｹ莉・                                    笏・
+笏・[1] 隕句・縺励梧律譛ｬ邏譚舌・邏ｹ莉九・                                 笏・
+笏・[2] 繧ｵ繝悶さ繝斐・                                               笏・
+笏・[3] 邏譚舌き繝ｼ繝・1・壹・縺ｰ逕ｻ蜒・/ 隕句・縺・/ 隱ｬ譏・                   笏・
+笏・[4] 邏譚舌き繝ｼ繝・2・壹ｆ縺夂判蜒・/ 隕句・縺・/ 隱ｬ譏・                   笏・
+笏・[5] 邏譚舌き繝ｼ繝・3・夊埋闕ｷ逕ｻ蜒・/ 隕句・縺・/ 隱ｬ譏・                   笏・
+笏懌楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏､
+笏・Frame 05・壻ｽ馴ｨ薙・豬√ｌ繝ｻ繝ｬ繝薙Η繝ｼ                                笏・
+笏・蟾ｦ・喙1] 隕句・縺励御ｽ馴ｨ薙・豬√ｌ縲・                                 笏・
+笏・    [2] 繧ｵ繝悶さ繝斐・                                           笏・
+笏・    [3] Step 1 邏譚舌ｒ遏･繧・                                   笏・
+笏・    [4] Step 2 閾ｪ蛻・・鬥吶ｊ繧剃ｽ懊ｋ                              笏・
+笏・    [5] Step 3 諤昴＞蜃ｺ縺ｨ縺励※謖√■蟶ｰ繧・                         笏・
+笏・蜿ｳ・喙6] 隕句・縺励後Ξ繝薙Η繝ｼ / 菴馴ｨ薙・螢ｰ縲・                        笏・
+笏・    [7] 繝ｬ繝薙Η繝ｼ01                                           笏・
+笏・    [8] 繝ｬ繝薙Η繝ｼ02                                           笏・
+笏懌楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏､
+笏・Frame 06・壻ｺ育ｴГTA蟶ｯ                                          笏・
+笏・[1] 隕句・縺励梧擲莠ｬ縺ｧ縲∬・蛻・□縺代・鬥吶ｊ繧剃ｽ懊ｋ縲・                   笏・
+笏・[2] 隱ｬ譏取枚                                                   笏・
+笏・[3] CTA・壻ｺ育ｴ・・繝ｼ繧ｸ縺ｸ騾ｲ繧                                    笏・
+笏懌楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏､
+笏・Frame 07・壹ヵ繝・ち繝ｼ                                           笏・
+笏・[1] Concept / About隱ｬ譏・                                     笏・
+笏・[2] Experience繝ｪ繝ｳ繧ｯ                                         笏・
+笏・[3] Concept繝ｪ繝ｳ繧ｯ                                            笏・
+笏・[4] Booking繝ｪ繝ｳ繧ｯ                                            笏・
+笏・[5] Instagram / Contact / Booking                            笏・
+笏披楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏・/pre>
+      </div>
+
+      <h3>繝輔Ξ繝ｼ繝蛻･ 驟咲ｽｮ鬆・岼繝ｻ陦ｨ遉ｺ鬆・/h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Frame</th>
+              <th>驟咲ｽｮ繧ｨ繝ｪ繧｢</th>
+              <th>陦ｨ遉ｺ鬆・/th>
+              <th>鬆・岼</th>
+              <th>繝｢繝・け繧｢繝・・荳翫・隕∫ｴ</th>
+              <th>遞ｮ蛻･</th>
+              <th>驟咲ｽｮ菴咲ｽｮ</th>
+              <th>陬懆ｶｳ繝ｻ霑ｽ蜉莉墓ｧ・/th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>01</td><td>繝倥ャ繝繝ｼ</td><td>1</td><td>繝悶Λ繝ｳ繝峨Ο繧ｴ / 繧ｵ繧､繝亥錐</td><td>Aroma Trip Nippon・懷柱鬥吝ｷ｡繧・/td><td>繝ｪ繝ｳ繧ｯ</td><td>蟾ｦ</td><td>謚ｼ荳区凾 index.html 縺ｸ驕ｷ遘ｻ縲・/td></tr>
+            <tr><td>01</td><td>繝倥ャ繝繝ｼ</td><td>2</td><td>繧ｰ繝ｭ繝ｼ繝舌Ν繝翫ン</td><td>繧ｳ繝ｳ繧ｻ繝励ヨ / 菴馴ｨ楢ｩｳ邏ｰ / 莠育ｴ・/td><td>繝ｪ繝ｳ繧ｯ鄒､</td><td>荳ｭ螟ｮ</td><td>繝｢繝・け繧｢繝・・縺ｮ鬆・ｺ上ｒ邯ｭ謖√・/td></tr>
+            <tr><td>01</td><td>繝倥ャ繝繝ｼ</td><td>3</td><td>險隱櫁｡ｨ遉ｺ</td><td>EN / JP</td><td>陦ｨ遉ｺ繝ｩ繝吶Ν</td><td>蜿ｳ</td><td>蟆・擂縺ｮ險隱槫・譖ｿ繧呈Φ螳壹ら樟譎らせ縺ｧ縺ｯ陦ｨ遉ｺ縺ｮ縺ｿ縲・/td></tr>
+            <tr><td>01</td><td>繝倥ャ繝繝ｼ</td><td>4</td><td>莠育ｴГTA</td><td>Book Experience</td><td>繝懊ち繝ｳ</td><td>蜿ｳ遶ｯ</td><td>reservation.html 縺ｸ驕ｷ遘ｻ縲・/td></tr>
+
+            <tr><td>02</td><td>繝偵・繝ｭ繝ｼ蟾ｦ</td><td>1</td><td>繝偵・繝ｭ繝ｼ繧ｹ繝ｩ繧､繝繝ｼ</td><td>pro-slider</td><td>逕ｻ蜒上せ繝ｩ繧､繝繝ｼ</td><td>蟾ｦ繧ｫ繝ｩ繝</td><td>5遘帝俣髫斐〒閾ｪ蜍募・譖ｿ縲・/td></tr>
+            <tr><td>02</td><td>繝偵・繝ｭ繝ｼ蟾ｦ</td><td>2</td><td>繧ｹ繝ｩ繧､繝臥判蜒・1</td><td>assets/index_hero_01.png</td><td>逕ｻ蜒・/td><td>繧ｹ繝ｩ繧､繝繝ｼ蜀・/td><td>alt螻樊ｧ縺ゅｊ縲ら判蜒丞叙蠕怜､ｱ謨玲凾縺ｯ莉｣譖ｿ繝・く繧ｹ繝郁｡ｨ遉ｺ縲・/td></tr>
+            <tr><td>02</td><td>繝偵・繝ｭ繝ｼ蟾ｦ</td><td>3</td><td>繧ｹ繝ｩ繧､繝臥判蜒・2</td><td>assets/index_hero_02.png</td><td>逕ｻ蜒・/td><td>繧ｹ繝ｩ繧､繝繝ｼ蜀・/td><td>2譫夂岼縺ｮ繧ｹ繝ｩ繧､繝峨・/td></tr>
+            <tr><td>02</td><td>繝偵・繝ｭ繝ｼ蟾ｦ</td><td>4</td><td>繧ｹ繝ｩ繧､繝臥判蜒・3</td><td>assets/index_hero_03.png</td><td>逕ｻ蜒・/td><td>繧ｹ繝ｩ繧､繝繝ｼ蜀・/td><td>3譫夂岼縺ｮ繧ｹ繝ｩ繧､繝峨・/td></tr>
+            <tr><td>02</td><td>繝偵・繝ｭ繝ｼ蟾ｦ</td><td>5</td><td>蜑阪∈ / 谺｡縺ｸ</td><td>pro-slider__nav</td><td>繝懊ち繝ｳ</td><td>繧ｹ繝ｩ繧､繝繝ｼ蟾ｦ蜿ｳ</td><td>謚ｼ荳区凾縲∬｡ｨ遉ｺ繧ｹ繝ｩ繧､繝峨ｒ蜑榊ｾ後↓蛻・崛縲・/td></tr>
+            <tr><td>02</td><td>繝偵・繝ｭ繝ｼ蟾ｦ</td><td>6</td><td>繝峨ャ繝医リ繝・/td><td>pro-slider__dot</td><td>繝懊ち繝ｳ</td><td>繧ｹ繝ｩ繧､繝繝ｼ荳矩Κ</td><td>謚ｼ荳区凾縲∵欠螳壹せ繝ｩ繧､繝峨∈蛻・崛縲・/td></tr>
+
+            <tr><td>02</td><td>繝偵・繝ｭ繝ｼ蜿ｳ</td><td>7</td><td>繧ｭ繝・き繝ｼ</td><td>STORY-FIRST LANDING / PHASE 1</td><td>繝・く繧ｹ繝・/td><td>蜿ｳ繧ｫ繝ｩ繝荳企Κ</td><td>繝壹・繧ｸ縺ｮ菴咲ｽｮ縺･縺代ｒ陦ｨ遉ｺ縲・/td></tr>
+            <tr><td>02</td><td>繝偵・繝ｭ繝ｼ蜿ｳ</td><td>8</td><td>繝｡繧､繝ｳ繧ｳ繝斐・</td><td>鬥吶ｊ縺ｧ縲∵律譛ｬ繧貞ｷ｡繧九・/td><td>隕句・縺・/td><td>繧ｭ繝・き繝ｼ荳・/td><td>譛驥崎ｦ√さ繝斐・縲・/td></tr>
+            <tr><td>02</td><td>繝偵・繝ｭ繝ｼ蜿ｳ</td><td>9</td><td>繝ｪ繝ｼ繝画枚1</td><td>譌・・險俶・繧偵・ｦ吶ｊ縺ｨ縺励※謖√■蟶ｰ繧九・/td><td>繝・く繧ｹ繝・/td><td>隕句・縺嶺ｸ・/td><td>萓｡蛟､繧堤洒縺乗署遉ｺ縲・/td></tr>
+            <tr><td>02</td><td>繝偵・繝ｭ繝ｼ蜿ｳ</td><td>10</td><td>繝ｪ繝ｼ繝画枚2</td><td>蝨ｰ蝓溽ｴ譚舌・迚ｩ隱槭→縺ｨ繧ゅ↓...</td><td>繝・く繧ｹ繝・/td><td>繝ｪ繝ｼ繝画枚1荳・/td><td>菴馴ｨ灘・螳ｹ繧定｣懆ｶｳ縲・/td></tr>
+            <tr><td>02</td><td>繝偵・繝ｭ繝ｼ蜿ｳ</td><td>11</td><td>莠育ｴ・☆繧・/td><td>莠育ｴ・☆繧・/td><td>繝懊ち繝ｳ</td><td>actions 蟾ｦ</td><td>reservation.html 縺ｸ驕ｷ遘ｻ縲・/td></tr>
+            <tr><td>02</td><td>繝偵・繝ｭ繝ｼ蜿ｳ</td><td>12</td><td>繧ｳ繝ｳ繧ｻ繝励ヨ繧定ｪｭ繧</td><td>繧ｳ繝ｳ繧ｻ繝励ヨ繧定ｪｭ繧</td><td>繝懊ち繝ｳ</td><td>actions 蜿ｳ</td><td>concept.html 縺ｸ驕ｷ遘ｻ縲・/td></tr>
+
+            <tr><td>03</td><td>繝悶Λ繝ｳ繝峨せ繝医・繝ｪ繝ｼ</td><td>1</td><td>隕句・縺・/td><td>繝悶Λ繝ｳ繝峨せ繝医・繝ｪ繝ｼ</td><td>隕句・縺・/td><td>蟾ｦ繧ｫ繝ｩ繝荳企Κ</td><td>繧ｻ繧ｯ繧ｷ繝ｧ繝ｳ縺ｮ荳ｻ鬘後・/td></tr>
+            <tr><td>03</td><td>繝悶Λ繝ｳ繝峨せ繝医・繝ｪ繝ｼ</td><td>2</td><td>繧ｵ繝悶さ繝斐・</td><td>譌･譛ｬ蜷・慍縺ｮ螟ｩ辟ｶ邏譚舌ｒ繝・・繝槭↓...</td><td>繝・く繧ｹ繝・/td><td>隕句・縺嶺ｸ・/td><td>繧ｵ繝ｼ繝薙せ蜀・ｮｹ繧定ｦ∫ｴ・・/td></tr>
+            <tr><td>03</td><td>繝悶Λ繝ｳ繝峨せ繝医・繝ｪ繝ｼ</td><td>3</td><td>隱ｬ譏取枚</td><td>蜊倥↑繧玖ｪｿ鬥吶〒縺ｯ縺ｪ縺・..</td><td>繝・く繧ｹ繝・/td><td>繧ｵ繝悶さ繝斐・荳・/td><td>繧ｹ繝医・繝ｪ繝ｼ諤ｧ繧定ｪｬ譏弱・/td></tr>
+            <tr><td>03</td><td>繝悶Λ繝ｳ繝峨せ繝医・繝ｪ繝ｼ</td><td>4</td><td>隧ｳ縺励￥隕九ｋ</td><td>隧ｳ縺励￥隕九ｋ</td><td>繝懊ち繝ｳ</td><td>隱ｬ譏取枚荳・/td><td>concept.html 縺ｸ驕ｷ遘ｻ縲・/td></tr>
+            <tr><td>03</td><td>繝悶Λ繝ｳ繝峨せ繝医・繝ｪ繝ｼ</td><td>5</td><td>菴馴ｨ薙う繝｡繝ｼ繧ｸ逕ｻ蜒・/td><td>assets/index_group_large2.png</td><td>逕ｻ蜒・/td><td>蜿ｳ繧ｫ繝ｩ繝</td><td>逕ｻ蜒丞叙蠕怜､ｱ謨玲凾縺ｯ莉｣譖ｿ陦ｨ遉ｺ縲・/td></tr>
+
+            <tr><td>04</td><td>譌･譛ｬ邏譚舌・邏ｹ莉・/td><td>1</td><td>隕句・縺・/td><td>譌･譛ｬ邏譚舌・邏ｹ莉・/td><td>隕句・縺・/td><td>荳企Κ</td><td>邏譚千ｴｹ莉九そ繧ｯ繧ｷ繝ｧ繝ｳ縲・/td></tr>
+            <tr><td>04</td><td>譌･譛ｬ邏譚舌・邏ｹ莉・/td><td>2</td><td>繧ｵ繝悶さ繝斐・</td><td>菴馴ｨ薙〒蜃ｺ莨壹∴繧矩ｦ吶ｊ縺ｮ荳驛ｨ繧偵＃邏ｹ莉九＠縺ｾ縺吶・/td><td>繝・く繧ｹ繝・/td><td>隕句・縺嶺ｸ・/td><td>繧ｻ繧ｯ繧ｷ繝ｧ繝ｳ隱ｬ譏弱・/td></tr>
+            <tr><td>04</td><td>譌･譛ｬ邏譚舌・邏ｹ莉・/td><td>3</td><td>邏譚舌き繝ｼ繝会ｼ壹・縺ｰ</td><td>material_hiba2.png / 關ｽ縺｡逹縺阪→髱吶￠縺・/td><td>繧ｫ繝ｼ繝・/td><td>3繧ｫ繝ｩ繝蟾ｦ</td><td>逕ｻ蜒上∬ｦ句・縺励∬ｪｬ譏取枚縲・/td></tr>
+            <tr><td>04</td><td>譌･譛ｬ邏譚舌・邏ｹ莉・/td><td>4</td><td>邏譚舌き繝ｼ繝会ｼ壹ｆ縺・/td><td>material_yuzu2.png / 譏弱ｋ縺冗或繧・°縺ｪ菴咎渊</td><td>繧ｫ繝ｼ繝・/td><td>3繧ｫ繝ｩ繝荳ｭ螟ｮ</td><td>逕ｻ蜒上∬ｦ句・縺励∬ｪｬ譏取枚縲・/td></tr>
+            <tr><td>04</td><td>譌･譛ｬ邏譚舌・邏ｹ莉・/td><td>5</td><td>邏譚舌き繝ｼ繝会ｼ夊埋闕ｷ</td><td>material_hakka2.png / 繧・ｏ繧峨°縺剰ｨ俶・縺ｫ谿九ｋ</td><td>繧ｫ繝ｼ繝・/td><td>3繧ｫ繝ｩ繝蜿ｳ</td><td>逕ｻ蜒上∬ｦ句・縺励∬ｪｬ譏取枚縲・/td></tr>
+
+            <tr><td>05</td><td>菴馴ｨ薙・豬√ｌ</td><td>1</td><td>隕句・縺・/td><td>菴馴ｨ薙・豬√ｌ</td><td>隕句・縺・/td><td>蟾ｦ繧ｫ繝ｩ繝荳企Κ</td><td>菴馴ｨ薙せ繝・ャ繝励ｒ遉ｺ縺吶・/td></tr>
+            <tr><td>05</td><td>菴馴ｨ薙・豬√ｌ</td><td>2</td><td>繧ｵ繝悶さ繝斐・</td><td>蛻昴ａ縺ｦ縺ｧ繧ょｮ牙ｿ・〒縺阪ｋ繧ｹ繝・ャ繝苓ｨｭ險・/td><td>繝・く繧ｹ繝・/td><td>隕句・縺嶺ｸ・/td><td>螳牙ｿ・─繧定ｨｴ豎ゅ・/td></tr>
+            <tr><td>05</td><td>菴馴ｨ薙・豬√ｌ</td><td>3</td><td>Step 1</td><td>邏譚舌ｒ遏･繧・/td><td>繧ｫ繝ｼ繝・/td><td>蟾ｦ繧ｫ繝ｩ繝</td><td>邏譚占レ譎ｯ縺ｨ鬥吶ｊ縺ｮ驕輔＞繧貞ｭｦ縺ｶ縲・/td></tr>
+            <tr><td>05</td><td>菴馴ｨ薙・豬√ｌ</td><td>4</td><td>Step 2</td><td>閾ｪ蛻・・鬥吶ｊ繧剃ｽ懊ｋ</td><td>繧ｫ繝ｼ繝・/td><td>蟾ｦ繧ｫ繝ｩ繝</td><td>鬥吶ｊ繧帝∈縺ｳ繝ｬ繧ｷ繝泌喧縲・/td></tr>
+            <tr><td>05</td><td>菴馴ｨ薙・豬√ｌ</td><td>5</td><td>Step 3</td><td>諤昴＞蜃ｺ縺ｨ縺励※謖√■蟶ｰ繧・/td><td>繧ｫ繝ｼ繝・/td><td>蟾ｦ繧ｫ繝ｩ繝</td><td>EC蜀崎ｳｼ蜈･縺ｯPhase2諠ｳ螳壹・/td></tr>
+            <tr><td>05</td><td>繝ｬ繝薙Η繝ｼ</td><td>6</td><td>隕句・縺・/td><td>繝ｬ繝薙Η繝ｼ / 菴馴ｨ薙・螢ｰ</td><td>隕句・縺・/td><td>蜿ｳ繧ｫ繝ｩ繝荳企Κ</td><td>菫｡鬆ｼ諤ｧ陬懷ｼｷ縲・/td></tr>
+            <tr><td>05</td><td>繝ｬ繝薙Η繝ｼ</td><td>7</td><td>繝ｬ繝薙Η繝ｼ01</td><td>窶應ｽ馴ｨ薙◎縺ｮ繧ゅ・縺ｫ諢丞袖縺後≠縺｣縺溪・/td><td>繧ｫ繝ｼ繝・/td><td>蜿ｳ繧ｫ繝ｩ繝</td><td>繝ｬ繝薙Η繝ｼ譁・ｒ陦ｨ遉ｺ縲・/td></tr>
+            <tr><td>05</td><td>繝ｬ繝薙Η繝ｼ</td><td>8</td><td>繝ｬ繝薙Η繝ｼ02</td><td>窶懷､ｧ莠ｺ縺｣縺ｽ縺上※關ｽ縺｡逹縺・◆髮ｰ蝗ｲ豌冷・/td><td>繧ｫ繝ｼ繝・/td><td>蜿ｳ繧ｫ繝ｩ繝</td><td>繝ｬ繝薙Η繝ｼ譁・ｒ陦ｨ遉ｺ縲・/td></tr>
+
+            <tr><td>06</td><td>莠育ｴГTA蟶ｯ</td><td>1</td><td>隕句・縺・/td><td>譚ｱ莠ｬ縺ｧ縲∬・蛻・□縺代・鬥吶ｊ繧剃ｽ懊ｋ</td><td>隕句・縺・/td><td>CTA蟶ｯ荳企Κ</td><td>莠育ｴ・｡悟虚繧剃ｿ・☆縲・/td></tr>
+            <tr><td>06</td><td>莠育ｴГTA蟶ｯ</td><td>2</td><td>隱ｬ譏取枚</td><td>荳也阜隕ｳ縺ｫ蜈ｱ諢溘＠縺溘ｉ...</td><td>繝・く繧ｹ繝・/td><td>隕句・縺嶺ｸ・/td><td>莠育ｴ・ｪ伜ｰ弱・陬懆ｶｳ縲・/td></tr>
+            <tr><td>06</td><td>莠育ｴГTA蟶ｯ</td><td>3</td><td>莠育ｴ・・繝ｼ繧ｸ縺ｸ騾ｲ繧</td><td>莠育ｴ・・繝ｼ繧ｸ縺ｸ騾ｲ繧</td><td>繝懊ち繝ｳ</td><td>隱ｬ譏取枚荳・/td><td>reservation.html 縺ｸ驕ｷ遘ｻ縲・/td></tr>
+
+            <tr><td>07</td><td>繝輔ャ繧ｿ繝ｼ</td><td>1</td><td>Concept / About</td><td>蜥碁ｦ吝ｷ｡繧翫→縺ｯ...</td><td>繝・く繧ｹ繝・/td><td>蟾ｦ繧ｫ繝ｩ繝</td><td>繧ｵ繧､繝域ｦりｦ√・/td></tr>
+            <tr><td>07</td><td>繝輔ャ繧ｿ繝ｼ</td><td>2</td><td>蜀・Κ繝ｪ繝ｳ繧ｯ</td><td>Experience / Concept / Booking</td><td>繝ｪ繝ｳ繧ｯ鄒､</td><td>荳ｭ螟ｮ繧ｫ繝ｩ繝</td><td>蜷・・繝ｼ繧ｸ縺ｸ驕ｷ遘ｻ縲・/td></tr>
+            <tr><td>07</td><td>繝輔ャ繧ｿ繝ｼ</td><td>3</td><td>陬懷勧繝ｪ繝ｳ繧ｯ</td><td>Instagram / Contact / Booking</td><td>繝・く繧ｹ繝・/ 繝ｪ繝ｳ繧ｯ諠ｳ螳・/td><td>蜿ｳ繧ｫ繝ｩ繝</td><td>Instagram縺ｨContact縺ｯURL險ｭ螳壹′蠢・ｦ√・/td></tr>
+          </tbody>
+        </table>
+      </div>
+</section>
+
+    <section>
+      <h2>2. 蜈･蜉幃・岼荳隕ｧ</h2>
+      <p class="note">
+        繝医ャ繝励・繝ｼ繧ｸ縺ｫ縺ｯ莠育ｴ・ヵ繧ｩ繝ｼ繝縺ｮ繧医≧縺ｪ逶ｴ謗･蜈･蜉帶ｬ・・蟄伜惠縺励↑縺・◆繧√√後Θ繝ｼ繧ｶ繝ｼ縺梧桃菴懊・驕ｸ謚槭☆繧矩・岼縲阪→
+        縲檎判髱｢陦ｨ遉ｺ譎ゅ↓蜿励￠蜿悶ｋ蛟､縲阪ｒ蜈･蜉幃・岼縺ｨ縺励※謨ｴ逅・☆繧九ょ推繝舌Μ繝・・繧ｷ繝ｧ繝ｳ縺ｯ縲√メ繧ｧ繝・け螳滓命繧ｿ繧､繝溘Φ繧ｰ繧呈・遉ｺ縺吶ｋ縲・
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>蟇ｾ雎｡繝輔Ξ繝ｼ繝</th>
+              <th>鬆・岼蜷・/th>
+              <th>繝・・繧ｿ蝙・/th>
+              <th>繝・・繧ｿ繧ｵ繧､繧ｺ</th>
+              <th>蠢・・莉ｻ諢・/th>
+              <th>繝舌Μ繝・・繧ｷ繝ｧ繝ｳ繝ｫ繝ｼ繝ｫ</th>
+              <th>繝√ぉ繝・け螳滓命繧ｿ繧､繝溘Φ繧ｰ</th>
+              <th>繧ｨ繝ｩ繝ｼ譎ゅ・謇ｱ縺・/th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Frame 01</td>
+              <td>驕ｷ遘ｻ蜈・RL・壹Ο繧ｴ</td>
+              <td>String</td>
+              <td>譛螟ｧ255譁・ｭ・/td>
+              <td>蠢・・/td>
+              <td>蜀・Κ繝ｪ繝ｳ繧ｯ縺ｧ縺ゅｋ縺薙→縲よΦ螳壼､・喨ndex.html縲・/td>
+              <td>逕ｻ髱｢謠冗判蜑阪√Μ繝ｳ繧ｯ謚ｼ荳区凾</td>
+              <td>荳肴ｭ｣縺ｪ蝣ｴ蜷医・href繧段ndex.html縺ｫ陬懈ｭ｣縺吶ｋ縲・/td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Frame 01</td>
+              <td>驕ｷ遘ｻ蜈・RL・壹さ繝ｳ繧ｻ繝励ヨ</td>
+              <td>String</td>
+              <td>譛螟ｧ255譁・ｭ・/td>
+              <td>蠢・・/td>
+              <td>蜀・Κ繝ｪ繝ｳ繧ｯ縺ｧ縺ゅｋ縺薙→縲よΦ螳壼､・喞oncept.html縲・/td>
+              <td>逕ｻ髱｢謠冗判蜑阪√Μ繝ｳ繧ｯ謚ｼ荳区凾</td>
+              <td>荳肴ｭ｣縺ｪ蝣ｴ蜷医・繝ｪ繝ｳ繧ｯ繧帝撼豢ｻ諤ｧ縺ｾ縺溘・髱櫁｡ｨ遉ｺ縺ｫ縺吶ｋ縲・/td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Frame 01</td>
+              <td>驕ｷ遘ｻ蜈・RL・壻ｽ馴ｨ楢ｩｳ邏ｰ</td>
+              <td>String</td>
+              <td>譛螟ｧ255譁・ｭ・/td>
+              <td>蠢・・/td>
+              <td>蜀・Κ繝ｪ繝ｳ繧ｯ縺ｧ縺ゅｋ縺薙→縲よΦ螳壼､・啼xperience.html縲・/td>
+              <td>逕ｻ髱｢謠冗判蜑阪√Μ繝ｳ繧ｯ謚ｼ荳区凾</td>
+              <td>荳肴ｭ｣縺ｪ蝣ｴ蜷医・繝ｪ繝ｳ繧ｯ繧帝撼豢ｻ諤ｧ縺ｾ縺溘・髱櫁｡ｨ遉ｺ縺ｫ縺吶ｋ縲・/td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Frame 01 / 02 / 06</td>
+              <td>驕ｷ遘ｻ蜈・RL・壻ｺ育ｴ・/td>
+              <td>String</td>
+              <td>譛螟ｧ255譁・ｭ・/td>
+              <td>蠢・・/td>
+              <td>蜀・Κ繝ｪ繝ｳ繧ｯ縺ｧ縺ゅｋ縺薙→縲よΦ螳壼､・嗷eservation.html縲・/td>
+              <td>逕ｻ髱｢謠冗判蜑阪，TA謚ｼ荳区凾</td>
+              <td>荳肴ｭ｣縺ｪ蝣ｴ蜷医・繧ｨ繝ｩ繝ｼ逕ｻ髱｢縺ｧ縺ｯ縺ｪ縺上√・繧ｿ繝ｳ繧帝撼豢ｻ諤ｧ縺ｫ縺吶ｋ縲・/td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>Frame 01</td>
+              <td>陦ｨ遉ｺ險隱槭Λ繝吶Ν</td>
+              <td>String</td>
+              <td>譛螟ｧ20譁・ｭ・/td>
+              <td>莉ｻ諢・/td>
+              <td>險ｱ蜿ｯ縺輔ｌ縺溯｡ｨ遉ｺ譁・ｭ励・縺ｿ縲よΦ螳壼､・哘N / JP縲・/td>
+              <td>逕ｻ髱｢謠冗判蜑・/td>
+              <td>譛ｪ險ｭ螳壹∪縺溘・荳肴ｭ｣縺ｪ蝣ｴ蜷医・縲窪N / JP縲阪ｒ陦ｨ遉ｺ縺吶ｋ縲・/td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>Frame 02</td>
+              <td>繧ｹ繝ｩ繧､繝繝ｼ陦ｨ遉ｺ髢馴囈</td>
+              <td>Integer</td>
+              <td>1000縲・0000 ms</td>
+              <td>莉ｻ諢・/td>
+              <td>謨ｰ蛟､縺ｧ縺ゅｋ縺薙→縲・000ms莉･荳・0000ms莉･荳九よ悴謖・ｮ壽凾縺ｯ5000ms縲・/td>
+              <td>DOMContentLoaded譎ゅ√せ繝ｩ繧､繝繝ｼ蛻晄悄蛹匁凾</td>
+              <td>荳肴ｭ｣蛟､縺ｮ蝣ｴ蜷医・5000ms縺ｨ縺励※蜃ｦ逅・☆繧九・/td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td>Frame 02</td>
+              <td>繧ｹ繝ｩ繧､繝臥判蜒上ヱ繧ｹ</td>
+              <td>String</td>
+              <td>譛螟ｧ255譁・ｭ・/td>
+              <td>蠢・・/td>
+              <td>assets/驟堺ｸ九・逕ｻ蜒上ヱ繧ｹ縺ｧ縺ゅｋ縺薙→縲よ僑蠑ｵ蟄舌・png / jpg / webp縲・/td>
+              <td>逕ｻ髱｢謠冗判蜑阪∫判蜒剰ｪｭ霎ｼ譎・/td>
+              <td>逕ｻ蜒剰ｪｭ霎ｼ螟ｱ謨玲凾縺ｯalt繝・く繧ｹ繝医ｒ陦ｨ遉ｺ縺励√せ繝ｩ繧､繝繝ｼ蜃ｦ逅・・邯咏ｶ壹☆繧九・/td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td>Frame 02</td>
+              <td>繧ｹ繝ｩ繧､繝臥分蜿ｷ</td>
+              <td>Integer</td>
+              <td>1縲・</td>
+              <td>莉ｻ諢・/td>
+              <td>1莉･荳翫√せ繝ｩ繧､繝我ｻｶ謨ｰ莉･荳九〒縺ゅｋ縺薙→縲・/td>
+              <td>蜑阪∈ / 谺｡縺ｸ / 繝峨ャ繝域款荳区凾</td>
+              <td>遽・峇螟悶・蝣ｴ蜷医・蠕ｪ迺ｰ蜃ｦ逅・↓繧医ｊ蜈磯ｭ縺ｾ縺溘・譛ｫ蟆ｾ縺ｸ遘ｻ蜍輔☆繧九・/td>
+            </tr>
+            <tr>
+              <td>9</td>
+              <td>Frame 03</td>
+              <td>繝悶Λ繝ｳ繝峨せ繝医・繝ｪ繝ｼ逕ｻ蜒上ヱ繧ｹ</td>
+              <td>String</td>
+              <td>譛螟ｧ255譁・ｭ・/td>
+              <td>蠢・・/td>
+              <td>assets/驟堺ｸ九・逕ｻ蜒上ヱ繧ｹ縺ｧ縺ゅｋ縺薙→縲よ僑蠑ｵ蟄舌・png / jpg / webp縲・/td>
+              <td>逕ｻ髱｢謠冗判蜑阪∫判蜒剰ｪｭ霎ｼ譎・/td>
+              <td>逕ｻ蜒剰ｪｭ霎ｼ螟ｱ謨玲凾縺ｯ莉｣譖ｿ繝・く繧ｹ繝医ｒ陦ｨ遉ｺ縺吶ｋ縲・/td>
+            </tr>
+            <tr>
+              <td>10</td>
+              <td>Frame 04</td>
+              <td>邏譚舌き繝ｼ繝臥判蜒上ヱ繧ｹ</td>
+              <td>String</td>
+              <td>譛螟ｧ255譁・ｭ・/td>
+              <td>蠢・・/td>
+              <td>assets/驟堺ｸ九・逕ｻ蜒上ヱ繧ｹ縺ｧ縺ゅｋ縺薙→縲よ僑蠑ｵ蟄舌・png / jpg / webp縲・/td>
+              <td>逕ｻ髱｢謠冗判蜑阪∫判蜒剰ｪｭ霎ｼ譎・/td>
+              <td>逕ｻ蜒剰ｪｭ霎ｼ螟ｱ謨玲凾縺ｯ蟇ｾ雎｡繧ｫ繝ｼ繝峨・逕ｻ蜒城伜沺縺ｫ莉｣譖ｿ陦ｨ遉ｺ繧定｡後≧縲・/td>
+            </tr>
+            <tr>
+              <td>11</td>
+              <td>Frame 05</td>
+              <td>繝ｬ繝薙Η繝ｼ陦ｨ遉ｺ繝・く繧ｹ繝・/td>
+              <td>String</td>
+              <td>譛螟ｧ500譁・ｭ・/td>
+              <td>莉ｻ諢・/td>
+              <td>HTML繧ｿ繧ｰ繧偵お繧ｹ繧ｱ繝ｼ繝励☆繧九％縺ｨ縲らｩｺ縺ｮ蝣ｴ蜷医・繧ｫ繝ｼ繝峨ｒ髱櫁｡ｨ遉ｺ縲・/td>
+              <td>逕ｻ髱｢謠冗判蜑・/td>
+              <td>荳肴ｭ｣縺ｪHTML縺ｯ繧ｨ繧ｹ繧ｱ繝ｼ繝励＠縲√ユ繧ｭ繧ｹ繝医→縺励※陦ｨ遉ｺ縺吶ｋ縲・/td>
+            </tr>
+            <tr>
+              <td>12</td>
+              <td>Frame 07</td>
+              <td>螟夜Κ繝ｪ繝ｳ繧ｯURL・唔nstagram</td>
+              <td>String</td>
+              <td>譛螟ｧ255譁・ｭ・/td>
+              <td>莉ｻ諢・/td>
+              <td>https://縺九ｉ蟋九∪繧偽RL縺ｮ縺ｿ險ｱ蜿ｯ縲・/td>
+              <td>逕ｻ髱｢謠冗判蜑阪√Μ繝ｳ繧ｯ謚ｼ荳区凾</td>
+              <td>譛ｪ險ｭ螳壹∪縺溘・荳肴ｭ｣縺ｪ蝣ｴ蜷医・繝・く繧ｹ繝郁｡ｨ遉ｺ縺ｮ縺ｿ縺ｨ縺吶ｋ縲・/td>
+            </tr>
+            <tr>
+              <td>13</td>
+              <td>Frame 07</td>
+              <td>縺雁撫縺・粋繧上○繝ｪ繝ｳ繧ｯURL</td>
+              <td>String</td>
+              <td>譛螟ｧ255譁・ｭ・/td>
+              <td>莉ｻ諢・/td>
+              <td>蜀・Κ繝ｪ繝ｳ繧ｯ縺ｾ縺溘・https://URL縺ｮ縺ｿ險ｱ蜿ｯ縲・/td>
+              <td>逕ｻ髱｢謠冗判蜑阪√Μ繝ｳ繧ｯ謚ｼ荳区凾</td>
+              <td>譛ｪ險ｭ螳壹∪縺溘・荳肴ｭ｣縺ｪ蝣ｴ蜷医・繝・く繧ｹ繝郁｡ｨ遉ｺ縺ｮ縺ｿ縺ｨ縺吶ｋ縲・/td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+</section>
+
+    <section>
+      <h2>3. 蜃ｦ逅・ヵ繝ｭ繝ｼ</h2>
+      <div class="flow">
+        <p class="flow-step"><span class="label">繝ｦ繝ｼ繧ｶ繝ｼ謫堺ｽ・/span>繝悶Λ繧ｦ繧ｶ縺ｧ <strong>user/index.html</strong> 縺ｫ繧｢繧ｯ繧ｻ繧ｹ縺吶ｋ縲・/p>
+        <p class="flow-step"><span class="label">逕ｻ髱｢隱ｭ霎ｼ</span>HTML縲《tyles.css縲∫判蜒上い繧ｻ繝・ヨ繧定ｪｭ縺ｿ霎ｼ繧縲・/p>
+        <p class="flow-step"><span class="label">蛻晄悄蛹門・逅・/span>DOMContentLoaded蠕後・pro-slider 繧貞叙蠕励＠縲√せ繝ｩ繧､繝我ｸ隕ｧ縲∝燕蠕後・繧ｿ繝ｳ縲√ラ繝・ヨ繝懊ち繝ｳ縲∬｡ｨ遉ｺ髢馴囈繧貞・譛溷喧縺吶ｋ縲・/p>
+        <p class="flow-step"><span class="label">蜈･蜉帙メ繧ｧ繝・け</span>繧ｹ繝ｩ繧､繝繝ｼ陦ｨ遉ｺ髢馴囈縲√せ繝ｩ繧､繝我ｻｶ謨ｰ縲∫判蜒上ヱ繧ｹ縲√Μ繝ｳ繧ｯURL縺ｮ螯･蠖捺ｧ繧堤｢ｺ隱阪☆繧九・/p>
+        <p class="flow-step"><span class="label">陦ｨ遉ｺ蜃ｦ逅・/span>繝倥ャ繝繝ｼ縲√ヲ繝ｼ繝ｭ繝ｼ縲√ヶ繝ｩ繝ｳ繝峨せ繝医・繝ｪ繝ｼ縲∵律譛ｬ邏譚舌∽ｽ馴ｨ薙・豬√ｌ縲√Ξ繝薙Η繝ｼ縲∽ｺ育ｴГTA縲√ヵ繝・ち繝ｼ繧帝・↓陦ｨ遉ｺ縺吶ｋ縲・/p>
+        <p class="flow-step"><span class="label">繝ｦ繝ｼ繧ｶ繝ｼ謫堺ｽ・/span>縲御ｺ育ｴ・☆繧九阪沓ook Experience縲阪後さ繝ｳ繧ｻ繝励ヨ繧定ｪｭ繧縲阪瑚ｩｳ縺励￥隕九ｋ縲阪御ｺ育ｴ・・繝ｼ繧ｸ縺ｸ騾ｲ繧縲咲ｭ峨ｒ謚ｼ荳九☆繧九・/p>
+        <p class="flow-step"><span class="label">驕ｷ遘ｻ蜃ｦ逅・/span>繧ｯ繝ｪ繝・け縺輔ｌ縺溘Μ繝ｳ繧ｯ縺ｮhref縺ｫ蠕薙＞縲…oncept.html縲‘xperience.html縲〉eservation.html遲峨∈驕ｷ遘ｻ縺吶ｋ縲・/p>
+      </div>
+</section>
+
+    <section>
+      <h2>4. 豁｣蟶ｸ譎ゅ・蜍穂ｽ・/h2>
+      <div class="ok-box">
+        <h3>豁｣蟶ｸ陦ｨ遉ｺ</h3>
+        <ul>
+          <li>繝医ャ繝励・繝ｼ繧ｸ繧｢繧ｯ繧ｻ繧ｹ譎ゅ√・繝・ム繝ｼ縺九ｉ繝輔ャ繧ｿ繝ｼ縺ｾ縺ｧ繝｢繝・け繧｢繝・・縺ｨ蜷後§鬆・ｺ上〒陦ｨ遉ｺ縺吶ｋ縲・/li>
+          <li>繝偵・繝ｭ繝ｼ繧ｹ繝ｩ繧､繝繝ｼ縺ｯ蛻晄悄陦ｨ遉ｺ縺ｧ1譫夂岼繧定｡ｨ遉ｺ縺励・遘帝俣髫斐〒谺｡繧ｹ繝ｩ繧､繝峨∈閾ｪ蜍募・譖ｿ縺吶ｋ縲・/li>
+          <li>蜑阪∈ / 谺｡縺ｸ繝懊ち繝ｳ謚ｼ荳区凾縲√せ繝ｩ繧､繝峨ｒ蜑榊ｾ後↓蛻・崛縺励∬・蜍募・譖ｿ繧ｿ繧､繝槭・繧貞・襍ｷ蜍輔☆繧九・/li>
+          <li>繝峨ャ繝医リ繝捺款荳区凾縲∵欠螳壹＆繧後◆繧ｹ繝ｩ繧､繝峨∈蛻・崛縺励∥ria-selected繧呈峩譁ｰ縺吶ｋ縲・/li>
+          <li>縲御ｺ育ｴ・☆繧九阪沓ook Experience縲阪御ｺ育ｴ・・繝ｼ繧ｸ縺ｸ騾ｲ繧縲肴款荳区凾縲〉eservation.html縺ｸ驕ｷ遘ｻ縺吶ｋ縲・/li>
+          <li>縲後さ繝ｳ繧ｻ繝励ヨ縲阪後さ繝ｳ繧ｻ繝励ヨ繧定ｪｭ繧縲阪瑚ｩｳ縺励￥隕九ｋ縲肴款荳区凾縲…oncept.html縺ｸ驕ｷ遘ｻ縺吶ｋ縲・/li>
+          <li>縲御ｽ馴ｨ楢ｩｳ邏ｰ縲肴款荳区凾縲‘xperience.html縺ｸ驕ｷ遘ｻ縺吶ｋ縲・/li>
+          <li>繝ｬ繝薙Η繝ｼ縲∫ｴ譚舌き繝ｼ繝峨∽ｽ馴ｨ薙せ繝・ャ繝励・蝗ｺ螳壹さ繝ｳ繝・Φ繝・→縺励※陦ｨ遉ｺ縺吶ｋ縲・/li>
+        </ul>
+      </div>
+</section>
+
+    <section>
+      <h2>5. 繧ｨ繝ｩ繝ｼ譎ゅ・蜍穂ｽ・/h2>
+
+      <div class="error-box">
+        <h3>繝舌Μ繝・・繧ｷ繝ｧ繝ｳ繧ｨ繝ｩ繝ｼ</h3>
+        <ul>
+          <li>繝ｪ繝ｳ繧ｯURL縺梧Φ螳壼､悶・蝣ｴ蜷医∫判髱｢謠冗判蜑阪↓隧ｲ蠖薙Μ繝ｳ繧ｯ繧帝撼豢ｻ諤ｧ縺ｾ縺溘・髱櫁｡ｨ遉ｺ縺ｫ縺吶ｋ縲・/li>
+          <li>繧ｹ繝ｩ繧､繝繝ｼ陦ｨ遉ｺ髢馴囈縺梧焚蛟､縺ｧ縺ｪ縺・ｴ蜷医．OMContentLoaded譎ゅ↓繝・ヵ繧ｩ繝ｫ繝亥､5000ms繧剃ｽｿ逕ｨ縺吶ｋ縲・/li>
+          <li>繧ｹ繝ｩ繧､繝臥分蜿ｷ縺檎ｯ・峇螟悶・蝣ｴ蜷医√せ繝ｩ繧､繝繝ｼ謫堺ｽ懈凾縺ｫ蠕ｪ迺ｰ蜃ｦ逅・〒蜈磯ｭ縺ｾ縺溘・譛ｫ蟆ｾ縺ｫ陬懈ｭ｣縺吶ｋ縲・/li>
+          <li>螟夜ΚSNS URL縺敬ttps://莉･螟悶・蝣ｴ蜷医∫判髱｢謠冗判蜑阪↓繝ｪ繝ｳ繧ｯ蛹悶○縺壹ユ繧ｭ繧ｹ繝郁｡ｨ遉ｺ縺ｫ縺吶ｋ縲・/li>
+          <li>繝ｬ繝薙Η繝ｼ譁・ｄ陦ｨ遉ｺ譁・ｨ縺ｫHTML繧ｿ繧ｰ縺悟性縺ｾ繧後ｋ蝣ｴ蜷医∫判髱｢謠冗判蜑阪↓繧ｨ繧ｹ繧ｱ繝ｼ繝励＠縺ｦ陦ｨ遉ｺ縺吶ｋ縲・/li>
+        </ul>
+      </div>
+
+      <div class="error-box">
+        <h3>繧ｷ繧ｹ繝・Β繧ｨ繝ｩ繝ｼ繝ｻ隱ｭ霎ｼ繧ｨ繝ｩ繝ｼ</h3>
+        <ul>
+          <li>CSS隱ｭ霎ｼ縺ｫ螟ｱ謨励＠縺溷ｴ蜷医√ヶ繝ｩ繧ｦ繧ｶ讓呎ｺ冶｡ｨ遉ｺ縺ｫ縺ｪ繧九′縲？TML讒矩縺ｨ繝ｪ繝ｳ繧ｯ驕ｷ遘ｻ縺ｯ邯ｭ謖√☆繧九・/li>
+          <li>逕ｻ蜒剰ｪｭ霎ｼ縺ｫ螟ｱ謨励＠縺溷ｴ蜷医∥lt繝・く繧ｹ繝医ｒ陦ｨ遉ｺ縺励√・繝ｼ繧ｸ蜈ｨ菴薙・陦ｨ遉ｺ縺ｯ邯咏ｶ壹☆繧九・/li>
+          <li>JavaScript螳溯｡梧凾繧ｨ繝ｩ繝ｼ縺檎匱逕溘＠縺溷ｴ蜷医√せ繝ｩ繧､繝繝ｼ縺ｮ閾ｪ蜍募・譖ｿ縺ｯ蛛懈ｭ｢縺吶ｋ縺後∝・譛溯｡ｨ遉ｺ縺ｨ繝ｪ繝ｳ繧ｯ驕ｷ遘ｻ縺ｯ蛻ｩ逕ｨ蜿ｯ閭ｽ縺ｨ縺吶ｋ縲・/li>
+          <li>繝ｪ繝ｳ繧ｯ蜈・TML縺悟ｭ伜惠縺励↑縺・ｴ蜷医√ヶ繝ｩ繧ｦ繧ｶ縺ｮ404縺ｾ縺溘・繝輔ぃ繧､繝ｫ譛ｪ讀懷・逕ｻ髱｢繧定｡ｨ遉ｺ縺吶ｋ縲・/li>
+        </ul>
+      </div>
+</section>
+
+    <section>
+      <h2>6. 逕ｻ髱｢驕ｷ遘ｻ蜈・/h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>No.</th>
+              <th>驕ｷ遘ｻ蜈・ヵ繝ｬ繝ｼ繝</th>
+              <th>繝医Μ繧ｬ繝ｼ</th>
+              <th>驕ｷ遘ｻ蜈・/th>
+              <th>驕ｷ遘ｻ譚｡莉ｶ</th>
+              <th>蠑輔″邯吶℃蛟､</th>
+              <th>蛯呵・/th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>Frame 01</td><td>繝悶Λ繝ｳ繝峨Ο繧ｴ謚ｼ荳・/td><td>index.html</td><td>蟶ｸ譎・/td><td>縺ｪ縺・/td><td>繝医ャ繝励∈謌ｻ繧九・/td></tr>
+            <tr><td>2</td><td>Frame 01</td><td>縲後さ繝ｳ繧ｻ繝励ヨ縲肴款荳・/td><td>concept.html</td><td>繝ｪ繝ｳ繧ｯURL縺梧ｭ｣蟶ｸ縺ｧ縺ゅｋ縺薙→</td><td>縺ｪ縺・/td><td>繧ｳ繝ｳ繧ｻ繝励ヨ繝壹・繧ｸ縺ｸ驕ｷ遘ｻ縲・/td></tr>
+            <tr><td>3</td><td>Frame 01</td><td>縲御ｽ馴ｨ楢ｩｳ邏ｰ縲肴款荳・/td><td>experience.html</td><td>繝ｪ繝ｳ繧ｯURL縺梧ｭ｣蟶ｸ縺ｧ縺ゅｋ縺薙→</td><td>縺ｪ縺・/td><td>菴馴ｨ楢ｩｳ邏ｰ繝壹・繧ｸ縺ｸ驕ｷ遘ｻ縲・/td></tr>
+            <tr><td>4</td><td>Frame 01</td><td>縲御ｺ育ｴ・肴款荳・/td><td>reservation.html</td><td>繝ｪ繝ｳ繧ｯURL縺梧ｭ｣蟶ｸ縺ｧ縺ゅｋ縺薙→</td><td>縺ｪ縺・/td><td>莠育ｴ・・繝ｼ繧ｸ縺ｸ驕ｷ遘ｻ縲・/td></tr>
+            <tr><td>5</td><td>Frame 01</td><td>縲沓ook Experience縲肴款荳・/td><td>reservation.html</td><td>繝ｪ繝ｳ繧ｯURL縺梧ｭ｣蟶ｸ縺ｧ縺ゅｋ縺薙→</td><td>縺ｪ縺・/td><td>莠育ｴГTA縲・/td></tr>
+            <tr><td>6</td><td>Frame 02</td><td>縲御ｺ育ｴ・☆繧九肴款荳・/td><td>reservation.html</td><td>繝ｪ繝ｳ繧ｯURL縺梧ｭ｣蟶ｸ縺ｧ縺ゅｋ縺薙→</td><td>縺ｪ縺・/td><td>繝偵・繝ｭ繝ｼCTA縲・/td></tr>
+            <tr><td>7</td><td>Frame 02</td><td>縲後さ繝ｳ繧ｻ繝励ヨ繧定ｪｭ繧縲肴款荳・/td><td>concept.html</td><td>繝ｪ繝ｳ繧ｯURL縺梧ｭ｣蟶ｸ縺ｧ縺ゅｋ縺薙→</td><td>縺ｪ縺・/td><td>繝偵・繝ｭ繝ｼ陬懷勧CTA縲・/td></tr>
+            <tr><td>8</td><td>Frame 03</td><td>縲瑚ｩｳ縺励￥隕九ｋ縲肴款荳・/td><td>concept.html</td><td>繝ｪ繝ｳ繧ｯURL縺梧ｭ｣蟶ｸ縺ｧ縺ゅｋ縺薙→</td><td>縺ｪ縺・/td><td>繝悶Λ繝ｳ繝峨せ繝医・繝ｪ繝ｼ隧ｳ邏ｰ縺ｸ驕ｷ遘ｻ縲・/td></tr>
+            <tr><td>9</td><td>Frame 06</td><td>縲御ｺ育ｴ・・繝ｼ繧ｸ縺ｸ騾ｲ繧縲肴款荳・/td><td>reservation.html</td><td>繝ｪ繝ｳ繧ｯURL縺梧ｭ｣蟶ｸ縺ｧ縺ゅｋ縺薙→</td><td>縺ｪ縺・/td><td>荳矩ΚCTA縲・/td></tr>
+            <tr><td>10</td><td>Frame 07</td><td>縲窪xperience縲肴款荳・/td><td>experience.html</td><td>繝ｪ繝ｳ繧ｯURL縺梧ｭ｣蟶ｸ縺ｧ縺ゅｋ縺薙→</td><td>縺ｪ縺・/td><td>繝輔ャ繧ｿ繝ｼ繝ｪ繝ｳ繧ｯ縲・/td></tr>
+            <tr><td>11</td><td>Frame 07</td><td>縲靴oncept縲肴款荳・/td><td>concept.html</td><td>繝ｪ繝ｳ繧ｯURL縺梧ｭ｣蟶ｸ縺ｧ縺ゅｋ縺薙→</td><td>縺ｪ縺・/td><td>繝輔ャ繧ｿ繝ｼ繝ｪ繝ｳ繧ｯ縲・/td></tr>
+            <tr><td>12</td><td>Frame 07</td><td>縲沓ooking縲肴款荳・/td><td>reservation.html</td><td>繝ｪ繝ｳ繧ｯURL縺梧ｭ｣蟶ｸ縺ｧ縺ゅｋ縺薙→</td><td>縺ｪ縺・/td><td>繝輔ャ繧ｿ繝ｼ繝ｪ繝ｳ繧ｯ縲・/td></tr>
+          </tbody>
+        </table>
+      </div>
+</section>
+  
+<h3>7. DB変更反映メモ（2026-05-14）</h3>
+<div class="note">
+  <ul>
+    <li>商品マスタは <code>category_master</code> を参照し、<code>products</code> は <code>category_id + master_id</code> を業務キーとして扱う。</li>
+    <li>在庫は商品と1:1（<code>inventory_items.product_id</code>）で管理し、増減履歴は <code>inventory_transactions</code> に記録する。</li>
+    <li>予約/顧客は <code>reservations</code> と <code>customers</code> の紐づきを前提とし、Phase2対象テーブル（<code>orders</code>/<code>order_items</code>/<code>reviews</code> 等）はPhase1機能では使用しない。</li>
+  </ul>
+</div>
+</main>
+</body>
+</html>
+
+

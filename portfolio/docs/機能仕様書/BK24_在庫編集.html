@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>14. 蝨ｨ蠎ｫ邱ｨ髮・ｽ懈ｮ九ｊ讖溯・ 隧ｳ邏ｰ莉墓ｧ俶嶌・医Δ繝・け繧｢繝・・貅匁侠・・/title>
+  <title>14. 在庫編集｜残り機能 詳細仕様書（モックアップ準拠）</title>
   <style>
 :root{--bg:#f7f5f2;--paper:#fff;--ink:#1f1b17;--muted:#6d645a;--line:#e8dccb;--accent:#b08d57;--accent-dark:#8c6a36;--soft:#faf6ef;--error:#8f3f2f;--ok:#48694d}
 *{box-sizing:border-box}body{margin:0;padding:40px 24px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;background:var(--bg);color:var(--ink);line-height:1.75}.page{max-width:1180px;margin:0 auto}
@@ -15,33 +15,34 @@ h1{margin:0 0 10px;font-size:30px}h2{margin:0 0 16px;padding-left:14px;border-le
 <body>
   <main class="page">
     <header>
-      <h1>14. 蝨ｨ蠎ｫ邱ｨ髮・/h1>
-      <p class="meta">蛻・牡蜈・ｼ壽ｮ九ｊ讖溯・ 隧ｳ邏ｰ莉墓ｧ俶嶌・医Δ繝・け繧｢繝・・貅匁侠・・/p>
+      <h1>14. 在庫編集</h1>
+      <p class="meta">分割元：残り機能 詳細仕様書（モックアップ準拠）</p>
     </header>
     <section class="screen" id="spec-14">
-<h2>14. 蝨ｨ蠎ｫ邱ｨ髮・/h2>
+<h2>14. 在庫編集</h2>
 <p class="meta"><span class="badge">management/inventory_edit.html</span><span class="badge">Phase1</span><span class="badge">Must</span></p>
-<p>蝨ｨ蠎ｫ諠・ｱ繧貞・蜉帙＠縲∵峩譁ｰ縺吶ｋ謫堺ｽ懊〒隧ｳ邏ｰ逕ｻ髱｢縺ｸ驕ｷ遘ｻ縺吶ｋ縲・/p>
-<h3>1. 逕ｻ髱｢繝ｬ繧､繧｢繧ｦ繝・/h3>
-<p class="note">豺ｻ莉倥Δ繝・け繧｢繝・・縺ｮ繝ｬ繧､繧｢繧ｦ繝医・鬆・岼繧偵・繝ｼ繧ｹ縺ｫ縲∝ｿ・ｦ√↓蠢懊§縺ｦ莉｣譖ｿ陦ｨ遉ｺ縲√Μ繝ｳ繧ｯ荳肴ｭ｣譎ゅ・謇ｱ縺・∝・蜉幄｣懷勧繝ｻ繧ｨ繝ｩ繝ｼ陦ｨ遉ｺ繧定ｿｽ蜉莉墓ｧ倥→縺励※謨ｴ逅・＠縺ｦ縺・∪縺吶・/p>
-<div class="layout-box"><pre>笏娯楳 Frame 01・夂ｮ｡逅・・騾壹リ繝凪楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏・
-笏・1. AT 2. 鬘ｧ 3. 鬥・4. 蝨ｨ 5. 蜃ｺ
-笏披楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏・
-笏娯楳 Frame 02・壹・繝ｼ繧ｸ繝倥ャ繝繝ｼ笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏・
-笏・1. 邂｡逅・判髱｢ 2. 蝨ｨ蠎ｫ邱ｨ髮・3. 繧ｭ繝｣繝ｳ繧ｻ繝ｫ
-笏披楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏・
-笏娯楳 Frame 03・壼・蜉帙ヵ繧ｩ繝ｼ繝笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏・
-笏・1. 蜩∝錐 / 繧ｫ繝・ざ繝ｪ / 蝨ｨ蠎ｫ謨ｰ / 蜊倅ｽ・/ 縺励″縺・､ / 菫晉ｮ｡蝣ｴ謇 / 莉募・蜈・/ 譛邨ょ・闕ｷ譌･ / 繝｡繝｢ 2. 繧ｭ繝｣繝ｳ繧ｻ繝ｫ 3. 譖ｴ譁ｰ縺吶ｋ
-笏披楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏・/pre></div>
-<h4>繝輔Ξ繝ｼ繝蛻･ 驟咲ｽｮ鬆・岼繝ｻ陦ｨ遉ｺ鬆・/h4>
-<div class="table-wrap"><table><thead><tr><th>Frame</th><th>驟咲ｽｮ繧ｨ繝ｪ繧｢</th><th>陦ｨ遉ｺ鬆・/th><th>鬆・岼</th><th>繝｢繝・け繧｢繝・・荳翫・隕∫ｴ</th><th>遞ｮ蛻･</th><th>驟咲ｽｮ菴咲ｽｮ</th><th>陬懆ｶｳ繝ｻ霑ｽ蜉莉墓ｧ・/th></tr></thead><tbody><tr><td>Frame 01</td><td>邂｡逅・・騾壹リ繝・/td><td>1</td><td>1. AT 2. 鬘ｧ 3. 鬥・4. 蝨ｨ 5. 蜃ｺ</td><td>1. AT 2. 鬘ｧ 3. 鬥・4. 蝨ｨ 5. 蜃ｺ</td><td>陦ｨ遉ｺ/繝ｪ繝ｳ繧ｯ/蜈･蜉・/td><td>繝｢繝・け繧｢繝・・鬆・/td><td>荳崎ｶｳ鬆・岼縺ｯ莉｣譖ｿ陦ｨ遉ｺ繝ｻ繝ｪ繝ｳ繧ｯ荳肴ｭ｣譎ょ宛蠕｡縺ｨ縺励※霑ｽ蜉</td></tr><tr><td>Frame 02</td><td>繝壹・繧ｸ繝倥ャ繝繝ｼ</td><td>1</td><td>1. 邂｡逅・判髱｢ 2. 蝨ｨ蠎ｫ邱ｨ髮・3. 繧ｭ繝｣繝ｳ繧ｻ繝ｫ</td><td>1. 邂｡逅・判髱｢ 2. 蝨ｨ蠎ｫ邱ｨ髮・3. 繧ｭ繝｣繝ｳ繧ｻ繝ｫ</td><td>陦ｨ遉ｺ/繝ｪ繝ｳ繧ｯ/蜈･蜉・/td><td>繝｢繝・け繧｢繝・・鬆・/td><td>荳崎ｶｳ鬆・岼縺ｯ莉｣譖ｿ陦ｨ遉ｺ繝ｻ繝ｪ繝ｳ繧ｯ荳肴ｭ｣譎ょ宛蠕｡縺ｨ縺励※霑ｽ蜉</td></tr><tr><td>Frame 03</td><td>蜈･蜉帙ヵ繧ｩ繝ｼ繝</td><td>1</td><td>1. 蜩∝錐 / 繧ｫ繝・ざ繝ｪ / 蝨ｨ蠎ｫ謨ｰ / 蜊倅ｽ・/ 縺励″縺・､ / 菫晉ｮ｡蝣ｴ謇 / 莉募・蜈・/ 譛邨ょ・闕ｷ譌･ / 繝｡繝｢ 2. 繧ｭ繝｣繝ｳ繧ｻ繝ｫ 3. 譖ｴ譁ｰ縺吶ｋ</td><td>1. 蜩∝錐 / 繧ｫ繝・ざ繝ｪ / 蝨ｨ蠎ｫ謨ｰ / 蜊倅ｽ・/ 縺励″縺・､ / 菫晉ｮ｡蝣ｴ謇 / 莉募・蜈・/ 譛邨ょ・闕ｷ譌･ / 繝｡繝｢ 2. 繧ｭ繝｣繝ｳ繧ｻ繝ｫ 3. 譖ｴ譁ｰ縺吶ｋ</td><td>陦ｨ遉ｺ/繝ｪ繝ｳ繧ｯ/蜈･蜉・/td><td>繝｢繝・け繧｢繝・・鬆・/td><td>荳崎ｶｳ鬆・岼縺ｯ莉｣譖ｿ陦ｨ遉ｺ繝ｻ繝ｪ繝ｳ繧ｯ荳肴ｭ｣譎ょ宛蠕｡縺ｨ縺励※霑ｽ蜉</td></tr></tbody></table></div>
-<h3>2. 蜈･蜉幃・岼荳隕ｧ</h3>
-<div class="table-wrap"><table><thead><tr><th>No.</th><th>蟇ｾ雎｡繝輔Ξ繝ｼ繝</th><th>鬆・岼蜷・/th><th>繝・・繧ｿ蝙・/th><th>繝・・繧ｿ繧ｵ繧､繧ｺ</th><th>蠢・・莉ｻ諢・/th><th>繝舌Μ繝・・繧ｷ繝ｧ繝ｳ繝ｫ繝ｼ繝ｫ</th><th>繝√ぉ繝・け螳滓命繧ｿ繧､繝溘Φ繧ｰ</th><th>繧ｨ繝ｩ繝ｼ譎ゅ・謇ｱ縺・/th></tr></thead><tbody><tr><td>1</td><td>Frame 03</td><td>蜩∝錐</td><td>String</td><td>1縲・00</td><td>蠢・・/td><td>遨ｺ荳榊庄</td><td>蜈･蜉帶凾繝ｻblur譎ゅ・菫晏ｭ俶凾</td><td>菫晏ｭ倅ｸ榊庄</td></tr><tr><td>2</td><td>Frame 03</td><td>繧ｫ繝・ざ繝ｪ</td><td>String</td><td>譛螟ｧ30</td><td>蠢・・/td><td>鬥呎侭/螳ｹ蝎ｨ/邏譚舌・縺ｿ</td><td>驕ｸ謚槫､画峩譎ゅ・菫晏ｭ俶凾</td><td>菫晏ｭ倅ｸ榊庄</td></tr><tr><td>3</td><td>Frame 03</td><td>蝨ｨ蠎ｫ謨ｰ</td><td>Decimal</td><td>0縲・99999</td><td>蠢・・/td><td>0莉･荳・/td><td>蜈･蜉帶凾繝ｻ菫晏ｭ俶凾</td><td>菫晏ｭ倅ｸ榊庄</td></tr><tr><td>4</td><td>Frame 03</td><td>蜊倅ｽ・/td><td>String</td><td>譛螟ｧ10</td><td>蠢・・/td><td>ml/蛟・g縺ｮ縺ｿ</td><td>驕ｸ謚槫､画峩譎ゅ・菫晏ｭ俶凾</td><td>菫晏ｭ倅ｸ榊庄</td></tr><tr><td>5</td><td>Frame 03</td><td>縺励″縺・､</td><td>Decimal</td><td>0縲・99999</td><td>蠢・・/td><td>0莉･荳・/td><td>蜈･蜉帶凾繝ｻ菫晏ｭ俶凾</td><td>菫晏ｭ倅ｸ榊庄</td></tr><tr><td>6</td><td>Frame 03</td><td>菫晉ｮ｡蝣ｴ謇</td><td>String</td><td>譛螟ｧ100</td><td>莉ｻ諢・/td><td>HTML繧ｿ繧ｰ荳榊庄</td><td>蜈･蜉帶凾繝ｻ菫晏ｭ俶凾</td><td>繧ｨ繝ｩ繝ｼ</td></tr><tr><td>7</td><td>Frame 03</td><td>莉募・蜈・/td><td>String</td><td>譛螟ｧ100</td><td>莉ｻ諢・/td><td>HTML繧ｿ繧ｰ荳榊庄</td><td>蜈･蜉帶凾繝ｻ菫晏ｭ俶凾</td><td>繧ｨ繝ｩ繝ｼ</td></tr><tr><td>8</td><td>Frame 03</td><td>譛邨ょ・闕ｷ譌･</td><td>Date</td><td>YYYY-MM-DD</td><td>莉ｻ諢・/td><td>譛ｪ譚･譌･荳榊庄</td><td>蜈･蜉帛､画峩譎ゅ・菫晏ｭ俶凾</td><td>菫晏ｭ倅ｸ榊庄</td></tr><tr><td>9</td><td>Frame 03</td><td>繝｡繝｢</td><td>String</td><td>譛螟ｧ1000</td><td>莉ｻ諢・/td><td>HTML繧ｨ繧ｹ繧ｱ繝ｼ繝・/td><td>蜈･蜉帶凾繝ｻ菫晏ｭ俶凾</td><td>雜・℃譎ゆｿ晏ｭ倅ｸ榊庄</td></tr></tbody></table></div>
-<h3>3. 蜃ｦ逅・ヵ繝ｭ繝ｼ</h3><div class="flow"><p class="flow-step"><span class="label">Step 1</span>management/inventory_edit.html縺ｫ繧｢繧ｯ繧ｻ繧ｹ</p><p class="flow-step"><span class="label">Step 2</span>蝨ｨ蠎ｫ諠・ｱ繧貞・蜉・菫ｮ豁｣</p><p class="flow-step"><span class="label">Step 3</span>蜈･蜉帶凾繝ｻblur譎ゅ・菫晏ｭ俶凾縺ｫ繝√ぉ繝・け</p><p class="flow-step"><span class="label">Step 4</span>譖ｴ譁ｰ縺吶ｋ謚ｼ荳九〒菫晏ｭ・/p><p class="flow-step"><span class="label">Step 5</span>豁｣蟶ｸ譎ゅ・隧ｳ邏ｰ縺ｸ驕ｷ遘ｻ</p></div>
-<h3>4. 豁｣蟶ｸ譎ゅ・蜍穂ｽ・/h3><div class="ok"><ul><li>蠢・磯・岼縺悟ｦ･蠖薙↑蝣ｴ蜷医∝惠蠎ｫ諠・ｱ繧剃ｿ晏ｭ・/li><li>菫晏ｭ伜ｾ後∬ｩｳ邏ｰ逕ｻ髱｢縺ｸ驕ｷ遘ｻ</li><li>繧ｭ繝｣繝ｳ繧ｻ繝ｫ譎ゅ・菫晏ｭ倥○縺壻ｸ隕ｧ縺ｸ謌ｻ繧・/li></ul></div>
-<h3>5. 繧ｨ繝ｩ繝ｼ譎ゅ・蜍穂ｽ・/h3><div class="err"><ul><li>蠢・域悴蜈･蜉帙・菫晏ｭ倅ｸ榊庄</li><li>蠖｢蠑丈ｸ肴ｭ｣繝ｻ譁・ｭ玲焚雜・℃縺ｯ菫晏ｭ倅ｸ榊庄</li><li>菫晏ｭ伜､ｱ謨玲凾縺ｯ繝輔か繝ｼ繝荳企Κ縺ｫ繧ｨ繝ｩ繝ｼ陦ｨ遉ｺ</li></ul></div>
-<h3>6. 逕ｻ髱｢驕ｷ遘ｻ蜈・/h3>
-<div class="table-wrap"><table><thead><tr><th>No.</th><th>驕ｷ遘ｻ蜈・ヵ繝ｬ繝ｼ繝</th><th>繝医Μ繧ｬ繝ｼ</th><th>驕ｷ遘ｻ蜈・/th><th>驕ｷ遘ｻ譚｡莉ｶ</th><th>蠑輔″邯吶℃蛟､</th><th>蛯呵・/th></tr></thead><tbody><tr><td>1</td><td>Frame 03</td><td>繧ｭ繝｣繝ｳ繧ｻ繝ｫ</td><td>management/inventory_list.html</td><td>蟶ｸ譎・/td><td>縺ｪ縺・/td><td>荳隕ｧ縺ｸ</td></tr><tr><td>2</td><td>Frame 03</td><td>譖ｴ譁ｰ縺吶ｋ</td><td>inventory_detail.html</td><td>蜈･蜉帛､螯･蠖・/td><td>蝨ｨ蠎ｫ諠・ｱ</td><td>隧ｳ邏ｰ縺ｸ</td></tr></tbody></table></div>
+<p>在庫情報を入力し、更新する操作で詳細画面へ遷移する。</p>
+<h3>1. 画面レイアウト</h3>
+<p class="note">添付モックアップのレイアウト・項目をベースに、必要に応じて代替表示、リンク不正時の扱い、入力補助・エラー表示を追加仕様として整理しています。</p>
+<div class="layout-box"><pre>┌─ Frame 01：管理共通ナビ──────────────────────────────┐
+│ 1. AT 2. 顧 3. 香 4. 在 5. 出
+└────────────────────────────────────────────────────────┘
+┌─ Frame 02：ページヘッダー──────────────────────────────┐
+│ 1. 管理画面 2. 在庫編集 3. キャンセル
+└────────────────────────────────────────────────────────┘
+┌─ Frame 03：入力フォーム──────────────────────────────┐
+│ 1. 品名 / カテゴリ / 在庫数 / 単位 / しきい値 / 保管場所 / 仕入先 / 最終入荷日 / メモ 2. キャンセル 3. 更新する
+└────────────────────────────────────────────────────────┘</pre></div>
+<h4>フレーム別 配置項目・表示順</h4>
+<div class="table-wrap"><table><thead><tr><th>Frame</th><th>配置エリア</th><th>表示順</th><th>項目</th><th>モックアップ上の要素</th><th>種別</th><th>配置位置</th><th>補足・追加仕様</th></tr></thead><tbody><tr><td>Frame 01</td><td>管理共通ナビ</td><td>1</td><td>1. AT 2. 顧 3. 香 4. 在 5. 出</td><td>1. AT 2. 顧 3. 香 4. 在 5. 出</td><td>表示/リンク/入力</td><td>モックアップ順</td><td>不足項目は代替表示・リンク不正時制御として追加</td></tr><tr><td>Frame 02</td><td>ページヘッダー</td><td>1</td><td>1. 管理画面 2. 在庫編集 3. キャンセル</td><td>1. 管理画面 2. 在庫編集 3. キャンセル</td><td>表示/リンク/入力</td><td>モックアップ順</td><td>不足項目は代替表示・リンク不正時制御として追加</td></tr><tr><td>Frame 03</td><td>入力フォーム</td><td>1</td><td>1. 品名 / カテゴリ / 在庫数 / 単位 / しきい値 / 保管場所 / 仕入先 / 最終入荷日 / メモ 2. キャンセル 3. 更新する</td><td>1. 品名 / カテゴリ / 在庫数 / 単位 / しきい値 / 保管場所 / 仕入先 / 最終入荷日 / メモ 2. キャンセル 3. 更新する</td><td>表示/リンク/入力</td><td>モックアップ順</td><td>不足項目は代替表示・リンク不正時制御として追加</td></tr></tbody></table></div>
+<h3>2. 入力項目一覧</h3>
+<div class="table-wrap"><table><thead><tr><th>No.</th><th>対象フレーム</th><th>項目名</th><th>データ型</th><th>データサイズ</th><th>必須/任意</th><th>バリデーションルール</th><th>チェック実施タイミング</th><th>エラー時の扱い</th></tr></thead><tbody><tr><td>1</td><td>Frame 03</td><td>品名</td><td>String</td><td>1〜100</td><td>必須</td><td>空不可</td><td>入力時・blur時・保存時</td><td>保存不可</td></tr><tr><td>2</td><td>Frame 03</td><td>カテゴリ</td><td>String</td><td>最大30</td><td>必須</td><td>香料/容器/素材のみ</td><td>選択変更時・保存時</td><td>保存不可</td></tr><tr><td>3</td><td>Frame 03</td><td>在庫数</td><td>Decimal</td><td>0〜999999</td><td>必須</td><td>0以上</td><td>入力時・保存時</td><td>保存不可</td></tr><tr><td>4</td><td>Frame 03</td><td>単位</td><td>String</td><td>最大10</td><td>必須</td><td>ml/個/gのみ</td><td>選択変更時・保存時</td><td>保存不可</td></tr><tr><td>5</td><td>Frame 03</td><td>しきい値</td><td>Decimal</td><td>0〜999999</td><td>必須</td><td>0以上</td><td>入力時・保存時</td><td>保存不可</td></tr><tr><td>6</td><td>Frame 03</td><td>保管場所</td><td>String</td><td>最大100</td><td>任意</td><td>HTMLタグ不可</td><td>入力時・保存時</td><td>エラー</td></tr><tr><td>7</td><td>Frame 03</td><td>仕入先</td><td>String</td><td>最大100</td><td>任意</td><td>HTMLタグ不可</td><td>入力時・保存時</td><td>エラー</td></tr><tr><td>8</td><td>Frame 03</td><td>最終入荷日</td><td>Date</td><td>YYYY-MM-DD</td><td>任意</td><td>未来日不可</td><td>入力変更時・保存時</td><td>保存不可</td></tr><tr><td>9</td><td>Frame 03</td><td>メモ</td><td>String</td><td>最大1000</td><td>任意</td><td>HTMLエスケープ</td><td>入力時・保存時</td><td>超過時保存不可</td></tr></tbody></table></div>
+<h3>3. 処理フロー</h3><div class="flow"><p class="flow-step"><span class="label">Step 1</span>management/inventory_edit.htmlにアクセス</p><p class="flow-step"><span class="label">Step 2</span>在庫情報を入力/修正</p><p class="flow-step"><span class="label">Step 3</span>入力時・blur時・保存時にチェック</p><p class="flow-step"><span class="label">Step 4</span>更新する押下で保存</p><p class="flow-step"><span class="label">Step 5</span>正常時は詳細へ遷移</p></div>
+<h3>4. 正常時の動作</h3><div class="ok"><ul><li>必須項目が妥当な場合、在庫情報を保存</li><li>保存後、詳細画面へ遷移</li><li>キャンセル時は保存せず一覧へ戻る</li></ul></div>
+<h3>5. エラー時の動作</h3><div class="err"><ul><li>必須未入力は保存不可</li><li>形式不正・文字数超過は保存不可</li><li>保存失敗時はフォーム上部にエラー表示</li></ul></div>
+<h3>6. 画面遷移先</h3>
+<div class="table-wrap"><table><thead><tr><th>No.</th><th>遷移元フレーム</th><th>トリガー</th><th>遷移先</th><th>遷移条件</th><th>引き継ぎ値</th><th>備考</th></tr></thead><tbody><tr><td>1</td><td>Frame 03</td><td>キャンセル</td><td>management/inventory_list.html</td><td>常時</td><td>なし</td><td>一覧へ</td></tr><tr><td>2</td><td>Frame 03</td><td>更新する</td><td>inventory_detail.html</td><td>入力値妥当</td><td>在庫情報</td><td>詳細へ</td></tr></tbody></table></div>
+
 <h3>7. DB変更反映メモ（2026-05-14）</h3>
 <div class="note">
   <ul>
@@ -54,4 +55,3 @@ h1{margin:0 0 10px;font-size:30px}h2{margin:0 0 16px;padding-left:14px;border-le
   </main>
 </body>
 </html>
-

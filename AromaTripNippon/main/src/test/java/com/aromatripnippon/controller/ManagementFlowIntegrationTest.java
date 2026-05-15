@@ -9,8 +9,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.flash;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+import com.aromatripnippon.AromaTripNipponApplication;
 import com.aromatripnippon.entity.Customer;
 import com.aromatripnippon.entity.ExperienceProgram;
 import com.aromatripnippon.entity.FragranceRecipe;
@@ -29,6 +31,7 @@ import com.aromatripnippon.repository.ReservationRepository;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import jakarta.servlet.http.HttpSession;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +41,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-@SpringBootTest
+@SpringBootTest(classes = AromaTripNipponApplication.class)
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
 class ManagementFlowIntegrationTest {
@@ -313,5 +316,61 @@ class ManagementFlowIntegrationTest {
         .andExpect(redirectedUrl("/management/dashboard"))
         .andExpect(flash().attribute("errorMessage",
             "対象データが見つかりませんでした。画面を更新して、一覧から再度操作してください。"));
+  }
+
+  @Test
+  void sessionTimeout_afterInvalidation_requiresRelogin() throws Exception {
+    MvcResult loginResult = mockMvc.perform(formLogin("/management/login")
+            .user("Adm01")
+            .password("password"))
+        .andExpect(status().is3xxRedirection())
+        .andReturn();
+    MockHttpSession authSession = (MockHttpSession) loginResult.getRequest().getSession(false);
+    assertThat(authSession).isNotNull();
+
+    authSession.invalidate();
+
+    mockMvc.perform(get("/management/dashboard").session(new MockHttpSession()))
+        .andExpect(status().is3xxRedirection());
+  }
+
+  @Test
+  void postWithoutCsrf_isRejected() throws Exception {
+    MvcResult loginResult = mockMvc.perform(formLogin("/management/login")
+            .user("Adm01")
+            .password("password"))
+        .andExpect(status().is3xxRedirection())
+        .andReturn();
+    MockHttpSession authSession = (MockHttpSession) loginResult.getRequest().getSession(false);
+    assertThat(authSession).isNotNull();
+
+    mockMvc.perform(post("/management/products").session(authSession)
+            .param("productName", "NoCsrf Product")
+            .param("category", "misc")
+            .param("price", "1000")
+            .param("description", "no csrf"))
+        .andExpect(status().isForbidden());
+  }
+
+  @Test
+  void xssPayload_isEscapedOnRender() throws Exception {
+    MvcResult loginResult = mockMvc.perform(formLogin("/management/login")
+            .user("Adm01")
+            .password("password"))
+        .andExpect(status().is3xxRedirection())
+        .andReturn();
+    MockHttpSession authSession = (MockHttpSession) loginResult.getRequest().getSession(false);
+    assertThat(authSession).isNotNull();
+
+    String payload = "<script>alert('x')</script>";
+    Customer customer = new Customer();
+    customer.setName(payload);
+    customer.setEmail("xss.customer@example.com");
+    customer = customers.save(customer);
+
+    mockMvc.perform(get("/management/customers/{id}", customer.getId()).session(authSession))
+        .andExpect(status().isOk())
+        .andExpect(content().string(Matchers.not(Matchers.containsString(payload))))
+        .andExpect(content().string(Matchers.containsString("&lt;script&gt;alert")));
   }
 }

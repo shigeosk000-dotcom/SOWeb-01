@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>トップページ</title>
   <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
+
 <body>
   <header class="header">
     <div class="container header-inner">
@@ -18,7 +20,7 @@
         <a th:href="@{/reservation}">予約</a>
       </nav>
       <div style="display:flex;gap:10px;align-items:center">
-        <a class="btn" th:href="@{/reservation}">Book Experience</a>
+        <a class="btn" th:href="@{/reservation}">予約する</a>
       </div>
     </div>
   </header>
@@ -28,9 +30,12 @@
       <div class="container hero-grid">
         <div class="card" style="padding:0;overflow:hidden">
           <div class="pro-slider hero-box" data-interval="5000" aria-label="トップページ ヒーロースライド">
-            <div class="pro-slider__slide is-active"><img th:src="@{/assets/images/index_hero_01.png}" alt="トップページ ヒーロースライド 1" class="pro-slider__media" /></div>
-            <div class="pro-slider__slide"><img th:src="@{/assets/images/index_hero_02.png}" alt="トップページ ヒーロースライド 2" class="pro-slider__media" /></div>
-            <div class="pro-slider__slide"><img th:src="@{/assets/images/index_hero_03.png}" alt="トップページ ヒーロースライド 3" class="pro-slider__media" /></div>
+            <div class="pro-slider__slide is-active"><img th:src="@{/assets/images/index_hero_01.png}"
+                alt="トップページ ヒーロースライド 1" class="pro-slider__media" /></div>
+            <div class="pro-slider__slide"><img th:src="@{/assets/images/index_hero_02.png}" alt="トップページ ヒーロースライド 2"
+                class="pro-slider__media" /></div>
+            <div class="pro-slider__slide"><img th:src="@{/assets/images/index_hero_03.png}" alt="トップページ ヒーロースライド 3"
+                class="pro-slider__media" /></div>
             <button class="pro-slider__nav pro-slider__nav--prev" type="button" aria-label="前へ"></button>
             <button class="pro-slider__nav pro-slider__nav--next" type="button" aria-label="次へ"></button>
             <div class="pro-slider__dots">
@@ -73,9 +78,21 @@
         <h2>日本素材の紹介</h2>
         <p class="sub">体験で出会える香りの一部をご紹介します。</p>
         <div class="grid-3">
-          <div class="material"><img th:src="@{/assets/images/material_hiba2.png}" alt="ひばの素材イメージ" class="material-thumb" /><span class="pill">能登ひば</span><h3>落ち着きと静けさ</h3><p class="text">森の空気感を思わせる、ひばの上品で深い香り。</p></div>
-          <div class="material"><img th:src="@{/assets/images/material_yuzu2.png}" alt="ゆずの素材イメージ" class="material-thumb" /><span class="pill">国造ゆず</span><h3>明るく爽やかな余韻</h3><p class="text">旅の高揚感と相性のよい、ゆずの軽やかな印象。</p></div>
-          <div class="material"><img th:src="@{/assets/images/material_hakka2.png}" alt="薄荷の素材イメージ" class="material-thumb" /><span class="pill">和薄荷</span><h3>やわらかく記憶に残る</h3><p class="text">清涼感のある和薄荷の香りが、心をリフレッシュさせます。</p></div>
+          <div class="material"><img th:src="@{/assets/images/material_hiba2.png}" alt="ひばの素材イメージ"
+              class="material-thumb" /><span class="pill">能登ひば</span>
+            <h3>落ち着きと静けさ</h3>
+            <p class="text">森の空気感を思わせる、ひばの上品で深い香り。</p>
+          </div>
+          <div class="material"><img th:src="@{/assets/images/material_yuzu2.png}" alt="ゆずの素材イメージ"
+              class="material-thumb" /><span class="pill">国造ゆず</span>
+            <h3>明るく爽やかな余韻</h3>
+            <p class="text">旅の高揚感と相性のよい、ゆずの軽やかな印象。</p>
+          </div>
+          <div class="material"><img th:src="@{/assets/images/material_hakka2.png}" alt="薄荷の素材イメージ"
+              class="material-thumb" /><span class="pill">和薄荷</span>
+            <h3>やわらかく記憶に残る</h3>
+            <p class="text">清涼感のある和薄荷の香りが、心をリフレッシュさせます。</p>
+          </div>
         </div>
       </div>
     </section>
@@ -86,16 +103,31 @@
           <h2>体験の流れ</h2>
           <p class="sub">初めてでも安心できるステップ設計</p>
           <div class="flow-list">
-            <div class="step"><h3>1. 素材を知る</h3><p class="text">素材の背景と香りの違いを学ぶ。</p></div>
-            <div class="step"><h3>2. 自分の香りを作る</h3><p class="text">香りを選び、レシピとして完成させる。</p></div>
-            <div class="step"><h3>3. 思い出として持ち帰る</h3><p class="text">旅の記憶として持ち帰る。</p></div>
+            <div class="step">
+              <h3>1. 素材を知る</h3>
+              <p class="text">素材の背景と香りの違いを学ぶ。</p>
+            </div>
+            <div class="step">
+              <h3>2. 自分の香りを作る</h3>
+              <p class="text">香りを選び、レシピとして完成させる。</p>
+            </div>
+            <div class="step">
+              <h3>3. 思い出として持ち帰る</h3>
+              <p class="text">旅の記憶として持ち帰る。</p>
+            </div>
           </div>
         </div>
         <div class="card" style="padding:24px">
           <h2>レビュー / 体験の声</h2>
           <div class="review-list">
-            <div class="review"><h3>“体験そのものに意味があった”</h3><p class="text">日本文化の背景まで感じられて、ただのワークショップ以上だった。</p></div>
-            <div class="review"><h3>“大人っぽくて落ち着いた雰囲気”</h3><p class="text">特別感があり、旅の記念として満足度が高かった。</p></div>
+            <div class="review">
+              <h3>“体験そのものに意味があった”</h3>
+              <p class="text">日本文化の背景まで感じられて、ただのワークショップ以上だった。</p>
+            </div>
+            <div class="review">
+              <h3>“大人っぽくて落ち着いた雰囲気”</h3>
+              <p class="text">特別感があり、旅の記念として満足度が高かった。</p>
+            </div>
           </div>
         </div>
       </div>
@@ -115,10 +147,21 @@
         <div class="card access-info">
           <div class="badge">Access</div>
           <h2>JapaneseAroma 香作</h2>
-          <dl class="shop-info"><div><dt>住所</dt><dd>東京都台東区浅草１</dd></div><div><dt>電話</dt><dd><a href="tel:03-000-0000">03-000-0000</a></dd></div></dl>
+          <dl class="shop-info">
+            <div>
+              <dt>住所</dt>
+              <dd>東京都台東区浅草１</dd>
+            </div>
+            <div>
+              <dt>電話</dt>
+              <dd><a href="tel:03-000-0000">03-000-0000</a></dd>
+            </div>
+          </dl>
         </div>
         <div class="card access-map">
-          <div class="shop-map"><iframe title="JapaneseAroma 香作の地図" src="https://maps.google.com/maps?q=%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%8F%B0%E6%9D%B1%E5%8C%BA%E6%B5%85%E8%8D%89%EF%BC%91&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+          <div class="shop-map"><iframe title="JapaneseAroma 香作の地図"
+              src="https://maps.google.com/maps?q=%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%8F%B0%E6%9D%B1%E5%8C%BA%E6%B5%85%E8%8D%89%EF%BC%91&output=embed"
+              loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
         </div>
       </div>
     </section>
@@ -127,10 +170,12 @@
   <footer class="footer">
     <div class="container footer-grid">
       <div><strong>Concept / About</strong><br>和香巡りとは・素材のこだわり・地域ストーリー</div>
-      <div><a th:href="@{/experience}">Experience</a><br><a th:href="@{/concept}">Concept</a><br><a th:href="@{/reservation}">Booking</a></div>
+      <div><a th:href="@{/experience}">Experience</a><br><a th:href="@{/concept}">Concept</a><br><a
+          th:href="@{/reservation}">Booking</a></div>
       <div>Instagram<br>Contact<br>Booking</div>
     </div>
   </footer>
   <script th:src="@{/js/slider.js}" defer></script>
 </body>
+
 </html>

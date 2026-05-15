@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>1. 繧ｮ繝｣繝ｩ繝ｪ繝ｼ繝ｻ菴馴ｨ謎ｺ倶ｾ玖｡ｨ遉ｺ・弃hase2讖溯・ 隧ｳ邏ｰ莉墓ｧ俶嶌</title>
+  <title>1. ギャラリー・体験事例表示｜Phase2機能 詳細仕様書</title>
   <style>
 :root{--bg:#f7f5f2;--paper:#fff;--ink:#1f1b17;--muted:#6d645a;--line:#e8dccb;--accent:#b08d57;--accent-dark:#8c6a36;--soft:#faf6ef;--error:#8f3f2f;--ok:#48694d}
 *{box-sizing:border-box}
@@ -33,36 +33,37 @@ tr:last-child td{border-bottom:none}th:last-child,td:last-child{border-right:non
 <body>
   <main class="page">
     <header>
-      <h1>1. 繧ｮ繝｣繝ｩ繝ｪ繝ｼ繝ｻ菴馴ｨ謎ｺ倶ｾ玖｡ｨ遉ｺ</h1>
-      <p class="meta">蛻・牡蜈・ｼ啀hase2讖溯・ 隧ｳ邏ｰ莉墓ｧ俶嶌</p>
+      <h1>1. ギャラリー・体験事例表示</h1>
+      <p class="meta">分割元：Phase2機能 詳細仕様書</p>
     </header>
     <section class="screen" id="spec-01">
-<h2>1. 繧ｮ繝｣繝ｩ繝ｪ繝ｼ繝ｻ菴馴ｨ謎ｺ倶ｾ玖｡ｨ遉ｺ</h2>
-<p class="meta"><span class="badge">繝輔Ο繝ｳ繝医お繝ｳ繝・/span><span class="badge">user/gallery.html</span><span class="badge">Phase2</span><span class="badge">Should</span></p>
-<p>蜀咏悄縲∝虚逕ｻ縲√Θ繝ｼ繧ｶ繝ｼ謚慕ｨｿ縲√Ξ繝薙Η繝ｼ繧定｡ｨ遉ｺ縺励∽ｽ馴ｨ謎ｾ｡蛟､繧定ｦ冶ｦ夂噪縺ｫ莨昴∴縺ｦ莠育ｴ・・繝ｼ繧ｸ縺ｸ隱伜ｰ弱☆繧九・/p>
-<h3>1. 逕ｻ髱｢繝ｬ繧､繧｢繧ｦ繝・/h3>
-<p class="note">Phase1繝｢繝・け繧｢繝・・縺ｨ蜷後§繝医・繝ｳ繧貞燕謠舌↓縲√き繝ｼ繝峨√ユ繝ｼ繝悶Ν縲√ヵ繧ｩ繝ｼ繝縲，TA繧帝・鄂ｮ縺励∪縺吶ゆｸ玖ｨ倥・繝輔Ξ繝ｼ繝蜊倅ｽ阪・驟咲ｽｮ鬆・〒縺吶・/p>
-<pre>笏娯楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏・
-笏・Frame 01・壹・繝・ム繝ｼ                                          笏・
-笏・[1] 繝ｭ繧ｴ [2] 繝翫ン [3] EN/JP [4] Book Experience             笏・
-笏懌楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏､
-笏・Frame 02・壹・繝ｼ繧ｸ繝偵・繝ｭ繝ｼ                                    笏・
-笏・[1] 隕句・縺・[2] 繝ｪ繝ｼ繝画枚 [3] 菴馴ｨ鍋ｨｮ蛻･ [4] 荳ｦ縺ｳ鬆・[5] 莠育ｴГTA 笏・
-笏懌楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏､
-笏・Frame 03・壹ぐ繝｣繝ｩ繝ｪ繝ｼ繧ｫ繝ｼ繝・                                 笏・
-笏・[1] 蜀咏悄/蜍慕判 [2] 繧ｿ繧ｰ [3] 繧ｿ繧､繝医Ν [4] 繧ｳ繝｡繝ｳ繝・           笏・
-笏披楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏・/pre>
-<div class='table-wrap'><table><thead><tr><th>No.</th><th>驟咲ｽｮ繝輔Ξ繝ｼ繝</th><th>陦ｨ遉ｺ鬆・・鬆・岼</th><th>遞ｮ蛻･</th><th>驟咲ｽｮ菴咲ｽｮ</th><th>陬懆ｶｳ</th></tr></thead><tbody><tr><td>3</td><td>Frame 3</td><td>[1] 繝ｭ繧ｴ [2] 繝翫ン [3] EN/JP [4] Book Experience</td><td>逕ｻ髱｢隕∫ｴ</td><td>荳翫°繧蛾・/td><td>繝｢繝・け繧｢繝・・縺ｫ蜿肴丐</td></tr><tr><td>6</td><td>Frame 6</td><td>[1] 隕句・縺・[2] 繝ｪ繝ｼ繝画枚 [3] 菴馴ｨ鍋ｨｮ蛻･ [4] 荳ｦ縺ｳ鬆・[5] 莠育ｴГTA</td><td>逕ｻ髱｢隕∫ｴ</td><td>荳翫°繧蛾・/td><td>繝｢繝・け繧｢繝・・縺ｫ蜿肴丐</td></tr><tr><td>9</td><td>Frame 9</td><td>[1] 蜀咏悄/蜍慕判 [2] 繧ｿ繧ｰ [3] 繧ｿ繧､繝医Ν [4] 繧ｳ繝｡繝ｳ繝・/td><td>逕ｻ髱｢隕∫ｴ</td><td>荳翫°繧蛾・/td><td>繝｢繝・け繧｢繝・・縺ｫ蜿肴丐</td></tr></tbody></table></div>
-<h3>2. 蜈･蜉幃・岼荳隕ｧ</h3>
-<div class='table-wrap'><table><thead><tr><th>No.</th><th>鬆・岼蜷・/th><th>繝・・繧ｿ蝙・/th><th>繝・・繧ｿ繧ｵ繧､繧ｺ</th><th>蠢・・莉ｻ諢・/th><th>繝舌Μ繝・・繧ｷ繝ｧ繝ｳ繝ｫ繝ｼ繝ｫ</th><th>繝√ぉ繝・け螳滓命繧ｿ繧､繝溘Φ繧ｰ</th><th>繧ｨ繝ｩ繝ｼ譎ゅ・謇ｱ縺・/th></tr></thead><tbody><tr><td>1</td><td>菴馴ｨ鍋ｨｮ蛻･</td><td>String</td><td>譛螟ｧ50譁・ｭ・/td><td>莉ｻ諢・/td><td>險ｱ蜿ｯ縺輔ｌ縺溘き繝・ざ繝ｪ縺ｮ縺ｿ</td><td>驕ｸ謚槫､画峩譎ゅ∵､懃ｴ｢譎・/td><td>荳肴ｭ｣譎ゅ・繧ｨ繝ｩ繝ｼ繝｡繝・そ繝ｼ繧ｸ陦ｨ遉ｺ縺ｾ縺溘・陬懈ｭ｣</td></tr><tr><td>2</td><td>荳ｦ縺ｳ鬆・/td><td>String</td><td>譛螟ｧ20譁・ｭ・/td><td>莉ｻ諢・/td><td>隧穂ｾ｡鬆・譁ｰ逹鬆・・縺ｿ</td><td>驕ｸ謚槫､画峩譎ゅ∵､懃ｴ｢譎・/td><td>荳肴ｭ｣譎ゅ・繧ｨ繝ｩ繝ｼ繝｡繝・そ繝ｼ繧ｸ陦ｨ遉ｺ縺ｾ縺溘・陬懈ｭ｣</td></tr><tr><td>3</td><td>繝ｬ繝薙Η繝ｼ譛ｬ譁・/td><td>String</td><td>譛螟ｧ500譁・ｭ・/td><td>莉ｻ諢・/td><td>HTML繧ｿ繧ｰ繧偵お繧ｹ繧ｱ繝ｼ繝・/td><td>逕ｻ髱｢謠冗判蜑・/td><td>荳肴ｭ｣譎ゅ・繧ｨ繝ｩ繝ｼ繝｡繝・そ繝ｼ繧ｸ陦ｨ遉ｺ縺ｾ縺溘・陬懈ｭ｣</td></tr></tbody></table></div>
-<h3>3. 蜃ｦ逅・ヵ繝ｭ繝ｼ</h3>
-<div class='flow'><p><span class='label'>Step 1</span>gallery.html縺ｫ繧｢繧ｯ繧ｻ繧ｹ縺吶ｋ縲・/p><p><span class='label'>Step 2</span>菴馴ｨ鍋ｨｮ蛻･繝ｻ荳ｦ縺ｳ鬆・ｒ蛻晄悄蛹悶☆繧九・/p><p><span class='label'>Step 3</span>蜀咏悄縲∝虚逕ｻ縲√Ξ繝薙Η繝ｼ繧ｫ繝ｼ繝峨ｒ陦ｨ遉ｺ縺吶ｋ縲・/p><p><span class='label'>Step 4</span>縺薙・菴馴ｨ薙ｒ莠育ｴ・款荳九〒reservation.html縺ｸ驕ｷ遘ｻ縺吶ｋ縲・/p></div>
-<h3>4. 豁｣蟶ｸ譎ゅ・蜍穂ｽ・/h3>
-<ul><li>繧ｮ繝｣繝ｩ繝ｪ繝ｼ繧ｫ繝ｼ繝峨′3繧ｫ繝ｩ繝縺ｧ陦ｨ遉ｺ縺輔ｌ繧九・/li><li>邨槭ｊ霎ｼ縺ｿ譚｡莉ｶ縺ｫ蠢懊§縺ｦ陦ｨ遉ｺ蜀・ｮｹ縺悟・繧頑崛繧上ｋ縲・/li><li>莠育ｴГTA縺梧ｩ溯・縺吶ｋ縲・/li></ul>
-<h3>5. 繧ｨ繝ｩ繝ｼ譎ゅ・蜍穂ｽ・/h3>
-<ul><li>逕ｻ蜒剰ｪｭ霎ｼ螟ｱ謨玲凾縺ｯ莉｣譖ｿ陦ｨ遉ｺ繧定｡後≧縲・/li><li>繧ｫ繝・ざ繝ｪ荳肴ｭ｣譎ゅ・縺吶∋縺ｦ縺ｮ菴馴ｨ薙↓陬懈ｭ｣縺吶ｋ縲・/li><li>繝ｬ繝薙Η繝ｼ譛ｬ譁・・HTML縺ｯ繧ｨ繧ｹ繧ｱ繝ｼ繝励☆繧九・/li></ul>
-<h3>6. 逕ｻ髱｢驕ｷ遘ｻ蜈・/h3>
-<div class='table-wrap'><table><thead><tr><th>No.</th><th>驕ｷ遘ｻ蜈・ヵ繝ｬ繝ｼ繝</th><th>繝医Μ繧ｬ繝ｼ</th><th>驕ｷ遘ｻ蜈・/th><th>驕ｷ遘ｻ譚｡莉ｶ</th><th>蠑輔″邯吶℃蛟､</th><th>蛯呵・/th></tr></thead><tbody><tr><td>1</td><td>Frame 02</td><td>縺薙・菴馴ｨ薙ｒ莠育ｴ・/td><td>reservation.html</td><td>URL豁｣蟶ｸ</td><td>驕ｸ謚槭き繝・ざ繝ｪ</td><td>莠育ｴ・ｪ伜ｰ・/td></tr><tr><td>2</td><td>Frame 01</td><td>繧ｷ繝ｧ繝・・</td><td>shop.html</td><td>URL豁｣蟶ｸ</td><td>縺ｪ縺・/td><td>繧ｷ繝ｧ繝・・縺ｸ</td></tr></tbody></table></div>
+<h2>1. ギャラリー・体験事例表示</h2>
+<p class="meta"><span class="badge">フロントエンド</span><span class="badge">user/gallery.html</span><span class="badge">Phase2</span><span class="badge">Should</span></p>
+<p>写真、動画、ユーザー投稿、レビューを表示し、体験価値を視覚的に伝えて予約ページへ誘導する。</p>
+<h3>1. 画面レイアウト</h3>
+<p class="note">Phase1モックアップと同じトーンを前提に、カード、テーブル、フォーム、CTAを配置します。下記はフレーム単位の配置順です。</p>
+<pre>┌────────────────────────────────────────────────────────────┐
+│ Frame 01：ヘッダー                                          │
+│ [1] ロゴ [2] ナビ [3] EN/JP [4] Book Experience             │
+├────────────────────────────────────────────────────────────┤
+│ Frame 02：ページヒーロー                                    │
+│ [1] 見出し [2] リード文 [3] 体験種別 [4] 並び順 [5] 予約CTA │
+├────────────────────────────────────────────────────────────┤
+│ Frame 03：ギャラリーカード                                  │
+│ [1] 写真/動画 [2] タグ [3] タイトル [4] コメント            │
+└────────────────────────────────────────────────────────────┘</pre>
+<div class='table-wrap'><table><thead><tr><th>No.</th><th>配置フレーム</th><th>表示順・項目</th><th>種別</th><th>配置位置</th><th>補足</th></tr></thead><tbody><tr><td>3</td><td>Frame 3</td><td>[1] ロゴ [2] ナビ [3] EN/JP [4] Book Experience</td><td>画面要素</td><td>上から順</td><td>モックアップに反映</td></tr><tr><td>6</td><td>Frame 6</td><td>[1] 見出し [2] リード文 [3] 体験種別 [4] 並び順 [5] 予約CTA</td><td>画面要素</td><td>上から順</td><td>モックアップに反映</td></tr><tr><td>9</td><td>Frame 9</td><td>[1] 写真/動画 [2] タグ [3] タイトル [4] コメント</td><td>画面要素</td><td>上から順</td><td>モックアップに反映</td></tr></tbody></table></div>
+<h3>2. 入力項目一覧</h3>
+<div class='table-wrap'><table><thead><tr><th>No.</th><th>項目名</th><th>データ型</th><th>データサイズ</th><th>必須/任意</th><th>バリデーションルール</th><th>チェック実施タイミング</th><th>エラー時の扱い</th></tr></thead><tbody><tr><td>1</td><td>体験種別</td><td>String</td><td>最大50文字</td><td>任意</td><td>許可されたカテゴリのみ</td><td>選択変更時、検索時</td><td>不正時はエラーメッセージ表示または補正</td></tr><tr><td>2</td><td>並び順</td><td>String</td><td>最大20文字</td><td>任意</td><td>評価順/新着順のみ</td><td>選択変更時、検索時</td><td>不正時はエラーメッセージ表示または補正</td></tr><tr><td>3</td><td>レビュー本文</td><td>String</td><td>最大500文字</td><td>任意</td><td>HTMLタグをエスケープ</td><td>画面描画前</td><td>不正時はエラーメッセージ表示または補正</td></tr></tbody></table></div>
+<h3>3. 処理フロー</h3>
+<div class='flow'><p><span class='label'>Step 1</span>gallery.htmlにアクセスする。</p><p><span class='label'>Step 2</span>体験種別・並び順を初期化する。</p><p><span class='label'>Step 3</span>写真、動画、レビューカードを表示する。</p><p><span class='label'>Step 4</span>この体験を予約押下でreservation.htmlへ遷移する。</p></div>
+<h3>4. 正常時の動作</h3>
+<ul><li>ギャラリーカードが3カラムで表示される。</li><li>絞り込み条件に応じて表示内容が切り替わる。</li><li>予約CTAが機能する。</li></ul>
+<h3>5. エラー時の動作</h3>
+<ul><li>画像読込失敗時は代替表示を行う。</li><li>カテゴリ不正時はすべての体験に補正する。</li><li>レビュー本文のHTMLはエスケープする。</li></ul>
+<h3>6. 画面遷移先</h3>
+<div class='table-wrap'><table><thead><tr><th>No.</th><th>遷移元フレーム</th><th>トリガー</th><th>遷移先</th><th>遷移条件</th><th>引き継ぎ値</th><th>備考</th></tr></thead><tbody><tr><td>1</td><td>Frame 02</td><td>この体験を予約</td><td>reservation.html</td><td>URL正常</td><td>選択カテゴリ</td><td>予約誘導</td></tr><tr><td>2</td><td>Frame 01</td><td>ショップ</td><td>shop.html</td><td>URL正常</td><td>なし</td><td>ショップへ</td></tr></tbody></table></div>
+
 <h3>7. DB変更反映メモ（2026-05-14）</h3>
 <div class="note">
   <ul>
@@ -75,4 +76,3 @@ tr:last-child td{border-bottom:none}th:last-child,td:last-child{border-right:non
   </main>
 </body>
 </html>
-

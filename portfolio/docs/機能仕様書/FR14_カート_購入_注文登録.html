@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>4. 繧ｫ繝ｼ繝医・雉ｼ蜈･繝ｻ豕ｨ譁・匳骭ｲ・弃hase2讖溯・ 隧ｳ邏ｰ莉墓ｧ俶嶌</title>
+  <title>4. カート・購入・注文登録｜Phase2機能 詳細仕様書</title>
   <style>
 :root{--bg:#f7f5f2;--paper:#fff;--ink:#1f1b17;--muted:#6d645a;--line:#e8dccb;--accent:#b08d57;--accent-dark:#8c6a36;--soft:#faf6ef;--error:#8f3f2f;--ok:#48694d}
 *{box-sizing:border-box}
@@ -33,44 +33,37 @@ tr:last-child td{border-bottom:none}th:last-child,td:last-child{border-right:non
 <body>
   <main class="page">
     <header>
-      <h1>4. 繧ｫ繝ｼ繝医・雉ｼ蜈･繝ｻ豕ｨ譁・匳骭ｲ</h1>
-      <p class="meta">蛻・牡蜈・ｼ啀hase2讖溯・ 隧ｳ邏ｰ莉墓ｧ俶嶌</p>
+      <h1>4. カート・購入・注文登録</h1>
+      <p class="meta">分割元：Phase2機能 詳細仕様書</p>
     </header>
     <section class="screen" id="spec-04">
-<h2>4. 繧ｫ繝ｼ繝医・雉ｼ蜈･繝ｻ豕ｨ譁・匳骭ｲ</h2>
-<p class="meta"><span class="badge">繝輔Ο繝ｳ繝医お繝ｳ繝・/span><span class="badge">user/cart.html</span><span class="badge">Phase2</span><span class="badge">Should</span></p>
-<p>繧ｫ繝ｼ繝亥・螳ｹ縲∵焚驥上・・騾∝・縲∵ｱｺ貂域婿豕輔ｒ蜈･蜉帙＠縲∵ｳｨ譁・ｒ遒ｺ螳壹☆繧九・/p>
-<h3>1. 逕ｻ髱｢繝ｬ繧､繧｢繧ｦ繝・/h3>
-<p class="note">Phase1繝｢繝・け繧｢繝・・縺ｨ蜷後§繝医・繝ｳ繧貞燕謠舌↓縲√き繝ｼ繝峨√ユ繝ｼ繝悶Ν縲√ヵ繧ｩ繝ｼ繝縲，TA繧帝・鄂ｮ縺励∪縺吶ゆｸ玖ｨ倥・繝輔Ξ繝ｼ繝蜊倅ｽ阪・驟咲ｽｮ鬆・〒縺吶・/p>
-<pre>笏娯楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏・
-笏・Frame 01・壹・繝・ム繝ｼ                                          笏・
-笏懌楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏､
-笏・Frame 02・壹き繝ｼ繝亥・螳ｹ                                        笏・
-笏・[1] 蝠・刀 [2] 謨ｰ驥・[3] 萓｡譬ｼ [4] 蜷郁ｨ・                        笏・
-笏懌楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏､
-笏・Frame 03・夐・騾√・豎ｺ貂域ュ蝣ｱ                                    笏・
-笏・[1] 豌丞錐 [2] 繝｡繝ｼ繝ｫ [3] 蝗ｽ [4] 驛ｵ萓ｿ逡ｪ蜿ｷ [5] 菴乗園 [6] 豎ｺ貂・   笏・
-笏・[7] 豕ｨ譁・ｒ遒ｺ螳・                                             笏・
-笏披楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏・/pre>
-<div class='table-wrap'><table><thead><tr><th>No.</th><th>驟咲ｽｮ繝輔Ξ繝ｼ繝</th><th>陦ｨ遉ｺ鬆・・鬆・岼</th><th>遞ｮ蛻･</th><th>驟咲ｽｮ菴咲ｽｮ</th><th>陬懆ｶｳ</th></tr></thead><tbody><tr><td>5</td><td>Frame 5</td><td>[1] 蝠・刀 [2] 謨ｰ驥・[3] 萓｡譬ｼ [4] 蜷郁ｨ・/td><td>逕ｻ髱｢隕∫ｴ</td><td>荳翫°繧蛾・/td><td>繝｢繝・け繧｢繝・・縺ｫ蜿肴丐</td></tr><tr><td>8</td><td>Frame 8</td><td>[1] 豌丞錐 [2] 繝｡繝ｼ繝ｫ [3] 蝗ｽ [4] 驛ｵ萓ｿ逡ｪ蜿ｷ [5] 菴乗園 [6] 豎ｺ貂・/td><td>逕ｻ髱｢隕∫ｴ</td><td>荳翫°繧蛾・/td><td>繝｢繝・け繧｢繝・・縺ｫ蜿肴丐</td></tr><tr><td>9</td><td>Frame 9</td><td>[7] 豕ｨ譁・ｒ遒ｺ螳・/td><td>逕ｻ髱｢隕∫ｴ</td><td>荳翫°繧蛾・/td><td>繝｢繝・け繧｢繝・・縺ｫ蜿肴丐</td></tr></tbody></table></div>
-<h3>2. 蜈･蜉幃・岼荳隕ｧ</h3>
-<div class='table-wrap'><table><thead><tr><th>No.</th><th>鬆・岼蜷・/th><th>繝・・繧ｿ蝙・/th><th>繝・・繧ｿ繧ｵ繧､繧ｺ</th><th>蠢・・莉ｻ諢・/th><th>繝舌Μ繝・・繧ｷ繝ｧ繝ｳ繝ｫ繝ｼ繝ｫ</th><th>繝√ぉ繝・け螳滓命繧ｿ繧､繝溘Φ繧ｰ</th><th>繧ｨ繝ｩ繝ｼ譎ゅ・謇ｱ縺・/th></tr></thead><tbody><tr><td>1</td><td>謨ｰ驥・/td><td>Integer</td><td>1縲・0</td><td>蠢・・/td><td>1莉･荳・0莉･荳・/td><td>螟画峩譎ゅ∵ｳｨ譁・｢ｺ螳壽凾</td><td>荳肴ｭ｣譎ゅ・繧ｨ繝ｩ繝ｼ繝｡繝・そ繝ｼ繧ｸ陦ｨ遉ｺ縺ｾ縺溘・陬懈ｭ｣</td></tr><tr><td>2</td><td>豌丞錐</td><td>String</td><td>1縲・00譁・ｭ・/td><td>蠢・・/td><td>遨ｺ荳榊庄</td><td>蜈･蜉帶凾縲・∽ｿ｡譎・/td><td>荳肴ｭ｣譎ゅ・繧ｨ繝ｩ繝ｼ繝｡繝・そ繝ｼ繧ｸ陦ｨ遉ｺ縺ｾ縺溘・陬懈ｭ｣</td></tr><tr><td>3</td><td>繝｡繝ｼ繝ｫ</td><td>String</td><td>譛螟ｧ255譁・ｭ・/td><td>蠢・・/td><td>繝｡繝ｼ繝ｫ蠖｢蠑・/td><td>blur譎ゅ・∽ｿ｡譎・/td><td>荳肴ｭ｣譎ゅ・繧ｨ繝ｩ繝ｼ繝｡繝・そ繝ｼ繧ｸ陦ｨ遉ｺ縺ｾ縺溘・陬懈ｭ｣</td></tr><tr><td>4</td><td>蝗ｽ</td><td>String</td><td>譛螟ｧ100譁・ｭ・/td><td>蠢・・/td><td>遨ｺ荳榊庄</td><td>騾∽ｿ｡譎・/td><td>荳肴ｭ｣譎ゅ・繧ｨ繝ｩ繝ｼ繝｡繝・そ繝ｼ繧ｸ陦ｨ遉ｺ縺ｾ縺溘・陬懈ｭ｣</td></tr><tr><td>5</td><td>驛ｵ萓ｿ逡ｪ蜿ｷ</td><td>String</td><td>譛螟ｧ20譁・ｭ・/td><td>莉ｻ諢・/td><td>闍ｱ謨ｰ蟄励→繝上う繝輔Φ</td><td>蜈･蜉帶凾縲・∽ｿ｡譎・/td><td>荳肴ｭ｣譎ゅ・繧ｨ繝ｩ繝ｼ繝｡繝・そ繝ｼ繧ｸ陦ｨ遉ｺ縺ｾ縺溘・陬懈ｭ｣</td></tr><tr><td>6</td><td>菴乗園</td><td>String</td><td>譛螟ｧ500譁・ｭ・/td><td>蠢・・/td><td>遨ｺ荳榊庄縲？TML繧ｿ繧ｰ荳榊庄</td><td>騾∽ｿ｡譎・/td><td>荳肴ｭ｣譎ゅ・繧ｨ繝ｩ繝ｼ繝｡繝・そ繝ｼ繧ｸ陦ｨ遉ｺ縺ｾ縺溘・陬懈ｭ｣</td></tr><tr><td>7</td><td>豎ｺ貂域婿豕・/td><td>String</td><td>譛螟ｧ30譁・ｭ・/td><td>蠢・・/td><td>險ｱ蜿ｯ蛟､縺ｮ縺ｿ</td><td>騾∽ｿ｡譎・/td><td>荳肴ｭ｣譎ゅ・繧ｨ繝ｩ繝ｼ繝｡繝・そ繝ｼ繧ｸ陦ｨ遉ｺ縺ｾ縺溘・陬懈ｭ｣</td></tr></tbody></table></div>
-<h3>3. 蜃ｦ逅・ヵ繝ｭ繝ｼ</h3>
-<div class='flow'><p><span class='label'>Step 1</span>cart.html縺ｫ繧｢繧ｯ繧ｻ繧ｹ縺吶ｋ縲・/p><p><span class='label'>Step 2</span>繧ｫ繝ｼ繝亥膚蜩√ｒ陦ｨ遉ｺ縺吶ｋ縲・/p><p><span class='label'>Step 3</span>驟埼∝・縺ｨ豎ｺ貂域婿豕輔ｒ蜈･蜉帙☆繧九・/p><p><span class='label'>Step 4</span>豕ｨ譁・ｒ遒ｺ螳壽款荳九〒蜈･蜉帙メ繧ｧ繝・け繧定｡後≧縲・/p><p><span class='label'>Step 5</span>豁｣蟶ｸ譎ゅ・order-complete.html縺ｸ驕ｷ遘ｻ縺吶ｋ縲・/p></div>
-<h3>4. 豁｣蟶ｸ譎ゅ・蜍穂ｽ・/h3>
-<ul><li>蠢・磯・岼縺悟ｦ･蠖薙↑蝣ｴ蜷域ｳｨ譁・匳骭ｲ縺吶ｋ縲・/li><li>豕ｨ譁・ｮ御ｺ・・繝ｼ繧ｸ縺ｸ驕ｷ遘ｻ縺吶ｋ縲・/li></ul>
-<h3>5. 繧ｨ繝ｩ繝ｼ譎ゅ・蜍穂ｽ・/h3>
-<ul><li>蠢・域悴蜈･蜉帙・豕ｨ譁・ｸ榊庄縲・/li><li>繝｡繝ｼ繝ｫ荳肴ｭ｣縺ｯ隧ｲ蠖捺ｬ・↓繧ｨ繝ｩ繝ｼ陦ｨ遉ｺ縲・/li><li>蝠・刀蝨ｨ蠎ｫ荳崎ｶｳ譎ゅ・謨ｰ驥丞､画峩繧剃ｿ・☆縲・/li><li>繧ｷ繧ｹ繝・Β繧ｨ繝ｩ繝ｼ譎ゅ・騾∽ｿ｡螟ｱ謨励Γ繝・そ繝ｼ繧ｸ陦ｨ遉ｺ縲・/li></ul>
-<h3>6. 逕ｻ髱｢驕ｷ遘ｻ蜈・/h3>
-<div class='table-wrap'><table><thead><tr><th>No.</th><th>驕ｷ遘ｻ蜈・ヵ繝ｬ繝ｼ繝</th><th>繝医Μ繧ｬ繝ｼ</th><th>驕ｷ遘ｻ蜈・/th><th>驕ｷ遘ｻ譚｡莉ｶ</th><th>蠑輔″邯吶℃蛟､</th><th>蛯呵・/th></tr></thead><tbody><tr><td>1</td><td>Frame 03</td><td>豕ｨ譁・ｒ遒ｺ螳・/td><td>order-complete.html</td><td>蜈･蜉帛､豁｣蟶ｸ</td><td>豕ｨ譁・ュ蝣ｱ</td><td>豕ｨ譁・ｮ御ｺ・∈</td></tr><tr><td>2</td><td>Frame 01</td><td>繧ｷ繝ｧ繝・・</td><td>shop.html</td><td>蟶ｸ譎・/td><td>縺ｪ縺・/td><td>雋ｷ縺・黄邯咏ｶ・/td></tr></tbody></table></div>
-<h3>7. DB螟画峩蜿肴丐繝｡繝｢・・026-05-14・・/h3>
-<div class="note">
-  <ul>
-    <li>豕ｨ譁・匳骭ｲ縺ｧ謇ｱ縺・膚蜩∵ュ蝣ｱ縺ｯ蝠・刀繝槭せ繧ｿ・・code>products</code>・峨・ <code>category_id + master_id</code> 縺ｫ謨ｴ蜷医＆縺帙ｋ縲・/li>
-    <li>蝨ｨ蠎ｫ蠑募ｽ薙・蝠・刀1莉ｶ縺ｫ蟇ｾ縺励※蝨ｨ蠎ｫ1莉ｶ・・code>inventory_items</code>・峨ｒ蜿ら・縺励∝｢玲ｸ帙・ <code>inventory_transactions</code> 縺ｫ險倬鹸縺吶ｋ縲・/li>
-    <li>繧ｫ繝・ざ繝ｪ諠・ｱ縺ｯ <code>category_master</code> 繧呈ｭ｣縺ｨ縺吶ｋ縲・/li>
-  </ul>
-</div>
+<h2>4. カート・購入・注文登録</h2>
+<p class="meta"><span class="badge">フロントエンド</span><span class="badge">user/cart.html</span><span class="badge">Phase2</span><span class="badge">Should</span></p>
+<p>カート内容、数量、配送先、決済方法を入力し、注文を確定する。</p>
+<h3>1. 画面レイアウト</h3>
+<p class="note">Phase1モックアップと同じトーンを前提に、カード、テーブル、フォーム、CTAを配置します。下記はフレーム単位の配置順です。</p>
+<pre>┌────────────────────────────────────────────────────────────┐
+│ Frame 01：ヘッダー                                          │
+├────────────────────────────────────────────────────────────┤
+│ Frame 02：カート内容                                        │
+│ [1] 商品 [2] 数量 [3] 価格 [4] 合計                         │
+├────────────────────────────────────────────────────────────┤
+│ Frame 03：配送・決済情報                                    │
+│ [1] 氏名 [2] メール [3] 国 [4] 郵便番号 [5] 住所 [6] 決済    │
+│ [7] 注文を確定                                              │
+└────────────────────────────────────────────────────────────┘</pre>
+<div class='table-wrap'><table><thead><tr><th>No.</th><th>配置フレーム</th><th>表示順・項目</th><th>種別</th><th>配置位置</th><th>補足</th></tr></thead><tbody><tr><td>5</td><td>Frame 5</td><td>[1] 商品 [2] 数量 [3] 価格 [4] 合計</td><td>画面要素</td><td>上から順</td><td>モックアップに反映</td></tr><tr><td>8</td><td>Frame 8</td><td>[1] 氏名 [2] メール [3] 国 [4] 郵便番号 [5] 住所 [6] 決済</td><td>画面要素</td><td>上から順</td><td>モックアップに反映</td></tr><tr><td>9</td><td>Frame 9</td><td>[7] 注文を確定</td><td>画面要素</td><td>上から順</td><td>モックアップに反映</td></tr></tbody></table></div>
+<h3>2. 入力項目一覧</h3>
+<div class='table-wrap'><table><thead><tr><th>No.</th><th>項目名</th><th>データ型</th><th>データサイズ</th><th>必須/任意</th><th>バリデーションルール</th><th>チェック実施タイミング</th><th>エラー時の扱い</th></tr></thead><tbody><tr><td>1</td><td>数量</td><td>Integer</td><td>1〜10</td><td>必須</td><td>1以上10以下</td><td>変更時、注文確定時</td><td>不正時はエラーメッセージ表示または補正</td></tr><tr><td>2</td><td>氏名</td><td>String</td><td>1〜100文字</td><td>必須</td><td>空不可</td><td>入力時、送信時</td><td>不正時はエラーメッセージ表示または補正</td></tr><tr><td>3</td><td>メール</td><td>String</td><td>最大255文字</td><td>必須</td><td>メール形式</td><td>blur時、送信時</td><td>不正時はエラーメッセージ表示または補正</td></tr><tr><td>4</td><td>国</td><td>String</td><td>最大100文字</td><td>必須</td><td>空不可</td><td>送信時</td><td>不正時はエラーメッセージ表示または補正</td></tr><tr><td>5</td><td>郵便番号</td><td>String</td><td>最大20文字</td><td>任意</td><td>英数字とハイフン</td><td>入力時、送信時</td><td>不正時はエラーメッセージ表示または補正</td></tr><tr><td>6</td><td>住所</td><td>String</td><td>最大500文字</td><td>必須</td><td>空不可、HTMLタグ不可</td><td>送信時</td><td>不正時はエラーメッセージ表示または補正</td></tr><tr><td>7</td><td>決済方法</td><td>String</td><td>最大30文字</td><td>必須</td><td>許可値のみ</td><td>送信時</td><td>不正時はエラーメッセージ表示または補正</td></tr></tbody></table></div>
+<h3>3. 処理フロー</h3>
+<div class='flow'><p><span class='label'>Step 1</span>cart.htmlにアクセスする。</p><p><span class='label'>Step 2</span>カート商品を表示する。</p><p><span class='label'>Step 3</span>配送先と決済方法を入力する。</p><p><span class='label'>Step 4</span>注文を確定押下で入力チェックを行う。</p><p><span class='label'>Step 5</span>正常時はorder-complete.htmlへ遷移する。</p></div>
+<h3>4. 正常時の動作</h3>
+<ul><li>必須項目が妥当な場合注文登録する。</li><li>注文完了ページへ遷移する。</li></ul>
+<h3>5. エラー時の動作</h3>
+<ul><li>必須未入力は注文不可。</li><li>メール不正は該当欄にエラー表示。</li><li>商品在庫不足時は数量変更を促す。</li><li>システムエラー時は送信失敗メッセージ表示。</li></ul>
+<h3>6. 画面遷移先</h3>
+<div class='table-wrap'><table><thead><tr><th>No.</th><th>遷移元フレーム</th><th>トリガー</th><th>遷移先</th><th>遷移条件</th><th>引き継ぎ値</th><th>備考</th></tr></thead><tbody><tr><td>1</td><td>Frame 03</td><td>注文を確定</td><td>order-complete.html</td><td>入力値正常</td><td>注文情報</td><td>注文完了へ</td></tr><tr><td>2</td><td>Frame 01</td><td>ショップ</td><td>shop.html</td><td>常時</td><td>なし</td><td>買い物継続</td></tr></tbody></table></div>
+
 <h3>7. DB変更反映メモ（2026-05-14）</h3>
 <div class="note">
   <ul>
@@ -83,4 +76,3 @@ tr:last-child td{border-bottom:none}th:last-child,td:last-child{border-right:non
   </main>
 </body>
 </html>
-

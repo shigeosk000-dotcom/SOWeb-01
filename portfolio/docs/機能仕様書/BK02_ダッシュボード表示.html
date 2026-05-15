@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>繝繝・す繝･繝懊・繝芽｡ｨ遉ｺ 隧ｳ邏ｰ莉墓ｧ・/title><style>
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>ダッシュボード表示 詳細仕様</title><style>
 :root{--bg:#f7f5f2;--paper:#fff;--ink:#1f1b17;--muted:#6d645a;--line:#e8dccb;--accent:#b08d57;--accent-dark:#8c6a36;--soft:#faf6ef;--error:#8f3f2f;--ok:#48694d}
 *{box-sizing:border-box}body{margin:0;padding:40px 24px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;background:var(--bg);color:var(--ink);line-height:1.75}
 .page{max-width:1180px;margin:0 auto}header,.screen{padding:30px;border-radius:22px;background:var(--paper);border:1px solid var(--line);box-shadow:0 8px 24px rgba(0,0,0,.06);margin-bottom:30px}
@@ -13,21 +13,22 @@ tr:last-child td{border-bottom:none}th:last-child,td:last-child{border-right:non
 .flow p{padding:10px 0;border-bottom:1px dashed #d1c6b7;margin:0}.flow p:last-child{border-bottom:none}.label{display:inline-block;min-width:120px;font-weight:700;color:var(--accent-dark)}
 ul{margin:8px 0 0;padding-left:24px}li{margin-bottom:6px}@media(max-width:800px){body{padding:22px 14px}header,.screen{padding:22px}pre{font-size:12px}}
 </style></head>
-<body><main class="page"><header><h1>繝繝・す繝･繝懊・繝芽｡ｨ遉ｺ 隧ｳ邏ｰ莉墓ｧ・/h1><p class="meta"><span class="badge">繝舌ャ繧ｯ繧ｨ繝ｳ繝臥ｮ｡逅・/span><span class="badge">Phase1</span><span class="badge">Must</span><span class="badge">management/dashboard.html</span></p><p class="meta">莠育ｴ・・｡ｧ螳｢縲∝惠蠎ｫ縲∵ｳｨ譁・憾豕√ｒ邂｡逅・・髄縺代↓繧ｵ繝槭Μ繝ｼ陦ｨ遉ｺ縺励∝推邂｡逅・判髱｢縺ｸ驕ｷ遘ｻ縺吶ｋ縲・/p></header>
-<section class="screen"><h2>1. 逕ｻ髱｢繝ｬ繧､繧｢繧ｦ繝・/h2><p class="note">逕ｻ髱｢驕ｷ遘ｻ蝗ｳ荳翫↓蟄伜惠縺励∵里蟄倩ｩｳ邏ｰ莉墓ｧ倥∪縺溘・繝｢繝・け繧｢繝・・縺ｧ荳崎ｶｳ縺励※縺・◆逕ｻ髱｢縺ｧ縺吶よ里蟄倥Δ繝・け繧｢繝・・縺ｮ繝・う繧ｹ繝医↓蜷医ｏ縺帙※Frame蜊倅ｽ阪〒驟咲ｽｮ鬆・ｒ螳夂ｾｩ縺励∪縺吶・/p><pre>笏娯楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏・
-笏・Frame 01・夂ｮ｡逅・し繧､繝峨リ繝・                                   笏・
-笏懌楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏､
-笏・Frame 02・壹し繝槭Μ繝ｼ繧ｫ繝ｼ繝・                                   笏・
-笏・[1] 譛ｬ譌･縺ｮ莠育ｴ・[2] 鬘ｧ螳｢謨ｰ [3] 蝨ｨ蠎ｫ豕ｨ諢・[4] 譁ｰ隕乗ｳｨ譁・         笏・
-笏懌楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏､
-笏・Frame 03・壹す繝ｧ繝ｼ繝医き繝・ヨ                                    笏・
-笏・[1] 莠育ｴ・ｮ｡逅・[2] 鬘ｧ螳｢邂｡逅・[3] 繝ｬ繧ｷ繝皮ｮ｡逅・[4] 蝨ｨ蠎ｫ邂｡逅・       笏・
-笏披楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏・/pre><div class='table-wrap'><table><thead><tr><th>No.</th><th>驟咲ｽｮ繝輔Ξ繝ｼ繝</th><th>陦ｨ遉ｺ鬆・・鬆・岼</th><th>遞ｮ蛻･</th><th>驟咲ｽｮ菴咲ｽｮ</th><th>陬懆ｶｳ</th></tr></thead><tbody><tr><td>1</td><td>Frame 1</td><td>[1] 譛ｬ譌･縺ｮ莠育ｴ・[2] 鬘ｧ螳｢謨ｰ [3] 蝨ｨ蠎ｫ豕ｨ諢・[4] 譁ｰ隕乗ｳｨ譁・/td><td>逕ｻ髱｢隕∫ｴ</td><td>荳翫°繧蛾・/td><td>驕ｷ遘ｻ蝗ｳ縺ｫ蝓ｺ縺･縺崎ｿｽ蜉</td></tr><tr><td>2</td><td>Frame 2</td><td>[1] 莠育ｴ・ｮ｡逅・[2] 鬘ｧ螳｢邂｡逅・[3] 繝ｬ繧ｷ繝皮ｮ｡逅・[4] 蝨ｨ蠎ｫ邂｡逅・/td><td>逕ｻ髱｢隕∫ｴ</td><td>荳翫°繧蛾・/td><td>驕ｷ遘ｻ蝗ｳ縺ｫ蝓ｺ縺･縺崎ｿｽ蜉</td></tr></tbody></table></div>
-<h2>2. 蜈･蜉幃・岼荳隕ｧ</h2><div class='table-wrap'><table><thead><tr><th>No.</th><th>鬆・岼蜷・/th><th>繝・・繧ｿ蝙・/th><th>繝・・繧ｿ繧ｵ繧､繧ｺ</th><th>蠢・・莉ｻ諢・/th><th>繝舌Μ繝・・繧ｷ繝ｧ繝ｳ繝ｫ繝ｼ繝ｫ</th><th>繝√ぉ繝・け螳滓命繧ｿ繧､繝溘Φ繧ｰ</th><th>繧ｨ繝ｩ繝ｼ譎ゅ・謇ｱ縺・/th></tr></thead><tbody><tr><td>1</td><td>髮・ｨ域悄髢・/td><td>String</td><td>譛螟ｧ20譁・ｭ・/td><td>莉ｻ諢・/td><td>today/week/month縺ｮ縺ｿ</td><td>蛻晄悄陦ｨ遉ｺ譎ゅ∝・譖ｿ譎・/td><td>荳肴ｭ｣譎ゅ・today</td></tr><tr><td>2</td><td>邂｡逅・・D</td><td>Long</td><td>謨ｴ謨ｰ</td><td>蠢・・/td><td>繝ｭ繧ｰ繧､繝ｳ貂医∩邂｡逅・・〒縺ゅｋ縺薙→</td><td>蛻晄悄陦ｨ遉ｺ譎・/td><td>譛ｪ繝ｭ繧ｰ繧､繝ｳ縺ｯlogin.html縺ｸ</td></tr><tr><td>3</td><td>騾夂衍陦ｨ遉ｺ莉ｶ謨ｰ</td><td>Integer</td><td>1縲・0</td><td>莉ｻ諢・/td><td>1莉･荳・0莉･荳・/td><td>蛻晄悄陦ｨ遉ｺ譎・/td><td>荳肴ｭ｣譎ゅ・5莉ｶ</td></tr></tbody></table></div>
-<h2>3. 蜃ｦ逅・ヵ繝ｭ繝ｼ</h2><div class="flow"><p><span class="label">Step 1</span>dashboard.html縺ｫ繧｢繧ｯ繧ｻ繧ｹ縺吶ｋ縲・/p><p><span class="label">Step 2</span>繝ｭ繧ｰ繧､繝ｳ迥ｶ諷九ｒ遒ｺ隱阪☆繧九・/p><p><span class="label">Step 3</span>蜷・ｨｮ繧ｵ繝槭Μ繝ｼ繧貞叙蠕励☆繧九・/p><p><span class="label">Step 4</span>繧ｷ繝ｧ繝ｼ繝医き繝・ヨ繧定｡ｨ遉ｺ縺吶ｋ縲・/p></div>
-<h2>4. 豁｣蟶ｸ譎ゅ・蜍穂ｽ・/h2><ul><li>繧ｵ繝槭Μ繝ｼ繧ｫ繝ｼ繝峨′陦ｨ遉ｺ縺輔ｌ繧九・/li><li>蜷・ｮ｡逅・判髱｢縺ｸ縺ｮ繝ｪ繝ｳ繧ｯ縺梧ｩ溯・縺吶ｋ縲・/li></ul>
-<h2>5. 繧ｨ繝ｩ繝ｼ譎ゅ・蜍穂ｽ・/h2><ul><li>譛ｪ繝ｭ繧ｰ繧､繝ｳ譎ゅ・login.html縺ｸ驕ｷ遘ｻ縲・/li><li>髮・ｨ亥叙蠕怜､ｱ謨玲凾縺ｯ隧ｲ蠖薙き繝ｼ繝峨↓繧ｨ繝ｩ繝ｼ陦ｨ遉ｺ縲・/li></ul>
-<h2>6. 逕ｻ髱｢驕ｷ遘ｻ蜈・/h2><div class='table-wrap'><table><thead><tr><th>No.</th><th>驕ｷ遘ｻ蜈・ヵ繝ｬ繝ｼ繝</th><th>繝医Μ繧ｬ繝ｼ</th><th>驕ｷ遘ｻ蜈・/th><th>驕ｷ遘ｻ譚｡莉ｶ</th><th>蠑輔″邯吶℃蛟､</th><th>蛯呵・/th></tr></thead><tbody><tr><td>1</td><td>Frame 03</td><td>莠育ｴ・ｮ｡逅・/td><td>reservation_list.html</td><td>蟶ｸ譎・/td><td>縺ｪ縺・/td><td>莠育ｴ・ｸ隕ｧ縺ｸ</td></tr><tr><td>2</td><td>Frame 03</td><td>鬘ｧ螳｢邂｡逅・/td><td>customer_list.html</td><td>蟶ｸ譎・/td><td>縺ｪ縺・/td><td>鬘ｧ螳｢荳隕ｧ縺ｸ</td></tr><tr><td>3</td><td>Frame 03</td><td>蝨ｨ蠎ｫ邂｡逅・/td><td>inventory_list.html</td><td>蟶ｸ譎・/td><td>縺ｪ縺・/td><td>蝨ｨ蠎ｫ荳隕ｧ縺ｸ</td></tr></tbody></table></div>
+<body><main class="page"><header><h1>ダッシュボード表示 詳細仕様</h1><p class="meta"><span class="badge">バックエンド管理</span><span class="badge">Phase1</span><span class="badge">Must</span><span class="badge">management/dashboard.html</span></p><p class="meta">予約、顧客、在庫、注文状況を管理者向けにサマリー表示し、各管理画面へ遷移する。</p></header>
+<section class="screen"><h2>1. 画面レイアウト</h2><p class="note">画面遷移図上に存在し、既存詳細仕様またはモックアップで不足していた画面です。既存モックアップのテイストに合わせてFrame単位で配置順を定義します。</p><pre>┌────────────────────────────────────────────────────────────┐
+│ Frame 01：管理サイドナビ                                    │
+├────────────────────────────────────────────────────────────┤
+│ Frame 02：サマリーカード                                    │
+│ [1] 本日の予約 [2] 顧客数 [3] 在庫注意 [4] 新規注文          │
+├────────────────────────────────────────────────────────────┤
+│ Frame 03：ショートカット                                    │
+│ [1] 予約管理 [2] 顧客管理 [3] レシピ管理 [4] 在庫管理        │
+└────────────────────────────────────────────────────────────┘</pre><div class='table-wrap'><table><thead><tr><th>No.</th><th>配置フレーム</th><th>表示順・項目</th><th>種別</th><th>配置位置</th><th>補足</th></tr></thead><tbody><tr><td>1</td><td>Frame 1</td><td>[1] 本日の予約 [2] 顧客数 [3] 在庫注意 [4] 新規注文</td><td>画面要素</td><td>上から順</td><td>遷移図に基づき追加</td></tr><tr><td>2</td><td>Frame 2</td><td>[1] 予約管理 [2] 顧客管理 [3] レシピ管理 [4] 在庫管理</td><td>画面要素</td><td>上から順</td><td>遷移図に基づき追加</td></tr></tbody></table></div>
+<h2>2. 入力項目一覧</h2><div class='table-wrap'><table><thead><tr><th>No.</th><th>項目名</th><th>データ型</th><th>データサイズ</th><th>必須/任意</th><th>バリデーションルール</th><th>チェック実施タイミング</th><th>エラー時の扱い</th></tr></thead><tbody><tr><td>1</td><td>集計期間</td><td>String</td><td>最大20文字</td><td>任意</td><td>today/week/monthのみ</td><td>初期表示時、切替時</td><td>不正時はtoday</td></tr><tr><td>2</td><td>管理者ID</td><td>Long</td><td>整数</td><td>必須</td><td>ログイン済み管理者であること</td><td>初期表示時</td><td>未ログインはlogin.htmlへ</td></tr><tr><td>3</td><td>通知表示件数</td><td>Integer</td><td>1〜20</td><td>任意</td><td>1以上20以下</td><td>初期表示時</td><td>不正時は5件</td></tr></tbody></table></div>
+<h2>3. 処理フロー</h2><div class="flow"><p><span class="label">Step 1</span>dashboard.htmlにアクセスする。</p><p><span class="label">Step 2</span>ログイン状態を確認する。</p><p><span class="label">Step 3</span>各種サマリーを取得する。</p><p><span class="label">Step 4</span>ショートカットを表示する。</p></div>
+<h2>4. 正常時の動作</h2><ul><li>サマリーカードが表示される。</li><li>各管理画面へのリンクが機能する。</li></ul>
+<h2>5. エラー時の動作</h2><ul><li>未ログイン時はlogin.htmlへ遷移。</li><li>集計取得失敗時は該当カードにエラー表示。</li></ul>
+<h2>6. 画面遷移先</h2><div class='table-wrap'><table><thead><tr><th>No.</th><th>遷移元フレーム</th><th>トリガー</th><th>遷移先</th><th>遷移条件</th><th>引き継ぎ値</th><th>備考</th></tr></thead><tbody><tr><td>1</td><td>Frame 03</td><td>予約管理</td><td>reservation_list.html</td><td>常時</td><td>なし</td><td>予約一覧へ</td></tr><tr><td>2</td><td>Frame 03</td><td>顧客管理</td><td>customer_list.html</td><td>常時</td><td>なし</td><td>顧客一覧へ</td></tr><tr><td>3</td><td>Frame 03</td><td>在庫管理</td><td>inventory_list.html</td><td>常時</td><td>なし</td><td>在庫一覧へ</td></tr></tbody></table></div>
+
 <h3>7. DB変更反映メモ（2026-05-14）</h3>
 <div class="note">
   <ul>

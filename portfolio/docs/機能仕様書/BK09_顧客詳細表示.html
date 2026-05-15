@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>15. 鬘ｧ螳｢隧ｳ邏ｰ陦ｨ遉ｺ・懈ｮ九ｊ讖溯・ 隧ｳ邏ｰ莉墓ｧ俶嶌・医Δ繝・け繧｢繝・・貅匁侠・・/title>
+  <title>15. 顧客詳細表示｜残り機能 詳細仕様書（モックアップ準拠）</title>
   <style>
 :root{--bg:#f7f5f2;--paper:#fff;--ink:#1f1b17;--muted:#6d645a;--line:#e8dccb;--accent:#b08d57;--accent-dark:#8c6a36;--soft:#faf6ef;--error:#8f3f2f;--ok:#48694d}
 *{box-sizing:border-box}body{margin:0;padding:40px 24px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;background:var(--bg);color:var(--ink);line-height:1.75}.page{max-width:1180px;margin:0 auto}
@@ -15,36 +15,37 @@ h1{margin:0 0 10px;font-size:30px}h2{margin:0 0 16px;padding-left:14px;border-le
 <body>
   <main class="page">
     <header>
-      <h1>15. 鬘ｧ螳｢隧ｳ邏ｰ陦ｨ遉ｺ</h1>
-      <p class="meta">蛻・牡蜈・ｼ壽ｮ九ｊ讖溯・ 隧ｳ邏ｰ莉墓ｧ俶嶌・医Δ繝・け繧｢繝・・貅匁侠・・/p>
+      <h1>15. 顧客詳細表示</h1>
+      <p class="meta">分割元：残り機能 詳細仕様書（モックアップ準拠）</p>
     </header>
     <section class="screen" id="spec-15">
-<h2>15. 鬘ｧ螳｢隧ｳ邏ｰ陦ｨ遉ｺ</h2>
+<h2>15. 顧客詳細表示</h2>
 <p class="meta"><span class="badge">management/customer_detail.html</span><span class="badge">Phase1</span><span class="badge">Must</span></p>
-<p>鬘ｧ螳｢縺ｮ隧ｳ邏ｰ諠・ｱ縺ｨ髢｢騾｣諠・ｱ繧定｡ｨ遉ｺ縺励∽ｸ隕ｧ繝ｻ邱ｨ髮・・髢｢騾｣逕ｻ髱｢縺ｸ驕ｷ遘ｻ縺吶ｋ縲・/p>
-<h3>1. 逕ｻ髱｢繝ｬ繧､繧｢繧ｦ繝・/h3>
-<p class="note">豺ｻ莉倥Δ繝・け繧｢繝・・縺ｮ繝ｬ繧､繧｢繧ｦ繝医・鬆・岼繧偵・繝ｼ繧ｹ縺ｫ縲∝ｿ・ｦ√↓蠢懊§縺ｦ莉｣譖ｿ陦ｨ遉ｺ縲√Μ繝ｳ繧ｯ荳肴ｭ｣譎ゅ・謇ｱ縺・∝・蜉幄｣懷勧繝ｻ繧ｨ繝ｩ繝ｼ陦ｨ遉ｺ繧定ｿｽ蜉莉墓ｧ倥→縺励※謨ｴ逅・＠縺ｦ縺・∪縺吶・/p>
-<div class="layout-box"><pre>笏娯楳 Frame 01・夂ｮ｡逅・・騾壹リ繝凪楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏・
-笏・1. AT 2. 鬘ｧ 3. 鬥・4. 蝨ｨ 5. 蜃ｺ
-笏披楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏・
-笏娯楳 Frame 02・壹・繝ｼ繧ｸ繝倥ャ繝繝ｼ笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏・
-笏・1. 鬘ｧ螳｢隧ｳ邏ｰ陦ｨ遉ｺ 2. 荳隕ｧ縺ｸ謌ｻ繧・3. 邱ｨ髮・
-笏披楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏・
-笏娯楳 Frame 03・壼渕譛ｬ諠・ｱ笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏・
-笏・1. 鬘ｧ螳｢蝓ｺ譛ｬ諠・ｱ
-笏披楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏・
-笏娯楳 Frame 04・夐未騾｣諠・ｱ笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏・
-笏・1. 菫晏ｭ倥Ξ繧ｷ繝・2. 雉ｼ蜈･蝠・刀
-笏披楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏・/pre></div>
-<h4>繝輔Ξ繝ｼ繝蛻･ 驟咲ｽｮ鬆・岼繝ｻ陦ｨ遉ｺ鬆・/h4>
-<div class="table-wrap"><table><thead><tr><th>Frame</th><th>驟咲ｽｮ繧ｨ繝ｪ繧｢</th><th>陦ｨ遉ｺ鬆・/th><th>鬆・岼</th><th>繝｢繝・け繧｢繝・・荳翫・隕∫ｴ</th><th>遞ｮ蛻･</th><th>驟咲ｽｮ菴咲ｽｮ</th><th>陬懆ｶｳ繝ｻ霑ｽ蜉莉墓ｧ・/th></tr></thead><tbody><tr><td>Frame 01</td><td>邂｡逅・・騾壹リ繝・/td><td>1</td><td>1. AT 2. 鬘ｧ 3. 鬥・4. 蝨ｨ 5. 蜃ｺ</td><td>1. AT 2. 鬘ｧ 3. 鬥・4. 蝨ｨ 5. 蜃ｺ</td><td>陦ｨ遉ｺ/繝ｪ繝ｳ繧ｯ/蜈･蜉・/td><td>繝｢繝・け繧｢繝・・鬆・/td><td>荳崎ｶｳ鬆・岼縺ｯ莉｣譖ｿ陦ｨ遉ｺ繝ｻ繝ｪ繝ｳ繧ｯ荳肴ｭ｣譎ょ宛蠕｡縺ｨ縺励※霑ｽ蜉</td></tr><tr><td>Frame 02</td><td>繝壹・繧ｸ繝倥ャ繝繝ｼ</td><td>1</td><td>1. 鬘ｧ螳｢隧ｳ邏ｰ陦ｨ遉ｺ 2. 荳隕ｧ縺ｸ謌ｻ繧・3. 邱ｨ髮・/td><td>1. 鬘ｧ螳｢隧ｳ邏ｰ陦ｨ遉ｺ 2. 荳隕ｧ縺ｸ謌ｻ繧・3. 邱ｨ髮・/td><td>陦ｨ遉ｺ/繝ｪ繝ｳ繧ｯ/蜈･蜉・/td><td>繝｢繝・け繧｢繝・・鬆・/td><td>荳崎ｶｳ鬆・岼縺ｯ莉｣譖ｿ陦ｨ遉ｺ繝ｻ繝ｪ繝ｳ繧ｯ荳肴ｭ｣譎ょ宛蠕｡縺ｨ縺励※霑ｽ蜉</td></tr><tr><td>Frame 03</td><td>蝓ｺ譛ｬ諠・ｱ</td><td>1</td><td>1. 鬘ｧ螳｢蝓ｺ譛ｬ諠・ｱ</td><td>1. 鬘ｧ螳｢蝓ｺ譛ｬ諠・ｱ</td><td>陦ｨ遉ｺ/繝ｪ繝ｳ繧ｯ/蜈･蜉・/td><td>繝｢繝・け繧｢繝・・鬆・/td><td>荳崎ｶｳ鬆・岼縺ｯ莉｣譖ｿ陦ｨ遉ｺ繝ｻ繝ｪ繝ｳ繧ｯ荳肴ｭ｣譎ょ宛蠕｡縺ｨ縺励※霑ｽ蜉</td></tr><tr><td>Frame 04</td><td>髢｢騾｣諠・ｱ</td><td>1</td><td>1. 菫晏ｭ倥Ξ繧ｷ繝・2. 雉ｼ蜈･蝠・刀</td><td>1. 菫晏ｭ倥Ξ繧ｷ繝・2. 雉ｼ蜈･蝠・刀</td><td>陦ｨ遉ｺ/繝ｪ繝ｳ繧ｯ/蜈･蜉・/td><td>繝｢繝・け繧｢繝・・鬆・/td><td>荳崎ｶｳ鬆・岼縺ｯ莉｣譖ｿ陦ｨ遉ｺ繝ｻ繝ｪ繝ｳ繧ｯ荳肴ｭ｣譎ょ宛蠕｡縺ｨ縺励※霑ｽ蜉</td></tr></tbody></table></div>
-<h3>2. 蜈･蜉幃・岼荳隕ｧ</h3>
-<div class="table-wrap"><table><thead><tr><th>No.</th><th>蟇ｾ雎｡繝輔Ξ繝ｼ繝</th><th>鬆・岼蜷・/th><th>繝・・繧ｿ蝙・/th><th>繝・・繧ｿ繧ｵ繧､繧ｺ</th><th>蠢・・莉ｻ諢・/th><th>繝舌Μ繝・・繧ｷ繝ｧ繝ｳ繝ｫ繝ｼ繝ｫ</th><th>繝√ぉ繝・け螳滓命繧ｿ繧､繝溘Φ繧ｰ</th><th>繧ｨ繝ｩ繝ｼ譎ゅ・謇ｱ縺・/th></tr></thead><tbody><tr><td>1</td><td>Frame 02/03</td><td>鬘ｧ螳｢ID</td><td>Long</td><td>謨ｴ謨ｰ</td><td>蠢・・/td><td>蟄伜惠縺吶ｋID</td><td>蛻晄悄陦ｨ遉ｺ譎・/td><td>荳隕ｧ縺ｸ謌ｻ縺・/td></tr><tr><td>2</td><td>Frame 04</td><td>髢｢騾｣ID</td><td>Long</td><td>謨ｴ謨ｰ</td><td>莉ｻ諢・/td><td>蟄伜惠縺吶ｋ髢｢騾｣ID</td><td>髢｢騾｣繝ｪ繝ｳ繧ｯ謚ｼ荳区凾</td><td>繝ｪ繝ｳ繧ｯ髱櫁｡ｨ遉ｺ</td></tr></tbody></table></div>
-<h3>3. 蜃ｦ逅・ヵ繝ｭ繝ｼ</h3><div class="flow"><p class="flow-step"><span class="label">Step 1</span>management/customer_detail.html縺ｫ繧｢繧ｯ繧ｻ繧ｹ</p><p class="flow-step"><span class="label">Step 2</span>鬘ｧ螳｢ID縺ｧ蝓ｺ譛ｬ諠・ｱ繧貞叙蠕・/p><p class="flow-step"><span class="label">Step 3</span>髢｢騾｣諠・ｱ繧貞叙蠕・/p><p class="flow-step"><span class="label">Step 4</span>隧ｳ邏ｰ諠・ｱ繧定｡ｨ遉ｺ</p><p class="flow-step"><span class="label">Step 5</span>荳隕ｧ/邱ｨ髮・髢｢騾｣逕ｻ髱｢縺ｸ驕ｷ遘ｻ</p></div>
-<h3>4. 豁｣蟶ｸ譎ゅ・蜍穂ｽ・/h3><div class="ok"><ul><li>鬘ｧ螳｢蝓ｺ譛ｬ諠・ｱ繧定ｪｭ縺ｿ蜿悶ｊ蟆ら畑縺ｧ陦ｨ遉ｺ</li><li>髢｢騾｣諠・ｱ繝ｪ繝ｳ繧ｯ繧定｡ｨ遉ｺ</li><li>邱ｨ髮・判髱｢縺ｸ驕ｷ遘ｻ縺ｧ縺阪ｋ</li></ul></div>
-<h3>5. 繧ｨ繝ｩ繝ｼ譎ゅ・蜍穂ｽ・/h3><div class="err"><ul><li>鬘ｧ螳｢ID荳肴ｭ｣譎ゅ・荳隕ｧ縺ｸ謌ｻ縺・/li><li>髢｢騾｣諠・ｱ蜿門ｾ怜､ｱ謨玲凾縺ｯ髢｢騾｣谺・↓繧ｨ繝ｩ繝ｼ陦ｨ遉ｺ</li><li>讓ｩ髯蝉ｸ崎ｶｳ譎ゅ・繝ｭ繧ｰ繧､繝ｳ縺ｸ謌ｻ縺・/li></ul></div>
-<h3>6. 逕ｻ髱｢驕ｷ遘ｻ蜈・/h3>
-<div class="table-wrap"><table><thead><tr><th>No.</th><th>驕ｷ遘ｻ蜈・ヵ繝ｬ繝ｼ繝</th><th>繝医Μ繧ｬ繝ｼ</th><th>驕ｷ遘ｻ蜈・/th><th>驕ｷ遘ｻ譚｡莉ｶ</th><th>蠑輔″邯吶℃蛟､</th><th>蛯呵・/th></tr></thead><tbody><tr><td>1</td><td>Frame 02</td><td>荳隕ｧ縺ｸ謌ｻ繧・/td><td>management/customer_list.html</td><td>蟶ｸ譎・/td><td>縺ｪ縺・/td><td>荳隕ｧ縺ｸ</td></tr><tr><td>2</td><td>Frame 02</td><td>邱ｨ髮・/td><td>management/customer_edit.html</td><td>ID豁｣蟶ｸ</td><td>鬘ｧ螳｢ID</td><td>邱ｨ髮・∈</td></tr><tr><td>3</td><td>Frame 04</td><td>髢｢騾｣繝ｪ繝ｳ繧ｯ</td><td>髢｢騾｣隧ｳ邏ｰ逕ｻ髱｢</td><td>髢｢騾｣ID豁｣蟶ｸ</td><td>髢｢騾｣ID</td><td>髢｢騾｣逕ｻ髱｢縺ｸ</td></tr></tbody></table></div>
+<p>顧客の詳細情報と関連情報を表示し、一覧・編集・関連画面へ遷移する。</p>
+<h3>1. 画面レイアウト</h3>
+<p class="note">添付モックアップのレイアウト・項目をベースに、必要に応じて代替表示、リンク不正時の扱い、入力補助・エラー表示を追加仕様として整理しています。</p>
+<div class="layout-box"><pre>┌─ Frame 01：管理共通ナビ──────────────────────────────┐
+│ 1. AT 2. 顧 3. 香 4. 在 5. 出
+└────────────────────────────────────────────────────────┘
+┌─ Frame 02：ページヘッダー──────────────────────────────┐
+│ 1. 顧客詳細表示 2. 一覧へ戻る 3. 編集
+└────────────────────────────────────────────────────────┘
+┌─ Frame 03：基本情報──────────────────────────────┐
+│ 1. 顧客基本情報
+└────────────────────────────────────────────────────────┘
+┌─ Frame 04：関連情報──────────────────────────────┐
+│ 1. 保存レシピ 2. 購入商品
+└────────────────────────────────────────────────────────┘</pre></div>
+<h4>フレーム別 配置項目・表示順</h4>
+<div class="table-wrap"><table><thead><tr><th>Frame</th><th>配置エリア</th><th>表示順</th><th>項目</th><th>モックアップ上の要素</th><th>種別</th><th>配置位置</th><th>補足・追加仕様</th></tr></thead><tbody><tr><td>Frame 01</td><td>管理共通ナビ</td><td>1</td><td>1. AT 2. 顧 3. 香 4. 在 5. 出</td><td>1. AT 2. 顧 3. 香 4. 在 5. 出</td><td>表示/リンク/入力</td><td>モックアップ順</td><td>不足項目は代替表示・リンク不正時制御として追加</td></tr><tr><td>Frame 02</td><td>ページヘッダー</td><td>1</td><td>1. 顧客詳細表示 2. 一覧へ戻る 3. 編集</td><td>1. 顧客詳細表示 2. 一覧へ戻る 3. 編集</td><td>表示/リンク/入力</td><td>モックアップ順</td><td>不足項目は代替表示・リンク不正時制御として追加</td></tr><tr><td>Frame 03</td><td>基本情報</td><td>1</td><td>1. 顧客基本情報</td><td>1. 顧客基本情報</td><td>表示/リンク/入力</td><td>モックアップ順</td><td>不足項目は代替表示・リンク不正時制御として追加</td></tr><tr><td>Frame 04</td><td>関連情報</td><td>1</td><td>1. 保存レシピ 2. 購入商品</td><td>1. 保存レシピ 2. 購入商品</td><td>表示/リンク/入力</td><td>モックアップ順</td><td>不足項目は代替表示・リンク不正時制御として追加</td></tr></tbody></table></div>
+<h3>2. 入力項目一覧</h3>
+<div class="table-wrap"><table><thead><tr><th>No.</th><th>対象フレーム</th><th>項目名</th><th>データ型</th><th>データサイズ</th><th>必須/任意</th><th>バリデーションルール</th><th>チェック実施タイミング</th><th>エラー時の扱い</th></tr></thead><tbody><tr><td>1</td><td>Frame 02/03</td><td>顧客ID</td><td>Long</td><td>整数</td><td>必須</td><td>存在するID</td><td>初期表示時</td><td>一覧へ戻す</td></tr><tr><td>2</td><td>Frame 04</td><td>関連ID</td><td>Long</td><td>整数</td><td>任意</td><td>存在する関連ID</td><td>関連リンク押下時</td><td>リンク非表示</td></tr></tbody></table></div>
+<h3>3. 処理フロー</h3><div class="flow"><p class="flow-step"><span class="label">Step 1</span>management/customer_detail.htmlにアクセス</p><p class="flow-step"><span class="label">Step 2</span>顧客IDで基本情報を取得</p><p class="flow-step"><span class="label">Step 3</span>関連情報を取得</p><p class="flow-step"><span class="label">Step 4</span>詳細情報を表示</p><p class="flow-step"><span class="label">Step 5</span>一覧/編集/関連画面へ遷移</p></div>
+<h3>4. 正常時の動作</h3><div class="ok"><ul><li>顧客基本情報を読み取り専用で表示</li><li>関連情報リンクを表示</li><li>編集画面へ遷移できる</li></ul></div>
+<h3>5. エラー時の動作</h3><div class="err"><ul><li>顧客ID不正時は一覧へ戻す</li><li>関連情報取得失敗時は関連欄にエラー表示</li><li>権限不足時はログインへ戻す</li></ul></div>
+<h3>6. 画面遷移先</h3>
+<div class="table-wrap"><table><thead><tr><th>No.</th><th>遷移元フレーム</th><th>トリガー</th><th>遷移先</th><th>遷移条件</th><th>引き継ぎ値</th><th>備考</th></tr></thead><tbody><tr><td>1</td><td>Frame 02</td><td>一覧へ戻る</td><td>management/customer_list.html</td><td>常時</td><td>なし</td><td>一覧へ</td></tr><tr><td>2</td><td>Frame 02</td><td>編集</td><td>management/customer_edit.html</td><td>ID正常</td><td>顧客ID</td><td>編集へ</td></tr><tr><td>3</td><td>Frame 04</td><td>関連リンク</td><td>関連詳細画面</td><td>関連ID正常</td><td>関連ID</td><td>関連画面へ</td></tr></tbody></table></div>
+
 <h3>7. DB変更反映メモ（2026-05-14）</h3>
 <div class="note">
   <ul>
@@ -57,4 +58,3 @@ h1{margin:0 0 10px;font-size:30px}h2{margin:0 0 16px;padding-left:14px;border-le
   </main>
 </body>
 </html>
-
