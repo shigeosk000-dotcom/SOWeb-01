@@ -14,7 +14,7 @@
         <h1 th:text="${recipe.id == null ? '香りレシピ登録' : '香りレシピ編集'}"></h1>
         <a class="btn" th:href="@{/management/recipes}">一覧へ戻る</a>
       </div>
-      <p th:if="${errorMessage}" class="errors" th:text="${errorMessage}"></p>
+      <div th:replace="~{management/fragments :: pageAlert}"></div>
 
       <form class="panel"
             th:action="${recipe.id == null} ? @{/management/recipes} : @{/management/recipes/{id}(id=${recipe.id})}"

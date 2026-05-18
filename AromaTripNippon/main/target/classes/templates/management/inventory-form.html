@@ -1,5 +1,6 @@
 <!DOCTYPE html><html lang="ja" xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>在庫フォーム</title><link rel="stylesheet" th:href="@{/css/app.css}"></head>
 <body class="admin-body"><div class="admin-layout"><div th:replace="~{management/fragments :: sidebar}"></div><main class="admin-main"><div class="page-head"><h1 th:text="${item.id == null ? '在庫登録' : '在庫編集'}"></h1><a class="btn" th:href="@{/management/inventory}">一覧へ戻る</a></div>
+<div th:replace="~{management/fragments :: pageAlert}"></div>
 <form class="panel" th:action="${item.id == null} ? @{/management/inventory} : @{/management/inventory/{id}(id=${item.id})}" method="post" th:object="${item}"><div class="form-grid">
 <label>品名<input th:field="*{itemName}" required></label><label>カテゴリ<select th:field="*{category}"><option value="香料">香料</option><option value="容器">容器</option><option value="素材">素材</option></select></label>
 <label>在庫数<input type="number" step="0.1" th:field="*{stockQuantity}" required></label><label>単位<select th:field="*{unit}"><option value="ml">ml</option><option value="個">個</option><option value="g">g</option></select></label>

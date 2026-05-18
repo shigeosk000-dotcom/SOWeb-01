@@ -190,3 +190,15 @@ select au1_0.id,au1_0.is_active,au1_0.created_at,au1_0.deleted_at,au1_0.display_
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
 	at com.aromatripnippon.AromaTripNipponApplication.main(AromaTripNipponApplication.java:9)
+2026-05-18 11:28:34.396613+09:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: SQLステートメントに文法エラーがあります "update customers set deleted_at = null where name =[*]= 'Lucas Smith'"; 期待されるステートメント "ALL (, ANY (, SOME ("
+Syntax error in SQL statement "update customers set deleted_at = null where name =[*]= 'Lucas Smith'"; expected "ALL (, ANY (, SOME ("; SQL statement:
+update customers set deleted_at = null where name == 'Lucas Smith' [42001-232]
+2026-05-18 11:30:07.324737+09:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: SQLステートメントに文法エラーがあります "update customers set deleted_at=null where name =[*]= 'Lucas Smith'"; 期待されるステートメント "ALL (, ANY (, SOME ("
+Syntax error in SQL statement "update customers set deleted_at=null where name =[*]= 'Lucas Smith'"; expected "ALL (, ANY (, SOME ("; SQL statement:
+update customers set deleted_at=null where name == 'Lucas Smith' [42001-232]
+2026-05-18 11:30:21.892022+09:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: SQLステートメントに文法エラーがあります "update customers set deleted_at = null where name =[*]= 'Lucas Smith'"; 期待されるステートメント "ALL (, ANY (, SOME ("
+Syntax error in SQL statement "update customers set deleted_at = null where name =[*]= 'Lucas Smith'"; expected "ALL (, ANY (, SOME ("; SQL statement:
+update customers set deleted_at = null where name == 'Lucas Smith' [42001-232]

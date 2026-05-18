@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface FragranceRecipeMaterialRepository extends JpaRepository<FragranceRecipeMaterial, Long> {
   List<FragranceRecipeMaterial> findByFragranceRecipeIdOrderByDisplayOrderAsc(Long fragranceRecipeId);
+  boolean existsByDeletedAtIsNullAndFragranceRecipeDeletedAtIsNullAndInventoryItemId(Long inventoryItemId);
 }

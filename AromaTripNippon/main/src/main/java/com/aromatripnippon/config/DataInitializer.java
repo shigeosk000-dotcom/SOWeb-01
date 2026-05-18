@@ -58,9 +58,9 @@ public class DataInitializer implements CommandLineRunner {
   @Override
   @Transactional
   public void run(String... args) {
-    AdminUser admin = admins.findByLoginIdAndDeletedAtIsNullAndActiveTrue("Adm01").orElseGet(() -> {
+    AdminUser admin = admins.findByLoginIdAndDeletedAtIsNullAndActiveTrue("AromaTripAdm01").orElseGet(() -> {
       AdminUser seed = new AdminUser();
-      seed.setLoginId("Adm01");
+      seed.setLoginId("AromaTripAdm01");
       seed.setDisplayName("AromaTrip Manager");
       seed.setEmail("admin@aromatripnippon.local");
       seed.setPasswordHash(encoder.encode("password"));

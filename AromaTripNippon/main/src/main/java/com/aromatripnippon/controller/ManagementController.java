@@ -12,6 +12,7 @@ import com.aromatripnippon.repository.AdminUserRepository;
 import com.aromatripnippon.repository.AuditLogRepository;
 import com.aromatripnippon.repository.CustomerRepository;
 import com.aromatripnippon.repository.ExperienceProgramRepository;
+import com.aromatripnippon.repository.FragranceRecipeMaterialRepository;
 import com.aromatripnippon.repository.FragranceRecipeRepository;
 import com.aromatripnippon.repository.InventoryItemRepository;
 import com.aromatripnippon.repository.InventoryTransactionRepository;
@@ -21,6 +22,8 @@ import com.aromatripnippon.service.AuditService;
 import jakarta.transaction.Transactional;
 import java.math.BigDecimal;
 import java.security.Principal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -39,6 +42,7 @@ public class ManagementController {
   private final CustomerRepository customers;
   private final ExperienceProgramRepository programs;
   private final FragranceRecipeRepository recipes;
+  private final FragranceRecipeMaterialRepository recipeMaterials;
   private final InventoryItemRepository inventory;
   private final InventoryTransactionRepository inventoryTransactions;
   private final ProductRepository products;
@@ -48,13 +52,15 @@ public class ManagementController {
   private final PasswordEncoder encoder;
 
   public ManagementController(ReservationRepository reservations, CustomerRepository customers,
-      ExperienceProgramRepository programs, FragranceRecipeRepository recipes, InventoryItemRepository inventory,
+      ExperienceProgramRepository programs, FragranceRecipeRepository recipes,
+      FragranceRecipeMaterialRepository recipeMaterials, InventoryItemRepository inventory,
       InventoryTransactionRepository inventoryTransactions, ProductRepository products, AdminUserRepository admins,
       AuditLogRepository auditLogs, AuditService audit, PasswordEncoder encoder) {
     this.reservations = reservations;
     this.customers = customers;
     this.programs = programs;
     this.recipes = recipes;
+    this.recipeMaterials = recipeMaterials;
     this.inventory = inventory;
     this.inventoryTransactions = inventoryTransactions;
     this.products = products;
@@ -77,6 +83,7 @@ public class ManagementController {
   @GetMapping("/management/reservations")
   public String reservationList(@RequestParam(required = false) String q, Model model) {
     model.addAttribute("reservations", reservations.findByDeletedAtIsNullOrderByVisitDateDescTimeSlotAsc());
+    model.addAttribute("today", LocalDate.now());
     model.addAttribute("q", q);
     return "management/reservation-list";
   }
@@ -131,10 +138,10 @@ public class ManagementController {
   }
 
   @PostMapping("/management/reservations/{id}/delete")
+  @Transactional
   public String reservationDelete(@PathVariable Long id, Principal principal) {
     Reservation reservation = reservations.findById(id).orElseThrow();
-    reservation.softDelete();
-    reservations.save(reservation);
+    reservations.softDeleteById(id, LocalDateTime.now());
     audit.record(principal, "DELETE", "reservations", id, "予約を論理削除");
     return "redirect:/management/reservations";
   }
@@ -189,8 +196,13 @@ public class ManagementController {
   }
 
   @PostMapping("/management/customers/{id}/delete")
-  public String customerDelete(@PathVariable Long id, Principal principal) {
+  public String customerDelete(@PathVariable Long id, Principal principal, RedirectAttributes redirectAttributes) {
     Customer customer = customers.findById(id).orElseThrow();
+    if (reservations.existsActiveByCustomerId(id)
+        || recipes.existsActiveByCustomerId(id)) {
+      redirectAttributes.addFlashAttribute("errorMessage", "予約または香りレシピが残っている顧客は削除できません。");
+      return "redirect:/management/customers";
+    }
     customer.softDelete();
     customers.save(customer);
     audit.record(principal, "DELETE", "customers", id, "顧客を論理削除");
@@ -340,8 +352,14 @@ public class ManagementController {
   }
 
   @PostMapping("/management/products/{id}/delete")
-  public String productDelete(@PathVariable Long id, Principal principal) {
-    Product product = products.findById(id).orElseThrow();
+  public String productDelete(@PathVariable Long id, Principal principal, RedirectAttributes redirectAttributes) {
+    Product product = products.findWithInventoryItemByIdAndDeletedAtIsNull(id).orElseThrow();
+    if (product.getInventoryItem() != null
+        && recipeMaterials.existsByDeletedAtIsNullAndFragranceRecipeDeletedAtIsNullAndInventoryItemId(
+            product.getInventoryItem().getId())) {
+      redirectAttributes.addFlashAttribute("errorMessage", "香りレシピに使われている商品は削除できません。");
+      return "redirect:/management/products";
+    }
     product.softDelete();
     products.save(product);
     audit.record(principal, "DELETE", "products", id, "商品を論理削除");

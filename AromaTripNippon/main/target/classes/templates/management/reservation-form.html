@@ -1,6 +1,7 @@
 <!DOCTYPE html><html lang="ja" xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>予約フォーム</title><link rel="stylesheet" th:href="@{/css/app.css}"></head>
 <body class="admin-body"><div class="admin-layout"><div th:replace="~{management/fragments :: sidebar}"></div><main class="admin-main">
 <div class="page-head"><h1 th:text="${reservation.id == null ? '予約登録' : '予約編集'}"></h1><a class="btn" th:href="@{/management/reservations}">一覧へ戻る</a></div>
+<div th:replace="~{management/fragments :: pageAlert}"></div>
 <form class="panel" th:action="${reservation.id == null} ? @{/management/reservations} : @{/management/reservations/{id}(id=${reservation.id})}" method="post" th:object="${reservation}">
 <div class="form-grid">
 <label>顧客<select name="customerId" required><option th:each="c : ${customers}" th:value="${c.id}" th:selected="${reservation.customer != null and reservation.customer.id == c.id}" th:text="${c.name}"></option></select></label>

@@ -1,5 +1,6 @@
 <!DOCTYPE html><html lang="ja" xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>顧客詳細</title><link rel="stylesheet" th:href="@{/css/app.css}"></head>
 <body class="admin-body"><div class="admin-layout"><div th:replace="~{management/fragments :: sidebar}"></div><main class="admin-main">
 <div class="page-head"><h1>顧客詳細</h1><div class="actions"><a class="btn" th:href="@{/management/customers}">一覧</a><a class="btn primary" th:href="@{/management/customers/{id}/edit(id=${customer.id})}">編集</a></div></div>
+<div th:replace="~{management/fragments :: pageAlert}"></div>
 <section class="panel"><table class="table"><tr><th>ID</th><td th:text="${customer.id}"></td></tr><tr><th>氏名</th><td th:text="${customer.name}"></td></tr><tr><th>メール</th><td th:text="${customer.email}"></td></tr><tr><th>国籍</th><td th:text="${customer.nationality}"></td></tr><tr><th>希望言語</th><td th:text="${customer.preferredLanguage}"></td></tr></table><form th:action="@{/management/customers/{id}/delete(id=${customer.id})}" method="post"><button class="danger">論理削除</button></form></section>
 </main></div></body></html>

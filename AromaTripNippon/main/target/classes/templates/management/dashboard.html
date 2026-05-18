@@ -11,11 +11,12 @@
   <div th:replace="~{management/fragments :: sidebar}"></div>
   <main class="admin-main">
     <div class="page-head"><h1>ダッシュボード</h1></div>
+    <div th:replace="~{management/fragments :: pageAlert}"></div>
     <section class="stats">
-      <article class="card stat"><span>予約</span><strong th:text="${reservationCount}">0</strong></article>
-      <article class="card stat"><span>顧客</span><strong th:text="${customerCount}">0</strong></article>
-      <article class="card stat"><span>レシピ</span><strong th:text="${recipeCount}">0</strong></article>
-      <article class="card stat"><span>在庫</span><strong th:text="${inventoryCount}">0</strong></article>
+      <a class="card stat stat-link" th:href="@{/management/reservations}"><span>予約</span><strong th:text="${reservationCount}">0</strong></a>
+      <a class="card stat stat-link" th:href="@{/management/customers}"><span>顧客</span><strong th:text="${customerCount}">0</strong></a>
+      <a class="card stat stat-link" th:href="@{/management/recipes}"><span>レシピ</span><strong th:text="${recipeCount}">0</strong></a>
+      <a class="card stat stat-link" th:href="@{/management/inventory}"><span>在庫</span><strong th:text="${inventoryCount}">0</strong></a>
     </section>
     <section class="panel">
       <h2>最近の監査ログ</h2>
