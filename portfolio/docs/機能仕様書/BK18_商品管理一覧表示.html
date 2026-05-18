@@ -24,7 +24,7 @@ ul{margin:8px 0 0;padding-left:24px}li{margin-bottom:6px}@media(max-width:800px)
 ├────────────────────────────────────────────────────────────┤
 │ Frame 04：商品一覧テーブル                                  │
 └────────────────────────────────────────────────────────────┘</pre><div class='table-wrap'><table><thead><tr><th>No.</th><th>配置フレーム</th><th>表示順・項目</th><th>種別</th><th>配置位置</th><th>補足</th></tr></thead><tbody><tr><td>1</td><td>Frame 1</td><td>[1] 商品名検索 [2] カテゴリ [3] 公開状態</td><td>画面要素</td><td>上から順</td><td>遷移図に基づき追加</td></tr></tbody></table></div>
-<h2>2. 入力項目一覧</h2><div class='table-wrap'><table><thead><tr><th>No.</th><th>項目名</th><th>データ型</th><th>データサイズ</th><th>必須/任意</th><th>バリデーションルール</th><th>チェック実施タイミング</th><th>エラー時の扱い</th></tr></thead><tbody><tr><td>1</td><td>検索キーワード</td><td>String</td><td>最大100文字</td><td>任意</td><td>HTMLタグ不可</td><td>検索時</td><td>エスケープ</td></tr><tr><td>2</td><td>カテゴリ</td><td>String</td><td>最大30文字</td><td>任意</td><td>香水/クリーム/ギフトのみ</td><td>検索時</td><td>すべてに補正</td></tr><tr><td>3</td><td>公開状態</td><td>String</td><td>最大20文字</td><td>任意</td><td>公開/非公開のみ</td><td>検索時</td><td>すべてに補正</td></tr><tr><td>4</td><td>商品ID</td><td>Long</td><td>整数</td><td>必須</td><td>存在する商品ID</td><td>詳細/編集押下時</td><td>不正時一覧へ</td></tr></tbody></table></div>
+<h2>2. 入力項目一覧</h2><div class='table-wrap'><table><thead><tr><th>No.</th><th>項目名</th><th>データ型</th><th>データサイズ</th><th>必須/任意</th><th>バリデーションルール</th><th>チェック実施タイミング</th><th>エラー時の扱い</th></tr></thead><tbody><tr><td>1</td><td>検索キーワード</td><td>String</td><td>最大100文字</td><td>任意</td><td>HTMLタグ不可</td><td>検索時</td><td>エスケープ</td></tr><tr><td>2</td><td>カテゴリ</td><td>String</td><td>最大30文字</td><td>任意</td><td>製品/素材/容器のみ</td><td>検索時</td><td>すべてに補正</td></tr><tr><td>3</td><td>公開状態</td><td>String</td><td>最大20文字</td><td>任意</td><td>公開/非公開のみ</td><td>検索時</td><td>すべてに補正</td></tr><tr><td>4</td><td>商品ID</td><td>Long</td><td>整数</td><td>必須</td><td>存在する商品ID</td><td>詳細/編集押下時</td><td>不正時一覧へ</td></tr></tbody></table></div>
 <h2>3. 処理フロー</h2><div class="flow"><p><span class="label">Step 1</span>商品一覧にアクセスする。</p><p><span class="label">Step 2</span>検索条件と商品一覧を表示する。</p><p><span class="label">Step 3</span>詳細・編集・新規登録へ遷移する。</p></div>
 <h2>4. 正常時の動作</h2><ul><li>商品一覧が表示される。</li><li>検索条件で絞り込みできる。</li></ul>
 <h2>5. エラー時の動作</h2><ul><li>商品取得失敗時はエラー表示。</li><li>商品ID不正時は一覧へ戻す。</li></ul>
@@ -33,7 +33,7 @@ ul{margin:8px 0 0;padding-left:24px}li{margin-bottom:6px}@media(max-width:800px)
 <h3>7. DB変更反映メモ（2026-05-14）</h3>
 <div class="note">
   <ul>
-    <li>商品マスタは <code>category_master</code> を参照し、<code>products</code> は <code>category_id + master_id</code> を業務キーとして扱う。</li>
+    <li>商品カテゴリは <code>product_categories</code> で管理し、<code>products.category</code> はマスタ登録済みの「製品」「素材」「容器」から選択する。</li>
     <li>在庫は商品と1:1（<code>inventory_items.product_id</code>）で管理し、増減履歴は <code>inventory_transactions</code> に記録する。</li>
     <li>予約/顧客は <code>reservations</code> と <code>customers</code> の紐づきを前提とし、Phase2対象テーブル（<code>orders</code>/<code>order_items</code>/<code>reviews</code> 等）はPhase1機能では使用しない。</li>
   </ul>

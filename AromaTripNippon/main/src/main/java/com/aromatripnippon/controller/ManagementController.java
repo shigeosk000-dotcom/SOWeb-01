@@ -16,6 +16,7 @@ import com.aromatripnippon.repository.FragranceRecipeMaterialRepository;
 import com.aromatripnippon.repository.FragranceRecipeRepository;
 import com.aromatripnippon.repository.InventoryItemRepository;
 import com.aromatripnippon.repository.InventoryTransactionRepository;
+import com.aromatripnippon.repository.ProductCategoryRepository;
 import com.aromatripnippon.repository.ProductRepository;
 import com.aromatripnippon.repository.ReservationRepository;
 import com.aromatripnippon.service.AuditService;
@@ -45,6 +46,7 @@ public class ManagementController {
   private final FragranceRecipeMaterialRepository recipeMaterials;
   private final InventoryItemRepository inventory;
   private final InventoryTransactionRepository inventoryTransactions;
+  private final ProductCategoryRepository productCategories;
   private final ProductRepository products;
   private final AdminUserRepository admins;
   private final AuditLogRepository auditLogs;
@@ -54,8 +56,9 @@ public class ManagementController {
   public ManagementController(ReservationRepository reservations, CustomerRepository customers,
       ExperienceProgramRepository programs, FragranceRecipeRepository recipes,
       FragranceRecipeMaterialRepository recipeMaterials, InventoryItemRepository inventory,
-      InventoryTransactionRepository inventoryTransactions, ProductRepository products, AdminUserRepository admins,
-      AuditLogRepository auditLogs, AuditService audit, PasswordEncoder encoder) {
+      InventoryTransactionRepository inventoryTransactions, ProductCategoryRepository productCategories,
+      ProductRepository products, AdminUserRepository admins, AuditLogRepository auditLogs, AuditService audit,
+      PasswordEncoder encoder) {
     this.reservations = reservations;
     this.customers = customers;
     this.programs = programs;
@@ -63,6 +66,7 @@ public class ManagementController {
     this.recipeMaterials = recipeMaterials;
     this.inventory = inventory;
     this.inventoryTransactions = inventoryTransactions;
+    this.productCategories = productCategories;
     this.products = products;
     this.admins = admins;
     this.auditLogs = auditLogs;
@@ -311,11 +315,13 @@ public class ManagementController {
   public String productNew(Model model) {
     model.addAttribute("product", new Product());
     model.addAttribute("items", inventory.findByDeletedAtIsNullOrderByIdDesc());
+    model.addAttribute("categories", productCategories.findByDeletedAtIsNullAndActiveTrueOrderByDisplayOrderAscIdAsc());
     return "management/product-form";
   }
 
   @PostMapping("/management/products")
   public String productCreate(@ModelAttribute Product product, @RequestParam Long inventoryItemId, Principal principal) {
+    productCategories.findByCategoryNameAndDeletedAtIsNull(product.getCategory()).orElseThrow();
     product.setInventoryItem(inventory.findById(inventoryItemId).orElseThrow());
     Product saved = products.save(product);
     audit.record(principal, "CREATE", "products", saved.getId(), "商品を登録");
@@ -332,6 +338,7 @@ public class ManagementController {
   public String productEdit(@PathVariable Long id, Model model) {
     model.addAttribute("product", products.findById(id).orElseThrow());
     model.addAttribute("items", inventory.findByDeletedAtIsNullOrderByIdDesc());
+    model.addAttribute("categories", productCategories.findByDeletedAtIsNullAndActiveTrueOrderByDisplayOrderAscIdAsc());
     return "management/product-form";
   }
 
@@ -339,6 +346,7 @@ public class ManagementController {
   public String productUpdate(@PathVariable Long id, @ModelAttribute Product form,
       @RequestParam Long inventoryItemId, Principal principal) {
     Product product = products.findById(id).orElseThrow();
+    productCategories.findByCategoryNameAndDeletedAtIsNull(form.getCategory()).orElseThrow();
     product.setProductName(form.getProductName());
     product.setCategory(form.getCategory());
     product.setPrice(form.getPrice());

@@ -53,7 +53,7 @@ tr:last-child td{border-bottom:none}th:last-child,td:last-child{border-right:non
 └────────────────────────────────────────────────────────────┘</pre>
 <div class='table-wrap'><table><thead><tr><th>No.</th><th>配置フレーム</th><th>表示順・項目</th><th>種別</th><th>配置位置</th><th>補足</th></tr></thead><tbody><tr><td>5</td><td>Frame 5</td><td>[1] 見出し [2] リード文 [3] 検索 [4] カテゴリ [5] 並び順</td><td>画面要素</td><td>上から順</td><td>モックアップに反映</td></tr><tr><td>8</td><td>Frame 8</td><td>[1] 商品画像 [2] カテゴリ [3] 商品名 [4] 説明 [5] 価格 CTA</td><td>画面要素</td><td>上から順</td><td>モックアップに反映</td></tr></tbody></table></div>
 <h3>2. 入力項目一覧</h3>
-<div class='table-wrap'><table><thead><tr><th>No.</th><th>項目名</th><th>データ型</th><th>データサイズ</th><th>必須/任意</th><th>バリデーションルール</th><th>チェック実施タイミング</th><th>エラー時の扱い</th></tr></thead><tbody><tr><td>1</td><td>検索キーワード</td><td>String</td><td>最大100文字</td><td>任意</td><td>HTMLタグ不可</td><td>入力時、検索時</td><td>不正時はエラーメッセージ表示または補正</td></tr><tr><td>2</td><td>カテゴリ</td><td>String</td><td>最大30文字</td><td>任意</td><td>香水/ハンドクリーム/ギフトのみ</td><td>選択変更時</td><td>不正時はエラーメッセージ表示または補正</td></tr><tr><td>3</td><td>並び順</td><td>String</td><td>最大30文字</td><td>任意</td><td>おすすめ順/価格順のみ</td><td>選択変更時</td><td>不正時はエラーメッセージ表示または補正</td></tr><tr><td>4</td><td>商品ID</td><td>Long</td><td>整数</td><td>必須</td><td>存在する公開商品ID</td><td>詳細押下時</td><td>不正時はエラーメッセージ表示または補正</td></tr></tbody></table></div>
+<div class='table-wrap'><table><thead><tr><th>No.</th><th>項目名</th><th>データ型</th><th>データサイズ</th><th>必須/任意</th><th>バリデーションルール</th><th>チェック実施タイミング</th><th>エラー時の扱い</th></tr></thead><tbody><tr><td>1</td><td>検索キーワード</td><td>String</td><td>最大100文字</td><td>任意</td><td>HTMLタグ不可</td><td>入力時、検索時</td><td>不正時はエラーメッセージ表示または補正</td></tr><tr><td>2</td><td>カテゴリ</td><td>String</td><td>最大30文字</td><td>任意</td><td>製品/素材/容器のみ</td><td>選択変更時</td><td>不正時はエラーメッセージ表示または補正</td></tr><tr><td>3</td><td>並び順</td><td>String</td><td>最大30文字</td><td>任意</td><td>おすすめ順/価格順のみ</td><td>選択変更時</td><td>不正時はエラーメッセージ表示または補正</td></tr><tr><td>4</td><td>商品ID</td><td>Long</td><td>整数</td><td>必須</td><td>存在する公開商品ID</td><td>詳細押下時</td><td>不正時はエラーメッセージ表示または補正</td></tr></tbody></table></div>
 <h3>3. 処理フロー</h3>
 <div class='flow'><p><span class='label'>Step 1</span>shop.htmlにアクセスする。</p><p><span class='label'>Step 2</span>検索条件を初期化する。</p><p><span class='label'>Step 3</span>商品カード一覧を表示する。</p><p><span class='label'>Step 4</span>詳細を見る押下でproduct-detail.htmlへ遷移する。</p></div>
 <h3>4. 正常時の動作</h3>
@@ -66,7 +66,7 @@ tr:last-child td{border-bottom:none}th:last-child,td:last-child{border-right:non
 <h3>7. DB変更反映メモ（2026-05-14）</h3>
 <div class="note">
   <ul>
-    <li>商品マスタは <code>category_master</code> を参照し、<code>products</code> は <code>category_id + master_id</code> を業務キーとして扱う。</li>
+    <li>商品カテゴリは <code>product_categories</code> で管理し、<code>products.category</code> はマスタ登録済みの「製品」「素材」「容器」から選択する。</li>
     <li>在庫は商品と1:1（<code>inventory_items.product_id</code>）で管理し、増減履歴は <code>inventory_transactions</code> に記録する。</li>
     <li>予約/顧客は <code>reservations</code> と <code>customers</code> の紐づきを前提とし、Phase2対象テーブル（<code>orders</code>/<code>order_items</code>/<code>reviews</code> 等）はPhase1機能では使用しない。</li>
   </ul>

@@ -66,7 +66,7 @@ tr:last-child td{border-bottom:none}th:last-child,td:last-child{border-right:non
 <h3>7. DB変更反映メモ（2026-05-14）</h3>
 <div class="note">
   <ul>
-    <li>商品マスタは <code>category_master</code> を参照し、<code>products</code> は <code>category_id + master_id</code> を業務キーとして扱う。</li>
+    <li>商品カテゴリは <code>product_categories</code> で管理し、<code>products.category</code> はマスタ登録済みの「製品」「素材」「容器」から選択する。</li>
     <li>在庫は商品と1:1（<code>inventory_items.product_id</code>）で管理し、増減履歴は <code>inventory_transactions</code> に記録する。</li>
     <li>予約/顧客は <code>reservations</code> と <code>customers</code> の紐づきを前提とし、Phase2対象テーブル（<code>orders</code>/<code>order_items</code>/<code>reviews</code> 等）はPhase1機能では使用しない。</li>
   </ul>

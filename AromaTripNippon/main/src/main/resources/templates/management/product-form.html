@@ -3,6 +3,6 @@
 <div th:replace="~{management/fragments :: pageAlert}"></div>
 <form class="panel" th:action="${product.id == null} ? @{/management/products} : @{/management/products/{id}(id=${product.id})}" method="post" th:object="${product}"><div class="form-grid">
 <label>在庫品目<select name="inventoryItemId" required><option th:each="i : ${items}" th:value="${i.id}" th:selected="${product.inventoryItem != null and product.inventoryItem.id == i.id}" th:text="${i.itemName}"></option></select></label>
-<label>商品名<input th:field="*{productName}" required></label><label>カテゴリ<input th:field="*{category}" required></label><label>価格<input type="number" step="1" th:field="*{price}" required></label>
+<label>商品名<input th:field="*{productName}" required></label><label>カテゴリ<select th:field="*{category}" required><option value="">選択してください</option><option th:each="category : ${categories}" th:value="${category.categoryName}" th:text="${category.categoryName}"></option></select></label><label>価格<input type="number" step="1" th:field="*{price}" required></label>
 <label>画像パス<input th:field="*{imagePath}" placeholder="/assets/images/material_yuzu.png"></label><label>公開<input type="checkbox" th:field="*{published}"></label><label class="full">説明<textarea th:field="*{description}"></textarea></label></div><button class="primary">保存</button></form>
 </main></div></body></html>

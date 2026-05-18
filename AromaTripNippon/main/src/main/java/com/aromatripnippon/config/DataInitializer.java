@@ -9,6 +9,7 @@ import com.aromatripnippon.entity.FragranceRecipeMaterial;
 import com.aromatripnippon.entity.InventoryItem;
 import com.aromatripnippon.entity.InventoryTransaction;
 import com.aromatripnippon.entity.Product;
+import com.aromatripnippon.entity.ProductCategory;
 import com.aromatripnippon.entity.Reservation;
 import com.aromatripnippon.repository.AdminUserRepository;
 import com.aromatripnippon.repository.AuditLogRepository;
@@ -17,6 +18,7 @@ import com.aromatripnippon.repository.ExperienceProgramRepository;
 import com.aromatripnippon.repository.FragranceRecipeRepository;
 import com.aromatripnippon.repository.InventoryItemRepository;
 import com.aromatripnippon.repository.InventoryTransactionRepository;
+import com.aromatripnippon.repository.ProductCategoryRepository;
 import com.aromatripnippon.repository.ProductRepository;
 import com.aromatripnippon.repository.ReservationRepository;
 import java.math.BigDecimal;
@@ -32,6 +34,7 @@ public class DataInitializer implements CommandLineRunner {
   private final ExperienceProgramRepository programs;
   private final InventoryItemRepository inventory;
   private final InventoryTransactionRepository transactions;
+  private final ProductCategoryRepository productCategories;
   private final ProductRepository products;
   private final CustomerRepository customers;
   private final ReservationRepository reservations;
@@ -40,13 +43,15 @@ public class DataInitializer implements CommandLineRunner {
   private final PasswordEncoder encoder;
 
   public DataInitializer(AdminUserRepository admins, ExperienceProgramRepository programs,
-      InventoryItemRepository inventory, InventoryTransactionRepository transactions, ProductRepository products,
+      InventoryItemRepository inventory, InventoryTransactionRepository transactions,
+      ProductCategoryRepository productCategories, ProductRepository products,
       CustomerRepository customers, ReservationRepository reservations, FragranceRecipeRepository recipes,
       AuditLogRepository auditLogs, PasswordEncoder encoder) {
     this.admins = admins;
     this.programs = programs;
     this.inventory = inventory;
     this.transactions = transactions;
+    this.productCategories = productCategories;
     this.products = products;
     this.customers = customers;
     this.reservations = reservations;
@@ -94,11 +99,15 @@ public class DataInitializer implements CommandLineRunner {
     InventoryItem bottle = ensureInventory("Glass bottle 30ml", "Container", "pcs", "Shelf B",
         new BigDecimal("120"), new BigDecimal("30"), "Tokyo Bottle Works");
 
+    ensureProductCategory("製品", 1);
+    ensureProductCategory("素材", 2);
+    ensureProductCategory("容器", 3);
+
     if (products.findByDeletedAtIsNullOrderByIdDesc().isEmpty()) {
       Product mist = new Product();
       mist.setInventoryItem(bottle);
       mist.setProductName("Aroma Mist 30ml");
-      mist.setCategory("Room fragrance");
+      mist.setCategory("製品");
       mist.setPrice(new BigDecimal("4200"));
       mist.setDescription("Management-only Phase1 sample product.");
       mist.setImagePath("/assets/images/material_yuzu.png");
@@ -176,6 +185,17 @@ public class DataInitializer implements CommandLineRunner {
           seed.setSupplier(supplier);
           seed.setLastReceivedDate(LocalDate.now());
           return inventory.save(seed);
+        });
+  }
+
+  private ProductCategory ensureProductCategory(String name, int displayOrder) {
+    return productCategories.findByCategoryNameAndDeletedAtIsNull(name)
+        .orElseGet(() -> {
+          ProductCategory seed = new ProductCategory();
+          seed.setCategoryName(name);
+          seed.setDisplayOrder(displayOrder);
+          seed.setActive(true);
+          return productCategories.save(seed);
         });
   }
 

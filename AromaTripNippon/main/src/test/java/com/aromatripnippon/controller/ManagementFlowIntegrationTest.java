@@ -27,6 +27,7 @@ import com.aromatripnippon.repository.FragranceRecipeMaterialRepository;
 import com.aromatripnippon.repository.FragranceRecipeRepository;
 import com.aromatripnippon.repository.InventoryItemRepository;
 import com.aromatripnippon.repository.InventoryTransactionRepository;
+import com.aromatripnippon.repository.ProductCategoryRepository;
 import com.aromatripnippon.repository.ProductRepository;
 import com.aromatripnippon.repository.ReservationRepository;
 import java.math.BigDecimal;
@@ -66,6 +67,8 @@ class ManagementFlowIntegrationTest {
     private InventoryItemRepository inventoryItems;
     @Autowired
     private InventoryTransactionRepository inventoryTransactions;
+    @Autowired
+    private ProductCategoryRepository productCategories;
     @Autowired
     private ProductRepository products;
     @Autowired
@@ -446,7 +449,7 @@ class ManagementFlowIntegrationTest {
 
         Product product = new Product();
         product.setProductName("Mgmt Product");
-        product.setCategory("misc");
+        product.setCategory("製品");
         product.setPrice(new BigDecimal("1000"));
         product.setDescription("desc");
         product.setInventoryItem(item);
@@ -456,13 +459,39 @@ class ManagementFlowIntegrationTest {
         mockMvc.perform(post("/management/products/{id}", product.getId()).session(authSession).with(csrf())
                 .param("inventoryItemId", item.getId().toString())
                 .param("productName", "Mgmt Product Updated")
-                .param("category", "misc")
+                .param("category", "製品")
                 .param("price", "1200")
                 .param("description", "updated")
                 .param("published", "true"))
                 .andExpect(status().is3xxRedirection());
         assertThat(products.findByIdAndDeletedAtIsNull(product.getId()).orElseThrow().getProductName())
                 .isEqualTo("Mgmt Product Updated");
+        assertThat(products.findByIdAndDeletedAtIsNull(product.getId()).orElseThrow().getCategory())
+                .isEqualTo("製品");
+    }
+
+    @Test
+    void productForm_usesProductCategoryMasterOptions() throws Exception {
+        MvcResult loginResult = mockMvc.perform(formLogin("/management/login")
+                .user("AromaTripAdm01")
+                .password("password"))
+                .andExpect(status().is3xxRedirection())
+                .andReturn();
+        MockHttpSession authSession = (MockHttpSession) loginResult.getRequest().getSession(false);
+        assertThat(authSession).isNotNull();
+
+        assertThat(productCategories.findByDeletedAtIsNullAndActiveTrueOrderByDisplayOrderAscIdAsc())
+                .extracting("categoryName")
+                .containsExactly("製品", "素材", "容器");
+
+        mockMvc.perform(get("/management/products/new").session(authSession))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("categories"))
+                .andExpect(content().string(Matchers.containsString("<select")))
+                .andExpect(content().string(Matchers.containsString("name=\"category\"")))
+                .andExpect(content().string(Matchers.containsString("製品")))
+                .andExpect(content().string(Matchers.containsString("素材")))
+                .andExpect(content().string(Matchers.containsString("容器")));
     }
 
     @Test
@@ -522,7 +551,7 @@ class ManagementFlowIntegrationTest {
         mockMvc.perform(post("/management/products/{id}", 999999L).session(authSession).with(csrf())
                 .param("inventoryItemId", "1")
                 .param("productName", "missing")
-                .param("category", "misc")
+                .param("category", "製品")
                 .param("price", "1200")
                 .param("description", "updated"))
                 .andExpect(status().is3xxRedirection())
@@ -559,7 +588,7 @@ class ManagementFlowIntegrationTest {
 
         mockMvc.perform(post("/management/products").session(authSession)
                 .param("productName", "NoCsrf Product")
-                .param("category", "misc")
+                .param("category", "製品")
                 .param("price", "1000")
                 .param("description", "no csrf"))
                 .andExpect(status().isForbidden());

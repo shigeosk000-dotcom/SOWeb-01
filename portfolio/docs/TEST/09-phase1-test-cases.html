@@ -40,7 +40,7 @@
         <tr><td>TC-P1-040</td><td>バックエンド</td><td>香りレシピ登録</td><td>正常系</td><td>素材2件、配合率合計100で登録</td><td>素材カテゴリ商品が存在</td><td>レシピ登録成功、詳細に素材明細が表示</td><td></td><td></td><td></td><td></td></tr>
         <tr><td>TC-P1-041</td><td>バックエンド</td><td>香りレシピ登録</td><td>正常系</td><td>素材を5件まで登録</td><td>素材候補が5件以上存在</td><td>5件登録できる</td><td></td><td></td><td></td><td></td></tr>
         <tr><td>TC-P1-050</td><td>バックエンド</td><td>香りレシピ編集</td><td>正常系</td><td>既存レシピの素材/配合率を更新</td><td>既存レシピあり</td><td>更新成功、一覧/詳細に反映</td><td></td><td></td><td></td><td></td></tr>
-        <tr><td>TC-P1-060</td><td>バックエンド</td><td>商品管理</td><td>正常系</td><td>カテゴリ+master_id一意の新規商品登録</td><td>対象カテゴリが存在</td><td>登録成功、一覧に表示</td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>TC-P1-060</td><td>バックエンド</td><td>商品管理</td><td>正常系</td><td>カテゴリマスタ値を選択した新規商品登録</td><td>商品カテゴリマスタが存在</td><td>登録成功、一覧に表示</td><td></td><td></td><td></td><td></td></tr>
         <tr><td>TC-P1-063</td><td>バックエンド</td><td>商品管理</td><td>正常系</td><td>商品を論理削除</td><td>対象商品が存在</td><td>deleted_at が設定され一覧非表示（物理削除なし）</td><td></td><td></td><td></td><td></td></tr>
         <tr><td>TC-P1-070</td><td>バックエンド</td><td>在庫管理</td><td>正常系</td><td>商品に紐づく在庫を登録/更新</td><td>対象商品が存在</td><td>在庫情報が保存される（1商品1在庫）</td><td></td><td></td><td></td><td></td></tr>
         <tr><td>TC-P1-072</td><td>バックエンド</td><td>在庫管理</td><td>正常系</td><td>在庫増減更新を実行</td><td>在庫品目が存在</td><td>在庫数更新 + 在庫更新履歴が1件追加</td><td></td><td></td><td></td><td></td></tr>
@@ -56,7 +56,7 @@
         <tr><td>TC-P1-042</td><td>バックエンド</td><td>香りレシピ登録</td><td>異常系</td><td>配合率合計100以外で登録</td><td>素材入力済み</td><td>「配合率は合計100」表示、入力保持で戻る</td><td></td><td></td><td></td><td></td></tr>
         <tr><td>TC-P1-043</td><td>バックエンド</td><td>香りレシピ登録</td><td>異常系</td><td>素材カテゴリ以外の商品を素材として指定</td><td>素材以外カテゴリ商品が存在</td><td>登録不可、バリデーションエラー</td><td></td><td></td><td></td><td></td></tr>
         <tr><td>TC-P1-051</td><td>バックエンド</td><td>香りレシピ編集</td><td>異常系</td><td>配合率合計100以外で更新</td><td>編集画面表示中</td><td>エラー表示、素材入力値はクリアされない</td><td></td><td></td><td></td><td></td></tr>
-        <tr><td>TC-P1-061</td><td>バックエンド</td><td>商品管理</td><td>異常系</td><td>同一カテゴリ+master_idで重複登録</td><td>同一キー商品が存在</td><td>一意制約エラーで登録不可</td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>TC-P1-061</td><td>バックエンド</td><td>商品管理</td><td>異常系</td><td>カテゴリマスタ未登録値での商品登録防止</td><td>商品カテゴリマスタに存在しないカテゴリを指定</td><td>マスタ未登録カテゴリのため登録不可</td><td></td><td></td><td></td><td></td></tr>
         <tr><td>TC-P1-071</td><td>バックエンド</td><td>在庫管理</td><td>異常系</td><td>同一商品に2件目の在庫を作成</td><td>既に在庫1件が存在</td><td>1:1制約エラーで作成不可</td><td></td><td></td><td></td><td></td></tr>
         <tr><td>TC-P1-090</td><td>共通基盤</td><td>セキュリティテスト</td><td>正常系</td><td>ログイン済みで管理画面の各機能へアクセス</td><td>有効な管理者アカウントでログイン済み</td><td>認可された画面/操作のみ実行できる</td><td>2026-05-15</td><td>Codex</td><td>OK</td><td>自動: ManagementFlowIntegrationTest（ログイン後CRUD）</td></tr>
         <tr><td>TC-P1-091</td><td>共通基盤</td><td>セキュリティテスト</td><td>境界値</td><td>セッション有効期限直前/直後で管理画面アクセス</td><td>ログイン後にセッションタイムアウト条件を再現</td><td>有効期限内は利用可、期限切れ後は再ログインを要求</td><td>2026-05-15</td><td>Codex</td><td>OK</td><td>自動: sessionTimeout_afterInvalidation_requiresRelogin</td></tr>

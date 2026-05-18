@@ -72,8 +72,8 @@
                 <section id="phase1-er-diagram">
                   <h3>Phase1（更新後）ER図</h3>
                   <p>
-                    Phase1のDB構造を、カテゴリーマスタ導入・商品/在庫1:1運用に合わせて更新したERです。
-                    香りレシピ素材は「素材カテゴリの商品」のみ選択可能とし、在庫更新は履歴で追跡します。
+                    Phase1のDB構造を、商品カテゴリマスタ導入に合わせて更新したERです。
+                    商品カテゴリは「製品」「素材」「容器」をマスタ管理し、商品登録・編集時はマスタ値から選択します。
                   </p>
                   <BR>
                   <pre><code>【Phase1（更新後）主要リレーション】
@@ -95,15 +95,15 @@
                                                     display_order
                                                     ...
 
-[category_master] 1 ──── * [products] 1 ──── 1 [inventory_items] 1 ──── * [inventory_transactions]
+[product_categories] 1 ──── * [products] * ──── 1 [inventory_items] 1 ──── * [inventory_transactions]
   id (PK)                id (PK)                    id (PK)                 id (PK)
-  category_name          category_id (FK)           product_id (FK, UNIQUE) inventory_item_id (FK)
-  comment                master_id                  stock_quantity           transaction_type
-                         product_name               threshold_quantity       quantity
-                         price                      storage_location         reason
-                         image_path                 supplier                 transaction_date
-                         is_active                  last_stocked_date        created_by
-                         ...                        ...                      ...
+  category_name          inventory_item_id (FK)     item_name               inventory_item_id (FK)
+  display_order          product_name               category                transaction_type
+  is_active              category                   stock_quantity           quantity
+                         price                      threshold_quantity       reason
+                         image_path                 storage_location         transaction_date
+                         is_active                  ...                      created_by
+                         ...                                                 ...
 
 [admin_users] 1 ──── * [audit_logs]
   id (PK)                id (PK)
@@ -124,14 +124,14 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <td><code>category_master</code></td>
-                        <td>商品カテゴリ（カテゴリID、カテゴリ名、コメント）を管理。</td>
-                        <td><code>products</code> と 1対多。</td>
+                        <td><code>product_categories</code></td>
+                        <td>商品カテゴリ（カテゴリ名、表示順、有効状態）を管理。初期値は「製品」「素材」「容器」。</td>
+                        <td><code>products.category</code> の選択元。</td>
                       </tr>
                       <tr>
                         <td><code>products</code></td>
-                        <td>商品マスタ。商品IDは <code>master_id</code>、業務ユニークは <code>(category_id, master_id)</code>。</td>
-                        <td><code>category_master</code> と多対1、<code>inventory_items</code> と1対1。</td>
+                        <td>商品マスタ。カテゴリは <code>product_categories</code> の登録値から選択し、<code>products.category</code> に保持。</td>
+                        <td><code>product_categories</code> を参照、<code>inventory_items</code> と関連。</td>
                       </tr>
                       <tr>
                         <td><code>inventory_items</code></td>
@@ -145,7 +145,7 @@
                       </tr>
                       <tr>
                         <td><code>fragrance_recipe_materials</code></td>
-                        <td>レシピ素材明細。選択可能素材は「素材カテゴリの商品」に限定。</td>
+                        <td>レシピ素材明細。選択可能素材は在庫品目と商品カテゴリの運用ルールに従う。</td>
                         <td><code>fragrance_recipes</code> と多対1、<code>products</code> と多対1。</td>
                       </tr>
                       <tr>
@@ -1321,7 +1321,7 @@
                       <td>不可</td>
                       <td>なし</td>
                       <td>NOT NULL</td>
-                      <td>香水、ハンドクリーム、ギフトなど。</td>
+                      <td><code>product_categories.category_name</code> の登録値（製品、素材、容器）。</td>
                     </tr>
                     <tr>
                       <td>price</td>
@@ -3046,7 +3046,7 @@
 
 
                 <h3>更新後INSERT文（優先）</h3>
-                <p>以下はDB更新後構造（category_master、products の category_id+master_id、商品/在庫1:1）に対応した初期データ例です。</p>
+                <p>以下はDB更新後構造（product_categories、products.category のマスタ選択）に対応した初期データ例です。</p>
                 <table class="spec-table">
                   <thead>
                     <tr>
@@ -3056,23 +3056,23 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td><code>category_master</code></td>
+                      <td><code>product_categories</code></td>
                       <td>
-                        <pre><code>INSERT INTO category_master (id, category_name, comment, created_at, updated_at) VALUES
-(1, '素材', '香りレシピ用素材', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-(2, '容器', 'ボトル等の資材', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-(3, '商品', '販売用商品', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);</code></pre>
+                        <pre><code>INSERT INTO product_categories (id, category_name, display_order, is_active, created_at, updated_at) VALUES
+(1, '製品', 1, TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(2, '素材', 2, TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(3, '容器', 3, TRUE, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);</code></pre>
                       </td>
                     </tr>
                     <tr>
                       <td><code>products</code></td>
                       <td>
                         <pre><code>INSERT INTO products (
-  id, category_id, master_id, product_name, price, image_path, is_active, description, created_at, updated_at
+  id, inventory_item_id, product_name, category, price, image_path, is_active, description, created_at, updated_at
 ) VALUES
-(1, 1, 'MAT-001', 'Yuzu essential oil', 3200, '/assets/images/material_yuzu.png', TRUE, '高知産ゆずの精油', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-(2, 1, 'MAT-002', 'Aomori hiba essential oil', 3400, '/assets/images/material_hiba.png', TRUE, '青森ひばの精油', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-(3, 2, 'CON-001', 'Glass bottle 30ml', 800, '/assets/images/material_hakka.png', TRUE, '30mlガラスボトル', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);</code></pre>
+(1, NULL, 'Aroma Mist 30ml', '製品', 4200, '/assets/images/material_yuzu.png', TRUE, '販売用アロマミスト', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(2, NULL, 'Yuzu essential oil', '素材', 3200, '/assets/images/material_yuzu.png', TRUE, '高知産ゆずの精油', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(3, NULL, 'Glass bottle 30ml', '容器', 800, '/assets/images/material_hakka.png', TRUE, '30mlガラスボトル', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);</code></pre>
                       </td>
                     </tr>
                     <tr>
@@ -3223,12 +3223,10 @@
                     </tr>
 
                     <tr>
-                      <td>categories（カテゴリマスタ）</td>
+                      <td>product_categories（商品カテゴリマスタ）</td>
                       <td>
-                        <pre><code>INSERT INTO categories (
+                        <pre><code>INSERT INTO product_categories (
   id,
-  category_type,
-  category_code,
   category_name,
   display_order,
   is_active,
@@ -3238,9 +3236,7 @@
 ) VALUES
 (
   1,
-  'PRODUCT',
-  'FRAGRANCE',
-  '香水',
+  '製品',
   1,
   TRUE,
   CURRENT_TIMESTAMP,
@@ -3249,9 +3245,7 @@
 ),
 (
   2,
-  'PRODUCT',
-  'HAND_CREAM',
-  'ハンドクリーム',
+  '素材',
   2,
   TRUE,
   CURRENT_TIMESTAMP,
@@ -3260,32 +3254,8 @@
 ),
 (
   3,
-  'PRODUCT',
-  'GIFT',
-  'ギフト',
-  3,
-  TRUE,
-  CURRENT_TIMESTAMP,
-  CURRENT_TIMESTAMP,
-  NULL
-),
-(
-  4,
-  'INVENTORY',
-  'ESSENTIAL_OIL',
-  '香料',
-  4,
-  TRUE,
-  CURRENT_TIMESTAMP,
-  CURRENT_TIMESTAMP,
-  NULL
-),
-(
-  5,
-  'INVENTORY',
-  'CONTAINER',
   '容器',
-  5,
+  3,
   TRUE,
   CURRENT_TIMESTAMP,
   CURRENT_TIMESTAMP,
@@ -3992,7 +3962,7 @@
                   <ul>
                     <li>上記の BCrypt ハッシュ値は、開発・検証用の固定パスワード(password)を想定したサンプル値である。</li>
                     <li>本番環境では、初期パスワードを利用者に通知後、初回ログイン時に変更させる運用が望ましい。</li>
-                    <li><code>categories</code> テーブルはカテゴリマスタとして追加想定しているため、実装時にはテーブル定義・Entity・Repositoryを追加する。</li>
+                    <li><code>product_categories</code> テーブルは商品カテゴリマスタとして追加し、初期データとして「製品」「素材」「容器」を登録する。</li>
                     <li>H2で利用する場合、<code>BOOLEAN</code>、<code>CURRENT_TIMESTAMP</code>、<code>CURRENT_DATE</code>
                       はそのまま利用可能な想定である。</li>
                   </ul>
