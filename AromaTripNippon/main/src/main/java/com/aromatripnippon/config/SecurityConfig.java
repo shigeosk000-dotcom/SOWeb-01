@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.filter.ForwardedHeaderFilter;
 
 @Configuration
 public class SecurityConfig {
@@ -19,7 +20,7 @@ public class SecurityConfig {
   SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http.authorizeHttpRequests(auth -> auth
             .requestMatchers("/", "/concept", "/experience", "/reservation/**", "/css/**", "/js/**",
-                "/assets/**", "/h2-console/**").permitAll()
+                "/assets/**", "/h2-console/**", "/management/login").permitAll()
             .requestMatchers("/management/**").authenticated()
             .anyRequest().permitAll())
         .formLogin(login -> login
@@ -57,5 +58,10 @@ public class SecurityConfig {
   @Bean
   PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
+  }
+
+  @Bean
+  ForwardedHeaderFilter forwardedHeaderFilter() {
+    return new ForwardedHeaderFilter();
   }
 }

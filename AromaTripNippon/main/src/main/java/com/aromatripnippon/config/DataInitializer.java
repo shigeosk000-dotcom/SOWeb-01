@@ -119,9 +119,17 @@ public class DataInitializer implements CommandLineRunner {
     }
 
     if (transactions.findByDeletedAtIsNullOrderByIdDesc().isEmpty()) {
-      transactions.save(transaction(yuzu, admin, "IN", new BigDecimal("500"), "Initial stock"));
-      transactions.save(transaction(hiba, admin, "IN", new BigDecimal("420"), "Initial stock"));
-      transactions.save(transaction(bottle, admin, "IN", new BigDecimal("120"), "Initial stock"));
+      InventoryTransaction t1 = transactions.save(transaction(yuzu, admin, "IN", new BigDecimal("500"), "Initial stock"));
+      yuzu.setStockQuantity(yuzu.getStockQuantity().add(t1.getQuantity()));
+      inventory.save(yuzu);
+
+      InventoryTransaction t2 = transactions.save(transaction(hiba, admin, "IN", new BigDecimal("420"), "Initial stock"));
+      hiba.setStockQuantity(hiba.getStockQuantity().add(t2.getQuantity()));
+      inventory.save(hiba);
+
+      InventoryTransaction t3 = transactions.save(transaction(bottle, admin, "IN", new BigDecimal("120"), "Initial stock"));
+      bottle.setStockQuantity(bottle.getStockQuantity().add(t3.getQuantity()));
+      inventory.save(bottle);
     }
 
     if (auditLogs.findByDeletedAtIsNullOrderByIdDesc().isEmpty()) {
