@@ -70,6 +70,23 @@
   </main>
 
   <footer class="footer"><div class="container footer-grid"><div><strong>Aroma Trip Nippon</strong><br>和香巡り</div><div><a th:href="@{/experience}">体験詳細</a><br><a th:href="@{/concept}">コンセプト</a></div><div><a th:href="@{/reservation}">予約</a><br><a th:href="@{/en/}">English</a></div></div></footer>
+  <script>
+    (function() {
+      const storageKey = 'atnPreferredLanguage';
+      const redirectFlag = 'atnAutoRedirectDone';
+      if (localStorage.getItem(storageKey) === 'ja') {
+        return;
+      }
+      if (!localStorage.getItem(redirectFlag)) {
+        localStorage.setItem(redirectFlag, 'true');
+        const langs = navigator.languages || [navigator.language || navigator.userLanguage || navigator.browserLanguage || ''];
+        const wantsJapanese = langs.some(lang => /^ja(-|$)/i.test(lang));
+        if (!wantsJapanese) {
+          window.location.replace('/en/');
+        }
+      }
+    })();
+  </script>
   <script th:src="@{/js/slider.js}" defer></script>
 </body>
 

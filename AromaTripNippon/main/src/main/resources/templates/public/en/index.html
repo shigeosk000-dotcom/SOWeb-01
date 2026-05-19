@@ -156,6 +156,16 @@
       <div><a th:href="@{/en/reservation}">Booking</a><br><a th:href="@{/}">Japanese</a></div>
     </div>
   </footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const japaneseLink = document.querySelector('a[href="/"]');
+      if (japaneseLink) {
+        japaneseLink.addEventListener('click', function() {
+          localStorage.setItem('atnPreferredLanguage', 'ja');
+        });
+      }
+    });
+  </script>
   <script th:src="@{/js/slider.js}" defer></script>
 </body>
 
