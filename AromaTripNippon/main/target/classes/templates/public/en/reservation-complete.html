@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reservation Complete | Aroma Trip Nippon</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+
+<body class="site-en">
+  <header class="header">
+    <div class="container header-inner">
+      <a class="brand" th:href="@{/en/}"><img class="brand-logo" th:src="@{/assets/images/LOGO.png}" alt="Aroma Trip Nippon" /></a>
+      <nav class="nav"><a th:href="@{/en/concept}">Concept</a><a th:href="@{/en/experience}">Experience</a><a th:href="@{/en/reservation}">Booking</a></nav>
+      <div class="header-actions"><div class="lang-switch"><a th:href="@{/}">JP</a><a class="active" th:href="@{/en/}">EN</a></div><a class="btn" th:href="@{/en/reservation}">Book Experience</a></div>
+    </div>
+  </header>
+  <main class="container">
+    <div class="breadcrumbs"><a th:href="@{/en/}">Top</a> / <a th:href="@{/en/reservation}">Booking</a> / <span>Complete</span></div>
+    <section class="hero">
+      <div class="card complete-card">
+        <div class="badge">Reservation Complete</div>
+        <h1>Thank you for your reservation.</h1>
+        <p class="lead">Your reservation request has been registered. Please tell us your name at reception on the day
+          of your visit.</p>
+        <div class="grid-2" style="text-align:left;margin:24px 0">
+          <div class="info-card">
+            <h3>Reservation</h3>
+            <p class="text" th:if="${reservation != null}">
+              Reservation ID: <span th:text="${reservation.id}"></span><br>
+              Program: <span th:text="${reservation.experienceProgram.name}"></span><br>
+              Date and time: <span th:text="${reservation.visitDate}"></span> <span th:text="${reservation.timeSlot}"></span><br>
+              Guests: <span th:text="${reservation.guestCount}"></span><br>
+              Name: <span th:text="${reservation.customer.name}"></span>
+            </p>
+            <p class="text" th:if="${reservation == null}">Reservation information could not be displayed.</p>
+          </div>
+          <div class="info-card">
+            <h3>Shop</h3>
+            <p class="text shop-name">JapaneseAroma Asakusa</p>
+            <dl class="shop-info">
+              <div><dt>Address</dt><dd>Asakusa 1, Taito-ku, Tokyo</dd></div>
+              <div><dt>Phone</dt><dd><a href="tel:03-000-0000">03-000-0000</a></dd></div>
+            </dl>
+            <div class="shop-map"><iframe title="JapaneseAroma Asakusa map"
+                src="https://maps.google.com/maps?q=%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%8F%B0%E6%9D%B1%E5%8C%BA%E6%B5%85%E8%8D%89%EF%BC%91&output=embed"
+                loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+          </div>
+        </div>
+        <div class="notice" style="text-align:left;margin-bottom:20px">Email confirmation is not sent in Phase 1. Please
+          keep this page or your reservation ID for reference.</div>
+        <div class="actions" style="justify-content:center"><a class="btn" th:href="@{/en/}">Back to Top</a><a class="btn secondary" th:href="@{/en/concept}">View Concept</a></div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div><strong>Aroma Trip Nippon</strong><br>Complete</div>
+      <div><a th:href="@{/en/}">Top</a></div>
+      <div><a th:href="@{/en/experience}">Experience</a></div>
+    </div>
+  </footer>
+</body>
+
+</html>

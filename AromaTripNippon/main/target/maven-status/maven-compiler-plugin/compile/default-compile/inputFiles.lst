@@ -15,6 +15,7 @@ C:\academia\src\soweb-01\AromaTripNippon\main\src\main\java\com\aromatripnippon\
 C:\academia\src\soweb-01\AromaTripNippon\main\src\main\java\com\aromatripnippon\entity\InventoryItem.java
 C:\academia\src\soweb-01\AromaTripNippon\main\src\main\java\com\aromatripnippon\entity\InventoryTransaction.java
 C:\academia\src\soweb-01\AromaTripNippon\main\src\main\java\com\aromatripnippon\entity\Product.java
+C:\academia\src\soweb-01\AromaTripNippon\main\src\main\java\com\aromatripnippon\entity\ProductCategory.java
 C:\academia\src\soweb-01\AromaTripNippon\main\src\main\java\com\aromatripnippon\entity\Reservation.java
 C:\academia\src\soweb-01\AromaTripNippon\main\src\main\java\com\aromatripnippon\form\ReservationRequest.java
 C:\academia\src\soweb-01\AromaTripNippon\main\src\main\java\com\aromatripnippon\repository\AdminUserRepository.java
@@ -25,6 +26,7 @@ C:\academia\src\soweb-01\AromaTripNippon\main\src\main\java\com\aromatripnippon\
 C:\academia\src\soweb-01\AromaTripNippon\main\src\main\java\com\aromatripnippon\repository\FragranceRecipeRepository.java
 C:\academia\src\soweb-01\AromaTripNippon\main\src\main\java\com\aromatripnippon\repository\InventoryItemRepository.java
 C:\academia\src\soweb-01\AromaTripNippon\main\src\main\java\com\aromatripnippon\repository\InventoryTransactionRepository.java
+C:\academia\src\soweb-01\AromaTripNippon\main\src\main\java\com\aromatripnippon\repository\ProductCategoryRepository.java
 C:\academia\src\soweb-01\AromaTripNippon\main\src\main\java\com\aromatripnippon\repository\ProductRepository.java
 C:\academia\src\soweb-01\AromaTripNippon\main\src\main\java\com\aromatripnippon\repository\ReservationRepository.java
 C:\academia\src\soweb-01\AromaTripNippon\main\src\main\java\com\aromatripnippon\service\AdminUserService.java

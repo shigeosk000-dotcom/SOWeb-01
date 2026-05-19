@@ -122,6 +122,35 @@ img {
   flex-wrap: wrap
 }
 
+.header-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-end
+}
+
+.lang-switch {
+  display: inline-flex;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff
+}
+
+.lang-switch a {
+  min-width: 42px;
+  padding: 8px 10px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-align: center
+}
+
+.lang-switch a.active {
+  background: var(--accent-dark);
+  color: #fff
+}
+
 .lang {
   padding: 8px 10px;
   border: 1px solid var(--line);
@@ -180,6 +209,13 @@ img {
   font-weight: 700
 }
 
+.jp-note {
+  margin: 8px 0 0;
+  color: var(--accent);
+  font-size: 14px;
+  letter-spacing: .08em
+}
+
 h1 {
   font-size: clamp(34px, 5vw, 56px);
   line-height: 1.08;
@@ -218,6 +254,18 @@ h3 {
 
 .section {
   padding: 20px 0
+}
+
+.section-head {
+  display: flex;
+  gap: 24px;
+  align-items: end;
+  justify-content: space-between;
+  margin-bottom: 18px
+}
+
+.section-head .sub {
+  max-width: 460px
 }
 
 .sub {
@@ -321,6 +369,12 @@ label {
   font-size: 14px;
   font-weight: 700;
   color: #493f34
+}
+
+.field-hint {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.4
 }
 
 input,
@@ -609,5 +663,13 @@ textarea {
 
   .nav {
     display: none
+  }
+
+  .header-actions .btn {
+    display: none
+  }
+
+  .section-head {
+    display: block
   }
 }

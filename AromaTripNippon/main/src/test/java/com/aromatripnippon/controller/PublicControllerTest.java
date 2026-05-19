@@ -71,4 +71,42 @@ class PublicControllerTest {
 
     verifyNoInteractions(reservationService);
   }
+
+  @Test
+  void postEnglishReservation_redirectsToEnglishCompleteWhenValid() throws Exception {
+    Reservation saved = new Reservation();
+    saved.setId(456L);
+    when(programs.findFirstByDeletedAtIsNullAndActiveTrueOrderById()).thenReturn(Optional.empty());
+    when(reservationService.createReservation(any(), any())).thenReturn(saved);
+
+    mockMvc.perform(post("/en/reservation")
+            .param("visitDate", LocalDate.now().plusDays(1).toString())
+            .param("timeSlot", "10:00")
+            .param("guestCount", "2")
+            .param("name", "Jane Smith")
+            .param("email", "jane@example.com")
+            .param("preferredLanguage", "English")
+            .param("requestNote", "English guidance please"))
+        .andExpect(status().is3xxRedirection())
+        .andExpect(redirectedUrlPattern("/en/reservation/complete/*"));
+  }
+
+  @Test
+  void postEnglishReservation_returnsEnglishFormWhenVisitDateIsPast() throws Exception {
+    when(programs.findFirstByDeletedAtIsNullAndActiveTrueOrderById()).thenReturn(Optional.empty());
+
+    mockMvc.perform(post("/en/reservation")
+            .param("visitDate", LocalDate.now().minusDays(1).toString())
+            .param("timeSlot", "10:00")
+            .param("guestCount", "2")
+            .param("name", "Jane Smith")
+            .param("email", "jane@example.com")
+            .param("preferredLanguage", "English")
+            .param("requestNote", "English guidance please"))
+        .andExpect(status().isOk())
+        .andExpect(view().name("public/en/reservation"))
+        .andExpect(model().attributeHasFieldErrors("reservationRequest", "visitDate"));
+
+    verifyNoInteractions(reservationService);
+  }
 }

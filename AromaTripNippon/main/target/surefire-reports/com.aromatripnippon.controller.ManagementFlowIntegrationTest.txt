@@ -1,4 +1,37 @@
 -------------------------------------------------------------------------------
 Test set: com.aromatripnippon.controller.ManagementFlowIntegrationTest
 -------------------------------------------------------------------------------
-Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 13.87 s -- in com.aromatripnippon.controller.ManagementFlowIntegrationTest
+Tests run: 12, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 13.68 s <<< FAILURE! -- in com.aromatripnippon.controller.ManagementFlowIntegrationTest
+com.aromatripnippon.controller.ManagementFlowIntegrationTest.productForm_usesProductCategoryMasterOptions -- Time elapsed: 0.158 s <<< FAILURE!
+java.lang.AssertionError: 
+Response content
+Expected: a string containing "製品"
+     but: was "<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>商品フォーム</title><link rel="stylesheet" href="/css/app.css"></head>
+<body class="admin-body"><div class="admin-layout"><aside class="sidebar">
+  <div class="brand">AromaTripNippon</div>
+  <a href="/management/dashboard">ダッシュボード</a>
+  <a href="/management/reservations">予約管理</a>
+  <a href="/management/customers">顧客管理</a>
+  <a href="/management/recipes">香りレシピ管理</a>
+  <a href="/management/products">商品管理</a>
+  <a href="/management/inventory">在庫管理</a>
+  <a href="/management/account">アカウント設定</a>
+  <form action="/management/logout" method="post"><input type="hidden" name="_csrf" value="ZXP8Jsl4nWMYSEYtB1ve1hWgBMTlejmbulJVOrimNB45tE8IVUrEFflK_gc1fXcYP3bqsHCRKfzRSAm2iWtiW46QAHoM0Hs7"/>
+    <button type="submit">ログアウト</button>
+  </form>
+</aside><main class="admin-main"><div class="page-head"><h1>商品登録</h1><a class="btn" href="/management/products">一覧へ戻る</a></div>
+
+<form class="panel" action="/management/products" method="post"><input type="hidden" name="_csrf" value="ZXP8Jsl4nWMYSEYtB1ve1hWgBMTlejmbulJVOrimNB45tE8IVUrEFflK_gc1fXcYP3bqsHCRKfzRSAm2iWtiW46QAHoM0Hs7"/><div class="form-grid">
+<label>在庫品目<select name="inventoryItemId" required><option value="4">Glass bottle 30ml</option><option value="3">Japanese mint oil</option><option value="2">Aomori hiba essential oil</option><option value="1">Yuzu essential oil</option></select></label>
+<label>商品名<input required id="productName" name="productName" value=""></label><label>カテゴリ<input required id="category" name="category" value=""></label><label>価格<input type="number" step="1" required id="price" name="price" value=""></label>
+<label>画像パス<input placeholder="/assets/images/material_yuzu.png" id="imagePath" name="imagePath" value=""></label><label>公開<input type="checkbox" id="published1" name="published" value="true"><input type="hidden" name="_published" value="on"/></label><label class="full">説明<textarea id="description" name="description"></textarea></label></div><button class="primary">保存</button></form>
+</main></div></body></html>
+"
+	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
+	at org.springframework.test.web.servlet.result.ContentResultMatchers.lambda$string$3(ContentResultMatchers.java:141)
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:214)
+	at com.aromatripnippon.controller.ManagementFlowIntegrationTest.productForm_usesProductCategoryMasterOptions(ManagementFlowIntegrationTest.java:492)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+

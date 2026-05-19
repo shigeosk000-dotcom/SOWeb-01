@@ -4,21 +4,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>予約ページ</title>
+  <title>予約 | Aroma Trip Nippon</title>
   <link rel="stylesheet" th:href="@{/css/style.css}" />
   <script th:src="@{/js/reservation.js}" defer></script>
 </head>
 
 <body>
-  <header class="header">
-    <div class="container header-inner">
-      <a class="brand" th:href="@{/}"><img class="brand-logo" th:src="@{/assets/images/LOGO.png}"
-          alt="Aroma Trip Nippon" /></a>
-      <nav class="nav"><a th:href="@{/concept}">コンセプト</a><a th:href="@{/experience}">体験詳細</a><a
-          th:href="@{/reservation}">予約</a></nav>
-      <div style="display:flex;gap:10px;align-items:center"><a class="btn" th:href="@{/reservation}">予約する</a></div>
-    </div>
-  </header>
+  <header class="header"><div class="container header-inner"><a class="brand" th:href="@{/}"><img class="brand-logo" th:src="@{/assets/images/LOGO.png}" alt="Aroma Trip Nippon" /></a><nav class="nav"><a th:href="@{/concept}">コンセプト</a><a th:href="@{/experience}">体験詳細</a><a th:href="@{/reservation}">予約</a></nav><div class="header-actions"><div class="lang-switch"><a class="active" th:href="@{/reservation}">JP</a><a th:href="@{/en/reservation}">EN</a></div><a class="btn" th:href="@{/reservation}">予約する</a></div></div></header>
   <main class="container">
     <div class="breadcrumbs"><a th:href="@{/}">トップ</a> / <a th:href="@{/experience}">体験詳細</a> / <span>予約</span></div>
     <section class="hero">
@@ -29,61 +21,28 @@
           <p class="lead">日程と人数を選択し、来店に必要な情報を入力してください。</p>
           <p class="notice" th:if="${errorMessage}" th:text="${errorMessage}"></p>
           <form th:action="@{/reservation}" th:object="${reservationRequest}" method="post" data-reservation-form>
-            <div class="field"><label for="date">日程</label><input id="date" type="date" th:field="*{visitDate}"
-                required /></div>
-            <div class="field"><label for="time">時間</label><select id="time" th:field="*{timeSlot}" required>
-                <option value="10:00">10:00</option>
-                <option value="13:00">13:00</option>
-                <option value="16:00">16:00</option>
-              </select></div>
-            <div class="field"><label for="people">人数</label><select id="people" th:field="*{guestCount}" required>
-                <option value="1">1名</option>
-                <option value="2">2名</option>
-                <option value="3">3名</option>
-                <option value="4">4名</option>
-              </select></div>
-            <div class="field"><label for="name">お名前</label><input id="name" type="text" th:field="*{name}"
-                placeholder="Your name" required /></div>
-            <div class="field"><label for="email">メールアドレス</label><input id="email" type="email" th:field="*{email}"
-                placeholder="name@example.com" required /></div>
-            <div class="field"><label for="lang">言語</label><select id="lang" th:field="*{preferredLanguage}">
-                <option value="English">English</option>
-                <option value="日本語">日本語</option>
-              </select></div>
-            <div class="field"><label for="request">ご要望・備考</label><textarea id="request" cols="50" rows="3"
-                th:field="*{requestNote}" placeholder="Please enter your request here."></textarea></div>
+            <input type="hidden" th:if="${_csrf != null}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+            <div class="field"><label for="date">日程</label><input id="date" type="date" th:field="*{visitDate}" required /></div>
+            <div class="field"><label for="time">時間</label><select id="time" th:field="*{timeSlot}" required><option value="10:00">10:00</option><option value="13:00">13:00</option><option value="16:00">16:00</option></select></div>
+            <div class="field"><label for="people">人数</label><select id="people" th:field="*{guestCount}" required><option value="1">1名</option><option value="2">2名</option><option value="3">3名</option><option value="4">4名</option></select></div>
+            <div class="field"><label for="name">お名前</label><input id="name" type="text" th:field="*{name}" placeholder="山田 花子" required /></div>
+            <div class="field"><label for="email">メールアドレス</label><input id="email" type="email" th:field="*{email}" placeholder="name@example.com" required /></div>
+            <div class="field"><label for="lang">希望言語</label><select id="lang" th:field="*{preferredLanguage}"><option value="Japanese">日本語</option><option value="English">English</option></select></div>
+            <div class="field"><label for="request">ご要望・備考</label><textarea id="request" cols="50" rows="3" th:field="*{requestNote}" placeholder="ご要望があれば入力してください。"></textarea></div>
             <p class="notice" th:if="${#fields.hasErrors('*')}">入力内容を確認してください。</p>
-            <div class="spacer"></div>
-            <button class="btn" type="submit">予約を確定する</button>
+            <div class="spacer"></div><button class="btn" type="submit">予約を確定する</button>
           </form>
         </div>
         <div class="card form-card">
           <h2>予約内容</h2>
-          <div class="review" style="margin-bottom:16px"><span class="pill">プラン</span>
-            <h3>香りづくり体験</h3>
-            <p class="text">約90分 / ¥5,500〜 / EN・JP対応</p>
-          </div>
-          <div class="review" style="margin-bottom:16px"><span class="pill">含まれる内容</span>
-            <p class="text">素材説明、調合体験、完成品持ち帰り、レシピ保存</p>
-          </div>
-          <div class="review"><span class="pill">注意事項</span>
-            <ul class="list">
-              <li>予約時間の10分前までにご来店ください</li>
-              <li>香りに敏感な方は事前にご相談ください</li>
-              <li>英語対応可能です</li>
-            </ul>
-          </div>
+          <div class="review" style="margin-bottom:16px"><span class="pill">プラン</span><h3 th:text="${program != null ? program.name : '香りづくり体験'}">香りづくり体験</h3><p class="text"><span th:text="${program != null ? program.durationMinutes + '分' : '約90分'}">約90分</span> / <span th:text="${program != null ? '¥' + #numbers.formatDecimal(program.price, 0, 'COMMA', 0, 'POINT') + '〜' : '¥5,500〜'}">¥5,500〜</span> / EN・JP対応</p></div>
+          <div class="review" style="margin-bottom:16px"><span class="pill">含まれる内容</span><p class="text">素材説明、調合体験、完成品持ち帰り、レシピ保存。</p></div>
+          <div class="review"><span class="pill">注意事項</span><ul class="list"><li>予約時間の10分前までにご来店ください。</li><li>香りに敏感な方は事前にご相談ください。</li><li>英語対応可能です。</li></ul></div>
         </div>
       </div>
     </section>
   </main>
-  <footer class="footer">
-    <div class="container footer-grid">
-      <div><strong>Booking Mockup</strong></div>
-      <div><a th:href="@{/experience}">Experience</a></div>
-      <div><a th:href="@{/reservation}">Complete</a></div>
-    </div>
-  </footer>
+  <footer class="footer"><div class="container footer-grid"><div><strong>Aroma Trip Nippon</strong><br>Booking</div><div><a th:href="@{/experience}">体験詳細</a></div><div><a th:href="@{/concept}">コンセプト</a></div></div></footer>
 </body>
 
 </html>

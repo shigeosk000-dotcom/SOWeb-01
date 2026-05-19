@@ -35,15 +35,32 @@ public class PublicController {
     return "public/index";
   }
 
+  @GetMapping({"/en", "/en/"})
+  public String indexEn(Model model) {
+    model.addAttribute("program", programs.findFirstByDeletedAtIsNullAndActiveTrueOrderById().orElse(null));
+    return "public/en/index";
+  }
+
   @GetMapping("/experience")
   public String experience(Model model) {
     model.addAttribute("program", programs.findFirstByDeletedAtIsNullAndActiveTrueOrderById().orElse(null));
     return "public/experience";
   }
 
+  @GetMapping("/en/experience")
+  public String experienceEn(Model model) {
+    model.addAttribute("program", programs.findFirstByDeletedAtIsNullAndActiveTrueOrderById().orElse(null));
+    return "public/en/experience";
+  }
+
   @GetMapping("/concept")
   public String concept() {
     return "public/concept";
+  }
+
+  @GetMapping("/en/concept")
+  public String conceptEn() {
+    return "public/en/concept";
   }
 
   @GetMapping("/reservation")
@@ -53,12 +70,33 @@ public class PublicController {
     return "public/reservation";
   }
 
+  @GetMapping("/en/reservation")
+  public String reservationEn(Model model) {
+    ReservationRequest reservationRequest = new ReservationRequest();
+    reservationRequest.setPreferredLanguage("English");
+    model.addAttribute("reservationRequest", reservationRequest);
+    model.addAttribute("program", programs.findFirstByDeletedAtIsNullAndActiveTrueOrderById().orElse(null));
+    return "public/en/reservation";
+  }
+
   @PostMapping("/reservation")
   public String createReservation(@Valid @ModelAttribute ReservationRequest reservationRequest, BindingResult errors,
       Model model, RedirectAttributes redirectAttributes) {
+    return createReservation(reservationRequest, errors, model, redirectAttributes, false);
+  }
+
+  @PostMapping("/en/reservation")
+  public String createReservationEn(@Valid @ModelAttribute ReservationRequest reservationRequest, BindingResult errors,
+      Model model, RedirectAttributes redirectAttributes) {
+    reservationRequest.setPreferredLanguage("English");
+    return createReservation(reservationRequest, errors, model, redirectAttributes, true);
+  }
+
+  private String createReservation(ReservationRequest reservationRequest, BindingResult errors,
+      Model model, RedirectAttributes redirectAttributes, boolean english) {
     if (errors.hasErrors()) {
       model.addAttribute("program", programs.findFirstByDeletedAtIsNullAndActiveTrueOrderById().orElse(null));
-      return "public/reservation";
+      return english ? "public/en/reservation" : "public/reservation";
     }
     Customer customer = new Customer();
     customer.setName(reservationRequest.getName());
@@ -75,11 +113,12 @@ public class PublicController {
       saved = reservationService.createReservation(reservation, customer);
     } catch (IllegalArgumentException ex) {
       model.addAttribute("program", programs.findFirstByDeletedAtIsNullAndActiveTrueOrderById().orElse(null));
-      model.addAttribute("errorMessage", ex.getMessage());
-      return "public/reservation";
+      model.addAttribute("errorMessage",
+          english ? "Please choose today or a future date for your reservation." : ex.getMessage());
+      return english ? "public/en/reservation" : "public/reservation";
     }
     redirectAttributes.addAttribute("id", saved.getId());
-    return "redirect:/reservation/complete/{id}";
+    return english ? "redirect:/en/reservation/complete/{id}" : "redirect:/reservation/complete/{id}";
   }
 
   @GetMapping("/reservation/complete/{id}")
@@ -87,5 +126,12 @@ public class PublicController {
     reservations.findById(id).filter(reservation -> !reservation.isDeleted())
         .ifPresent(reservation -> model.addAttribute("reservation", reservation));
     return "public/reservation-complete";
+  }
+
+  @GetMapping("/en/reservation/complete/{id}")
+  public String completeEn(@PathVariable Long id, Model model) {
+    reservations.findById(id).filter(reservation -> !reservation.isDeleted())
+        .ifPresent(reservation -> model.addAttribute("reservation", reservation));
+    return "public/en/reservation-complete";
   }
 }

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Booking | Aroma Trip Nippon</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+  <script th:src="@{/js/reservation.js}" defer></script>
+</head>
+
+<body class="site-en">
+  <header class="header">
+    <div class="container header-inner">
+      <a class="brand" th:href="@{/en/}"><img class="brand-logo" th:src="@{/assets/images/LOGO.png}" alt="Aroma Trip Nippon" /></a>
+      <nav class="nav"><a th:href="@{/en/concept}">Concept</a><a th:href="@{/en/experience}">Experience</a><a th:href="@{/en/reservation}">Booking</a></nav>
+      <div class="header-actions"><div class="lang-switch"><a th:href="@{/reservation}">JP</a><a class="active" th:href="@{/en/reservation}">EN</a></div><a class="btn" th:href="@{/en/reservation}">Book Experience</a></div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="breadcrumbs"><a th:href="@{/en/}">Top</a> / <a th:href="@{/en/experience}">Experience</a> / <span>Booking</span></div>
+    <section class="hero">
+      <div class="grid-2">
+        <div class="card form-card">
+          <div class="kicker">BOOKING</div>
+          <p class="jp-note">予約フォーム</p>
+          <h1>Book your experience.</h1>
+          <p class="lead">Choose your date, time, and party size. Your booking will be registered in the same reservation
+            system as the Japanese site.</p>
+          <p class="notice" th:if="${errorMessage}" th:text="${errorMessage}"></p>
+          <form th:action="@{/en/reservation}" th:object="${reservationRequest}" method="post" data-reservation-form>
+            <input type="hidden" th:if="${_csrf != null}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+            <div class="field"><label for="date">Preferred date</label><input id="date" type="date" th:field="*{visitDate}" lang="en" aria-describedby="date-format" required /><span class="field-hint" id="date-format">Format: YYYY-MM-DD</span></div>
+            <div class="field"><label for="time">Time</label><select id="time" th:field="*{timeSlot}" required>
+                <option value="10:00">10:00</option>
+                <option value="13:00">13:00</option>
+                <option value="16:00">16:00</option>
+              </select></div>
+            <div class="field"><label for="people">Guests</label><select id="people" th:field="*{guestCount}" required>
+                <option value="1">1 guest</option>
+                <option value="2">2 guests</option>
+                <option value="3">3 guests</option>
+                <option value="4">4 guests</option>
+              </select></div>
+            <div class="field"><label for="name">Name</label><input id="name" type="text" th:field="*{name}" placeholder="Jane Smith" required /></div>
+            <div class="field"><label for="email">Email</label><input id="email" type="email" th:field="*{email}" placeholder="name@example.com" required /></div>
+            <div class="field"><label for="lang">Preferred language</label><select id="lang" th:field="*{preferredLanguage}">
+                <option value="English">English</option>
+                <option value="Japanese">Japanese</option>
+              </select></div>
+            <div class="field"><label for="request">Requests or notes</label><textarea id="request" cols="50" rows="3" th:field="*{requestNote}" placeholder="Please tell us about allergies, accessibility needs, or anything we should know."></textarea></div>
+            <p class="notice" th:if="${#fields.hasErrors('*')}">Please check the required fields and try again.</p>
+            <div class="spacer"></div>
+            <button class="btn" type="submit">Submit Reservation</button>
+          </form>
+        </div>
+        <div class="card form-card">
+          <h2>Reservation details</h2>
+          <div class="review" style="margin-bottom:16px"><span class="pill">Plan</span>
+            <h3 th:text="${program != null ? program.name : 'Fragrance-making experience'}">Fragrance-making experience</h3>
+            <p class="text"><span th:text="${program != null ? program.durationMinutes + ' min' : 'Approx. 90 min'}">Approx. 90 min</span> / <span th:text="${program != null ? 'From ¥' + #numbers.formatDecimal(program.price, 0, 'COMMA', 0, 'POINT') : 'From ¥5,500'}">From ¥5,500</span> / English and Japanese support</p>
+          </div>
+          <div class="review" style="margin-bottom:16px"><span class="pill">Included</span>
+            <p class="text">Ingredient introduction, fragrance blending, finished fragrance bottle, and recipe record.</p>
+          </div>
+          <div class="review"><span class="pill">Before you visit</span>
+            <ul class="list">
+              <li>Please arrive 10 minutes before your reservation time.</li>
+              <li>Tell us in advance if you are sensitive to fragrances.</li>
+              <li>English guidance is available.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div><strong>Aroma Trip Nippon</strong><br>Booking</div>
+      <div><a th:href="@{/en/experience}">Experience</a></div>
+      <div><a th:href="@{/en/concept}">Concept</a></div>
+    </div>
+  </footer>
+</body>
+
+</html>

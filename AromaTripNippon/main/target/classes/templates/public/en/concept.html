@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Concept | Aroma Trip Nippon</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+
+<body class="site-en">
+  <header class="header">
+    <div class="container header-inner">
+      <a class="brand" th:href="@{/en/}"><img class="brand-logo" th:src="@{/assets/images/LOGO.png}" alt="Aroma Trip Nippon" /></a>
+      <nav class="nav"><a th:href="@{/en/concept}">Concept</a><a th:href="@{/en/experience}">Experience</a><a th:href="@{/en/reservation}">Booking</a></nav>
+      <div class="header-actions"><div class="lang-switch"><a th:href="@{/concept}">JP</a><a class="active" th:href="@{/en/concept}">EN</a></div><a class="btn" th:href="@{/en/reservation}">Book Experience</a></div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="breadcrumbs"><a th:href="@{/en/}">Top</a> / <span>Concept</span></div>
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="card" style="padding:32px">
+          <div class="kicker">ABOUT / CONCEPT</div>
+          <p class="jp-note">和香巡りとは</p>
+          <h1>A journey carried by scent.</h1>
+          <p class="lead">Aroma Trip Nippon is a fragrance-making experience for travelers who want to meet Japan
+            through regional botanicals, quiet stories, and personal memory.</p>
+          <p class="text">The English site keeps the same layout, color palette, and visual rhythm as the Japanese
+            site, while making the service easy to understand and book for international guests.</p>
+        </div>
+        <div class="card" style="padding:0;overflow:hidden">
+          <div class="pro-slider concept-box" data-interval="5000" aria-label="Regional inspiration slideshow">
+            <div class="pro-slider__slide is-active"><img th:src="@{/assets/images/concept_edo.png}" alt="Edo inspiration" class="pro-slider__media" /></div>
+            <div class="pro-slider__slide"><img th:src="@{/assets/images/concept_kanazawa.png}" alt="Kanazawa inspiration" class="pro-slider__media" /></div>
+            <div class="pro-slider__slide"><img th:src="@{/assets/images/concept_noto.png}" alt="Noto inspiration" class="pro-slider__media" /></div>
+            <div class="pro-slider__slide"><img th:src="@{/assets/images/concept_tosa.png}" alt="Tosa inspiration" class="pro-slider__media" /></div>
+            <button class="pro-slider__nav pro-slider__nav--prev" type="button" aria-label="Previous slide"></button>
+            <button class="pro-slider__nav pro-slider__nav--next" type="button" aria-label="Next slide"></button>
+            <div class="pro-slider__dots"><button class="pro-slider__dot is-active" type="button" aria-label="Slide 1" aria-selected="true"></button><button class="pro-slider__dot" type="button" aria-label="Slide 2" aria-selected="false"></button><button class="pro-slider__dot" type="button" aria-label="Slide 3" aria-selected="false"></button><button class="pro-slider__dot" type="button" aria-label="Slide 4" aria-selected="false"></button></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="grid-2">
+        <div class="card" style="padding:24px">
+          <h2>Fragrance as a travel memory</h2>
+          <p class="quote">A scent you create, a journey you can take home.</p>
+          <p class="text">Guests learn about Japanese ingredients, compare scent profiles, and blend a personal
+            fragrance that reflects their trip.</p>
+        </div>
+        <div class="card" style="padding:24px">
+          <h2>Designed for English-speaking guests</h2>
+          <p class="text">Navigation, explanations, form labels, validation guidance, and completion details are
+            available in English, while the reservation is stored in the same management system.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="card" style="padding:24px">
+        <h2>Regional stories</h2>
+        <p class="text">The experience presents places such as Noto, Tosa, Kanazawa, and Edo not as tourist labels, but
+          as scent stories expressed through woods, citrus, herbs, and cultural memory.</p>
+        <div class="spacer"></div><a class="btn" th:href="@{/en/experience}">View Experience</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div><strong>Aroma Trip Nippon</strong><br>Concept page</div>
+      <div><a th:href="@{/en/experience}">Experience</a></div>
+      <div><a th:href="@{/en/reservation}">Book Now</a></div>
+    </div>
+  </footer>
+  <script th:src="@{/js/slider.js}" defer></script>
+</body>
+
+</html>

@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aroma Trip Nippon / 和香巡り | JP-EN Full Mockup</title>
+  <style>
+    :root {
+      --bg: #f7f1e8;
+      --paper: #fffaf2;
+      --paper-2: #fbf6ee;
+      --ink: #2c2520;
+      --muted: #72675c;
+      --line: #e2d4c1;
+      --accent: #8b6a43;
+      --accent-2: #b99a72;
+      --accent-dark: #3f3328;
+      --soft: #eadfce;
+      --white: #ffffff;
+      --shadow: 0 18px 42px rgba(69, 52, 35, 0.13);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans JP", "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.75;
+    }
+
+    body[data-lang="en"] { font-family: "Noto Sans", "Helvetica Neue", Arial, sans-serif; }
+
+    img { display: block; width: 100%; height: auto; }
+    a { color: inherit; text-decoration: none; }
+
+    .container { width: min(1120px, calc(100% - 32px)); margin: 0 auto; }
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(247, 241, 232, 0.92);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(12px);
+    }
+
+    .header-inner {
+      min-height: 76px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .brand { display: flex; flex-direction: column; line-height: 1.2; letter-spacing: 0.08em; }
+    .brand-main { font-family: Georgia, "Times New Roman", serif; font-size: 21px; font-weight: 700; }
+    .brand-sub { margin-top: 5px; color: var(--muted); font-size: 12px; letter-spacing: 0.18em; }
+
+    .nav { display: flex; align-items: center; justify-content: center; gap: 26px; color: var(--muted); font-size: 14px; }
+    .nav a { padding: 8px 0; border-bottom: 1px solid transparent; }
+    .nav a:hover { color: var(--accent-dark); border-color: var(--accent); }
+
+    .header-actions { display: flex; align-items: center; justify-content: flex-end; gap: 12px; }
+
+    .lang-switch { display: inline-flex; overflow: hidden; border: 1px solid var(--line); border-radius: 999px; background: rgba(255,255,255,.45); }
+    .lang-switch a { min-width: 42px; padding: 7px 10px; color: var(--muted); font-size: 12px; font-weight: 700; text-align: center; }
+    .lang-switch a.active { background: var(--accent-dark); color: var(--white); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 10px 22px;
+      border: 1px solid var(--accent-dark);
+      border-radius: 999px;
+      background: var(--accent-dark);
+      color: var(--white);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      transition: 0.2s ease;
+      cursor: pointer;
+    }
+
+    .btn:hover { transform: translateY(-1px); box-shadow: 0 10px 22px rgba(63, 51, 40, 0.18); }
+    .btn.secondary { background: transparent; color: var(--accent-dark); }
+    .btn.light { background: var(--white); color: var(--accent-dark); border-color: var(--white); }
+
+    .mock-note {
+      background: var(--accent-dark);
+      color: rgba(255,255,255,.88);
+      font-size: 13px;
+      text-align: center;
+      padding: 8px 16px;
+    }
+
+    .mock-note strong { color: var(--white); }
+
+    .page { display: none; }
+    .page.active { display: block; }
+
+    .hero { padding: 56px 0 44px; }
+    .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 30px; align-items: stretch; }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .card--pad { padding: 34px; }
+
+    .visual-card {
+      height: 520px;
+      min-height: 520px;
+      position: relative;
+      background: #b99a72;
+      isolation: isolate;
+    }
+
+    .hero-slideshow {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transform: scale(1.02);
+      transition: opacity 1.2s ease, transform 6s ease;
+    }
+
+    .hero-slide.active {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .hero-slideshow::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        linear-gradient(180deg, rgba(35, 28, 22, 0.05), rgba(35, 28, 22, 0.26)),
+        linear-gradient(90deg, rgba(35, 28, 22, 0.34), transparent 56%),
+        linear-gradient(0deg, rgba(35, 28, 22, 0.42), transparent 42%);
+      pointer-events: none;
+    }
+
+    .slideshow-dots {
+      position: absolute;
+      left: 34px;
+      bottom: 22px;
+      z-index: 3;
+      display: flex;
+      gap: 8px;
+    }
+
+    .slideshow-dot {
+      width: 7px;
+      height: 7px;
+      border: 0;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.42);
+      padding: 0;
+      cursor: pointer;
+      transition: width 0.25s ease, background 0.25s ease;
+    }
+
+    .slideshow-dot.active {
+      width: 22px;
+      background: rgba(255, 255, 255, 0.88);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-slide { transition: none; transform: none; }
+    }
+
+    .visual-card::after {
+      content: "";
+      position: absolute;
+      inset: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      border-radius: 20px;
+      pointer-events: none;
+    }
+
+    .visual-caption { position: absolute; left: 34px; bottom: 46px; right: 34px; z-index: 3; color: var(--white); text-shadow: 0 2px 16px rgba(35, 28, 22, 0.38); }
+    .visual-caption small { display: block; letter-spacing: 0.25em; opacity: 0.88; }
+    .visual-caption strong { display: block; margin-top: 8px; font-family: Georgia, "Times New Roman", serif; font-size: 34px; line-height: 1.25; }
+
+    .kicker { color: var(--accent); font-size: 12px; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase; }
+
+    h1, h2, h3 { margin: 0; font-family: Georgia, "Times New Roman", serif; line-height: 1.25; letter-spacing: 0.01em; }
+    h1 { margin-top: 18px; font-size: clamp(44px, 6vw, 76px); }
+    h2 { font-size: clamp(30px, 4vw, 44px); }
+    h3 { font-size: 24px; }
+
+    .jp-note { margin: 12px 0 0; color: var(--accent); font-size: 14px; letter-spacing: 0.14em; }
+    .en-note { margin: 12px 0 0; color: var(--accent); font-size: 14px; letter-spacing: 0.08em; }
+    .lead { margin: 24px 0 0; color: var(--ink); font-size: 21px; line-height: 1.8; }
+    .text { margin: 14px 0 0; color: var(--muted); font-size: 15px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+
+    .info-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 28px; }
+    .info-card { padding: 18px; border: 1px solid var(--line); border-radius: 18px; background: rgba(255, 255, 255, 0.55); }
+    .pill { display: inline-flex; width: fit-content; padding: 5px 12px; border-radius: 999px; background: var(--soft); color: var(--accent-dark); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; }
+    .info-card h3 { margin-top: 8px; font-size: 18px; font-family: "Noto Sans JP", "Noto Sans", "Helvetica Neue", Arial, sans-serif; }
+
+    .section { padding: 64px 0; }
+    .section.alt { background: var(--paper-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .section-head { display: flex; justify-content: space-between; gap: 24px; align-items: end; margin-bottom: 28px; }
+    .section-head .text { max-width: 440px; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+    .story-image {
+      min-height: 360px;
+      background:
+        radial-gradient(circle at 26% 22%, rgba(255,255,255,.6), transparent 24%),
+        linear-gradient(145deg, #d7c5ad, #f5eadb 50%, #a99173);
+    }
+
+    .material-thumb {
+      aspect-ratio: 4 / 3;
+      background:
+        radial-gradient(circle at 50% 42%, rgba(255,255,255,.8), transparent 16%),
+        linear-gradient(135deg, #e9dcc9, #cbb79c);
+      display: grid;
+      place-items: center;
+      color: var(--accent);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 20px;
+      letter-spacing: .1em;
+    }
+
+    .material-body { padding: 22px; }
+    .material-body h3 { margin-top: 10px; }
+    .name-pair { display: flex; justify-content: space-between; gap: 10px; align-items: center; margin-bottom: 6px; }
+    .jp-small { color: var(--muted); font-size: 13px; letter-spacing: 0.12em; white-space: nowrap; }
+
+    .flow-list { display: grid; gap: 14px; margin-top: 20px; }
+    .step { display: grid; grid-template-columns: 60px 1fr; gap: 16px; padding: 20px; border: 1px solid var(--line); border-radius: 18px; background: rgba(255, 255, 255, 0.5); }
+    .step-num { color: var(--accent); font-family: Georgia, "Times New Roman", serif; font-size: 30px; line-height: 1; }
+
+    .review-list { display: grid; gap: 16px; margin-top: 22px; }
+    .review { padding: 20px; border-radius: 18px; background: rgba(234, 223, 206, 0.55); }
+
+    .cta-band {
+      border-radius: 28px;
+      background: linear-gradient(135deg, rgba(63, 51, 40, 0.98), rgba(139, 106, 67, 0.92));
+      color: var(--white);
+      padding: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .cta-band .text, .cta-band .jp-note, .cta-band .en-note { color: rgba(255, 255, 255, 0.82); }
+
+    .shop-info { margin: 24px 0 0; }
+    .shop-info div { display: grid; grid-template-columns: 90px 1fr; padding: 12px 0; border-bottom: 1px solid var(--line); }
+    .shop-info dt { color: var(--accent); font-weight: 700; }
+    .shop-info dd { margin: 0; color: var(--muted); }
+
+    .form-grid { display: grid; gap: 16px; margin-top: 24px; }
+    .field { display: grid; gap: 7px; }
+    label { color: var(--accent-dark); font-size: 13px; font-weight: 700; }
+    input, select, textarea { width: 100%; border: 1px solid var(--line); border-radius: 14px; background: rgba(255,255,255,.72); padding: 13px 14px; font: inherit; color: var(--ink); }
+    textarea { min-height: 110px; resize: vertical; }
+
+    .page-title { padding: 56px 0 28px; }
+    .page-title h1 { font-size: clamp(40px, 5vw, 64px); }
+
+    .footer { margin-top: 32px; border-top: 1px solid var(--line); background: var(--paper); color: var(--muted); }
+    .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 24px; padding: 36px 0; font-size: 14px; }
+    .footer a { display: inline-block; margin: 2px 0; }
+
+    @media (max-width: 920px) {
+      .header-inner { grid-template-columns: 1fr auto; }
+      .nav { order: 3; grid-column: 1 / -1; overflow-x: auto; justify-content: flex-start; padding-bottom: 12px; }
+      .hero-grid, .grid-2, .grid-3, .footer-grid { grid-template-columns: 1fr; }
+      .visual-card { height: 380px; min-height: 380px; }
+      .info-row { grid-template-columns: 1fr; }
+      .section-head, .cta-band { display: block; }
+      .cta-band .btn { margin-top: 22px; }
+    }
+
+    @media (max-width: 560px) {
+      .header-actions .btn { display: none; }
+      .card--pad, .cta-band { padding: 24px; }
+      .step { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body data-lang="ja">
+
+  <header class="header">
+    <div class="container header-inner">
+      <a class="brand" href="#/jp/" data-route="home" aria-label="Home">
+        <span class="brand-main" data-brand-main>JapaneseAroma 香作</span>
+        <span class="brand-sub" data-brand-sub>和香巡り</span>
+      </a>
+      <nav class="nav" aria-label="Global navigation">
+        <a href="#/jp/concept/" data-nav="concept">コンセプト</a>
+        <a href="#/jp/experience/" data-nav="experience">体験詳細</a>
+        <a href="#/jp/reservation/" data-nav="reservation">予約</a>
+      </nav>
+      <div class="header-actions">
+        <div class="lang-switch" aria-label="Language switch">
+          <a href="#/jp/" data-lang-link="jp" class="active">JP</a>
+          <a href="#/en/" data-lang-link="en">EN</a>
+        </div>
+        <a class="btn" href="#/jp/reservation/" data-book>予約する</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="page-jp-home" class="page active" data-lang="jp" data-page="home">
+      <div class="hero">
+        <div class="container hero-grid">
+          <div class="card visual-card">
+            <div class="hero-slideshow" data-slideshow aria-label="Fragrance-making experience slideshow">
+              <img class="hero-slide active" src="assets/slideshow-01-choose.png" alt="多国籍のゲストが香りの素材を選んでいる様子" loading="eager">
+              <img class="hero-slide" src="assets/slideshow-02-mix.png" alt="ゲストがスポイトで香料を混ぜている様子" loading="lazy">
+              <img class="hero-slide" src="assets/slideshow-03-test.png" alt="完成に近い香りを試している様子" loading="lazy">
+              <img class="hero-slide" src="assets/slideshow-04-share.png" alt="他の人が作った香りも試して楽しむ様子" loading="lazy">
+              <img class="hero-slide" src="assets/slideshow-05-bottle.png" alt="持ち帰り容器に香りを詰めている様子" loading="lazy">
+            </div>
+            <div class="slideshow-dots" aria-hidden="true">
+              <button class="slideshow-dot active" type="button"></button>
+              <button class="slideshow-dot" type="button"></button>
+              <button class="slideshow-dot" type="button"></button>
+              <button class="slideshow-dot" type="button"></button>
+              <button class="slideshow-dot" type="button"></button>
+            </div>
+            <div class="visual-caption"><small>TOKYO / JAPAN</small><strong>日本の香りと出会う、静かな時間。</strong></div>
+          </div>
+          <div class="card card--pad">
+            <div class="kicker">WAKOU MEGURI</div>
+            <p class="en-note">Travel Japan Through Scent.</p>
+            <h1>香りで、<br>日本を巡る。</h1>
+            <p class="lead">旅の記憶を、香りとして持ち帰る。</p>
+            <p class="text">日本各地の素材の物語に触れながら、自分だけのフレグランスを作る東京の体験。</p>
+            <div class="actions"><a class="btn" href="#/jp/reservation/">予約する</a><a class="btn secondary" href="#/jp/concept/">コンセプトを読む</a></div>
+            <div class="info-row"><div class="info-card"><span class="pill">時間</span><h3>約90分</h3></div><div class="info-card"><span class="pill">料金</span><h3>¥5,500〜</h3></div><div class="info-card"><span class="pill">言語</span><h3>EN / JP</h3></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="section alt"><div class="container grid-2"><div class="card card--pad"><div class="kicker">Brand Story</div><p class="en-note">A journey carried by scent.</p><h2>香りは、旅の記憶を連れて帰る。</h2><p class="text">和香巡りは、日本各地の自然素材を手がかりに、その土地の空気や物語を感じながら香りを作る体験です。</p><div class="actions"><a class="btn secondary" href="#/jp/concept/">詳しく見る</a></div></div><div class="card story-image"></div></div></div>
+      <div class="section"><div class="container"><div class="section-head"><div><div class="kicker">Japanese Ingredients</div><p class="en-note">Scents you will meet.</p><h2>出会う日本素材</h2></div><p class="text">英語版でも同じ素材名・同じ色味を使用し、相互移動してもブランドの印象が変わらない設計にします。</p></div><div class="grid-3"><article class="card"><div class="material-thumb">HIBA</div><div class="material-body"><div class="name-pair"><span class="pill">能登ひば</span><span class="jp-small">Noto Hiba</span></div><h3>森の奥行き</h3><p class="text">静かな森を思わせる、落ち着いたウッディノート。</p></div></article><article class="card"><div class="material-thumb">YUZU</div><div class="material-body"><div class="name-pair"><span class="pill">国造ゆず</span><span class="jp-small">Kokuzo Yuzu</span></div><h3>明るい余韻</h3><p class="text">旅の高揚感に寄り添う、軽やかな柑橘の香り。</p></div></article><article class="card"><div class="material-thumb">MINT</div><div class="material-body"><div class="name-pair"><span class="pill">和薄荷</span><span class="jp-small">Japanese Mint</span></div><h3>澄んだ清涼感</h3><p class="text">記憶に残る、やわらかな清涼感。</p></div></article></div></div></div>
+      <div class="section"><div class="container"><div class="cta-band"><div><div class="kicker">Booking</div><p class="en-note">Create your own scent in Tokyo.</p><h2>東京で、自分だけの香りを作る。</h2><p class="text">空き状況を確認し、ご希望の日程でご予約ください。</p></div><a class="btn light" href="#/jp/reservation/">予約へ進む</a></div></div></div>
+    </section>
+
+    <section id="page-en-home" class="page" data-lang="en" data-page="home">
+      <div class="hero">
+        <div class="container hero-grid">
+          <div class="card visual-card">
+            <div class="hero-slideshow" data-slideshow aria-label="Fragrance-making experience slideshow">
+              <img class="hero-slide active" src="assets/slideshow-01-choose.png" alt="多国籍のゲストが香りの素材を選んでいる様子" loading="eager">
+              <img class="hero-slide" src="assets/slideshow-02-mix.png" alt="ゲストがスポイトで香料を混ぜている様子" loading="lazy">
+              <img class="hero-slide" src="assets/slideshow-03-test.png" alt="完成に近い香りを試している様子" loading="lazy">
+              <img class="hero-slide" src="assets/slideshow-04-share.png" alt="他の人が作った香りも試して楽しむ様子" loading="lazy">
+              <img class="hero-slide" src="assets/slideshow-05-bottle.png" alt="持ち帰り容器に香りを詰めている様子" loading="lazy">
+            </div>
+            <div class="slideshow-dots" aria-hidden="true">
+              <button class="slideshow-dot active" type="button"></button>
+              <button class="slideshow-dot" type="button"></button>
+              <button class="slideshow-dot" type="button"></button>
+              <button class="slideshow-dot" type="button"></button>
+              <button class="slideshow-dot" type="button"></button>
+            </div>
+            <div class="visual-caption"><small>TOKYO / JAPAN</small><strong>A quiet journey through Japanese aroma.</strong></div>
+          </div>
+          <div class="card card--pad">
+            <div class="kicker">WAKOU MEGURI</div>
+            <p class="jp-note">香りで、日本を巡る。</p>
+            <h1>Travel Japan<br>Through Scent.</h1>
+            <p class="lead">Create your own fragrance in Tokyo, inspired by regional Japanese ingredients and the stories behind them.</p>
+            <p class="text">Take home the memory of your journey as a personal scent. Japanese names remain visible to preserve the quiet cultural atmosphere of the approved design.</p>
+            <div class="actions"><a class="btn" href="#/en/reservation/">Book Now</a><a class="btn secondary" href="#/en/concept/">Read the Concept</a></div>
+            <div class="info-row"><div class="info-card"><span class="pill">Duration</span><h3>Approx. 90 min</h3></div><div class="info-card"><span class="pill">Price</span><h3>From ¥5,500</h3></div><div class="info-card"><span class="pill">Language</span><h3>English / 日本語</h3></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="section alt"><div class="container grid-2"><div class="card card--pad"><div class="kicker">Brand Story</div><p class="jp-note">ブランドストーリー</p><h2>A fragrance experience shaped by Japanese places.</h2><p class="text">Wakou Meguri is built around natural ingredients from regions across Japan. Guests encounter the stories, landscapes, and moods behind each scent.</p><div class="actions"><a class="btn secondary" href="#/en/concept/">Learn More</a></div></div><div class="card story-image"></div></div></div>
+      <div class="section"><div class="container"><div class="section-head"><div><div class="kicker">Japanese Ingredients</div><p class="jp-note">日本素材の紹介</p><h2>Scents you will meet.</h2></div><p class="text">The English page uses the same color palette, rhythm, cards, and spacing as the Japanese page, so moving between languages feels seamless.</p></div><div class="grid-3"><article class="card"><div class="material-thumb">HIBA</div><div class="material-body"><div class="name-pair"><span class="pill">Noto Hiba</span><span class="jp-small">能登ひば</span></div><h3>Calm forest depth</h3><p class="text">A refined woody note that evokes quiet forests and a grounded, peaceful mood.</p></div></article><article class="card"><div class="material-thumb">YUZU</div><div class="material-body"><div class="name-pair"><span class="pill">Kokuzo Yuzu</span><span class="jp-small">国造ゆず</span></div><h3>Bright citrus afterglow</h3><p class="text">A light and refreshing citrus note that matches the uplifting feeling of travel.</p></div></article><article class="card"><div class="material-thumb">MINT</div><div class="material-body"><div class="name-pair"><span class="pill">Japanese Mint</span><span class="jp-small">和薄荷</span></div><h3>Soft, clear freshness</h3><p class="text">A gentle cooling scent that leaves a clean and memorable impression.</p></div></article></div></div></div>
+      <div class="section"><div class="container"><div class="cta-band"><div><div class="kicker">Booking</div><p class="jp-note">東京で、自分だけの香りを作る</p><h2>Create your own scent in Tokyo.</h2><p class="text">Check availability, choose your date, and reserve your fragrance-making experience.</p></div><a class="btn light" href="#/en/reservation/">Go to Booking</a></div></div></div>
+    </section>
+
+    <section id="page-jp-concept" class="page" data-lang="jp" data-page="concept">
+      <div class="container page-title"><div class="kicker">Concept</div><p class="en-note">A journey carried by scent.</p><h1>コンセプト</h1></div>
+      <div class="section"><div class="container grid-2"><div class="card card--pad"><h2>香りを通じて、日本の土地と記憶に触れる。</h2><p class="text">このページは日本語版の承認済みデザインを基準に、英語版でも同じ余白・色・カード設計を使う想定です。</p><p class="text">言語が変わっても、写真・背景色・ボタン・見出しの階層は揃えることで、ブランド体験を統一します。</p></div><div class="card story-image"></div></div></div>
+      <div class="section alt"><div class="container"><div class="cta-band"><div><h2>英語版コンセプトへ移動して比較</h2><p class="text">同じフレームのまま、英語コピーと日本語サブ表記に切り替わります。</p></div><a class="btn light" href="#/en/concept/">View in English</a></div></div></div>
+    </section>
+
+    <section id="page-en-concept" class="page" data-lang="en" data-page="concept">
+      <div class="container page-title"><div class="kicker">Concept</div><p class="jp-note">コンセプト</p><h1>A journey carried by scent.</h1></div>
+      <div class="section"><div class="container grid-2"><div class="card card--pad"><h2>Touch the memory of Japanese places through aroma.</h2><p class="text">This English page keeps the approved Japanese framework: the same spacing, color palette, card shapes, and calm visual rhythm.</p><p class="text">Instead of over-localizing the design, the English copy explains the experience while preserving Japanese cultural cues.</p></div><div class="card story-image"></div></div></div>
+      <div class="section alt"><div class="container"><div class="cta-band"><div><h2>Compare with the Japanese concept page</h2><p class="text">The layout stays identical, while the main and sub-language hierarchy changes.</p></div><a class="btn light" href="#/jp/concept/">日本語で見る</a></div></div></div>
+    </section>
+
+    <section id="page-jp-experience" class="page" data-lang="jp" data-page="experience">
+      <div class="container page-title"><div class="kicker">Experience</div><p class="en-note">Simple, calm, and memorable.</p><h1>体験詳細</h1></div>
+      <div class="section"><div class="container grid-2"><div class="card card--pad"><h2>約90分の香りづくり体験</h2><div class="flow-list"><div class="step"><div class="step-num">01</div><div><h3>素材を知る</h3><p class="text">日本素材の背景と香りの印象を知る。</p></div></div><div class="step"><div class="step-num">02</div><div><h3>自分の香りを作る</h3><p class="text">好きな香りを選び、レシピを組み立てる。</p></div></div><div class="step"><div class="step-num">03</div><div><h3>思い出として持ち帰る</h3><p class="text">完成した香りを旅の記憶として持ち帰る。</p></div></div></div></div><div class="card card--pad"><h2>体験情報</h2><dl class="shop-info"><div><dt>時間</dt><dd>約90分</dd></div><div><dt>料金</dt><dd>¥5,500〜</dd></div><div><dt>言語</dt><dd>英語 / 日本語</dd></div></dl><div class="actions"><a class="btn" href="#/jp/reservation/">予約する</a><a class="btn secondary" href="#/en/experience/">English</a></div></div></div></div>
+    </section>
+
+    <section id="page-en-experience" class="page" data-lang="en" data-page="experience">
+      <div class="container page-title"><div class="kicker">Experience</div><p class="jp-note">体験詳細</p><h1>Simple, calm, and memorable.</h1></div>
+      <div class="section"><div class="container grid-2"><div class="card card--pad"><h2>A 90-minute fragrance-making experience</h2><div class="flow-list"><div class="step"><div class="step-num">01</div><div><h3>Discover the ingredients</h3><p class="jp-note">素材を知る</p><p class="text">Learn the stories and scent profiles behind Japanese regional botanicals.</p></div></div><div class="step"><div class="step-num">02</div><div><h3>Create your own scent</h3><p class="jp-note">自分の香りを作る</p><p class="text">Choose your favorite notes and blend them into a personal fragrance recipe.</p></div></div><div class="step"><div class="step-num">03</div><div><h3>Take the memory home</h3><p class="jp-note">思い出として持ち帰る</p><p class="text">Bring home your fragrance as a keepsake of your journey through Japan.</p></div></div></div></div><div class="card card--pad"><h2>Experience details</h2><dl class="shop-info"><div><dt>Duration</dt><dd>Approx. 90 min</dd></div><div><dt>Price</dt><dd>From ¥5,500</dd></div><div><dt>Language</dt><dd>English / Japanese</dd></div></dl><div class="actions"><a class="btn" href="#/en/reservation/">Book Now</a><a class="btn secondary" href="#/jp/experience/">日本語</a></div></div></div></div>
+    </section>
+
+    <section id="page-jp-reservation" class="page" data-lang="jp" data-page="reservation">
+      <div class="container page-title"><div class="kicker">Booking</div><p class="en-note">Create your own scent in Tokyo.</p><h1>予約</h1></div>
+      <div class="section"><div class="container grid-2"><div class="card card--pad"><h2>ご予約フォーム</h2><div class="form-grid"><div class="field"><label>お名前</label><input placeholder="山田 花子"></div><div class="field"><label>メールアドレス</label><input placeholder="name@example.com"></div><div class="field"><label>希望日</label><input type="date"></div><div class="field"><label>人数</label><select><option>1名</option><option>2名</option><option>3名</option></select></div><div class="field"><label>言語</label><select><option>日本語</option><option>English</option></select></div><button class="btn">送信する</button></div></div><div class="card card--pad"><h2>店舗情報</h2><dl class="shop-info"><div><dt>住所</dt><dd>東京都台東区浅草1</dd></div><div><dt>電話</dt><dd>03-000-0000</dd></div><div><dt>対応</dt><dd>日本語 / 英語</dd></div></dl><div class="actions"><a class="btn secondary" href="#/en/reservation/">English Booking</a></div></div></div></div>
+    </section>
+
+    <section id="page-en-reservation" class="page" data-lang="en" data-page="reservation">
+      <div class="container page-title"><div class="kicker">Booking</div><p class="jp-note">予約</p><h1>Book your experience.</h1></div>
+      <div class="section"><div class="container grid-2"><div class="card card--pad"><h2>Reservation form</h2><div class="form-grid"><div class="field"><label>Name</label><input placeholder="Jane Smith"></div><div class="field"><label>Email</label><input placeholder="name@example.com"></div><div class="field"><label>Preferred date</label><input type="date"></div><div class="field"><label>Guests</label><select><option>1 guest</option><option>2 guests</option><option>3 guests</option></select></div><div class="field"><label>Language</label><select><option>English</option><option>日本語</option></select></div><button class="btn">Submit Request</button></div></div><div class="card card--pad"><h2>Shop information</h2><dl class="shop-info"><div><dt>Address</dt><dd>Asakusa 1, Taito-ku, Tokyo</dd></div><div><dt>Phone</dt><dd>03-000-0000</dd></div><div><dt>Support</dt><dd>English / Japanese</dd></div></dl><div class="actions"><a class="btn secondary" href="#/jp/reservation/">日本語予約</a></div></div></div></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div><strong data-footer-brand>JapaneseAroma 香作</strong><br><span data-footer-sub>Wakou Meguri / 和香巡り</span><br>JP / EN unified color mockup.</div>
+      <div><a href="#/jp/concept/">コンセプト</a><br><a href="#/jp/experience/">体験詳細</a><br><a href="#/jp/reservation/">予約</a></div>
+      <div><a href="#/en/concept/">Concept</a><br><a href="#/en/experience/">Experience</a><br><a href="#/en/reservation/">Booking</a></div>
+    </div>
+  </footer>
+
+  <script>
+    function initSlideshows() {
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      document.querySelectorAll('[data-slideshow]').forEach(slideshow => {
+        const card = slideshow.closest('.visual-card');
+        const slides = Array.from(slideshow.querySelectorAll('.hero-slide'));
+        const dots = Array.from(card.querySelectorAll('.slideshow-dot'));
+        if (!slides.length || slideshow.dataset.ready === 'true') return;
+        slideshow.dataset.ready = 'true';
+        let current = 0;
+
+        function showSlide(index) {
+          current = (index + slides.length) % slides.length;
+          slides.forEach((slide, i) => slide.classList.toggle('active', i === current));
+          dots.forEach((dot, i) => dot.classList.toggle('active', i === current));
+        }
+
+        dots.forEach((dot, i) => dot.addEventListener('click', () => showSlide(i)));
+        if (!prefersReducedMotion) {
+          window.setInterval(() => showSlide(current + 1), 4200);
+        }
+      });
+    }
+
+    const copy = {
+      jp: {
+        brandMain: "JapaneseAroma 香作",
+        brandSub: "和香巡り",
+        nav: ["コンセプト", "体験詳細", "予約"],
+        book: "予約する",
+        footerBrand: "JapaneseAroma 香作",
+        footerSub: "Wakou Meguri / 和香巡り"
+      },
+      en: {
+        brandMain: "Aroma Trip Nippon",
+        brandSub: "Wakou Meguri / 和香巡り",
+        nav: ["Concept", "Experience", "Booking"],
+        book: "Book Experience",
+        footerBrand: "Aroma Trip Nippon",
+        footerSub: "Wakou Meguri / 和香巡り"
+      }
+    };
+
+    const pages = ["home", "concept", "experience", "reservation"];
+
+    function parseHash() {
+      const raw = window.location.hash || "#/jp/";
+      const parts = raw.replace(/^#\/?/, "").split("/").filter(Boolean);
+      const lang = parts[0] === "en" ? "en" : "jp";
+      const page = pages.includes(parts[1]) ? parts[1] : "home";
+      return { lang, page };
+    }
+
+    function routeFor(lang, page) {
+      return page === "home" ? `#/${lang}/` : `#/${lang}/${page}/`;
+    }
+
+    function render() {
+      const { lang, page } = parseHash();
+      const c = copy[lang];
+      document.body.dataset.lang = lang;
+      document.documentElement.lang = lang === "jp" ? "ja" : "en";
+
+      document.querySelectorAll(".page").forEach(el => el.classList.remove("active"));
+      const active = document.querySelector(`#page-${lang}-${page}`);
+      if (active) active.classList.add("active");
+
+      document.querySelector("[data-brand-main]").textContent = c.brandMain;
+      document.querySelector("[data-brand-sub]").textContent = c.brandSub;
+      document.querySelector("[data-book]").textContent = c.book;
+      document.querySelector("[data-book]").href = routeFor(lang, "reservation");
+      document.querySelector("[data-footer-brand]").textContent = c.footerBrand;
+      document.querySelector("[data-footer-sub]").textContent = c.footerSub;
+
+      const navTargets = ["concept", "experience", "reservation"];
+      document.querySelectorAll("[data-nav]").forEach((a, i) => {
+        a.textContent = c.nav[i];
+        a.href = routeFor(lang, navTargets[i]);
+      });
+
+      document.querySelector(".brand").href = routeFor(lang, "home");
+      document.querySelector('[data-lang-link="jp"]').href = routeFor("jp", page);
+      document.querySelector('[data-lang-link="en"]').href = routeFor("en", page);
+      document.querySelectorAll("[data-lang-link]").forEach(a => a.classList.toggle("active", a.dataset.langLink === lang));
+
+      window.scrollTo({ top: 0, behavior: "instant" });
+    }
+
+    window.addEventListener("hashchange", render);
+    render();
+    initSlideshows();
+  </script>
+</body>
+</html>
