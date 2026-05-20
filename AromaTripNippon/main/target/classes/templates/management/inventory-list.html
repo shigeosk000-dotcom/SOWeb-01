@@ -1,6 +1,0 @@
-<!DOCTYPE html><html lang="ja" xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>在庫管理</title><link rel="stylesheet" th:href="@{/css/app.css}"></head>
-<body class="admin-body"><div class="admin-layout"><div th:replace="~{management/fragments :: sidebar}"></div><main class="admin-main"><div class="page-head"><h1>在庫管理</h1><a class="btn primary" th:href="@{/management/inventory/new}">新規登録</a></div>
-<div th:replace="~{management/fragments :: pageAlert}"></div>
-<form class="panel" th:action="@{/management/inventory}" method="get"><input name="q" th:value="${q}" placeholder="品名で検索"></form>
-<table class="table"><tr><th>ID</th><th>品名</th><th>カテゴリ</th><th>在庫数</th><th>単位</th><th>操作</th></tr><tr th:each="i : ${items}"><td th:text="${i.id}"></td><td th:text="${i.itemName}"></td><td th:text="${i.category}"></td><td th:text="${i.stockQuantity}"></td><td th:text="${i.unit}"></td><td><a th:href="@{/management/inventory/{id}(id=${i.id})}">詳細</a> / <a th:href="@{/management/inventory/{id}/edit(id=${i.id})}">編集</a></td></tr></table>
-</main></div></body></html>
