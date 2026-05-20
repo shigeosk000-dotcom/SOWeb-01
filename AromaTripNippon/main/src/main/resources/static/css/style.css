@@ -1,28 +1,25 @@
 ﻿:root {
-  --bg: #f7f7f7;
-  /* ニュートラルな明るいグレー */
-  --paper: #ffffff;
-  --text: #2c2c2c;
-  /* 都会的で視認性の高い黒 */
-  --muted: #666666;
-  /* プレーンなグレー */
-  --line: #e0e0e0;
-  /* 繊細な細い線 */
-  --accent: #8b7355;
-  /* 真鍮・古道具をイメージしたゴールド系 */
-  --accent-dark: #5c4a35;
-  --soft: #f0ede9;
+  --bg: #f7f1e8;
+  --paper: #fffaf2;
+  --paper-2: #fbf6ee;
+  --ink: #2c2520;
+  --muted: #72675c;
+  --line: #e2d4c1;
+  --accent: #8b6a43;
+  --accent-2: #b99a72;
+  --accent-dark: #3f3328;
+  --soft: #eadfce;
 
-  --shadow: 0 8px 24px rgba(0, 0, 0, .08);
-  --radius: 18px;
+  --shadow: 0 18px 42px rgba(69, 52, 35, .13);
+  --radius: 24px;
   --max: 1120px;
-
-
+  --font-base: "Noto Sans JP", "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-heading: Georgia, "Times New Roman", serif;
 }
 
 /* ヘッダーの透明度を高めてより洗練された印象に */
 .header {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(247, 241, 232, 0.92);
 }
 
 .brand {
@@ -59,7 +56,7 @@
 }
 
 .cta-band {
-  background: linear-gradient(135deg, #5c4a35, #8b7355 60%, #b8a68d) !important;
+  background: linear-gradient(135deg, rgba(63, 51, 40, 0.98), rgba(139, 106, 67, 0.92));
 }
 
 
@@ -71,14 +68,18 @@ html,
 body {
   margin: 0;
   padding: 0;
-  font-family: "Noto Sans JP", "Yu Gothic", "YuGothic", "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
-  color: var(--text);
-  background: var(--bg)
+  font-family: var(--font-base);
+  color: var(--ink);
+  background: var(--bg);
+}
+
+body[data-lang="en"] {
+  font-family: var(--font-base);
 }
 
 a {
   text-decoration: none;
-  color: inherit
+  color: inherit;
 }
 
 img {
@@ -95,9 +96,9 @@ img {
   position: sticky;
   top: 0;
   z-index: 20;
-  background: rgba(255, 255, 255, .9);
+  background: rgba(247, 241, 232, 0.92);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--line)
+  border-bottom: 1px solid var(--line);
 }
 
 .header-inner {
@@ -110,7 +111,7 @@ img {
 
 .brand {
   font-weight: 800;
-  letter-spacing: .02em
+  letter-spacing: .02em;
 }
 
 .nav {
@@ -119,14 +120,14 @@ img {
   align-items: center;
   color: var(--muted);
   font-size: 14px;
-  flex-wrap: wrap
+  flex-wrap: wrap;
 }
 
 .header-actions {
   display: flex;
   gap: 10px;
   align-items: center;
-  justify-content: flex-end
+  justify-content: flex-end;
 }
 
 .lang-switch {
@@ -134,7 +135,7 @@ img {
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 999px;
-  background: #fff
+  background: rgba(255, 255, 255, 0.7);
 }
 
 .lang-switch a {
@@ -163,21 +164,27 @@ img {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: var(--accent);
+  background: var(--accent-dark);
   color: #fff;
   border-radius: 999px;
   padding: 14px 20px;
   font-weight: 700;
   box-shadow: var(--shadow);
   border: none;
-  cursor: pointer
+  cursor: pointer;
 }
 
 .btn.secondary {
+  background: transparent;
+  color: var(--accent-dark);
+  border: 1px solid var(--accent-dark);
+  box-shadow: none;
+}
+
+.btn.light {
   background: #fff;
-  color: var(--text);
-  border: 1px solid var(--line);
-  box-shadow: none
+  color: var(--accent-dark);
+  border: 1px solid #fff;
 }
 
 .hero {
@@ -216,22 +223,27 @@ img {
   letter-spacing: .08em
 }
 
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading);
+  margin: 0 0 8px;
+}
+
 h1 {
   font-size: clamp(34px, 5vw, 56px);
   line-height: 1.08;
-  margin: 10px 0 16px
+  margin: 10px 0 16px;
 }
 
 h2 {
   font-size: clamp(26px, 3vw, 36px);
   line-height: 1.2;
-  margin: 0 0 8px
 }
 
 h3 {
   font-size: 20px;
   line-height: 1.35;
-  margin: 0 0 8px
 }
 
 .lead {
