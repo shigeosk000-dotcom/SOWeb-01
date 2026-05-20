@@ -57,7 +57,8 @@
             <button class="pro-slider__nav pro-slider__nav--prev" type="button" aria-label="Previous slide"></button>
             <button class="pro-slider__nav pro-slider__nav--next" type="button" aria-label="Next slide"></button>
             <div class="pro-slider__dots">
-              <button class="pro-slider__dot is-active" type="button" aria-label="Slide 1" aria-selected="true"></button>
+              <button class="pro-slider__dot is-active" type="button" aria-label="Slide 1"
+                aria-selected="true"></button>
               <button class="pro-slider__dot" type="button" aria-label="Slide 2" aria-selected="false"></button>
               <button class="pro-slider__dot" type="button" aria-label="Slide 3" aria-selected="false"></button>
               <button class="pro-slider__dot" type="button" aria-label="Slide 4" aria-selected="false"></button>
@@ -65,7 +66,7 @@
             </div>
           </div>
         </div>
-        <div class="hero-copy card">
+        <div class="hero-copy card text-gradient">
           <div class="kicker">WAKOU MEGURI</div>
           <p class="jp-note">香りで、日本を巡る。</p>
           <h1>Travel Japan<br>Through Scent.</h1>
@@ -81,7 +82,9 @@
               <h3>Approx. 90 min</h3>
             </div>
             <div class="info-card"><span class="pill">Price</span>
-              <h3 th:text="${program != null ? 'From ¥' + #numbers.formatDecimal(program.price, 0, 'COMMA', 0, 'POINT') : 'From ¥5,500'}">From ¥5,500</h3>
+              <h3
+                th:text="${program != null ? 'From ¥' + #numbers.formatDecimal(program.price, 0, 'COMMA', 0, 'POINT') : 'From ¥5,500'}">
+                From ¥5,500</h3>
             </div>
             <div class="info-card"><span class="pill">Language</span>
               <h3>English / Japanese</h3>
@@ -93,7 +96,7 @@
 
     <section class="section">
       <div class="container grid-2">
-        <div class="card" style="padding:24px">
+        <div class="card text-gradient" style="padding:24px">
           <div class="kicker">Brand Story</div>
           <h2>A fragrance experience shaped by Japanese places.</h2>
           <p class="text">Aroma Trip Nippon introduces natural ingredients from different regions of Japan and turns
@@ -102,7 +105,8 @@
           <a class="btn secondary" th:href="@{/en/concept}">Learn More</a>
         </div>
         <div class="media-stack">
-          <img th:src="@{/assets/images/index_group_large2.png}" alt="Guests creating fragrance together" class="large" />
+          <img th:src="@{/assets/images/index_group_large2.png}" alt="Guests creating fragrance together"
+            class="large" />
         </div>
       </div>
     </section>
@@ -118,17 +122,20 @@
             the original design.</p>
         </div>
         <div class="grid-3">
-          <div class="material"><img th:src="@{/assets/images/material_hiba2.png}" alt="Noto hiba" class="material-thumb" />
+          <div class="material"><img th:src="@{/assets/images/material_hiba2.png}" alt="Noto hiba"
+              class="material-thumb" />
             <span class="pill">Noto Hiba</span>
             <h3>Calm forest depth</h3>
             <p class="text">A refined woody note that evokes a quiet walk through Japanese cedar forests.</p>
           </div>
-          <div class="material"><img th:src="@{/assets/images/material_yuzu2.png}" alt="Kokuzo yuzu" class="material-thumb" />
+          <div class="material"><img th:src="@{/assets/images/material_yuzu2.png}" alt="Kokuzo yuzu"
+              class="material-thumb" />
             <span class="pill">Kokuzo Yuzu</span>
             <h3>Bright citrus afterglow</h3>
             <p class="text">A clear citrus note that adds freshness and an uplifting travel mood.</p>
           </div>
-          <div class="material"><img th:src="@{/assets/images/material_hakka2.png}" alt="Japanese mint" class="material-thumb" />
+          <div class="material"><img th:src="@{/assets/images/material_hakka2.png}" alt="Japanese mint"
+              class="material-thumb" />
             <span class="pill">Japanese Mint</span>
             <h3>Soft, clear freshness</h3>
             <p class="text">A gentle cooling scent that leaves a clean, memorable finish.</p>
@@ -157,15 +164,16 @@
     </div>
   </footer>
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       const japaneseLink = document.querySelector('a[href="/"]');
       if (japaneseLink) {
-        japaneseLink.addEventListener('click', function() {
+        japaneseLink.addEventListener('click', function () {
           localStorage.setItem('atnPreferredLanguage', 'ja');
         });
       }
     });
   </script>
+  <script th:src="@{/js/public-nav.js}" defer></script>
   <script th:src="@{/js/slider.js}" defer></script>
 </body>
 

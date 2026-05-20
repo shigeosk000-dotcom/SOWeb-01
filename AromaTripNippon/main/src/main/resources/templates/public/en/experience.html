@@ -11,9 +11,14 @@
 <body class="site-en">
   <header class="header">
     <div class="container header-inner">
-      <a class="brand" th:href="@{/en/}"><img class="brand-logo" th:src="@{/assets/images/LOGO.png}" alt="Aroma Trip Nippon" /></a>
-      <nav class="nav"><a th:href="@{/en/concept}">Concept</a><a th:href="@{/en/experience}">Experience</a><a th:href="@{/en/reservation}">Booking</a></nav>
-      <div class="header-actions"><div class="lang-switch"><a th:href="@{/experience}">JP</a><a class="active" th:href="@{/en/experience}">EN</a></div><a class="btn" th:href="@{/en/reservation}">Book Experience</a></div>
+      <a class="brand" th:href="@{/en/}"><img class="brand-logo" th:src="@{/assets/images/LOGO.png}"
+          alt="Aroma Trip Nippon" /></a>
+      <nav class="nav"><a th:href="@{/en/concept}">Concept</a><a th:href="@{/en/experience}">Experience</a><a
+          th:href="@{/en/reservation}">Booking</a></nav>
+      <div class="header-actions">
+        <div class="lang-switch"><a th:href="@{/experience}">JP</a><a class="active" th:href="@{/en/experience}">EN</a>
+        </div><a class="btn" th:href="@{/en/reservation}">Book Experience</a>
+      </div>
     </div>
   </header>
 
@@ -21,28 +26,43 @@
     <div class="breadcrumbs"><a th:href="@{/en/}">Top</a> / <span>Experience</span></div>
     <section class="hero">
       <div class="hero-grid">
-        <div class="card" style="padding:24px">
+        <div class="card text-gradient" style="padding:24px">
           <div class="kicker">EXPERIENCE DETAIL</div>
           <p class="jp-note">香りづくり体験</p>
           <h1>A 90-minute fragrance-making workshop.</h1>
           <p class="lead">Choose Japanese ingredients, learn their stories, blend your own scent, and take the finished
             fragrance home.</p>
           <div class="meta-list">
-            <div class="info-card"><span class="pill">Duration</span><h3 th:text="${program != null ? program.durationMinutes + ' min' : 'Approx. 90 min'}">Approx. 90 min</h3></div>
-            <div class="info-card"><span class="pill">Price</span><h3 th:text="${program != null ? 'From ¥' + #numbers.formatDecimal(program.price, 0, 'COMMA', 0, 'POINT') : 'From ¥5,500'}">From ¥5,500</h3></div>
-            <div class="info-card"><span class="pill">Language</span><h3>EN / JP</h3></div>
+            <div class="info-card"><span class="pill">Duration</span>
+              <h3 th:text="${program != null ? program.durationMinutes + ' min' : 'Approx. 90 min'}">Approx. 90 min</h3>
+            </div>
+            <div class="info-card"><span class="pill">Price</span>
+              <h3
+                th:text="${program != null ? 'From ¥' + #numbers.formatDecimal(program.price, 0, 'COMMA', 0, 'POINT') : 'From ¥5,500'}">
+                From ¥5,500</h3>
+            </div>
+            <div class="info-card"><span class="pill">Language</span>
+              <h3>EN / JP</h3>
+            </div>
           </div>
           <div class="spacer"></div>
-          <div class="actions"><a class="btn" th:href="@{/en/reservation}">Book this Experience</a><a class="btn secondary" th:href="@{/en/concept}">View Concept</a></div>
+          <div class="actions"><a class="btn" th:href="@{/en/reservation}">Book this Experience</a><a
+              class="btn secondary" th:href="@{/en/concept}">View Concept</a></div>
         </div>
         <div class="card" style="padding:0;overflow:hidden">
           <div class="pro-slider exp-box" data-interval="5000" aria-label="Experience image slideshow">
-            <div class="pro-slider__slide is-active"><img th:src="@{/assets/images/exp_slide_1.png}" alt="Choosing ingredients" class="pro-slider__media" /></div>
-            <div class="pro-slider__slide"><img th:src="@{/assets/images/exp_slide_2.png}" alt="Mixing fragrance" class="pro-slider__media" /></div>
-            <div class="pro-slider__slide"><img th:src="@{/assets/images/exp_slide_3.png}" alt="Finished fragrance" class="pro-slider__media" /></div>
+            <div class="pro-slider__slide is-active"><img th:src="@{/assets/images/exp_slide_1.png}"
+                alt="Choosing ingredients" class="pro-slider__media" /></div>
+            <div class="pro-slider__slide"><img th:src="@{/assets/images/exp_slide_2.png}" alt="Mixing fragrance"
+                class="pro-slider__media" /></div>
+            <div class="pro-slider__slide"><img th:src="@{/assets/images/exp_slide_3.png}" alt="Finished fragrance"
+                class="pro-slider__media" /></div>
             <button class="pro-slider__nav pro-slider__nav--prev" type="button" aria-label="Previous slide"></button>
             <button class="pro-slider__nav pro-slider__nav--next" type="button" aria-label="Next slide"></button>
-            <div class="pro-slider__dots"><button class="pro-slider__dot is-active" type="button" aria-label="Slide 1" aria-selected="true"></button><button class="pro-slider__dot" type="button" aria-label="Slide 2" aria-selected="false"></button><button class="pro-slider__dot" type="button" aria-label="Slide 3" aria-selected="false"></button></div>
+            <div class="pro-slider__dots"><button class="pro-slider__dot is-active" type="button" aria-label="Slide 1"
+                aria-selected="true"></button><button class="pro-slider__dot" type="button" aria-label="Slide 2"
+                aria-selected="false"></button><button class="pro-slider__dot" type="button" aria-label="Slide 3"
+                aria-selected="false"></button></div>
           </div>
         </div>
       </div>
@@ -50,7 +70,7 @@
 
     <section class="section">
       <div class="grid-2">
-        <div class="card" style="padding:24px">
+        <div class="card text-gradient" style="padding:24px">
           <h2>Experience flow</h2>
           <ul class="list">
             <li>Discover the background and scent profile of Japanese botanicals.</li>
@@ -59,7 +79,7 @@
             <li>Take the finished scent home as a travel keepsake.</li>
           </ul>
         </div>
-        <div class="card" style="padding:24px">
+        <div class="card text-gradient" style="padding:24px">
           <h2>Ingredients</h2>
           <ul class="list">
             <li>Noto Hiba: calm and woody.</li>
@@ -87,6 +107,7 @@
       <div><a th:href="@{/en/reservation}">Book</a></div>
     </div>
   </footer>
+  <script th:src="@{/js/public-nav.js}" defer></script>
   <script th:src="@{/js/slider.js}" defer></script>
 </body>
 

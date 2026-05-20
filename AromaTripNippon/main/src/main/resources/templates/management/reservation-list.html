@@ -2,6 +2,7 @@
 <body class="admin-body"><div class="admin-layout"><div th:replace="~{management/fragments :: sidebar}"></div><main class="admin-main">
 <div class="page-head"><h1>予約管理</h1><a class="btn primary" th:href="@{/management/reservations/new}">新規登録</a></div>
 <div th:replace="~{management/fragments :: pageAlert}"></div>
+<form class="panel search-form" th:action="@{/management/reservations}" method="get"><input name="q" th:value="${q}" placeholder="顧客名で検索"><button class="primary" type="submit">検索</button><a class="btn primary" th:href="@{/management/reservations}">クリア</a></form>
 <table class="table"><tr><th>ID</th><th>日時</th><th>顧客</th><th>人数</th><th>状況</th><th>操作</th></tr>
 <tr th:each="r : ${reservations}" th:classappend="${r.visitDate != null and r.visitDate.isBefore(today)} ? 'reservation-expired'">
 <td th:text="${r.id}"></td><td><span th:text="${r.visitDate}"></span> <span th:text="${r.timeSlot}"></span></td><td th:text="${r.customer.name}"></td><td th:text="${r.guestCount}"></td><td th:text="${r.status}"></td>

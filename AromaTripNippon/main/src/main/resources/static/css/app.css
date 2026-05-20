@@ -95,6 +95,12 @@ input, select, textarea {
   font: inherit;
 }
 textarea { min-height: 110px; resize: vertical; }
+form.panel > button {
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
 .full { grid-column: 1 / -1; }
 .errors { color: var(--danger); }
 .page-alert {
@@ -131,6 +137,24 @@ textarea { min-height: 110px; resize: vertical; }
   text-align: left;
 }
 .admin-main { padding: 28px 0; }
+.admin-main .btn,
+.admin-main button:not(.link-button) {
+  min-height: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-color: var(--accent-dark);
+  background: var(--accent-dark);
+  color: #fff;
+  line-height: 1.2;
+}
+.admin-main .btn.danger,
+.admin-main button.danger {
+  border-color: var(--danger);
+  background: var(--danger);
+  color: #fff;
+}
 .page-head {
   display: flex;
   justify-content: space-between;
@@ -138,6 +162,24 @@ textarea { min-height: 110px; resize: vertical; }
   align-items: center;
   margin-bottom: 18px;
 }
+.search-form {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.search-form input { flex: 1; }
+.search-form button,
+.search-form .btn {
+  flex: 0 0 auto;
+  height: 44px;
+}
+.search-form .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.search-form input { height: 44px; }
 .table {
   width: 100%;
   border-collapse: collapse;
@@ -184,6 +226,7 @@ textarea { min-height: 110px; resize: vertical; }
 @media (max-width: 760px) {
   .hero, .two, .form-grid, .admin-layout { grid-template-columns: 1fr; }
   .grid, .stats { grid-template-columns: 1fr; }
+  .search-form { align-items: stretch; flex-direction: column; }
   h1 { font-size: 32px; }
   .sidebar { position: static; }
 }

@@ -15,6 +15,8 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
   Optional<Reservation> findByIdAndDeletedAtIsNull(Long id);
   @EntityGraph(attributePaths = {"customer", "experienceProgram"})
   List<Reservation> findByDeletedAtIsNullOrderByVisitDateDescTimeSlotAsc();
+  @EntityGraph(attributePaths = {"customer", "experienceProgram"})
+  List<Reservation> findByDeletedAtIsNullAndCustomerNameContainingIgnoreCaseOrderByVisitDateDescTimeSlotAsc(String customerName);
   List<Reservation> findByDeletedAtIsNullAndVisitDateOrderByTimeSlotAsc(LocalDate visitDate);
   @Query("select (count(r) > 0) from Reservation r where r.deletedAt is null and r.customer.id = :customerId")
   boolean existsActiveByCustomerId(@Param("customerId") Long customerId);

@@ -86,7 +86,9 @@ public class ManagementController {
 
   @GetMapping("/management/reservations")
   public String reservationList(@RequestParam(required = false) String q, Model model) {
-    model.addAttribute("reservations", reservations.findByDeletedAtIsNullOrderByVisitDateDescTimeSlotAsc());
+    model.addAttribute("reservations", q == null || q.isBlank()
+        ? reservations.findByDeletedAtIsNullOrderByVisitDateDescTimeSlotAsc()
+        : reservations.findByDeletedAtIsNullAndCustomerNameContainingIgnoreCaseOrderByVisitDateDescTimeSlotAsc(q));
     model.addAttribute("today", LocalDate.now());
     model.addAttribute("q", q);
     return "management/reservation-list";
