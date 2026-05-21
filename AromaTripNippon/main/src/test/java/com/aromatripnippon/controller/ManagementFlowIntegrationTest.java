@@ -45,7 +45,9 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-@SpringBootTest(classes = AromaTripNipponApplication.class)
+@SpringBootTest(
+        classes = AromaTripNipponApplication.class,
+        properties = "app.data-initializer.enabled=true")
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
 class ManagementFlowIntegrationTest {

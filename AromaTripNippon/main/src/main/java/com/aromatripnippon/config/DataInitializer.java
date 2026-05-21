@@ -24,11 +24,13 @@ import com.aromatripnippon.repository.ReservationRepository;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 @Component
+@ConditionalOnProperty(name = "app.data-initializer.enabled", havingValue = "true")
 public class DataInitializer implements CommandLineRunner {
   private final AdminUserRepository admins;
   private final ExperienceProgramRepository programs;
@@ -104,15 +106,14 @@ public class DataInitializer implements CommandLineRunner {
     ensureProductCategory("容器", 3);
 
     if (products.findByDeletedAtIsNullOrderByIdDesc().isEmpty()) {
-      Product mist = new Product();
-      mist.setInventoryItem(bottle);
-      mist.setProductName("Aroma Mist 30ml");
-      mist.setCategory("製品");
-      mist.setPrice(new BigDecimal("4200"));
-      mist.setDescription("Management-only Phase1 sample product.");
-      mist.setImagePath("/assets/images/material_yuzu.png");
-      mist.setActive(true);
-      products.save(mist);
+      products.save(product(yuzu, "国造ゆず精油", "Kunizukuri Yuzu Essential Oil", "素材",
+          new BigDecimal("1200"), "Japanese yuzu fragrance material.", "/assets/images/material_yuzu2.png"));
+      products.save(product(hiba, "青森ひば精油", "Aomori Hiba Essential Oil", "素材",
+          new BigDecimal("1400"), "Aomori hiba wood fragrance material.", "/assets/images/material_hiba2.png"));
+      products.save(product(mint, "和薄荷精油", "Japanese Mint Essential Oil", "素材",
+          new BigDecimal("1100"), "Japanese mint fragrance material.", "/assets/images/material_hakka2.png"));
+      products.save(product(bottle, "Aroma Mist 30ml", "Aroma Mist 30ml", "製品",
+          new BigDecimal("4200"), "Management-only Phase1 sample product.", "/assets/images/material_yuzu.png"));
     }
 
     if (reservations.findByDeletedAtIsNullOrderByVisitDateDescTimeSlotAsc().isEmpty()) {
@@ -222,6 +223,20 @@ public class DataInitializer implements CommandLineRunner {
     seed.setTotalAmount(new BigDecimal("100.00"));
     seed.getMaterials().add(material(seed, first, new BigDecimal("60.00"), 1));
     seed.getMaterials().add(material(seed, second, new BigDecimal("40.00"), 2));
+    return seed;
+  }
+
+  private Product product(InventoryItem item, String name, String englishName, String category, BigDecimal price,
+      String description, String imagePath) {
+    Product seed = new Product();
+    seed.setInventoryItem(item);
+    seed.setProductName(name);
+    seed.setEnglishName(englishName);
+    seed.setCategory(category);
+    seed.setPrice(price);
+    seed.setDescription(description);
+    seed.setImagePath(imagePath);
+    seed.setActive(true);
     return seed;
   }
 

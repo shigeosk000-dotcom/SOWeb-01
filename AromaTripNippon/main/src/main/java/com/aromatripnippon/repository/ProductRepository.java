@@ -13,5 +13,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
   @EntityGraph(attributePaths = "inventoryItem")
   List<Product> findByDeletedAtIsNullOrderByIdDesc();
   @EntityGraph(attributePaths = "inventoryItem")
+  List<Product> findByDeletedAtIsNullAndActiveTrueAndInventoryItemIsNotNullOrderByIdAsc();
+  @EntityGraph(attributePaths = "inventoryItem")
   List<Product> findByDeletedAtIsNullAndProductNameContainingIgnoreCaseOrderByIdDesc(String productName);
 }

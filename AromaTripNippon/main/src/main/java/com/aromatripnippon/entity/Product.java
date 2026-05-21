@@ -20,6 +20,8 @@ public class Product extends BaseEntity {
   @NotBlank
   @Column(name = "product_name", nullable = false)
   private String productName;
+  @Column(name = "english_name")
+  private String englishName;
   @NotBlank
   private String category;
   @NotNull
@@ -36,6 +38,8 @@ public class Product extends BaseEntity {
   public void setInventoryItem(InventoryItem inventoryItem) { this.inventoryItem = inventoryItem; }
   public String getProductName() { return productName; }
   public void setProductName(String productName) { this.productName = productName; }
+  public String getEnglishName() { return englishName; }
+  public void setEnglishName(String englishName) { this.englishName = englishName; }
   public String getCategory() { return category; }
   public void setCategory(String category) { this.category = category; }
   public BigDecimal getPrice() { return price; }

@@ -229,6 +229,7 @@ public class ManagementController {
     model.addAttribute("recipe", new FragranceRecipe());
     model.addAttribute("customers", customers.findByDeletedAtIsNullOrderByIdDesc());
     model.addAttribute("items", inventory.findByDeletedAtIsNullOrderByIdDesc());
+    model.addAttribute("productOptions", recipeProductOptions());
     return "management/recipe-form";
   }
 
@@ -261,6 +262,7 @@ public class ManagementController {
     model.addAttribute("recipe", recipes.findById(id).orElseThrow());
     model.addAttribute("customers", customers.findByDeletedAtIsNullOrderByIdDesc());
     model.addAttribute("items", inventory.findByDeletedAtIsNullOrderByIdDesc());
+    model.addAttribute("productOptions", recipeProductOptions());
     return "management/recipe-form";
   }
 
@@ -284,6 +286,7 @@ public class ManagementController {
       model.addAttribute("recipe", recipe);
       model.addAttribute("customers", customers.findByDeletedAtIsNullOrderByIdDesc());
       model.addAttribute("items", inventory.findByDeletedAtIsNullOrderByIdDesc());
+      model.addAttribute("productOptions", recipeProductOptions());
       model.addAttribute("materialIds", materialIds);
       model.addAttribute("blendRatios", blendRatios);
       return "management/recipe-form";
@@ -350,6 +353,7 @@ public class ManagementController {
     Product product = products.findById(id).orElseThrow();
     productCategories.findByCategoryNameAndDeletedAtIsNull(form.getCategory()).orElseThrow();
     product.setProductName(form.getProductName());
+    product.setEnglishName(form.getEnglishName());
     product.setCategory(form.getCategory());
     product.setPrice(form.getPrice());
     product.setDescription(form.getDescription());
@@ -474,6 +478,12 @@ public class ManagementController {
     admins.save(admin);
     audit.record(principal, "UPDATE", "admin_users", admin.getId(), "アカウント設定を更新");
     return "redirect:/management/account?updated";
+  }
+
+  private List<Product> recipeProductOptions() {
+    return products.findByDeletedAtIsNullAndActiveTrueAndInventoryItemIsNotNullOrderByIdAsc().stream()
+        .filter(product -> "素材".equals(product.getCategory()))
+        .toList();
   }
 
   private List<FragranceRecipeMaterial> buildRecipeMaterials(FragranceRecipe recipe, List<Long> materialIds,

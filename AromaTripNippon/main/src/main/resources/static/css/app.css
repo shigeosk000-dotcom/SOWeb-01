@@ -215,6 +215,21 @@ form.panel > button {
   transform: translateY(-1px);
 }
 .stat strong { display: block; font-size: 30px; }
+.recipe-materials {
+  display: grid;
+  gap: 10px;
+}
+.recipe-materials__head,
+.recipe-materials__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(120px, .45fr);
+  gap: 12px;
+  align-items: center;
+}
+.recipe-materials__head {
+  color: var(--muted);
+  font-weight: 700;
+}
 .login {
   min-height: 100vh;
   display: grid;
@@ -226,6 +241,8 @@ form.panel > button {
 @media (max-width: 760px) {
   .hero, .two, .form-grid, .admin-layout { grid-template-columns: 1fr; }
   .grid, .stats { grid-template-columns: 1fr; }
+  .recipe-materials__head { display: none; }
+  .recipe-materials__row { grid-template-columns: 1fr; }
   .search-form { align-items: stretch; flex-direction: column; }
   h1 { font-size: 32px; }
   .sidebar { position: static; }

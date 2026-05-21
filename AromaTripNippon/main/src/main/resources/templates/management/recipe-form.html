@@ -41,27 +41,41 @@
             <input th:field="*{concept}">
           </label>
 
-          <th:block th:each="idx : ${#numbers.sequence(1, 5)}">
-            <label>
-              <span th:text="|素材 ${idx}|"></span>
-              <select name="materialId" th:required="${idx == 1}">
+          <section class="full recipe-materials">
+            <div class="recipe-materials__head">
+              <span>商品名</span>
+              <span>英語名</span>
+              <span>配合率</span>
+            </div>
+            <div class="recipe-materials__row" th:each="idx : ${#numbers.sequence(1, 5)}">
+              <select class="js-material-name"
+                      name="materialId"
+                      th:required="${idx == 1}"
+                      th:attr="aria-label=|商品名 ${idx}|">
                 <option value="" th:text="${idx == 1 ? '選択してください' : '未選択'}"></option>
-                <option th:each="i : ${items}"
-                        th:value="${i.id}"
-                        th:selected="${(materialIds != null and #lists.size(materialIds) >= idx and materialIds[idx - 1] != null and materialIds[idx - 1] == i.id) or (materialIds == null and recipe.materials != null and recipe.materials.size() >= idx and recipe.materials[idx - 1].inventoryItem.id == i.id)}"
-                        th:text="${i.itemName}"></option>
+                <option th:each="p : ${productOptions}"
+                        th:value="${p.inventoryItem.id}"
+                        th:selected="${(materialIds != null and #lists.size(materialIds) >= idx and materialIds[idx - 1] != null and materialIds[idx - 1] == p.inventoryItem.id) or (materialIds == null and recipe.materials != null and recipe.materials.size() >= idx and recipe.materials[idx - 1].inventoryItem.id == p.inventoryItem.id)}"
+                        th:text="${p.productName}"></option>
               </select>
-            </label>
-            <label>
-              <span th:text="|配合率 ${idx}|"></span>
+              <select class="js-material-english"
+                      th:required="${idx == 1}"
+                      th:attr="aria-label=|英語名 ${idx}|">
+                <option value="" th:text="${idx == 1 ? 'Select' : 'None'}"></option>
+                <option th:each="p : ${productOptions}"
+                        th:value="${p.inventoryItem.id}"
+                        th:selected="${(materialIds != null and #lists.size(materialIds) >= idx and materialIds[idx - 1] != null and materialIds[idx - 1] == p.inventoryItem.id) or (materialIds == null and recipe.materials != null and recipe.materials.size() >= idx and recipe.materials[idx - 1].inventoryItem.id == p.inventoryItem.id)}"
+                        th:text="${p.englishName != null and !#strings.isEmpty(p.englishName) ? p.englishName : p.productName}"></option>
+              </select>
               <input name="blendRatio"
                      type="number"
                      step="5"
                      min="5"
                      th:value="${materialIds != null ? (#lists.size(blendRatios) >= idx ? blendRatios[idx - 1] : '') : (recipe.materials != null and recipe.materials.size() >= idx ? recipe.materials[idx - 1].blendRatio : (idx == 1 ? '100' : ''))}"
-                     th:required="${idx == 1}">
-            </label>
-          </th:block>
+                     th:required="${idx == 1}"
+                     th:attr="aria-label=|配合率 ${idx}|">
+            </div>
+          </section>
 
           <label class="full">
             メモ
@@ -72,5 +86,16 @@
       </form>
     </main>
   </div>
+  <script>
+    document.querySelectorAll('.recipe-materials__row').forEach((row) => {
+      const nameSelect = row.querySelector('.js-material-name');
+      const englishSelect = row.querySelector('.js-material-english');
+      const sync = (source, target) => {
+        target.value = source.value;
+      };
+      nameSelect.addEventListener('change', () => sync(nameSelect, englishSelect));
+      englishSelect.addEventListener('change', () => sync(englishSelect, nameSelect));
+    });
+  </script>
 </body>
 </html>
