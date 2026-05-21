@@ -8,15 +8,14 @@ INSERT INTO customers
 VALUES
   (1, TIMESTAMP '2026-05-20 12:36:40.393402', NULL, TIMESTAMP '2026-05-20 12:36:40.393402', 'emily.chen@example.com', 'Emily Chen', 'Taiwan', 'Booked a fragrance workshop.', '+886-900-000-001', 'English', 'Travel experience'),
   (2, TIMESTAMP '2026-05-20 12:36:40.396445', NULL, TIMESTAMP '2026-05-20 12:36:40.396445', 'lucas.smith@example.com', 'Lucas Smith', 'United States', 'Interested in a take-home gift.', '+1-202-555-0102', 'English', 'Gift purchase'),
-  (3, TIMESTAMP '2026-05-20 12:50:10.100000', NULL, TIMESTAMP '2026-05-20 12:50:10.100000', 'isabella.johnson@example.com', 'Isabella Johnson', 'United Kingdom', '希望は桜の香り。', '+44-7700-900001', 'English', 'Personal care'),
-  (4, TIMESTAMP '2026-05-20 12:50:10.200000', NULL, TIMESTAMP '2026-05-20 12:50:10.200000', 'noah.williams@example.com', 'Noah Williams', 'United States', 'マッサージ用に使いたい。', '+1-310-555-0110', 'English', 'Relaxation'),
-  (5, TIMESTAMP '2026-05-20 12:50:10.300000', NULL, TIMESTAMP '2026-05-20 12:50:10.300000', 'grace.miller@example.com', 'Grace Miller', 'Australia', 'プレゼント用に相談したい。', '+61-400-123-456', 'English', 'Gift purchase'),
-  (6, TIMESTAMP '2026-05-20 12:50:10.400000', NULL, TIMESTAMP '2026-05-20 12:50:10.400000', 'ethan.davis@example.com', 'Ethan Davis', 'Canada', '強めの檜の香りが好き。', '+1-416-555-0123', 'English', 'Fragrance creation'),
-  (7, TIMESTAMP '2026-05-20 12:50:10.500000', NULL, TIMESTAMP '2026-05-20 12:50:10.500000', 'sophia.brown@example.com', 'Sophia Brown', 'New Zealand', '和の素材を試したい。', '+64-21-555-0145', 'English', 'Wellness'),
-  (8, TIMESTAMP '2026-05-20 12:50:10.600000', NULL, TIMESTAMP '2026-05-20 12:50:10.600000', 'yamada.taro@example.jp', '山田太郎', 'Japan', '体験会に参加したい。', '080-1111-2222', 'Japanese', '体験予約'),
-  (9, TIMESTAMP '2026-05-20 12:50:10.700000', NULL, TIMESTAMP '2026-05-20 12:50:10.700000', 'sato.misaki@example.jp', '佐藤美咲', 'Japan', '母の日のプレゼント相談。', '080-3333-4444', 'Japanese', 'Gift planning'),
-  (10, TIMESTAMP '2026-05-20 12:50:10.800000', NULL, TIMESTAMP '2026-05-20 12:50:10.800000', 'suzuki.ren@example.jp', '鈴木蓮', 'Japan', '週末に予約希望。', '080-5555-6666', 'Japanese', 'Workshop');
-
+  (3, TIMESTAMP '2026-05-20 12:50:10.100000', NULL, TIMESTAMP '2026-05-20 12:50:10.100000', 'isabella.johnson@example.com', 'Isabella Johnson', 'United Kingdom', 'Prefers sakura fragrance.', '+44-7700-900001', 'English', 'Personal care'),
+  (4, TIMESTAMP '2026-05-20 12:50:10.200000', NULL, TIMESTAMP '2026-05-20 12:50:10.200000', 'noah.williams@example.com', 'Noah Williams', 'United States', 'Wants a massage oil scent.', '+1-310-555-0110', 'English', 'Relaxation'),
+  (5, TIMESTAMP '2026-05-20 12:50:10.300000', NULL, TIMESTAMP '2026-05-20 12:50:10.300000', 'grace.miller@example.com', 'Grace Miller', 'Australia', 'Looking for a gift.', '+61-400-123-456', 'English', 'Gift purchase'),
+  (6, TIMESTAMP '2026-05-20 12:50:10.400000', NULL, TIMESTAMP '2026-05-20 12:50:10.400000', 'ethan.davis@example.com', 'Ethan Davis', 'Canada', 'Likes strong woody notes.', '+1-416-555-0123', 'English', 'Fragrance creation'),
+  (7, TIMESTAMP '2026-05-20 12:50:10.500000', NULL, TIMESTAMP '2026-05-20 12:50:10.500000', 'sophia.brown@example.com', 'Sophia Brown', 'New Zealand', 'Wants to try Japanese materials.', '+64-21-555-0145', 'English', 'Wellness'),
+  (8, TIMESTAMP '2026-05-20 12:50:10.600000', NULL, TIMESTAMP '2026-05-20 12:50:10.600000', 'taro.yamada@example.jp', 'Taro Yamada', 'Japan', 'Wants to join the workshop.', '080-1111-2222', 'Japanese', 'Workshop'),
+  (9, TIMESTAMP '2026-05-20 12:50:10.700000', NULL, TIMESTAMP '2026-05-20 12:50:10.700000', 'misaki.sato@example.jp', 'Misaki Sato', 'Japan', 'Gift consultation.', '080-3333-4444', 'Japanese', 'Gift planning'),
+  (10, TIMESTAMP '2026-05-20 12:50:10.800000', NULL, TIMESTAMP '2026-05-20 12:50:10.800000', 'ren.suzuki@example.jp', 'Ren Suzuki', 'Japan', 'Weekend booking request.', '080-5555-6666', 'Japanese', 'Workshop');
 INSERT INTO experience_programs
   (id, created_at, deleted_at, updated_at, is_active, description, duration_minutes, material_summary, name, price)
 VALUES
@@ -24,41 +23,47 @@ VALUES
   (2, TIMESTAMP '2026-05-20 12:36:40.390000', NULL, TIMESTAMP '2026-05-20 12:36:40.390000', TRUE, 'Make a hand cream or perfume with seasonal Japanese scents.', 60, 'Hand cream, perfume, glass bottle', 'Aroma Gift Workshop', 6600.00);
 
 INSERT INTO inventory_items
-  (id, created_at, deleted_at, updated_at, category, item_name, last_stocked_date, memo, stock_quantity, storage_location, supplier, threshold_quantity, unit)
+  (id, created_at, deleted_at, updated_at, category, english_name, item_name, last_stocked_date, memo, stock_quantity, storage_location, supplier, threshold_quantity, unit)
 VALUES
-  (1, TIMESTAMP '2026-05-20 12:36:40.411229', NULL, TIMESTAMP '2026-05-20 12:36:40.511207', '素材', 'Yuzu essential oil', DATE '2026-05-20', NULL, 1000.00, 'Shelf A', 'Kyushu Botanicals', 100.00, 'ml'),
-  (2, TIMESTAMP '2026-05-20 12:36:40.415395', NULL, TIMESTAMP '2026-05-20 12:36:40.511207', '素材', 'Aomori hiba essential oil', DATE '2026-05-20', NULL, 840.00, 'Shelf A', 'Aomori Wood Lab', 80.00, 'ml'),
-  (3, TIMESTAMP '2026-05-20 12:36:40.418733', NULL, TIMESTAMP '2026-05-20 12:36:40.418733', '素材', 'Japanese mint oil', DATE '2026-05-20', NULL, 360.00, 'Shelf A', 'Hokkaido Herbs', 80.00, 'ml'),
-  (4, TIMESTAMP '2026-05-20 12:36:40.420000', NULL, TIMESTAMP '2026-05-20 12:36:40.420000', '素材', 'Sakura absolute', DATE '2026-05-20', NULL, 520.00, 'Shelf A', 'Tokyo Blossom Co.', 80.00, 'ml'),
-  (5, TIMESTAMP '2026-05-20 12:36:40.422000', NULL, TIMESTAMP '2026-05-20 12:36:40.422000', '素材', 'Hinoki wood oil', DATE '2026-05-20', NULL, 680.00, 'Shelf A', 'Nagano Forest Works', 80.00, 'ml'),
-  (6, TIMESTAMP '2026-05-20 12:36:40.424000', NULL, TIMESTAMP '2026-05-20 12:36:40.424000', '素材', 'Matcha green tea extract', DATE '2026-05-20', NULL, 450.00, 'Shelf A', 'Uji Herbal Lab', 80.00, 'ml'),
-  (7, TIMESTAMP '2026-05-20 12:36:40.426000', NULL, TIMESTAMP '2026-05-20 12:36:40.426000', '素材', 'White cedar resin', DATE '2026-05-20', NULL, 380.00, 'Shelf A', 'Kiso Cedar Co.', 80.00, 'g'),
-  (8, TIMESTAMP '2026-05-20 12:36:40.428000', NULL, TIMESTAMP '2026-05-20 12:36:40.428000', '容器', 'Glass bottle 30ml', DATE '2026-05-20', NULL, 240.00, 'Shelf B', 'Tokyo Bottle Works', 30.00, 'pcs'),
-  (9, TIMESTAMP '2026-05-20 12:36:40.430000', NULL, TIMESTAMP '2026-05-20 12:36:40.430000', '容器', 'Aluminum tube 50ml', DATE '2026-05-20', NULL, 180.00, 'Shelf B', 'Nagoya Pack Co.', 20.00, 'pcs'),
-  (10, TIMESTAMP '2026-05-20 12:36:40.432000', NULL, TIMESTAMP '2026-05-20 12:36:40.432000', '製品', '和香ハンドクリーム - ゆず', DATE '2026-05-20', NULL, 60.00, 'Warehouse C', 'AromaCraft Japan', 10.00, 'pcs'),
-  (11, TIMESTAMP '2026-05-20 12:36:40.434000', NULL, TIMESTAMP '2026-05-20 12:36:40.434000', '製品', '和香ハンドクリーム - ひば', DATE '2026-05-20', NULL, 55.00, 'Warehouse C', 'AromaCraft Japan', 10.00, 'pcs'),
-  (12, TIMESTAMP '2026-05-20 12:36:40.436000', NULL, TIMESTAMP '2026-05-20 12:36:40.436000', '製品', '和香ハンドクリーム - 抹茶', DATE '2026-05-20', NULL, 70.00, 'Warehouse C', 'AromaCraft Japan', 10.00, 'pcs'),
-  (13, TIMESTAMP '2026-05-20 12:36:40.438000', NULL, TIMESTAMP '2026-05-20 12:36:40.438000', '製品', '和香フレグランス - 桜', DATE '2026-05-20', NULL, 40.00, 'Warehouse C', 'AromaCraft Japan', 5.00, 'pcs'),
-  (14, TIMESTAMP '2026-05-20 12:36:40.440000', NULL, TIMESTAMP '2026-05-20 12:36:40.440000', '製品', '和香フレグランス - 檜', DATE '2026-05-20', NULL, 38.00, 'Warehouse C', 'AromaCraft Japan', 5.00, 'pcs'),
-  (15, TIMESTAMP '2026-05-20 12:36:40.442000', NULL, TIMESTAMP '2026-05-20 12:36:40.442000', '製品', '和香フレグランス - 白杉', DATE '2026-05-20', NULL, 42.00, 'Warehouse C', 'AromaCraft Japan', 5.00, 'pcs');
-
+  (1, TIMESTAMP '2026-05-20 12:36:40.411229', NULL, TIMESTAMP '2026-05-20 12:36:40.511207', STRINGDECODE('\u7d20\u6750'), 'Yuzu essential oil', 'Yuzu essential oil', DATE '2026-05-20', NULL, 1000.00, 'Shelf A', 'Kyushu Botanicals', 100.00, 'ml'),
+  (2, TIMESTAMP '2026-05-20 12:36:40.415395', NULL, TIMESTAMP '2026-05-20 12:36:40.511207', STRINGDECODE('\u7d20\u6750'), 'Aomori hiba essential oil', 'Aomori hiba essential oil', DATE '2026-05-20', NULL, 840.00, 'Shelf A', 'Aomori Wood Lab', 80.00, 'ml'),
+  (3, TIMESTAMP '2026-05-20 12:36:40.418733', NULL, TIMESTAMP '2026-05-20 12:36:40.418733', STRINGDECODE('\u7d20\u6750'), 'Japanese mint oil', 'Japanese mint oil', DATE '2026-05-20', NULL, 360.00, 'Shelf A', 'Hokkaido Herbs', 80.00, 'ml'),
+  (4, TIMESTAMP '2026-05-20 12:36:40.420000', NULL, TIMESTAMP '2026-05-20 12:36:40.420000', STRINGDECODE('\u7d20\u6750'), 'Sakura absolute', 'Sakura absolute', DATE '2026-05-20', NULL, 520.00, 'Shelf A', 'Tokyo Blossom Co.', 80.00, 'ml'),
+  (5, TIMESTAMP '2026-05-20 12:36:40.422000', NULL, TIMESTAMP '2026-05-20 12:36:40.422000', STRINGDECODE('\u7d20\u6750'), 'Hinoki wood oil', 'Hinoki wood oil', DATE '2026-05-20', NULL, 680.00, 'Shelf A', 'Nagano Forest Works', 80.00, 'ml'),
+  (6, TIMESTAMP '2026-05-20 12:36:40.424000', NULL, TIMESTAMP '2026-05-20 12:36:40.424000', STRINGDECODE('\u7d20\u6750'), 'Matcha green tea extract', 'Matcha green tea extract', DATE '2026-05-20', NULL, 450.00, 'Shelf A', 'Uji Herbal Lab', 80.00, 'ml'),
+  (7, TIMESTAMP '2026-05-20 12:36:40.426000', NULL, TIMESTAMP '2026-05-20 12:36:40.426000', STRINGDECODE('\u7d20\u6750'), 'White cedar resin', 'White cedar resin', DATE '2026-05-20', NULL, 380.00, 'Shelf A', 'Kiso Cedar Co.', 80.00, 'g'),
+  (8, TIMESTAMP '2026-05-20 12:36:40.428000', NULL, TIMESTAMP '2026-05-20 12:36:40.428000', STRINGDECODE('\u5bb9\u5668'), 'Glass bottle 30ml', 'Glass bottle 30ml', DATE '2026-05-20', NULL, 240.00, 'Shelf B', 'Tokyo Bottle Works', 30.00, 'pcs'),
+  (9, TIMESTAMP '2026-05-20 12:36:40.430000', NULL, TIMESTAMP '2026-05-20 12:36:40.430000', STRINGDECODE('\u5bb9\u5668'), 'Aluminum tube 50ml', 'Aluminum tube 50ml', DATE '2026-05-20', NULL, 180.00, 'Shelf B', 'Nagoya Pack Co.', 20.00, 'pcs'),
+  (10, TIMESTAMP '2026-05-20 12:36:40.432000', NULL, TIMESTAMP '2026-05-20 12:36:40.432000', STRINGDECODE('\u88fd\u54c1'), 'Yuzu Hand Cream', 'Yuzu Hand Cream', DATE '2026-05-20', NULL, 60.00, 'Warehouse C', 'AromaCraft Japan', 10.00, 'pcs'),
+  (11, TIMESTAMP '2026-05-20 12:36:40.434000', NULL, TIMESTAMP '2026-05-20 12:36:40.434000', STRINGDECODE('\u88fd\u54c1'), 'Hiba Hand Cream', 'Hiba Hand Cream', DATE '2026-05-20', NULL, 55.00, 'Warehouse C', 'AromaCraft Japan', 10.00, 'pcs'),
+  (12, TIMESTAMP '2026-05-20 12:36:40.436000', NULL, TIMESTAMP '2026-05-20 12:36:40.436000', STRINGDECODE('\u88fd\u54c1'), 'Matcha Hand Cream', 'Matcha Hand Cream', DATE '2026-05-20', NULL, 70.00, 'Warehouse C', 'AromaCraft Japan', 10.00, 'pcs'),
+  (13, TIMESTAMP '2026-05-20 12:36:40.438000', NULL, TIMESTAMP '2026-05-20 12:36:40.438000', STRINGDECODE('\u88fd\u54c1'), 'Sakura Perfume', 'Sakura Perfume', DATE '2026-05-20', NULL, 40.00, 'Warehouse C', 'AromaCraft Japan', 5.00, 'pcs'),
+  (14, TIMESTAMP '2026-05-20 12:36:40.440000', NULL, TIMESTAMP '2026-05-20 12:36:40.440000', STRINGDECODE('\u88fd\u54c1'), 'Hinoki Perfume', 'Hinoki Perfume', DATE '2026-05-20', NULL, 38.00, 'Warehouse C', 'AromaCraft Japan', 5.00, 'pcs'),
+  (15, TIMESTAMP '2026-05-20 12:36:40.442000', NULL, TIMESTAMP '2026-05-20 12:36:40.442000', STRINGDECODE('\u88fd\u54c1'), 'Cedar Perfume', 'Cedar Perfume', DATE '2026-05-20', NULL, 42.00, 'Warehouse C', 'AromaCraft Japan', 5.00, 'pcs');
 INSERT INTO product_categories
   (id, created_at, deleted_at, updated_at, is_active, category_name, display_order)
 VALUES
-  (1, TIMESTAMP '2026-05-20 12:36:40.425463', NULL, TIMESTAMP '2026-05-20 12:36:40.425463', TRUE, '製品', 1),
-  (2, TIMESTAMP '2026-05-20 12:36:40.428461', NULL, TIMESTAMP '2026-05-20 12:36:40.428461', TRUE, '素材', 2),
-  (3, TIMESTAMP '2026-05-20 12:36:40.430462', NULL, TIMESTAMP '2026-05-20 12:36:40.430462', TRUE, '容器', 3);
-
+  (1, TIMESTAMP '2026-05-20 12:36:40.425463', NULL, TIMESTAMP '2026-05-20 12:36:40.425463', TRUE, STRINGDECODE('\u88fd\u54c1'), 1),
+  (2, TIMESTAMP '2026-05-20 12:36:40.428461', NULL, TIMESTAMP '2026-05-20 12:36:40.428461', TRUE, STRINGDECODE('\u7d20\u6750'), 2),
+  (3, TIMESTAMP '2026-05-20 12:36:40.430462', NULL, TIMESTAMP '2026-05-20 12:36:40.430462', TRUE, STRINGDECODE('\u5bb9\u5668'), 3);
 INSERT INTO products
-  (id, created_at, deleted_at, updated_at, is_active, category, description, english_name, image_path, price, product_name, inventory_item_id)
+  (id, created_at, deleted_at, updated_at, is_active, category_id, description, english_name, price, product_name)
 VALUES
-  (1, TIMESTAMP '2026-05-20 12:36:40.450000', NULL, TIMESTAMP '2026-05-20 12:36:40.450000', TRUE, '製品', 'Hand cream with refreshing yuzu scent.', 'Yuzu Hand Cream', '/assets/images/product_handcream_yuzu.png', 2400.00, '和香ハンドクリーム - ゆず', 10),
-  (2, TIMESTAMP '2026-05-20 12:36:40.451000', NULL, TIMESTAMP '2026-05-20 12:36:40.451000', TRUE, '製品', 'Warm hinoki-scented hand cream.', 'Hiba Hand Cream', '/assets/images/product_handcream_hiba.png', 2500.00, '和香ハンドクリーム - ひば', 11),
-  (3, TIMESTAMP '2026-05-20 12:36:40.452000', NULL, TIMESTAMP '2026-05-20 12:36:40.452000', TRUE, '製品', 'Soothing matcha hand cream.', 'Matcha Hand Cream', '/assets/images/product_handcream_matcha.png', 2600.00, '和香ハンドクリーム - 抹茶', 12),
-  (4, TIMESTAMP '2026-05-20 12:36:40.453000', NULL, TIMESTAMP '2026-05-20 12:36:40.453000', TRUE, '製品', 'A gentle cherry blossom perfume.', 'Sakura Perfume', '/assets/images/product_perfume_sakura.png', 4200.00, '和香フレグランス - 桜', 13),
-  (5, TIMESTAMP '2026-05-20 12:36:40.454000', NULL, TIMESTAMP '2026-05-20 12:36:40.454000', TRUE, '製品', 'Earthy hinoki fragrance.', 'Hinoki Perfume', '/assets/images/product_perfume_hinoki.png', 4500.00, '和香フレグランス - 檜', 14),
-  (6, TIMESTAMP '2026-05-20 12:36:40.455000', NULL, TIMESTAMP '2026-05-20 12:36:40.455000', TRUE, '製品', 'Fresh white cedar perfume.', 'Cedar Perfume', '/assets/images/product_perfume_cedar.png', 4300.00, '和香フレグランス - 白杉', 15);
-
+  (1, TIMESTAMP '2026-05-20 12:36:40.450000', NULL, TIMESTAMP '2026-05-20 12:36:40.450000', TRUE, 2, 'Japanese yuzu fragrance material.', 'Yuzu essential oil', 1200.00, 'Yuzu essential oil'),
+  (2, TIMESTAMP '2026-05-20 12:36:40.451000', NULL, TIMESTAMP '2026-05-20 12:36:40.451000', TRUE, 2, 'Aomori hiba wood fragrance material.', 'Aomori hiba essential oil', 1400.00, 'Aomori hiba essential oil'),
+  (3, TIMESTAMP '2026-05-20 12:36:40.452000', NULL, TIMESTAMP '2026-05-20 12:36:40.452000', TRUE, 2, 'Japanese mint fragrance material.', 'Japanese mint oil', 1100.00, 'Japanese mint oil'),
+  (4, TIMESTAMP '2026-05-20 12:36:40.453000', NULL, TIMESTAMP '2026-05-20 12:36:40.453000', TRUE, 2, 'Soft cherry blossom absolute.', 'Sakura absolute', 1600.00, 'Sakura absolute'),
+  (5, TIMESTAMP '2026-05-20 12:36:40.454000', NULL, TIMESTAMP '2026-05-20 12:36:40.454000', TRUE, 2, 'Hinoki wood fragrance material.', 'Hinoki wood oil', 1500.00, 'Hinoki wood oil'),
+  (6, TIMESTAMP '2026-05-20 12:36:40.455000', NULL, TIMESTAMP '2026-05-20 12:36:40.455000', TRUE, 2, 'Green tea extract for blends.', 'Matcha green tea extract', 1300.00, 'Matcha green tea extract'),
+  (7, TIMESTAMP '2026-05-20 12:36:40.456000', NULL, TIMESTAMP '2026-05-20 12:36:40.456000', TRUE, 2, 'White cedar resin base note.', 'White cedar resin', 1450.00, 'White cedar resin'),
+  (8, TIMESTAMP '2026-05-20 12:36:40.457000', NULL, TIMESTAMP '2026-05-20 12:36:40.457000', TRUE, 3, 'Glass bottle for workshop blends.', 'Glass bottle 30ml', 300.00, 'Glass bottle 30ml'),
+  (9, TIMESTAMP '2026-05-20 12:36:40.458000', NULL, TIMESTAMP '2026-05-20 12:36:40.458000', TRUE, 3, 'Aluminum tube for hand cream.', 'Aluminum tube 50ml', 250.00, 'Aluminum tube 50ml'),
+  (10, TIMESTAMP '2026-05-20 12:36:40.459000', NULL, TIMESTAMP '2026-05-20 12:36:40.459000', TRUE, 1, 'Hand cream with refreshing yuzu scent.', 'Yuzu Hand Cream', 2400.00, 'Yuzu Hand Cream'),
+  (11, TIMESTAMP '2026-05-20 12:36:40.460000', NULL, TIMESTAMP '2026-05-20 12:36:40.460000', TRUE, 1, 'Warm hiba-scented hand cream.', 'Hiba Hand Cream', 2500.00, 'Hiba Hand Cream'),
+  (12, TIMESTAMP '2026-05-20 12:36:40.461000', NULL, TIMESTAMP '2026-05-20 12:36:40.461000', TRUE, 1, 'Soothing matcha hand cream.', 'Matcha Hand Cream', 2600.00, 'Matcha Hand Cream'),
+  (13, TIMESTAMP '2026-05-20 12:36:40.462000', NULL, TIMESTAMP '2026-05-20 12:36:40.462000', TRUE, 1, 'A gentle cherry blossom perfume.', 'Sakura Perfume', 4200.00, 'Sakura Perfume'),
+  (14, TIMESTAMP '2026-05-20 12:36:40.463000', NULL, TIMESTAMP '2026-05-20 12:36:40.463000', TRUE, 1, 'Earthy hinoki fragrance.', 'Hinoki Perfume', 4500.00, 'Hinoki Perfume'),
+  (15, TIMESTAMP '2026-05-20 12:36:40.464000', NULL, TIMESTAMP '2026-05-20 12:36:40.464000', TRUE, 1, 'Fresh white cedar perfume.', 'Cedar Perfume', 4300.00, 'Cedar Perfume');
 INSERT INTO fragrance_recipes
   (id, created_at, deleted_at, updated_at, concept_note, memo, recipe_name, total_amount, customer_id)
 VALUES
@@ -159,10 +164,9 @@ INSERT INTO reservations
 VALUES
   (1, TIMESTAMP '2026-05-20 12:58:00.100000', NULL, TIMESTAMP '2026-05-20 12:58:00.100000', 2, 'English', 'Please prepare English guidance.', 'RESERVED', '13:00', DATE '2026-06-02', 1, 1),
   (2, TIMESTAMP '2026-05-20 12:58:00.200000', NULL, TIMESTAMP '2026-05-20 12:58:00.200000', 1, 'English', 'Looking for a gift workshop.', 'RESERVED', '10:00', DATE '2026-06-05', 2, 1),
-  (3, TIMESTAMP '2026-05-20 12:58:00.300000', NULL, TIMESTAMP '2026-05-20 12:58:00.300000', 2, 'English', '希望は桜の香りです。', 'RESERVED', '14:00', DATE '2026-06-10', 3, 2),
+  (3, TIMESTAMP '2026-05-20 12:58:00.300000', NULL, TIMESTAMP '2026-05-20 12:58:00.300000', 2, 'English', 'Prefers sakura fragrance.', 'RESERVED', '14:00', DATE '2026-06-10', 3, 2),
   (4, TIMESTAMP '2026-05-20 12:58:00.400000', NULL, TIMESTAMP '2026-05-20 12:58:00.400000', 3, 'English', 'Need a workshop for friends.', 'RESERVED', '11:00', DATE '2026-06-12', 4, 1),
-  (5, TIMESTAMP '2026-05-20 12:58:00.500000', NULL, TIMESTAMP '2026-05-20 12:58:00.500000', 1, 'Japanese', '以前キャンセルした分の再予約です。', 'RESERVED', '15:00', DATE '2026-05-10', 8, 2);
-
+  (5, TIMESTAMP '2026-05-20 12:58:00.500000', NULL, TIMESTAMP '2026-05-20 12:58:00.500000', 1, 'Japanese', 'Rebooking from a previous cancellation.', 'RESERVED', '15:00', DATE '2026-05-10', 8, 2);
 INSERT INTO audit_logs
   (id, created_at, deleted_at, updated_at, action_type, description, target_id, target_table, admin_user_id)
 VALUES
@@ -177,5 +181,6 @@ ALTER TABLE fragrance_recipes ALTER COLUMN id RESTART WITH 18;
 ALTER TABLE inventory_items ALTER COLUMN id RESTART WITH 16;
 ALTER TABLE inventory_transactions ALTER COLUMN id RESTART WITH 16;
 ALTER TABLE product_categories ALTER COLUMN id RESTART WITH 4;
-ALTER TABLE products ALTER COLUMN id RESTART WITH 7;
+ALTER TABLE products ALTER COLUMN id RESTART WITH 16;
 ALTER TABLE reservations ALTER COLUMN id RESTART WITH 6;
+

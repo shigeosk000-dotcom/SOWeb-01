@@ -204,9 +204,8 @@ class ManagementFlowIntegrationTest {
 
         Product guardedProduct = new Product();
         guardedProduct.setProductName("Guarded Product");
-        guardedProduct.setCategory("material");
+        guardedProduct.setCategory(productCategories.findByCategoryNameAndDeletedAtIsNull("素材").orElseThrow());
         guardedProduct.setPrice(new BigDecimal("1200"));
-        guardedProduct.setInventoryItem(usedItem);
         guardedProduct = products.save(guardedProduct);
 
         FragranceRecipe guardedRecipe = new FragranceRecipe();
@@ -451,24 +450,23 @@ class ManagementFlowIntegrationTest {
 
         Product product = new Product();
         product.setProductName("Mgmt Product");
-        product.setCategory("製品");
+        product.setCategory(productCategories.findByCategoryNameAndDeletedAtIsNull("製品").orElseThrow());
         product.setPrice(new BigDecimal("1000"));
         product.setDescription("desc");
-        product.setInventoryItem(item);
         product.setActive(true);
         products.save(product);
 
         mockMvc.perform(post("/management/products/{id}", product.getId()).session(authSession).with(csrf())
-                .param("inventoryItemId", item.getId().toString())
                 .param("productName", "Mgmt Product Updated")
-                .param("category", "製品")
+                .param("categoryId", productCategories.findByCategoryNameAndDeletedAtIsNull("製品").orElseThrow()
+                        .getId().toString())
                 .param("price", "1200")
                 .param("description", "updated")
                 .param("published", "true"))
                 .andExpect(status().is3xxRedirection());
         assertThat(products.findByIdAndDeletedAtIsNull(product.getId()).orElseThrow().getProductName())
                 .isEqualTo("Mgmt Product Updated");
-        assertThat(products.findByIdAndDeletedAtIsNull(product.getId()).orElseThrow().getCategory())
+        assertThat(products.findByIdAndDeletedAtIsNull(product.getId()).orElseThrow().getCategory().getCategoryName())
                 .isEqualTo("製品");
     }
 
@@ -490,7 +488,7 @@ class ManagementFlowIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("categories"))
                 .andExpect(content().string(Matchers.containsString("<select")))
-                .andExpect(content().string(Matchers.containsString("name=\"category\"")))
+                .andExpect(content().string(Matchers.containsString("name=\"categoryId\"")))
                 .andExpect(content().string(Matchers.containsString("製品")))
                 .andExpect(content().string(Matchers.containsString("素材")))
                 .andExpect(content().string(Matchers.containsString("容器")));
@@ -551,9 +549,9 @@ class ManagementFlowIntegrationTest {
         assertThat(authSession).isNotNull();
 
         mockMvc.perform(post("/management/products/{id}", 999999L).session(authSession).with(csrf())
-                .param("inventoryItemId", "1")
                 .param("productName", "missing")
-                .param("category", "製品")
+                .param("categoryId", productCategories.findByCategoryNameAndDeletedAtIsNull("製品").orElseThrow()
+                        .getId().toString())
                 .param("price", "1200")
                 .param("description", "updated"))
                 .andExpect(status().is3xxRedirection())

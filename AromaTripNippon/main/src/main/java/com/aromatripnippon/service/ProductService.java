@@ -1,7 +1,6 @@
 package com.aromatripnippon.service;
 
 import com.aromatripnippon.entity.Product;
-import com.aromatripnippon.repository.InventoryItemRepository;
 import com.aromatripnippon.repository.ProductRepository;
 import jakarta.validation.Valid;
 import java.util.List;
@@ -13,11 +12,9 @@ import org.springframework.validation.annotation.Validated;
 @Validated
 public class ProductService {
   private final ProductRepository products;
-  private final InventoryItemRepository inventoryItems;
 
-  public ProductService(ProductRepository products, InventoryItemRepository inventoryItems) {
+  public ProductService(ProductRepository products) {
     this.products = products;
-    this.inventoryItems = inventoryItems;
   }
 
   public List<Product> search(String keyword) {
@@ -32,8 +29,7 @@ public class ProductService {
   }
 
   @Transactional
-  public Product save(@Valid Product product, Long inventoryItemId) {
-    product.setInventoryItem(inventoryItems.findByIdAndDeletedAtIsNull(inventoryItemId).orElseThrow());
+  public Product save(@Valid Product product) {
     return products.save(product);
   }
 

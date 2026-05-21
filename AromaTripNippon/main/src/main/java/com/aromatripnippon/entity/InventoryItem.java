@@ -15,6 +15,8 @@ public class InventoryItem extends BaseEntity {
   @NotBlank
   @Column(name = "item_name", nullable = false)
   private String itemName;
+  @Column(name = "english_name")
+  private String englishName;
   @NotBlank
   private String category;
   @NotNull
@@ -36,6 +38,8 @@ public class InventoryItem extends BaseEntity {
 
   public String getItemName() { return itemName; }
   public void setItemName(String itemName) { this.itemName = itemName; }
+  public String getEnglishName() { return englishName; }
+  public void setEnglishName(String englishName) { this.englishName = englishName; }
   public String getCategory() { return category; }
   public void setCategory(String category) { this.category = category; }
   public BigDecimal getStockQuantity() { return stockQuantity; }

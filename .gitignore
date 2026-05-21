@@ -1,3 +1,8 @@
 AromaTripNippon/main/data/aromatripnippon.lock.db
 AromaTripNippon/main/target/
 AromaTripNippon/main/data/aromatripnippon.mv.db
+AromaTripNippon/main/app-run.err.log
+AromaTripNippon/main/app-run.log
+AromaTripNippon/main/data/aromatripnippon.trace.db
+AromaTripNippon/main/src/main/resources/data.sql.txt
+AromaTripNippon/main/src/main/resources/schema.sql.txt

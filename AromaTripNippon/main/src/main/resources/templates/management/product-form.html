@@ -22,15 +22,6 @@
             th:object="${product}">
         <div class="form-grid">
           <label>
-            在庫品目
-            <select name="inventoryItemId" required>
-              <option th:each="i : ${items}"
-                      th:value="${i.id}"
-                      th:selected="${product.inventoryItem != null and product.inventoryItem.id == i.id}"
-                      th:text="${i.itemName}"></option>
-            </select>
-          </label>
-          <label>
             商品名
             <input th:field="*{productName}" required>
           </label>
@@ -40,20 +31,17 @@
           </label>
           <label>
             カテゴリ
-            <select th:field="*{category}" required>
+            <select name="categoryId" required>
               <option value="">選択してください</option>
               <option th:each="category : ${categories}"
-                      th:value="${category.categoryName}"
+                      th:value="${category.id}"
+                      th:selected="${product.category != null and product.category.id == category.id}"
                       th:text="${category.categoryName}"></option>
             </select>
           </label>
           <label>
             価格
             <input type="number" step="1" th:field="*{price}" required>
-          </label>
-          <label>
-            画像パス
-            <input th:field="*{imagePath}" placeholder="/assets/images/material_yuzu.png">
           </label>
           <label>
             公開

@@ -230,6 +230,10 @@ form.panel > button {
   color: var(--muted);
   font-weight: 700;
 }
+.inventory-transaction-submit {
+  justify-self: start;
+  width: auto;
+}
 .login {
   min-height: 100vh;
   display: grid;

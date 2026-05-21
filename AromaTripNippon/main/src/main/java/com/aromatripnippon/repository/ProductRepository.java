@@ -7,13 +7,12 @@ import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
+  @EntityGraph(attributePaths = "category")
   Optional<Product> findByIdAndDeletedAtIsNull(Long id);
-  @EntityGraph(attributePaths = "inventoryItem")
-  Optional<Product> findWithInventoryItemByIdAndDeletedAtIsNull(Long id);
-  @EntityGraph(attributePaths = "inventoryItem")
+  @EntityGraph(attributePaths = "category")
   List<Product> findByDeletedAtIsNullOrderByIdDesc();
-  @EntityGraph(attributePaths = "inventoryItem")
-  List<Product> findByDeletedAtIsNullAndActiveTrueAndInventoryItemIsNotNullOrderByIdAsc();
-  @EntityGraph(attributePaths = "inventoryItem")
+  @EntityGraph(attributePaths = "category")
+  List<Product> findByDeletedAtIsNullAndActiveTrueOrderByIdAsc();
+  @EntityGraph(attributePaths = "category")
   List<Product> findByDeletedAtIsNullAndProductNameContainingIgnoreCaseOrderByIdDesc(String productName);
 }

@@ -23,10 +23,9 @@
           <tr><th>ID</th><td th:text="${product.id}"></td></tr>
           <tr><th>商品名</th><td th:text="${product.productName}"></td></tr>
           <tr><th>英語名</th><td th:text="${product.englishName}"></td></tr>
-          <tr><th>カテゴリ</th><td th:text="${product.category}"></td></tr>
+          <tr><th>カテゴリ</th><td th:text="${product.category != null ? product.category.categoryName : ''}"></td></tr>
           <tr><th>価格</th><td th:text="${product.price}"></td></tr>
-          <tr><th>在庫品目</th><td th:text="${product.inventoryItem != null ? product.inventoryItem.itemName : ''}"></td></tr>
-          <tr><th>画像パス</th><td th:text="${product.imagePath}"></td></tr>
+          <tr><th>説明</th><td th:text="${product.description}"></td></tr>
         </table>
         <form th:action="@{/management/products/{id}/delete(id=${product.id})}" method="post">
           <button class="danger">論理削除</button>

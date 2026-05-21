@@ -92,28 +92,24 @@ public class DataInitializer implements CommandLineRunner {
     Customer lucas = ensureCustomer("Lucas Smith", "United States", "lucas.smith@example.com", "+1-202-555-0102",
         "English", "Gift purchase", "Interested in a take-home gift.");
 
-    InventoryItem yuzu = ensureInventory("Yuzu essential oil", "Fragrance material", "ml", "Shelf A",
+    InventoryItem yuzu = ensureInventory("柚子精油", "Yuzu essential oil", "素材", "ml", "Shelf A",
         new BigDecimal("500"), new BigDecimal("100"), "Kyushu Botanicals");
-    InventoryItem hiba = ensureInventory("Aomori hiba essential oil", "Fragrance material", "ml", "Shelf A",
+    InventoryItem hiba = ensureInventory("青森ひば精油", "Aomori hiba essential oil", "素材", "ml", "Shelf A",
         new BigDecimal("420"), new BigDecimal("80"), "Aomori Wood Lab");
-    InventoryItem mint = ensureInventory("Japanese mint oil", "Fragrance material", "ml", "Shelf A",
+    InventoryItem mint = ensureInventory("和薄荷精油", "Japanese mint oil", "素材", "ml", "Shelf A",
         new BigDecimal("360"), new BigDecimal("80"), "Hokkaido Herbs");
-    InventoryItem bottle = ensureInventory("Glass bottle 30ml", "Container", "pcs", "Shelf B",
+    InventoryItem bottle = ensureInventory("ガラスボトル 30ml", "Glass bottle 30ml", "容器", "pcs", "Shelf B",
         new BigDecimal("120"), new BigDecimal("30"), "Tokyo Bottle Works");
 
     ensureProductCategory("製品", 1);
-    ensureProductCategory("素材", 2);
-    ensureProductCategory("容器", 3);
+    ProductCategory material = ensureProductCategory("素材", 2);
+    ProductCategory container = ensureProductCategory("容器", 3);
 
     if (products.findByDeletedAtIsNullOrderByIdDesc().isEmpty()) {
-      products.save(product(yuzu, "国造ゆず精油", "Kunizukuri Yuzu Essential Oil", "素材",
-          new BigDecimal("1200"), "Japanese yuzu fragrance material.", "/assets/images/material_yuzu2.png"));
-      products.save(product(hiba, "青森ひば精油", "Aomori Hiba Essential Oil", "素材",
-          new BigDecimal("1400"), "Aomori hiba wood fragrance material.", "/assets/images/material_hiba2.png"));
-      products.save(product(mint, "和薄荷精油", "Japanese Mint Essential Oil", "素材",
-          new BigDecimal("1100"), "Japanese mint fragrance material.", "/assets/images/material_hakka2.png"));
-      products.save(product(bottle, "Aroma Mist 30ml", "Aroma Mist 30ml", "製品",
-          new BigDecimal("4200"), "Management-only Phase1 sample product.", "/assets/images/material_yuzu.png"));
+      products.save(product(yuzu, material, new BigDecimal("1200"), "Japanese yuzu fragrance material."));
+      products.save(product(hiba, material, new BigDecimal("1400"), "Aomori hiba wood fragrance material."));
+      products.save(product(mint, material, new BigDecimal("1100"), "Japanese mint fragrance material."));
+      products.save(product(bottle, container, new BigDecimal("300"), "Glass bottle for workshop blends."));
     }
 
     if (reservations.findByDeletedAtIsNullOrderByVisitDateDescTimeSlotAsc().isEmpty()) {
@@ -170,14 +166,15 @@ public class DataInitializer implements CommandLineRunner {
         });
   }
 
-  private InventoryItem ensureInventory(String name, String category, String unit, String location, BigDecimal stock,
-      BigDecimal threshold, String supplier) {
+  private InventoryItem ensureInventory(String name, String englishName, String category, String unit, String location,
+      BigDecimal stock, BigDecimal threshold, String supplier) {
     return inventory.findByDeletedAtIsNullAndItemNameContainingIgnoreCaseOrderByIdDesc(name).stream()
         .filter(item -> name.equalsIgnoreCase(item.getItemName()))
         .findFirst()
         .orElseGet(() -> {
           InventoryItem seed = new InventoryItem();
           seed.setItemName(name);
+          seed.setEnglishName(englishName);
           seed.setCategory(category);
           seed.setUnit(unit);
           seed.setStorageLocation(location);
@@ -226,16 +223,13 @@ public class DataInitializer implements CommandLineRunner {
     return seed;
   }
 
-  private Product product(InventoryItem item, String name, String englishName, String category, BigDecimal price,
-      String description, String imagePath) {
+  private Product product(InventoryItem item, ProductCategory category, BigDecimal price, String description) {
     Product seed = new Product();
-    seed.setInventoryItem(item);
-    seed.setProductName(name);
-    seed.setEnglishName(englishName);
+    seed.setProductName(item.getItemName());
+    seed.setEnglishName(item.getEnglishName());
     seed.setCategory(category);
     seed.setPrice(price);
     seed.setDescription(description);
-    seed.setImagePath(imagePath);
     seed.setActive(true);
     return seed;
   }

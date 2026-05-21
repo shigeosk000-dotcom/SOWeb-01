@@ -27,16 +27,14 @@
           <th>英語名</th>
           <th>カテゴリ</th>
           <th>価格</th>
-          <th>在庫品目</th>
           <th>操作</th>
         </tr>
         <tr th:each="p : ${products}">
           <td th:text="${p.id}"></td>
           <td th:text="${p.productName}"></td>
           <td th:text="${p.englishName}"></td>
-          <td th:text="${p.category}"></td>
+          <td th:text="${p.category != null ? p.category.categoryName : ''}"></td>
           <td th:text="${p.price}"></td>
-          <td th:text="${p.inventoryItem != null ? p.inventoryItem.itemName : ''}"></td>
           <td>
             <div class="table-actions">
               <a th:href="@{/management/products/{id}(id=${p.id})}">詳細</a>

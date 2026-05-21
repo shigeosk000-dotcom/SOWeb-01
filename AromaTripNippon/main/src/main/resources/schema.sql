@@ -66,6 +66,7 @@ CREATE TABLE inventory_items (
   deleted_at TIMESTAMP(6),
   updated_at TIMESTAMP(6) NOT NULL,
   category VARCHAR(255) NOT NULL,
+  english_name VARCHAR(255),
   item_name VARCHAR(255) NOT NULL,
   last_stocked_date DATE,
   memo VARCHAR(1000),
@@ -141,15 +142,14 @@ CREATE TABLE products (
   deleted_at TIMESTAMP(6),
   updated_at TIMESTAMP(6) NOT NULL,
   is_active BOOLEAN,
-  category VARCHAR(255) NOT NULL,
+  category_id BIGINT NOT NULL,
   description VARCHAR(1000),
   english_name VARCHAR(255),
-  image_path VARCHAR(255),
   price NUMERIC(38, 2) NOT NULL,
   product_name VARCHAR(255) NOT NULL,
-  inventory_item_id BIGINT,
   CONSTRAINT pk_products PRIMARY KEY (id),
-  CONSTRAINT fk_products_inventory_item FOREIGN KEY (inventory_item_id) REFERENCES inventory_items (id)
+  CONSTRAINT fk_products_category FOREIGN KEY (category_id) REFERENCES product_categories (id),
+  CONSTRAINT fk_products_inventory_item_id FOREIGN KEY (id) REFERENCES inventory_items (id)
 );
 
 CREATE TABLE reservations (

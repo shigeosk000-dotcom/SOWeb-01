@@ -54,8 +54,8 @@
                       th:attr="aria-label=|商品名 ${idx}|">
                 <option value="" th:text="${idx == 1 ? '選択してください' : '未選択'}"></option>
                 <option th:each="p : ${productOptions}"
-                        th:value="${p.inventoryItem.id}"
-                        th:selected="${(materialIds != null and #lists.size(materialIds) >= idx and materialIds[idx - 1] != null and materialIds[idx - 1] == p.inventoryItem.id) or (materialIds == null and recipe.materials != null and recipe.materials.size() >= idx and recipe.materials[idx - 1].inventoryItem.id == p.inventoryItem.id)}"
+                        th:value="${p.id}"
+                        th:selected="${(materialIds != null and #lists.size(materialIds) >= idx and materialIds[idx - 1] != null and materialIds[idx - 1] == p.id) or (materialIds == null and recipe.materials != null and recipe.materials.size() >= idx and recipe.materials[idx - 1].inventoryItem.id == p.id)}"
                         th:text="${p.productName}"></option>
               </select>
               <select class="js-material-english"
@@ -63,8 +63,8 @@
                       th:attr="aria-label=|英語名 ${idx}|">
                 <option value="" th:text="${idx == 1 ? 'Select' : 'None'}"></option>
                 <option th:each="p : ${productOptions}"
-                        th:value="${p.inventoryItem.id}"
-                        th:selected="${(materialIds != null and #lists.size(materialIds) >= idx and materialIds[idx - 1] != null and materialIds[idx - 1] == p.inventoryItem.id) or (materialIds == null and recipe.materials != null and recipe.materials.size() >= idx and recipe.materials[idx - 1].inventoryItem.id == p.inventoryItem.id)}"
+                        th:value="${p.id}"
+                        th:selected="${(materialIds != null and #lists.size(materialIds) >= idx and materialIds[idx - 1] != null and materialIds[idx - 1] == p.id) or (materialIds == null and recipe.materials != null and recipe.materials.size() >= idx and recipe.materials[idx - 1].inventoryItem.id == p.id)}"
                         th:text="${p.englishName != null and !#strings.isEmpty(p.englishName) ? p.englishName : p.productName}"></option>
               </select>
               <input name="blendRatio"
