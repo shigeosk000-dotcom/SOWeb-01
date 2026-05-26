@@ -1,4 +1,4 @@
-﻿package com.aromatripnippon.controller;
+package com.aromatripnippon.controller;
 
 import com.aromatripnippon.entity.Customer;
 import com.aromatripnippon.entity.Reservation;
