@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 
 <head>
@@ -18,26 +18,28 @@
         <div class="card form-card">
           <div class="kicker">BOOKING</div>
           <h1>予約フォーム</h1>
-          <p class="lead">日程と人数を選択し、来店に必要な情報を入力してください。</p>
+          <p class="lead">日程と人数を選択し、必要情報を入力してご予約ください。</p>
           <p class="notice" th:if="${errorMessage}" th:text="${errorMessage}"></p>
           <form th:action="@{/reservation}" th:object="${reservationRequest}" method="post" data-reservation-form>
             <input type="hidden" th:if="${_csrf != null}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-            <div class="field"><label for="date">日程</label><input id="date" type="date" th:field="*{visitDate}" required /></div>
+            <div class="field"><label for="date">日程</label><input id="date" type="date" th:field="*{visitDate}" th:attr="min=${minDate},max=${maxDate}" required /></div>
             <div class="field"><label for="time">時間</label><select id="time" th:field="*{timeSlot}" required><option value="10:00">10:00</option><option value="13:00">13:00</option><option value="16:00">16:00</option></select></div>
             <div class="field"><label for="people">人数</label><select id="people" th:field="*{guestCount}" required><option value="1">1名</option><option value="2">2名</option><option value="3">3名</option><option value="4">4名</option></select></div>
-            <div class="field"><label for="name">お名前</label><input id="name" type="text" th:field="*{name}" placeholder="山田 花子" required /></div>
+            <div class="field"><label for="name">お名前</label><input id="name" type="text" th:field="*{name}" placeholder="山田 太郎" required /></div>
             <div class="field"><label for="email">メールアドレス</label><input id="email" type="email" th:field="*{email}" placeholder="name@example.com" required /></div>
-            <div class="field"><label for="lang">希望言語</label><select id="lang" th:field="*{preferredLanguage}"><option value="Japanese">日本語</option><option value="English">English</option></select></div>
-            <div class="field"><label for="request">ご要望・備考</label><textarea id="request" cols="50" rows="3" th:field="*{requestNote}" placeholder="ご要望があれば入力してください。"></textarea></div>
-            <p class="notice" th:if="${#fields.hasErrors('*')}">入力内容を確認してください。</p>
+            <div class="field"><label for="phone">電話</label><input id="phone" type="text" th:field="*{phone}" placeholder="090-1234-5678" /></div>
+            <div class="field"><label for="nationality">国籍</label><input id="nationality" type="text" th:field="*{nationality}" placeholder="日本" /></div>
+            <div class="field"><label for="lang">希望言語</label><select id="lang" th:field="*{preferredLanguage}"><option value="日本語">日本語</option><option value="英語">英語</option></select></div>
+            <div class="field"><label for="request">要望・備考</label><textarea id="request" cols="50" rows="3" th:field="*{requestNote}" placeholder="要望があればご入力ください。"></textarea></div>
+            <p class="notice" th:if="${#fields.hasErrors('*')}">入力内容をご確認ください。</p>
             <div class="spacer"></div><button class="btn" type="submit">予約を確定する</button>
           </form>
         </div>
         <div class="card form-card">
-          <h2>予約内容</h2>
+          <h2>予約のご案内</h2>
           <div class="review" style="margin-bottom:16px"><span class="pill">プラン</span><h3 th:text="${program != null ? program.name : '香りづくり体験'}">香りづくり体験</h3><p class="text"><span th:text="${program != null ? program.durationMinutes + '分' : '約90分'}">約90分</span> / <span th:text="${program != null ? '¥' + #numbers.formatDecimal(program.price, 0, 'COMMA', 0, 'POINT') + '〜' : '¥5,500〜'}">¥5,500〜</span> / EN・JP対応</p></div>
-          <div class="review" style="margin-bottom:16px"><span class="pill">含まれる内容</span><p class="text">素材説明、調合体験、完成品持ち帰り、レシピ保存。</p></div>
-          <div class="review"><span class="pill">注意事項</span><ul class="list"><li>予約時間の10分前までにご来店ください。</li><li>香りに敏感な方は事前にご相談ください。</li><li>英語対応可能です。</li></ul></div>
+          <div class="review" style="margin-bottom:16px"><span class="pill">含まれる内容</span><p class="text">素材紹介、調香体験、完成ボトル、レシピ記録。</p></div>
+          <div class="review"><span class="pill">ご来店前のお願い</span><ul class="list"><li>予約時刻の10分前までにご来店ください。</li><li>香りに敏感な方は事前にお知らせください。</li><li>通訳対応可能です。</li></ul></div>
         </div>
       </div>
     </section>

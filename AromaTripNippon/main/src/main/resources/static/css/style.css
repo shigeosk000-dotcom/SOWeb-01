@@ -211,7 +211,7 @@ img {
 }
 
 .btn.secondary {
-  background: transparent;
+  background: #fff;
   color: var(--accent-dark);
   border: 1px solid var(--accent-dark);
   box-shadow: none;

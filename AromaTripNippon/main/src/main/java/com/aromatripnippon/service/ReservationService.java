@@ -1,4 +1,4 @@
-package com.aromatripnippon.service;
+﻿package com.aromatripnippon.service;
 
 import com.aromatripnippon.entity.Customer;
 import com.aromatripnippon.entity.ExperienceProgram;
@@ -37,9 +37,15 @@ public class ReservationService {
 
   @Transactional
   public Reservation createReservation(Reservation reservation, @Valid Customer customer) {
-    if (reservation.getVisitDate() == null || reservation.getVisitDate().isBefore(LocalDate.now())) {
-      throw new IllegalArgumentException("予約日は本日以降を選択してください。");
+    LocalDate today = LocalDate.now();
+    LocalDate maxDate = today.plusMonths(3);
+    if (reservation.getVisitDate() == null || reservation.getVisitDate().isBefore(today)) {
+      throw new IllegalArgumentException("\u4E88\u7D04\u65E5\u306F\u672C\u65E5\u4EE5\u964D\u3092\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044\u3002");
     }
+    if (reservation.getVisitDate().isAfter(maxDate)) {
+      throw new IllegalArgumentException("\u4E88\u7D04\u65E5\u306F\u672C\u65E5\u304B\u30893\u304B\u6708\u5148\u307E\u3067\u9078\u629E\u3067\u304D\u307E\u3059\u3002");
+    }
+
     Customer savedCustomer = customers.save(customer);
     ExperienceProgram program = programs.findFirstByDeletedAtIsNullAndActiveTrueOrderById()
         .orElseThrow(() -> new IllegalStateException("Active experience program is not configured."));

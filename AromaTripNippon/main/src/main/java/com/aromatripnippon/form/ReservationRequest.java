@@ -22,7 +22,9 @@ public class ReservationRequest {
   @Email
   @NotBlank
   private String email;
-  private String preferredLanguage = "English";
+  private String phone;
+  private String nationality;
+  private String preferredLanguage = "英語";
   private String requestNote;
 
   public LocalDate getVisitDate() { return visitDate; }
@@ -35,6 +37,10 @@ public class ReservationRequest {
   public void setName(String name) { this.name = name; }
   public String getEmail() { return email; }
   public void setEmail(String email) { this.email = email; }
+  public String getPhone() { return phone; }
+  public void setPhone(String phone) { this.phone = phone; }
+  public String getNationality() { return nationality; }
+  public void setNationality(String nationality) { this.nationality = nationality; }
   public String getPreferredLanguage() { return preferredLanguage; }
   public void setPreferredLanguage(String preferredLanguage) { this.preferredLanguage = preferredLanguage; }
   public String getRequestNote() { return requestNote; }

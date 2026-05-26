@@ -31,7 +31,7 @@
           <p class="notice" th:if="${errorMessage}" th:text="${errorMessage}"></p>
           <form th:action="@{/en/reservation}" th:object="${reservationRequest}" method="post" data-reservation-form>
             <input type="hidden" th:if="${_csrf != null}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-            <div class="field"><label for="date">Preferred date</label><input id="date" type="date" th:field="*{visitDate}" lang="en" aria-describedby="date-format" required /><span class="field-hint" id="date-format">Format: YYYY-MM-DD</span></div>
+            <div class="field"><label for="date">Preferred date</label><input id="date" type="date" th:field="*{visitDate}" th:attr="min=${minDate},max=${maxDate}" lang="en" aria-describedby="date-format" required /><span class="field-hint" id="date-format">Format: YYYY-MM-DD</span></div>
             <div class="field"><label for="time">Time</label><select id="time" th:field="*{timeSlot}" required>
                 <option value="10:00">10:00</option>
                 <option value="13:00">13:00</option>
@@ -45,6 +45,8 @@
               </select></div>
             <div class="field"><label for="name">Name</label><input id="name" type="text" th:field="*{name}" placeholder="Jane Smith" required /></div>
             <div class="field"><label for="email">Email</label><input id="email" type="email" th:field="*{email}" placeholder="name@example.com" required /></div>
+            <div class="field"><label for="phone">Phone</label><input id="phone" type="text" th:field="*{phone}" placeholder="+1 555 123 4567" /></div>
+            <div class="field"><label for="nationality">Nationality</label><input id="nationality" type="text" th:field="*{nationality}" placeholder="United States" /></div>
             <div class="field"><label for="lang">Preferred language</label><select id="lang" th:field="*{preferredLanguage}">
                 <option value="English">English</option>
                 <option value="Japanese">Japanese</option>

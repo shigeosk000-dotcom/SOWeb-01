@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+﻿document.addEventListener("DOMContentLoaded", () => {
   const form = document.querySelector("[data-reservation-form]");
   if (!form) return;
 
@@ -6,9 +6,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const visitDateInput = form.querySelector('input[name="visitDate"]');
   const now = new Date();
   const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+  const max = (() => {
+    const maxDate = new Date(now.getFullYear(), now.getMonth() + 3, now.getDate());
+    return `${maxDate.getFullYear()}-${String(maxDate.getMonth() + 1).padStart(2, "0")}-${String(maxDate.getDate()).padStart(2, "0")}`;
+  })();
 
   if (visitDateInput) {
     visitDateInput.min = today;
+    visitDateInput.max = max;
   }
 
   form.addEventListener("submit", (event) => {
@@ -17,6 +22,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (visitDate && visitDate < today) {
       event.preventDefault();
       window.alert(isEnglish ? "Please choose today or a future date." : "予約日は本日以降を選択してください。");
+      return;
+    }
+    if (visitDate && visitDate > max) {
+      event.preventDefault();
+      window.alert(isEnglish ? "Please choose a date within 3 months from today." : "予約日は本日から3か月先まで選択できます。");
       return;
     }
 
@@ -29,19 +39,23 @@ document.addEventListener("DOMContentLoaded", () => {
           `Guests: ${data.get("guestCount")}`,
           `Name: ${data.get("name")}`,
           `Email: ${data.get("email")}`,
+          `Phone: ${data.get("phone") || "-"}`,
+          `Nationality: ${data.get("nationality") || "-"}`,
           "",
           "Please confirm the details before submitting.",
         ]
       : [
-          "以下の内容で予約を登録します。",
+          "この内容で予約を送信します。",
           "",
-          `来店日: ${data.get("visitDate")}`,
-          `時間帯: ${data.get("timeSlot")}`,
+          `日程: ${data.get("visitDate")}`,
+          `時間: ${data.get("timeSlot")}`,
           `人数: ${data.get("guestCount")}`,
-          `氏名: ${data.get("name")}`,
+          `名前: ${data.get("name")}`,
           `メール: ${data.get("email")}`,
+          `電話: ${data.get("phone") || "-"}`,
+          `国籍: ${data.get("nationality") || "-"}`,
           "",
-          "登録してよろしいですか？",
+          "送信前に内容をご確認ください。",
         ];
 
     if (!window.confirm(lines.join("\n"))) {
