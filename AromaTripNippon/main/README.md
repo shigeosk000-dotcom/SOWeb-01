@@ -1,7 +1,8 @@
 # AromaTripNippon Phase1
 
-`AromaTripNippon/main` 配下にある Spring Boot 実装です。  
+`AromaTripNippon/main` 配下にある Spring Boot 実装です。
 本READMEは UTF-8（日本語）で記載しています。
+ソースコード等、テキストファイルはすべてUTF-8（日本語）BOMなしで記載します。
 
 ## Phase1実装範囲
 
@@ -43,13 +44,13 @@
 ## ログイン情報
 
 - 管理画面URL: `http://localhost:8080/management/login`
-- ログインID: `Adm01`
+- ログインID: `AromaTripAdm01`
 - パスワード: `password`
 
 ## 起動手順（H2デフォルト）
 
-1. JDK 17以上を使用します。  
-   `pom.xml` では Java release `25` が指定されています。
+1. JDK 17以上を使用します。
+   `pom.xml` では Java release `17` が指定されています。
 2. 以下を実行します。
 
 ```bash
