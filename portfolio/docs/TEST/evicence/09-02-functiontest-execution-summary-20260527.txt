@@ -1,0 +1,35 @@
+09-02-functiontest 実施サマリ
+実施日: 2026-05-27
+実施者: Codex
+実施方法: Maven test (./mvnw -q test)
+結果: PASS (全JUnitテスト成功)
+
+OK反映ID一覧:
+- IT-010 : PublicControllerTest.postReservation_redirectsToCompleteWhenValid
+- IT-011 : PublicControllerTest.postEnglishReservation_redirectsToEnglishCompleteWhenValid
+- IT-013 : ManagementFlowIntegrationTest.managementCrudAndInventoryHistory_workAfterLogin
+- IT-014 : ManagementFlowIntegrationTest.reservationList_rendersAndSeedLucasCustomerCannotBeDeletedWhenRecipeExists
+- IT-016 : ManagementFlowIntegrationTest.managementCrudAndInventoryHistory_workAfterLogin
+- IT-017 : ManagementFlowIntegrationTest.managementCrudAndInventoryHistory_workAfterLogin
+- IT-018 : ManagementFlowIntegrationTest.reservationList_canDeleteAndMarksExpiredRows
+- IT-021 : ManagementFlowIntegrationTest.managementCrudAndInventoryHistory_workAfterLogin
+- IT-022 : ManagementFlowIntegrationTest.managementLists_canDeleteAndBlockParentDeletesWhenRelatedDataRemains
+- IT-023 : ManagementFlowIntegrationTest.managementLists_canDeleteAndBlockParentDeletesWhenRelatedDataRemains
+- IT-024 : ManagementFlowIntegrationTest.managementLists_canDeleteAndBlockParentDeletesWhenRelatedDataRemains
+- IT-026 : ManagementFlowIntegrationTest.recipeUpdate_rejectsWhenBlendRatioTotalIsNot100
+- IT-028 : ManagementFlowIntegrationTest.managementCrudAndInventoryHistory_workAfterLogin
+- IT-029 : ManagementFlowIntegrationTest.managementLists_canDeleteAndBlockParentDeletesWhenRelatedDataRemains
+- IT-031 : ManagementFlowIntegrationTest.managementCrudAndInventoryHistory_workAfterLogin
+- IT-033 : ManagementFlowIntegrationTest.managementLists_canDeleteAndBlockParentDeletesWhenRelatedDataRemains
+- IT-036 : ManagementFlowIntegrationTest.managementCrudAndInventoryHistory_workAfterLogin
+- IT-037 : ManagementFlowIntegrationTest.managementCrudAndInventoryHistory_workAfterLogin
+- IT-041 : PublicControllerTest.postReservation_returnsFormWhenVisitDateIsPast
+- IT-055 : ManagementFlowIntegrationTest.managementPage_requiresAuthentication
+- IT-057 : ManagementFlowIntegrationTest.postWithoutCsrf_isRejected
+- IT-058 : ManagementFlowIntegrationTest.xssPayload_isEscapedOnRender
+
+主なエビデンス:
+- TEST-com.aromatripnippon.controller.ManagementFlowIntegrationTest.xml
+- TEST-com.aromatripnippon.controller.PublicControllerTest.xml
+- TEST-com.aromatripnippon.service.InventoryServiceTest.xml
+- TEST-com.aromatripnippon.service.ReservationServiceTest.xml
