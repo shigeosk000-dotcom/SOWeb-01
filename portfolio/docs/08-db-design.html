@@ -27,6 +27,11 @@
           <span><span class="material-symbols-outlined icon-sm">person</span> 作成者：尾坂 成紀</span>
           <span><span class="material-symbols-outlined icon-sm">push_pin</span> Ver 1.0</span>
         </div>
+        <div class="doc-meta">
+          <span><span class="material-symbols-outlined icon-sm">calendar_today</span> 更新日：2026-05-27</span>
+          <span><span class="material-symbols-outlined icon-sm">person</span> 更新者：尾坂 成紀</span>
+          <span><span class="material-symbols-outlined icon-sm">push_pin</span> Ver 1.1</span>
+        </div>
       </header>
 
       <div class="doc-body">
@@ -89,7 +94,7 @@
 [customers] 1 ──── * [fragrance_recipes] 1 ──── * [fragrance_recipe_materials]
   id (PK)                id (PK)                    id (PK)
                          customer_id (FK)           fragrance_recipe_id (FK)
-                         recipe_name                product_id (FK)
+                         recipe_name                inventory_item_id (FK)
                          ...                        material_name_snapshot
                                                     blend_ratio
                                                     display_order
@@ -97,11 +102,11 @@
 
 [product_categories] 1 ──── * [products] * ──── 1 [inventory_items] 1 ──── * [inventory_transactions]
   id (PK)                id (PK)                    id (PK)                 id (PK)
-  category_name          inventory_item_id (FK)     item_name               inventory_item_id (FK)
+  category_name          category_id (FK)           item_name               inventory_item_id (FK)
   display_order          product_name               category                transaction_type
-  is_active              category                   stock_quantity           quantity
+  is_active              english_name               stock_quantity           quantity
                          price                      threshold_quantity       reason
-                         image_path                 storage_location         transaction_date
+                         id = inventory_items.id    storage_location         transaction_date
                          is_active                  ...                      created_by
                          ...                                                 ...
 
@@ -126,11 +131,12 @@
                       <tr>
                         <td><code>product_categories</code></td>
                         <td>商品カテゴリ（カテゴリ名、表示順、有効状態）を管理。初期値は「製品」「素材」「容器」。</td>
-                        <td><code>products.category</code> の選択元。</td>
+                        <td><code>products.category_id</code> の参照元。</td>
                       </tr>
                       <tr>
                         <td><code>products</code></td>
-                        <td>商品マスタ。カテゴリは <code>product_categories</code> の登録値から選択し、<code>products.category</code> に保持。</td>
+                        <td>商品マスタ。カテゴリは <code>product_categories</code> を外部キー（<code>products.category_id</code>）で参照。
+                        </td>
                         <td><code>product_categories</code> を参照、<code>inventory_items</code> と関連。</td>
                       </tr>
                       <tr>
@@ -146,7 +152,7 @@
                       <tr>
                         <td><code>fragrance_recipe_materials</code></td>
                         <td>レシピ素材明細。選択可能素材は在庫品目と商品カテゴリの運用ルールに従う。</td>
-                        <td><code>fragrance_recipes</code> と多対1、<code>products</code> と多対1。</td>
+                        <td><code>fragrance_recipes</code> と多対1、<code>inventory_items</code> と多対1。</td>
                       </tr>
                       <tr>
                         <td><code>customers</code> / <code>reservations</code></td>
@@ -772,7 +778,7 @@
                     <tr>
                       <td>reservation_time</td>
                       <td>来店時間</td>
-                      <td>TIME</td>
+                      <td>VARCHAR(255)</td>
                       <td>不可</td>
                       <td>なし</td>
                       <td>NOT NULL</td>
@@ -782,9 +788,9 @@
                       <td>number_of_people</td>
                       <td>人数</td>
                       <td>INT</td>
-                      <td>不可</td>
-                      <td>1</td>
-                      <td>NOT NULL</td>
+                      <td>可</td>
+                      <td>NULL</td>
+                      <td>-</td>
                       <td>予約人数。</td>
                     </tr>
                     <tr>
@@ -985,9 +991,9 @@
                       <td>blend_ratio</td>
                       <td>配合率</td>
                       <td>DECIMAL(5,2)</td>
-                      <td>不可</td>
-                      <td>0.00</td>
-                      <td>NOT NULL</td>
+                      <td>可</td>
+                      <td>NULL</td>
+                      <td>-</td>
                       <td>配合率。例：45.00。</td>
                     </tr>
                     <tr>
@@ -1003,9 +1009,9 @@
                       <td>display_order</td>
                       <td>表示順</td>
                       <td>INT</td>
-                      <td>不可</td>
-                      <td>1</td>
-                      <td>NOT NULL</td>
+                      <td>可</td>
+                      <td>NULL</td>
+                      <td>-</td>
                       <td>素材の表示順。</td>
                     </tr>
                     <tr>
@@ -1096,9 +1102,9 @@
                       <td>threshold_quantity</td>
                       <td>在庫警告しきい値</td>
                       <td>DECIMAL(10,2)</td>
-                      <td>不可</td>
-                      <td>0.00</td>
-                      <td>NOT NULL</td>
+                      <td>可</td>
+                      <td>NULL</td>
+                      <td>-</td>
                       <td>在庫少表示に使用するしきい値。</td>
                     </tr>
                     <tr>
@@ -1297,13 +1303,13 @@
                       <td>商品を一意に識別するID。</td>
                     </tr>
                     <tr>
-                      <td>inventory_item_id</td>
-                      <td>在庫品目ID</td>
+                      <td>category_id</td>
+                      <td>商品カテゴリID</td>
                       <td>BIGINT</td>
-                      <td>可</td>
-                      <td>NULL</td>
-                      <td>FK → inventory_items.id</td>
-                      <td>商品と紐づく在庫品目ID。</td>
+                      <td>不可</td>
+                      <td>なし</td>
+                      <td>FK → product_categories.id</td>
+                      <td>商品カテゴリの外部キー。</td>
                     </tr>
                     <tr>
                       <td>product_name</td>
@@ -1315,18 +1321,18 @@
                       <td>販売商品名。</td>
                     </tr>
                     <tr>
-                      <td>category</td>
-                      <td>カテゴリ</td>
-                      <td>VARCHAR(30)</td>
-                      <td>不可</td>
-                      <td>なし</td>
-                      <td>NOT NULL</td>
-                      <td><code>product_categories.category_name</code> の登録値（製品、素材、容器）。</td>
+                      <td>english_name</td>
+                      <td>英語商品名</td>
+                      <td>VARCHAR(255)</td>
+                      <td>可</td>
+                      <td>NULL</td>
+                      <td>-</td>
+                      <td>英語表示用の商品名。</td>
                     </tr>
                     <tr>
                       <td>price</td>
                       <td>価格</td>
-                      <td>INT</td>
+                      <td>NUMERIC(38,2)</td>
                       <td>不可</td>
                       <td>0</td>
                       <td>NOT NULL</td>
@@ -3046,7 +3052,7 @@
 
 
                 <h3>更新後INSERT文（優先）</h3>
-                <p>以下はDB更新後構造（product_categories、products.category のマスタ選択）に対応した初期データ例です。</p>
+                <p>以下はDB更新後構造（products.category_id による商品カテゴリ参照）に対応した初期データ例です。</p>
                 <table class="spec-table">
                   <thead>
                     <tr>
@@ -3068,29 +3074,29 @@
                       <td><code>products</code></td>
                       <td>
                         <pre><code>INSERT INTO products (
-  id, inventory_item_id, product_name, category, price, image_path, is_active, description, created_at, updated_at
+  id, category_id, product_name, english_name, price, is_active, description, created_at, updated_at
 ) VALUES
-(1, NULL, 'Aroma Mist 30ml', '製品', 4200, '/assets/images/material_yuzu.png', TRUE, '販売用アロマミスト', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-(2, NULL, 'Yuzu essential oil', '素材', 3200, '/assets/images/material_yuzu.png', TRUE, '高知産ゆずの精油', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-(3, NULL, 'Glass bottle 30ml', '容器', 800, '/assets/images/material_hakka.png', TRUE, '30mlガラスボトル', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);</code></pre>
+(1, 1, 'Aroma Mist 30ml', 'Aroma Mist 30ml', 4200.00, TRUE, '販売用アロマミスト', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(2, 2, 'Yuzu essential oil', 'Yuzu essential oil', 3200.00, TRUE, '高知産ゆずの精油', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(3, 3, 'Glass bottle 30ml', 'Glass bottle 30ml', 800.00, TRUE, '30mlガラスボトル', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);</code></pre>
                       </td>
                     </tr>
                     <tr>
                       <td><code>inventory_items</code></td>
                       <td>
                         <pre><code>INSERT INTO inventory_items (
-  id, product_id, stock_quantity, threshold_quantity, storage_location, supplier, last_stocked_date, memo, created_at, updated_at
+  id, item_name, category, english_name, stock_quantity, unit, threshold_quantity, storage_location, supplier, last_stocked_date, memo, created_at, updated_at
 ) VALUES
-(1, 1, 500, 100, 'Shelf A', 'Kyushu Botanicals', CURRENT_DATE, '初期在庫', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-(2, 2, 420, 80,  'Shelf A', 'Aomori Wood Lab', CURRENT_DATE, '初期在庫', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-(3, 3, 120, 30,  'Shelf B', 'Tokyo Bottle Works', CURRENT_DATE, '初期在庫', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);</code></pre>
+(1, 'Aroma Mist 30ml', '製品', 'Aroma Mist 30ml', 500.00, 'pcs', 100.00, 'Shelf A', 'Kyushu Botanicals', CURRENT_DATE, '初期在庫', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(2, 'Yuzu essential oil', '素材', 'Yuzu essential oil', 420.00, 'ml', 80.00, 'Shelf A', 'Aomori Wood Lab', CURRENT_DATE, '初期在庫', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(3, 'Glass bottle 30ml', '容器', 'Glass bottle 30ml', 120.00, 'pcs', 30.00, 'Shelf B', 'Tokyo Bottle Works', CURRENT_DATE, '初期在庫', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);</code></pre>
                       </td>
                     </tr>
                     <tr>
                       <td><code>fragrance_recipe_materials</code></td>
                       <td>
                         <pre><code>INSERT INTO fragrance_recipe_materials (
-  id, fragrance_recipe_id, product_id, material_name_snapshot, blend_ratio, amount, display_order, created_at, updated_at
+  id, fragrance_recipe_id, inventory_item_id, material_name_snapshot, blend_ratio, amount, display_order, created_at, updated_at
 ) VALUES
 (1, 1, 1, 'Yuzu essential oil', 60.00, 60.00, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 (2, 1, 2, 'Aomori hiba essential oil', 40.00, 40.00, 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);</code></pre>

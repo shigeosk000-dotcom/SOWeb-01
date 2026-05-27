@@ -1,0 +1,323 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: "Yu Gothic", Meiryo, sans-serif;
+            margin: 24px
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            min-width: 1800px
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            vertical-align: top;
+            font-size: 13px
+        }
+
+        th {
+            background: #f3f3f3
+        }
+
+        .wrap {
+            overflow-x: auto
+        }
+    </style>
+    <title>システムテスト</title>
+</head>
+
+<body>
+    <h1>システムテスト</h1>
+    <div class="wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>システム種別</th>
+                    <th>対象機能</th>
+                    <th>テスト種別</th>
+                    <th>テスト内容</th>
+                    <th>前提条件</th>
+                    <th>期待結果</th>
+                    <th>実施者</th>
+                    <th>実施日</th>
+                    <th>OK/NG</th>
+                    <th>備考</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>ST-001</td>
+                    <td>システムテスト</td>
+                    <td>利用者導線（日本語）</td>
+                    <td>正常系</td>
+                    <td>利用者がトップ→体験/コンセプト閲覧→予約入力→完了まで実施</td>
+                    <td>アプリ起動済み、公開導線有効</td>
+                    <td>一連の導線が中断なく完了する</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>ST-002</td>
+                    <td>システムテスト</td>
+                    <td>利用者導線（英語）</td>
+                    <td>正常系</td>
+                    <td>英語トップ→英語サブ画面閲覧→英語予約入力→完了まで実施</td>
+                    <td>`/en`利用可能</td>
+                    <td>英語導線で完了まで実施できる</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>ST-003</td>
+                    <td>システムテスト</td>
+                    <td>日英切替横断</td>
+                    <td>正常系</td>
+                    <td>閲覧途中に日英切替して導線継続</td>
+                    <td>公開導線有効</td>
+                    <td>言語切替後も該当画面へ遷移できる</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>ST-004</td>
+                    <td>システムテスト</td>
+                    <td>管理者導線（全サブ画面）</td>
+                    <td>正常系</td>
+                    <td>管理者ログイン後、予約/顧客/レシピ/商品/在庫/アカウント各画面を閲覧</td>
+                    <td>管理者アカウント有効</td>
+                    <td>全サブ画面が閲覧可能</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>ST-005</td>
+                    <td>システムテスト</td>
+                    <td>予約反映確認</td>
+                    <td>正常系</td>
+                    <td>ST-001またはST-002で登録した予約を管理予約一覧で確認</td>
+                    <td>利用者予約登録済み</td>
+                    <td>予約が一覧・詳細に反映される</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>ST-006</td>
+                    <td>システムテスト</td>
+                    <td>管理新規登録反映</td>
+                    <td>正常系</td>
+                    <td>顧客/商品/在庫/レシピ/予約を新規登録</td>
+                    <td>各マスタ初期データあり</td>
+                    <td>DBと画面双方に登録結果が反映</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>ST-007</td>
+                    <td>システムテスト</td>
+                    <td>管理編集反映</td>
+                    <td>正常系</td>
+                    <td>上記登録データを編集して保存</td>
+                    <td>対象データ登録済み</td>
+                    <td>DBと画面双方に更新結果が反映</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>ST-008</td>
+                    <td>システムテスト</td>
+                    <td>削除確認ダイアログ</td>
+                    <td>正常系</td>
+                    <td>一覧の削除操作時に確認アラートを表示、OKで削除</td>
+                    <td>対象データあり</td>
+                    <td>OK時のみ論理削除され一覧から消える</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>ST-009</td>
+                    <td>システムテスト</td>
+                    <td>参照付き削除抑止</td>
+                    <td>正常系</td>
+                    <td>親データ参照がある顧客/商品を削除操作</td>
+                    <td>関連データあり</td>
+                    <td>警告表示し削除されず一覧に戻る</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>ST-010</td>
+                    <td>システムテスト</td>
+                    <td>直アクセス制御（管理）</td>
+                    <td>異常系</td>
+                    <td>未ログインで管理配下URLへ直接アクセス</td>
+                    <td>未ログイン状態</td>
+                    <td>ログインページへ遷移</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>ST-011</td>
+                    <td>システムテスト</td>
+                    <td>不正ログイン入力</td>
+                    <td>異常系</td>
+                    <td>誤ID/PW、空欄、過長文字でログイン試行</td>
+                    <td>管理ログイン画面表示中</td>
+                    <td>認証失敗し管理画面へ入れない</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>ST-012</td>
+                    <td>システムテスト</td>
+                    <td>公開予約異常入力</td>
+                    <td>異常系</td>
+                    <td>必須欠落/形式不正/範囲外値で予約送信</td>
+                    <td>予約フォーム表示中</td>
+                    <td>適切なエラーで登録不可</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>ST-013</td>
+                    <td>システムテスト</td>
+                    <td>境界値（予約人数・日付）</td>
+                    <td>境界値</td>
+                    <td>人数1,4/0,5、日付=本日/3か月境界/超過を実施</td>
+                    <td>予約フォーム表示中</td>
+                    <td>境界内のみ成功、境界外は失敗</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>ST-014</td>
+                    <td>システムテスト</td>
+                    <td>境界値（0件表示）</td>
+                    <td>境界値</td>
+                    <td>各一覧検索で0件条件を投入</td>
+                    <td>各一覧画面表示中</td>
+                    <td>0件時も表示崩れ/エラーなし</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>ST-015</td>
+                    <td>システムテスト</td>
+                    <td>非機能-表示性能</td>
+                    <td>非機能</td>
+                    <td>主要画面初回表示時間を計測</td>
+                    <td>ローカル標準環境</td>
+                    <td>仕様書の性能要件内で表示される</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>ST-016</td>
+                    <td>システムテスト</td>
+                    <td>非機能-可用性（基本動作継続）</td>
+                    <td>非機能</td>
+                    <td>連続操作（閲覧・登録・検索）を一定回数実施</td>
+                    <td>アプリ稼働中</td>
+                    <td>途中エラー停止なく継続動作する</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>ST-017</td>
+                    <td>システムテスト</td>
+                    <td>非機能-セキュリティ（認可）</td>
+                    <td>非機能</td>
+                    <td>権限外URL、CSRFなしPOST、XSS入力を確認</td>
+                    <td>テストアカウント準備</td>
+                    <td>認可防御/CSRF防御/XSS無害化が機能</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>ST-018</td>
+                    <td>システムテスト</td>
+                    <td>非機能-ログ/監査</td>
+                    <td>非機能</td>
+                    <td>管理の登録/更新/削除操作後に監査ログ確認</td>
+                    <td>管理ログイン済み</td>
+                    <td>主要操作の監査ログが記録される</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>ST-019</td>
+                    <td>システムテスト</td>
+                    <td>非機能-レスポンシブ</td>
+                    <td>非機能</td>
+                    <td>公開画面をPC/スマホで一通り操作</td>
+                    <td>各画面表示可能</td>
+                    <td>レスポンシブ崩れなく操作可能</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>ST-020</td>
+                    <td>システムテスト</td>
+                    <td>スコープ確認（Phase2除外）</td>
+                    <td>非機能</td>
+                    <td>マイページ等Phase2機能を除外してテスト実施</td>
+                    <td>仕様書でPhase区分確認済み</td>
+                    <td>Phase1対象のみでテスト完了する</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
