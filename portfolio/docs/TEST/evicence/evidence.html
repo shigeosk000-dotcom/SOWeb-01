@@ -1,137 +1,72 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<title>JUnitテスト結果レポート</title>
+<title>JUnitテスト結果レポート（2026-05-27 実行分）</title>
 <style>
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  margin: 32px;
-  line-height: 1.6;
-  color: #222;
-}
-h1, h2 { margin-top: 1.2em; }
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 12px;
-  margin: 20px 0;
-}
-.card {
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  padding: 16px;
-  background: #fafafa;
-}
-.num {
-  font-size: 28px;
-  font-weight: 700;
-}
-.ok .num { color: #147a2e; }
-.fail .num, .err .num { color: #b42318; }
-.skip .num { color: #946200; }
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 12px 0 28px;
-  font-size: 14px;
-}
-th, td {
-  border: 1px solid #ddd;
-  padding: 8px 10px;
-  vertical-align: top;
-}
-th {
-  background: #f2f4f7;
-  text-align: left;
-}
-.okrow td:first-child {
-  color: #147a2e;
-  font-weight: 700;
-}
-.badrow td:first-child {
-  color: #b42318;
-  font-weight: 700;
-}
-pre {
-  white-space: pre-wrap;
-  margin: 0;
-  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
-}
-.note {
-  background: #fff8e1;
-  border: 1px solid #f3d27a;
-  border-radius: 10px;
-  padding: 12px 14px;
-  margin: 16px 0;
-}
-.footer {
-  color: #666;
-  font-size: 12px;
-  margin-top: 32px;
-}
+body { font-family: "Yu Gothic UI", "Meiryo", sans-serif; margin: 28px; line-height: 1.55; color: #222; }
+h1 { margin: 0 0 6px; }
+.small { color: #555; font-size: 13px; }
+.note { background:#fff8e8; border:1px solid #f2d48a; border-radius:10px; padding:10px 12px; margin:14px 0 20px; }
+.cards { display:grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap:10px; margin:12px 0 22px; }
+.card { border:1px solid #ddd; border-radius:10px; padding:12px; background:#fafafa; }
+.num { font-size:24px; font-weight:700; }
+.ok .num { color:#1b7f3a; } .ng .num { color:#b42318; }
+table { width:100%; border-collapse:collapse; margin:10px 0 24px; font-size:13px; }
+th,td { border:1px solid #ddd; padding:7px 9px; vertical-align:top; }
+th { background:#f4f6f8; text-align:left; }
+.pass { color:#1b7f3a; font-weight:700; }
+.fail { color:#b42318; font-weight:700; }
 </style>
 </head>
 <body>
 <h1>JUnitテスト結果レポート</h1>
-<p>JUnit/SurefireのXMLファイルを、人が読みやすい形にまとめたレポートです。</p>
-
-<div class="note">
-  <strong>補足:</strong> 「テスト内容」は、XMLに含まれるテストメソッド名から日本語化しています。
-  テストコード本体がない場合、詳細な検証条件までは推測になります。
-</div>
-
+<div class="small">対象: 2026-05-27 実行分（Maven Surefire XML）</div>
+<div class="note">このレポートは <code>evicence</code> 配下の <code>TEST-*.xml</code>（5/27更新分）から生成しています。</div>
 
 <div class="cards">
   <div class="card"><div class="num">5</div><div>XMLファイル数</div></div>
-  <div class="card"><div class="num">12</div><div>実行テスト数</div></div>
-  <div class="card ok"><div class="num">12</div><div>成功</div></div>
-  <div class="card fail"><div class="num">0</div><div>失敗</div></div>
-  <div class="card err"><div class="num">0</div><div>エラー</div></div>
-  <div class="card skip"><div class="num">0</div><div>スキップ</div></div>
-  <div class="card"><div class="num">43.282秒</div><div>合計時間</div></div>
+  <div class="card"><div class="num">19</div><div>テスト件数</div></div>
+  <div class="card ok"><div class="num">19</div><div>成功</div></div>
+  <div class="card ng"><div class="num">0</div><div>失敗</div></div>
+  <div class="card ng"><div class="num">0</div><div>エラー</div></div>
+  <div class="card"><div class="num">0</div><div>スキップ</div></div>
+  <div class="card"><div class="num">17.821s</div><div>合計時間</div></div>
 </div>
 
-
-<h2>テストスイート別サマリー</h2>
+<h2>テストスイート一覧</h2>
 <table>
-<thead>
-<tr>
-<th>状態</th><th>テストスイート</th><th>件数</th><th>失敗</th><th>エラー</th><th>スキップ</th><th>時間</th><th>元ファイル</th><th>備考</th>
-</tr>
-</thead>
-<tbody>
-<tr class='okrow'><td>成功</td><td>com.aromatripnippon.TemplateScopeTest</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0.048秒</td><td>TEST-com.aromatripnippon.TemplateScopeTest.xml</td><td></td></tr>
-<tr class='okrow'><td>成功</td><td>com.aromatripnippon.controller.ManagementFlowIntegrationTest</td><td>7</td><td>0</td><td>0</td><td>0</td><td>10.844秒</td><td>TEST-com.aromatripnippon.controller.ManagementFlowIntegrationTest.xml</td><td></td></tr>
-<tr class='okrow'><td>成功</td><td>com.aromatripnippon.controller.PublicControllerTest</td><td>2</td><td>0</td><td>0</td><td>0</td><td>30.246秒</td><td>TEST-com.aromatripnippon.controller.PublicControllerTest.xml</td><td></td></tr>
-<tr class='okrow'><td>成功</td><td>com.aromatripnippon.service.InventoryServiceTest</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1.302秒</td><td>TEST-com.aromatripnippon.service.InventoryServiceTest.xml</td><td></td></tr>
-<tr class='okrow'><td>成功</td><td>com.aromatripnippon.service.ReservationServiceTest</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0.842秒</td><td>TEST-com.aromatripnippon.service.ReservationServiceTest.xml</td><td></td></tr>
-</tbody>
-</table>
-
-<h2>テストケース別詳細</h2>
+<thead><tr><th>状態</th><th>スイート</th><th>tests</th><th>failures</th><th>errors</th><th>skipped</th><th>time</th><th>ファイル</th></tr></thead>
+<tbody><tr><td class='pass'>PASS</td><td>com.aromatripnippon.controller.ManagementFlowIntegrationTest</td><td>12</td><td>0</td><td>0</td><td>0</td><td>13.667s</td><td>TEST-com.aromatripnippon.controller.ManagementFlowIntegrationTest.xml</td></tr>
+<tr><td class='pass'>PASS</td><td>com.aromatripnippon.controller.PublicControllerTest</td><td>4</td><td>0</td><td>0</td><td>0</td><td>1.920s</td><td>TEST-com.aromatripnippon.controller.PublicControllerTest.xml</td></tr>
+<tr><td class='pass'>PASS</td><td>com.aromatripnippon.service.InventoryServiceTest</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1.284s</td><td>TEST-com.aromatripnippon.service.InventoryServiceTest.xml</td></tr>
+<tr><td class='pass'>PASS</td><td>com.aromatripnippon.service.ReservationServiceTest</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0.891s</td><td>TEST-com.aromatripnippon.service.ReservationServiceTest.xml</td></tr>
+<tr><td class='pass'>PASS</td><td>com.aromatripnippon.TemplateScopeTest</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0.059s</td><td>TEST-com.aromatripnippon.TemplateScopeTest.xml</td></tr>
+</tbody></table>
+<h2>テストケース一覧</h2>
 <table>
-<thead>
-<tr>
-<th>状態</th><th>クラス</th><th>テスト名</th><th>テスト内容</th><th>時間</th><th>失敗・エラー内容</th>
-</tr>
-</thead>
+<thead><tr><th>状態</th><th>クラス</th><th>テストケース</th><th>time</th><th>失敗/エラーメッセージ</th></tr></thead>
 <tbody>
-<tr class='okrow'><td>成功</td><td>com.aromatripnippon.TemplateScopeTest</td><td>templates_doNotContainPhase2LinksOrKeywords</td><td>テンプレート内に、Phase2向けのリンクやキーワードが含まれていないことを確認するテスト</td><td>0.045秒</td><td><pre></pre></td></tr>
-<tr class='okrow'><td>成功</td><td>com.aromatripnippon.controller.ManagementFlowIntegrationTest</td><td>xssPayload_isEscapedOnRender</td><td>XSS攻撃用の文字列を画面に表示したとき、HTMLとして実行されず安全にエスケープされることを確認するテスト</td><td>1.324秒</td><td><pre></pre></td></tr>
-<tr class='okrow'><td>成功</td><td>com.aromatripnippon.controller.ManagementFlowIntegrationTest</td><td>managementAction_missingEntity_redirectsWithErrorMessage</td><td>管理画面の一連の操作に関するテスト（テスト名から推測: 管理画面・action・missing・entity・redirects・with・error・message）</td><td>0.114秒</td><td><pre></pre></td></tr>
-<tr class='okrow'><td>成功</td><td>com.aromatripnippon.controller.ManagementFlowIntegrationTest</td><td>managementPage_requiresAuthentication</td><td>管理画面の一連の操作に関するテスト（テスト名から推測: 管理画面・page・requires・authentication）</td><td>0.008秒</td><td><pre></pre></td></tr>
-<tr class='okrow'><td>成功</td><td>com.aromatripnippon.controller.ManagementFlowIntegrationTest</td><td>postWithoutCsrf_isRejected</td><td>管理画面の一連の操作に関するテスト（テスト名から推測: post・without・csrf・〜であること・rejected）</td><td>0.093秒</td><td><pre></pre></td></tr>
-<tr class='okrow'><td>成功</td><td>com.aromatripnippon.controller.ManagementFlowIntegrationTest</td><td>recipeUpdate_rejectsWhenBlendRatioTotalIsNot100</td><td>管理画面の一連の操作に関するテスト（テスト名から推測: recipe・更新・rejects・条件・blend・ratio・total・〜であること・〜でないこと・100）</td><td>0.212秒</td><td><pre></pre></td></tr>
-<tr class='okrow'><td>成功</td><td>com.aromatripnippon.controller.ManagementFlowIntegrationTest</td><td>sessionTimeout_afterInvalidation_requiresRelogin</td><td>管理画面の一連の操作に関するテスト（テスト名から推測: session・timeout・after・invalidation・requires・relogin）</td><td>0.091秒</td><td><pre></pre></td></tr>
-<tr class='okrow'><td>成功</td><td>com.aromatripnippon.controller.ManagementFlowIntegrationTest</td><td>managementCrudAndInventoryHistory_workAfterLogin</td><td>管理画面の一連の操作に関するテスト（テスト名から推測: 管理画面・crud・and・在庫・history・work・after・ログイン）</td><td>0.305秒</td><td><pre></pre></td></tr>
-<tr class='okrow'><td>成功</td><td>com.aromatripnippon.controller.PublicControllerTest</td><td>postReservation_redirectsToCompleteWhenValid</td><td>公開画面に関するテスト（テスト名から推測: post・予約・redirects・to・complete・条件・正常）</td><td>0.547秒</td><td><pre></pre></td></tr>
-<tr class='okrow'><td>成功</td><td>com.aromatripnippon.controller.PublicControllerTest</td><td>postReservation_returnsFormWhenVisitDateIsPast</td><td>公開画面に関するテスト（テスト名から推測: post・予約・returns・form・条件・visit・date・〜であること・past）</td><td>1.612秒</td><td><pre></pre></td></tr>
-<tr class='okrow'><td>成功</td><td>com.aromatripnippon.service.InventoryServiceTest</td><td>recordTransaction_updatesStockAndKeepsHistory</td><td>在庫サービスに関するテスト（テスト名から推測: record・transaction・更新する・在庫・and・keeps・history）</td><td>0.054秒</td><td><pre></pre></td></tr>
-<tr class='okrow'><td>成功</td><td>com.aromatripnippon.service.ReservationServiceTest</td><td>createReservation_savesReservationAndCustomerRelation</td><td>予約サービスに関するテスト（テスト名から推測: 作成・予約・saves・予約・and・顧客・relation）</td><td>0.040秒</td><td><pre></pre></td></tr>
-</tbody>
-</table>
+<tr><td class='pass'>PASS</td><td>com.aromatripnippon.controller.ManagementFlowIntegrationTest</td><td>xssPayload_isEscapedOnRender</td><td>1.674s</td><td></td></tr>
+<tr><td class='pass'>PASS</td><td>com.aromatripnippon.controller.ManagementFlowIntegrationTest</td><td>managementAction_missingEntity_redirectsWithErrorMessage</td><td>0.115s</td><td></td></tr>
+<tr><td class='pass'>PASS</td><td>com.aromatripnippon.controller.ManagementFlowIntegrationTest</td><td>managementPage_requiresAuthentication</td><td>0.010s</td><td></td></tr>
+<tr><td class='pass'>PASS</td><td>com.aromatripnippon.controller.ManagementFlowIntegrationTest</td><td>dashboardStats_linkToEachManagementPage</td><td>0.146s</td><td></td></tr>
+<tr><td class='pass'>PASS</td><td>com.aromatripnippon.controller.ManagementFlowIntegrationTest</td><td>postWithoutCsrf_isRejected</td><td>0.080s</td><td></td></tr>
+<tr><td class='pass'>PASS</td><td>com.aromatripnippon.controller.ManagementFlowIntegrationTest</td><td>productForm_usesProductCategoryMasterOptions</td><td>0.139s</td><td></td></tr>
+<tr><td class='pass'>PASS</td><td>com.aromatripnippon.controller.ManagementFlowIntegrationTest</td><td>reservationList_canDeleteAndMarksExpiredRows</td><td>0.172s</td><td></td></tr>
+<tr><td class='pass'>PASS</td><td>com.aromatripnippon.controller.ManagementFlowIntegrationTest</td><td>reservationList_rendersAndSeedLucasCustomerCannotBeDeletedWhenRecipeExists</td><td>0.149s</td><td></td></tr>
+<tr><td class='pass'>PASS</td><td>com.aromatripnippon.controller.ManagementFlowIntegrationTest</td><td>managementLists_canDeleteAndBlockParentDeletesWhenRelatedDataRemains</td><td>0.225s</td><td></td></tr>
+<tr><td class='pass'>PASS</td><td>com.aromatripnippon.controller.ManagementFlowIntegrationTest</td><td>recipeUpdate_rejectsWhenBlendRatioTotalIsNot100</td><td>0.152s</td><td></td></tr>
+<tr><td class='pass'>PASS</td><td>com.aromatripnippon.controller.ManagementFlowIntegrationTest</td><td>sessionTimeout_afterInvalidation_requiresRelogin</td><td>0.074s</td><td></td></tr>
+<tr><td class='pass'>PASS</td><td>com.aromatripnippon.controller.ManagementFlowIntegrationTest</td><td>managementCrudAndInventoryHistory_workAfterLogin</td><td>0.293s</td><td></td></tr>
+<tr><td class='pass'>PASS</td><td>com.aromatripnippon.controller.PublicControllerTest</td><td>postReservation_redirectsToCompleteWhenValid</td><td>0.127s</td><td></td></tr>
+<tr><td class='pass'>PASS</td><td>com.aromatripnippon.controller.PublicControllerTest</td><td>postReservation_returnsFormWhenVisitDateIsPast</td><td>0.142s</td><td></td></tr>
+<tr><td class='pass'>PASS</td><td>com.aromatripnippon.controller.PublicControllerTest</td><td>postEnglishReservation_returnsEnglishFormWhenVisitDateIsPast</td><td>0.031s</td><td></td></tr>
+<tr><td class='pass'>PASS</td><td>com.aromatripnippon.controller.PublicControllerTest</td><td>postEnglishReservation_redirectsToEnglishCompleteWhenValid</td><td>0.014s</td><td></td></tr>
+<tr><td class='pass'>PASS</td><td>com.aromatripnippon.service.InventoryServiceTest</td><td>recordTransaction_updatesStockAndKeepsHistory</td><td>0.051s</td><td></td></tr>
+<tr><td class='pass'>PASS</td><td>com.aromatripnippon.service.ReservationServiceTest</td><td>createReservation_savesReservationAndCustomerRelation</td><td>0.037s</td><td></td></tr>
+<tr><td class='pass'>PASS</td><td>com.aromatripnippon.TemplateScopeTest</td><td>templates_doNotContainPhase2LinksOrKeywords</td><td>0.059s</td><td></td></tr>
+</tbody></table>
+<div class='small'>生成日時: 2026-05-28 12:31:57</div>
+</body></html>
 
-<div class="footer">生成日時: 2026-05-15 03:49:13</div>
-</body>
-</html>

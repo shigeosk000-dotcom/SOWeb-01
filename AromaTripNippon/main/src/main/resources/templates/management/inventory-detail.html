@@ -18,11 +18,15 @@
       <section class="panel">
         <table class="table">
           <tr><th>ID</th><td th:text="${item.id}"></td></tr>
-          <tr><th>品名</th><td th:text="${item.itemName}"></td></tr>
+          <tr><th>材料名</th><td th:text="${item.itemName}"></td></tr>
           <tr><th>英語名</th><td th:text="${item.englishName}"></td></tr>
           <tr><th>カテゴリ</th><td th:text="${item.category}"></td></tr>
           <tr><th>在庫数</th><td><span th:text="${item.stockQuantity}"></span> <span th:text="${item.unit}"></span></td></tr>
+          <tr><th>しきい値</th><td><span th:text="${item.thresholdQuantity}"></span> <span th:text="${item.unit}"></span></td></tr>
           <tr><th>保管場所</th><td th:text="${item.storageLocation}"></td></tr>
+          <tr><th>仕入先</th><td th:text="${item.supplier}"></td></tr>
+          <tr><th>最終入荷日</th><td th:text="${item.lastReceivedDate}"></td></tr>
+          <tr><th>メモ</th><td th:text="${item.memo}"></td></tr>
         </table>
         <h2>在庫更新</h2>
         <form th:action="@{/management/inventory/{id}/transaction(id=${item.id})}" method="post" class="form-grid">
@@ -31,7 +35,7 @@
           <label class="full">理由<input name="reason"></label>
           <button class="primary inventory-transaction-submit">保存</button>
         </form>
-        <form th:action="@{/management/inventory/{id}/delete(id=${item.id})}" method="post"><button class="danger">論理削除</button></form>
+        <form th:action="@{/management/inventory/{id}/delete(id=${item.id})}" method="post"><button class="danger">削除実行</button></form>
       </section>
     </main>
   </div>

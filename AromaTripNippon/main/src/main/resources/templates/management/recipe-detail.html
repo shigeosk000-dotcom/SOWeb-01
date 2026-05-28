@@ -21,17 +21,18 @@
           <tr><th>レシピ名</th><td th:text="${recipe.recipeName}"></td></tr>
           <tr><th>顧客</th><td th:text="${recipe.customer.name}"></td></tr>
           <tr><th>コンセプト</th><td th:text="${recipe.concept}"></td></tr>
+          <tr><th>メモ</th><td th:text="${recipe.memo}"></td></tr>
         </table>
-        <h2>素材</h2>
+        <h2>材料</h2>
         <table class="table">
-          <tr><th>素材</th><th>英語名</th><th>配合率</th></tr>
+          <tr><th>材料</th><th>英語名</th><th>配合比率</th></tr>
           <tr th:each="m : ${recipe.materials}">
             <td th:text="${m.inventoryItem.itemName}"></td>
             <td th:text="${m.inventoryItem.englishName}"></td>
             <td th:text="${m.blendRatio}"></td>
           </tr>
         </table>
-        <form th:action="@{/management/recipes/{id}/delete(id=${recipe.id})}" method="post"><button class="danger">論理削除</button></form>
+        <form th:action="@{/management/recipes/{id}/delete(id=${recipe.id})}" method="post"><button class="danger">削除実行</button></form>
       </section>
     </main>
   </div>

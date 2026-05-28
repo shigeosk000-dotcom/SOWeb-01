@@ -25,10 +25,11 @@
           <tr><th>英語名</th><td th:text="${product.englishName}"></td></tr>
           <tr><th>カテゴリ</th><td th:text="${product.category != null ? product.category.categoryName : ''}"></td></tr>
           <tr><th>価格</th><td th:text="${product.price}"></td></tr>
+          <tr><th>公開</th><td th:text="${product.published ? '公開中' : '非公開'}"></td></tr>
           <tr><th>説明</th><td th:text="${product.description}"></td></tr>
         </table>
         <form th:action="@{/management/products/{id}/delete(id=${product.id})}" method="post">
-          <button class="danger">論理削除</button>
+          <button class="danger">削除実行</button>
         </form>
       </section>
     </main>
