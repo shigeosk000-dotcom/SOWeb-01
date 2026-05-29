@@ -29,13 +29,13 @@
           <tr><th>メモ</th><td th:text="${item.memo}"></td></tr>
         </table>
         <h2>在庫更新</h2>
-        <form th:action="@{/management/inventory/{id}/transaction(id=${item.id})}" method="post" class="form-grid">
+        <form th:action="@{/management/inventory/{id}/transaction(id=${item.id})}" method="post" class="form-grid" onsubmit="return confirm('この在庫調整を実行しますか？');">
           <label>種別<select name="transactionType"><option value="IN">入庫</option><option value="OUT">出庫</option><option value="ADJUST">調整</option></select></label>
           <label>数量<input name="quantity" type="number" step="0.1" required></label>
           <label class="full">理由<input name="reason"></label>
           <button class="primary inventory-transaction-submit">保存</button>
         </form>
-        <form th:action="@{/management/inventory/{id}/delete(id=${item.id})}" method="post"><button class="danger">削除実行</button></form>
+        <form th:action="@{/management/inventory/{id}/delete(id=${item.id})}" method="post" onsubmit="return confirm('この在庫を削除しますか？');"><button class="danger">削除実行</button></form>
       </section>
     </main>
   </div>

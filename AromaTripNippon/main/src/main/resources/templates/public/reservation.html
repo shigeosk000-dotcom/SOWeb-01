@@ -23,7 +23,7 @@
           <form th:action="@{/reservation}" th:object="${reservationRequest}" method="post" data-reservation-form>
             <input type="hidden" th:if="${_csrf != null}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
             <div class="field"><label for="date">日程</label><input id="date" type="date" th:field="*{visitDate}" th:attr="min=${minDate},max=${maxDate}" required /></div>
-            <div class="field"><label for="time">時間</label><select id="time" th:field="*{timeSlot}" required><option value="10:00">10:00</option><option value="13:00">13:00</option><option value="16:00">16:00</option></select></div>
+            <div class="field"><label for="time">時間</label><select id="time" th:field="*{timeSlot}" required><option value="10:00">10:00</option><option value="14:00">14:00</option><option value="16:00">16:00</option></select></div>
             <div class="field"><label for="people">人数</label><select id="people" th:field="*{guestCount}" required><option value="1">1名</option><option value="2">2名</option><option value="3">3名</option><option value="4">4名</option></select></div>
             <div class="field"><label for="name">お名前</label><input id="name" type="text" th:field="*{name}" placeholder="山田 太郎" required /></div>
             <div class="field"><label for="email">メールアドレス</label><input id="email" type="email" th:field="*{email}" placeholder="name@example.com" required /></div>

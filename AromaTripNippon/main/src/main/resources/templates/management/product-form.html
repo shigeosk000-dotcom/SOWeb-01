@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
@@ -19,18 +19,12 @@
       <form class="panel"
             th:action="${product.id == null} ? @{/management/products} : @{/management/products/{id}(id=${product.id})}"
             method="post"
-            th:object="${product}">
+            th:object="${product}"
+            onsubmit="return confirm('この内容で保存しますか？');">
         <div class="form-grid">
-          <label>
-            商品名
-            <input th:field="*{productName}" required>
-          </label>
-          <label>
-            英語名
-            <input th:field="*{englishName}" required>
-          </label>
-          <label>
-            カテゴリ
+          <label>商品名<input th:field="*{productName}" required></label>
+          <label>英語名<input th:field="*{englishName}" required></label>
+          <label>カテゴリ
             <select name="categoryId" required>
               <option value="">選択してください</option>
               <option th:each="category : ${categories}"
@@ -39,20 +33,11 @@
                       th:text="${category.categoryName}"></option>
             </select>
           </label>
-          <label>
-            価格
-            <input type="number" step="1" th:field="*{price}" required>
-          </label>
-          <label>
-            公開
-            <input type="checkbox" th:field="*{published}">
-          </label>
-          <label class="full">
-            説明
-            <textarea th:field="*{description}"></textarea>
-          </label>
+          <label>価格<input type="number" step="1" th:field="*{price}" required></label>
+          <label>公開<input type="checkbox" th:field="*{published}"></label>
+          <label class="full">説明<textarea th:field="*{description}"></textarea></label>
         </div>
-        <button class="primary">保存</button>
+        <button class="primary" type="submit">保存</button>
       </form>
     </main>
   </div>

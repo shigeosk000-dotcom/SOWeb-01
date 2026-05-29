@@ -2,6 +2,6 @@
 <body class="admin-body"><div class="admin-layout"><div th:replace="~{management/fragments :: sidebar}"></div><main class="admin-main"><div class="page-head"><h1>アカウント設定</h1></div>
 <div th:replace="~{management/fragments :: pageAlert}"></div>
 <p th:if="${param.updated}">保存しました。</p>
-<form class="panel" th:action="@{/management/account}" method="post" th:object="${admin}"><div class="form-grid">
+<form class="panel" th:action="@{/management/account}" method="post" th:object="${admin}" onsubmit="return confirm('アカウント設定を更新しますか？');"><div class="form-grid">
 <label>管理者名<input th:field="*{displayName}" required></label><label>メール<input type="email" th:field="*{email}"></label><label>通知設定<select th:field="*{notificationSetting}"><option value="ON">ON</option><option value="OFF">OFF</option></select></label><label>表示言語<select th:field="*{displayLanguage}"><option value="日本語">日本語</option><option value="English">English</option></select></label><label>新パスワード<input type="password" name="newPassword" minlength="8"></label></div><button class="primary">保存</button></form>
 </main></div></body></html>

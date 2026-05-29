@@ -12,6 +12,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "reservations")
@@ -26,6 +27,7 @@ public class Reservation extends BaseEntity {
   private ExperienceProgram experienceProgram;
   @FutureOrPresent
   @NotNull
+  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
   @Column(name = "reservation_date", nullable = false)
   private LocalDate visitDate;
   @NotBlank

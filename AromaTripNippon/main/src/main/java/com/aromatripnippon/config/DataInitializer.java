@@ -23,6 +23,8 @@ import com.aromatripnippon.repository.ProductRepository;
 import com.aromatripnippon.repository.ReservationRepository;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Set;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -113,7 +115,7 @@ public class DataInitializer implements CommandLineRunner {
     }
 
     if (reservations.findByDeletedAtIsNullOrderByVisitDateDescTimeSlotAsc().isEmpty()) {
-      reservations.save(reservation(emily, workshop, LocalDate.now().plusDays(7), "13:00", 2,
+      reservations.save(reservation(emily, workshop, LocalDate.now().plusDays(7), "14:00", 2,
           "English guidance requested."));
       reservations.save(reservation(lucas, workshop, LocalDate.now().plusDays(9), "10:00", 2,
           "Considering gift purchase."));
@@ -146,6 +148,87 @@ public class DataInitializer implements CommandLineRunner {
       log.setDetail("Inserted Phase1 sample data.");
       auditLogs.save(log);
     }
+
+    normalizeJapaneseDisplayNames();
+    normalizeReservationValuesForManagementForm();
+  }
+
+  private void normalizeJapaneseDisplayNames() {
+    for (InventoryItem item : inventory.findByDeletedAtIsNullOrderByIdDesc()) {
+      String translated = japaneseNameForEnglish(item.getEnglishName());
+      if (translated != null && (item.getItemName() == null || item.getItemName().isBlank()
+          || item.getItemName().equals(item.getEnglishName()))) {
+        item.setItemName(translated);
+        inventory.save(item);
+      }
+    }
+    for (Product product : products.findByDeletedAtIsNullOrderByIdDesc()) {
+      String translated = japaneseNameForEnglish(product.getEnglishName());
+      if (translated != null && (product.getProductName() == null || product.getProductName().isBlank()
+          || product.getProductName().equals(product.getEnglishName()))) {
+        product.setProductName(translated);
+        products.save(product);
+      }
+    }
+  }
+
+  private String japaneseNameForEnglish(String englishName) {
+    if (englishName == null) {
+      return null;
+    }
+    return switch (englishName) {
+      case "Yuzu essential oil" -> "柚子精油";
+      case "Aomori hiba essential oil" -> "青森ひば精油";
+      case "Japanese mint oil" -> "和薄荷精油";
+      case "Sakura absolute" -> "桜アブソリュート";
+      case "Hinoki wood oil" -> "ひのき木部精油";
+      case "Matcha green tea extract" -> "抹茶エキス";
+      case "White cedar resin" -> "白杉レジン";
+      case "Glass bottle 30ml" -> "ガラスボトル 30ml";
+      case "Aluminum tube 50ml" -> "アルミチューブ 50ml";
+      case "Yuzu Hand Cream" -> "柚子ハンドクリーム";
+      case "Hiba Hand Cream" -> "ひばハンドクリーム";
+      case "Matcha Hand Cream" -> "抹茶ハンドクリーム";
+      case "Sakura Perfume" -> "桜パフューム";
+      case "Hinoki Perfume" -> "ひのきパフューム";
+      case "Cedar Perfume" -> "シダーパフューム";
+      default -> null;
+    };
+  }
+
+  private void normalizeReservationValuesForManagementForm() {
+    Set<String> allowedSlots = Set.of("10:00", "14:00", "16:00");
+    LocalDate fallbackDate = LocalDate.now().plusDays(1);
+    List<Reservation> activeReservations = reservations.findByDeletedAtIsNullOrderByVisitDateDescTimeSlotAsc();
+    for (Reservation reservation : activeReservations) {
+      boolean changed = false;
+      if (reservation.getVisitDate() == null) {
+        reservation.setVisitDate(fallbackDate);
+        changed = true;
+      }
+      String slot = reservation.getTimeSlot();
+      String normalizedSlot = normalizeReservationSlot(slot);
+      if (slot == null || slot.isBlank() || !allowedSlots.contains(slot) || !slot.equals(normalizedSlot)) {
+        reservation.setTimeSlot(normalizedSlot);
+        changed = true;
+      }
+      if (changed) {
+        reservations.save(reservation);
+      }
+    }
+  }
+
+  private String normalizeReservationSlot(String slot) {
+    if (slot == null || slot.isBlank()) {
+      return "10:00";
+    }
+    if (slot.startsWith("10") || slot.startsWith("11") || slot.startsWith("12")) {
+      return "10:00";
+    }
+    if (slot.startsWith("13") || slot.startsWith("14")) {
+      return "14:00";
+    }
+    return "16:00";
   }
 
   private Customer ensureCustomer(String name, String nationality, String email, String phone, String language,

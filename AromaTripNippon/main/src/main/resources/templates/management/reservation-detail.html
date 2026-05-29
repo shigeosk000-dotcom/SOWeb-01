@@ -13,5 +13,5 @@
 <tr><th>希望言語</th><td th:text="${reservation.preferredLanguage}"></td></tr>
 <tr><th>要望</th><td th:text="${reservation.requestNote}"></td></tr>
 </table>
-<form th:action="@{/management/reservations/{id}/delete(id=${reservation.id})}" method="post"><button class="danger" type="submit">論理削除</button></form></section>
+<form th:action="@{/management/reservations/{id}/delete(id=${reservation.id})}" method="post" onsubmit="return confirm('この予約を削除しますか？');"><button class="danger" type="submit">論理削除</button></form></section>
 </main></div></body></html>

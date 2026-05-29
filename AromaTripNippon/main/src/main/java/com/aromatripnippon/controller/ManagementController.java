@@ -1,4 +1,4 @@
-package com.aromatripnippon.controller;
+﻿package com.aromatripnippon.controller;
 
 import com.aromatripnippon.entity.AdminUser;
 import com.aromatripnippon.entity.Customer;
@@ -97,9 +97,7 @@ public class ManagementController {
 
   @GetMapping("/management/reservations/new")
   public String reservationNew(Model model) {
-    model.addAttribute("reservation", new Reservation());
-    model.addAttribute("customers", customers.findByDeletedAtIsNullOrderByIdDesc());
-    model.addAttribute("programs", programs.findAll());
+    populateReservationFormModel(model, new Reservation());
     return "management/reservation-form";
   }
 
@@ -109,7 +107,7 @@ public class ManagementController {
     reservation.setCustomer(customers.findById(customerId).orElseThrow());
     reservation.setExperienceProgram(programs.findById(programId).orElseThrow());
     Reservation saved = reservations.save(reservation);
-    audit.record(principal, "CREATE", "reservations", saved.getId(), "莠育ｴ・ｒ逋ｻ骭ｲ");
+    audit.record(principal, "CREATE", "reservations", saved.getId(), "闔閧ｲ・ｴ繝ｻ・帝具ｽｻ鬪ｭ・ｲ");
     return "redirect:/management/reservations/" + saved.getId();
   }
 
@@ -121,9 +119,7 @@ public class ManagementController {
 
   @GetMapping("/management/reservations/{id}/edit")
   public String reservationEdit(@PathVariable Long id, Model model) {
-    model.addAttribute("reservation", reservations.findById(id).orElseThrow());
-    model.addAttribute("customers", customers.findByDeletedAtIsNullOrderByIdDesc());
-    model.addAttribute("programs", programs.findAll());
+    populateReservationFormModel(model, reservations.findById(id).orElseThrow());
     return "management/reservation-form";
   }
 
@@ -140,7 +136,7 @@ public class ManagementController {
     reservation.setCustomer(customers.findById(customerId).orElseThrow());
     reservation.setExperienceProgram(programs.findById(programId).orElseThrow());
     reservations.save(reservation);
-    audit.record(principal, "UPDATE", "reservations", id, "莠育ｴ・ｒ譖ｴ譁ｰ");
+    audit.record(principal, "UPDATE", "reservations", id, "闔閧ｲ・ｴ繝ｻ・定ｭ厄ｽｴ隴・ｽｰ");
     return "redirect:/management/reservations/" + id;
   }
 
@@ -149,7 +145,7 @@ public class ManagementController {
   public String reservationDelete(@PathVariable Long id, Principal principal) {
     Reservation reservation = reservations.findById(id).orElseThrow();
     reservations.softDeleteById(id, LocalDateTime.now());
-    audit.record(principal, "DELETE", "reservations", id, "莠育ｴ・ｒ隲也炊蜑企勁");
+    audit.record(principal, "DELETE", "reservations", id, "闔閧ｲ・ｴ繝ｻ・帝坿荵溽ｊ陷台ｼ∝求");
     return "redirect:/management/reservations";
   }
 
@@ -171,7 +167,7 @@ public class ManagementController {
   @PostMapping("/management/customers")
   public String customerCreate(@ModelAttribute Customer customer, Principal principal) {
     Customer saved = customers.save(customer);
-    audit.record(principal, "CREATE", "customers", saved.getId(), "鬘ｧ螳｢繧堤匳骭ｲ");
+    audit.record(principal, "CREATE", "customers", saved.getId(), "鬯假ｽｧ陞ｳ・｢郢ｧ蝣､蛹ｳ鬪ｭ・ｲ");
     return "redirect:/management/customers/" + saved.getId();
   }
 
@@ -198,7 +194,7 @@ public class ManagementController {
     customer.setPurpose(form.getPurpose());
     customer.setNotes(form.getNotes());
     customers.save(customer);
-    audit.record(principal, "UPDATE", "customers", id, "鬘ｧ螳｢繧呈峩譁ｰ");
+    audit.record(principal, "UPDATE", "customers", id, "鬯假ｽｧ陞ｳ・｢郢ｧ蜻亥ｳｩ隴・ｽｰ");
     return "redirect:/management/customers/" + id;
   }
 
@@ -212,7 +208,7 @@ public class ManagementController {
     }
     customer.softDelete();
     customers.save(customer);
-    audit.record(principal, "DELETE", "customers", id, "鬘ｧ螳｢繧定ｫ也炊蜑企勁");
+    audit.record(principal, "DELETE", "customers", id, "鬯假ｽｧ陞ｳ・｢郢ｧ螳夲ｽｫ荵溽ｊ陷台ｼ∝求");
     return "redirect:/management/customers";
   }
 
@@ -248,7 +244,7 @@ public class ManagementController {
       return "redirect:/management/recipes/new";
     }
     FragranceRecipe saved = recipes.save(recipe);
-    audit.record(principal, "CREATE", "fragrance_recipes", saved.getId(), "鬥吶ｊ繝ｬ繧ｷ繝斐ｒ逋ｻ骭ｲ");
+    audit.record(principal, "CREATE", "fragrance_recipes", saved.getId(), "鬯･蜷ｶ・顔ｹ晢ｽｬ郢ｧ・ｷ郢晄鱒・帝具ｽｻ鬪ｭ・ｲ");
     return "redirect:/management/recipes/" + saved.getId();
   }
 
@@ -295,7 +291,7 @@ public class ManagementController {
     recipe.getMaterials().clear();
     recipe.getMaterials().addAll(newMaterials);
     recipes.save(recipe);
-    audit.record(principal, "UPDATE", "fragrance_recipes", id, "鬥吶ｊ繝ｬ繧ｷ繝斐ｒ譖ｴ譁ｰ");
+    audit.record(principal, "UPDATE", "fragrance_recipes", id, "鬯･蜷ｶ・顔ｹ晢ｽｬ郢ｧ・ｷ郢晄鱒・定ｭ厄ｽｴ隴・ｽｰ");
     return "redirect:/management/recipes/" + id;
   }
 
@@ -304,7 +300,7 @@ public class ManagementController {
     FragranceRecipe recipe = recipes.findById(id).orElseThrow();
     recipe.softDelete();
     recipes.save(recipe);
-    audit.record(principal, "DELETE", "fragrance_recipes", id, "鬥吶ｊ繝ｬ繧ｷ繝斐ｒ隲也炊蜑企勁");
+    audit.record(principal, "DELETE", "fragrance_recipes", id, "鬯･蜷ｶ・顔ｹ晢ｽｬ郢ｧ・ｷ郢晄鱒・帝坿荵溽ｊ陷台ｼ∝求");
     return "redirect:/management/recipes";
   }
 
@@ -332,7 +328,7 @@ public class ManagementController {
     inventory.save(item);
     product.setCategory(category);
     Product saved = products.save(product);
-    audit.record(principal, "CREATE", "products", saved.getId(), "蝠・刀繧堤匳骭ｲ");
+    audit.record(principal, "CREATE", "products", saved.getId(), "陜繝ｻ蛻郢ｧ蝣､蛹ｳ鬪ｭ・ｲ");
     return "redirect:/management/products/" + saved.getId();
   }
 
@@ -367,7 +363,7 @@ public class ManagementController {
     item.setCategory(category.getCategoryName());
     inventory.save(item);
     products.save(product);
-    audit.record(principal, "UPDATE", "products", id, "蝠・刀繧呈峩譁ｰ");
+    audit.record(principal, "UPDATE", "products", id, "陜繝ｻ蛻郢ｧ蜻亥ｳｩ隴・ｽｰ");
     return "redirect:/management/products/" + id;
   }
 
@@ -378,9 +374,21 @@ public class ManagementController {
       redirectAttributes.addFlashAttribute("errorMessage", "香りレシピに使われている商品は削除できません。");
       return "redirect:/management/products";
     }
+    InventoryItem item = inventory.findByIdAndDeletedAtIsNull(id).orElse(null);
+    if (item != null && item.getStockQuantity() != null && item.getStockQuantity().compareTo(BigDecimal.ZERO) > 0) {
+      redirectAttributes.addFlashAttribute("errorMessage", "在庫が残っている商品は削除できません。先に在庫数を0にしてください。");
+      return "redirect:/management/products";
+    }
     product.softDelete();
     products.save(product);
-    audit.record(principal, "DELETE", "products", id, "蝠・刀繧定ｫ也炊蜑企勁");
+    if (item != null) {
+      item.softDelete();
+      inventory.save(item);
+    }
+    audit.record(principal, "DELETE", "products", id, "陜繝ｻ蛻郢ｧ螳夲ｽｫ荵溽ｊ陷台ｼ∝求");
+    if (item != null) {
+      audit.record(principal, "DELETE", "inventory_items", id, "蝠・刀蜑企勁縺ｫ莨ｴ縺・惠蠎ｫ繧帝｣蜍募炎髯､");
+    }
     return "redirect:/management/products";
   }
 
@@ -404,7 +412,7 @@ public class ManagementController {
   public String inventoryCreate(@ModelAttribute InventoryItem item, Principal principal) {
     InventoryItem saved = inventory.save(item);
     syncProductFromInventory(saved);
-    audit.record(principal, "CREATE", "inventory_items", saved.getId(), "蝨ｨ蠎ｫ蜩∫岼繧堤匳骭ｲ");
+    audit.record(principal, "CREATE", "inventory_items", saved.getId(), "陜ｨ・ｨ陟趣ｽｫ陷ｩ竏ｫ蟯ｼ郢ｧ蝣､蛹ｳ鬪ｭ・ｲ");
     return "redirect:/management/inventory/" + saved.getId();
   }
 
@@ -437,7 +445,7 @@ public class ManagementController {
     item.setMemo(form.getMemo());
     item = inventory.save(item);
     syncProductFromInventory(item);
-    audit.record(principal, "UPDATE", "inventory_items", id, "蝨ｨ蠎ｫ蜩∫岼繧呈峩譁ｰ");
+    audit.record(principal, "UPDATE", "inventory_items", id, "陜ｨ・ｨ陟趣ｽｫ陷ｩ竏ｫ蟯ｼ郢ｧ蜻亥ｳｩ隴・ｽｰ");
     return "redirect:/management/inventory/" + id;
   }
 
@@ -454,16 +462,26 @@ public class ManagementController {
     transaction.setReason(reason);
     inventoryTransactions.save(transaction);
     inventory.save(item);
-    audit.record(principal, "UPDATE", "inventory_transactions", transaction.getId(), "蝨ｨ蠎ｫ繧呈峩譁ｰ");
+    audit.record(principal, "UPDATE", "inventory_transactions", transaction.getId(), "陜ｨ・ｨ陟趣ｽｫ郢ｧ蜻亥ｳｩ隴・ｽｰ");
     return "redirect:/management/inventory/" + id;
   }
 
   @PostMapping("/management/inventory/{id}/delete")
-  public String inventoryDelete(@PathVariable Long id, Principal principal) {
-    InventoryItem item = inventory.findById(id).orElseThrow();
+  public String inventoryDelete(@PathVariable Long id, Principal principal, RedirectAttributes redirectAttributes) {
+    if (recipeMaterials.existsByDeletedAtIsNullAndFragranceRecipeDeletedAtIsNullAndInventoryItemId(id)) {
+      redirectAttributes.addFlashAttribute("errorMessage", "香りレシピで使用中の在庫は削除できません。");
+      return "redirect:/management/inventory";
+    }
+    InventoryItem item = inventory.findByIdAndDeletedAtIsNull(id).orElseThrow();
     item.softDelete();
     inventory.save(item);
-    audit.record(principal, "DELETE", "inventory_items", id, "蝨ｨ蠎ｫ蜩∫岼繧定ｫ也炊蜑企勁");
+    Product product = products.findByIdAndDeletedAtIsNull(id).orElse(null);
+    if (product != null) {
+      product.softDelete();
+      products.save(product);
+      audit.record(principal, "DELETE", "products", id, "在庫削除に伴い商品を連動削除");
+    }
+    audit.record(principal, "DELETE", "inventory_items", id, "在庫を論理削除");
     return "redirect:/management/inventory";
   }
 
@@ -485,13 +503,45 @@ public class ManagementController {
       admin.setPasswordHash(encoder.encode(newPassword));
     }
     admins.save(admin);
-    audit.record(principal, "UPDATE", "admin_users", admin.getId(), "繧｢繧ｫ繧ｦ繝ｳ繝郁ｨｭ螳壹ｒ譖ｴ譁ｰ");
+    audit.record(principal, "UPDATE", "admin_users", admin.getId(), "郢ｧ・｢郢ｧ・ｫ郢ｧ・ｦ郢晢ｽｳ郢晞メ・ｨ・ｭ陞ｳ螢ｹ・定ｭ厄ｽｴ隴・ｽｰ");
     return "redirect:/management/account?updated";
+  }
+
+  private void populateReservationFormModel(Model model, Reservation reservation) {
+    model.addAttribute("reservation", reservation);
+    model.addAttribute("customers", customers.findByDeletedAtIsNullOrderByIdDesc());
+    model.addAttribute("programs", programs.findAll());
+    model.addAttribute("timeSlotOptions", reservationTimeSlotOptions(reservation));
+  }
+
+  private List<String> reservationTimeSlotOptions(Reservation reservation) {
+    List<String> options = new ArrayList<>(List.of("10:00", "14:00", "16:00"));
+    String current = reservation.getTimeSlot();
+    if (current != null && !current.isBlank() && !options.contains(current)) {
+      String normalized = normalizeReservationSlot(current);
+      if (!options.contains(normalized)) {
+        options.add(normalized);
+      }
+    }
+    return options;
+  }
+
+  private String normalizeReservationSlot(String slot) {
+    if (slot == null || slot.isBlank()) {
+      return "10:00";
+    }
+    if (slot.startsWith("10") || slot.startsWith("11") || slot.startsWith("12")) {
+      return "10:00";
+    }
+    if (slot.startsWith("13") || slot.startsWith("14")) {
+      return "14:00";
+    }
+    return "16:00";
   }
 
   private List<Product> recipeProductOptions() {
     return products.findByDeletedAtIsNullAndActiveTrueOrderByIdAsc().stream()
-        .filter(product -> product.getCategory() != null && "素材".equals(product.getCategory().getCategoryName()))
+        .filter(product -> product.getCategory() != null && "原料".equals(product.getCategory().getCategoryName()))
         .toList();
   }
 
@@ -533,20 +583,20 @@ public class ManagementController {
 
   private String normalizedProductCategoryName(String inventoryCategory) {
     if (inventoryCategory == null) {
-      return "製品";
+      return "商品";
     }
     String normalized = inventoryCategory.toLowerCase();
-    if (inventoryCategory.contains("素材") || normalized.contains("material") || normalized.contains("fragrance")) {
-      return "素材";
+    if (inventoryCategory.contains("原料") || normalized.contains("material") || normalized.contains("fragrance")) {
+      return "原料";
     }
     if (inventoryCategory.contains("容器") || normalized.contains("container")) {
       return "容器";
     }
-    return "製品";
+    return "商品";
   }
 
   private String defaultUnit(String categoryName) {
-    return "素材".equals(categoryName) ? "ml" : "pcs";
+    return "原料".equals(categoryName) ? "ml" : "pcs";
   }
 
   private List<FragranceRecipeMaterial> buildRecipeMaterials(FragranceRecipe recipe, List<Long> materialIds,
@@ -562,13 +612,13 @@ public class ManagementController {
           continue;
         }
         if (blendRatio.compareTo(BigDecimal.ZERO) <= 0) {
-          throw new IllegalArgumentException("配合率は0より大きい値を入力してください");
+          throw new IllegalArgumentException("驟榊粋邇・・0繧医ｊ螟ｧ縺阪＞蛟､繧貞・蜉帙＠縺ｦ縺上□縺輔＞");
         }
         if (blendRatio.stripTrailingZeros().scale() > 0) {
-          throw new IllegalArgumentException("配合率は整数で入力してください");
+          throw new IllegalArgumentException("驟榊粋邇・・謨ｴ謨ｰ縺ｧ蜈･蜉帙＠縺ｦ縺上□縺輔＞");
         }
         if (blendRatio.remainder(new BigDecimal("5")).compareTo(BigDecimal.ZERO) != 0) {
-          throw new IllegalArgumentException("配合率は5刻みで入力してください");
+          throw new IllegalArgumentException("驟榊粋邇・・5蛻ｻ縺ｿ縺ｧ蜈･蜉帙＠縺ｦ縺上□縺輔＞");
         }
         FragranceRecipeMaterial material = new FragranceRecipeMaterial();
         material.setFragranceRecipe(recipe);
@@ -580,7 +630,7 @@ public class ManagementController {
       }
     }
     if (materials.isEmpty()) {
-      throw new IllegalArgumentException("素材を1件以上入力してください");
+      throw new IllegalArgumentException("邏譚舌ｒ1莉ｶ莉･荳雁・蜉帙＠縺ｦ縺上□縺輔＞");
     }
     if (totalBlendRatio.compareTo(new BigDecimal("100")) != 0) {
       throw new IllegalArgumentException("配合率は合計１００になるようにしてください");
@@ -588,3 +638,4 @@ public class ManagementController {
     return materials;
   }
 }
+

@@ -28,7 +28,7 @@
           <tr><th>公開</th><td th:text="${product.published ? '公開中' : '非公開'}"></td></tr>
           <tr><th>説明</th><td th:text="${product.description}"></td></tr>
         </table>
-        <form th:action="@{/management/products/{id}/delete(id=${product.id})}" method="post">
+        <form th:action="@{/management/products/{id}/delete(id=${product.id})}" method="post" onsubmit="return confirm('この商品を削除しますか？');">
           <button class="danger">削除実行</button>
         </form>
       </section>

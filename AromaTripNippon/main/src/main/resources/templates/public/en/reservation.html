@@ -34,7 +34,7 @@
             <div class="field"><label for="date">Preferred date</label><input id="date" type="date" th:field="*{visitDate}" th:attr="min=${minDate},max=${maxDate}" lang="en" aria-describedby="date-format" required /><span class="field-hint" id="date-format">Format: YYYY-MM-DD</span></div>
             <div class="field"><label for="time">Time</label><select id="time" th:field="*{timeSlot}" required>
                 <option value="10:00">10:00</option>
-                <option value="13:00">13:00</option>
+                <option value="14:00">14:00</option>
                 <option value="16:00">16:00</option>
               </select></div>
             <div class="field"><label for="people">Guests</label><select id="people" th:field="*{guestCount}" required>

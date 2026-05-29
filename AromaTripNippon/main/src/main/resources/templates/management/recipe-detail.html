@@ -32,7 +32,7 @@
             <td th:text="${m.blendRatio}"></td>
           </tr>
         </table>
-        <form th:action="@{/management/recipes/{id}/delete(id=${recipe.id})}" method="post"><button class="danger">削除実行</button></form>
+        <form th:action="@{/management/recipes/{id}/delete(id=${recipe.id})}" method="post" onsubmit="return confirm('この香りレシピを削除しますか？');"><button class="danger">削除実行</button></form>
       </section>
     </main>
   </div>

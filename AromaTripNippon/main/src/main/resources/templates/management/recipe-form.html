@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
@@ -19,10 +19,10 @@
       <form class="panel"
             th:action="${recipe.id == null} ? @{/management/recipes} : @{/management/recipes/{id}(id=${recipe.id})}"
             method="post"
-            th:object="${recipe}">
+            th:object="${recipe}"
+            onsubmit="return confirm('この内容で保存しますか？');">
         <div class="form-grid">
-          <label>
-            顧客
+          <label>顧客
             <select name="customerId" required>
               <option th:each="c : ${customers}"
                       th:value="${c.id}"
@@ -31,61 +31,50 @@
             </select>
           </label>
 
-          <label>
-            レシピ名
+          <label>レシピ名
             <input th:field="*{recipeName}" required>
           </label>
 
-          <label class="full">
-            コンセプト
+          <label class="full">コンセプト
             <input th:field="*{concept}">
           </label>
 
           <section class="full recipe-materials">
             <div class="recipe-materials__head">
-              <span>商品名</span>
+              <span>商品</span>
               <span>英語名</span>
-              <span>配合率</span>
+              <span>配合比率</span>
             </div>
             <div class="recipe-materials__row" th:each="idx : ${#numbers.sequence(1, 5)}">
-              <select class="js-material-name"
-                      name="materialId"
-                      th:required="${idx == 1}"
-                      th:attr="aria-label=|商品名 ${idx}|">
+              <select class="js-material-name" name="materialId" th:required="${idx == 1}" th:attr="aria-label=|商品 ${idx}|">
                 <option value="" th:text="${idx == 1 ? '選択してください' : '未選択'}"></option>
                 <option th:each="p : ${productOptions}"
                         th:value="${p.id}"
                         th:selected="${(materialIds != null and #lists.size(materialIds) >= idx and materialIds[idx - 1] != null and materialIds[idx - 1] == p.id) or (materialIds == null and recipe.materials != null and recipe.materials.size() >= idx and recipe.materials[idx - 1].inventoryItem.id == p.id)}"
                         th:text="${p.productName}"></option>
               </select>
-              <select class="js-material-english"
-                      th:required="${idx == 1}"
-                      th:attr="aria-label=|英語名 ${idx}|">
+              <select class="js-material-english" th:required="${idx == 1}" th:attr="aria-label=|英語名 ${idx}|">
                 <option value="" th:text="${idx == 1 ? 'Select' : 'None'}"></option>
                 <option th:each="p : ${productOptions}"
                         th:value="${p.id}"
                         th:selected="${(materialIds != null and #lists.size(materialIds) >= idx and materialIds[idx - 1] != null and materialIds[idx - 1] == p.id) or (materialIds == null and recipe.materials != null and recipe.materials.size() >= idx and recipe.materials[idx - 1].inventoryItem.id == p.id)}"
                         th:text="${p.englishName != null and !#strings.isEmpty(p.englishName) ? p.englishName : p.productName}"></option>
               </select>
-              <input name="blendRatio"
-                     type="number"
-                     step="5"
-                     min="5"
+              <input name="blendRatio" type="number" step="5" min="5"
                      th:value="${materialIds != null ? (#lists.size(blendRatios) >= idx ? blendRatios[idx - 1] : '') : (recipe.materials != null and recipe.materials.size() >= idx ? recipe.materials[idx - 1].blendRatio : (idx == 1 ? '100' : ''))}"
-                     th:required="${idx == 1}"
-                     th:attr="aria-label=|配合率 ${idx}|">
+                     th:required="${idx == 1}" th:attr="aria-label=|配合比率 ${idx}|">
             </div>
           </section>
 
-          <label class="full">
-            メモ
+          <label class="full">メモ
             <textarea th:field="*{memo}"></textarea>
           </label>
         </div>
-        <button class="primary">保存</button>
+        <button class="primary" type="submit">保存</button>
       </form>
     </main>
   </div>
+
   <script>
     document.querySelectorAll('.recipe-materials__row').forEach((row) => {
       const nameSelect = row.querySelector('.js-material-name');
