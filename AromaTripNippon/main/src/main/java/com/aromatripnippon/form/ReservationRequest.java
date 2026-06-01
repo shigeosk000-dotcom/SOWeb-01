@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import java.time.LocalDate;
 
 public class ReservationRequest {
@@ -13,18 +14,25 @@ public class ReservationRequest {
   @NotNull
   private LocalDate visitDate;
   @NotBlank
+  @Size(max = 255, message = "時間帯は255文字以内で入力してください。")
   private String timeSlot;
   @Min(1)
   @Max(4)
   private Integer guestCount;
   @NotBlank
+  @Size(max = 255, message = "お名前は255文字以内で入力してください。")
   private String name;
   @Email
   @NotBlank
+  @Size(max = 255, message = "メールアドレスは255文字以内で入力してください。")
   private String email;
+  @Size(max = 255, message = "電話番号は255文字以内で入力してください。")
   private String phone;
+  @Size(max = 255, message = "国籍は255文字以内で入力してください。")
   private String nationality;
+  @Size(max = 255, message = "希望言語は255文字以内で入力してください。")
   private String preferredLanguage = "英語";
+  @Size(max = 1000, message = "要望・備考は1000文字以内で入力してください。")
   private String requestNote;
 
   public LocalDate getVisitDate() { return visitDate; }

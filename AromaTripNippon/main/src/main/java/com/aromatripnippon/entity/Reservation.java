@@ -11,6 +11,7 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import java.time.LocalDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -31,6 +32,7 @@ public class Reservation extends BaseEntity {
   @Column(name = "reservation_date", nullable = false)
   private LocalDate visitDate;
   @NotBlank
+  @Size(max = 255)
   @Column(name = "reservation_time", nullable = false)
   private String timeSlot;
   @Min(1)
@@ -39,10 +41,13 @@ public class Reservation extends BaseEntity {
   @Column(name = "number_of_people", nullable = false)
   private Integer guestCount;
   @Column(name = "preferred_language")
+  @Size(max = 255)
   private String preferredLanguage = "English";
   @Column(name = "request_note", length = 1000)
+  @Size(max = 1000)
   private String requestNote;
   @NotBlank
+  @Size(max = 255)
   private String status = "RESERVED";
 
   public Customer getCustomer() { return customer; }

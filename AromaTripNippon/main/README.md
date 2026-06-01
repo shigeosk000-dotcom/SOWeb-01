@@ -75,6 +75,13 @@ mvn spring-boot:run -Dspring-boot.run.profiles=mysql
 mvn test
 ```
 
+## 文字化け防止ルール
+
+- Java/HTML/SQL/Properties/Markdown は UTF-8（BOMなし）で保存します。
+- Windows + PowerShell で確認する場合は、`Get-Content -Encoding utf8` を使って誤判定を避けます。
+- 監査ログなど日本語文言を含む定数を編集した後は、管理画面で実表示を確認します。
+- `src/main/resources/data.sql` を更新する場合は `spring.sql.init.encoding=UTF-8` 前提で、エディタの保存エンコーディングを必ず UTF-8 にします。
+
 追加済みテスト:
 
 - `src/test/java/com/aromatripnippon/service/ReservationServiceTest.java`

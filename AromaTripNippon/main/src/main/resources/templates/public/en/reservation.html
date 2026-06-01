@@ -43,15 +43,15 @@
                 <option value="3">3 guests</option>
                 <option value="4">4 guests</option>
               </select></div>
-            <div class="field"><label for="name">Name</label><input id="name" type="text" th:field="*{name}" placeholder="Jane Smith" required /></div>
-            <div class="field"><label for="email">Email</label><input id="email" type="email" th:field="*{email}" placeholder="name@example.com" required /></div>
-            <div class="field"><label for="phone">Phone</label><input id="phone" type="text" th:field="*{phone}" placeholder="+1 555 123 4567" /></div>
-            <div class="field"><label for="nationality">Nationality</label><input id="nationality" type="text" th:field="*{nationality}" placeholder="United States" /></div>
+            <div class="field"><label for="name">Name</label><input id="name" type="text" th:field="*{name}" maxlength="255" placeholder="Jane Smith" required /></div>
+            <div class="field"><label for="email">Email</label><input id="email" type="email" th:field="*{email}" maxlength="255" placeholder="name@example.com" required /></div>
+            <div class="field"><label for="phone">Phone</label><input id="phone" type="text" th:field="*{phone}" maxlength="255" placeholder="+1 555 123 4567" /></div>
+            <div class="field"><label for="nationality">Nationality</label><input id="nationality" type="text" th:field="*{nationality}" maxlength="255" placeholder="United States" /></div>
             <div class="field"><label for="lang">Preferred language</label><select id="lang" th:field="*{preferredLanguage}">
                 <option value="English">English</option>
                 <option value="Japanese">Japanese</option>
               </select></div>
-            <div class="field"><label for="request">Requests or notes</label><textarea id="request" cols="50" rows="3" th:field="*{requestNote}" placeholder="Please tell us about allergies, accessibility needs, or anything we should know."></textarea></div>
+            <div class="field"><label for="request">Requests or notes</label><textarea id="request" cols="50" rows="3" th:field="*{requestNote}" maxlength="1000" placeholder="Please tell us about allergies, accessibility needs, or anything we should know."></textarea></div>
             <p class="notice" th:if="${#fields.hasErrors('*')}">Please check the required fields and try again.</p>
             <div class="spacer"></div>
             <button class="btn" type="submit">Submit Reservation</button>

@@ -192,6 +192,13 @@ form.panel > button {
   text-align: left;
   vertical-align: top;
 }
+.table td.note-scroll {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  max-height: 180px;
+  overflow-y: auto;
+}
 .table th { background: #f0e7da; }
 .table tr.reservation-expired td { background: #e4e0d9; color: #6b6258; }
 .table-actions { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }

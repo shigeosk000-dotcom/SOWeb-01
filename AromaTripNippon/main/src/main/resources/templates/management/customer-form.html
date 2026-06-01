@@ -22,13 +22,13 @@
             th:object="${customer}"
             onsubmit="return confirm('この内容で保存しますか？');">
         <div class="form-grid">
-          <label>氏名<input th:field="*{name}" required></label>
-          <label>メール<input type="email" th:field="*{email}" required></label>
-          <label>電話<input th:field="*{phone}"></label>
-          <label>国籍<input th:field="*{nationality}"></label>
-          <label>希望言語<input th:field="*{preferredLanguage}"></label>
-          <label>利用目的<input th:field="*{purpose}"></label>
-          <label class="full">メモ<textarea th:field="*{notes}"></textarea></label>
+          <label>氏名<input th:field="*{name}" maxlength="255" required></label>
+          <label>メール<input type="email" th:field="*{email}" maxlength="255" required></label>
+          <label>電話<input th:field="*{phone}" maxlength="255"></label>
+          <label>国籍<input th:field="*{nationality}" maxlength="255"></label>
+          <label>希望言語<input th:field="*{preferredLanguage}" maxlength="255"></label>
+          <label>利用目的<input th:field="*{purpose}" maxlength="255"></label>
+          <label class="full">メモ<textarea th:field="*{notes}" maxlength="1000"></textarea></label>
         </div>
         <button class="primary" type="submit">保存</button>
       </form>

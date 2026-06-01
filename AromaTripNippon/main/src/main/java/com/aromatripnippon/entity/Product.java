@@ -9,6 +9,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 import java.math.BigDecimal;
 
 @Entity
@@ -18,14 +19,17 @@ public class Product extends BaseEntity {
   @JoinColumn(name = "category_id", nullable = false)
   private ProductCategory category;
   @NotBlank
+  @Size(max = 255)
   @Column(name = "product_name", nullable = false)
   private String productName;
   @Column(name = "english_name")
+  @Size(max = 255)
   private String englishName;
   @NotNull
   @Positive
   private BigDecimal price;
   @Column(length = 1000)
+  @Size(max = 1000)
   private String description;
   @Column(name = "is_active")
   private Boolean active = false;

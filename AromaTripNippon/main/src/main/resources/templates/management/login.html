@@ -14,12 +14,17 @@
       <h1>管理ログイン</h1>
       <!-- <p>初期アカウント: Adm01 / password</p> -->
       <p class="errors" th:if="${param.error}">IDまたはパスワードが違います。</p>
+      <p class="errors" th:if="${param.locked}">ログイン失敗が5回に達したためロックされました。パスワード再設定後に再度ログインしてください。</p>
+      <p th:if="${param.reset}">パスワードを再設定しました。新しいパスワードでログインしてください。</p>
       <p th:if="${param.logout}">ログアウトしました。</p>
+      <p th:if="${successMessage}" th:text="${successMessage}"></p>
       <form th:action="@{/management/login}" method="post">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
         <label>管理者ID<input name="username" required autofocus></label>
         <label>パスワード<input type="password" name="password" required></label>
         <button class="primary" type="submit">ログイン</button>
       </form>
+      <!-- <p><a th:href="@{/management/forgot-password}">パスワードを忘れた場合</a></p> -->
     </section>
   </main>
 </body>

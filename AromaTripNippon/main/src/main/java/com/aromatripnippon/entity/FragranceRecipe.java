@@ -10,6 +10,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,13 +23,16 @@ public class FragranceRecipe extends BaseEntity {
   @NotNull
   private Customer customer;
   @NotBlank
+  @Size(max = 255)
   @Column(name = "recipe_name", nullable = false)
   private String recipeName;
   @Column(name = "concept_note", length = 1000)
+  @Size(max = 1000)
   private String concept;
   @Column(name = "total_amount")
   private BigDecimal totalAmount = BigDecimal.ZERO;
   @Column(length = 1000)
+  @Size(max = 1000)
   private String memo;
   @OneToMany(mappedBy = "fragranceRecipe", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<FragranceRecipeMaterial> materials = new ArrayList<>();

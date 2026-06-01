@@ -25,12 +25,12 @@
             <div class="field"><label for="date">日程</label><input id="date" type="date" th:field="*{visitDate}" th:attr="min=${minDate},max=${maxDate}" required /></div>
             <div class="field"><label for="time">時間</label><select id="time" th:field="*{timeSlot}" required><option value="10:00">10:00</option><option value="14:00">14:00</option><option value="16:00">16:00</option></select></div>
             <div class="field"><label for="people">人数</label><select id="people" th:field="*{guestCount}" required><option value="1">1名</option><option value="2">2名</option><option value="3">3名</option><option value="4">4名</option></select></div>
-            <div class="field"><label for="name">お名前</label><input id="name" type="text" th:field="*{name}" placeholder="山田 太郎" required /></div>
-            <div class="field"><label for="email">メールアドレス</label><input id="email" type="email" th:field="*{email}" placeholder="name@example.com" required /></div>
-            <div class="field"><label for="phone">電話</label><input id="phone" type="text" th:field="*{phone}" placeholder="090-1234-5678" /></div>
-            <div class="field"><label for="nationality">国籍</label><input id="nationality" type="text" th:field="*{nationality}" placeholder="日本" /></div>
+            <div class="field"><label for="name">お名前</label><input id="name" type="text" th:field="*{name}" maxlength="255" placeholder="山田 太郎" required /></div>
+            <div class="field"><label for="email">メールアドレス</label><input id="email" type="email" th:field="*{email}" maxlength="255" placeholder="name@example.com" required /></div>
+            <div class="field"><label for="phone">電話</label><input id="phone" type="text" th:field="*{phone}" maxlength="255" placeholder="090-1234-5678" /></div>
+            <div class="field"><label for="nationality">国籍</label><input id="nationality" type="text" th:field="*{nationality}" maxlength="255" placeholder="日本" /></div>
             <div class="field"><label for="lang">希望言語</label><select id="lang" th:field="*{preferredLanguage}"><option value="日本語">日本語</option><option value="英語">英語</option></select></div>
-            <div class="field"><label for="request">要望・備考</label><textarea id="request" cols="50" rows="3" th:field="*{requestNote}" placeholder="要望があればご入力ください。"></textarea></div>
+            <div class="field"><label for="request">要望・備考</label><textarea id="request" cols="50" rows="3" th:field="*{requestNote}" maxlength="1000" placeholder="要望があればご入力ください。"></textarea></div>
             <p class="notice" th:if="${#fields.hasErrors('*')}">入力内容をご確認ください。</p>
             <div class="spacer"></div><button class="btn" type="submit">予約を確定する</button>
           </form>

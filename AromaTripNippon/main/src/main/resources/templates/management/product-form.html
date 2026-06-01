@@ -22,8 +22,8 @@
             th:object="${product}"
             onsubmit="return confirm('この内容で保存しますか？');">
         <div class="form-grid">
-          <label>商品名<input th:field="*{productName}" required></label>
-          <label>英語名<input th:field="*{englishName}" required></label>
+          <label>商品名<input th:field="*{productName}" maxlength="255" required></label>
+          <label>英語名<input th:field="*{englishName}" maxlength="255" required></label>
           <label>カテゴリ
             <select name="categoryId" required>
               <option value="">選択してください</option>
@@ -35,7 +35,7 @@
           </label>
           <label>価格<input type="number" step="1" th:field="*{price}" required></label>
           <label>公開<input type="checkbox" th:field="*{published}"></label>
-          <label class="full">説明<textarea th:field="*{description}"></textarea></label>
+          <label class="full">説明<textarea th:field="*{description}" maxlength="1000"></textarea></label>
         </div>
         <button class="primary" type="submit">保存</button>
       </form>

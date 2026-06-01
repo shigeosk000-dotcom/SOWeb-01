@@ -21,7 +21,7 @@
           <tr><th>レシピ名</th><td th:text="${recipe.recipeName}"></td></tr>
           <tr><th>顧客</th><td th:text="${recipe.customer.name}"></td></tr>
           <tr><th>コンセプト</th><td th:text="${recipe.concept}"></td></tr>
-          <tr><th>メモ</th><td th:text="${recipe.memo}"></td></tr>
+          <tr><th>メモ</th><td class="note-scroll" th:text="${recipe.memo}"></td></tr>
         </table>
         <h2>材料</h2>
         <table class="table">

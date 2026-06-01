@@ -5,21 +5,29 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "customers")
 public class Customer extends BaseEntity {
   @NotBlank
+  @Size(max = 255)
   private String name;
+  @Size(max = 255)
   private String nationality;
   @Email
   @NotBlank
+  @Size(max = 255)
   private String email;
+  @Size(max = 255)
   private String phone;
   @Column(name = "preferred_language")
+  @Size(max = 255)
   private String preferredLanguage = "English";
+  @Size(max = 255)
   private String purpose;
   @Column(name = "note", length = 1000)
+  @Size(max = 1000)
   private String notes;
 
   public String getName() { return name; }
