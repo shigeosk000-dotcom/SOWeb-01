@@ -1,11 +1,13 @@
 ﻿<!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>予約フォーム</title>
   <link rel="stylesheet" th:href="@{/css/app.css}">
 </head>
+
 <body class="admin-body">
   <div class="admin-layout">
     <div th:replace="~{management/fragments :: sidebar}"></div>
@@ -17,26 +19,22 @@
       <div th:replace="~{management/fragments :: pageAlert}"></div>
 
       <form class="panel"
-            th:action="${reservation.id == null} ? @{/management/reservations} : @{/management/reservations/{id}(id=${reservation.id})}"
-            method="post"
-            th:object="${reservation}"
-            onsubmit="return confirm('この内容で保存しますか？');">
+        th:action="${reservation.id == null} ? @{/management/reservations} : @{/management/reservations/{id}(id=${reservation.id})}"
+        method="post" th:object="${reservation}" onsubmit="return confirm('この内容で保存しますか？');">
         <div class="form-grid">
           <label>顧客
             <select name="customerId" required>
-              <option th:each="c : ${customers}"
-                      th:value="${c.id}"
-                      th:selected="${reservation.customer != null and reservation.customer.id == c.id}"
-                      th:text="${c.name}"></option>
+              <option th:each="c : ${customers}" th:value="${c.id}"
+                th:selected="${reservation.customer != null and reservation.customer.id == c.id}" th:text="${c.name}">
+              </option>
             </select>
           </label>
 
           <label>体験
             <select name="programId" required>
-              <option th:each="p : ${programs}"
-                      th:value="${p.id}"
-                      th:selected="${reservation.experienceProgram != null and reservation.experienceProgram.id == p.id}"
-                      th:text="${p.name}"></option>
+              <option th:each="p : ${programs}" th:value="${p.id}"
+                th:selected="${reservation.experienceProgram != null and reservation.experienceProgram.id == p.id}"
+                th:text="${p.name}"></option>
             </select>
           </label>
 
@@ -69,10 +67,11 @@
           <label class="full">要望
             <textarea th:field="*{requestNote}" maxlength="1000"></textarea>
           </label>
-        </div>
+        </div><BR>
         <button class="primary" type="submit">保存</button>
       </form>
     </main>
   </div>
 </body>
+
 </html>

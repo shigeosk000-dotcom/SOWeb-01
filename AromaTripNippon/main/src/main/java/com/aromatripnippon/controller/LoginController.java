@@ -1,19 +1,26 @@
 package com.aromatripnippon.controller;
 
-import com.aromatripnippon.service.PasswordResetService;
+import com.aromatripnippon.entity.AdminUser;
+import com.aromatripnippon.repository.AdminUserRepository;
+import com.aromatripnippon.service.TotpService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class LoginController {
-  private final PasswordResetService passwordResetService;
+  private final AdminUserRepository admins;
+  private final TotpService totpService;
+  private final PasswordEncoder encoder;
 
-  public LoginController(PasswordResetService passwordResetService) {
-    this.passwordResetService = passwordResetService;
+  public LoginController(AdminUserRepository admins, TotpService totpService, PasswordEncoder encoder) {
+    this.admins = admins;
+    this.totpService = totpService;
+    this.encoder = encoder;
   }
 
   @GetMapping("/management/login")
@@ -27,49 +34,51 @@ public class LoginController {
   }
 
   @PostMapping("/management/forgot-password")
-  public String requestPasswordReset(@RequestParam String loginId, @RequestParam String email,
+  public String forgotPasswordSubmit(@RequestParam String loginId,
+      @RequestParam String newPassword,
+      @RequestParam String confirmPassword,
+      @RequestParam(required = false) String totpCode,
+      @RequestParam(required = false) String backupCode,
+      Model model,
       RedirectAttributes redirectAttributes) {
-    if (loginId != null && !loginId.isBlank() && email != null && !email.isBlank()) {
-      passwordResetService.requestReset(loginId, email);
-    }
-    redirectAttributes.addFlashAttribute("infoMessage",
-        "入力内容が正しければ、パスワード再設定用のメールを送信しました。");
-    return "redirect:/management/forgot-password";
-  }
-
-  @GetMapping("/management/reset-password")
-  public String resetPasswordForm(@RequestParam String token, Model model) {
-    model.addAttribute("token", token);
-    if (!passwordResetService.isTokenValid(token)) {
-      model.addAttribute("errorMessage", "再設定リンクが無効か有効期限切れです。再度お試しください。");
-    }
-    return "management/reset-password";
-  }
-
-  @PostMapping("/management/reset-password")
-  public String resetPassword(@RequestParam String token, @RequestParam String newPassword,
-      @RequestParam String confirmPassword, Model model) {
-    model.addAttribute("token", token);
-    if (!passwordResetService.isTokenValid(token)) {
-      model.addAttribute("errorMessage", "再設定リンクが無効か有効期限切れです。再度お試しください。");
-      return "management/reset-password";
-    }
-    if (newPassword == null || newPassword.isBlank() || confirmPassword == null || confirmPassword.isBlank()) {
-      model.addAttribute("errorMessage", "全ての項目を入力してください。");
-      return "management/reset-password";
-    }
-    if (newPassword.length() < 8) {
+    if (newPassword == null || newPassword.length() < 8) {
       model.addAttribute("errorMessage", "新しいパスワードは8文字以上で入力してください。");
-      return "management/reset-password";
+      return "management/forgot-password";
     }
     if (!newPassword.equals(confirmPassword)) {
-      model.addAttribute("errorMessage", "新しいパスワードと確認用パスワードが一致しません。");
-      return "management/reset-password";
+      model.addAttribute("errorMessage", "新しいパスワード（確認）が一致しません。");
+      return "management/forgot-password";
     }
-    if (!passwordResetService.resetPassword(token, newPassword)) {
-      model.addAttribute("errorMessage", "再設定リンクが無効か有効期限切れです。再度お試しください。");
-      return "management/reset-password";
+
+    AdminUser admin = admins.findByLoginIdAndDeletedAtIsNullAndActiveTrue(loginId).orElse(null);
+    if (admin == null || !Boolean.TRUE.equals(admin.getTotpEnabled()) || admin.getTotpSecret() == null) {
+      model.addAttribute("errorMessage", "入力内容が正しくありません。");
+      return "management/forgot-password";
     }
+
+    boolean verified = totpService.verifyCode(admin.getTotpSecret(), trimToNull(totpCode))
+        || totpService.consumeBackupCode(admin, trimToNull(backupCode));
+    if (!verified) {
+      model.addAttribute("errorMessage", "認証コードまたはバックアップコードが正しくありません。");
+      return "management/forgot-password";
+    }
+
+    admin.setPasswordHash(encoder.encode(newPassword));
+    admin.setFailedLoginAttempts(0);
+    admin.setAccountLocked(false);
+    admin.setPasswordResetRequired(false);
+    admin.setPasswordResetTokenHash(null);
+    admin.setPasswordResetTokenExpiresAt(null);
+    admins.save(admin);
+    redirectAttributes.addFlashAttribute("successMessage", "パスワードを再設定しました。");
     return "redirect:/management/login?reset";
+  }
+
+  private String trimToNull(String value) {
+    if (value == null) {
+      return null;
+    }
+    String trimmed = value.trim();
+    return trimmed.isEmpty() ? null : trimmed;
   }
 }

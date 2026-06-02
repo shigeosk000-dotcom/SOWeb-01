@@ -21,10 +21,10 @@
       <form th:action="@{/management/login}" method="post">
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
         <label>管理者ID<input name="username" required autofocus></label>
-        <label>パスワード<input type="password" name="password" required></label>
+        <label>パスワード<input type="password" name="password" required></label><BR>
         <button class="primary" type="submit">ログイン</button>
-      </form>
-      <!-- <p><a th:href="@{/management/forgot-password}">パスワードを忘れた場合</a></p> -->
+      </form><BR>
+      <p><a th:href="@{/management/forgot-password}">パスワードを忘れた場合</a></p>
     </section>
   </main>
 </body>

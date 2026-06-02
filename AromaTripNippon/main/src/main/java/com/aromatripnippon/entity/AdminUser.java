@@ -46,6 +46,12 @@ public class AdminUser extends BaseEntity {
   private String passwordResetTokenHash;
   @Column(name = "password_reset_token_expires_at")
   private LocalDateTime passwordResetTokenExpiresAt;
+  @Column(name = "totp_enabled", nullable = false)
+  private Boolean totpEnabled = false;
+  @Column(name = "totp_secret")
+  private String totpSecret;
+  @Column(name = "totp_pending_secret")
+  private String totpPendingSecret;
 
   public String getLoginId() { return loginId; }
   public void setLoginId(String loginId) { this.loginId = loginId; }
@@ -73,4 +79,10 @@ public class AdminUser extends BaseEntity {
   public void setPasswordResetTokenHash(String passwordResetTokenHash) { this.passwordResetTokenHash = passwordResetTokenHash; }
   public LocalDateTime getPasswordResetTokenExpiresAt() { return passwordResetTokenExpiresAt; }
   public void setPasswordResetTokenExpiresAt(LocalDateTime passwordResetTokenExpiresAt) { this.passwordResetTokenExpiresAt = passwordResetTokenExpiresAt; }
+  public Boolean getTotpEnabled() { return totpEnabled; }
+  public void setTotpEnabled(Boolean totpEnabled) { this.totpEnabled = totpEnabled; }
+  public String getTotpSecret() { return totpSecret; }
+  public void setTotpSecret(String totpSecret) { this.totpSecret = totpSecret; }
+  public String getTotpPendingSecret() { return totpPendingSecret; }
+  public void setTotpPendingSecret(String totpPendingSecret) { this.totpPendingSecret = totpPendingSecret; }
 }

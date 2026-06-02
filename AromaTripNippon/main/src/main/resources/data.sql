@@ -1,7 +1,7 @@
 INSERT INTO admin_users
-  (id, created_at, deleted_at, updated_at, is_active, display_language, name, email, login_id, notification_setting, failed_login_attempts, account_locked, password_reset_required, password_hash, role)
+  (id, created_at, deleted_at, updated_at, is_active, display_language, name, email, login_id, notification_setting, failed_login_attempts, account_locked, password_reset_required, password_reset_token_hash, password_reset_token_expires_at, totp_enabled, totp_secret, totp_pending_secret, password_hash, role)
 VALUES
-  (1, TIMESTAMP '2026-05-20 12:36:40.313467', NULL, TIMESTAMP '2026-05-20 12:36:40.313467', TRUE, 'Japanese', 'AromaTrip Manager', 'admin@aromatripnippon.local', 'AromaTripAdm01', 'ON', 0, FALSE, FALSE, '$2a$10$MAFHv9apCzHY29Ix7lYlkuGb8X2Qn6vV6odOSVgW.AxWTlplA/Rji', 'ADMIN');
+  (1, TIMESTAMP '2026-05-20 12:36:40.313467', NULL, TIMESTAMP '2026-05-20 12:36:40.313467', TRUE, 'Japanese', 'AromaTrip Manager', 'admin@aromatripnippon.local', 'AromaTripAdm01', 'ON', 0, FALSE, FALSE, NULL, NULL, FALSE, NULL, NULL, '$2a$10$MAFHv9apCzHY29Ix7lYlkuGb8X2Qn6vV6odOSVgW.AxWTlplA/Rji', 'ADMIN');
 
 INSERT INTO customers
   (id, created_at, deleted_at, updated_at, email, name, nationality, note, phone, preferred_language, purpose)

@@ -5,7 +5,6 @@ import com.aromatripnippon.entity.Customer;
 import com.aromatripnippon.entity.FragranceRecipe;
 import com.aromatripnippon.entity.FragranceRecipeMaterial;
 import com.aromatripnippon.entity.InventoryItem;
-import com.aromatripnippon.entity.InventoryTransaction;
 import com.aromatripnippon.entity.Product;
 import com.aromatripnippon.entity.ProductCategory;
 import com.aromatripnippon.entity.Reservation;
@@ -16,19 +15,34 @@ import com.aromatripnippon.repository.ExperienceProgramRepository;
 import com.aromatripnippon.repository.FragranceRecipeMaterialRepository;
 import com.aromatripnippon.repository.FragranceRecipeRepository;
 import com.aromatripnippon.repository.InventoryItemRepository;
-import com.aromatripnippon.repository.InventoryTransactionRepository;
 import com.aromatripnippon.repository.ProductCategoryRepository;
 import com.aromatripnippon.repository.ProductRepository;
 import com.aromatripnippon.repository.ReservationRepository;
 import com.aromatripnippon.service.AuditService;
+import com.aromatripnippon.service.TotpService;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import jakarta.validation.Valid;
 import jakarta.transaction.Transactional;
+import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
+import javax.imageio.ImageIO;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,33 +62,33 @@ public class ManagementController {
   private final FragranceRecipeRepository recipes;
   private final FragranceRecipeMaterialRepository recipeMaterials;
   private final InventoryItemRepository inventory;
-  private final InventoryTransactionRepository inventoryTransactions;
   private final ProductCategoryRepository productCategories;
   private final ProductRepository products;
   private final AdminUserRepository admins;
   private final AuditLogRepository auditLogs;
   private final AuditService audit;
   private final PasswordEncoder encoder;
+  private final TotpService totpService;
 
   public ManagementController(ReservationRepository reservations, CustomerRepository customers,
       ExperienceProgramRepository programs, FragranceRecipeRepository recipes,
       FragranceRecipeMaterialRepository recipeMaterials, InventoryItemRepository inventory,
-      InventoryTransactionRepository inventoryTransactions, ProductCategoryRepository productCategories,
+      ProductCategoryRepository productCategories,
       ProductRepository products, AdminUserRepository admins, AuditLogRepository auditLogs, AuditService audit,
-      PasswordEncoder encoder) {
+      PasswordEncoder encoder, TotpService totpService) {
     this.reservations = reservations;
     this.customers = customers;
     this.programs = programs;
     this.recipes = recipes;
     this.recipeMaterials = recipeMaterials;
     this.inventory = inventory;
-    this.inventoryTransactions = inventoryTransactions;
     this.productCategories = productCategories;
     this.products = products;
     this.admins = admins;
     this.auditLogs = auditLogs;
     this.audit = audit;
     this.encoder = encoder;
+    this.totpService = totpService;
   }
 
   @GetMapping("/management/dashboard")
@@ -467,7 +481,6 @@ public class ManagementController {
   @GetMapping("/management/inventory/{id}")
   public String inventoryDetail(@PathVariable Long id, Model model) {
     model.addAttribute("item", inventory.findById(id).orElseThrow());
-    model.addAttribute("transactions", inventoryTransactions.findByDeletedAtIsNullOrderByIdDesc());
     return "management/inventory-detail";
   }
 
@@ -501,23 +514,6 @@ public class ManagementController {
     return "redirect:/management/inventory/" + id;
   }
 
-  @PostMapping("/management/inventory/{id}/transaction")
-  public String inventoryTransaction(@PathVariable Long id, @RequestParam String transactionType,
-      @RequestParam BigDecimal quantity, @RequestParam(required = false) String reason, Principal principal) {
-    InventoryItem item = inventory.findById(id).orElseThrow();
-    BigDecimal signedQuantity = "OUT".equals(transactionType) ? quantity.negate() : quantity;
-    item.setStockQuantity(item.getStockQuantity().add(signedQuantity));
-    InventoryTransaction transaction = new InventoryTransaction();
-    transaction.setInventoryItem(item);
-    transaction.setTransactionType(transactionType);
-    transaction.setQuantity(quantity);
-    transaction.setReason(reason);
-    inventoryTransactions.save(transaction);
-    inventory.save(item);
-    audit.record(principal, "UPDATE", "inventory_transactions", transaction.getId(), "在庫取引を更新");
-    return "redirect:/management/inventory/" + id;
-  }
-
   @PostMapping("/management/inventory/{id}/delete")
   public String inventoryDelete(@PathVariable Long id, Principal principal, RedirectAttributes redirectAttributes) {
     if (recipeMaterials.existsByDeletedAtIsNullAndFragranceRecipeDeletedAtIsNullAndInventoryItemId(id)) {
@@ -539,8 +535,27 @@ public class ManagementController {
 
   @GetMapping("/management/account")
   public String account(Principal principal, Model model) {
-    model.addAttribute("admin", admins.findByLoginIdAndDeletedAtIsNullAndActiveTrue(principal.getName()).orElseThrow());
+    AdminUser admin = admins.findByLoginIdAndDeletedAtIsNullAndActiveTrue(principal.getName()).orElseThrow();
+    String setupSecret = ensureTotpSetupSecret(admin);
+    model.addAttribute("admin", admin);
+    model.addAttribute("totpEnabled", Boolean.TRUE.equals(admin.getTotpEnabled()));
+    model.addAttribute("totpSetupInProgress", !Boolean.TRUE.equals(admin.getTotpEnabled()) || isPresent(admin.getTotpPendingSecret()));
+    model.addAttribute("totpSecret", setupSecret);
+    model.addAttribute("totpUri", totpService.buildOtpAuthUri("AromaTripNippon", admin.getLoginId(), setupSecret));
+    model.addAttribute("totpQrUrl", "/management/account/totp/qr");
     return "management/account";
+  }
+
+  @GetMapping(value = "/management/account/totp/qr", produces = MediaType.IMAGE_PNG_VALUE)
+  public ResponseEntity<byte[]> totpQrCode(Principal principal) throws Exception {
+    AdminUser admin = admins.findByLoginIdAndDeletedAtIsNullAndActiveTrue(principal.getName()).orElseThrow();
+    String setupSecret = ensureTotpSetupSecret(admin);
+    String uri = totpService.buildOtpAuthUri("AromaTripNippon", admin.getLoginId(), setupSecret);
+    byte[] png = createQrPng(uri, 320);
+    return ResponseEntity.ok()
+        .header(HttpHeaders.CACHE_CONTROL, "no-store")
+        .contentType(MediaType.IMAGE_PNG)
+        .body(png);
   }
 
   @PostMapping("/management/account")
@@ -557,6 +572,50 @@ public class ManagementController {
     admins.save(admin);
     audit.record(principal, "UPDATE", "admin_users", admin.getId(), "管理者アカウント情報を更新");
     return "redirect:/management/account?updated";
+  }
+
+  @PostMapping("/management/account/totp/setup")
+  public String regenerateTotpSecret(Principal principal) {
+    AdminUser admin = admins.findByLoginIdAndDeletedAtIsNullAndActiveTrue(principal.getName()).orElseThrow();
+    admin.setTotpPendingSecret(totpService.generateSecret());
+    admins.save(admin);
+    return "redirect:/management/account";
+  }
+
+  @PostMapping("/management/account/totp/enable")
+  public String enableTotp(@RequestParam String totpCode, Principal principal, RedirectAttributes redirectAttributes) {
+    AdminUser admin = admins.findByLoginIdAndDeletedAtIsNullAndActiveTrue(principal.getName()).orElseThrow();
+    String setupSecret = setupSecret(admin);
+    if (setupSecret == null || !totpService.verifyCode(setupSecret, totpCode)) {
+      redirectAttributes.addFlashAttribute("errorMessage", "認証コードが正しくありません。");
+      return "redirect:/management/account";
+    }
+    admin.setTotpSecret(setupSecret);
+    admin.setTotpPendingSecret(null);
+    admin.setTotpEnabled(true);
+    admins.save(admin);
+    redirectAttributes.addFlashAttribute("backupCodes", totpService.regenerateBackupCodes(admin));
+    redirectAttributes.addFlashAttribute("successMessage", "TOTPを有効化しました。バックアップコードを保存してください。");
+    return "redirect:/management/account";
+  }
+
+  @PostMapping("/management/account/totp/cancel")
+  public String cancelTotpSetup(Principal principal, RedirectAttributes redirectAttributes) {
+    AdminUser admin = admins.findByLoginIdAndDeletedAtIsNullAndActiveTrue(principal.getName()).orElseThrow();
+    if (Boolean.TRUE.equals(admin.getTotpEnabled())) {
+      admin.setTotpPendingSecret(null);
+      admins.save(admin);
+      redirectAttributes.addFlashAttribute("successMessage", "TOTP再設定をキャンセルしました。現在有効なTOTPはそのまま利用できます。");
+    }
+    return "redirect:/management/account";
+  }
+
+  @PostMapping("/management/account/totp/backup-codes")
+  public String regenerateBackupCodes(Principal principal, RedirectAttributes redirectAttributes) {
+    AdminUser admin = admins.findByLoginIdAndDeletedAtIsNullAndActiveTrue(principal.getName()).orElseThrow();
+    redirectAttributes.addFlashAttribute("backupCodes", totpService.regenerateBackupCodes(admin));
+    redirectAttributes.addFlashAttribute("successMessage", "バックアップコードを再発行しました。");
+    return "redirect:/management/account";
   }
 
   private void populateReservationFormModel(Model model, Reservation reservation) {
@@ -576,6 +635,52 @@ public class ManagementController {
       }
     }
     return options;
+  }
+
+  private String ensureTotpSetupSecret(AdminUser admin) {
+    String secret = setupSecret(admin);
+    if (secret != null) {
+      return secret;
+    }
+    String newSecret = totpService.generateSecret();
+    if (Boolean.TRUE.equals(admin.getTotpEnabled())) {
+      admin.setTotpPendingSecret(newSecret);
+    } else {
+      admin.setTotpSecret(newSecret);
+    }
+    admins.save(admin);
+    return newSecret;
+  }
+
+  private String setupSecret(AdminUser admin) {
+    if (isPresent(admin.getTotpPendingSecret())) {
+      return admin.getTotpPendingSecret();
+    }
+    return isPresent(admin.getTotpSecret()) ? admin.getTotpSecret() : null;
+  }
+
+  private boolean isPresent(String value) {
+    return value != null && !value.isBlank();
+  }
+
+  private byte[] createQrPng(String value, int size) throws Exception {
+    Map<EncodeHintType, Object> hints = new EnumMap<>(EncodeHintType.class);
+    hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
+    hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.M);
+    hints.put(EncodeHintType.MARGIN, 4);
+    BitMatrix matrix = new MultiFormatWriter().encode(value, BarcodeFormat.QR_CODE, size, size, hints);
+    BufferedImage image = new BufferedImage(matrix.getWidth(), matrix.getHeight(), BufferedImage.TYPE_INT_RGB);
+    for (int y = 0; y < matrix.getHeight(); y++) {
+      for (int x = 0; x < matrix.getWidth(); x++) {
+        image.setRGB(x, y, matrix.get(x, y) ? Color.BLACK.getRGB() : Color.WHITE.getRGB());
+      }
+    }
+    try (ByteArrayOutputStream out = new ByteArrayOutputStream()) {
+      ImageIO.write(image, "png", out);
+      return out.toByteArray();
+    } catch (IOException ex) {
+      throw new IllegalStateException("Failed to create TOTP QR code.", ex);
+    }
   }
 
   private String normalizeReservationSlot(String slot) {

@@ -1,11 +1,13 @@
 ﻿<!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>香りレシピフォーム</title>
   <link rel="stylesheet" th:href="@{/css/app.css}">
 </head>
+
 <body class="admin-body">
   <div class="admin-layout">
     <div th:replace="~{management/fragments :: sidebar}"></div>
@@ -17,17 +19,13 @@
       <div th:replace="~{management/fragments :: pageAlert}"></div>
 
       <form class="panel"
-            th:action="${recipe.id == null} ? @{/management/recipes} : @{/management/recipes/{id}(id=${recipe.id})}"
-            method="post"
-            th:object="${recipe}"
-            onsubmit="return confirm('この内容で保存しますか？');">
+        th:action="${recipe.id == null} ? @{/management/recipes} : @{/management/recipes/{id}(id=${recipe.id})}"
+        method="post" th:object="${recipe}" onsubmit="return confirm('この内容で保存しますか？');">
         <div class="form-grid">
           <label>顧客
             <select name="customerId" required>
-              <option th:each="c : ${customers}"
-                      th:value="${c.id}"
-                      th:selected="${recipe.customer != null and recipe.customer.id == c.id}"
-                      th:text="${c.name}"></option>
+              <option th:each="c : ${customers}" th:value="${c.id}"
+                th:selected="${recipe.customer != null and recipe.customer.id == c.id}" th:text="${c.name}"></option>
             </select>
           </label>
 
@@ -46,30 +44,30 @@
               <span>配合比率</span>
             </div>
             <div class="recipe-materials__row" th:each="idx : ${#numbers.sequence(1, 5)}">
-              <select class="js-material-name" name="materialId" th:required="${idx == 1}" th:attr="aria-label=|商品 ${idx}|">
+              <select class="js-material-name" name="materialId" th:required="${idx == 1}"
+                th:attr="aria-label=|商品 ${idx}|">
                 <option value="" th:text="${idx == 1 ? '選択してください' : '未選択'}"></option>
-                <option th:each="p : ${productOptions}"
-                        th:value="${p.id}"
-                        th:selected="${(materialIds != null and #lists.size(materialIds) >= idx and materialIds[idx - 1] != null and materialIds[idx - 1] == p.id) or (materialIds == null and recipe.materials != null and recipe.materials.size() >= idx and recipe.materials[idx - 1].inventoryItem.id == p.id)}"
-                        th:text="${p.productName}"></option>
+                <option th:each="p : ${productOptions}" th:value="${p.id}"
+                  th:selected="${(materialIds != null and #lists.size(materialIds) >= idx and materialIds[idx - 1] != null and materialIds[idx - 1] == p.id) or (materialIds == null and recipe.materials != null and recipe.materials.size() >= idx and recipe.materials[idx - 1].inventoryItem.id == p.id)}"
+                  th:text="${p.productName}"></option>
               </select>
               <select class="js-material-english" th:required="${idx == 1}" th:attr="aria-label=|英語名 ${idx}|">
                 <option value="" th:text="${idx == 1 ? 'Select' : 'None'}"></option>
-                <option th:each="p : ${productOptions}"
-                        th:value="${p.id}"
-                        th:selected="${(materialIds != null and #lists.size(materialIds) >= idx and materialIds[idx - 1] != null and materialIds[idx - 1] == p.id) or (materialIds == null and recipe.materials != null and recipe.materials.size() >= idx and recipe.materials[idx - 1].inventoryItem.id == p.id)}"
-                        th:text="${p.englishName != null and !#strings.isEmpty(p.englishName) ? p.englishName : p.productName}"></option>
+                <option th:each="p : ${productOptions}" th:value="${p.id}"
+                  th:selected="${(materialIds != null and #lists.size(materialIds) >= idx and materialIds[idx - 1] != null and materialIds[idx - 1] == p.id) or (materialIds == null and recipe.materials != null and recipe.materials.size() >= idx and recipe.materials[idx - 1].inventoryItem.id == p.id)}"
+                  th:text="${p.englishName != null and !#strings.isEmpty(p.englishName) ? p.englishName : p.productName}">
+                </option>
               </select>
               <input name="blendRatio" type="number" step="5" min="5"
-                     th:value="${materialIds != null ? (#lists.size(blendRatios) >= idx ? blendRatios[idx - 1] : '') : (recipe.materials != null and recipe.materials.size() >= idx ? recipe.materials[idx - 1].blendRatio : (idx == 1 ? '100' : ''))}"
-                     th:required="${idx == 1}" th:attr="aria-label=|配合比率 ${idx}|">
+                th:value="${materialIds != null ? (#lists.size(blendRatios) >= idx ? blendRatios[idx - 1] : '') : (recipe.materials != null and recipe.materials.size() >= idx ? recipe.materials[idx - 1].blendRatio : (idx == 1 ? '100' : ''))}"
+                th:required="${idx == 1}" th:attr="aria-label=|配合比率 ${idx}|">
             </div>
           </section>
 
           <label class="full">メモ
             <textarea th:field="*{memo}" maxlength="1000"></textarea>
           </label>
-        </div>
+        </div><BR>
         <button class="primary" type="submit">保存</button>
       </form>
     </main>
@@ -87,4 +85,5 @@
     });
   </script>
 </body>
+
 </html>
