@@ -1,0 +1,17 @@
+status=200 final=http://localhost:8080/management/reservations
+body_snippet=﻿<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>予約フォーム</title>
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+
+<body class="admin-body">
+  <div class="admin-layout">
+    <aside class="sidebar">
+  <div class="brand">AromaTripNippon</div>
+  <a href="/management/dashboard">ダッシュボード</a>
+  <a href

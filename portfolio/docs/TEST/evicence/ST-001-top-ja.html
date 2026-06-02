@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aroma Trip Nippon | 和香巡り</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a class="brand" href="/"><img class="brand-logo" src="/assets/images/LOGO.png"
+          alt="Aroma Trip Nippon" /></a>
+      <nav class="nav"><a href="/concept">コンセプト</a><a href="/experience">体験詳細</a><a
+          href="/reservation">予約</a></nav>
+      <div class="header-actions">
+        <div class="lang-switch"><a class="active" href="/">JP</a><a href="/en/">EN</a></div><a class="btn"
+          href="/reservation">予約する</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="card" style="padding:0;overflow:hidden">
+          <div class="pro-slider hero-box" data-interval="5000" aria-label="トップページ画像スライダー">
+            <div class="pro-slider__slide is-active"><img src="/assets/images/index_hero_01.png"
+                alt="香りづくり体験イメージ1" class="pro-slider__media" /></div>
+            <div class="pro-slider__slide"><img src="/assets/images/index_hero_02.png" alt="香りづくり体験イメージ2"
+                class="pro-slider__media" /></div>
+            <div class="pro-slider__slide"><img src="/assets/images/index_hero_03.png" alt="香りづくり体験イメージ3"
+                class="pro-slider__media" /></div>
+            <button class="pro-slider__nav pro-slider__nav--prev" type="button" aria-label="前へ"></button>
+            <button class="pro-slider__nav pro-slider__nav--next" type="button" aria-label="次へ"></button>
+            <div class="pro-slider__dots"><button class="pro-slider__dot is-active" type="button" aria-label="スライド1"
+                aria-selected="true"></button><button class="pro-slider__dot" type="button" aria-label="スライド2"
+                aria-selected="false"></button><button class="pro-slider__dot" type="button" aria-label="スライド3"
+                aria-selected="false"></button></div>
+          </div>
+        </div>
+        <div class="hero-copy card text-gradient">
+          <div class="kicker">WAKOU MEGURI</div>
+          <p class="jp-note">Travel Japan Through Scent.</p>
+          <h1>香りで、<br>日本を巡る。</h1>
+          <p class="lead">日本各地の素材と物語に触れながら、自分だけの香りをつくる東京の体験サービスです。</p>
+          <p class="text">旅の記憶を香りとして持ち帰る、訪日ゲストにも楽しみやすいワークショップを提供します。</p>
+          <div class="actions"><a class="btn" href="/reservation">予約する</a><a class="btn secondary"
+              href="/concept">コンセプトを見る</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container grid-2">
+        <div class="card text-gradient" style="padding:24px">
+          <h2>ブランドストーリー</h2>
+          <p class="text">日本各地の自然素材をテーマに、地域ごとの香りを組み合わせてつくる体験型サービスです。</p>
+          <div class="spacer"></div><a class="btn secondary" href="/concept">詳しく見る</a>
+        </div>
+        <div class="media-stack"><img src="/assets/images/index_group_large2.png" alt="香りづくり体験の様子"
+            class="large" /></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>日本素材の紹介</h2>
+        <p class="sub">体験で出会える香りの一部をご紹介します。</p>
+        <div class="grid-3">
+          <div class="material"><img src="/assets/images/material_hiba2.png" alt="能登ひば"
+              class="material-thumb" /><span class="pill">能登ひば</span>
+            <h3>落ち着きと静けさ</h3>
+            <p class="text">森の空気を思わせる、深いウッディノート。</p>
+          </div>
+          <div class="material"><img src="/assets/images/material_yuzu2.png" alt="国造ゆず"
+              class="material-thumb" /><span class="pill">国造ゆず</span>
+            <h3>明るく軽やかな余韻</h3>
+            <p class="text">旅の高揚感と相性のよい、爽やかな柑橘の香り。</p>
+          </div>
+          <div class="material"><img src="/assets/images/material_hakka2.png" alt="和薄荷"
+              class="material-thumb" /><span class="pill">和薄荷</span>
+            <h3>記憶に残る清涼感</h3>
+            <p class="text">やわらかな清涼感が、香り全体を引き締めます。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="cta-band">
+          <h2 style="margin-top:0;color:white">東京で、自分だけの香りをつくる</h2>
+          <p style="margin:0 0 14px;color:rgba(255,255,255,.9)">英語ページからも同じ予約システムで申し込みできます。</p><a class="btn secondary"
+            href="/reservation">予約ページへ</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div><strong>Aroma Trip Nippon</strong><br>和香巡り</div>
+      <div><a href="/experience">体験詳細</a><br><a href="/concept">コンセプト</a></div>
+      <div><a href="/reservation">予約</a><br><a href="/en/">English</a></div>
+    </div>
+  </footer>
+  <script>
+    (function () {
+      const storageKey = 'atnPreferredLanguage';
+      const redirectFlag = 'atnAutoRedirectDone';
+      if (localStorage.getItem(storageKey) === 'ja') {
+        return;
+      }
+      if (!localStorage.getItem(redirectFlag)) {
+        localStorage.setItem(redirectFlag, 'true');
+        const langs = navigator.languages || [navigator.language || navigator.userLanguage || navigator.browserLanguage || ''];
+        const wantsJapanese = langs.some(lang => /^ja(-|$)/i.test(lang));
+        if (!wantsJapanese) {
+          window.location.replace('/en/');
+        }
+      }
+    })();
+  </script>
+  <script src="/js/public-nav.js" defer></script>
+  <script src="/js/slider.js" defer></script>
+</body>
+
+</html>

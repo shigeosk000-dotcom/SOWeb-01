@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>在庫詳細</title>
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+
+<body class="admin-body">
+  <div class="admin-layout">
+    <aside class="sidebar">
+  <div class="brand">AromaTripNippon</div>
+  <a href="/management/dashboard">ダッシュボード</a>
+  <a href="/management/reservations">予約管理</a>
+  <a href="/management/customers">顧客管理</a>
+  <a href="/management/recipes">香りレシピ管理</a>
+  <a href="/management/products">商品管理</a>
+  <a href="/management/inventory">在庫管理</a>
+  <a href="/management/account">アカウント設定</a>
+  <form action="/management/logout" method="post"><input type="hidden" name="_csrf" value="-V4oWmnpHEOh0HzWt4QLiT4LbInMu5MyE6F-NCVVoYjXuXMewWtMYguLL3CM5UrggKk_7F06QeioiKcfKsBJABBnw-uxgEB7"/>
+    <button type="submit">ログアウト</button>
+  </form>
+</aside>
+    <main class="admin-main">
+      <div class="page-head">
+        <h1>在庫詳細</h1>
+        <div class="actions"><a class="btn" href="/management/inventory">一覧</a><a class="btn primary"
+            href="/management/inventory/18/edit">編集</a></div>
+      </div>
+      
+      <section class="panel">
+        <table class="table">
+          <tr>
+            <th>ID</th>
+            <td>18</td>
+          </tr>
+          <tr>
+            <th>材料名</th>
+            <td>System Test Item 1780371864</td>
+          </tr>
+          <tr>
+            <th>英語名</th>
+            <td></td>
+          </tr>
+          <tr>
+            <th>カテゴリ</th>
+            <td>material</td>
+          </tr>
+          <tr>
+            <th>在庫数</th>
+            <td><span>20.00</span> <span>ml</span></td>
+          </tr>
+          <tr>
+            <th>しきい値</th>
+            <td><span>5.00</span> <span>ml</span></td>
+          </tr>
+          <tr>
+            <th>保管場所</th>
+            <td>Shelf A</td>
+          </tr>
+          <tr>
+            <th>仕入先</th>
+            <td>Supplier X</td>
+          </tr>
+          <tr>
+            <th>最終入荷日</th>
+            <td>2026-06-02</td>
+          </tr>
+          <tr>
+            <th>メモ</th>
+            <td>created by codex</td>
+          </tr>
+        </table><BR>
+        <form action="/management/inventory/18/delete" method="post"
+          onsubmit="return confirm('この在庫を削除しますか？');"><input type="hidden" name="_csrf" value="-V4oWmnpHEOh0HzWt4QLiT4LbInMu5MyE6F-NCVVoYjXuXMewWtMYguLL3CM5UrggKk_7F06QeioiKcfKsBJABBnw-uxgEB7"/><button class="danger">削除実行</button></form>
+      </section>
+    </main>
+  </div>
+</body>
+
+</html>

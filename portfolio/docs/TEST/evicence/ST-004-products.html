@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>商品管理</title>
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+<body class="admin-body">
+  <div class="admin-layout">
+    <aside class="sidebar">
+  <div class="brand">AromaTripNippon</div>
+  <a href="/management/dashboard">ダッシュボード</a>
+  <a href="/management/reservations">予約管理</a>
+  <a href="/management/customers">顧客管理</a>
+  <a href="/management/recipes">香りレシピ管理</a>
+  <a href="/management/products">商品管理</a>
+  <a href="/management/inventory">在庫管理</a>
+  <a href="/management/account">アカウント設定</a>
+  <form action="/management/logout" method="post"><input type="hidden" name="_csrf" value="md4dZZPcUgUI0fi_BlE7Qru8x6PExQ41FSA55k88iOIGiQzDoet5XfG-YTYl5M6JMXwPJ9iN6sKg9joYLEEO0noO6oFgsD-m"/>
+    <button type="submit">ログアウト</button>
+  </form>
+</aside>
+    <main class="admin-main">
+      <div class="page-head">
+        <h1>商品管理</h1>
+        <a class="btn primary" href="/management/products/new">新規登録</a>
+      </div>
+      
+      <form class="panel search-form" action="/management/products" method="get">
+        <input name="q" value="" placeholder="商品名で検索">
+        <button class="primary" type="submit">検索</button>
+        <a class="btn primary" href="/management/products">クリア</a>
+      </form>
+      <table class="table">
+        <tr>
+          <th>ID</th>
+          <th>商品名</th>
+          <th>英語名</th>
+          <th>カテゴリ</th>
+          <th>価格</th>
+          <th>操作</th>
+        </tr>
+        <tr>
+          <td>17</td>
+          <td>System Test Product 1780371774 Updated</td>
+          <td></td>
+          <td>製品</td>
+          <td>1500.00</td>
+          <td>
+            <div class="table-actions">
+              <a href="/management/products/17">詳細</a>
+              <span>/</span>
+              <a href="/management/products/17/edit">編集</a>
+              <span>/</span>
+              <form action="/management/products/17/delete" method="post"
+                    onsubmit="return confirm('この商品を削除しますか？');"><input type="hidden" name="_csrf" value="md4dZZPcUgUI0fi_BlE7Qru8x6PExQ41FSA55k88iOIGiQzDoet5XfG-YTYl5M6JMXwPJ9iN6sKg9joYLEEO0noO6oFgsD-m"/>
+                <button class="link-button danger-text" type="submit">削除</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>16</td>
+          <td>System Test Item 1780371774 Updated</td>
+          <td></td>
+          <td>製品</td>
+          <td>1.00</td>
+          <td>
+            <div class="table-actions">
+              <a href="/management/products/16">詳細</a>
+              <span>/</span>
+              <a href="/management/products/16/edit">編集</a>
+              <span>/</span>
+              <form action="/management/products/16/delete" method="post"
+                    onsubmit="return confirm('この商品を削除しますか？');"><input type="hidden" name="_csrf" value="md4dZZPcUgUI0fi_BlE7Qru8x6PExQ41FSA55k88iOIGiQzDoet5XfG-YTYl5M6JMXwPJ9iN6sKg9joYLEEO0noO6oFgsD-m"/>
+                <button class="link-button danger-text" type="submit">削除</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>15</td>
+          <td>シダーパフューム</td>
+          <td>Cedar Perfume</td>
+          <td>製品</td>
+          <td>4300.00</td>
+          <td>
+            <div class="table-actions">
+              <a href="/management/products/15">詳細</a>
+              <span>/</span>
+              <a href="/management/products/15/edit">編集</a>
+              <span>/</span>
+              <form action="/management/products/15/delete" method="post"
+                    onsubmit="return confirm('この商品を削除しますか？');"><input type="hidden" name="_csrf" value="md4dZZPcUgUI0fi_BlE7Qru8x6PExQ41FSA55k88iOIGiQzDoet5XfG-YTYl5M6JMXwPJ9iN6sKg9joYLEEO0noO6oFgsD-m"/>
+                <button class="link-button danger-text" type="submit">削除</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>14</td>
+          <td>ひのきパフューム</td>
+          <td>Hinoki Perfume</td>
+          <td>製品</td>
+          <td>4500.00</td>
+          <td>
+            <div class="table-actions">
+              <a href="/management/products/14">詳細</a>
+              <span>/</span>
+              <a href="/management/products/14/edit">編集</a>
+              <span>/</span>
+              <form action="/management/products/14/delete" method="post"
+                    onsubmit="return confirm('この商品を削除しますか？');"><input type="hidden" name="_csrf" value="md4dZZPcUgUI0fi_BlE7Qru8x6PExQ41FSA55k88iOIGiQzDoet5XfG-YTYl5M6JMXwPJ9iN6sKg9joYLEEO0noO6oFgsD-m"/>
+                <button class="link-button danger-text" type="submit">削除</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>13</td>
+          <td>桜パフューム</td>
+          <td>Sakura Perfume</td>
+          <td>製品</td>
+          <td>4200.00</td>
+          <td>
+            <div class="table-actions">
+              <a href="/management/products/13">詳細</a>
+              <span>/</span>
+              <a href="/management/products/13/edit">編集</a>
+              <span>/</span>
+              <form action="/management/products/13/delete" method="post"
+                    onsubmit="return confirm('この商品を削除しますか？');"><input type="hidden" name="_csrf" value="md4dZZPcUgUI0fi_BlE7Qru8x6PExQ41FSA55k88iOIGiQzDoet5XfG-YTYl5M6JMXwPJ9iN6sKg9joYLEEO0noO6oFgsD-m"/>
+                <button class="link-button danger-text" type="submit">削除</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>12</td>
+          <td>抹茶ハンドクリーム</td>
+          <td>Matcha Hand Cream</td>
+          <td>製品</td>
+          <td>2600.00</td>
+          <td>
+            <div class="table-actions">
+              <a href="/management/products/12">詳細</a>
+              <span>/</span>
+              <a href="/management/products/12/edit">編集</a>
+              <span>/</span>
+              <form action="/management/products/12/delete" method="post"
+                    onsubmit="return confirm('この商品を削除しますか？');"><input type="hidden" name="_csrf" value="md4dZZPcUgUI0fi_BlE7Qru8x6PExQ41FSA55k88iOIGiQzDoet5XfG-YTYl5M6JMXwPJ9iN6sKg9joYLEEO0noO6oFgsD-m"/>
+                <button class="link-button danger-text" type="submit">削除</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td>ひばハンドクリーム</td>
+          <td>Hiba Hand Cream</td>
+          <td>製品</td>
+          <td>2500.00</td>
+          <td>
+            <div class="table-actions">
+              <a href="/management/products/11">詳細</a>
+              <span>/</span>
+              <a href="/management/products/11/edit">編集</a>
+              <span>/</span>
+              <form action="/management/products/11/delete" method="post"
+                    onsubmit="return confirm('この商品を削除しますか？');"><input type="hidden" name="_csrf" value="md4dZZPcUgUI0fi_BlE7Qru8x6PExQ41FSA55k88iOIGiQzDoet5XfG-YTYl5M6JMXwPJ9iN6sKg9joYLEEO0noO6oFgsD-m"/>
+                <button class="link-button danger-text" type="submit">削除</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td>柚子ハンドクリーム</td>
+          <td>Yuzu Hand Cream</td>
+          <td>製品</td>
+          <td>2400.00</td>
+          <td>
+            <div class="table-actions">
+              <a href="/management/products/10">詳細</a>
+              <span>/</span>
+              <a href="/management/products/10/edit">編集</a>
+              <span>/</span>
+              <form action="/management/products/10/delete" method="post"
+                    onsubmit="return confirm('この商品を削除しますか？');"><input type="hidden" name="_csrf" value="md4dZZPcUgUI0fi_BlE7Qru8x6PExQ41FSA55k88iOIGiQzDoet5XfG-YTYl5M6JMXwPJ9iN6sKg9joYLEEO0noO6oFgsD-m"/>
+                <button class="link-button danger-text" type="submit">削除</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td>アルミチューブ 50ml</td>
+          <td>Aluminum tube 50ml</td>
+          <td>容器</td>
+          <td>250.00</td>
+          <td>
+            <div class="table-actions">
+              <a href="/management/products/9">詳細</a>
+              <span>/</span>
+              <a href="/management/products/9/edit">編集</a>
+              <span>/</span>
+              <form action="/management/products/9/delete" method="post"
+                    onsubmit="return confirm('この商品を削除しますか？');"><input type="hidden" name="_csrf" value="md4dZZPcUgUI0fi_BlE7Qru8x6PExQ41FSA55k88iOIGiQzDoet5XfG-YTYl5M6JMXwPJ9iN6sKg9joYLEEO0noO6oFgsD-m"/>
+                <button class="link-button danger-text" type="submit">削除</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>ガラスボトル 30ml</td>
+          <td>Glass bottle 30ml</td>
+          <td>容器</td>
+          <td>300.00</td>
+          <td>
+            <div class="table-actions">
+              <a href="/management/products/8">詳細</a>
+              <span>/</span>
+              <a href="/management/products/8/edit">編集</a>
+              <span>/</span>
+              <form action="/management/products/8/delete" method="post"
+                    onsubmit="return confirm('この商品を削除しますか？');"><input type="hidden" name="_csrf" value="md4dZZPcUgUI0fi_BlE7Qru8x6PExQ41FSA55k88iOIGiQzDoet5XfG-YTYl5M6JMXwPJ9iN6sKg9joYLEEO0noO6oFgsD-m"/>
+                <button class="link-button danger-text" type="submit">削除</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>白杉レジン</td>
+          <td>White cedar resin</td>
+          <td>素材</td>
+          <td>1450.00</td>
+          <td>
+            <div class="table-actions">
+              <a href="/management/products/7">詳細</a>
+              <span>/</span>
+              <a href="/management/products/7/edit">編集</a>
+              <span>/</span>
+              <form action="/management/products/7/delete" method="post"
+                    onsubmit="return confirm('この商品を削除しますか？');"><input type="hidden" name="_csrf" value="md4dZZPcUgUI0fi_BlE7Qru8x6PExQ41FSA55k88iOIGiQzDoet5XfG-YTYl5M6JMXwPJ9iN6sKg9joYLEEO0noO6oFgsD-m"/>
+                <button class="link-button danger-text" type="submit">削除</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>抹茶エキス</td>
+          <td>Matcha green tea extract</td>
+          <td>素材</td>
+          <td>1300.00</td>
+          <td>
+            <div class="table-actions">
+              <a href="/management/products/6">詳細</a>
+              <span>/</span>
+              <a href="/management/products/6/edit">編集</a>
+              <span>/</span>
+              <form action="/management/products/6/delete" method="post"
+                    onsubmit="return confirm('この商品を削除しますか？');"><input type="hidden" name="_csrf" value="md4dZZPcUgUI0fi_BlE7Qru8x6PExQ41FSA55k88iOIGiQzDoet5XfG-YTYl5M6JMXwPJ9iN6sKg9joYLEEO0noO6oFgsD-m"/>
+                <button class="link-button danger-text" type="submit">削除</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>ひのき木部精油</td>
+          <td>Hinoki wood oil</td>
+          <td>素材</td>
+          <td>1500.00</td>
+          <td>
+            <div class="table-actions">
+              <a href="/management/products/5">詳細</a>
+              <span>/</span>
+              <a href="/management/products/5/edit">編集</a>
+              <span>/</span>
+              <form action="/management/products/5/delete" method="post"
+                    onsubmit="return confirm('この商品を削除しますか？');"><input type="hidden" name="_csrf" value="md4dZZPcUgUI0fi_BlE7Qru8x6PExQ41FSA55k88iOIGiQzDoet5XfG-YTYl5M6JMXwPJ9iN6sKg9joYLEEO0noO6oFgsD-m"/>
+                <button class="link-button danger-text" type="submit">削除</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>桜アブソリュート</td>
+          <td>Sakura absolute</td>
+          <td>素材</td>
+          <td>1600.00</td>
+          <td>
+            <div class="table-actions">
+              <a href="/management/products/4">詳細</a>
+              <span>/</span>
+              <a href="/management/products/4/edit">編集</a>
+              <span>/</span>
+              <form action="/management/products/4/delete" method="post"
+                    onsubmit="return confirm('この商品を削除しますか？');"><input type="hidden" name="_csrf" value="md4dZZPcUgUI0fi_BlE7Qru8x6PExQ41FSA55k88iOIGiQzDoet5XfG-YTYl5M6JMXwPJ9iN6sKg9joYLEEO0noO6oFgsD-m"/>
+                <button class="link-button danger-text" type="submit">削除</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>和薄荷精油</td>
+          <td>Japanese mint oil</td>
+          <td>素材</td>
+          <td>1100.00</td>
+          <td>
+            <div class="table-actions">
+              <a href="/management/products/3">詳細</a>
+              <span>/</span>
+              <a href="/management/products/3/edit">編集</a>
+              <span>/</span>
+              <form action="/management/products/3/delete" method="post"
+                    onsubmit="return confirm('この商品を削除しますか？');"><input type="hidden" name="_csrf" value="md4dZZPcUgUI0fi_BlE7Qru8x6PExQ41FSA55k88iOIGiQzDoet5XfG-YTYl5M6JMXwPJ9iN6sKg9joYLEEO0noO6oFgsD-m"/>
+                <button class="link-button danger-text" type="submit">削除</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>青森ひば精油</td>
+          <td>Aomori hiba essential oil</td>
+          <td>素材</td>
+          <td>1400.00</td>
+          <td>
+            <div class="table-actions">
+              <a href="/management/products/2">詳細</a>
+              <span>/</span>
+              <a href="/management/products/2/edit">編集</a>
+              <span>/</span>
+              <form action="/management/products/2/delete" method="post"
+                    onsubmit="return confirm('この商品を削除しますか？');"><input type="hidden" name="_csrf" value="md4dZZPcUgUI0fi_BlE7Qru8x6PExQ41FSA55k88iOIGiQzDoet5XfG-YTYl5M6JMXwPJ9iN6sKg9joYLEEO0noO6oFgsD-m"/>
+                <button class="link-button danger-text" type="submit">削除</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>柚子精油</td>
+          <td>Yuzu essential oil</td>
+          <td>素材</td>
+          <td>1200.00</td>
+          <td>
+            <div class="table-actions">
+              <a href="/management/products/1">詳細</a>
+              <span>/</span>
+              <a href="/management/products/1/edit">編集</a>
+              <span>/</span>
+              <form action="/management/products/1/delete" method="post"
+                    onsubmit="return confirm('この商品を削除しますか？');"><input type="hidden" name="_csrf" value="md4dZZPcUgUI0fi_BlE7Qru8x6PExQ41FSA55k88iOIGiQzDoet5XfG-YTYl5M6JMXwPJ9iN6sKg9joYLEEO0noO6oFgsD-m"/>
+                <button class="link-button danger-text" type="submit">削除</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </main>
+  </div>
+</body>
+</html>

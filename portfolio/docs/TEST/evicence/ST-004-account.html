@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>アカウント設定</title>
+    <link rel="stylesheet" href="/css/app.css">
+</head>
+
+<body class="admin-body">
+    <div class="admin-layout">
+        <aside class="sidebar">
+  <div class="brand">AromaTripNippon</div>
+  <a href="/management/dashboard">ダッシュボード</a>
+  <a href="/management/reservations">予約管理</a>
+  <a href="/management/customers">顧客管理</a>
+  <a href="/management/recipes">香りレシピ管理</a>
+  <a href="/management/products">商品管理</a>
+  <a href="/management/inventory">在庫管理</a>
+  <a href="/management/account">アカウント設定</a>
+  <form action="/management/logout" method="post"><input type="hidden" name="_csrf" value="n7klYJw7rTnlnEX2foSeOS7VdOijP-MF2azlLBk8jNR_qZ67p4xBWP5ZngrIqXPASamqXE3kWYnHDNco4M3SGCwO7rcZkK3e"/>
+    <button type="submit">ログアウト</button>
+  </form>
+</aside>
+        <main class="admin-main">
+            <div class="page-head">
+                <h1>アカウント設定</h1>
+            </div>
+            
+            
+            
+            <form class="panel" action="/management/account" method="post" onsubmit="return confirm('アカウント設定を更新しますか？');"><input type="hidden" name="_csrf" value="n7klYJw7rTnlnEX2foSeOS7VdOijP-MF2azlLBk8jNR_qZ67p4xBWP5ZngrIqXPASamqXE3kWYnHDNco4M3SGCwO7rcZkK3e"/>
+                <div class="form-grid">
+                    <label>管理者名<input maxlength="255" required id="displayName" name="displayName" value="AromaTrip Manager"></label><label>メール<input
+                            type="email" maxlength="255" id="email" name="email" value="admin@aromatripnippon.local"></label><label>通知設定<select id="notificationSetting" name="notificationSetting">
+                            <option value="ON" selected="selected">ON</option>
+                            <option value="OFF">OFF</option>
+                        </select></label><label>表示言語<select id="displayLanguage" name="displayLanguage">
+                            <option value="日本語">日本語</option>
+                            <option value="English">English</option>
+                        </select></label><label>新パスワード<input type="password" name="newPassword"
+                            minlength="8"></label><BR>
+                </div><BR><button class="primary">保存</button>
+            </form>
+            <section class="panel">
+                <h2>TOTP認証</h2>
+                
+                <p>状態: 未設定</p>
+                <p>認証アプリ（Google
+                    Authenticatorなど）でQR読み込み又はシークレットコードを入力し、表示された6桁コードを設定してください。</p>
+                <div class="totp-qr-box">
+                    <img class="totp-qr" src="/management/account/totp/qr" alt="TOTP登録用QRコード">
+                </div>
+                <p>シークレット: <code>LCEA4DVD23YAIISMTPYYAJCGEGNFUAOC</code></p>
+                <p>otpauth URI: <code>otpauth://totp/AromaTripNippon:AromaTripAdm01?secret=LCEA4DVD23YAIISMTPYYAJCGEGNFUAOC&amp;issuer=AromaTripNippon&amp;algorithm=SHA1&amp;digits=6&amp;period=30</code></p>
+                <form action="/management/account/totp/enable" method="post"><input type="hidden" name="_csrf" value="n7klYJw7rTnlnEX2foSeOS7VdOijP-MF2azlLBk8jNR_qZ67p4xBWP5ZngrIqXPASamqXE3kWYnHDNco4M3SGCwO7rcZkK3e"/>
+                    <label>認証アプリの6桁コード<input name="totpCode" inputmode="numeric" pattern="[0-9]{6}" maxlength="6"
+                            required></label><BR>
+                    <button class="primary" type="submit">TOTPを有効化</button>
+                </form><BR>
+                <form action="/management/account/totp/setup" method="post"><input type="hidden" name="_csrf" value="n7klYJw7rTnlnEX2foSeOS7VdOijP-MF2azlLBk8jNR_qZ67p4xBWP5ZngrIqXPASamqXE3kWYnHDNco4M3SGCwO7rcZkK3e"/>
+                    <button type="submit">シークレット再生成</button>
+                </form><BR>
+                <BR>
+                <BR>
+                
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>

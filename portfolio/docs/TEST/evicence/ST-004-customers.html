@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>顧客管理</title>
+    <link rel="stylesheet" href="/css/app.css">
+</head>
+
+<body class="admin-body">
+    <div class="admin-layout">
+        <aside class="sidebar">
+  <div class="brand">AromaTripNippon</div>
+  <a href="/management/dashboard">ダッシュボード</a>
+  <a href="/management/reservations">予約管理</a>
+  <a href="/management/customers">顧客管理</a>
+  <a href="/management/recipes">香りレシピ管理</a>
+  <a href="/management/products">商品管理</a>
+  <a href="/management/inventory">在庫管理</a>
+  <a href="/management/account">アカウント設定</a>
+  <form action="/management/logout" method="post"><input type="hidden" name="_csrf" value="js_UKvd-4vJQFfu_P48nzZDejKWvcWAaep0bXaMaMnccWw2itvqwEpUc0cF9IM2JCKITqPPvocTLQlQ3Q_wsaZYoUBR6Yj7H"/>
+    <button type="submit">ログアウト</button>
+  </form>
+</aside>
+        <main class="admin-main">
+            <div class="page-head">
+                <h1>顧客管理</h1><a class="btn primary" href="/management/customers/new">新規登録</a>
+            </div>
+            
+            <form class="panel search-form" action="/management/customers" method="get"><input name="q"
+                    value="" placeholder="顧客名で検索"><button class="primary" type="submit">検索</button><a
+                    class="btn primary" href="/management/customers">クリア</a></form>
+            <table class="table">
+                <tr>
+                    <th>ID</th>
+                    <th>氏名</th>
+                    <th>メール</th>
+                    <th>言語</th>
+                    <th>操作</th>
+                </tr>
+                <tr>
+                    <td>19</td>
+                    <td>Codex Test User</td>
+                    <td>codex.test.user@example.com</td>
+                    <td>日本語</td>
+                    <td>
+                        <div class="table-actions"><a
+                                href="/management/customers/19">詳細</a><span>/</span><a
+                                href="/management/customers/19/edit">編集</a><span>/</span>
+                            <form action="/management/customers/19/delete" method="post"
+                                onsubmit="return confirm('この顧客を削除しますか？');"><input type="hidden" name="_csrf" value="js_UKvd-4vJQFfu_P48nzZDejKWvcWAaep0bXaMaMnccWw2itvqwEpUc0cF9IM2JCKITqPPvocTLQlQ3Q_wsaZYoUBR6Yj7H"/><button class="link-button danger-text"
+                                    type="submit">削除</button></form>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>18</td>
+                    <td>Codex Test User</td>
+                    <td>codex.test.user@example.com</td>
+                    <td>日本語</td>
+                    <td>
+                        <div class="table-actions"><a
+                                href="/management/customers/18">詳細</a><span>/</span><a
+                                href="/management/customers/18/edit">編集</a><span>/</span>
+                            <form action="/management/customers/18/delete" method="post"
+                                onsubmit="return confirm('この顧客を削除しますか？');"><input type="hidden" name="_csrf" value="js_UKvd-4vJQFfu_P48nzZDejKWvcWAaep0bXaMaMnccWw2itvqwEpUc0cF9IM2JCKITqPPvocTLQlQ3Q_wsaZYoUBR6Yj7H"/><button class="link-button danger-text"
+                                    type="submit">削除</button></form>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>17</td>
+                    <td>Codex English User</td>
+                    <td>codex.english.user@example.com</td>
+                    <td>英語</td>
+                    <td>
+                        <div class="table-actions"><a
+                                href="/management/customers/17">詳細</a><span>/</span><a
+                                href="/management/customers/17/edit">編集</a><span>/</span>
+                            <form action="/management/customers/17/delete" method="post"
+                                onsubmit="return confirm('この顧客を削除しますか？');"><input type="hidden" name="_csrf" value="js_UKvd-4vJQFfu_P48nzZDejKWvcWAaep0bXaMaMnccWw2itvqwEpUc0cF9IM2JCKITqPPvocTLQlQ3Q_wsaZYoUBR6Yj7H"/><button class="link-button danger-text"
+                                    type="submit">削除</button></form>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>16</td>
+                    <td>Codex Test User</td>
+                    <td>codex.test.user@example.com</td>
+                    <td>日本語</td>
+                    <td>
+                        <div class="table-actions"><a
+                                href="/management/customers/16">詳細</a><span>/</span><a
+                                href="/management/customers/16/edit">編集</a><span>/</span>
+                            <form action="/management/customers/16/delete" method="post"
+                                onsubmit="return confirm('この顧客を削除しますか？');"><input type="hidden" name="_csrf" value="js_UKvd-4vJQFfu_P48nzZDejKWvcWAaep0bXaMaMnccWw2itvqwEpUc0cF9IM2JCKITqPPvocTLQlQ3Q_wsaZYoUBR6Yj7H"/><button class="link-button danger-text"
+                                    type="submit">削除</button></form>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>15</td>
+                    <td>System Test Customer 1780371774 Updated</td>
+                    <td>updated@example.com</td>
+                    <td>Japanese</td>
+                    <td>
+                        <div class="table-actions"><a
+                                href="/management/customers/15">詳細</a><span>/</span><a
+                                href="/management/customers/15/edit">編集</a><span>/</span>
+                            <form action="/management/customers/15/delete" method="post"
+                                onsubmit="return confirm('この顧客を削除しますか？');"><input type="hidden" name="_csrf" value="js_UKvd-4vJQFfu_P48nzZDejKWvcWAaep0bXaMaMnccWw2itvqwEpUc0cF9IM2JCKITqPPvocTLQlQ3Q_wsaZYoUBR6Yj7H"/><button class="link-button danger-text"
+                                    type="submit">削除</button></form>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>14</td>
+                    <td>Codex Test User</td>
+                    <td>codex.test.user@example.com</td>
+                    <td>日本語</td>
+                    <td>
+                        <div class="table-actions"><a
+                                href="/management/customers/14">詳細</a><span>/</span><a
+                                href="/management/customers/14/edit">編集</a><span>/</span>
+                            <form action="/management/customers/14/delete" method="post"
+                                onsubmit="return confirm('この顧客を削除しますか？');"><input type="hidden" name="_csrf" value="js_UKvd-4vJQFfu_P48nzZDejKWvcWAaep0bXaMaMnccWw2itvqwEpUc0cF9IM2JCKITqPPvocTLQlQ3Q_wsaZYoUBR6Yj7H"/><button class="link-button danger-text"
+                                    type="submit">削除</button></form>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                    <td>Codex Test User</td>
+                    <td>codex.test.user@example.com</td>
+                    <td>日本語</td>
+                    <td>
+                        <div class="table-actions"><a
+                                href="/management/customers/13">詳細</a><span>/</span><a
+                                href="/management/customers/13/edit">編集</a><span>/</span>
+                            <form action="/management/customers/13/delete" method="post"
+                                onsubmit="return confirm('この顧客を削除しますか？');"><input type="hidden" name="_csrf" value="js_UKvd-4vJQFfu_P48nzZDejKWvcWAaep0bXaMaMnccWw2itvqwEpUc0cF9IM2JCKITqPPvocTLQlQ3Q_wsaZYoUBR6Yj7H"/><button class="link-button danger-text"
+                                    type="submit">削除</button></form>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td>Codex English User</td>
+                    <td>codex.english.user@example.com</td>
+                    <td>英語</td>
+                    <td>
+                        <div class="table-actions"><a
+                                href="/management/customers/12">詳細</a><span>/</span><a
+                                href="/management/customers/12/edit">編集</a><span>/</span>
+                            <form action="/management/customers/12/delete" method="post"
+                                onsubmit="return confirm('この顧客を削除しますか？');"><input type="hidden" name="_csrf" value="js_UKvd-4vJQFfu_P48nzZDejKWvcWAaep0bXaMaMnccWw2itvqwEpUc0cF9IM2JCKITqPPvocTLQlQ3Q_wsaZYoUBR6Yj7H"/><button class="link-button danger-text"
+                                    type="submit">削除</button></form>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>Codex Test User</td>
+                    <td>codex.test.user@example.com</td>
+                    <td>日本語</td>
+                    <td>
+                        <div class="table-actions"><a
+                                href="/management/customers/11">詳細</a><span>/</span><a
+                                href="/management/customers/11/edit">編集</a><span>/</span>
+                            <form action="/management/customers/11/delete" method="post"
+                                onsubmit="return confirm('この顧客を削除しますか？');"><input type="hidden" name="_csrf" value="js_UKvd-4vJQFfu_P48nzZDejKWvcWAaep0bXaMaMnccWw2itvqwEpUc0cF9IM2JCKITqPPvocTLQlQ3Q_wsaZYoUBR6Yj7H"/><button class="link-button danger-text"
+                                    type="submit">削除</button></form>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>Ren Suzuki</td>
+                    <td>ren.suzuki@example.jp</td>
+                    <td>Japanese</td>
+                    <td>
+                        <div class="table-actions"><a
+                                href="/management/customers/10">詳細</a><span>/</span><a
+                                href="/management/customers/10/edit">編集</a><span>/</span>
+                            <form action="/management/customers/10/delete" method="post"
+                                onsubmit="return confirm('この顧客を削除しますか？');"><input type="hidden" name="_csrf" value="js_UKvd-4vJQFfu_P48nzZDejKWvcWAaep0bXaMaMnccWw2itvqwEpUc0cF9IM2JCKITqPPvocTLQlQ3Q_wsaZYoUBR6Yj7H"/><button class="link-button danger-text"
+                                    type="submit">削除</button></form>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>Misaki Sato</td>
+                    <td>misaki.sato@example.jp</td>
+                    <td>Japanese</td>
+                    <td>
+                        <div class="table-actions"><a
+                                href="/management/customers/9">詳細</a><span>/</span><a
+                                href="/management/customers/9/edit">編集</a><span>/</span>
+                            <form action="/management/customers/9/delete" method="post"
+                                onsubmit="return confirm('この顧客を削除しますか？');"><input type="hidden" name="_csrf" value="js_UKvd-4vJQFfu_P48nzZDejKWvcWAaep0bXaMaMnccWw2itvqwEpUc0cF9IM2JCKITqPPvocTLQlQ3Q_wsaZYoUBR6Yj7H"/><button class="link-button danger-text"
+                                    type="submit">削除</button></form>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>Taro Yamada</td>
+                    <td>taro.yamada@example.jp</td>
+                    <td>Japanese</td>
+                    <td>
+                        <div class="table-actions"><a
+                                href="/management/customers/8">詳細</a><span>/</span><a
+                                href="/management/customers/8/edit">編集</a><span>/</span>
+                            <form action="/management/customers/8/delete" method="post"
+                                onsubmit="return confirm('この顧客を削除しますか？');"><input type="hidden" name="_csrf" value="js_UKvd-4vJQFfu_P48nzZDejKWvcWAaep0bXaMaMnccWw2itvqwEpUc0cF9IM2JCKITqPPvocTLQlQ3Q_wsaZYoUBR6Yj7H"/><button class="link-button danger-text"
+                                    type="submit">削除</button></form>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>Sophia Brown</td>
+                    <td>sophia.brown@example.com</td>
+                    <td>English</td>
+                    <td>
+                        <div class="table-actions"><a
+                                href="/management/customers/7">詳細</a><span>/</span><a
+                                href="/management/customers/7/edit">編集</a><span>/</span>
+                            <form action="/management/customers/7/delete" method="post"
+                                onsubmit="return confirm('この顧客を削除しますか？');"><input type="hidden" name="_csrf" value="js_UKvd-4vJQFfu_P48nzZDejKWvcWAaep0bXaMaMnccWw2itvqwEpUc0cF9IM2JCKITqPPvocTLQlQ3Q_wsaZYoUBR6Yj7H"/><button class="link-button danger-text"
+                                    type="submit">削除</button></form>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Ethan Davis</td>
+                    <td>ethan.davis@example.com</td>
+                    <td>English</td>
+                    <td>
+                        <div class="table-actions"><a
+                                href="/management/customers/6">詳細</a><span>/</span><a
+                                href="/management/customers/6/edit">編集</a><span>/</span>
+                            <form action="/management/customers/6/delete" method="post"
+                                onsubmit="return confirm('この顧客を削除しますか？');"><input type="hidden" name="_csrf" value="js_UKvd-4vJQFfu_P48nzZDejKWvcWAaep0bXaMaMnccWw2itvqwEpUc0cF9IM2JCKITqPPvocTLQlQ3Q_wsaZYoUBR6Yj7H"/><button class="link-button danger-text"
+                                    type="submit">削除</button></form>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Grace Miller</td>
+                    <td>grace.miller@example.com</td>
+                    <td>English</td>
+                    <td>
+                        <div class="table-actions"><a
+                                href="/management/customers/5">詳細</a><span>/</span><a
+                                href="/management/customers/5/edit">編集</a><span>/</span>
+                            <form action="/management/customers/5/delete" method="post"
+                                onsubmit="return confirm('この顧客を削除しますか？');"><input type="hidden" name="_csrf" value="js_UKvd-4vJQFfu_P48nzZDejKWvcWAaep0bXaMaMnccWw2itvqwEpUc0cF9IM2JCKITqPPvocTLQlQ3Q_wsaZYoUBR6Yj7H"/><button class="link-button danger-text"
+                                    type="submit">削除</button></form>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Noah Williams</td>
+                    <td>noah.williams@example.com</td>
+                    <td>English</td>
+                    <td>
+                        <div class="table-actions"><a
+                                href="/management/customers/4">詳細</a><span>/</span><a
+                                href="/management/customers/4/edit">編集</a><span>/</span>
+                            <form action="/management/customers/4/delete" method="post"
+                                onsubmit="return confirm('この顧客を削除しますか？');"><input type="hidden" name="_csrf" value="js_UKvd-4vJQFfu_P48nzZDejKWvcWAaep0bXaMaMnccWw2itvqwEpUc0cF9IM2JCKITqPPvocTLQlQ3Q_wsaZYoUBR6Yj7H"/><button class="link-button danger-text"
+                                    type="submit">削除</button></form>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Isabella Johnson</td>
+                    <td>isabella.johnson@example.com</td>
+                    <td>English</td>
+                    <td>
+                        <div class="table-actions"><a
+                                href="/management/customers/3">詳細</a><span>/</span><a
+                                href="/management/customers/3/edit">編集</a><span>/</span>
+                            <form action="/management/customers/3/delete" method="post"
+                                onsubmit="return confirm('この顧客を削除しますか？');"><input type="hidden" name="_csrf" value="js_UKvd-4vJQFfu_P48nzZDejKWvcWAaep0bXaMaMnccWw2itvqwEpUc0cF9IM2JCKITqPPvocTLQlQ3Q_wsaZYoUBR6Yj7H"/><button class="link-button danger-text"
+                                    type="submit">削除</button></form>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Lucas Smith</td>
+                    <td>lucas.smith@example.com</td>
+                    <td>English</td>
+                    <td>
+                        <div class="table-actions"><a
+                                href="/management/customers/2">詳細</a><span>/</span><a
+                                href="/management/customers/2/edit">編集</a><span>/</span>
+                            <form action="/management/customers/2/delete" method="post"
+                                onsubmit="return confirm('この顧客を削除しますか？');"><input type="hidden" name="_csrf" value="js_UKvd-4vJQFfu_P48nzZDejKWvcWAaep0bXaMaMnccWw2itvqwEpUc0cF9IM2JCKITqPPvocTLQlQ3Q_wsaZYoUBR6Yj7H"/><button class="link-button danger-text"
+                                    type="submit">削除</button></form>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Emily Chen</td>
+                    <td>emily.chen@example.com</td>
+                    <td>English</td>
+                    <td>
+                        <div class="table-actions"><a
+                                href="/management/customers/1">詳細</a><span>/</span><a
+                                href="/management/customers/1/edit">編集</a><span>/</span>
+                            <form action="/management/customers/1/delete" method="post"
+                                onsubmit="return confirm('この顧客を削除しますか？');"><input type="hidden" name="_csrf" value="js_UKvd-4vJQFfu_P48nzZDejKWvcWAaep0bXaMaMnccWw2itvqwEpUc0cF9IM2JCKITqPPvocTLQlQ3Q_wsaZYoUBR6Yj7H"/><button class="link-button danger-text"
+                                    type="submit">削除</button></form>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </main>
+    </div>
+</body>
+
+</html>

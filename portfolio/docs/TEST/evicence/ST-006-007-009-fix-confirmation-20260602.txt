@@ -1,0 +1,24 @@
+ST-006/ST-007/ST-009 修正確認
+実施日: 2026-06-02
+実施者: Codex
+
+対象ファイル:
+- C:\academia\src\soweb-01\AromaTripNippon\main\src\main\java\com\aromatripnippon\controller\ManagementController.java
+
+確認内容:
+- ManagementController.java の文字化けしていた監査ログ文言を正しい日本語に修正。
+- ST-006: 予約登録時に customer / experienceProgram を設定した後でバリデーションするよう修正。
+- ST-007: レシピ登録・編集時に customer を設定した後でバリデーションするよう修正し、配合率エラーを正しく表示することを確認。
+- ST-009: 商品削除時、関連在庫を ID / 商品名 / 英語名で解決してからレシピ参照を確認するよう修正。
+- 管理在庫取引 POST /management/inventory/{id}/transaction の 404 を解消。
+
+確認コマンド:
+& .\mvnw.cmd -q "-Dtest=PublicControllerTest,ManagementFlowIntegrationTest,TemplateScopeTest" test
+
+確認結果:
+対象テストはすべて成功。
+
+システムテスト表反映:
+- ST-006: OK
+- ST-007: OK
+- ST-009: OK

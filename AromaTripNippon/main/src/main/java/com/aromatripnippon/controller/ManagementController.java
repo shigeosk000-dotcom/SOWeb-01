@@ -19,6 +19,7 @@ import com.aromatripnippon.repository.ProductCategoryRepository;
 import com.aromatripnippon.repository.ProductRepository;
 import com.aromatripnippon.repository.ReservationRepository;
 import com.aromatripnippon.service.AuditService;
+import com.aromatripnippon.service.InventoryService;
 import com.aromatripnippon.service.TotpService;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
@@ -27,6 +28,8 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import jakarta.validation.Valid;
 import jakarta.transaction.Transactional;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validator;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
@@ -39,6 +42,7 @@ import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import javax.imageio.ImageIO;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -67,15 +71,17 @@ public class ManagementController {
   private final AdminUserRepository admins;
   private final AuditLogRepository auditLogs;
   private final AuditService audit;
+  private final InventoryService inventoryService;
   private final PasswordEncoder encoder;
   private final TotpService totpService;
+  private final Validator validator;
 
   public ManagementController(ReservationRepository reservations, CustomerRepository customers,
       ExperienceProgramRepository programs, FragranceRecipeRepository recipes,
       FragranceRecipeMaterialRepository recipeMaterials, InventoryItemRepository inventory,
       ProductCategoryRepository productCategories,
       ProductRepository products, AdminUserRepository admins, AuditLogRepository auditLogs, AuditService audit,
-      PasswordEncoder encoder, TotpService totpService) {
+      InventoryService inventoryService, PasswordEncoder encoder, TotpService totpService, Validator validator) {
     this.reservations = reservations;
     this.customers = customers;
     this.programs = programs;
@@ -87,8 +93,10 @@ public class ManagementController {
     this.admins = admins;
     this.auditLogs = auditLogs;
     this.audit = audit;
+    this.inventoryService = inventoryService;
     this.encoder = encoder;
     this.totpService = totpService;
+    this.validator = validator;
   }
 
   @GetMapping("/management/dashboard")
@@ -118,14 +126,21 @@ public class ManagementController {
   }
 
   @PostMapping("/management/reservations")
-  public String reservationCreate(@Valid @ModelAttribute Reservation reservation, BindingResult errors,
+  public String reservationCreate(@ModelAttribute Reservation reservation, BindingResult errors,
       @RequestParam Long customerId, @RequestParam Long programId, Principal principal, Model model) {
     if (errors.hasErrors()) {
       populateReservationFormModel(model, reservation);
+      model.addAttribute("errorMessage", firstBindingErrorMessage(errors));
       return "management/reservation-form";
     }
     reservation.setCustomer(customers.findById(customerId).orElseThrow());
     reservation.setExperienceProgram(programs.findById(programId).orElseThrow());
+    String validationMessage = validateReservation(reservation);
+    if (validationMessage != null) {
+      populateReservationFormModel(model, reservation);
+      model.addAttribute("errorMessage", validationMessage);
+      return "management/reservation-form";
+    }
     Reservation saved = reservations.save(reservation);
     audit.record(principal, "CREATE", "reservations", saved.getId(), "予約を作成");
     return "redirect:/management/reservations/" + saved.getId();
@@ -144,10 +159,11 @@ public class ManagementController {
   }
 
   @PostMapping("/management/reservations/{id}")
-  public String reservationUpdate(@PathVariable Long id, @Valid @ModelAttribute Reservation form, BindingResult errors,
+  public String reservationUpdate(@PathVariable Long id, @ModelAttribute Reservation form, BindingResult errors,
       @RequestParam Long customerId, @RequestParam Long programId, Principal principal, Model model) {
     if (errors.hasErrors()) {
       populateReservationFormModel(model, form);
+      model.addAttribute("errorMessage", firstBindingErrorMessage(errors));
       return "management/reservation-form";
     }
     Reservation reservation = reservations.findById(id).orElseThrow();
@@ -159,6 +175,12 @@ public class ManagementController {
     reservation.setStatus(form.getStatus());
     reservation.setCustomer(customers.findById(customerId).orElseThrow());
     reservation.setExperienceProgram(programs.findById(programId).orElseThrow());
+    String validationMessage = validateReservation(reservation);
+    if (validationMessage != null) {
+      populateReservationFormModel(model, reservation);
+      model.addAttribute("errorMessage", validationMessage);
+      return "management/reservation-form";
+    }
     reservations.save(reservation);
     audit.record(principal, "UPDATE", "reservations", id, "予約を更新");
     return "redirect:/management/reservations/" + id;
@@ -263,7 +285,7 @@ public class ManagementController {
 
   @PostMapping("/management/recipes")
   @Transactional
-  public String recipeCreate(@Valid @ModelAttribute FragranceRecipe recipe, BindingResult errors,
+  public String recipeCreate(@ModelAttribute FragranceRecipe recipe, BindingResult errors,
       @RequestParam Long customerId,
       @RequestParam(name = "materialId", required = false) List<Long> materialIds,
       @RequestParam(name = "blendRatio", required = false) List<BigDecimal> blendRatios, Principal principal,
@@ -274,9 +296,21 @@ public class ManagementController {
       model.addAttribute("productOptions", recipeProductOptions());
       model.addAttribute("materialIds", materialIds);
       model.addAttribute("blendRatios", blendRatios);
+      model.addAttribute("errorMessage", firstBindingErrorMessage(errors));
       return "management/recipe-form";
     }
     recipe.setCustomer(customers.findById(customerId).orElseThrow());
+    String validationMessage = validateRecipe(recipe);
+    if (validationMessage != null) {
+      model.addAttribute("recipe", recipe);
+      model.addAttribute("customers", customers.findByDeletedAtIsNullOrderByIdDesc());
+      model.addAttribute("items", inventory.findByDeletedAtIsNullOrderByIdDesc());
+      model.addAttribute("productOptions", recipeProductOptions());
+      model.addAttribute("materialIds", materialIds);
+      model.addAttribute("blendRatios", blendRatios);
+      model.addAttribute("errorMessage", validationMessage);
+      return "management/recipe-form";
+    }
     try {
       recipe.getMaterials().addAll(buildRecipeMaterials(recipe, materialIds, blendRatios));
     } catch (IllegalArgumentException ex) {
@@ -305,7 +339,7 @@ public class ManagementController {
 
   @PostMapping("/management/recipes/{id}")
   @Transactional
-  public String recipeUpdate(@PathVariable Long id, @Valid @ModelAttribute FragranceRecipe form, BindingResult errors,
+  public String recipeUpdate(@PathVariable Long id, @ModelAttribute FragranceRecipe form, BindingResult errors,
       @RequestParam Long customerId,
       @RequestParam(name = "materialId", required = false) List<Long> materialIds,
       @RequestParam(name = "blendRatio", required = false) List<BigDecimal> blendRatios, Principal principal,
@@ -319,12 +353,24 @@ public class ManagementController {
       model.addAttribute("productOptions", recipeProductOptions());
       model.addAttribute("materialIds", materialIds);
       model.addAttribute("blendRatios", blendRatios);
+      model.addAttribute("errorMessage", firstBindingErrorMessage(errors));
       return "management/recipe-form";
     }
     recipe.setRecipeName(form.getRecipeName());
     recipe.setConcept(form.getConcept());
     recipe.setMemo(form.getMemo());
     recipe.setCustomer(customers.findById(customerId).orElseThrow());
+    String validationMessage = validateRecipe(recipe);
+    if (validationMessage != null) {
+      model.addAttribute("recipe", recipe);
+      model.addAttribute("customers", customers.findByDeletedAtIsNullOrderByIdDesc());
+      model.addAttribute("items", inventory.findByDeletedAtIsNullOrderByIdDesc());
+      model.addAttribute("productOptions", recipeProductOptions());
+      model.addAttribute("materialIds", materialIds);
+      model.addAttribute("blendRatios", blendRatios);
+      model.addAttribute("errorMessage", validationMessage);
+      return "management/recipe-form";
+    }
     List<FragranceRecipeMaterial> newMaterials;
     try {
       newMaterials = buildRecipeMaterials(recipe, materialIds, blendRatios);
@@ -429,11 +475,12 @@ public class ManagementController {
   @PostMapping("/management/products/{id}/delete")
   public String productDelete(@PathVariable Long id, Principal principal, RedirectAttributes redirectAttributes) {
     Product product = products.findByIdAndDeletedAtIsNull(id).orElseThrow();
-    if (recipeMaterials.existsByDeletedAtIsNullAndFragranceRecipeDeletedAtIsNullAndInventoryItemId(id)) {
+    InventoryItem linkedItem = linkedInventoryItemForProduct(product);
+    if (isProductReferencedByRecipe(product, linkedItem)) {
       redirectAttributes.addFlashAttribute("errorMessage", "香りレシピに使われている商品は削除できません。");
       return "redirect:/management/products";
     }
-    InventoryItem item = inventory.findByIdAndDeletedAtIsNull(id).orElse(null);
+    InventoryItem item = linkedItem;
     if (item != null && item.getStockQuantity() != null && item.getStockQuantity().compareTo(BigDecimal.ZERO) > 0) {
       redirectAttributes.addFlashAttribute("errorMessage", "在庫が残っている商品は削除できません。先に在庫数を0にしてください。");
       return "redirect:/management/products";
@@ -512,6 +559,21 @@ public class ManagementController {
     syncProductFromInventory(item);
     audit.record(principal, "UPDATE", "inventory_items", id, "在庫を更新");
     return "redirect:/management/inventory/" + id;
+  }
+
+  @PostMapping("/management/inventory/{id}/transaction")
+  @Transactional
+  public String inventoryTransaction(@PathVariable Long id, @RequestParam String transactionType,
+      @RequestParam BigDecimal quantity, @RequestParam(required = false) String reason, Principal principal,
+      RedirectAttributes redirectAttributes) {
+    try {
+      inventoryService.recordTransaction(id, transactionType, quantity, reason, principal);
+      audit.record(principal, "CREATE", "inventory_transactions", id, "在庫取引を登録");
+      return "redirect:/management/inventory/" + id;
+    } catch (IllegalArgumentException ex) {
+      redirectAttributes.addFlashAttribute("errorMessage", ex.getMessage());
+      return "redirect:/management/inventory/" + id;
+    }
   }
 
   @PostMapping("/management/inventory/{id}/delete")
@@ -728,6 +790,45 @@ public class ManagementController {
       product.setPrice(BigDecimal.ONE);
     }
     products.save(product);
+  }
+
+  private String validateReservation(Reservation reservation) {
+    Set<ConstraintViolation<Reservation>> violations = validator.validate(reservation);
+    return violations.stream().map(ConstraintViolation::getMessage).findFirst().orElse(null);
+  }
+
+  private String validateRecipe(FragranceRecipe recipe) {
+    Set<ConstraintViolation<FragranceRecipe>> violations = validator.validate(recipe);
+    return violations.stream().map(ConstraintViolation::getMessage).findFirst().orElse(null);
+  }
+
+  private String firstBindingErrorMessage(BindingResult errors) {
+    return errors.getAllErrors().stream()
+        .map(error -> error.getDefaultMessage() != null ? error.getDefaultMessage() : "入力内容を確認してください。")
+        .findFirst()
+        .orElse("入力内容を確認してください。");
+  }
+
+  private InventoryItem linkedInventoryItemForProduct(Product product) {
+    return inventory.findByIdAndDeletedAtIsNull(product.getId())
+        .or(() -> inventory.findByDeletedAtIsNullOrderByIdDesc().stream()
+            .filter(item -> item.getItemName() != null && product.getProductName() != null
+                && item.getItemName().equalsIgnoreCase(product.getProductName()))
+            .findFirst())
+        .or(() -> inventory.findByDeletedAtIsNullOrderByIdDesc().stream()
+            .filter(item -> item.getEnglishName() != null && product.getEnglishName() != null
+                && item.getEnglishName().equalsIgnoreCase(product.getEnglishName()))
+            .findFirst())
+        .orElse(null);
+  }
+
+  private boolean isProductReferencedByRecipe(Product product, InventoryItem linkedInventoryItem) {
+    if (recipeMaterials.existsByDeletedAtIsNullAndFragranceRecipeDeletedAtIsNullAndInventoryItemId(product.getId())) {
+      return true;
+    }
+    return linkedInventoryItem != null
+        && recipeMaterials.existsByDeletedAtIsNullAndFragranceRecipeDeletedAtIsNullAndInventoryItemId(
+            linkedInventoryItem.getId());
   }
 
   private ProductCategory categoryForInventory(String inventoryCategory) {

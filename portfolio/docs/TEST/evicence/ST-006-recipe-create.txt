@@ -1,0 +1,2 @@
+status=500 final=http://localhost:8080/management/recipes
+body_snippet=

@@ -1,0 +1,23 @@
+status=200
+final_url=http://localhost:8080/management/login
+body_snippet=<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>管理ログイン</title>
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+
+<body class="admin-body">
+  <main class="login">
+    <section class="panel">
+      <h1>管理ログイン</h1>
+      <!-- <p>初期アカウント: Adm01 / password</p> -->
+      
+      
+      
+      
+      
+

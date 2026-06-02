@@ -1,0 +1,4 @@
+customer_edit status=200 final=http://localhost:8080/management/customers/20
+product_edit status=200 final=http://localhost:8080/management/products/20
+inventory_edit status=200 final=http://localhost:8080/management/inventory/18
+recipe_edit status=SKIP final=SKIP

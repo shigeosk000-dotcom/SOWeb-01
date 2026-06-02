@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>在庫管理</title>
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+<body class="admin-body">
+  <div class="admin-layout">
+    <aside class="sidebar">
+  <div class="brand">AromaTripNippon</div>
+  <a href="/management/dashboard">ダッシュボード</a>
+  <a href="/management/reservations">予約管理</a>
+  <a href="/management/customers">顧客管理</a>
+  <a href="/management/recipes">香りレシピ管理</a>
+  <a href="/management/products">商品管理</a>
+  <a href="/management/inventory">在庫管理</a>
+  <a href="/management/account">アカウント設定</a>
+  <form action="/management/logout" method="post"><input type="hidden" name="_csrf" value="TqxflyOkpMm9FIFnC4pTHUsXyBQp-_C9QpaDF6nzKsQ5sgkDdpk7r0HGl_qQIbdRPKdneCgm5XVNyMSQe_e0I5zBSKdfizpm"/>
+    <button type="submit">ログアウト</button>
+  </form>
+</aside>
+    <main class="admin-main">
+      <div class="page-head">
+        <h1>在庫管理</h1>
+        <a class="btn primary" href="/management/inventory/new">新規登録</a>
+      </div>
+      <form class="panel search-form" action="/management/inventory" method="get">
+        <input name="q" value="" placeholder="品名で検索">
+        <button class="primary" type="submit">検索</button>
+        <a class="btn primary" href="/management/inventory">クリア</a>
+      </form>
+      <table class="table">
+        <tr><th>ID</th><th>品名</th><th>英語名</th><th>カテゴリ</th><th>在庫数</th><th>単位</th><th>操作</th></tr>
+        <tr>
+          <td>17</td>
+          <td>System Test Product 1780371774 Updated</td>
+          <td></td>
+          <td>製品</td>
+          <td>0.00</td>
+          <td>pcs</td>
+          <td><a href="/management/inventory/17">詳細</a> / <a href="/management/inventory/17/edit">編集</a></td>
+        </tr>
+        <tr>
+          <td>16</td>
+          <td>System Test Item 1780371774 Updated</td>
+          <td></td>
+          <td>material</td>
+          <td>25.00</td>
+          <td>ml</td>
+          <td><a href="/management/inventory/16">詳細</a> / <a href="/management/inventory/16/edit">編集</a></td>
+        </tr>
+        <tr>
+          <td>15</td>
+          <td>シダーパフューム</td>
+          <td>Cedar Perfume</td>
+          <td>製品</td>
+          <td>42.00</td>
+          <td>pcs</td>
+          <td><a href="/management/inventory/15">詳細</a> / <a href="/management/inventory/15/edit">編集</a></td>
+        </tr>
+        <tr>
+          <td>14</td>
+          <td>ひのきパフューム</td>
+          <td>Hinoki Perfume</td>
+          <td>製品</td>
+          <td>38.00</td>
+          <td>pcs</td>
+          <td><a href="/management/inventory/14">詳細</a> / <a href="/management/inventory/14/edit">編集</a></td>
+        </tr>
+        <tr>
+          <td>13</td>
+          <td>桜パフューム</td>
+          <td>Sakura Perfume</td>
+          <td>製品</td>
+          <td>40.00</td>
+          <td>pcs</td>
+          <td><a href="/management/inventory/13">詳細</a> / <a href="/management/inventory/13/edit">編集</a></td>
+        </tr>
+        <tr>
+          <td>12</td>
+          <td>抹茶ハンドクリーム</td>
+          <td>Matcha Hand Cream</td>
+          <td>製品</td>
+          <td>70.00</td>
+          <td>pcs</td>
+          <td><a href="/management/inventory/12">詳細</a> / <a href="/management/inventory/12/edit">編集</a></td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td>ひばハンドクリーム</td>
+          <td>Hiba Hand Cream</td>
+          <td>製品</td>
+          <td>55.00</td>
+          <td>pcs</td>
+          <td><a href="/management/inventory/11">詳細</a> / <a href="/management/inventory/11/edit">編集</a></td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td>柚子ハンドクリーム</td>
+          <td>Yuzu Hand Cream</td>
+          <td>製品</td>
+          <td>60.00</td>
+          <td>pcs</td>
+          <td><a href="/management/inventory/10">詳細</a> / <a href="/management/inventory/10/edit">編集</a></td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td>アルミチューブ 50ml</td>
+          <td>Aluminum tube 50ml</td>
+          <td>容器</td>
+          <td>180.00</td>
+          <td>pcs</td>
+          <td><a href="/management/inventory/9">詳細</a> / <a href="/management/inventory/9/edit">編集</a></td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>ガラスボトル 30ml</td>
+          <td>Glass bottle 30ml</td>
+          <td>容器</td>
+          <td>240.00</td>
+          <td>pcs</td>
+          <td><a href="/management/inventory/8">詳細</a> / <a href="/management/inventory/8/edit">編集</a></td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>白杉レジン</td>
+          <td>White cedar resin</td>
+          <td>素材</td>
+          <td>380.00</td>
+          <td>g</td>
+          <td><a href="/management/inventory/7">詳細</a> / <a href="/management/inventory/7/edit">編集</a></td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>抹茶エキス</td>
+          <td>Matcha green tea extract</td>
+          <td>素材</td>
+          <td>450.00</td>
+          <td>ml</td>
+          <td><a href="/management/inventory/6">詳細</a> / <a href="/management/inventory/6/edit">編集</a></td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>ひのき木部精油</td>
+          <td>Hinoki wood oil</td>
+          <td>素材</td>
+          <td>680.00</td>
+          <td>ml</td>
+          <td><a href="/management/inventory/5">詳細</a> / <a href="/management/inventory/5/edit">編集</a></td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>桜アブソリュート</td>
+          <td>Sakura absolute</td>
+          <td>素材</td>
+          <td>520.00</td>
+          <td>ml</td>
+          <td><a href="/management/inventory/4">詳細</a> / <a href="/management/inventory/4/edit">編集</a></td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>和薄荷精油</td>
+          <td>Japanese mint oil</td>
+          <td>素材</td>
+          <td>360.00</td>
+          <td>ml</td>
+          <td><a href="/management/inventory/3">詳細</a> / <a href="/management/inventory/3/edit">編集</a></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>青森ひば精油</td>
+          <td>Aomori hiba essential oil</td>
+          <td>素材</td>
+          <td>840.00</td>
+          <td>ml</td>
+          <td><a href="/management/inventory/2">詳細</a> / <a href="/management/inventory/2/edit">編集</a></td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>柚子精油</td>
+          <td>Yuzu essential oil</td>
+          <td>素材</td>
+          <td>1000.00</td>
+          <td>ml</td>
+          <td><a href="/management/inventory/1">詳細</a> / <a href="/management/inventory/1/edit">編集</a></td>
+        </tr>
+      </table>
+    </main>
+  </div>
+</body>
+</html>

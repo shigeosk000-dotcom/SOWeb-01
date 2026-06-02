@@ -1,0 +1,1 @@
+status=200 final=http://localhost:8080/management/inventory/18

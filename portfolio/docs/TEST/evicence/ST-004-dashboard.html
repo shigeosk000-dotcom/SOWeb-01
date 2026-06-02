@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ダッシュボード</title>
+  <link rel="stylesheet" href="/css/app.css">
+</head>
+<body class="admin-body">
+<div class="admin-layout">
+  <aside class="sidebar">
+  <div class="brand">AromaTripNippon</div>
+  <a href="/management/dashboard">ダッシュボード</a>
+  <a href="/management/reservations">予約管理</a>
+  <a href="/management/customers">顧客管理</a>
+  <a href="/management/recipes">香りレシピ管理</a>
+  <a href="/management/products">商品管理</a>
+  <a href="/management/inventory">在庫管理</a>
+  <a href="/management/account">アカウント設定</a>
+  <form action="/management/logout" method="post"><input type="hidden" name="_csrf" value="NkPJaOwYUOqoffgwAP7DC0Ci4OQ4GakwWiFDjslvkz3sgJyLDnatUI56Y9mFSM4GN9P3biOTzYVcKp0dY0B0uvxd8V6Kua_u"/>
+    <button type="submit">ログアウト</button>
+  </form>
+</aside>
+  <main class="admin-main">
+    <div class="page-head"><h1>ダッシュボード</h1></div>
+    
+    <section class="stats">
+      <a class="card stat stat-link" href="/management/reservations"><span>予約</span><strong>13</strong></a>
+      <a class="card stat stat-link" href="/management/customers"><span>顧客</span><strong>19</strong></a>
+      <a class="card stat stat-link" href="/management/recipes"><span>レシピ</span><strong>17</strong></a>
+      <a class="card stat stat-link" href="/management/inventory"><span>在庫</span><strong>17</strong></a>
+    </section>
+    <section class="panel">
+      <h2>最近の監査ログ</h2>
+      <table class="table"><tr><th>操作</th><th>対象</th><th>詳細</th></tr>
+        <tr><td>UPDATE</td><td>inventory_items</td><td>在庫を更新</td></tr>
+        <tr><td>UPDATE</td><td>products</td><td>商品を更新</td></tr>
+        <tr><td>UPDATE</td><td>customers</td><td>顧客を更新</td></tr>
+        <tr><td>CREATE</td><td>products</td><td>商品を作成</td></tr>
+        <tr><td>CREATE</td><td>inventory_items</td><td>在庫を作成</td></tr>
+      </table>
+    </section>
+  </main>
+</div>
+</body>
+</html>

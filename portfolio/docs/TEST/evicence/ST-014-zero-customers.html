@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>顧客管理</title>
+    <link rel="stylesheet" href="/css/app.css">
+</head>
+
+<body class="admin-body">
+    <div class="admin-layout">
+        <aside class="sidebar">
+  <div class="brand">AromaTripNippon</div>
+  <a href="/management/dashboard">ダッシュボード</a>
+  <a href="/management/reservations">予約管理</a>
+  <a href="/management/customers">顧客管理</a>
+  <a href="/management/recipes">香りレシピ管理</a>
+  <a href="/management/products">商品管理</a>
+  <a href="/management/inventory">在庫管理</a>
+  <a href="/management/account">アカウント設定</a>
+  <form action="/management/logout" method="post"><input type="hidden" name="_csrf" value="xfxedLLceA1l_vMWz1qYtoEAv1QljJT3F-AmVyoq5ZYYn41g_ck6TNC-Sz5Iy8Ug-Hes0-IxkjVBv6DaLoERYx8Yh_V-pr4F"/>
+    <button type="submit">ログアウト</button>
+  </form>
+</aside>
+        <main class="admin-main">
+            <div class="page-head">
+                <h1>顧客管理</h1><a class="btn primary" href="/management/customers/new">新規登録</a>
+            </div>
+            
+            <form class="panel search-form" action="/management/customers" method="get"><input name="q"
+                    value="__no_match__" placeholder="顧客名で検索"><button class="primary" type="submit">検索</button><a
+                    class="btn primary" href="/management/customers">クリア</a></form>
+            <table class="table">
+                <tr>
+                    <th>ID</th>
+                    <th>氏名</th>
+                    <th>メール</th>
+                    <th>言語</th>
+                    <th>操作</th>
+                </tr>
+                
+            </table>
+        </main>
+    </div>
+</body>
+
+</html>

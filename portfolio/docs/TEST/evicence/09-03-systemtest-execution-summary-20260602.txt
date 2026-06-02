@@ -1,0 +1,79 @@
+09-03-systemtest execution summary
+date=2026-06-02
+executor=Codex
+
+ST-001	OK	Public JP reservation completed and redirected to completion page.	ST-001-reservation-complete.html
+ST-002	OK	Public EN reservation completed and redirected to completion page.	ST-002-reservation-complete-en.html
+ST-003	OK	Language switch targets and cross-language pages are reachable.	ST-003-concept-*.html, ST-003-experience-*.html
+ST-004	OK	All admin sub pages are reachable after login.	ST-004-dashboard.html; ST-004-reservations.html; ST-004-customers.html; ST-004-recipes.html; ST-004-products.html; ST-004-inventory.html; ST-004-account.html
+ST-005	OK	Reservation reflected in management after public booking.	ST-001-reservation-complete.html
+ST-006	NG	Management reservation creation is blocked by current entity validation behavior; other management create flows were verified.	ST-006-*.txt
+ST-007	NG	One or more management edit actions did not behave as expected.	ST-007-edit-results.txt
+ST-008	OK	Delete forms include confirmation dialogs and the OK action performs logical deletion.	ST-008-delete-confirmation.txt; templates/management/* delete forms
+ST-009	NG	Referenced customer delete was blocked, but product delete was not suppressed; the product disappeared from the list.	ST-009-customer-delete-block.txt; ST-009-product-delete-block.txt
+ST-010	OK	Unauthenticated admin access redirects to login.	ST-010-unauthorized-dashboard.txt
+ST-011	OK	Invalid login attempts are rejected.	ST-011-bad-login.txt
+ST-012	OK	Public reservation rejects past dates and invalid date range.	ST-012-reservation-invalid-past.html; ST-013-reservation-invalid-max.html
+ST-013	OK	Guest count boundary checks (1/4 pass, 0/5 fail) and date boundary checks were exercised.	ST-013-reservation-guest-*.html; ST-012-reservation-invalid-past.html
+ST-014	OK	Zero-result searches render without error.	ST-014-zero-*.html
+ST-015	OK	Primary pages rendered within sub-second local timings.	ST-015-performance.txt
+ST-016	OK	Repeated browsing and form access completed without interruption.	ST-016-continuous-operation.txt
+ST-017	OK	Management POST without CSRF is rejected.	ST-017-csrf-reject.txt
+ST-018	OK	Dashboard includes audit log entries after management CRUD.	ST-018-dashboard-after-crud.html
+ST-019	NG	Responsive behavior was checked via static viewport/CSS inspection only; device-width browser emulation was not available here.	ST-019-responsive-scope.txt
+ST-020	OK	Phase2 keywords are excluded from templates.	ST-020-scope.txt
+
+Evidence files:
+- README-response-note.txt
+- ST-001-reservation-complete.html
+- ST-001-reservation-ja.html
+- ST-001-top-ja.html
+- ST-002-reservation-complete-en.html
+- ST-002-reservation-en.html
+- ST-002-top-en.html
+- ST-003-concept-en.html
+- ST-003-concept-ja.html
+- ST-003-experience-en.html
+- ST-003-experience-ja.html
+- ST-004-account.html
+- ST-004-admin-login.txt
+- ST-004-customers.html
+- ST-004-dashboard.html
+- ST-004-inventory.html
+- ST-004-products.html
+- ST-004-recipes.html
+- ST-004-reservations.html
+- ST-006-customer-create.txt
+- ST-006-customer-detail.html
+- ST-006-inventory-create-2.txt
+- ST-006-inventory-create.txt
+- ST-006-inventory-detail.html
+- ST-006-management-reservation-create.txt
+- ST-006-product-create.txt
+- ST-006-product-detail.html
+- ST-006-recipe-create.txt
+- ST-007-edit-results.txt
+- ST-008-delete-confirmation.txt
+- ST-008-template-confirmation.txt
+- ST-009-customer-delete-block.txt
+- ST-009-product-delete-block.txt
+- ST-010-unauthorized-dashboard.txt
+- ST-011-bad-login.txt
+- ST-012-reservation-invalid-past.html
+- ST-013-reservation-guest-0.html
+- ST-013-reservation-guest-1.html
+- ST-013-reservation-guest-4.html
+- ST-013-reservation-guest-5.html
+- ST-013-reservation-invalid-max.html
+- ST-014-zero-customers.html
+- ST-014-zero-inventory.html
+- ST-014-zero-products.html
+- ST-014-zero-recipes.html
+- ST-014-zero-reservations.html
+- ST-015-performance.txt
+- ST-016-continuous-operation.txt
+- ST-017-csrf-reject.txt
+- ST-017-xss-customer-detail.html
+- ST-018-dashboard-after-crud.html
+- ST-019-responsive-scope.txt
+- ST-020-scope.txt

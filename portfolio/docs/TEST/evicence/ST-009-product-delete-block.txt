@@ -1,0 +1,2 @@
+product 20 was deleted and no product 20 row remained in the management list.
+This means deletion was not suppressed as expected by ST-009.

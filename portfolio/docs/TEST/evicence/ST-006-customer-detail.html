@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>顧客詳細</title>
+    <link rel="stylesheet" href="/css/app.css">
+</head>
+
+<body class="admin-body">
+    <div class="admin-layout">
+        <aside class="sidebar">
+  <div class="brand">AromaTripNippon</div>
+  <a href="/management/dashboard">ダッシュボード</a>
+  <a href="/management/reservations">予約管理</a>
+  <a href="/management/customers">顧客管理</a>
+  <a href="/management/recipes">香りレシピ管理</a>
+  <a href="/management/products">商品管理</a>
+  <a href="/management/inventory">在庫管理</a>
+  <a href="/management/account">アカウント設定</a>
+  <form action="/management/logout" method="post"><input type="hidden" name="_csrf" value="8T7TiCtJnad_YETyDkh673i5LHgpxSwHv_dIdaIevSzxnG73yQu3sEkrrpRSVXLEOWVOihuIARlN9hgqhpZ_QZcs30-XpV2S"/>
+    <button type="submit">ログアウト</button>
+  </form>
+</aside>
+        <main class="admin-main">
+            <div class="page-head">
+                <h1>顧客詳細</h1>
+                <div class="actions"><a class="btn" href="/management/customers">一覧</a><a class="btn primary"
+                        href="/management/customers/20/edit">編集</a></div>
+            </div>
+            
+            <section class="panel">
+                <table class="table">
+                    <tr>
+                        <th>ID</th>
+                        <td>20</td>
+                    </tr>
+                    <tr>
+                        <th>顧客名</th>
+                        <td>System Test Customer 1780371864</td>
+                    </tr>
+                    <tr>
+                        <th>メール</th>
+                        <td>1780371864@example.com</td>
+                    </tr>
+                    <tr>
+                        <th>電話</th>
+                        <td>03-1111-2222</td>
+                    </tr>
+                    <tr>
+                        <th>国籍</th>
+                        <td>Japan</td>
+                    </tr>
+                    <tr>
+                        <th>希望言語</th>
+                        <td>Japanese</td>
+                    </tr>
+                    <tr>
+                        <th>利用目的</th>
+                        <td>System test</td>
+                    </tr>
+                    <tr>
+                        <th>備考</th>
+                        <td class="note-scroll">created by codex</td>
+                    </tr>
+                </table><BR>
+                <form action="/management/customers/20/delete" method="post"
+                    onsubmit="return confirm('この顧客を削除しますか？');"><input type="hidden" name="_csrf" value="8T7TiCtJnad_YETyDkh673i5LHgpxSwHv_dIdaIevSzxnG73yQu3sEkrrpRSVXLEOWVOihuIARlN9hgqhpZ_QZcs30-XpV2S"/><button class="danger">削除実行</button></form>
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>

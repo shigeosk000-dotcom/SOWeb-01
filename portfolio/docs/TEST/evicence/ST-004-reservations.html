@@ -1,0 +1,71 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>予約管理</title><link rel="stylesheet" href="/css/app.css"></head>
+<body class="admin-body"><div class="admin-layout"><aside class="sidebar">
+  <div class="brand">AromaTripNippon</div>
+  <a href="/management/dashboard">ダッシュボード</a>
+  <a href="/management/reservations">予約管理</a>
+  <a href="/management/customers">顧客管理</a>
+  <a href="/management/recipes">香りレシピ管理</a>
+  <a href="/management/products">商品管理</a>
+  <a href="/management/inventory">在庫管理</a>
+  <a href="/management/account">アカウント設定</a>
+  <form action="/management/logout" method="post"><input type="hidden" name="_csrf" value="T5u5ku0P5uuoUbtJZ9KA_C39late1_ihIn2PH51Uh9Oel6s4d67dqo9t1diFZI1_UP-0mU7MuMo65MyMGxy4K6hm5bD4rphd"/>
+    <button type="submit">ログアウト</button>
+  </form>
+</aside><main class="admin-main">
+<div class="page-head"><h1>予約管理</h1><a class="btn primary" href="/management/reservations/new">新規登録</a></div>
+
+<form class="panel search-form" action="/management/reservations" method="get"><input name="q" value="" placeholder="顧客名で検索"><button class="primary" type="submit">検索</button><a class="btn primary" href="/management/reservations">クリア</a></form>
+<table class="table"><tr><th>ID</th><th>日時</th><th>顧客</th><th>人数</th><th>状況</th><th>操作</th></tr>
+<tr>
+<td>4</td><td><span>2026-06-12</span> <span>10:00</span></td><td>Noah Williams</td><td>3</td><td>RESERVED</td>
+<td><div class="table-actions"><a href="/management/reservations/4">詳細</a><span>/</span><a href="/management/reservations/4/edit">編集</a><span>/</span><form action="/management/reservations/4/delete" method="post" onsubmit="return confirm('この予約を削除しますか？');"><input type="hidden" name="_csrf" value="T5u5ku0P5uuoUbtJZ9KA_C39late1_ihIn2PH51Uh9Oel6s4d67dqo9t1diFZI1_UP-0mU7MuMo65MyMGxy4K6hm5bD4rphd"/><button class="link-button danger-text" type="submit">削除</button></form></div></td>
+</tr>
+<tr>
+<td>3</td><td><span>2026-06-10</span> <span>14:00</span></td><td>Isabella Johnson</td><td>2</td><td>RESERVED</td>
+<td><div class="table-actions"><a href="/management/reservations/3">詳細</a><span>/</span><a href="/management/reservations/3/edit">編集</a><span>/</span><form action="/management/reservations/3/delete" method="post" onsubmit="return confirm('この予約を削除しますか？');"><input type="hidden" name="_csrf" value="T5u5ku0P5uuoUbtJZ9KA_C39late1_ihIn2PH51Uh9Oel6s4d67dqo9t1diFZI1_UP-0mU7MuMo65MyMGxy4K6hm5bD4rphd"/><button class="link-button danger-text" type="submit">削除</button></form></div></td>
+</tr>
+<tr>
+<td>2</td><td><span>2026-06-05</span> <span>10:00</span></td><td>Lucas Smith</td><td>1</td><td>RESERVED</td>
+<td><div class="table-actions"><a href="/management/reservations/2">詳細</a><span>/</span><a href="/management/reservations/2/edit">編集</a><span>/</span><form action="/management/reservations/2/delete" method="post" onsubmit="return confirm('この予約を削除しますか？');"><input type="hidden" name="_csrf" value="T5u5ku0P5uuoUbtJZ9KA_C39late1_ihIn2PH51Uh9Oel6s4d67dqo9t1diFZI1_UP-0mU7MuMo65MyMGxy4K6hm5bD4rphd"/><button class="link-button danger-text" type="submit">削除</button></form></div></td>
+</tr>
+<tr>
+<td>6</td><td><span>2026-06-03</span> <span>10:00</span></td><td>Codex Test User</td><td>2</td><td>RESERVED</td>
+<td><div class="table-actions"><a href="/management/reservations/6">詳細</a><span>/</span><a href="/management/reservations/6/edit">編集</a><span>/</span><form action="/management/reservations/6/delete" method="post" onsubmit="return confirm('この予約を削除しますか？');"><input type="hidden" name="_csrf" value="T5u5ku0P5uuoUbtJZ9KA_C39late1_ihIn2PH51Uh9Oel6s4d67dqo9t1diFZI1_UP-0mU7MuMo65MyMGxy4K6hm5bD4rphd"/><button class="link-button danger-text" type="submit">削除</button></form></div></td>
+</tr>
+<tr>
+<td>8</td><td><span>2026-06-03</span> <span>10:00</span></td><td>Codex Test User</td><td>1</td><td>RESERVED</td>
+<td><div class="table-actions"><a href="/management/reservations/8">詳細</a><span>/</span><a href="/management/reservations/8/edit">編集</a><span>/</span><form action="/management/reservations/8/delete" method="post" onsubmit="return confirm('この予約を削除しますか？');"><input type="hidden" name="_csrf" value="T5u5ku0P5uuoUbtJZ9KA_C39late1_ihIn2PH51Uh9Oel6s4d67dqo9t1diFZI1_UP-0mU7MuMo65MyMGxy4K6hm5bD4rphd"/><button class="link-button danger-text" type="submit">削除</button></form></div></td>
+</tr>
+<tr>
+<td>9</td><td><span>2026-06-03</span> <span>10:00</span></td><td>Codex Test User</td><td>4</td><td>RESERVED</td>
+<td><div class="table-actions"><a href="/management/reservations/9">詳細</a><span>/</span><a href="/management/reservations/9/edit">編集</a><span>/</span><form action="/management/reservations/9/delete" method="post" onsubmit="return confirm('この予約を削除しますか？');"><input type="hidden" name="_csrf" value="T5u5ku0P5uuoUbtJZ9KA_C39late1_ihIn2PH51Uh9Oel6s4d67dqo9t1diFZI1_UP-0mU7MuMo65MyMGxy4K6hm5bD4rphd"/><button class="link-button danger-text" type="submit">削除</button></form></div></td>
+</tr>
+<tr>
+<td>10</td><td><span>2026-06-03</span> <span>10:00</span></td><td>Codex Test User</td><td>2</td><td>RESERVED</td>
+<td><div class="table-actions"><a href="/management/reservations/10">詳細</a><span>/</span><a href="/management/reservations/10/edit">編集</a><span>/</span><form action="/management/reservations/10/delete" method="post" onsubmit="return confirm('この予約を削除しますか？');"><input type="hidden" name="_csrf" value="T5u5ku0P5uuoUbtJZ9KA_C39late1_ihIn2PH51Uh9Oel6s4d67dqo9t1diFZI1_UP-0mU7MuMo65MyMGxy4K6hm5bD4rphd"/><button class="link-button danger-text" type="submit">削除</button></form></div></td>
+</tr>
+<tr>
+<td>12</td><td><span>2026-06-03</span> <span>10:00</span></td><td>Codex Test User</td><td>1</td><td>RESERVED</td>
+<td><div class="table-actions"><a href="/management/reservations/12">詳細</a><span>/</span><a href="/management/reservations/12/edit">編集</a><span>/</span><form action="/management/reservations/12/delete" method="post" onsubmit="return confirm('この予約を削除しますか？');"><input type="hidden" name="_csrf" value="T5u5ku0P5uuoUbtJZ9KA_C39late1_ihIn2PH51Uh9Oel6s4d67dqo9t1diFZI1_UP-0mU7MuMo65MyMGxy4K6hm5bD4rphd"/><button class="link-button danger-text" type="submit">削除</button></form></div></td>
+</tr>
+<tr>
+<td>13</td><td><span>2026-06-03</span> <span>10:00</span></td><td>Codex Test User</td><td>4</td><td>RESERVED</td>
+<td><div class="table-actions"><a href="/management/reservations/13">詳細</a><span>/</span><a href="/management/reservations/13/edit">編集</a><span>/</span><form action="/management/reservations/13/delete" method="post" onsubmit="return confirm('この予約を削除しますか？');"><input type="hidden" name="_csrf" value="T5u5ku0P5uuoUbtJZ9KA_C39late1_ihIn2PH51Uh9Oel6s4d67dqo9t1diFZI1_UP-0mU7MuMo65MyMGxy4K6hm5bD4rphd"/><button class="link-button danger-text" type="submit">削除</button></form></div></td>
+</tr>
+<tr>
+<td>7</td><td><span>2026-06-03</span> <span>14:00</span></td><td>Codex English User</td><td>2</td><td>RESERVED</td>
+<td><div class="table-actions"><a href="/management/reservations/7">詳細</a><span>/</span><a href="/management/reservations/7/edit">編集</a><span>/</span><form action="/management/reservations/7/delete" method="post" onsubmit="return confirm('この予約を削除しますか？');"><input type="hidden" name="_csrf" value="T5u5ku0P5uuoUbtJZ9KA_C39late1_ihIn2PH51Uh9Oel6s4d67dqo9t1diFZI1_UP-0mU7MuMo65MyMGxy4K6hm5bD4rphd"/><button class="link-button danger-text" type="submit">削除</button></form></div></td>
+</tr>
+<tr>
+<td>11</td><td><span>2026-06-03</span> <span>14:00</span></td><td>Codex English User</td><td>2</td><td>RESERVED</td>
+<td><div class="table-actions"><a href="/management/reservations/11">詳細</a><span>/</span><a href="/management/reservations/11/edit">編集</a><span>/</span><form action="/management/reservations/11/delete" method="post" onsubmit="return confirm('この予約を削除しますか？');"><input type="hidden" name="_csrf" value="T5u5ku0P5uuoUbtJZ9KA_C39late1_ihIn2PH51Uh9Oel6s4d67dqo9t1diFZI1_UP-0mU7MuMo65MyMGxy4K6hm5bD4rphd"/><button class="link-button danger-text" type="submit">削除</button></form></div></td>
+</tr>
+<tr>
+<td>1</td><td><span>2026-06-02</span> <span>14:00</span></td><td>Emily Chen</td><td>2</td><td>RESERVED</td>
+<td><div class="table-actions"><a href="/management/reservations/1">詳細</a><span>/</span><a href="/management/reservations/1/edit">編集</a><span>/</span><form action="/management/reservations/1/delete" method="post" onsubmit="return confirm('この予約を削除しますか？');"><input type="hidden" name="_csrf" value="T5u5ku0P5uuoUbtJZ9KA_C39late1_ihIn2PH51Uh9Oel6s4d67dqo9t1diFZI1_UP-0mU7MuMo65MyMGxy4K6hm5bD4rphd"/><button class="link-button danger-text" type="submit">削除</button></form></div></td>
+</tr>
+<tr class="reservation-expired">
+<td>5</td><td><span>2026-05-10</span> <span>16:00</span></td><td>Taro Yamada</td><td>1</td><td>RESERVED</td>
+<td><div class="table-actions"><a href="/management/reservations/5">詳細</a><span>/</span><a href="/management/reservations/5/edit">編集</a><span>/</span><form action="/management/reservations/5/delete" method="post" onsubmit="return confirm('この予約を削除しますか？');"><input type="hidden" name="_csrf" value="T5u5ku0P5uuoUbtJZ9KA_C39late1_ihIn2PH51Uh9Oel6s4d67dqo9t1diFZI1_UP-0mU7MuMo65MyMGxy4K6hm5bD4rphd"/><button class="link-button danger-text" type="submit">削除</button></form></div></td>
+</tr>
+</table></main></div></body></html>

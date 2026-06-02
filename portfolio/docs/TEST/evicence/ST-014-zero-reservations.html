@@ -1,0 +1,20 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>予約管理</title><link rel="stylesheet" href="/css/app.css"></head>
+<body class="admin-body"><div class="admin-layout"><aside class="sidebar">
+  <div class="brand">AromaTripNippon</div>
+  <a href="/management/dashboard">ダッシュボード</a>
+  <a href="/management/reservations">予約管理</a>
+  <a href="/management/customers">顧客管理</a>
+  <a href="/management/recipes">香りレシピ管理</a>
+  <a href="/management/products">商品管理</a>
+  <a href="/management/inventory">在庫管理</a>
+  <a href="/management/account">アカウント設定</a>
+  <form action="/management/logout" method="post"><input type="hidden" name="_csrf" value="1tzSL_eOe1UA2upY56V-84gcpnicwntzpFPnKX9s1OFAQJBN7um2F5XsSGYt79xu0IhKlustixn48U9enTLQHUpetoImeaMo"/>
+    <button type="submit">ログアウト</button>
+  </form>
+</aside><main class="admin-main">
+<div class="page-head"><h1>予約管理</h1><a class="btn primary" href="/management/reservations/new">新規登録</a></div>
+
+<form class="panel search-form" action="/management/reservations" method="get"><input name="q" value="__no_match__" placeholder="顧客名で検索"><button class="primary" type="submit">検索</button><a class="btn primary" href="/management/reservations">クリア</a></form>
+<table class="table"><tr><th>ID</th><th>日時</th><th>顧客</th><th>人数</th><th>状況</th><th>操作</th></tr>
+
+</table></main></div></body></html>
