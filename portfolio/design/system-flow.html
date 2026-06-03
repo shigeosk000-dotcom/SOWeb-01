@@ -221,40 +221,26 @@ HTML Response
 
         <div class="fill-block">
           <div class="fill-label">全体の画面遷移図 <span class="required">必須</span></div>
-          <div class="fill-hint">Webアプリケーション全体の画面遷移＠ASCII図でなくてもよいです。</div>
-          <div class="fill-content">
-            <div class="ascii-diagram">
-              <pre>
-┌─────────────┐
-│ ログイン │
-│ /login │
-└──────┬──────┘
-│ 認証成功
-▼
-┌──────────────────────────────────────────────────────────────────┐
-│ メイン画面群 │
-├──────────────────────────────────────────────────────────────────┤
-│ │
-│ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ │
-│ │ 一覧画面 │───▶│ 詳細画面 │ │ 新規作成 │ │
-│ │ /tasks │◀───│ /tasks/{id}│ │ /tasks/new │ │
-│ └─────────────┘ └─────────────┘ └─────────────┘ │
-│ │ ▲ │ │ │
-│ │ │ │ │ │
-│ │ │ ▼ ▼ │
-│ │ │ ┌─────────────┐ ┌─────────────┐ │
-│ │ └──────────│ 編集画面 │ │ 確認画面 │ │
-│ │ │/tasks/{id}/edit │/tasks/confirm│ │
-│ │ └─────────────┘ └─────────────┘ │
-│ │ │ │ │
-│ │ ▼ ▼ │
-│ └───────────────────┴───────────────────┘ │
-│ 完了後リダイレクト │
-└──────────────────────────────────────────────────────────────────┘
+          <div class="fill-hint">AromaTripNipponの画面遷移を、利用者機能と管理者機能に分けて表示します。</div>
 
-（上記を参考に編集してください）
-                </pre>
-            </div>
+          <div class="fill-label">利用者機能の画面遷移</div>
+          <div class="fill-content">
+            <iframe class="embedded-html-frame" src="aromatripnippon-user-screen-flow.html" title="利用者機能の画面遷移"
+              style="width: 100%; min-height: 620px;"></iframe>
+            <p class="embedded-doc-link">
+              <a href="aromatripnippon-user-screen-flow.html" target="_blank"
+                rel="noopener">aromatripnippon-user-screen-flow.htmlを別タブで開く</a>
+            </p>
+          </div>
+
+          <div class="fill-label">管理者機能の画面遷移</div>
+          <div class="fill-content">
+            <iframe class="embedded-html-frame" src="aromatripnippon-admin-screen-flow.html" title="管理者機能の画面遷移"
+              style="width: 100%; min-height: 720px;"></iframe>
+            <p class="embedded-doc-link">
+              <a href="aromatripnippon-admin-screen-flow.html" target="_blank"
+                rel="noopener">aromatripnippon-admin-screen-flow.htmlを別タブで開く</a>
+            </p>
           </div>
         </div>
       </section>
