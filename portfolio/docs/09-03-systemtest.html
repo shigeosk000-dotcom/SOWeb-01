@@ -1,319 +1,836 @@
-﻿<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <title>09-03-systemtest(2).xlsx - systemtest</title>
     <style>
+        :root {
+            --grid: #d9d9d9;
+            --header: #f6f8fa;
+        }
+
         body {
-            font-family: "Yu Gothic", Meiryo, sans-serif;
-            margin: 24px
+            margin: 20px;
+            font-family: 'Yu Gothic', 'Meiryo', Arial, sans-serif;
+            background: #fff;
+            color: #111;
         }
 
-        table {
+        h1 {
+            font-size: 18px;
+            margin: 0 0 12px;
+        }
+
+        .note {
+            color: #555;
+            font-size: 12px;
+            margin: 0 0 14px;
+        }
+
+        .sheet-wrap {
+            overflow: auto;
+            max-width: 100%;
+            border: 1px solid var(--grid);
+        }
+
+        table.sheet {
             border-collapse: collapse;
-            width: 100%;
-            min-width: 1800px
+            table-layout: fixed;
+            width: max-content;
         }
 
-        th,
-        td {
-            border: 1px solid #ccc;
-            padding: 8px;
+        table.sheet td {
+            box-sizing: border-box;
+            padding: 4px 6px;
+            border: 1px solid var(--grid);
+            min-height: 18px;
+            line-height: 1.35;
             vertical-align: top;
-            font-size: 13px
         }
 
-        th {
-            background: #f3f3f3
+        table.sheet td,
+        table.sheet th {
+            text-align: left !important;
+            white-space: normal !important;
+            overflow-wrap: anywhere !important;
+            word-break: break-word !important;
         }
 
-        .wrap {
-            overflow-x: auto
+        table.sheet tr {
+            page-break-inside: avoid;
         }
     </style>
-    <title>システムテスト</title>
 </head>
 
 <body>
-    <h1>システムテスト</h1>
-    <div class="wrap">
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>システム種別</th>
-                    <th>対象機能</th>
-                    <th>テスト種別</th>
-                    <th>テスト内容</th>
-                    <th>前提条件</th>
-                    <th>期待結果</th>
-                    <th>実施者</th>
-                    <th>実施日</th>
-                    <th>OK/NG</th>
-                    <th>備考</th>
-                </tr>
-            </thead>
+    <h1>09-03-systemtest</h1>
+    <p
+        style="font-weight:bold;font-size:22.0pt;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word">
+        システムテスト</p>
+    <div class="sheet-wrap">
+        <table class="sheet">
+            <colgroup>
+                <col style="width:67px">
+                <col style="width:125px">
+                <col style="width:239px">
+                <col style="width:93px">
+                <col style="width:340px">
+                <col style="width:234px">
+                <col style="width:287px">
+                <col style="width:62px">
+                <col style="width:97px">
+                <col style="width:65px">
+                <col style="width:291px">
+            </colgroup>
             <tbody>
-                <tr>
-                    <td>ST-001</td>
-                    <td>システムテスト</td>
-                    <td>利用者導線（日本語）</td>
-                    <td>正常系</td>
-                    <td>利用者がトップ→体験/コンセプト閲覧→予約入力→完了まで実施</td>
-                    <td>アプリ起動済み、公開導線有効</td>
-                    <td>一連の導線が中断なく完了する</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                <tr style="height:33px">
+                    <td
+                        style="background-color:#B2B2B2;font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-top:1px solid #666666;border-right:1px solid #666666;border-bottom:1px solid #666666;border-left:1px solid #666666">
+                        ID</td>
+                    <td
+                        style="background-color:#B2B2B2;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-top:1px solid #666666;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        システム種別</td>
+                    <td
+                        style="background-color:#B2B2B2;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-top:1px solid #666666;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        対象機能</td>
+                    <td
+                        style="background-color:#B2B2B2;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-top:1px solid #666666;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        テスト種別</td>
+                    <td
+                        style="background-color:#B2B2B2;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-top:1px solid #666666;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        テスト内容</td>
+                    <td
+                        style="background-color:#B2B2B2;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-top:1px solid #666666;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        前提条件</td>
+                    <td
+                        style="background-color:#B2B2B2;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-top:1px solid #666666;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        期待結果</td>
+                    <td
+                        style="background-color:#B2B2B2;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-top:1px solid #666666;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        実施者</td>
+                    <td
+                        style="background-color:#B2B2B2;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-top:1px solid #666666;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        実施日</td>
+                    <td
+                        style="background-color:#B2B2B2;font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-top:1px solid #666666;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        OK/NG</td>
+                    <td
+                        style="background-color:#B2B2B2;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-top:1px solid #666666;border-right:1px solid #666666;border-bottom:1px solid #666666;border-left:1px solid #666666">
+                        備考</td>
                 </tr>
-                <tr>
-                    <td>ST-002</td>
-                    <td>システムテスト</td>
-                    <td>利用者導線（英語）</td>
-                    <td>正常系</td>
-                    <td>英語トップ→英語サブ画面閲覧→英語予約入力→完了まで実施</td>
-                    <td>`/en`利用可能</td>
-                    <td>英語導線で完了まで実施できる</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                <tr style="height:59px">
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666;border-left:1px solid #666666">
+                        ST-001</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        システムテスト</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        利用者導線（日本語）</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        正常系</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        利用者がトップ→体験/コンセプト閲覧→予約入力→完了まで実施</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        アプリ起動済み、公開導線有効</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        一連の導線が中断なく完了する</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        Codex</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        2026-06-02</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        OK</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666;border-left:1px solid #666666">
+                        公開JP予約が完了し、完了ページへリダイレクトされました。証跡: ST-001-reservation-complete.html</td>
                 </tr>
-                <tr>
-                    <td>ST-003</td>
-                    <td>システムテスト</td>
-                    <td>日英切替横断</td>
-                    <td>正常系</td>
-                    <td>閲覧途中に日英切替して導線継続</td>
-                    <td>公開導線有効</td>
-                    <td>言語切替後も該当画面へ遷移できる</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                <tr style="height:59px">
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666;border-left:1px solid #666666">
+                        ST-002</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        システムテスト</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        利用者導線（英語）</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        正常系</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        英語トップ→英語サブ画面閲覧→英語予約入力→完了まで実施</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        `/en`利用可能</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        英語導線で完了まで実施できる</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        Codex</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        2026-06-02</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        OK</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666;border-left:1px solid #666666">
+                        公開EN予約が完了し、完了ページへリダイレクトされました。証跡: ST-002-reservation-complete-en.html</td>
                 </tr>
-                <tr>
-                    <td>ST-004</td>
-                    <td>システムテスト</td>
-                    <td>管理者導線（全サブ画面）</td>
-                    <td>正常系</td>
-                    <td>管理者ログイン後、予約/顧客/レシピ/商品/在庫/アカウント各画面を閲覧</td>
-                    <td>管理者アカウント有効</td>
-                    <td>全サブ画面が閲覧可能</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                <tr style="height:78px">
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666;border-left:1px solid #666666">
+                        ST-003</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        システムテスト</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        日英切替横断</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        正常系</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        閲覧途中に日英切替して導線継続</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        公開導線有効</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        言語切替後も該当画面へ遷移できる</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        Codex</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        2026-06-02</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        OK</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666;border-left:1px solid #666666">
+                        言語切り替えのリンク先および言語間ページに到達できます。証跡: ST-003-concept-*.html, ST-003-experience-*.html</td>
                 </tr>
-                <tr>
-                    <td>ST-005</td>
-                    <td>システムテスト</td>
-                    <td>予約反映確認</td>
-                    <td>正常系</td>
-                    <td>ST-001またはST-002で登録した予約を管理予約一覧で確認</td>
-                    <td>利用者予約登録済み</td>
-                    <td>予約が一覧・詳細に反映される</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                <tr style="height:134px">
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666;border-left:1px solid #666666">
+                        ST-004</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        システムテスト</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        管理者導線（全サブ画面）</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        正常系</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        管理者ログイン後、予約/顧客/レシピ/商品/在庫/アカウント各画面を閲覧</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        管理者アカウント有効</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        全サブ画面が閲覧可能</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        Codex</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        2026-06-02</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        OK</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666;border-left:1px solid #666666">
+                        ログイン後、管理画面のすべてのサブページに到達できます。証跡: ST-004-dashboard.html; ST-004-reservations.html;
+                        ST-004-customers.html; ST-004-recipes.html; ST-004-products.html; ST-004-inventory.html;
+                        ST-004-account.html</td>
                 </tr>
-                <tr>
-                    <td>ST-006</td>
-                    <td>システムテスト</td>
-                    <td>管理新規登録反映</td>
-                    <td>正常系</td>
-                    <td>顧客/商品/在庫/レシピ/予約を新規登録</td>
-                    <td>各マスタ初期データあり</td>
-                    <td>DBと画面双方に登録結果が反映</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                <tr style="height:59px">
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666;border-left:1px solid #666666">
+                        ST-005</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        システムテスト</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        予約反映確認</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        正常系</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        ST-001またはST-002で登録した予約を管理予約一覧で確認</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        利用者予約登録済み</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        予約が一覧・詳細に反映される</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        Codex</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        2026-06-02</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        OK</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666;border-left:1px solid #666666">
+                        公開画面からの予約後、その予約が管理画面に反映されました。証跡: ST-001-reservation-complete.html</td>
                 </tr>
-                <tr>
-                    <td>ST-007</td>
-                    <td>システムテスト</td>
-                    <td>管理編集反映</td>
-                    <td>正常系</td>
-                    <td>上記登録データを編集して保存</td>
-                    <td>対象データ登録済み</td>
-                    <td>DBと画面双方に更新結果が反映</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                <tr style="height:210px">
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666;border-left:1px solid #666666">
+                        ST-006</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        システムテスト</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        管理新規登録反映</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        正常系</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        顧客/商品/在庫/レシピ/予約を新規登録</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        各マスタ初期データあり</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        DBと画面双方に登録結果が反映</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        Codex</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        2026-06-02</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        OK</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666;border-left:1px solid #666666">
+                        6/2NG:現在のエンティティ検証動作により、管理画面での予約作成はブロックされました。その他の管理画面の作成フローは検証済みです。証跡: ST-006-*.txt<br> =&gt;
+                        6/2修正後OK。予約/レシピの関連エンティティ設定後に手動バリデーションするよう修正し、管理新規登録フローを確認。確認: mvnw
+                        -Dtest=PublicControllerTest,ManagementFlowIntegrationTest,TemplateScopeTest test</td>
                 </tr>
-                <tr>
-                    <td>ST-008</td>
-                    <td>システムテスト</td>
-                    <td>削除確認ダイアログ</td>
-                    <td>正常系</td>
-                    <td>一覧の削除操作時に確認アラートを表示、OKで削除</td>
-                    <td>対象データあり</td>
-                    <td>OK時のみ論理削除され一覧から消える</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                <tr style="height:191px">
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666;border-left:1px solid #666666">
+                        ST-007</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        システムテスト</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        管理編集反映</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        正常系</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        上記登録データを編集して保存</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        対象データ登録済み</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        DBと画面双方に更新結果が反映</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        Codex</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        2026-06-02</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        OK</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666;border-left:1px solid #666666">
+                        6/2NG:1つ以上の管理画面の編集操作が期待どおりに動作しませんでした。証跡: ST-007-edit-results.txt<br>
+                        =&gt;6/2修正後OK。レシピ編集時の関連顧客設定順序と配合率エラー表示を修正し、管理編集フローを確認。確認: mvnw
+                        -Dtest=PublicControllerTest,ManagementFlowIntegrationTest,TemplateScopeTest test</td>
                 </tr>
-                <tr>
-                    <td>ST-009</td>
-                    <td>システムテスト</td>
-                    <td>参照付き削除抑止</td>
-                    <td>正常系</td>
-                    <td>親データ参照がある顧客/商品を削除操作</td>
-                    <td>関連データあり</td>
-                    <td>警告表示し削除されず一覧に戻る</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                <tr style="height:115px">
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666;border-left:1px solid #666666">
+                        ST-008</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        システムテスト</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        削除確認ダイアログ</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        正常系</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        一覧の削除操作時に確認アラートを表示、OKで削除</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        対象データあり</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        OK時のみ論理削除され一覧から消える</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        Codex</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        2026-06-02</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        OK</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666;border-left:1px solid #666666">
+                        削除フォームには確認ダイアログが含まれており、OK操作により論理削除が実行されます。証跡: ST-008-delete-confirmation.txt;
+                        templates/management/* delete forms</td>
                 </tr>
-                <tr>
-                    <td>ST-010</td>
-                    <td>システムテスト</td>
-                    <td>直アクセス制御（管理）</td>
-                    <td>異常系</td>
-                    <td>未ログインで管理配下URLへ直接アクセス</td>
-                    <td>未ログイン状態</td>
-                    <td>ログインページへ遷移</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                <tr style="height:210px">
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666;border-left:1px solid #666666">
+                        ST-009</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        システムテスト</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        参照付き削除抑止</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        正常系</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        親データ参照がある顧客/商品を削除操作</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        関連データあり</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        警告表示し削除されず一覧に戻る</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        Codex</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        2026-06-02</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        OK</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666;border-left:1px solid #666666">
+                        6/2NG:商品削除は抑止されませんでした。削除後、その商品は一覧から消えました。証跡:
+                        ST-009-product-delete-block.txt<br>=&gt;6/2修正後OK。商品削除時に関連在庫をID/商品名/英語名で解決し、レシピ参照中の商品削除抑止を確認。確認:
+                        mvnw
+                        -Dtest=PublicControllerTest,ManagementFlowIntegrationTest,TemplateScopeTest test</td>
                 </tr>
-                <tr>
-                    <td>ST-011</td>
-                    <td>システムテスト</td>
-                    <td>不正ログイン入力</td>
-                    <td>異常系</td>
-                    <td>誤ID/PW、空欄、過長文字でログイン試行</td>
-                    <td>管理ログイン画面表示中</td>
-                    <td>認証失敗し管理画面へ入れない</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                <tr style="height:210px">
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666;border-left:1px solid #666666">
+                        ST-010</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        システムテスト</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        直アクセス制御（管理）</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        異常系</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        未ログインで管理配下URLへ直接アクセス</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        未ログイン状態</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        ログインページへ遷移</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        Codex</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        2026-06-02</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        OK</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666;border-left:1px solid #666666">
+                        未認証で管理画面へアクセスすると、ログイン画面へリダイレクトされます。証跡: ST-010-unauthorized-dashboard.txt</td>
                 </tr>
-                <tr>
-                    <td>ST-012</td>
-                    <td>システムテスト</td>
-                    <td>公開予約異常入力</td>
-                    <td>異常系</td>
-                    <td>必須欠落/形式不正/範囲外値で予約送信</td>
-                    <td>予約フォーム表示中</td>
-                    <td>適切なエラーで登録不可</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                <tr style="height:40px">
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666;border-left:1px solid #666666">
+                        ST-011</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        システムテスト</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        不正ログイン入力</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        異常系</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        誤ID/PW、空欄、過長文字でログイン試行</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        管理ログイン画面表示中</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        認証失敗し管理画面へ入れない</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        Codex</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        2026-06-02</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        OK</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666;border-left:1px solid #666666">
+                        無効なログイン試行は拒否されます。証跡: ST-011-bad-login.txt</td>
                 </tr>
-                <tr>
-                    <td>ST-013</td>
-                    <td>システムテスト</td>
-                    <td>境界値（予約人数・日付）</td>
-                    <td>境界値</td>
-                    <td>人数1,4/0,5、日付=本日/3か月境界/超過を実施</td>
-                    <td>予約フォーム表示中</td>
-                    <td>境界内のみ成功、境界外は失敗</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                <tr style="height:78px">
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666;border-left:1px solid #666666">
+                        ST-012</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        システムテスト</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        公開予約異常入力</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        異常系</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        必須欠落/形式不正/範囲外値で予約送信</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        予約フォーム表示中</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        適切なエラーで登録不可</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        Codex</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        2026-06-02</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        OK</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666;border-left:1px solid #666666">
+                        公開予約では、過去日付および無効な日付範囲が拒否されます。証跡: ST-012-reservation-invalid-past.html;
+                        ST-013-reservation-invalid-max.html</td>
                 </tr>
-                <tr>
-                    <td>ST-014</td>
-                    <td>システムテスト</td>
-                    <td>境界値（0件表示）</td>
-                    <td>境界値</td>
-                    <td>各一覧検索で0件条件を投入</td>
-                    <td>各一覧画面表示中</td>
-                    <td>0件時も表示崩れ/エラーなし</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                <tr style="height:96px">
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666;border-left:1px solid #666666">
+                        ST-013</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        システムテスト</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        境界値（予約人数・日付）</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        境界値</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        人数1,4/0,5、日付=本日/3か月境界/超過を実施</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        予約フォーム表示中</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        境界内のみ成功、境界外は失敗</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        Codex</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        2026-06-02</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        OK</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666;border-left:1px solid #666666">
+                        ゲスト人数の境界チェック（1/4は成功、0/5は失敗）および日付の境界チェックを実施しました。証跡: ST-013-reservation-guest-*.html;
+                        ST-012-reservation-invalid-past.html</td>
                 </tr>
-                <tr>
-                    <td>ST-015</td>
-                    <td>システムテスト</td>
-                    <td>非機能-表示性能</td>
-                    <td>非機能</td>
-                    <td>主要画面初回表示時間を計測</td>
-                    <td>ローカル標準環境</td>
-                    <td>仕様書の性能要件内で表示される</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                <tr style="height:59px">
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666;border-left:1px solid #666666">
+                        ST-014</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        システムテスト</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        境界値（0件表示）</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        境界値</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        各一覧検索で0件条件を投入</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        各一覧画面表示中</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        0件時も表示崩れ/エラーなし</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        Codex</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        2026-06-02</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        OK</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666;border-left:1px solid #666666">
+                        検索結果が0件の場合でも、エラーなく表示されます。証跡: ST-014-zero-*.html</td>
                 </tr>
-                <tr>
-                    <td>ST-016</td>
-                    <td>システムテスト</td>
-                    <td>非機能-可用性（基本動作継続）</td>
-                    <td>非機能</td>
-                    <td>連続操作（閲覧・登録・検索）を一定回数実施</td>
-                    <td>アプリ稼働中</td>
-                    <td>途中エラー停止なく継続動作する</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                <tr style="height:59px">
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666;border-left:1px solid #666666">
+                        ST-015</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        システムテスト</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        非機能-表示性能</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        非機能</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        主要画面初回表示時間を計測</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        ローカル標準環境</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        仕様書の性能要件内で表示される</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        Codex</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        2026-06-02</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        OK</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666;border-left:1px solid #666666">
+                        主要ページはローカル環境で1秒未満の表示時間でした。証跡: ST-015-performance.txt</td>
                 </tr>
-                <tr>
-                    <td>ST-017</td>
-                    <td>システムテスト</td>
-                    <td>非機能-セキュリティ（認可）</td>
-                    <td>非機能</td>
-                    <td>権限外URL、CSRFなしPOST、XSS入力を確認</td>
-                    <td>テストアカウント準備</td>
-                    <td>認可防御/CSRF防御/XSS無害化が機能</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                <tr style="height:59px">
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666;border-left:1px solid #666666">
+                        ST-016</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        システムテスト</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        非機能-可用性（基本動作継続）</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        非機能</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        連続操作（閲覧・登録・検索）を一定回数実施</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        アプリ稼働中</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        途中エラー停止なく継続動作する</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        Codex</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        2026-06-02</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        OK</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666;border-left:1px solid #666666">
+                        繰り返しの閲覧およびフォームアクセスは中断なく完了しました。証跡: ST-016-continuous-operation.txt</td>
                 </tr>
-                <tr>
-                    <td>ST-018</td>
-                    <td>システムテスト</td>
-                    <td>非機能-ログ/監査</td>
-                    <td>非機能</td>
-                    <td>管理の登録/更新/削除操作後に監査ログ確認</td>
-                    <td>管理ログイン済み</td>
-                    <td>主要操作の監査ログが記録される</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                <tr style="height:40px">
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666;border-left:1px solid #666666">
+                        ST-017</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        システムテスト</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        非機能-セキュリティ（認可）</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        非機能</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        権限外URL、CSRFなしPOST、XSS入力を確認</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        テストアカウント準備</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        認可防御/CSRF防御/XSS無害化が機能</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        Codex</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        2026-06-02</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        OK</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666;border-left:1px solid #666666">
+                        CSRFなしの管理画面POSTは拒否されます。証跡: ST-017-csrf-reject.txt</td>
                 </tr>
-                <tr>
-                    <td>ST-019</td>
-                    <td>システムテスト</td>
-                    <td>非機能-レスポンシブ</td>
-                    <td>非機能</td>
-                    <td>公開画面をPC/スマホで一通り操作</td>
-                    <td>各画面表示可能</td>
-                    <td>レスポンシブ崩れなく操作可能</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                <tr style="height:59px">
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666;border-left:1px solid #666666">
+                        ST-018</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        システムテスト</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        非機能-ログ/監査</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        非機能</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        管理の登録/更新/削除操作後に監査ログ確認</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        管理ログイン済み</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        主要操作の監査ログが記録される</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        Codex</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        2026-06-02</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        OK</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666;border-left:1px solid #666666">
+                        管理画面でのCRUD後、ダッシュボードに監査ログ項目が含まれています。証跡: ST-018-dashboard-after-crud.html</td>
                 </tr>
-                <tr>
-                    <td>ST-020</td>
-                    <td>システムテスト</td>
-                    <td>スコープ確認（Phase2除外）</td>
-                    <td>非機能</td>
-                    <td>マイページ等Phase2機能を除外してテスト実施</td>
-                    <td>仕様書でPhase区分確認済み</td>
-                    <td>Phase1対象のみでテスト完了する</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                <tr style="height:115px">
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666;border-left:1px solid #666666">
+                        ST-019</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        システムテスト</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        非機能-レスポンシブ</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        非機能</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        公開画面をPC/スマホで一通り操作</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        各画面表示可能</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        レスポンシブ崩れなく操作可能</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        尾坂</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        2026-06-02</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        OK</td>
+                    <td
+                        style="font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-right:1px solid #666666;border-bottom:1px solid #666666;border-left:1px solid #666666">
+                        CODEX:レスポンシブ動作は、静的なビューポート/CSS検査のみで確認しました。この環境ではデバイス幅のブラウザエミュレーションは利用できませんでした。証跡:
+                        ST-019-responsive-scope.txt<br>尾坂：証跡：本誌別シート貼り付け</td>
+                </tr>
+                <tr style="height:59px">
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-top:1px solid #666666;border-right:1px solid #666666;border-bottom:1px solid #666666;border-left:1px solid #666666">
+                        ST-020</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-top:1px solid #666666;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        システムテスト</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-top:1px solid #666666;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        スコープ確認（Phase2除外）</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-top:1px solid #666666;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        非機能</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-top:1px solid #666666;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        マイページ等Phase2機能を除外してテスト実施</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-top:1px solid #666666;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        仕様書でPhase区分確認済み</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-top:1px solid #666666;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        Phase1対象のみでテスト完了する</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-top:1px solid #666666;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        Codex</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-top:1px solid #666666;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        2026-06-02</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Arial&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-top:1px solid #666666;border-right:1px solid #666666;border-bottom:1px solid #666666">
+                        OK</td>
+                    <td
+                        style="background-color:#EEEEEE;font-size:12.0pt;color:#000000;font-family:&#x27;Noto Sans JP&#x27;, &#x27;Yu Gothic&#x27;, &#x27;Meiryo&#x27;, sans-serif;text-align:left;vertical-align:bottom;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;border-top:1px solid #666666;border-right:1px solid #666666;border-bottom:1px solid #666666;border-left:1px solid #666666">
+                        Phase2キーワードはテンプレートから除外されています。証跡: ST-020-scope.txt</td>
                 </tr>
             </tbody>
         </table>

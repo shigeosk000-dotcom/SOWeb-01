@@ -8,6 +8,11 @@
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
   <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .doc-table .template-row td {
+      color: var(--text);
+    }
+  </style>
 </head>
 
 <body>
@@ -23,7 +28,7 @@
         <div class="doc-category">DOCUMENT 09</div>
         <h1 class="doc-title">テスト報告書</h1>
         <div class="doc-meta">
-          <span><span class="material-symbols-outlined icon-sm">calendar_today</span> 作成日：2026-05-27</span>
+          <span><span class="material-symbols-outlined icon-sm">calendar_today</span> 作成日：2026-06-03</span>
           <span><span class="material-symbols-outlined icon-sm">person</span> 作成者：尾坂 成紀</span>
           <span><span class="material-symbols-outlined icon-sm">push_pin</span> Ver 1.0</span>
         </div>
@@ -108,8 +113,7 @@
           <h2 class="section-title"><span class="section-icon">3</span> テスト結果サマリー</h2>
 
           <div class="fill-block">
-            <div class="fill-label">テスト結果サマリー <span class="required">必須</span></div>
-            <div class="fill-hint">テスト実施後に集計結果を記入してください</div>
+            <div class="fill-label">テスト結果サマリー</div>
             <table class="doc-table">
               <thead>
                 <tr>
@@ -120,23 +124,23 @@
               <tbody>
                 <tr class="template-row">
                   <td>総テストケース数</td>
-                  <td>（数値を入力）</td>
+                  <td>80</td>
                 </tr>
                 <tr class="template-row">
                   <td>OK</td>
-                  <td>（数値を入力）</td>
+                  <td>75</td>
                 </tr>
                 <tr class="template-row">
                   <td>NG</td>
-                  <td>（数値を入力）</td>
+                  <td>5</td>
                 </tr>
                 <tr class="template-row">
                   <td>未実施</td>
-                  <td>（数値を入力）</td>
+                  <td>0</td>
                 </tr>
                 <tr class="template-row">
                   <td>合格率</td>
-                  <td>（％を入力）</td>
+                  <td>93.75%</td>
                 </tr>
               </tbody>
             </table>
@@ -153,6 +157,7 @@
               <thead>
                 <tr>
                   <th>バグID</th>
+                  <th>テストID</th>
                   <th>発見日</th>
                   <th>対象機能</th>
                   <th>内容</th>
@@ -163,19 +168,48 @@
               <tbody>
                 <tr class="template-row">
                   <td>BUG-001</td>
-                  <td>（日付）</td>
-                  <td>（機能名）</td>
-                  <td>（バグの内容）</td>
-                  <td>（高/中/低）</td>
-                  <td>（修正済/対応中/保留）</td>
+                  <td>IT-020</td>
+                  <td>2026-05-28</td>
+                  <td>顧客詳細</td>
+                  <td>管理機能の顧客登録画面にある項目で顧客詳細に表示されないものがあった</td>
+                  <td>低</td>
+                  <td>修正済</td>
                 </tr>
                 <tr class="template-row">
-                  <td>…</td>
-                  <td>…</td>
-                  <td>…</td>
-                  <td>…</td>
-                  <td>…</td>
-                  <td>…</td>
+                  <td>BUG-002</td>
+                  <td>IT-054</td>
+                  <td>2026-06-01</td>
+                  <td>長文入力</td>
+                  <td>1000文字制限のところ、制限を超えて入力が出来てしまい、DB登録エラー</td>
+                  <td>高</td>
+                  <td>修正済</td>
+                </tr>
+                <tr class="template-row">
+                  <td>BUG-003</td>
+                  <td>ST-006</td>
+                  <td>2026-06-02</td>
+                  <td>管理機能の予約登録</td>
+                  <td>必須でない項目に必須チェックがかかり、登録不可</td>
+                  <td>中</td>
+                  <td>修正済</td>
+                </tr>
+                <tr class="template-row">
+                  <td>BUG-004</td>
+                  <td>ST-007</td>
+                  <td>2026-06-02</td>
+                  <td>管理画面のレシピ登録・編集</td>
+                  <td>配合率チェック動作不具合により登録不可</td>
+                  <td>高</td>
+                  <td>修正済</td>
+                </tr>
+                <tr class="template-row">
+                  <td>BUG-005</td>
+                  <td>ST-009</td>
+                  <td>2026-06-02</td>
+                  <td>レシピ使用中制御</td>
+                  <td>レシピに使用中の商品は削除できない制限がかかっていなかった</td>
+                  <td>中</td>
+                  <td>修正済</td>
                 </tr>
               </tbody>
             </table>
@@ -201,38 +235,17 @@
               <tbody>
                 <tr class="template-row">
                   <td>Chrome（PC）</td>
-                  <td>（バージョン）</td>
-                  <td>（○/△/×）</td>
-                  <td>（○/△/×）</td>
-                  <td>（備考）</td>
-                </tr>
-                <tr class="template-row">
-                  <td>Firefox（PC）</td>
-                  <td>（バージョン）</td>
-                  <td>（○/△/×）</td>
-                  <td>（○/△/×）</td>
-                  <td>（備考）</td>
+                  <td>148.0.7778.218</td>
+                  <td>○</td>
+                  <td>○</td>
+                  <td></td>
                 </tr>
                 <tr class="template-row">
                   <td>Edge（PC）</td>
-                  <td>（バージョン）</td>
-                  <td>（○/△/×）</td>
-                  <td>（○/△/×）</td>
-                  <td>（備考）</td>
-                </tr>
-                <tr class="template-row">
-                  <td>Chrome（スマートフォン）</td>
-                  <td>（バージョン）</td>
-                  <td>（○/△/×）</td>
-                  <td>（○/△/×）</td>
-                  <td>（備考）</td>
-                </tr>
-                <tr class="template-row">
-                  <td>Safari（iPhone）</td>
-                  <td>（バージョン）</td>
-                  <td>（○/△/×）</td>
-                  <td>（○/△/×）</td>
-                  <td>（備考）</td>
+                  <td> 148.0.3967.96</td>
+                  <td>○</td>
+                  <td>○</td>
+                  <td></td>
                 </tr>
               </tbody>
             </table>

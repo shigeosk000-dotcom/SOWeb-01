@@ -23,8 +23,8 @@
         <div class="doc-category">DESIGN DOCUMENT</div>
         <h1 class="doc-title">システムフロー図</h1>
         <div class="doc-meta">
-          <span><span class="material-symbols-outlined icon-sm">calendar_today</span> 作成日：2026-XX-XX</span>
-          <span><span class="material-symbols-outlined icon-sm">person</span> 作成者：（氏名を入力）</span>
+          <span><span class="material-symbols-outlined icon-sm">calendar_today</span> 作成日：2026-06-03</span>
+          <span><span class="material-symbols-outlined icon-sm">person</span> 作成者：尾坂 成紀</span>
           <span><span class="material-symbols-outlined icon-sm">push_pin</span> Ver 1.0</span>
         </div>
       </header>
@@ -45,10 +45,14 @@
         <section class="section" id="sec1">
           <h2 class="section-title"><span class="section-icon">1</span> システム全体構成</h2>
 
+
+
+
+
           <div class="fill-block">
-            <div class="fill-label">システム構成図 <span class="required">必須</span></div>
-            <div class="fill-hint">Controller → Service → Repository → DB の流れをASCII図で表現＠ASCII図でなくてもよいです。</div>
-            <div class="fill-content">
+            <div class="fill-label">システム構成図 ＆　レイヤー構成の説明 <span class="required">必須</span></div>
+            <!-- <div class="fill-hint">Controller → Service → Repository → DB の流れをASCII図で表現＠ASCII図でなくてもよいです。</div> -->
+            <!-- <div class="fill-content">
               <div class="ascii-diagram">
                 <pre>
 ┌─────────────────────────────────────────────────────────────────────┐
@@ -79,9 +83,17 @@
 （上記を参考に、自分のプロジェクトに合わせて編集してください）
                 </pre>
               </div>
+            </div> -->
+            <div class="fill-content">
+              <iframe class="embedded-html-frame" src="aromatripnippon-system-architecture.html" title="システム構成"
+                style="width: 100%; min-height: 600px;"></iframe>
+              <p class="embedded-doc-link">
+                <a href="aromatripnippon-system-architecture.html" target="_blank"
+                  rel="noopener">aromatripnippon-system-architecture.htmlを別タブで開く</a>
+              </p>
             </div>
           </div>
-
+          <!--
           <div class="fill-block">
             <div class="fill-label">レイヤー構成の説明 <span class="required">必須</span></div>
             <div class="fill-hint">各レイヤーの役割を表形式で説明</div>
@@ -123,16 +135,25 @@
                 </tbody>
               </table>
             </div>
-          </div>
+          </div> -->
         </section>
 
         <section class="section" id="sec2">
           <h2 class="section-title"><span class="section-icon">2</span> リクエスト処理フロー</h2>
 
           <div class="fill-block">
-            <div class="fill-label">一覧表示の処理フロー <span class="required">必須</span></div>
-            <div class="fill-hint">GET /tasks リクエストの処理の流れ＠ASCII図でなくてもよいです。</div>
+            <!-- <div class="fill-label">一覧表示の処理フロー <span class="required">必須</span></div> -->
             <div class="fill-content">
+              <iframe class="embedded-html-frame" src="task-list-request-flow.html" title="タスク一覧リクエストフロー"
+                style="width: 100%; min-height: 600px;"></iframe>
+              <p class="embedded-doc-link">
+                <a href="task-list-request-flow.html" target="_blank"
+                  rel="noopener">task-list-request-flow.htmlを別タブで開く</a>
+              </p>
+            </div>
+          </div>
+          <!-- <div class="fill-hint">GET /tasks リクエストの処理の流れ＠ASCII図でなくてもよいです。</div> -->
+          <!-- <div class="fill-content">
               <div class="ascii-diagram">
                 <pre>
 ┌────────┐ ┌──────────────┐ ┌───────────┐ ┌──────────┐ ┌────────┐
@@ -191,19 +212,19 @@ HTML Response
 （上記を参考に編集してください）
                 </pre>
               </div>
-            </div>
-          </div>
-        </section>
+            </div> -->
+      </div>
+      </section>
 
-        <section class="section" id="sec3">
-          <h2 class="section-title"><span class="section-icon">3</span> 画面遷移フロー</h2>
+      <section class="section" id="sec3">
+        <h2 class="section-title"><span class="section-icon">3</span> 画面遷移フロー</h2>
 
-          <div class="fill-block">
-            <div class="fill-label">全体の画面遷移図 <span class="required">必須</span></div>
-            <div class="fill-hint">Webアプリケーション全体の画面遷移＠ASCII図でなくてもよいです。</div>
-            <div class="fill-content">
-              <div class="ascii-diagram">
-                <pre>
+        <div class="fill-block">
+          <div class="fill-label">全体の画面遷移図 <span class="required">必須</span></div>
+          <div class="fill-hint">Webアプリケーション全体の画面遷移＠ASCII図でなくてもよいです。</div>
+          <div class="fill-content">
+            <div class="ascii-diagram">
+              <pre>
 ┌─────────────┐
 │ ログイン │
 │ /login │
@@ -233,20 +254,20 @@ HTML Response
 
 （上記を参考に編集してください）
                 </pre>
-              </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section class="section" id="sec4">
-          <h2 class="section-title"><span class="section-icon">4</span> データフロー</h2>
+      <section class="section" id="sec4">
+        <h2 class="section-title"><span class="section-icon">4</span> データフロー</h2>
 
-          <div class="fill-block">
-            <div class="fill-label">Form → Entity → DB の変換フロー <span class="required">必須</span></div>
-            <div class="fill-hint">画面入力からデータベース保存までのデータ変換の流れ＠ASCII図でなくてもよいです。</div>
-            <div class="fill-content">
-              <div class="ascii-diagram">
-                <pre>
+        <div class="fill-block">
+          <div class="fill-label">Form → Entity → DB の変換フロー <span class="required">必須</span></div>
+          <div class="fill-hint">画面入力からデータベース保存までのデータ変換の流れ＠ASCII図でなくてもよいです。</div>
+          <div class="fill-content">
+            <div class="ascii-diagram">
+              <pre>
 ┌────────────────┐ ┌────────────────┐ ┌────────────────┐
 │ TaskForm │ │ Task │ │ tasks │
 │ (入力データ) │ ───▶ │ (Entity) │ ───▶ │ (DBテーブル) │
@@ -266,20 +287,20 @@ HTML Response
 
 （上記を参考に編集してください）
                 </pre>
-              </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section class="section" id="sec5">
-          <h2 class="section-title"><span class="section-icon">5</span> 認証・認可フロー</h2>
+      <section class="section" id="sec5">
+        <h2 class="section-title"><span class="section-icon">5</span> 認証・認可フロー</h2>
 
-          <div class="fill-block">
-            <div class="fill-label">Spring Security の認証フロー <span class="required">必須</span></div>
-            <div class="fill-hint">ログイン処理の詳細フロー＠ASCII図でなくてもよいです。</div>
-            <div class="fill-content">
-              <div class="ascii-diagram">
-                <pre>
+        <div class="fill-block">
+          <div class="fill-label">Spring Security の認証フロー <span class="required">必須</span></div>
+          <div class="fill-hint">ログイン処理の詳細フロー＠ASCII図でなくてもよいです。</div>
+          <div class="fill-content">
+            <div class="ascii-diagram">
+              <pre>
 ┌────────┐ ┌─────────────────┐ ┌──────────────────┐
 │ Client │────▶│ SecurityFilter │────▶│UsernamePassword │
 │ Login │ │ Chain │ │Authentication │
@@ -321,68 +342,68 @@ HTML Response
 
 （上記を参考に編集してください）
                 </pre>
-              </div>
             </div>
           </div>
+        </div>
 
-          <div class="fill-block">
-            <div class="fill-label">ロールによるアクセス制御 <span class="optional">任意</span></div>
-            <div class="fill-hint">管理者/一般ユーザーによるアクセス権限の違い</div>
-            <div class="fill-content">
-              <table class="doc-table">
-                <thead>
-                  <tr>
-                    <th>機能</th>
-                    <th>URL</th>
-                    <th>ADMIN</th>
-                    <th>USER</th>
-                    <th>未認証</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr class="template-row">
-                    <td>ログイン</td>
-                    <td>/login</td>
-                    <td>○</td>
-                    <td>○</td>
-                    <td>○</td>
-                  </tr>
-                  <tr class="template-row">
-                    <td>タスク一覧</td>
-                    <td>/tasks</td>
-                    <td>○</td>
-                    <td>○</td>
-                    <td>×</td>
-                  </tr>
-                  <tr class="template-row">
-                    <td>タスク作成</td>
-                    <td>/tasks/new</td>
-                    <td>○</td>
-                    <td>○</td>
-                    <td>×</td>
-                  </tr>
-                  <tr class="template-row">
-                    <td>ユーザー管理</td>
-                    <td>/admin/users</td>
-                    <td>○</td>
-                    <td>×</td>
-                    <td>×</td>
-                  </tr>
-                  <tr class="template-row">
-                    <td>システム設定</td>
-                    <td>/admin/settings</td>
-                    <td>○</td>
-                    <td>×</td>
-                    <td>×</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+        <div class="fill-block">
+          <div class="fill-label">ロールによるアクセス制御 <span class="optional">任意</span></div>
+          <div class="fill-hint">管理者/一般ユーザーによるアクセス権限の違い</div>
+          <div class="fill-content">
+            <table class="doc-table">
+              <thead>
+                <tr>
+                  <th>機能</th>
+                  <th>URL</th>
+                  <th>ADMIN</th>
+                  <th>USER</th>
+                  <th>未認証</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="template-row">
+                  <td>ログイン</td>
+                  <td>/login</td>
+                  <td>○</td>
+                  <td>○</td>
+                  <td>○</td>
+                </tr>
+                <tr class="template-row">
+                  <td>タスク一覧</td>
+                  <td>/tasks</td>
+                  <td>○</td>
+                  <td>○</td>
+                  <td>×</td>
+                </tr>
+                <tr class="template-row">
+                  <td>タスク作成</td>
+                  <td>/tasks/new</td>
+                  <td>○</td>
+                  <td>○</td>
+                  <td>×</td>
+                </tr>
+                <tr class="template-row">
+                  <td>ユーザー管理</td>
+                  <td>/admin/users</td>
+                  <td>○</td>
+                  <td>×</td>
+                  <td>×</td>
+                </tr>
+                <tr class="template-row">
+                  <td>システム設定</td>
+                  <td>/admin/settings</td>
+                  <td>○</td>
+                  <td>×</td>
+                  <td>×</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-        </section>
+        </div>
+      </section>
 
-      </div>
-    </main>
+  </div>
+  </main>
   </div>
 
   <script src="../js/main.js"></script>
