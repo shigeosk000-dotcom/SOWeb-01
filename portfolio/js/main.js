@@ -65,6 +65,7 @@ function generateNavigation() {
         <a href="${designPath}class-diagram.html"><span class="material-symbols-outlined icon-sm">lan</span> クラス構成図</a>
         <a href="${designPath}method-list.html"><span class="material-symbols-outlined icon-sm">list_alt</span> メソッド一覧</a>
         <a href="${designPath}logic-explanation.html"><span class="material-symbols-outlined icon-sm">search</span> ロジック解説</a>
+        <a href="${designPath}aromatripnippon-reservation-dataflow.html"><span class="material-symbols-outlined icon-sm">schema</span> 予約データフロー</a>
       </div>
       <div class="nav-group">
         <div class="nav-group-title">プロンプト</div>

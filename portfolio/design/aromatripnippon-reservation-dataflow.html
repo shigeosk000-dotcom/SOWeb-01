@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AromaTripNippon 予約フォーム→Entity→DB 変換フロー</title>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    .flow-callout {
+      background: linear-gradient(135deg, #111111 0%, #2d2d2d 100%);
+      color: #ffffff;
+      padding: 20px 24px;
+      margin-bottom: 24px;
+      border: 1px solid #111111;
+    }
+
+    .flow-callout p {
+      margin-bottom: 0;
+      line-height: 1.8;
+    }
+
+    .flow-callout code {
+      background: rgba(255, 255, 255, 0.16);
+      color: #ffffff;
+      padding: 1px 6px;
+      border-radius: 4px;
+    }
+
+    .flow-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .flow-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      padding: 16px 18px;
+      min-height: 100%;
+    }
+
+    .flow-card h3 {
+      font-size: 16px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: var(--black);
+    }
+
+    .flow-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .flow-card li {
+      border-top: 1px dashed var(--border);
+      padding: 8px 0;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .flow-card li:first-child {
+      border-top: none;
+      padding-top: 0;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin-top: 16px;
+    }
+
+    .table-wrap .doc-table {
+      margin-bottom: 0;
+      min-width: 760px;
+    }
+
+    .tiny-note {
+      font-size: 13px;
+      color: var(--text-light);
+      margin-top: 12px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 2px 8px;
+      border: 1px solid var(--gray-300);
+      background: var(--gray-100);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      margin-right: 6px;
+      margin-bottom: 6px;
+    }
+
+    .code-block pre {
+      white-space: pre-wrap;
+    }
+
+    .code-block .string {
+      color: #ce9178;
+    }
+
+    @media (max-width: 768px) {
+      .doc-header {
+        padding: 32px 24px;
+      }
+
+      .doc-body {
+        padding: 32px 24px 72px;
+      }
+
+      .flow-callout,
+      .fill-block {
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <button class="hamburger" aria-label="メニュー">
+    <span></span><span></span><span></span>
+  </button>
+
+  <div class="page-wrapper">
+    <aside class="sidebar" data-nav-level="design"></aside>
+
+    <main class="main-content">
+      <header class="doc-header">
+        <div class="doc-category">DESIGN DOCUMENT</div>
+        <h1 class="doc-title">AromaTripNippon 予約フォーム→Entity→DB 変換フロー</h1>
+        <div class="doc-meta">
+          <span><span class="material-symbols-outlined icon-sm">calendar_today</span> 2026-06-04</span>
+          <span><span class="material-symbols-outlined icon-sm">account_tree</span> PublicController / ReservationService</span>
+          <span><span class="material-symbols-outlined icon-sm">database</span> Spring Data JPA</span>
+        </div>
+      </header>
+
+      <div class="doc-body">
+        <div class="toc">
+          <div class="toc-title">目次</div>
+          <ol class="toc-list">
+            <li><a href="#sec1">全体像</a></li>
+            <li><a href="#sec2">ASCII図</a></li>
+            <li><a href="#sec3">フォーム / Entity / DB のフィールド</a></li>
+            <li><a href="#sec4">型変換とマッピング方法</a></li>
+            <li><a href="#sec5">保存方法と実コード</a></li>
+          </ol>
+        </div>
+
+        <section class="section" id="sec1">
+          <h2 class="section-title"><span class="section-icon">1</span> 全体像</h2>
+
+          <div class="flow-callout">
+            <p><strong>このフローは <code>BeanUtils</code> ではなく手動マッピングで実装されています。</strong><br />
+              フォーム入力は <code>@ModelAttribute</code> で <code>ReservationRequest</code> にバインドされ、その後
+              <code>PublicController</code> で <code>Customer</code> と <code>Reservation</code> に分解してセットします。保存は
+              MyBatis の <code>@Insert</code> ではなく、Spring Data JPA の <code>JpaRepository.save()</code> です。
+            </p>
+
+            <div class="flow-grid">
+              <div class="flow-card">
+                <h3>1. Form</h3>
+                <ul>
+                  <li><code>ReservationRequest</code> に自動バインド</li>
+                  <li><code>visitDate</code> は <code>LocalDate</code></li>
+                  <li><code>guestCount</code> は <code>Integer</code></li>
+                </ul>
+              </div>
+              <div class="flow-card">
+                <h3>2. Controller</h3>
+                <ul>
+                  <li><code>Customer</code> / <code>Reservation</code> を new する</li>
+                  <li>値は <code>setXXX()</code> で手動コピー</li>
+                  <li>言語は <code>normalizePreferredLanguage()</code> で補正</li>
+                </ul>
+              </div>
+              <div class="flow-card">
+                <h3>3. Service</h3>
+                <ul>
+                  <li>日付範囲をチェック</li>
+                  <li>active な <code>ExperienceProgram</code> を取得</li>
+                  <li><code>@Transactional</code> の中で保存</li>
+                </ul>
+              </div>
+              <div class="flow-card">
+                <h3>4. DB</h3>
+                <ul>
+                  <li><code>customers</code> に顧客を保存</li>
+                  <li><code>reservations</code> に予約を保存</li>
+                  <li><code>experience_programs</code> は参照のみ</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="sec2">
+          <h2 class="section-title"><span class="section-icon">2</span> ASCII図</h2>
+
+          <div class="fill-block">
+            <div class="fill-label">データフローの全体図 <span class="required">必須</span></div>
+            <div class="fill-hint">入力フォームから Entity を組み立て、JPA でテーブルへ保存する流れです。</div>
+            <div class="fill-content">
+              <div class="ascii-diagram">
+                <pre>+------------------------------+
+| ReservationRequest (Form)    |
+| @ModelAttribute              |
+|                              |
+| visitDate: LocalDate         |
+| timeSlot: String             |
+| guestCount: Integer          |
+| name: String                 |
+| email: String                |
+| phone: String                |
+| nationality: String          |
+| preferredLanguage: String    |
+| requestNote: String          |
++--------------+---------------+
+               |
+               | Spring MVC binding
+               v
++------------------------------+
+| PublicController             |
+| 手動マッピング               |
+| - new Customer()             |
+| - new Reservation()          |
+| - normalizePreferredLanguage |
++--------------+---------------+
+               |
+       +-------+--------+
+       |                |
+       | setXXX()       | setXXX()
+       v                v
++--------------------+   +---------------------------+
+| Customer Entity    |   | Reservation Entity        |
+|                    |   |                           |
+| name               |   | customer: Customer        |
+| nationality        |   | experienceProgram: Program|
+| email              |   | visitDate: LocalDate      |
+| phone              |   | timeSlot: String          |
+| preferredLanguage  |   | guestCount: Integer       |
+| purpose (unused)   |   | preferredLanguage: String |
+| notes (unused)     |   | requestNote: String       |
++---------+----------+   | status: "RESERVED"       |
+          |              +------------+--------------+
+          | customers.save(customer)               |
+          v                                        | programs.findFirst...
++--------------------+                             v
+| customers table    |               +---------------------------+
+| id, name, email    |               | experience_programs       |
+| phone, nationality |               | active row (lookup only)  |
+| preferred_language |               +------------+--------------+
+| note, purpose      |                            |
++--------------------+                            | reservation.setExperienceProgram()
+                                                  v
+                                    +------------------------------+
+                                    | reservations.save(reservation)|
+                                    +---------------+--------------+
+                                                    |
+                                                    v
+                                    +------------------------------+
+                                    | reservations table           |
+                                    | reservation_date: DATE       |
+                                    | reservation_time: VARCHAR    |
+                                    | number_of_people: INT        |
+                                    | customer_id: FK              |
+                                    | experience_program_id: FK    |
+                                    +------------------------------+</pre>
+              </div>
+            </div>
+          </div>
+
+          <p class="tiny-note">補足: 予約の保存時に <code>customer_id</code> と <code>experience_program_id</code> が入ります。<code>created_at</code> と <code>updated_at</code> は <code>BaseEntity</code> の
+            <code>@PrePersist</code> / <code>@PreUpdate</code> で自動更新されます。</p>
+        </section>
+
+        <section class="section" id="sec3">
+          <h2 class="section-title"><span class="section-icon">3</span> フォーム / Entity / DB のフィールド</h2>
+
+          <div class="fill-block">
+            <div class="fill-label">ReservationRequest (Form) <span class="required">入力データ</span></div>
+            <div class="fill-hint">ブラウザから送られる項目。<code>@ModelAttribute</code> で受け取ります。</div>
+            <div class="table-wrap">
+              <table class="doc-table">
+                <thead>
+                  <tr>
+                    <th>フィールド</th>
+                    <th>型</th>
+                    <th>入力 / 例</th>
+                    <th>反映先</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>visitDate</td>
+                    <td>LocalDate</td>
+                    <td>日付入力</td>
+                    <td>Reservation.visitDate</td>
+                  </tr>
+                  <tr>
+                    <td>timeSlot</td>
+                    <td>String</td>
+                    <td>10:00 / 14:00 / 16:00</td>
+                    <td>Reservation.timeSlot</td>
+                  </tr>
+                  <tr>
+                    <td>guestCount</td>
+                    <td>Integer</td>
+                    <td>1 - 4</td>
+                    <td>Reservation.guestCount</td>
+                  </tr>
+                  <tr>
+                    <td>name</td>
+                    <td>String</td>
+                    <td>お名前</td>
+                    <td>Customer.name</td>
+                  </tr>
+                  <tr>
+                    <td>email</td>
+                    <td>String</td>
+                    <td>メールアドレス</td>
+                    <td>Customer.email</td>
+                  </tr>
+                  <tr>
+                    <td>phone</td>
+                    <td>String</td>
+                    <td>電話番号</td>
+                    <td>Customer.phone</td>
+                  </tr>
+                  <tr>
+                    <td>nationality</td>
+                    <td>String</td>
+                    <td>国籍</td>
+                    <td>Customer.nationality</td>
+                  </tr>
+                  <tr>
+                    <td>preferredLanguage</td>
+                    <td>String</td>
+                    <td>日本語 / 英語</td>
+                    <td>Customer / Reservation</td>
+                  </tr>
+                  <tr>
+                    <td>requestNote</td>
+                    <td>String</td>
+                    <td>任意メモ</td>
+                    <td>Reservation.requestNote</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="fill-block">
+            <div class="fill-label">Customer Entity / customers テーブル <span class="optional">保存対象</span></div>
+            <div class="fill-hint">予約時に新規作成され、<code>customers.save(customer)</code> で保存されます。</div>
+            <div class="table-wrap">
+              <table class="doc-table">
+                <thead>
+                  <tr>
+                    <th>Entity フィールド</th>
+                    <th>型</th>
+                    <th>DB列</th>
+                    <th>備考</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>id</td>
+                    <td>Long</td>
+                    <td>id</td>
+                    <td>自動採番</td>
+                  </tr>
+                  <tr>
+                    <td>name</td>
+                    <td>String</td>
+                    <td>name</td>
+                    <td>フォームの name を手動コピー</td>
+                  </tr>
+                  <tr>
+                    <td>nationality</td>
+                    <td>String</td>
+                    <td>nationality</td>
+                    <td>フォームの nationality を手動コピー</td>
+                  </tr>
+                  <tr>
+                    <td>email</td>
+                    <td>String</td>
+                    <td>email</td>
+                    <td>フォームの email を手動コピー</td>
+                  </tr>
+                  <tr>
+                    <td>phone</td>
+                    <td>String</td>
+                    <td>phone</td>
+                    <td>フォームの phone を手動コピー</td>
+                  </tr>
+                  <tr>
+                    <td>preferredLanguage</td>
+                    <td>String</td>
+                    <td>preferred_language</td>
+                    <td>controller で正規化</td>
+                  </tr>
+                  <tr>
+                    <td>purpose</td>
+                    <td>String</td>
+                    <td>purpose</td>
+                    <td>この予約フォームでは未設定</td>
+                  </tr>
+                  <tr>
+                    <td>notes</td>
+                    <td>String</td>
+                    <td>note</td>
+                    <td>この予約フォームでは未設定</td>
+                  </tr>
+                  <tr>
+                    <td>createdAt / updatedAt / deletedAt</td>
+                    <td>LocalDateTime</td>
+                    <td>created_at / updated_at / deleted_at</td>
+                    <td>BaseEntity で管理</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="fill-block">
+            <div class="fill-label">Reservation Entity / reservations テーブル <span class="optional">保存対象</span></div>
+            <div class="fill-hint">Customer と ExperienceProgram を紐づけてから <code>reservations.save(reservation)</code> します。</div>
+            <div class="table-wrap">
+              <table class="doc-table">
+                <thead>
+                  <tr>
+                    <th>Entity フィールド</th>
+                    <th>型</th>
+                    <th>DB列</th>
+                    <th>備考</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>id</td>
+                    <td>Long</td>
+                    <td>id</td>
+                    <td>自動採番</td>
+                  </tr>
+                  <tr>
+                    <td>customer</td>
+                    <td>Customer</td>
+                    <td>customer_id</td>
+                    <td>外部キー</td>
+                  </tr>
+                  <tr>
+                    <td>experienceProgram</td>
+                    <td>ExperienceProgram</td>
+                    <td>experience_program_id</td>
+                    <td>外部キー</td>
+                  </tr>
+                  <tr>
+                    <td>visitDate</td>
+                    <td>LocalDate</td>
+                    <td>reservation_date</td>
+                    <td>JPA が DATE に変換</td>
+                  </tr>
+                  <tr>
+                    <td>timeSlot</td>
+                    <td>String</td>
+                    <td>reservation_time</td>
+                    <td>時間帯文字列</td>
+                  </tr>
+                  <tr>
+                    <td>guestCount</td>
+                    <td>Integer</td>
+                    <td>number_of_people</td>
+                    <td>1 - 4 の範囲</td>
+                  </tr>
+                  <tr>
+                    <td>preferredLanguage</td>
+                    <td>String</td>
+                    <td>preferred_language</td>
+                    <td>日本語 / 英語</td>
+                  </tr>
+                  <tr>
+                    <td>requestNote</td>
+                    <td>String</td>
+                    <td>request_note</td>
+                    <td>任意入力</td>
+                  </tr>
+                  <tr>
+                    <td>status</td>
+                    <td>String</td>
+                    <td>status</td>
+                    <td>作成時は <code>RESERVED</code></td>
+                  </tr>
+                  <tr>
+                    <td>createdAt / updatedAt / deletedAt</td>
+                    <td>LocalDateTime</td>
+                    <td>created_at / updated_at / deleted_at</td>
+                    <td>BaseEntity で管理</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="fill-block">
+            <div class="fill-label">ExperienceProgram Entity / experience_programs テーブル <span class="optional">参照のみ</span></div>
+            <div class="fill-hint">予約保存時に active な1件を取得し、<code>reservation.setExperienceProgram(program)</code> で紐づけます。</div>
+            <div class="table-wrap">
+              <table class="doc-table">
+                <thead>
+                  <tr>
+                    <th>Entity フィールド</th>
+                    <th>型</th>
+                    <th>DB列</th>
+                    <th>備考</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>id</td>
+                    <td>Long</td>
+                    <td>id</td>
+                    <td>参照キー</td>
+                  </tr>
+                  <tr>
+                    <td>name</td>
+                    <td>String</td>
+                    <td>name</td>
+                    <td>表示名</td>
+                  </tr>
+                  <tr>
+                    <td>description</td>
+                    <td>String</td>
+                    <td>description</td>
+                    <td>説明文</td>
+                  </tr>
+                  <tr>
+                    <td>durationMinutes</td>
+                    <td>Integer</td>
+                    <td>duration_minutes</td>
+                    <td>所要時間</td>
+                  </tr>
+                  <tr>
+                    <td>price</td>
+                    <td>BigDecimal</td>
+                    <td>price</td>
+                    <td>料金</td>
+                  </tr>
+                  <tr>
+                    <td>materialsSummary</td>
+                    <td>String</td>
+                    <td>material_summary</td>
+                    <td>素材説明</td>
+                  </tr>
+                  <tr>
+                    <td>active</td>
+                    <td>Boolean</td>
+                    <td>is_active</td>
+                    <td>検索条件に使用</td>
+                  </tr>
+                  <tr>
+                    <td>createdAt / updatedAt / deletedAt</td>
+                    <td>LocalDateTime</td>
+                    <td>created_at / updated_at / deleted_at</td>
+                    <td>BaseEntity で管理</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="sec4">
+          <h2 class="section-title"><span class="section-icon">4</span> 型変換とマッピング方法</h2>
+
+          <div class="fill-block">
+            <div class="fill-label">変換ルール <span class="required">重要</span></div>
+            <div class="fill-hint">この実装で実際に行っている変換だけを並べています。</div>
+            <div class="table-wrap">
+              <table class="doc-table">
+                <thead>
+                  <tr>
+                    <th>変換元</th>
+                    <th>変換先</th>
+                    <th>方法</th>
+                    <th>実装箇所</th>
+                    <th>補足</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>HTML date input の文字列</td>
+                    <td>ReservationRequest.visitDate: LocalDate</td>
+                    <td>Spring MVC の自動バインド</td>
+                    <td>@ModelAttribute</td>
+                    <td>JPA 側では LocalDate のまま扱う</td>
+                  </tr>
+                  <tr>
+                    <td>セレクトの値文字列</td>
+                    <td>ReservationRequest.guestCount: Integer</td>
+                    <td>Spring MVC の型変換</td>
+                    <td>@ModelAttribute</td>
+                    <td>1 - 4 の数値に変換</td>
+                  </tr>
+                  <tr>
+                    <td>ReservationRequest</td>
+                    <td>Customer / Reservation</td>
+                    <td>手動マッピング</td>
+                    <td>PublicController#createReservation()</td>
+                    <td><code>setName()</code> などで代入</td>
+                  </tr>
+                  <tr>
+                    <td>preferredLanguage の文字列</td>
+                    <td>日本語 / 英語</td>
+                    <td>正規化</td>
+                    <td>normalizePreferredLanguage()</td>
+                    <td>入力ゆれを吸収</td>
+                  </tr>
+                  <tr>
+                    <td>Reservation.visitDate: LocalDate</td>
+                    <td>reservation_date: DATE</td>
+                    <td>JPA / Hibernate</td>
+                    <td>Reservation Entity</td>
+                    <td>列定義は <code>@Column(name = "reservation_date")</code></td>
+                  </tr>
+                  <tr>
+                    <td>BaseEntity.createdAt / updatedAt</td>
+                    <td>created_at / updated_at: TIMESTAMP</td>
+                    <td>@PrePersist / @PreUpdate</td>
+                    <td>BaseEntity</td>
+                    <td>新規保存時に自動セット</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="tiny-note">このフローでは <code>BeanUtils.copyProperties()</code> は使っていません。保存は MyBatis の <code>@Insert</code> ではなく、JPA の <code>save()</code> です。</p>
+          </div>
+        </section>
+
+        <section class="section" id="sec5">
+          <h2 class="section-title"><span class="section-icon">5</span> 保存方法と実コード</h2>
+
+          <div class="fill-block">
+            <div class="fill-label">保存処理 <span class="required">実装どおり</span></div>
+            <div class="fill-hint">予約保存の本体は <code>ReservationService#createReservation()</code> です。</div>
+            <div class="code-block">
+              <pre><span class="comment">// ReservationService#createReservation()</span>
+<span class="keyword">@Transactional</span>
+<span class="keyword">public</span> Reservation createReservation(Reservation reservation, <span class="keyword">@Valid</span> Customer customer) {
+  LocalDate today = LocalDate.now();
+  LocalDate maxDate = today.plusMonths(3);
+
+  <span class="comment">// 日付バリデーション</span>
+  <span class="keyword">if</span> (reservation.getVisitDate() == <span class="keyword">null</span> || reservation.getVisitDate().isBefore(today)) {
+    <span class="keyword">throw new</span> IllegalArgumentException(<span class="string">"予約日は本日以降を選択してください。"</span>);
+  }
+  <span class="keyword">if</span> (reservation.getVisitDate().isAfter(maxDate)) {
+    <span class="keyword">throw new</span> IllegalArgumentException(<span class="string">"予約日は本日から3か月先まで選択できます。"</span>);
+  }
+
+  <span class="comment">// 1) Customer を先に保存</span>
+  Customer savedCustomer = customers.save(customer);
+
+  <span class="comment">// 2) active な体験プログラムを取得</span>
+  ExperienceProgram program = programs.findFirstByDeletedAtIsNullAndActiveTrueOrderById()
+      .orElseThrow(() -> <span class="keyword">new</span> IllegalStateException(<span class="string">"Active experience program is not configured."</span>));
+
+  <span class="comment">// 3) 予約 Entity に関連オブジェクトをセット</span>
+  reservation.setCustomer(savedCustomer);
+  reservation.setExperienceProgram(program);
+  reservation.setStatus(<span class="string">"RESERVED"</span>);
+
+  <span class="comment">// 4) reservations テーブルへ保存</span>
+  <span class="keyword">return</span> reservations.save(reservation);
+}</pre>
+            </div>
+          </div>
+
+          <div class="fill-block">
+            <div class="fill-label">Repository の役割 <span class="optional">補足</span></div>
+            <div class="fill-hint">保存に使うのは JPA の <code>save()</code>、参照に使うのは repository の query メソッドです。</div>
+            <div class="table-wrap">
+              <table class="doc-table">
+                <thead>
+                  <tr>
+                    <th>Repository</th>
+                    <th>主な用途</th>
+                    <th>保存 / 参照</th>
+                    <th>備考</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>CustomerRepository</td>
+                    <td>Customer の保存</td>
+                    <td><code>save(customer)</code></td>
+                    <td><code>JpaRepository</code> を継承</td>
+                  </tr>
+                  <tr>
+                    <td>ReservationRepository</td>
+                    <td>Reservation の保存 / 参照</td>
+                    <td><code>save(reservation)</code></td>
+                    <td>一覧取得や soft delete 用の query あり</td>
+                  </tr>
+                  <tr>
+                    <td>ExperienceProgramRepository</td>
+                    <td>active な体験プログラムの取得</td>
+                    <td>参照のみ</td>
+                    <td><code>findFirstByDeletedAtIsNullAndActiveTrueOrderById()</code></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/main.js"></script>
+</body>
+
+</html>
