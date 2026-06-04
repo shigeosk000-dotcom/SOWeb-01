@@ -23,8 +23,8 @@
         <div class="doc-category">DESIGN DOCUMENT</div>
         <h1 class="doc-title">ロジック解説</h1>
         <div class="doc-meta">
-          <span><span class="material-symbols-outlined icon-sm">calendar_today</span> 作成日：2026-XX-XX</span>
-          <span><span class="material-symbols-outlined icon-sm">person</span> 作成者：（氏名を入力）</span>
+          <span><span class="material-symbols-outlined icon-sm">calendar_today</span> 作成日：2026-06-04</span>
+          <span><span class="material-symbols-outlined icon-sm">person</span> 作成者：尾坂 成紀</span>
           <span><span class="material-symbols-outlined icon-sm">push_pin</span> Ver 1.0</span>
         </div>
       </header>
@@ -36,9 +36,9 @@
           <ol class="toc-list">
             <li><a href="#sec1">ログイン処理のロジック</a></li>
             <li><a href="#sec2">バリデーション処理のロジック</a></li>
-            <li><a href="#sec3">検索処理のロジック</a></li>
+            <!-- <li><a href="#sec3">検索処理のロジック</a></li>
             <li><a href="#sec4">権限チェックのロジック</a></li>
-            <li><a href="#sec5">ステータス遷移のロジック</a></li>
+            <li><a href="#sec5">ステータス遷移のロジック</a></li> -->
           </ol>
         </div>
 
@@ -46,113 +46,16 @@
           <h2 class="section-title"><span class="section-icon">1</span> ログイン処理のロジック</h2>
 
           <div class="fill-block">
-            <div class="fill-label">フローチャート <span class="required">必須</span></div>
-            <div class="fill-hint">ログイン処理の判定フロー</div>
+            <div class="fill-label">AromaTripNippon 管理機能ログイン処理フロー <span class="required">必須</span></div>
+            <div class="fill-hint">入力値チェック、ユーザー存在チェック、パスワード照合、SecurityContext保存、エラー復帰、パスワード紛失時の再設定、攻撃対応をまとめたASCIIフローチャートと疑似コードです。</div>
             <div class="fill-content">
-              <div class="ascii-diagram">
-                <pre>
-                    ┌─────────────────┐
-                    │  ログイン画面表示 │
-                    └────────┬────────┘
-                             │
-                             ▼
-                    ┌─────────────────┐
-                    │ メール/パスワード │
-                    │     入力        │
-                    └────────┬────────┘
-                             │
-                             ▼
-                    ┌─────────────────┐
-                    │  入力値チェック   │
-                    └────────┬────────┘
-                             │
-                    ┌────────┴────────┐
-                    ▼                  ▼
-               入力エラー          入力OK
-                    │                  │
-                    ▼                  ▼
-            ┌───────────┐     ┌─────────────────┐
-            │エラー表示  │     │  ユーザー検索    │
-            │ログイン画面│     │ (DBからメールで) │
-            └───────────┘     └────────┬────────┘
-                                       │
-                              ┌────────┴────────┐
-                              ▼                  ▼
-                         ユーザー無し        ユーザー有り
-                              │                  │
-                              ▼                  ▼
-                      ┌───────────┐     ┌─────────────────┐
-                      │認証エラー  │     │ パスワード照合   │
-                      │ログイン画面│     │(BCrypt.matches) │
-                      └───────────┘     └────────┬────────┘
-                                                 │
-                                        ┌────────┴────────┐
-                                        ▼                  ▼
-                                   不一致             一致
-                                        │                  │
-                                        ▼                  ▼
-                                ┌───────────┐     ┌─────────────────┐
-                                │認証エラー  │     │  認証成功        │
-                                │ログイン画面│     │ SecurityContext │
-                                └───────────┘     │   に保存        │
-                                                  └────────┬────────┘
-                                                           │
-                                                           ▼
-                                                  ┌─────────────────┐
-                                                  │ /tasks へ       │
-                                                  │ リダイレクト     │
-                                                  └─────────────────┘
-
-（上記を参考に編集してください）
-                </pre>
-              </div>
-            </div>
-          </div>
-
-          <div class="fill-block">
-            <div class="fill-label">疑似コード <span class="required">必須</span></div>
-            <div class="fill-hint">IF-THEN-ELSE形式でロジックを記述</div>
-            <div class="fill-content">
-              <div class="code-block">
-                <pre>
-<span class="comment">// ログイン処理の疑似コード</span>
-
-<span class="keyword">FUNCTION</span> login(email, password)
-
-  <span class="comment">// 入力値チェック</span>
-  <span class="keyword">IF</span> email が空 <span class="keyword">THEN</span>
-    エラー「メールアドレスを入力してください」を追加
-  <span class="keyword">END IF</span>
-
-  <span class="keyword">IF</span> password が空 <span class="keyword">THEN</span>
-    エラー「パスワードを入力してください」を追加
-  <span class="keyword">END IF</span>
-
-  <span class="keyword">IF</span> エラーリストが空でない <span class="keyword">THEN</span>
-    <span class="keyword">RETURN</span> ログイン画面（エラー表示）
-  <span class="keyword">END IF</span>
-
-  <span class="comment">// ユーザー検索</span>
-  user = userMapper.selectByEmail(email)
-
-  <span class="keyword">IF</span> user が null <span class="keyword">THEN</span>
-    エラー「メールアドレスまたはパスワードが正しくありません」を追加
-    <span class="keyword">RETURN</span> ログイン画面（エラー表示）
-  <span class="keyword">END IF</span>
-
-  <span class="comment">// パスワード照合</span>
-  <span class="keyword">IF</span> BCrypt.matches(password, user.password) が false <span class="keyword">THEN</span>
-    エラー「メールアドレスまたはパスワードが正しくありません」を追加
-    <span class="keyword">RETURN</span> ログイン画面（エラー表示）
-  <span class="keyword">END IF</span>
-
-  <span class="comment">// 認証成功</span>
-  SecurityContext に user 情報を保存
-  <span class="keyword">RETURN</span> リダイレクト("/tasks")
-
-<span class="keyword">END FUNCTION</span>
-                </pre>
-              </div>
+              <iframe class="embedded-html-frame" src="aromatripnippon-admin-login-process-flow.html"
+                title="AromaTripNippon 管理機能ログイン処理フローチャート" style="width: 100%; min-height: 2100px;"></iframe>
+              <p class="embedded-doc-link">
+                <a href="aromatripnippon-admin-login-process-flow.html" target="_blank" rel="noopener">
+                  aromatripnippon-admin-login-process-flow.html を別タブで開く
+                </a>
+              </p>
             </div>
           </div>
         </section>
@@ -161,124 +64,20 @@
           <h2 class="section-title"><span class="section-icon">2</span> バリデーション処理のロジック</h2>
 
           <div class="fill-block">
-            <div class="fill-label">バリデーションの判定フロー <span class="required">必須</span></div>
-            <div class="fill-hint">タスク登録時のバリデーション処理</div>
+            <div class="fill-label">AromaTripNippon 商品登録バリデーション処理フロー <span class="required">必須</span></div>
+            <div class="fill-hint">@ValidによるBean Validation、Serviceでの業務ロジックバリデーション、BindingResultを使用したエラーハンドリングをまとめたASCIIフローと疑似コードです。</div>
             <div class="fill-content">
-              <div class="ascii-diagram">
-                <pre>
-                    ┌─────────────────┐
-                    │  フォーム送信    │
-                    └────────┬────────┘
-                             │
-                             ▼
-                    ┌─────────────────┐
-                    │ @Valid による    │
-                    │ 自動バリデーション│
-                    └────────┬────────┘
-                             │
-                    ┌────────┴────────┐
-                    ▼                  ▼
-            BindingResult に      エラーなし
-             エラーあり                │
-                    │                  │
-                    ▼                  ▼
-            ┌───────────────┐  ┌─────────────────┐
-            │ 入力画面に戻る │  │  追加バリデーション │
-            │ エラー表示     │  │  （業務ロジック）   │
-            └───────────────┘  └────────┬────────┘
-                                        │
-                               ┌────────┴────────┐
-                               ▼                  ▼
-                         業務エラー          エラーなし
-                               │                  │
-                               ▼                  ▼
-                       ┌───────────────┐  ┌─────────────────┐
-                       │ 入力画面に戻る │  │  登録処理実行    │
-                       │ エラー表示     │  │  リダイレクト    │
-                       └───────────────┘  └─────────────────┘
-
-（上記を参考に編集してください）
-                </pre>
-              </div>
-            </div>
-          </div>
-
-          <div class="fill-block">
-            <div class="fill-label">疑似コード <span class="required">必須</span></div>
-            <div class="fill-hint">バリデーション処理のロジック</div>
-            <div class="fill-content">
-              <div class="code-block">
-                <pre>
-<span class="comment">// タスク登録のバリデーション処理</span>
-
-<span class="keyword">FUNCTION</span> createTask(taskForm, bindingResult)
-
-  <span class="comment">// Bean Validationのエラーチェック</span>
-  <span class="keyword">IF</span> bindingResult.hasErrors() <span class="keyword">THEN</span>
-    <span class="keyword">RETURN</span> 入力画面（フォーム + エラーメッセージ）
-  <span class="keyword">END IF</span>
-
-  <span class="comment">// 業務ロジックバリデーション</span>
-
-  <span class="comment">// 期限の妥当性チェック</span>
-  <span class="keyword">IF</span> taskForm.dueDate が過去の日付 <span class="keyword">THEN</span>
-    bindingResult.rejectValue("dueDate", "error.dueDate",
-                              "期限は今日以降の日付を指定してください")
-  <span class="keyword">END IF</span>
-
-  <span class="comment">// タイトルの重複チェック（同一ユーザー内）</span>
-  existingTask = taskMapper.selectByTitleAndUserId(taskForm.title, userId)
-  <span class="keyword">IF</span> existingTask が存在する <span class="keyword">THEN</span>
-    bindingResult.rejectValue("title", "error.title",
-                              "同じタイトルのタスクが既に存在します")
-  <span class="keyword">END IF</span>
-
-  <span class="comment">// エラーがあれば入力画面に戻る</span>
-  <span class="keyword">IF</span> bindingResult.hasErrors() <span class="keyword">THEN</span>
-    <span class="keyword">RETURN</span> 入力画面（フォーム + エラーメッセージ）
-  <span class="keyword">END IF</span>
-
-  <span class="comment">// 登録処理</span>
-  task = FormからEntityに変換(taskForm)
-  task.userId = ログインユーザーID
-  task.createdAt = 現在日時
-  taskMapper.insert(task)
-
-  <span class="keyword">RETURN</span> リダイレクト("/tasks")（成功メッセージ付き）
-
-<span class="keyword">END FUNCTION</span>
-                </pre>
-              </div>
-            </div>
-          </div>
-
-          <div class="fill-block">
-            <div class="fill-label">エラーメッセージの表示ロジック <span class="optional">任意</span></div>
-            <div class="fill-hint">Thymeleafでのエラー表示</div>
-            <div class="fill-content">
-              <div class="code-block">
-                <pre>
-<span class="comment">&lt;!-- Thymeleafでのエラー表示 --&gt;</span>
-
-<span class="comment">&lt;!-- フィールドエラー（特定フィールド） --&gt;</span>
-&lt;div th:if="${#fields.hasErrors('title')}" class="error-message"&gt;
-  &lt;p th:each="err : ${#fields.errors('title')}" th:text="${err}"&gt;&lt;/p&gt;
-&lt;/div&gt;
-
-<span class="comment">&lt;!-- グローバルエラー（フィールドに紐づかないエラー） --&gt;</span>
-&lt;div th:if="${#fields.hasGlobalErrors()}" class="global-error"&gt;
-  &lt;p th:each="err : ${#fields.globalErrors()}" th:text="${err}"&gt;&lt;/p&gt;
-&lt;/div&gt;
-
-<span class="comment">&lt;!-- 入力フィールドのエラークラス付与 --&gt;</span>
-&lt;input type="text" th:field="*{title}"
-       th:classappend="${#fields.hasErrors('title')} ? 'error' : ''"&gt;
-                </pre>
-              </div>
+              <iframe class="embedded-html-frame" src="aromatripnippon-product-validation-flow.html"
+                title="AromaTripNippon 商品登録バリデーション処理フロー" style="width: 100%; min-height: 2600px;"></iframe>
+              <p class="embedded-doc-link">
+                <a href="aromatripnippon-product-validation-flow.html" target="_blank" rel="noopener">
+                  aromatripnippon-product-validation-flow.html を別タブで開く
+                </a>
+              </p>
             </div>
           </div>
         </section>
-
+<!-- 
         <section class="section" id="sec3">
           <h2 class="section-title"><span class="section-icon">3</span> 検索処理のロジック</h2>
 
@@ -568,7 +367,7 @@
               </div>
             </div>
           </div>
-        </section>
+        </section> -->
 
       </div>
     </main>

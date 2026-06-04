@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AromaTripNippon 商品登録バリデーション処理フロー</title>
+  <style>
+    :root {
+      --bg: #f3f6f1;
+      --paper: #fffef8;
+      --ink: #20251d;
+      --muted: #64705e;
+      --line: #d2dccb;
+      --accent: #4f6f38;
+      --accent-dark: #2f4720;
+      --accent-soft: #e7efdf;
+      --code-bg: #1d231a;
+      --code-ink: #f5f8ee;
+      --code-line: #45523f;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 8%, rgba(79, 111, 56, .16), transparent 28%),
+        radial-gradient(circle at 90% 10%, rgba(151, 100, 50, .12), transparent 24%),
+        linear-gradient(180deg, #fffdf2 0%, var(--bg) 100%);
+      font-family: "Yu Gothic", "Meiryo", "Hiragino Kaku Gothic ProN", sans-serif;
+      line-height: 1.75;
+    }
+
+    main {
+      width: min(1140px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 34px 0 64px;
+    }
+
+    header {
+      padding: 32px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255, 254, 248, .92);
+      box-shadow: 0 18px 60px rgba(42, 57, 34, .08);
+    }
+
+    .doc-label {
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 10px 0 14px;
+      font-size: clamp(26px, 4vw, 42px);
+      line-height: 1.2;
+      letter-spacing: -.02em;
+    }
+
+    h2 {
+      margin: 0 0 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--accent-dark);
+      font-size: 22px;
+      line-height: 1.35;
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      font-size: 17px;
+      color: var(--accent-dark);
+    }
+
+    p {
+      margin: 0 0 12px;
+    }
+
+    .lead {
+      max-width: 920px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #ffffff;
+      color: var(--accent-dark);
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    section {
+      margin-top: 28px;
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255, 254, 248, .94);
+      box-shadow: 0 12px 36px rgba(42, 57, 34, .05);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #ffffff;
+      padding: 16px 18px;
+    }
+
+    .card ul {
+      margin: 0;
+      padding-left: 1.2em;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .diagram-wrap,
+    .code-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--code-line);
+      border-radius: 12px;
+      background: var(--code-bg);
+    }
+
+    pre {
+      width: max-content;
+      min-width: 100%;
+      margin: 0;
+      padding: 22px;
+      color: var(--code-ink);
+      font: 14px/1.5 Consolas, "Courier New", monospace;
+      white-space: pre;
+    }
+
+    .keyword {
+      color: #f0d37b;
+      font-weight: 700;
+    }
+
+    .comment {
+      color: #a6d5a1;
+    }
+
+    .note {
+      margin-top: 14px;
+      border-left: 4px solid var(--accent);
+      background: var(--accent-soft);
+      padding: 14px 16px;
+      color: var(--accent-dark);
+      font-size: 14px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid var(--line);
+      background: #ffffff;
+    }
+
+    th,
+    td {
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      font-size: 14px;
+    }
+
+    th {
+      background: var(--accent-soft);
+      color: var(--accent-dark);
+      white-space: nowrap;
+    }
+
+    code {
+      padding: 2px 5px;
+      border-radius: 4px;
+      background: #edf3e7;
+      color: var(--accent-dark);
+      font-family: Consolas, "Courier New", monospace;
+      font-size: .92em;
+    }
+
+    @media (max-width: 760px) {
+      main {
+        width: min(100% - 20px, 1140px);
+        padding-top: 18px;
+      }
+
+      header,
+      section {
+        padding: 18px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      pre {
+        padding: 16px;
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <header>
+      <div class="doc-label">Product Validation Flow / Bean Validation + Service Rules</div>
+      <h1>AromaTripNippon 管理機能・商品登録バリデーション処理フロー</h1>
+      <p class="lead">
+        商品登録フォーム送信時の2段階バリデーションをASCII図とIF-THEN-ELSE疑似コードで整理します。
+        第1段階は<code>@Valid</code>によるBean Validation、第2段階はServiceでの業務ロジックバリデーションです。
+        どちらのエラーも<code>BindingResult</code>に集約し、商品フォームへ戻してエラー表示します。
+      </p>
+      <div class="meta">
+        <span class="pill">POST /management/products</span>
+        <span class="pill">@Valid Product</span>
+        <span class="pill">BindingResult</span>
+        <span class="pill">ProductService</span>
+        <span class="pill">product-form.html</span>
+      </div>
+    </header>
+
+    <section>
+      <h2>1. バリデーション観点</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>1段階目: Bean Validation</h3>
+          <ul>
+            <li><code>@Valid @ModelAttribute Product</code>でController到達時に自動検証する。</li>
+            <li><code>productName</code>は<code>@NotBlank</code>、<code>@Size(max=255)</code>で検証する。</li>
+            <li><code>price</code>は<code>@NotNull</code>、<code>@Positive</code>で検証する。</li>
+            <li><code>description</code>は<code>@Size(max=1000)</code>で検証する。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>BindingResult</h3>
+          <ul>
+            <li>Bean Validationの結果は<code>BindingResult errors</code>に入る。</li>
+            <li><code>errors.hasErrors()</code>がtrueなら保存せず商品フォームへ戻す。</li>
+            <li>戻る前にカテゴリ選択肢を再取得して<code>model</code>へセットする。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>2段階目: Service業務チェック</h3>
+          <ul>
+            <li>カテゴリIDが存在し、有効かを確認する。</li>
+            <li>削除済み商品や既存商品との重複名を確認する。</li>
+            <li>公開商品として成立するか、価格・カテゴリなどの業務条件を確認する。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>登録処理</h3>
+          <ul>
+            <li>業務エラーは<code>bindingResult.rejectValue()</code>または<code>reject()</code>で追加する。</li>
+            <li>エラーがなければカテゴリを設定し、商品と在庫初期データを保存する。</li>
+            <li>登録後は監査ログを記録し、商品詳細へリダイレクトする。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>2. ASCIIフローチャート</h2>
+      <div class="diagram-wrap" aria-label="AromaTripNippon product validation ascii flowchart">
+        <pre>                          +----------------------------+
+                          | 商品登録画面表示           |
+                          | GET /management/products/new |
+                          +-------------+--------------+
+                                        |
+                                        v
+                          +-------------+--------------+
+                          | 商品情報入力               |
+                          | 商品名 / 英語名 / カテゴリ |
+                          | 価格 / 公開 / 説明         |
+                          +-------------+--------------+
+                                        |
+                                        v
+                          +-------------+--------------+
+                          | フォーム送信               |
+                          | POST /management/products  |
+                          +-------------+--------------+
+                                        |
+                                        v
+                          +-------------+--------------+
+                          | 1段階目                    |
+                          | @Valid Bean Validation     |
+                          | Product制約を自動チェック |
+                          +-------------+--------------+
+                                        |
+                          +-------------+--------------+
+                          | BindingResult.hasErrors()? |
+                          +-------------+--------------+
+                                        |
+                         +--------------+--------------+
+                         | Bean Validationエラーあり   | エラーなし
+                         v                             v
+             +-----------+------------+    +-----------+------------+
+             | BindingResultに保持    |    | 2段階目               |
+             | categoriesを再セット   |    | Service業務チェック   |
+             | 商品フォームへ戻る     |    +-----------+------------+
+             | management/product-form|                |
+             +------------------------+                v
+                                      +----------------+----------------+
+                                      | カテゴリ存在・有効性チェック     |
+                                      | categoryIdは有効カテゴリか？     |
+                                      +----------------+----------------+
+                                                       |
+                                      +----------------+----------------+
+                                      | カテゴリエラー                  | カテゴリOK
+                                      v                                 v
+                          +-----------+------------+        +-----------+------------+
+                          | rejectValue("category")|        | 商品名重複チェック     |
+                          | 商品フォームへ戻る     |        | 同名商品が存在するか？ |
+                          +------------------------+        +-----------+------------+
+                                                                       |
+                                                        +--------------+--------------+
+                                                        | 重複あり                    | 重複なし
+                                                        v                             v
+                                            +-----------+------------+    +-----------+------------+
+                                            | rejectValue("productName")| | 公開条件チェック       |
+                                            | 商品フォームへ戻る       | | 公開商品として妥当か？ |
+                                            +------------------------+    +-----------+------------+
+                                                                                     |
+                                                                      +--------------+--------------+
+                                                                      | 業務エラーあり              | 業務OK
+                                                                      v                             v
+                                                          +-----------+------------+    +-----------+------------+
+                                                          | BindingResultへ追加    |    | 商品登録処理          |
+                                                          | categoriesを再セット   |    | categoryをProductへ設定|
+                                                          | 商品フォームへ戻る     |    | InventoryItemを初期化 |
+                                                          +------------------------+    | Productを保存         |
+                                                                                        +-----------+------------+
+                                                                                                    |
+                                                                                                    v
+                                                                                        +-----------+------------+
+                                                                                        | AuditLogへCREATE記録  |
+                                                                                        | 商品詳細へリダイレクト |
+                                                                                        | /management/products/{id} |
+                                                                                        +------------------------+</pre>
+      </div>
+      <p class="note">
+        画面へ戻るすべての分岐では、入力済みの<code>Product</code>と<code>BindingResult</code>を維持し、
+        カテゴリ一覧を再セットして<code>management/product-form</code>を再表示します。
+      </p>
+    </section>
+
+    <section>
+      <h2>3. IF-THEN-ELSE形式の疑似コード</h2>
+      <div class="code-wrap" aria-label="AromaTripNippon product validation pseudocode">
+        <pre><span class="comment">// 商品登録バリデーション処理の疑似コード</span>
+<span class="keyword">FUNCTION</span> createProduct(product, bindingResult, categoryId, principal, model)
+
+  <span class="comment">// 1段階目: @Valid による自動バリデーション</span>
+  <span class="comment">// Controller呼び出し前に Product の Bean Validation が実行され、結果が BindingResult に入る</span>
+
+  <span class="keyword">IF</span> bindingResult.hasErrors() <span class="keyword">THEN</span>
+    model に有効カテゴリ一覧を再セット
+    <span class="keyword">RETURN</span> 商品登録画面（入力値 + Bean Validationエラー表示）
+  <span class="keyword">END IF</span>
+
+  <span class="comment">// 2段階目: Serviceでの業務ロジックバリデーション</span>
+  businessErrors = ProductService.validateForCreate(product, categoryId)
+
+  <span class="keyword">IF</span> businessErrors.categoryNotFound <span class="keyword">THEN</span>
+    bindingResult.rejectValue("category", "product.category.invalid",
+                              "有効なカテゴリを選択してください")
+  <span class="keyword">END IF</span>
+
+  <span class="keyword">IF</span> businessErrors.duplicateProductName <span class="keyword">THEN</span>
+    bindingResult.rejectValue("productName", "product.productName.duplicate",
+                              "同じ商品名の商品が既に登録されています")
+  <span class="keyword">END IF</span>
+
+  <span class="keyword">IF</span> businessErrors.invalidPublishedCondition <span class="keyword">THEN</span>
+    bindingResult.reject("product.publish.invalid",
+                         "公開する商品はカテゴリ・価格・説明内容を確認してください")
+  <span class="keyword">END IF</span>
+
+  <span class="keyword">IF</span> bindingResult.hasErrors() <span class="keyword">THEN</span>
+    model に有効カテゴリ一覧を再セット
+    <span class="keyword">RETURN</span> 商品登録画面（入力値 + 業務エラー表示）
+  <span class="keyword">END IF</span>
+
+  <span class="comment">// 登録処理</span>
+  category = ProductCategoryRepository.findActiveById(categoryId)
+  product.category = category
+
+  inventoryItem = InventoryItem()
+  inventoryItem.itemName = product.productName
+  inventoryItem.englishName = product.englishName
+  inventoryItem.category = category.categoryName
+  inventoryItem.unit = defaultUnit(category.categoryName)
+  inventoryItem.stockQuantity = 0
+  inventoryItem.thresholdQuantity = 0
+
+  InventoryItemRepository.save(inventoryItem)
+  savedProduct = ProductRepository.save(product)
+  AuditService.record(principal, "CREATE", "products", savedProduct.id, "商品を作成")
+
+  <span class="keyword">RETURN</span> リダイレクト("/management/products/" + savedProduct.id)
+
+<span class="keyword">END FUNCTION</span>
+
+
+<span class="comment">// Service側の業務ロジックバリデーション例</span>
+<span class="keyword">FUNCTION</span> validateForCreate(product, categoryId)
+
+  result = new BusinessValidationResult()
+
+  category = ProductCategoryRepository.findById(categoryId)
+
+  <span class="keyword">IF</span> category が null OR category.deletedAt が null ではない OR category.active が false <span class="keyword">THEN</span>
+    result.categoryNotFound = true
+  <span class="keyword">END IF</span>
+
+  duplicate = ProductRepositoryで同名・未削除の商品を検索(product.productName)
+
+  <span class="keyword">IF</span> duplicate が存在する <span class="keyword">THEN</span>
+    result.duplicateProductName = true
+  <span class="keyword">END IF</span>
+
+  <span class="keyword">IF</span> product.published が true AND product.description が空 <span class="keyword">THEN</span>
+    result.invalidPublishedCondition = true
+  <span class="keyword">END IF</span>
+
+  <span class="keyword">RETURN</span> result
+
+<span class="keyword">END FUNCTION</span></pre>
+      </div>
+    </section>
+
+    <section>
+      <h2>4. エラーハンドリング整理</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>段階</th>
+            <th>チェック内容</th>
+            <th>エラー時の処理</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Bean Validation</td>
+            <td>必須、文字数、価格の正数などEntity制約</td>
+            <td><code>BindingResult</code>に自動格納し、商品フォームへ戻す。</td>
+          </tr>
+          <tr>
+            <td>Service業務チェック</td>
+            <td>カテゴリ有効性、重複商品名、公開条件など</td>
+            <td><code>rejectValue()</code>または<code>reject()</code>で<code>BindingResult</code>に追加し、商品フォームへ戻す。</td>
+          </tr>
+          <tr>
+            <td>画面再表示</td>
+            <td>エラー表示と入力値保持</td>
+            <td><code>categories</code>を再セットし、<code>management/product-form</code>を返す。</td>
+          </tr>
+          <tr>
+            <td>登録成功</td>
+            <td>全チェック通過</td>
+            <td>商品・在庫初期データを保存し、監査ログ記録後に商品詳細へ遷移する。</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+</body>
+
+</html>

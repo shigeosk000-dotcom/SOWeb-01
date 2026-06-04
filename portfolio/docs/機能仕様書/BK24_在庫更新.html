@@ -13,20 +13,20 @@ tr:last-child td{border-bottom:none}th:last-child,td:last-child{border-right:non
 .flow p{padding:10px 0;border-bottom:1px dashed #d1c6b7;margin:0}.flow p:last-child{border-bottom:none}.label{display:inline-block;min-width:120px;font-weight:700;color:var(--accent-dark)}
 ul{margin:8px 0 0;padding-left:24px}li{margin-bottom:6px}@media(max-width:800px){body{padding:22px 14px}header,.screen{padding:22px}pre{font-size:12px}}
 </style></head>
-<body><main class="page"><header><h1>在庫更新 詳細仕様</h1><p class="meta"><span class="badge">バックエンド管理</span><span class="badge">Phase1</span><span class="badge">Must</span><span class="badge">management/inventory_update.html</span></p><p class="meta">在庫一覧または詳細から、入庫・出庫数量を入力して在庫数を更新する。</p></header>
-<section class="screen"><h2>1. 画面レイアウト</h2><p class="note">画面遷移図上に存在し、既存詳細仕様またはモックアップで不足していた画面です。既存モックアップのテイストに合わせてFrame単位で配置順を定義します。</p><pre>┌────────────────────────────────────────────────────────────┐
+<body><main class="page"><header><h1>在庫更新 詳細仕様</h1><p class="meta"><span class="badge">バックエンド管理</span><span class="badge">Phase1</span><span class="badge">Must</span><span class="badge">management/inventory_detail.html</span></p><p class="meta">在庫詳細画面内の入出庫登録フォームから、入庫・出庫数量を入力して在庫数を更新する。</p></header>
+<section class="screen"><h2>1. 画面レイアウト</h2><p class="note">現行Phase1では独立した <code>management/inventory_update.html</code> は存在しない。入出庫登録は <code>/management/inventory/{id}</code> の在庫詳細画面内フォームから <code>/management/inventory/{id}/transaction</code> へPOSTする。</p><pre>┌────────────────────────────────────────────────────────────┐
 │ Frame 01：管理ナビ                                          │
 ├────────────────────────────────────────────────────────────┤
-│ Frame 02：在庫更新                                          │
+│ Frame 02：在庫詳細                                          │
 ├────────────────────────────────────────────────────────────┤
-│ Frame 03：更新フォーム                                      │
+│ Frame 03：入出庫登録フォーム                                │
 │ [1] 品名 [2] 現在庫 [3] 入出庫区分 [4] 数量 [5] 理由 [6] 保存│
 └────────────────────────────────────────────────────────────┘</pre><div class='table-wrap'><table><thead><tr><th>No.</th><th>配置フレーム</th><th>表示順・項目</th><th>種別</th><th>配置位置</th><th>補足</th></tr></thead><tbody><tr><td>1</td><td>Frame 1</td><td>[1] 品名 [2] 現在庫 [3] 入出庫区分 [4] 数量 [5] 理由 [6] 保存</td><td>画面要素</td><td>上から順</td><td>遷移図に基づき追加</td></tr></tbody></table></div>
 <h2>2. 入力項目一覧</h2><div class='table-wrap'><table><thead><tr><th>No.</th><th>項目名</th><th>データ型</th><th>データサイズ</th><th>必須/任意</th><th>バリデーションルール</th><th>チェック実施タイミング</th><th>エラー時の扱い</th></tr></thead><tbody><tr><td>1</td><td>在庫ID</td><td>Long</td><td>整数</td><td>必須</td><td>存在する在庫ID</td><td>初期表示時、保存時</td><td>一覧へ戻す</td></tr><tr><td>2</td><td>入出庫区分</td><td>String</td><td>最大10文字</td><td>必須</td><td>入庫/出庫のみ</td><td>選択時、保存時</td><td>保存不可</td></tr><tr><td>3</td><td>数量</td><td>Decimal</td><td>0.01〜999999</td><td>必須</td><td>0より大きい数値</td><td>入力時、保存時</td><td>保存不可</td></tr><tr><td>4</td><td>理由</td><td>String</td><td>最大500文字</td><td>任意</td><td>HTMLタグ不可</td><td>入力時、保存時</td><td>エスケープ</td></tr></tbody></table></div>
-<h2>3. 処理フロー</h2><div class="flow"><p><span class="label">Step 1</span>在庫更新画面にアクセスする。</p><p><span class="label">Step 2</span>現在庫を表示する。</p><p><span class="label">Step 3</span>入出庫区分と数量を入力する。</p><p><span class="label">Step 4</span>保存で在庫数を更新する。</p></div>
-<h2>4. 正常時の動作</h2><ul><li>入庫は在庫数を加算する。</li><li>出庫は在庫数を減算する。</li><li>更新後に在庫詳細へ戻る。</li></ul>
+<h2>3. 処理フロー</h2><div class="flow"><p><span class="label">Step 1</span>在庫詳細画面にアクセスする。</p><p><span class="label">Step 2</span>現在庫と入出庫履歴を表示する。</p><p><span class="label">Step 3</span>入出庫区分と数量、理由を入力する。</p><p><span class="label">Step 4</span><code>/management/inventory/{id}/transaction</code> へPOSTし、在庫数と入出庫履歴を更新する。</p></div>
+<h2>4. 正常時の動作</h2><ul><li>入庫は在庫数を加算する。</li><li>出庫は在庫数を減算する。</li><li>入出庫履歴を記録する。</li><li>更新後に在庫詳細へ戻る。</li></ul>
 <h2>5. エラー時の動作</h2><ul><li>出庫数量が現在庫を超える場合は保存不可。</li><li>数量が0以下の場合は保存不可。</li><li>保存失敗時はエラー表示。</li></ul>
-<h2>6. 画面遷移先</h2><div class='table-wrap'><table><thead><tr><th>No.</th><th>遷移元フレーム</th><th>トリガー</th><th>遷移先</th><th>遷移条件</th><th>引き継ぎ値</th><th>備考</th></tr></thead><tbody><tr><td>1</td><td>Frame 03</td><td>キャンセル</td><td>inventory_detail.html</td><td>在庫ID正常</td><td>在庫ID</td><td>詳細へ</td></tr><tr><td>2</td><td>Frame 03</td><td>保存</td><td>inventory_detail.html</td><td>入力値正常</td><td>在庫ID</td><td>詳細へ</td></tr></tbody></table></div>
+<h2>6. 画面遷移先</h2><div class='table-wrap'><table><thead><tr><th>No.</th><th>遷移元フレーム</th><th>トリガー</th><th>遷移先</th><th>遷移条件</th><th>引き継ぎ値</th><th>備考</th></tr></thead><tbody><tr><td>1</td><td>Frame 03</td><td>キャンセル</td><td>inventory_detail.html</td><td>在庫ID正常</td><td>在庫ID</td><td>詳細へ</td></tr><tr><td>2</td><td>Frame 03</td><td>保存</td><td>inventory_detail.html</td><td>入力値正常</td><td>在庫ID</td><td>取引登録後に詳細へ</td></tr></tbody></table></div>
 
 <h3>7. DB変更反映メモ（2026-05-14）</h3>
 <div class="note">

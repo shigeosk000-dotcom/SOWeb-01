@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AromaTripNippon 管理機能ログイン処理フローチャート</title>
+  <style>
+    :root {
+      --bg: #f4f1ea;
+      --paper: #fffdf8;
+      --ink: #26221d;
+      --muted: #6e6256;
+      --line: #d9cec0;
+      --accent: #8a4f2b;
+      --accent-dark: #5c321d;
+      --accent-soft: #f2e4d7;
+      --green: #2f6b4f;
+      --red: #9b2f2f;
+      --code-bg: #1f1d1a;
+      --code-ink: #f8f2e8;
+      --code-line: #4a4038;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 8%, rgba(138, 79, 43, .14), transparent 26%),
+        radial-gradient(circle at 88% 12%, rgba(47, 107, 79, .12), transparent 24%),
+        linear-gradient(180deg, #fffaf0 0%, var(--bg) 100%);
+      font-family: "Yu Gothic", "Meiryo", "Hiragino Kaku Gothic ProN", sans-serif;
+      line-height: 1.75;
+    }
+
+    main {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 34px 0 64px;
+    }
+
+    header {
+      padding: 32px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255, 253, 248, .9);
+      box-shadow: 0 18px 60px rgba(64, 42, 25, .08);
+    }
+
+    .doc-label {
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 10px 0 14px;
+      font-size: clamp(26px, 4vw, 42px);
+      line-height: 1.2;
+      letter-spacing: -.02em;
+    }
+
+    h2 {
+      margin: 0 0 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--accent-dark);
+      font-size: 22px;
+      line-height: 1.35;
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      font-size: 17px;
+      color: var(--accent-dark);
+    }
+
+    p {
+      margin: 0 0 12px;
+    }
+
+    .lead {
+      max-width: 900px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #ffffff;
+      color: var(--accent-dark);
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    section {
+      margin-top: 28px;
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255, 253, 248, .94);
+      box-shadow: 0 12px 36px rgba(64, 42, 25, .05);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #ffffff;
+      padding: 16px 18px;
+    }
+
+    .card ul {
+      margin: 0;
+      padding-left: 1.2em;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .diagram-wrap,
+    .code-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--code-line);
+      border-radius: 12px;
+      background: var(--code-bg);
+    }
+
+    pre {
+      width: max-content;
+      min-width: 100%;
+      margin: 0;
+      padding: 22px;
+      color: var(--code-ink);
+      font: 14px/1.5 Consolas, "Courier New", monospace;
+      white-space: pre;
+    }
+
+    .diagram {
+      color: #fff7e9;
+    }
+
+    .pseudo {
+      color: #f7efe2;
+    }
+
+    .keyword {
+      color: #ffd37d;
+      font-weight: 700;
+    }
+
+    .comment {
+      color: #9dc79f;
+    }
+
+    .note {
+      border-left: 4px solid var(--accent);
+      background: var(--accent-soft);
+      padding: 14px 16px;
+      color: var(--accent-dark);
+      font-size: 14px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid var(--line);
+      background: #ffffff;
+    }
+
+    th,
+    td {
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      font-size: 14px;
+    }
+
+    th {
+      background: var(--accent-soft);
+      color: var(--accent-dark);
+      white-space: nowrap;
+    }
+
+    code {
+      padding: 2px 5px;
+      border-radius: 4px;
+      background: #f0e6dc;
+      color: var(--accent-dark);
+      font-family: Consolas, "Courier New", monospace;
+      font-size: .92em;
+    }
+
+    @media (max-width: 760px) {
+      main {
+        width: min(100% - 20px, 1120px);
+        padding-top: 18px;
+      }
+
+      header,
+      section {
+        padding: 18px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      pre {
+        padding: 16px;
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <header>
+      <div class="doc-label">Admin Login Flow / IF-THEN-ELSE Logic</div>
+      <h1>AromaTripNippon 管理機能ログイン処理フローチャート</h1>
+      <p class="lead">
+        管理画面ログインの入力チェック、管理ユーザー存在チェック、BCryptパスワード照合、SecurityContext保存、
+        エラー時のログイン画面復帰、パスワード紛失時の再設定、SQLインジェクション等への防御をASCII形式で整理します。
+      </p>
+      <div class="meta">
+        <span class="pill">POST /management/login</span>
+        <span class="pill">GET /management/forgot-password</span>
+        <span class="pill">Spring Security</span>
+        <span class="pill">AdminUserRepository</span>
+        <span class="pill">BCryptPasswordEncoder</span>
+      </div>
+    </header>
+
+    <section>
+      <h2>1. 判定ポイント</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>ログイン入力</h3>
+          <ul>
+            <li>ログインIDとパスワードの空チェックを行う。</li>
+            <li>CSRFトークン不正、極端な長さ、制御文字などの異常入力を拒否する。</li>
+            <li>エラー内容は詳細化せず、ログイン画面へ戻す。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>ユーザー検索</h3>
+          <ul>
+            <li><code>findByLoginIdAndDeletedAtIsNullAndActiveTrue</code>で有効な管理者を検索する。</li>
+            <li>存在しない場合もパスワード誤りと同じメッセージにする。</li>
+            <li>SQL文字列連結ではなく、Spring Data JPAのパラメータバインドを使う。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>パスワード照合</h3>
+          <ul>
+            <li><code>BCryptPasswordEncoder.matches</code>で入力値とハッシュを照合する。</li>
+            <li>失敗時は失敗回数を加算し、5回以上でロック・再設定必須にする。</li>
+            <li>成功時は失敗回数を0に戻す。</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>認証成功・紛失対応</h3>
+          <ul>
+            <li>認証成功時はSpring Securityが<code>SecurityContext</code>に認証情報を保存する。</li>
+            <li>成功後は<code>/management/dashboard</code>へリダイレクトする。</li>
+            <li>パスワード紛失時はTOTPまたはバックアップコード確認後に再設定する。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>2. ASCIIフローチャート</h2>
+      <div class="diagram-wrap" aria-label="AromaTripNippon admin login ascii flowchart">
+        <pre class="diagram">[A] 管理ログイン処理
+
+                          +----------------------------+
+                          | ログイン画面表示           |
+                          | GET /management/login      |
+                          +-------------+--------------+
+                                        |
+                                        v
+                          +-------------+--------------+
+                          | ログインID / パスワード    |
+                          | 入力                       |
+                          +-------------+--------------+
+                                        |
+                                        v
+                          +-------------+--------------+
+                          | 入力値チェック             |
+                          | 空欄があるか？             |
+                          +-------------+--------------+
+                                        |
+                         +--------------+--------------+
+                         | 入力エラー                  | 入力OK
+                         v                             v
+             +-----------+------------+    +-----------+------------+
+             | エラー表示             |    | CSRF・攻撃入力チェック |
+             | ログイン画面に戻る     |    | token不正 / 長すぎる   |
+             | /management/login?error|    | 制御文字などがあるか？  |
+             +------------------------+    +-----------+------------+
+                                                        |
+                                       +----------------+----------------+
+                                       | 攻撃疑い                        | 正常
+                                       v                                 v
+                           +-----------+------------+        +-----------+------------+
+                           | AuditLogへ記録         |        | ユーザー検索          |
+                           | 汎用エラー表示         |        | DBからloginIdで検索   |
+                           | ログイン画面に戻る     |        +-----------+------------+
+                           | /management/login?error|                    |
+                           +------------------------+       +------------+------------+
+                                                            | ユーザー無し            | ユーザー有り
+                                                            v                         v
+                                                +-----------+------------+  +---------+--------------+
+                                                | 認証エラー表示         |  | アカウント状態チェック |
+                                                | ログイン画面に戻る     |  | locked/resetRequired?  |
+                                                | /management/login?error|  +---------+--------------+
+                                                +------------------------+            |
+                                                                         +-----------+-----------+
+                                                                         | ロックあり            | ロックなし
+                                                                         v                       v
+                                                             +-----------+------------+  +-------+----------------+
+                                                             | ロック表示             |  | パスワード照合       |
+                                                             | ログイン画面に戻る     |  | BCrypt.matches?      |
+                                                             | /management/login?locked| +-------+----------------+
+                                                             +------------------------+          |
+                                                                                      +----------+----------+
+                                                                                      | 不一致              | 一致
+                                                                                      v                    v
+                                                                          +-----------+------------+  +----+------------------------+
+                                                                          | 失敗回数 + 1           |  | 認証成功                  |
+                                                                          | 5回以上か？            |  | SecurityContextへ保存     |
+                                                                          +-----------+------------+  | failedLoginAttempts = 0   |
+                                                                                      |               +----+------------------------+
+                                                                            +---------+---------+          |
+                                                                            | 5回未満           | 5回以上  |
+                                                                            v                   v          v
+                                                                +-----------+------------+  +----+---------+------------+  +---+------------------+
+                                                                | 認証エラー表示         |  | accountLocked = true  |  | 管理ダッシュボードへ |
+                                                                | ログイン画面に戻る     |  | resetRequired = true  |  | リダイレクト         |
+                                                                | /management/login?error|  | ロック表示へ戻る      |  | /management/dashboard|
+                                                                +------------------------+  +------------------------+  +----------------------+
+
+
+[B] パスワード紛失時の処理
+
+                          +----------------------------+
+                          | ログイン画面               |
+                          | パスワードを忘れた場合     |
+                          +-------------+--------------+
+                                        |
+                                        v
+                          +-------------+--------------+
+                          | 再設定画面表示             |
+                          | GET /management/forgot-password |
+                          +-------------+--------------+
+                                        |
+                                        v
+                          +-------------+--------------+
+                          | loginId / 新パスワード     |
+                          | TOTP or backupCode 入力    |
+                          +-------------+--------------+
+                                        |
+                                        v
+                          +-------------+--------------+
+                          | 再設定入力チェック         |
+                          | 空 / 8文字未満 / 不一致?   |
+                          +-------------+--------------+
+                                        |
+                         +--------------+--------------+
+                         | 入力エラー                  | 入力OK
+                         v                             v
+             +-----------+------------+    +-----------+------------+
+             | エラー表示             |    | 管理ユーザー検索       |
+             | 再設定画面に戻る       |    | 有効ユーザー+TOTPあり? |
+             +------------------------+    +-----------+------------+
+                                                        |
+                                       +----------------+----------------+
+                                       | 無し / TOTP未設定               | 有り
+                                       v                                 v
+                           +-----------+------------+        +-----------+------------+
+                           | エラー表示             |        | 認証コード照合       |
+                           | 再設定画面に戻る       |        | TOTP or backup OK?   |
+                           +------------------------+        +-----------+------------+
+                                                                        |
+                                                        +---------------+---------------+
+                                                        | 不正                          | 正常
+                                                        v                               v
+                                            +-----------+------------+      +-----------+------------+
+                                            | エラー表示             |      | 新パスワード保存     |
+                                            | 再設定画面に戻る       |      | BCryptでハッシュ化   |
+                                            +------------------------+      | failed=0             |
+                                                                            | locked=false         |
+                                                                            | resetRequired=false  |
+                                                                            +-----------+------------+
+                                                                                        |
+                                                                                        v
+                                                                            +-----------+------------+
+                                                                            | ログイン画面に戻る   |
+                                                                            | /management/login?reset |
+                                                                            +------------------------+</pre>
+      </div>
+    </section>
+
+    <section>
+      <h2>3. IF-THEN-ELSE形式の疑似コード</h2>
+      <div class="code-wrap" aria-label="AromaTripNippon admin login pseudocode">
+        <pre class="pseudo"><span class="comment">// 管理機能ログイン処理</span>
+<span class="keyword">FUNCTION</span> managementLogin(username, password, csrfToken, request)
+
+  errors = []
+
+  <span class="comment">// CSRF・攻撃入力チェック</span>
+  <span class="keyword">IF</span> csrfToken が不正 <span class="keyword">THEN</span>
+    AuditLog に「CSRF不正」を記録
+    errors に「ログイン情報が正しくありません」を追加
+    <span class="keyword">RETURN</span> ログイン画面（エラー表示）
+  <span class="keyword">END IF</span>
+
+  username = trim(username)
+
+  <span class="comment">// 入力値の空チェック</span>
+  <span class="keyword">IF</span> username が空 <span class="keyword">THEN</span>
+    errors に「ログインIDを入力してください」を追加
+  <span class="keyword">END IF</span>
+
+  <span class="keyword">IF</span> password が空 <span class="keyword">THEN</span>
+    errors に「パスワードを入力してください」を追加
+  <span class="keyword">END IF</span>
+
+  <span class="keyword">IF</span> errors が空でない <span class="keyword">THEN</span>
+    <span class="keyword">RETURN</span> ログイン画面（エラー表示）
+  <span class="keyword">END IF</span>
+
+  <span class="comment">// SQLインジェクション等の攻撃対応</span>
+  <span class="keyword">IF</span> username が長すぎる OR password が長すぎる OR 制御文字を含む <span class="keyword">THEN</span>
+    AuditLog に「異常なログイン入力」を記録
+    errors に「ログイン情報が正しくありません」を追加
+    <span class="keyword">RETURN</span> ログイン画面（エラー表示）
+  <span class="keyword">END IF</span>
+
+  <span class="comment">// 重要: 入力値をSQL文字列へ連結しない。Spring Data JPAのパラメータバインドで検索する。</span>
+  user = AdminUserRepository.findByLoginIdAndDeletedAtIsNullAndActiveTrue(username)
+
+  <span class="comment">// ユーザーの存在チェック</span>
+  <span class="keyword">IF</span> user が null <span class="keyword">THEN</span>
+    errors に「ログインIDまたはパスワードが正しくありません」を追加
+    <span class="keyword">RETURN</span> ログイン画面（エラー表示）
+  <span class="keyword">END IF</span>
+
+  <span class="comment">// ロック状態チェック</span>
+  <span class="keyword">IF</span> user.accountLocked が true OR user.passwordResetRequired が true <span class="keyword">THEN</span>
+    errors に「アカウントがロックされています。パスワード再設定後にログインしてください」を追加
+    <span class="keyword">RETURN</span> ログイン画面（ロック表示）
+  <span class="keyword">END IF</span>
+
+  <span class="comment">// パスワードの照合</span>
+  <span class="keyword">IF</span> BCryptPasswordEncoder.matches(password, user.passwordHash) が false <span class="keyword">THEN</span>
+    user.failedLoginAttempts = user.failedLoginAttempts + 1
+
+    <span class="keyword">IF</span> user.failedLoginAttempts が 5以上 <span class="keyword">THEN</span>
+      user.accountLocked = true
+      user.passwordResetRequired = true
+      AdminUserRepository.save(user)
+      errors に「アカウントがロックされました」を追加
+      <span class="keyword">RETURN</span> ログイン画面（ロック表示）
+    <span class="keyword">ELSE</span>
+      AdminUserRepository.save(user)
+      errors に「ログインIDまたはパスワードが正しくありません」を追加
+      <span class="keyword">RETURN</span> ログイン画面（エラー表示）
+    <span class="keyword">END IF</span>
+  <span class="keyword">END IF</span>
+
+  <span class="comment">// 認証成功時の処理</span>
+  authentication = Authentication(user.loginId, user.role)
+  SecurityContextHolder.getContext().setAuthentication(authentication)
+
+  user.failedLoginAttempts = 0
+  AdminUserRepository.save(user)
+
+  <span class="keyword">RETURN</span> リダイレクト("/management/dashboard")
+
+<span class="keyword">END FUNCTION</span>
+
+
+<span class="comment">// パスワード紛失時の処理</span>
+<span class="keyword">FUNCTION</span> forgotPassword(loginId, newPassword, confirmPassword, totpCode, backupCode)
+
+  errors = []
+  loginId = trim(loginId)
+
+  <span class="keyword">IF</span> loginId が空 <span class="keyword">THEN</span>
+    errors に「ログインIDを入力してください」を追加
+  <span class="keyword">END IF</span>
+
+  <span class="keyword">IF</span> newPassword が空 OR newPassword が8文字未満 <span class="keyword">THEN</span>
+    errors に「新しいパスワードは8文字以上で入力してください」を追加
+  <span class="keyword">END IF</span>
+
+  <span class="keyword">IF</span> newPassword と confirmPassword が一致しない <span class="keyword">THEN</span>
+    errors に「確認用パスワードが一致しません」を追加
+  <span class="keyword">END IF</span>
+
+  <span class="keyword">IF</span> errors が空でない <span class="keyword">THEN</span>
+    <span class="keyword">RETURN</span> パスワード再設定画面（エラー表示）
+  <span class="keyword">END IF</span>
+
+  admin = AdminUserRepository.findByLoginIdAndDeletedAtIsNullAndActiveTrue(loginId)
+
+  <span class="keyword">IF</span> admin が null OR admin.totpEnabled が false OR admin.totpSecret が null <span class="keyword">THEN</span>
+    errors に「入力内容が正しくありません」を追加
+    <span class="keyword">RETURN</span> パスワード再設定画面（エラー表示）
+  <span class="keyword">END IF</span>
+
+  verified = TotpService.verifyCode(admin.totpSecret, totpCode)
+             OR TotpService.consumeBackupCode(admin, backupCode)
+
+  <span class="keyword">IF</span> verified が false <span class="keyword">THEN</span>
+    errors に「認証コードまたはバックアップコードが正しくありません」を追加
+    <span class="keyword">RETURN</span> パスワード再設定画面（エラー表示）
+  <span class="keyword">END IF</span>
+
+  admin.passwordHash = BCryptPasswordEncoder.encode(newPassword)
+  admin.failedLoginAttempts = 0
+  admin.accountLocked = false
+  admin.passwordResetRequired = false
+  admin.passwordResetTokenHash = null
+  admin.passwordResetTokenExpiresAt = null
+  AdminUserRepository.save(admin)
+
+  <span class="keyword">RETURN</span> リダイレクト("/management/login?reset")
+
+<span class="keyword">END FUNCTION</span></pre>
+      </div>
+    </section>
+
+    <section>
+      <h2>4. エラー・攻撃対応まとめ</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>ケース</th>
+            <th>判定</th>
+            <th>処理</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>入力値が空</td>
+            <td>ログインIDまたはパスワードが未入力</td>
+            <td>エラーを表示して<code>/management/login</code>へ戻る。</td>
+          </tr>
+          <tr>
+            <td>ユーザーなし</td>
+            <td>有効な管理者ユーザーが見つからない</td>
+            <td>ユーザー列挙を防ぐため、パスワード誤りと同じ汎用エラーを表示する。</td>
+          </tr>
+          <tr>
+            <td>パスワード不一致</td>
+            <td>BCrypt照合が失敗</td>
+            <td>失敗回数を加算し、5回以上でロックしてログイン画面へ戻る。</td>
+          </tr>
+          <tr>
+            <td>SQLインジェクション等</td>
+            <td>異常な入力、CSRF不正、過度な長さ、制御文字など</td>
+            <td>監査ログに記録し、SQLは必ずパラメータバインドで実行する。画面には汎用エラーのみ表示する。</td>
+          </tr>
+          <tr>
+            <td>パスワード紛失</td>
+            <td>ログイン画面の「パスワードを忘れた場合」から再設定へ遷移</td>
+            <td>TOTPまたはバックアップコード確認後、BCryptで新パスワードを保存し、ログイン画面へ戻る。</td>
+          </tr>
+          <tr>
+            <td>認証成功</td>
+            <td>ユーザー存在、未ロック、パスワード一致</td>
+            <td><code>SecurityContext</code>へ認証情報を保存し、<code>/management/dashboard</code>へリダイレクトする。</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="note">
+        実装ではSpring Securityの<code>UsernamePasswordAuthenticationFilter</code>、
+        <code>DaoAuthenticationProvider</code>、<code>AuthenticationSuccessHandler</code>、
+        <code>AuthenticationFailureHandler</code>が上記の流れを分担します。
+      </p>
+    </section>
+  </main>
+</body>
+
+</html>

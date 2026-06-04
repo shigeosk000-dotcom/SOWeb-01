@@ -205,8 +205,9 @@
           <li>氏名</li>
           <li>国籍</li>
           <li>連絡先</li>
-          <li>利用履歴</li>
-          <li>購入履歴</li>
+          <li>希望言語</li>
+          <li>来店目的</li>
+          <li>備考</li>
         </ul>
       </div>
 
@@ -228,28 +229,27 @@
           <li>価格</li>
           <li>説明</li>
           <li>在庫数</li>
-          <li>在庫アラート</li>
+          <li>単位・閾値</li>
         </ul>
       </div>
 
       <div class="data-group">
-        <h3>EC注文情報</h3>
+        <h3>管理アカウント・監査情報</h3>
         <ul>
-          <li>注文内容</li>
-          <li>数量</li>
-          <li>配送先</li>
-          <li>注文状況</li>
-          <li>発送状況</li>
-          <li>決済状況</li>
+          <li>管理者表示名</li>
+          <li>メールアドレス</li>
+          <li>通知設定</li>
+          <li>TOTP設定状態</li>
+          <li>最近の監査ログ</li>
         </ul>
       </div>
 
       <div class="data-group">
-        <h3>レビュー／口コミ情報</h3>
+        <h3>Phase2対象（Phase1未取得）</h3>
         <ul>
-          <li>評価</li>
-          <li>コメント</li>
-          <li>公開状態</li>
+          <li>EC注文情報</li>
+          <li>レビュー／口コミ情報</li>
+          <li>多言語文言管理情報</li>
         </ul>
       </div>
     </div>
@@ -307,21 +307,23 @@
       </div>
 
       <div class="data-group">
-        <h3>EC注文管理データ</h3>
+        <h3>管理アカウント設定データ</h3>
         <ul>
-          <li>注文ステータス</li>
-          <li>発送状況</li>
-          <li>決済状況</li>
-          <li>管理メモ</li>
+          <li>表示名・メールアドレス</li>
+          <li>通知設定</li>
+          <li>表示言語</li>
+          <li>パスワード変更</li>
+          <li>TOTP有効化・解除</li>
+          <li>バックアップコード</li>
         </ul>
       </div>
 
       <div class="data-group">
-        <h3>多言語・レビュー管理データ</h3>
+        <h3>Phase2対象（Phase1未更新）</h3>
         <ul>
-          <li>予約確認メール文面</li>
-          <li>案内文</li>
+          <li>EC注文管理データ</li>
           <li>レビュー公開／非公開状態</li>
+          <li>多言語文言マスタ</li>
         </ul>
       </div>
     </div>
@@ -343,7 +345,7 @@
 
     <div class="box db-box">
       <div class="box-title">H2 Database</div>
-      <p>予約情報・顧客情報・香りレシピ情報・商品在庫情報・注文情報・レビュー情報などを保存</p>
+      <p>予約情報・顧客情報・香りレシピ情報・商品在庫情報・管理アカウント情報・監査ログを保存</p>
     </div>
 
   </div>
