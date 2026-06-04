@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AromaTripNippon Repository クラス図・メソッド詳細</title>
+  <style>
+    :root {
+      --ink: #1f2933;
+      --muted: #667085;
+      --line: #d9dee7;
+      --panel: #f6f7f9;
+      --head: #050505;
+      --accent: #28756f;
+      --accent-soft: #e7f3f1;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #ffffff;
+      color: var(--ink);
+      font-family: "Yu Gothic", "Meiryo", Arial, sans-serif;
+      line-height: 1.75;
+    }
+
+    main {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 32px 0 56px;
+    }
+
+    .doc-header {
+      border-bottom: 3px solid var(--ink);
+      padding-bottom: 18px;
+      margin-bottom: 24px;
+    }
+
+    .doc-kicker {
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .08em;
+    }
+
+    h1 {
+      margin: 6px 0 8px;
+      font-size: 30px;
+      line-height: 1.35;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 18px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .summary {
+      background: var(--accent-soft);
+      border: 1px solid #b8d9d4;
+      border-radius: 6px;
+      padding: 14px 16px;
+      margin: 20px 0 24px;
+    }
+
+    .toc {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 16px 18px;
+      margin-bottom: 28px;
+    }
+
+    .toc-title {
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .toc ol {
+      columns: 2;
+      margin: 0;
+      padding-left: 22px;
+    }
+
+    .toc a {
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .toc a:hover {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+
+    section {
+      margin-top: 30px;
+    }
+
+    h2 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 14px;
+      font-size: 22px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 8px;
+    }
+
+    .number {
+      display: inline-grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--head);
+      color: #fff;
+      font-size: 14px;
+      flex: 0 0 auto;
+    }
+
+    .class-block {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      overflow: hidden;
+      margin-bottom: 28px;
+    }
+
+    .class-title {
+      padding: 12px 16px;
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .class-title strong {
+      display: block;
+      font-size: 16px;
+    }
+
+    .class-title span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .diagram-area {
+      background: var(--panel);
+      padding: 18px;
+      border-bottom: 1px solid var(--line);
+      overflow-x: auto;
+    }
+
+    pre.diagram {
+      display: inline-block;
+      min-width: 560px;
+      margin: 0;
+      color: #1f2933;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 13px;
+      line-height: 1.35;
+      background: #fff;
+      border: 1px dashed #8da09c;
+      padding: 16px 18px;
+    }
+
+    .table-wrap {
+      padding: 14px 16px 18px;
+      overflow-x: auto;
+      background: #fff;
+    }
+
+    table {
+      width: 100%;
+      min-width: 920px;
+      border-collapse: collapse;
+      font-size: 13px;
+      table-layout: fixed;
+    }
+
+    th:nth-child(1),
+    td:nth-child(1) {
+      width: 28%;
+    }
+
+    th:nth-child(2),
+    td:nth-child(2) {
+      width: 18%;
+    }
+
+    th:nth-child(3),
+    td:nth-child(3) {
+      width: 15%;
+    }
+
+    th:nth-child(4),
+    td:nth-child(4) {
+      width: 8%;
+    }
+
+    th:nth-child(5),
+    td:nth-child(5) {
+      width: 31%;
+    }
+
+    th {
+      background: var(--head);
+      color: #fff;
+      text-align: left;
+      padding: 10px 12px;
+      white-space: nowrap;
+    }
+
+    td {
+      border: 1px solid var(--line);
+      padding: 10px 12px;
+      vertical-align: top;
+    }
+
+    td.method,
+    td.type,
+    td.sql {
+      font-family: Consolas, "Courier New", monospace;
+      color: #3f4f5f;
+      white-space: nowrap;
+    }
+
+    td.method {
+      white-space: normal;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      line-height: 1.55;
+    }
+
+    td.sql {
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .note {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 720px) {
+      main {
+        width: min(100% - 20px, 1120px);
+        padding-top: 20px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      .toc ol {
+        columns: 1;
+      }
+
+      pre.diagram {
+        min-width: 520px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <header class="doc-header">
+      <div class="doc-kicker">DESIGN DOCUMENT</div>
+      <h1>AromaTripNippon Repository クラス図・メソッド詳細</h1>
+      <div class="meta">
+        <span>作成日: 2026-06-04</span>
+        <span>対象: com.aromatripnippon.repository</span>
+        <span>形式: Spring Data JPA Repository</span>
+      </div>
+    </header>
+
+    <div class="summary">
+      AromaTripNippon プロジェクトの Repository インターフェースをクラスごとに整理した資料です。
+      各Repositoryは <code>JpaRepository&lt;Entity, Long&gt;</code> を継承するため、表にはソース上で個別に宣言されている検索・更新メソッドを記載しています。
+    </div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol>
+        <li><a href="#admin-backup-code-repository">AdminBackupCodeRepository</a></li>
+        <li><a href="#admin-user-repository">AdminUserRepository</a></li>
+        <li><a href="#audit-log-repository">AuditLogRepository</a></li>
+        <li><a href="#customer-repository">CustomerRepository</a></li>
+        <li><a href="#experience-program-repository">ExperienceProgramRepository</a></li>
+        <li><a href="#fragrance-recipe-material-repository">FragranceRecipeMaterialRepository</a></li>
+        <li><a href="#fragrance-recipe-repository">FragranceRecipeRepository</a></li>
+        <li><a href="#inventory-item-repository">InventoryItemRepository</a></li>
+        <li><a href="#inventory-transaction-repository">InventoryTransactionRepository</a></li>
+        <li><a href="#product-category-repository">ProductCategoryRepository</a></li>
+        <li><a href="#product-repository">ProductRepository</a></li>
+        <li><a href="#reservation-repository">ReservationRepository</a></li>
+      </ol>
+    </nav>
+
+    <section id="admin-backup-code-repository" class="class-block">
+      <div class="class-title">
+        <strong>AdminBackupCodeRepository.java</strong>
+        <span>管理者バックアップコードの認証用コード取得を担当するRepository。</span>
+      </div>
+      <div class="diagram-area">
+        <pre class="diagram">┌──────────────────────────────────────────────────────────────┐
+│                         «Interface»                          │
+│                  AdminBackupCodeRepository                   │
+│      extends JpaRepository&lt;AdminBackupCode, Long&gt;            │
+├──────────────────────────────────────────────────────────────┤
+│ + findByAdminUserAndDeletedAtIsNullAndUsedAtIsNull(          │
+│     adminUser: AdminUser): List&lt;AdminBackupCode&gt;             │
+│ + findByAdminUserAndCodeHashAndDeletedAtIsNullAndUsedAtIsNull│
+│     (adminUser: AdminUser, codeHash: String):                │
+│     Optional&lt;AdminBackupCode&gt;                                │
+└──────────────────────────────────────────────────────────────┘</pre>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>メソッド</th><th>引数</th><th>戻り値</th><th>SQL種別</th><th>説明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="method">findByAdminUserAndDeletedAtIsNullAndUsedAtIsNull</td><td>adminUser: AdminUser</td><td class="type">List&lt;AdminBackupCode&gt;</td><td class="sql">SELECT</td><td>指定した管理者ユーザーに紐づく、未削除かつ未使用のバックアップコード一覧を取得する。</td></tr>
+            <tr><td class="method">findByAdminUserAndCodeHashAndDeletedAtIsNullAndUsedAtIsNull</td><td>adminUser: AdminUser<br>codeHash: String</td><td class="type">Optional&lt;AdminBackupCode&gt;</td><td class="sql">SELECT</td><td>管理者ユーザーとコードハッシュに一致する、未削除かつ未使用のバックアップコードを1件取得する。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="admin-user-repository" class="class-block">
+      <div class="class-title">
+        <strong>AdminUserRepository.java</strong>
+        <span>管理者ユーザーのログイン、本人確認、パスワードリセット検索を担当するRepository。</span>
+      </div>
+      <div class="diagram-area">
+        <pre class="diagram">┌──────────────────────────────────────────────────────────────┐
+│                         «Interface»                          │
+│                     AdminUserRepository                      │
+│            extends JpaRepository&lt;AdminUser, Long&gt;            │
+├──────────────────────────────────────────────────────────────┤
+│ + findByIdAndDeletedAtIsNull(id: Long): Optional&lt;AdminUser&gt;  │
+│ + findByLoginIdAndDeletedAtIsNullAndActiveTrue(              │
+│     loginId: String): Optional&lt;AdminUser&gt;                    │
+│ + findByLoginIdAndDeletedAtIsNull(loginId: String):          │
+│     Optional&lt;AdminUser&gt;                                      │
+│ + findByLoginIdAndEmailAndDeletedAtIsNull(                   │
+│     loginId: String, email: String): Optional&lt;AdminUser&gt;     │
+│ + findByPasswordResetTokenHashAndPasswordResetTokenExpires... │
+│     (passwordResetTokenHash: String, now: LocalDateTime):    │
+│     Optional&lt;AdminUser&gt;                                      │
+└──────────────────────────────────────────────────────────────┘</pre>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>メソッド</th><th>引数</th><th>戻り値</th><th>SQL種別</th><th>説明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="method">findByIdAndDeletedAtIsNull</td><td>id: Long</td><td class="type">Optional&lt;AdminUser&gt;</td><td class="sql">SELECT</td><td>IDに一致する未削除の管理者ユーザーを取得する。</td></tr>
+            <tr><td class="method">findByLoginIdAndDeletedAtIsNullAndActiveTrue</td><td>loginId: String</td><td class="type">Optional&lt;AdminUser&gt;</td><td class="sql">SELECT</td><td>ログインIDに一致する、未削除かつ有効な管理者ユーザーを取得する。</td></tr>
+            <tr><td class="method">findByLoginIdAndDeletedAtIsNull</td><td>loginId: String</td><td class="type">Optional&lt;AdminUser&gt;</td><td class="sql">SELECT</td><td>ログインIDに一致する未削除の管理者ユーザーを取得する。</td></tr>
+            <tr><td class="method">findByLoginIdAndEmailAndDeletedAtIsNull</td><td>loginId: String<br>email: String</td><td class="type">Optional&lt;AdminUser&gt;</td><td class="sql">SELECT</td><td>ログインIDとメールアドレスが一致する未削除の管理者ユーザーを取得する。</td></tr>
+            <tr><td class="method">findByPasswordResetTokenHashAndPasswordResetTokenExpiresAtAfterAndDeletedAtIsNull</td><td>passwordResetTokenHash: String<br>now: LocalDateTime</td><td class="type">Optional&lt;AdminUser&gt;</td><td class="sql">SELECT</td><td>パスワード再設定トークンのハッシュが一致し、有効期限が現在時刻より後の未削除ユーザーを取得する。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="audit-log-repository" class="class-block">
+      <div class="class-title">
+        <strong>AuditLogRepository.java</strong>
+        <span>操作監査ログの一覧取得を担当するRepository。</span>
+      </div>
+      <div class="diagram-area">
+        <pre class="diagram">┌──────────────────────────────────────────────────────────────┐
+│                         «Interface»                          │
+│                      AuditLogRepository                      │
+│              extends JpaRepository&lt;AuditLog, Long&gt;           │
+├──────────────────────────────────────────────────────────────┤
+│ + findByDeletedAtIsNullOrderByIdDesc(): List&lt;AuditLog&gt;       │
+└──────────────────────────────────────────────────────────────┘</pre>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>メソッド</th><th>引数</th><th>戻り値</th><th>SQL種別</th><th>説明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="method">findByDeletedAtIsNullOrderByIdDesc</td><td>なし</td><td class="type">List&lt;AuditLog&gt;</td><td class="sql">SELECT</td><td>未削除の監査ログをID降順で取得する。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="customer-repository" class="class-block">
+      <div class="class-title">
+        <strong>CustomerRepository.java</strong>
+        <span>顧客情報の取得と氏名検索を担当するRepository。</span>
+      </div>
+      <div class="diagram-area">
+        <pre class="diagram">┌──────────────────────────────────────────────────────────────┐
+│                         «Interface»                          │
+│                       CustomerRepository                     │
+│              extends JpaRepository&lt;Customer, Long&gt;           │
+├──────────────────────────────────────────────────────────────┤
+│ + findByIdAndDeletedAtIsNull(id: Long): Optional&lt;Customer&gt;   │
+│ + findByDeletedAtIsNullOrderByIdDesc(): List&lt;Customer&gt;       │
+│ + findByDeletedAtIsNullAndNameContainingIgnoreCaseOrder...   │
+│     (name: String): List&lt;Customer&gt;                           │
+└──────────────────────────────────────────────────────────────┘</pre>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>メソッド</th><th>引数</th><th>戻り値</th><th>SQL種別</th><th>説明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="method">findByIdAndDeletedAtIsNull</td><td>id: Long</td><td class="type">Optional&lt;Customer&gt;</td><td class="sql">SELECT</td><td>IDに一致する未削除の顧客を取得する。</td></tr>
+            <tr><td class="method">findByDeletedAtIsNullOrderByIdDesc</td><td>なし</td><td class="type">List&lt;Customer&gt;</td><td class="sql">SELECT</td><td>未削除の顧客一覧をID降順で取得する。</td></tr>
+            <tr><td class="method">findByDeletedAtIsNullAndNameContainingIgnoreCaseOrderByIdDesc</td><td>name: String</td><td class="type">List&lt;Customer&gt;</td><td class="sql">SELECT</td><td>氏名に指定文字列を含む未削除の顧客を、大文字小文字を区別せずID降順で検索する。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="experience-program-repository" class="class-block">
+      <div class="class-title">
+        <strong>ExperienceProgramRepository.java</strong>
+        <span>体験プログラムの取得と有効プログラム検索を担当するRepository。</span>
+      </div>
+      <div class="diagram-area">
+        <pre class="diagram">┌──────────────────────────────────────────────────────────────┐
+│                         «Interface»                          │
+│                  ExperienceProgramRepository                 │
+│          extends JpaRepository&lt;ExperienceProgram, Long&gt;      │
+├──────────────────────────────────────────────────────────────┤
+│ + findByIdAndDeletedAtIsNull(id: Long):                      │
+│     Optional&lt;ExperienceProgram&gt;                              │
+│ + findByDeletedAtIsNullOrderById(): List&lt;ExperienceProgram&gt;  │
+│ + findFirstByDeletedAtIsNullAndActiveTrueOrderById():        │
+│     Optional&lt;ExperienceProgram&gt;                              │
+└──────────────────────────────────────────────────────────────┘</pre>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>メソッド</th><th>引数</th><th>戻り値</th><th>SQL種別</th><th>説明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="method">findByIdAndDeletedAtIsNull</td><td>id: Long</td><td class="type">Optional&lt;ExperienceProgram&gt;</td><td class="sql">SELECT</td><td>IDに一致する未削除の体験プログラムを取得する。</td></tr>
+            <tr><td class="method">findByDeletedAtIsNullOrderById</td><td>なし</td><td class="type">List&lt;ExperienceProgram&gt;</td><td class="sql">SELECT</td><td>未削除の体験プログラム一覧をID昇順で取得する。</td></tr>
+            <tr><td class="method">findFirstByDeletedAtIsNullAndActiveTrueOrderById</td><td>なし</td><td class="type">Optional&lt;ExperienceProgram&gt;</td><td class="sql">SELECT</td><td>未削除かつ有効な体験プログラムの先頭1件をID昇順で取得する。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="fragrance-recipe-material-repository" class="class-block">
+      <div class="class-title">
+        <strong>FragranceRecipeMaterialRepository.java</strong>
+        <span>香りレシピ材料の取得と在庫品目利用状況確認を担当するRepository。</span>
+      </div>
+      <div class="diagram-area">
+        <pre class="diagram">┌──────────────────────────────────────────────────────────────┐
+│                         «Interface»                          │
+│              FragranceRecipeMaterialRepository               │
+│      extends JpaRepository&lt;FragranceRecipeMaterial, Long&gt;    │
+├──────────────────────────────────────────────────────────────┤
+│ + findByFragranceRecipeIdOrderByDisplayOrderAsc(             │
+│     fragranceRecipeId: Long): List&lt;FragranceRecipeMaterial&gt;  │
+│ + existsByDeletedAtIsNullAndFragranceRecipeDeletedAtIsNull...│
+│     (inventoryItemId: Long): boolean                         │
+└──────────────────────────────────────────────────────────────┘</pre>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>メソッド</th><th>引数</th><th>戻り値</th><th>SQL種別</th><th>説明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="method">findByFragranceRecipeIdOrderByDisplayOrderAsc</td><td>fragranceRecipeId: Long</td><td class="type">List&lt;FragranceRecipeMaterial&gt;</td><td class="sql">SELECT</td><td>指定した香りレシピIDに紐づく材料一覧を表示順の昇順で取得する。</td></tr>
+            <tr><td class="method">existsByDeletedAtIsNullAndFragranceRecipeDeletedAtIsNullAndInventoryItemId</td><td>inventoryItemId: Long</td><td class="type">boolean</td><td class="sql">SELECT</td><td>未削除の香りレシピ材料で、未削除のレシピに紐づき、指定在庫品目を利用しているものが存在するか判定する。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="fragrance-recipe-repository" class="class-block">
+      <div class="class-title">
+        <strong>FragranceRecipeRepository.java</strong>
+        <span>香りレシピの取得、名称検索、顧客利用状況確認を担当するRepository。</span>
+      </div>
+      <div class="diagram-area">
+        <pre class="diagram">┌──────────────────────────────────────────────────────────────┐
+│                         «Interface»                          │
+│                  FragranceRecipeRepository                   │
+│        extends JpaRepository&lt;FragranceRecipe, Long&gt;          │
+├──────────────────────────────────────────────────────────────┤
+│ + findByIdAndDeletedAtIsNull(id: Long):                      │
+│     Optional&lt;FragranceRecipe&gt;                                │
+│ + findByDeletedAtIsNullOrderByIdDesc(): List&lt;FragranceRecipe&gt;│
+│ + findByDeletedAtIsNullAndRecipeNameContainingIgnoreCase...  │
+│     (recipeName: String): List&lt;FragranceRecipe&gt;              │
+│ + existsActiveByCustomerId(customerId: Long): boolean        │
+└──────────────────────────────────────────────────────────────┘</pre>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>メソッド</th><th>引数</th><th>戻り値</th><th>SQL種別</th><th>説明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="method">findByIdAndDeletedAtIsNull</td><td>id: Long</td><td class="type">Optional&lt;FragranceRecipe&gt;</td><td class="sql">SELECT</td><td>IDに一致する未削除の香りレシピを取得する。</td></tr>
+            <tr><td class="method">findByDeletedAtIsNullOrderByIdDesc</td><td>なし</td><td class="type">List&lt;FragranceRecipe&gt;</td><td class="sql">SELECT</td><td>未削除の香りレシピ一覧をID降順で取得する。顧客情報をEntityGraphで同時取得する。</td></tr>
+            <tr><td class="method">findByDeletedAtIsNullAndRecipeNameContainingIgnoreCaseOrderByIdDesc</td><td>recipeName: String</td><td class="type">List&lt;FragranceRecipe&gt;</td><td class="sql">SELECT</td><td>レシピ名に指定文字列を含む未削除の香りレシピを、大文字小文字を区別せずID降順で検索する。</td></tr>
+            <tr><td class="method">existsActiveByCustomerId</td><td>customerId: Long</td><td class="type">boolean</td><td class="sql">SELECT</td><td>指定した顧客IDに紐づく未削除の香りレシピが存在するかをJPQLで判定する。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="inventory-item-repository" class="class-block">
+      <div class="class-title">
+        <strong>InventoryItemRepository.java</strong>
+        <span>在庫品目の取得と品目名検索を担当するRepository。</span>
+      </div>
+      <div class="diagram-area">
+        <pre class="diagram">┌──────────────────────────────────────────────────────────────┐
+│                         «Interface»                          │
+│                    InventoryItemRepository                   │
+│          extends JpaRepository&lt;InventoryItem, Long&gt;          │
+├──────────────────────────────────────────────────────────────┤
+│ + findByIdAndDeletedAtIsNull(id: Long): Optional&lt;InventoryItem&gt;│
+│ + findByDeletedAtIsNullOrderByIdDesc(): List&lt;InventoryItem&gt;  │
+│ + findByDeletedAtIsNullAndItemNameContainingIgnoreCase...    │
+│     (itemName: String): List&lt;InventoryItem&gt;                  │
+└──────────────────────────────────────────────────────────────┘</pre>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>メソッド</th><th>引数</th><th>戻り値</th><th>SQL種別</th><th>説明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="method">findByIdAndDeletedAtIsNull</td><td>id: Long</td><td class="type">Optional&lt;InventoryItem&gt;</td><td class="sql">SELECT</td><td>IDに一致する未削除の在庫品目を取得する。</td></tr>
+            <tr><td class="method">findByDeletedAtIsNullOrderByIdDesc</td><td>なし</td><td class="type">List&lt;InventoryItem&gt;</td><td class="sql">SELECT</td><td>未削除の在庫品目一覧をID降順で取得する。</td></tr>
+            <tr><td class="method">findByDeletedAtIsNullAndItemNameContainingIgnoreCaseOrderByIdDesc</td><td>itemName: String</td><td class="type">List&lt;InventoryItem&gt;</td><td class="sql">SELECT</td><td>品目名に指定文字列を含む未削除の在庫品目を、大文字小文字を区別せずID降順で検索する。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="inventory-transaction-repository" class="class-block">
+      <div class="class-title">
+        <strong>InventoryTransactionRepository.java</strong>
+        <span>在庫入出庫履歴の一覧取得を担当するRepository。</span>
+      </div>
+      <div class="diagram-area">
+        <pre class="diagram">┌──────────────────────────────────────────────────────────────┐
+│                         «Interface»                          │
+│                InventoryTransactionRepository                │
+│       extends JpaRepository&lt;InventoryTransaction, Long&gt;      │
+├──────────────────────────────────────────────────────────────┤
+│ + findByDeletedAtIsNullOrderByIdDesc():                      │
+│     List&lt;InventoryTransaction&gt;                               │
+│ + findByDeletedAtIsNullAndInventoryItemIdOrderBy...          │
+│     (inventoryItemId: Long): List&lt;InventoryTransaction&gt;      │
+└──────────────────────────────────────────────────────────────┘</pre>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>メソッド</th><th>引数</th><th>戻り値</th><th>SQL種別</th><th>説明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="method">findByDeletedAtIsNullOrderByIdDesc</td><td>なし</td><td class="type">List&lt;InventoryTransaction&gt;</td><td class="sql">SELECT</td><td>未削除の在庫入出庫履歴一覧をID降順で取得する。</td></tr>
+            <tr><td class="method">findByDeletedAtIsNullAndInventoryItemIdOrderByTransactionDateDescIdDesc</td><td>inventoryItemId: Long</td><td class="type">List&lt;InventoryTransaction&gt;</td><td class="sql">SELECT</td><td>指定在庫品目IDに紐づく未削除の入出庫履歴を、取引日降順、ID降順で取得する。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="product-category-repository" class="class-block">
+      <div class="class-title">
+        <strong>ProductCategoryRepository.java</strong>
+        <span>商品カテゴリの名称検索と有効カテゴリ一覧取得を担当するRepository。</span>
+      </div>
+      <div class="diagram-area">
+        <pre class="diagram">┌──────────────────────────────────────────────────────────────┐
+│                         «Interface»                          │
+│                  ProductCategoryRepository                   │
+│        extends JpaRepository&lt;ProductCategory, Long&gt;          │
+├──────────────────────────────────────────────────────────────┤
+│ + findByCategoryNameAndDeletedAtIsNull(                      │
+│     categoryName: String): Optional&lt;ProductCategory&gt;         │
+│ + findByDeletedAtIsNullAndActiveTrueOrderByDisplayOrder...   │
+│     (): List&lt;ProductCategory&gt;                                │
+└──────────────────────────────────────────────────────────────┘</pre>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>メソッド</th><th>引数</th><th>戻り値</th><th>SQL種別</th><th>説明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="method">findByCategoryNameAndDeletedAtIsNull</td><td>categoryName: String</td><td class="type">Optional&lt;ProductCategory&gt;</td><td class="sql">SELECT</td><td>カテゴリ名に一致する未削除の商品カテゴリを取得する。</td></tr>
+            <tr><td class="method">findByDeletedAtIsNullAndActiveTrueOrderByDisplayOrderAscIdAsc</td><td>なし</td><td class="type">List&lt;ProductCategory&gt;</td><td class="sql">SELECT</td><td>未削除かつ有効な商品カテゴリ一覧を表示順昇順、ID昇順で取得する。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="product-repository" class="class-block">
+      <div class="class-title">
+        <strong>ProductRepository.java</strong>
+        <span>商品の取得、一覧表示、有効商品検索、商品名検索を担当するRepository。</span>
+      </div>
+      <div class="diagram-area">
+        <pre class="diagram">┌──────────────────────────────────────────────────────────────┐
+│                         «Interface»                          │
+│                       ProductRepository                      │
+│              extends JpaRepository&lt;Product, Long&gt;            │
+├──────────────────────────────────────────────────────────────┤
+│ + findByIdAndDeletedAtIsNull(id: Long): Optional&lt;Product&gt;    │
+│ + findByDeletedAtIsNullOrderByIdDesc(): List&lt;Product&gt;        │
+│ + findByDeletedAtIsNullAndActiveTrueOrderByIdAsc():          │
+│     List&lt;Product&gt;                                            │
+│ + findByDeletedAtIsNullAndProductNameContainingIgnoreCase... │
+│     (productName: String): List&lt;Product&gt;                     │
+└──────────────────────────────────────────────────────────────┘</pre>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>メソッド</th><th>引数</th><th>戻り値</th><th>SQL種別</th><th>説明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="method">findByIdAndDeletedAtIsNull</td><td>id: Long</td><td class="type">Optional&lt;Product&gt;</td><td class="sql">SELECT</td><td>IDに一致する未削除の商品を取得する。カテゴリ情報をEntityGraphで同時取得する。</td></tr>
+            <tr><td class="method">findByDeletedAtIsNullOrderByIdDesc</td><td>なし</td><td class="type">List&lt;Product&gt;</td><td class="sql">SELECT</td><td>未削除の商品一覧をID降順で取得する。カテゴリ情報をEntityGraphで同時取得する。</td></tr>
+            <tr><td class="method">findByDeletedAtIsNullAndActiveTrueOrderByIdAsc</td><td>なし</td><td class="type">List&lt;Product&gt;</td><td class="sql">SELECT</td><td>未削除かつ有効な商品一覧をID昇順で取得する。カテゴリ情報をEntityGraphで同時取得する。</td></tr>
+            <tr><td class="method">findByDeletedAtIsNullAndProductNameContainingIgnoreCaseOrderByIdDesc</td><td>productName: String</td><td class="type">List&lt;Product&gt;</td><td class="sql">SELECT</td><td>商品名に指定文字列を含む未削除の商品を、大文字小文字を区別せずID降順で検索する。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="reservation-repository" class="class-block">
+      <div class="class-title">
+        <strong>ReservationRepository.java</strong>
+        <span>予約の取得、日付・顧客名検索、顧客利用状況確認、論理削除を担当するRepository。</span>
+      </div>
+      <div class="diagram-area">
+        <pre class="diagram">┌──────────────────────────────────────────────────────────────┐
+│                         «Interface»                          │
+│                     ReservationRepository                    │
+│            extends JpaRepository&lt;Reservation, Long&gt;          │
+├──────────────────────────────────────────────────────────────┤
+│ + findByIdAndDeletedAtIsNull(id: Long): Optional&lt;Reservation&gt;│
+│ + findByDeletedAtIsNullOrderByVisitDateDescTimeSlotAsc():    │
+│     List&lt;Reservation&gt;                                        │
+│ + findByDeletedAtIsNullAndCustomerNameContainingIgnore...    │
+│     (customerName: String): List&lt;Reservation&gt;                │
+│ + findByDeletedAtIsNullAndVisitDateOrderByTimeSlotAsc(       │
+│     visitDate: LocalDate): List&lt;Reservation&gt;                 │
+│ + existsActiveByCustomerId(customerId: Long): boolean        │
+│ + softDeleteById(id: Long, deletedAt: LocalDateTime): int    │
+└──────────────────────────────────────────────────────────────┘</pre>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>メソッド</th><th>引数</th><th>戻り値</th><th>SQL種別</th><th>説明</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="method">findByIdAndDeletedAtIsNull</td><td>id: Long</td><td class="type">Optional&lt;Reservation&gt;</td><td class="sql">SELECT</td><td>IDに一致する未削除の予約を取得する。</td></tr>
+            <tr><td class="method">findByDeletedAtIsNullOrderByVisitDateDescTimeSlotAsc</td><td>なし</td><td class="type">List&lt;Reservation&gt;</td><td class="sql">SELECT</td><td>未削除の予約一覧を来店日降順、時間帯昇順で取得する。顧客と体験プログラムをEntityGraphで同時取得する。</td></tr>
+            <tr><td class="method">findByDeletedAtIsNullAndCustomerNameContainingIgnoreCaseOrderByVisitDateDescTimeSlotAsc</td><td>customerName: String</td><td class="type">List&lt;Reservation&gt;</td><td class="sql">SELECT</td><td>顧客名に指定文字列を含む未削除の予約を、大文字小文字を区別せず来店日降順、時間帯昇順で検索する。</td></tr>
+            <tr><td class="method">findByDeletedAtIsNullAndVisitDateOrderByTimeSlotAsc</td><td>visitDate: LocalDate</td><td class="type">List&lt;Reservation&gt;</td><td class="sql">SELECT</td><td>指定来店日の未削除予約を時間帯昇順で取得する。</td></tr>
+            <tr><td class="method">existsActiveByCustomerId</td><td>customerId: Long</td><td class="type">boolean</td><td class="sql">SELECT</td><td>指定した顧客IDに紐づく未削除予約が存在するかをJPQLで判定する。</td></tr>
+            <tr><td class="method">softDeleteById</td><td>id: Long<br>deletedAt: LocalDateTime</td><td class="type">int</td><td class="sql">UPDATE</td><td>指定IDの未削除予約に削除日時を設定し、論理削除する。戻り値は更新件数。</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="table-wrap">
+        <div class="note">補足: Repository共通の保存・削除処理は JpaRepository の継承メソッドとして利用されます。この資料では各Repositoryで追加宣言されたメソッドを対象にしています。</div>
+      </div>
+    </section>
+  </main>
+</body>
+
+</html>

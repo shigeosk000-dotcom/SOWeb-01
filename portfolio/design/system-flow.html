@@ -23,7 +23,7 @@
         <div class="doc-category">DESIGN DOCUMENT</div>
         <h1 class="doc-title">システムフロー図</h1>
         <div class="doc-meta">
-          <span><span class="material-symbols-outlined icon-sm">calendar_today</span> 作成日：2026-06-03</span>
+          <span><span class="material-symbols-outlined icon-sm">calendar_today</span> 作成日：2026-06-04</span>
           <span><span class="material-symbols-outlined icon-sm">person</span> 作成者：尾坂 成紀</span>
           <span><span class="material-symbols-outlined icon-sm">push_pin</span> Ver 1.0</span>
         </div>
@@ -38,7 +38,7 @@
             <li><a href="#sec2">リクエスト処理フロー</a></li>
             <li><a href="#sec3">画面遷移フロー</a></li>
             <li><a href="#sec4">データフロー</a></li>
-            <li><a href="#sec5">認証・認可フロー</a></li>
+            <!-- <li><a href="#sec5">認証・認可フロー</a></li> -->
           </ol>
         </div>
 
@@ -152,67 +152,6 @@
               </p>
             </div>
           </div>
-          <!-- <div class="fill-hint">GET /tasks リクエストの処理の流れ＠ASCII図でなくてもよいです。</div> -->
-          <!-- <div class="fill-content">
-              <div class="ascii-diagram">
-                <pre>
-┌────────┐ ┌──────────────┐ ┌───────────┐ ┌──────────┐ ┌────────┐
-│ Client │────▶│TaskController│────▶│TaskService│────▶│TaskMapper│────▶│ DB │
-│ │ │ list() │ │ findAll() │ │selectAll │ │ │
-└────────┘ └──────────────┘ └───────────┘ └──────────┘ └────────┘
-▲ │ │ │ │
-│ │ │ │ │
-│ ▼ ▼ ▼ │
-│ ┌──────────┐ List&lt;Task&gt; List&lt;Task&gt; │
-│ │ list.html│◀──────────────────────────────────────────────┘
-│ └──────────┘
-│ │
-└─────────────────┘
-HTML Response
-
-（上記を参考に編集してください）
-                </pre>
-              </div>
-            </div>
-          </div>
-
-          <div class="fill-block">
-            <div class="fill-label">登録処理のフロー <span class="required">必須</span></div>
-            <div class="fill-hint">POST /tasks/create リクエストの処理（バリデーション分岐含む）＠ASCII図でなくてもよいです。</div>
-            <div class="fill-content">
-              <div class="ascii-diagram">
-                <pre>
-┌────────┐ ┌──────────────┐ ┌───────────────┐
-│ Client │────▶│TaskController│────▶│ Validation │
-│ Form │ │ create() │ │ @Valid check │
-└────────┘ └──────────────┘ └───────────────┘
-│ │
-│ ┌──────┴──────┐
-│ ▼ ▼
-│ エラーあり エラーなし
-│ │ │
-│ ▼ ▼
-│ ┌──────────┐ ┌───────────┐
-│ │create.html│ │TaskService│
-│ │(エラー表示)│ │ insert() │
-│ └──────────┘ └───────────┘
-│ │
-│ ▼
-│ ┌──────────┐
-│ │TaskMapper│
-│ │ insert │
-│ └──────────┘
-│ │
-│ ▼
-│ ┌──────────┐
-│◀─────────────────────│ redirect │
-│ │ /tasks │
-│ └──────────┘
-
-（上記を参考に編集してください）
-                </pre>
-              </div>
-            </div> -->
       </div>
       </section>
 
@@ -249,49 +188,24 @@ HTML Response
         <h2 class="section-title"><span class="section-icon">4</span> データフロー</h2>
 
         <div class="fill-block">
-          <div class="fill-label">Form → Entity → DB の変換フロー <span class="required">必須</span></div>
-          <div class="fill-hint">画面入力からデータベース保存までのデータ変換の流れ＠ASCII図でなくてもよいです。</div>
+          <div class="fill-label">Form → Entity → DB の変換フロー</div>
           <div class="fill-content">
             <iframe class="embedded-html-frame" src="aromatripnippon-reservation-dataflow.html"
-              title="AromaTripNippon 予約フォームからEntity、DBへのデータフロー"
-              style="width: 100%; min-height: 1600px;"></iframe>
+              title="AromaTripNippon 予約フォームからEntity、DBへのデータフロー" style="width: 100%; min-height: 1600px;"></iframe>
             <p class="embedded-doc-link">
               <a href="aromatripnippon-reservation-dataflow.html" target="_blank" rel="noopener">
                 aromatripnippon-reservation-dataflow.html を別タブで開く
               </a>
             </p>
-            <div class="ascii-diagram" style="display: none;">
-              <pre>
-┌────────────────┐ ┌────────────────┐ ┌────────────────┐
-│ TaskForm │ │ Task │ │ tasks │
-│ (入力データ) │ ───▶ │ (Entity) │ ───▶ │ (DBテーブル) │
-├────────────────┤ ├────────────────┤ ├────────────────┤
-│ title: String │ │ id: Long │ │ id: BIGINT │
-│ content: String│ │ title: String │ │ title: VARCHAR │
-│ dueDate: String│ 変換 │ content: String│ 保存 │ content: TEXT │
-│ priority: int │ ───▶ │ dueDate: Date │ ───▶ │ due_date: DATE │
-│ │ │ priority: int │ │ priority: INT │
-│ │ │ createdAt: Date│ │ created_at: │
-│ │ │ updatedAt: Date│ │ TIMESTAMP │
-└────────────────┘ └────────────────┘ └────────────────┘
-│ │ │
-│ BeanUtils.copy │ MyBatis Mapper │
-│ または手動マッピング │ @Insert/@Update │
-└───────────────────────┴───────────────────────┘
-
-（上記を参考に編集してください）
-                </pre>
-            </div>
           </div>
         </div>
       </section>
-
+      <!--
       <section class="section" id="sec5">
         <h2 class="section-title"><span class="section-icon">5</span> 認証・認可フロー</h2>
 
         <div class="fill-block">
           <div class="fill-label">Spring Security の認証フロー <span class="required">必須</span></div>
-          <div class="fill-hint">ログイン処理の詳細フロー＠ASCII図でなくてもよいです。</div>
           <div class="fill-content">
             <div class="ascii-diagram">
               <pre>
@@ -394,7 +308,7 @@ HTML Response
             </table>
           </div>
         </div>
-      </section>
+      </section> -->
 
   </div>
   </main>

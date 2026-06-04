@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AromaTripNippon Controller クラス図・エンドポイント一覧</title>
+  <style>
+    :root {
+      --ink: #1f2933;
+      --muted: #667085;
+      --line: #d9dee7;
+      --panel: #f6f7f9;
+      --head: #050505;
+      --accent: #28756f;
+      --accent-soft: #e7f3f1;
+      --warn-soft: #fff8e6;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #fff;
+      color: var(--ink);
+      font-family: "Yu Gothic", "Meiryo", Arial, sans-serif;
+      line-height: 1.75;
+    }
+
+    main {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 32px 0 56px;
+    }
+
+    .doc-header {
+      border-bottom: 3px solid var(--ink);
+      padding-bottom: 18px;
+      margin-bottom: 24px;
+    }
+
+    .doc-kicker {
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .08em;
+    }
+
+    h1 {
+      margin: 6px 0 8px;
+      font-size: 30px;
+      line-height: 1.35;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 18px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .summary,
+    .note-box {
+      border-radius: 6px;
+      padding: 14px 16px;
+      margin: 20px 0 24px;
+    }
+
+    .summary {
+      background: var(--accent-soft);
+      border: 1px solid #b8d9d4;
+    }
+
+    .note-box {
+      background: var(--warn-soft);
+      border: 1px solid #ead491;
+    }
+
+    .toc {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 16px 18px;
+      margin-bottom: 28px;
+    }
+
+    .toc-title {
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .toc ol {
+      columns: 2;
+      margin: 0;
+      padding-left: 22px;
+    }
+
+    .toc a {
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .toc a:hover {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+
+    .class-block {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      overflow: hidden;
+      margin-bottom: 28px;
+    }
+
+    .class-title {
+      padding: 12px 16px;
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .class-title strong {
+      display: block;
+      font-size: 16px;
+    }
+
+    .class-title span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .diagram-area {
+      background: var(--panel);
+      padding: 18px;
+      border-bottom: 1px solid var(--line);
+      overflow-x: auto;
+    }
+
+    pre.diagram {
+      display: inline-block;
+      min-width: 620px;
+      margin: 0;
+      color: #1f2933;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 13px;
+      line-height: 1.35;
+      background: #fff;
+      border: 1px dashed #8da09c;
+      padding: 16px 18px;
+    }
+
+    .dependency {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--line);
+      background: #fbfcfd;
+      font-size: 13px;
+    }
+
+    .table-wrap {
+      padding: 14px 16px 18px;
+      overflow-x: auto;
+      background: #fff;
+    }
+
+    table {
+      width: 100%;
+      min-width: 1040px;
+      border-collapse: collapse;
+      font-size: 13px;
+      table-layout: fixed;
+    }
+
+    th:nth-child(1),
+    td:nth-child(1) {
+      width: 8%;
+    }
+
+    th:nth-child(2),
+    td:nth-child(2) {
+      width: 22%;
+    }
+
+    th:nth-child(3),
+    td:nth-child(3) {
+      width: 18%;
+    }
+
+    th:nth-child(4),
+    td:nth-child(4) {
+      width: 20%;
+    }
+
+    th:nth-child(5),
+    td:nth-child(5) {
+      width: 32%;
+    }
+
+    th {
+      background: var(--head);
+      color: #fff;
+      text-align: left;
+      padding: 10px 12px;
+      white-space: nowrap;
+    }
+
+    td {
+      border: 1px solid var(--line);
+      padding: 10px 12px;
+      vertical-align: top;
+    }
+
+    td.http,
+    td.path,
+    td.method {
+      font-family: Consolas, "Courier New", monospace;
+      color: #3f4f5f;
+    }
+
+    td.path,
+    td.method {
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      line-height: 1.55;
+    }
+
+    td.http {
+      font-weight: 700;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    code {
+      font-family: Consolas, "Courier New", monospace;
+      font-size: .95em;
+    }
+
+    @media (max-width: 720px) {
+      main {
+        width: min(100% - 20px, 1180px);
+        padding-top: 20px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      .toc ol {
+        columns: 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <header class="doc-header">
+      <div class="doc-kicker">DESIGN DOCUMENT</div>
+      <h1>AromaTripNippon Controller クラス図・エンドポイント一覧</h1>
+      <div class="meta">
+        <span>作成日: 2026-06-04</span>
+        <span>対象: com.aromatripnippon.controller</span>
+        <span>形式: Spring MVC Controller</span>
+      </div>
+    </header>
+
+    <div class="summary">
+      AromaTripNippon プロジェクトの Controller クラスを、クラス図風の構造とエンドポイント一覧で整理した資料です。
+      URLは公開サイト系、管理画面系、認証系に分かれ、管理画面の更新・削除はHTMLフォーム前提のため <code>POST</code> で実装されています。
+    </div>
+
+    <div class="note-box">
+      <strong>RESTfulなURL設計:</strong>
+      一覧は <code>GET /management/{resources}</code>、新規フォームは <code>GET /management/{resources}/new</code>、
+      作成は <code>POST /management/{resources}</code>、詳細は <code>GET /management/{resources}/{id}</code>、
+      編集フォームは <code>GET /management/{resources}/{id}/edit</code>、更新は <code>POST /management/{resources}/{id}</code>、
+      削除は <code>POST /management/{resources}/{id}/delete</code> の形で統一されています。
+    </div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol>
+        <li><a href="#public-controller">PublicController</a></li>
+        <li><a href="#login-controller">LoginController</a></li>
+        <li><a href="#management-controller">ManagementController</a></li>
+        <li><a href="#management-exception-handler">ManagementExceptionHandler</a></li>
+      </ol>
+    </nav>
+
+    <section id="public-controller" class="class-block">
+      <div class="class-title">
+        <strong>PublicController.java</strong>
+        <span>公開サイト、英語ページ、公開予約フローを担当するController。</span>
+      </div>
+      <div class="diagram-area">
+        <pre class="diagram">┌──────────────────────────────────────────────────────────────┐
+│                         «Controller»                         │
+│                       PublicController                       │
+├──────────────────────────────────────────────────────────────┤
+│ - programs: ExperienceProgramRepository                      │
+│ - reservations: ReservationRepository                        │
+│ - reservationService: ReservationService                     │
+├──────────────────────────────────────────────────────────────┤
+│ + index(model): String                                       │
+│ + indexEn(model): String                                     │
+│ + experience(model): String                                  │
+│ + experienceEn(model): String                                │
+│ + concept(): String                                          │
+│ + conceptEn(): String                                        │
+│ + reservation(model): String                                 │
+│ + reservationEn(model): String                               │
+│ + createReservation(request, errors, model, redirect): String│
+│ + createReservationEn(request, errors, model, redirect): String│
+│ + complete(id, model): String                                │
+│ + completeEn(id, model): String                              │
+└──────────────────────────────────────────────────────────────┘</pre>
+      </div>
+      <div class="dependency"><strong>依存:</strong> ExperienceProgramRepository, ReservationRepository, ReservationService, ReservationRequest。</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>HTTP</th><th>URL</th><th>ハンドラ</th><th>表示/遷移</th><th>処理概要</th></tr></thead>
+          <tbody>
+            <tr><td class="http">GET</td><td class="path">/</td><td class="method">index</td><td>public/index</td><td>有効な体験プログラムを取得し、日本語トップページを表示する。</td></tr>
+            <tr><td class="http">GET</td><td class="path">/en, /en/</td><td class="method">indexEn</td><td>public/en/index</td><td>有効な体験プログラムを取得し、英語トップページを表示する。</td></tr>
+            <tr><td class="http">GET</td><td class="path">/experience</td><td class="method">experience</td><td>public/experience</td><td>体験プログラム情報を表示する。</td></tr>
+            <tr><td class="http">GET</td><td class="path">/en/experience</td><td class="method">experienceEn</td><td>public/en/experience</td><td>英語版の体験プログラム情報を表示する。</td></tr>
+            <tr><td class="http">GET</td><td class="path">/concept</td><td class="method">concept</td><td>public/concept</td><td>コンセプトページを表示する。</td></tr>
+            <tr><td class="http">GET</td><td class="path">/en/concept</td><td class="method">conceptEn</td><td>public/en/concept</td><td>英語版コンセプトページを表示する。</td></tr>
+            <tr><td class="http">GET</td><td class="path">/reservation</td><td class="method">reservation</td><td>public/reservation</td><td>日本語予約フォームを表示する。<code>ReservationRequest</code> の希望言語を日本語で初期化し、予約可能期間を設定する。</td></tr>
+            <tr><td class="http">GET</td><td class="path">/en/reservation</td><td class="method">reservationEn</td><td>public/en/reservation</td><td>英語予約フォームを表示する。希望言語を英語で初期化する。</td></tr>
+            <tr><td class="http">POST</td><td class="path">/reservation</td><td class="method">createReservation</td><td>redirect:/reservation/complete/{id}</td><td>入力検証後、<code>ReservationRequest</code> から <code>Customer</code> と <code>Reservation</code> を生成し、予約作成Serviceへ渡す。</td></tr>
+            <tr><td class="http">POST</td><td class="path">/en/reservation</td><td class="method">createReservationEn</td><td>redirect:/en/reservation/complete/{id}</td><td>英語予約フォームのPOST処理。入力検証と英語メッセージ変換を行い、予約完了へ遷移する。</td></tr>
+            <tr><td class="http">GET</td><td class="path">/reservation/complete/{id}</td><td class="method">complete</td><td>public/reservation-complete</td><td>未削除の予約を取得し、日本語予約完了ページを表示する。</td></tr>
+            <tr><td class="http">GET</td><td class="path">/en/reservation/complete/{id}</td><td class="method">completeEn</td><td>public/en/reservation-complete</td><td>未削除の予約を取得し、英語予約完了ページを表示する。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="login-controller" class="class-block">
+      <div class="class-title">
+        <strong>LoginController.java</strong>
+        <span>管理画面ログイン表示と、TOTP/バックアップコードを使ったパスワード再設定を担当するController。</span>
+      </div>
+      <div class="diagram-area">
+        <pre class="diagram">┌──────────────────────────────────────────────────────────────┐
+│                         «Controller»                         │
+│                       LoginController                        │
+├──────────────────────────────────────────────────────────────┤
+│ - admins: AdminUserRepository                                │
+│ - totpService: TotpService                                   │
+│ - encoder: PasswordEncoder                                   │
+├──────────────────────────────────────────────────────────────┤
+│ + login(): String                                            │
+│ + forgotPassword(): String                                   │
+│ + forgotPasswordSubmit(loginId, newPassword, confirmPassword,│
+│     totpCode, backupCode, model, redirect): String           │
+└──────────────────────────────────────────────────────────────┘</pre>
+      </div>
+      <div class="dependency"><strong>依存:</strong> AdminUserRepository, TotpService, PasswordEncoder。</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>HTTP</th><th>URL</th><th>ハンドラ</th><th>表示/遷移</th><th>処理概要</th></tr></thead>
+          <tbody>
+            <tr><td class="http">GET</td><td class="path">/management/login</td><td class="method">login</td><td>management/login</td><td>管理画面ログインページを表示する。</td></tr>
+            <tr><td class="http">GET</td><td class="path">/management/forgot-password</td><td class="method">forgotPassword</td><td>management/forgot-password</td><td>パスワード再設定フォームを表示する。</td></tr>
+            <tr><td class="http">POST</td><td class="path">/management/forgot-password</td><td class="method">forgotPasswordSubmit</td><td>redirect:/management/login?reset</td><td>新パスワードの長さと確認入力を検証し、TOTPまたはバックアップコードで本人確認する。成功時はパスワードハッシュ、ログイン失敗回数、ロック状態、再設定要求、リセットトークン情報を更新する。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="management-controller" class="class-block">
+      <div class="class-title">
+        <strong>ManagementController.java</strong>
+        <span>管理画面のダッシュボード、予約、顧客、香りレシピ、商品、在庫、アカウント設定を担当するController。</span>
+      </div>
+      <div class="diagram-area">
+        <pre class="diagram">┌──────────────────────────────────────────────────────────────┐
+│                         «Controller»                         │
+│                    ManagementController                      │
+├──────────────────────────────────────────────────────────────┤
+│ - reservations, customers, programs, recipes, recipeMaterials│
+│ - inventory, productCategories, products, admins, auditLogs  │
+│ - audit: AuditService                                        │
+│ - inventoryService: InventoryService                         │
+│ - encoder: PasswordEncoder                                   │
+│ - totpService: TotpService                                   │
+│ - validator: Validator                                       │
+├──────────────────────────────────────────────────────────────┤
+│ + dashboard(model): String                                   │
+│ + reservationList(q, model): String                          │
+│ + reservationNew(model): String                              │
+│ + reservationCreate(...): String                             │
+│ + reservationDetail(id, model): String                       │
+│ + reservationEdit(id, model): String                         │
+│ + reservationUpdate(...): String                             │
+│ + reservationDelete(id, principal): String                   │
+│ + customer/product/recipe/inventory/account handlers...      │
+└──────────────────────────────────────────────────────────────┘</pre>
+      </div>
+      <div class="dependency"><strong>依存:</strong> 各Repository、AuditService、InventoryService、TotpService、PasswordEncoder、Validator。</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>HTTP</th><th>URL</th><th>ハンドラ</th><th>表示/遷移</th><th>処理概要</th></tr></thead>
+          <tbody>
+            <tr><td class="http">GET</td><td class="path">/management/dashboard</td><td class="method">dashboard</td><td>management/dashboard</td><td>予約、顧客、レシピ、在庫の件数と最新監査ログを取得してダッシュボードを表示する。</td></tr>
+            <tr><td class="http">GET</td><td class="path">/management/reservations</td><td class="method">reservationList</td><td>management/reservation-list</td><td>予約一覧を表示する。<code>q</code> 指定時は顧客名で検索する。</td></tr>
+            <tr><td class="http">GET</td><td class="path">/management/reservations/new</td><td class="method">reservationNew</td><td>management/reservation-form</td><td>予約新規作成フォームを表示する。</td></tr>
+            <tr><td class="http">POST</td><td class="path">/management/reservations</td><td class="method">reservationCreate</td><td>redirect:/management/reservations/{id}</td><td>予約を作成する。顧客と体験プログラムを紐づけ、日付・人数を検証し、監査ログを登録する。</td></tr>
+            <tr><td class="http">GET</td><td class="path">/management/reservations/{id}</td><td class="method">reservationDetail</td><td>management/reservation-detail</td><td>指定IDの予約詳細を表示する。</td></tr>
+            <tr><td class="http">GET</td><td class="path">/management/reservations/{id}/edit</td><td class="method">reservationEdit</td><td>management/reservation-form</td><td>予約編集フォームを表示する。</td></tr>
+            <tr><td class="http">POST</td><td class="path">/management/reservations/{id}</td><td class="method">reservationUpdate</td><td>redirect:/management/reservations/{id}</td><td>予約を更新する。日付、時間帯、人数、希望言語、備考、ステータス、顧客、プログラムを反映し、監査ログを登録する。</td></tr>
+            <tr><td class="http">POST</td><td class="path">/management/reservations/{id}/delete</td><td class="method">reservationDelete</td><td>redirect:/management/reservations</td><td><code>@Transactional</code>。予約を論理削除し、監査ログを登録する。</td></tr>
+            <tr><td class="http">GET</td><td class="path">/management/customers</td><td class="method">customerList</td><td>management/customer-list</td><td>顧客一覧を表示する。<code>q</code> 指定時は氏名で検索する。</td></tr>
+            <tr><td class="http">GET</td><td class="path">/management/customers/new</td><td class="method">customerNew</td><td>management/customer-form</td><td>顧客新規作成フォームを表示する。</td></tr>
+            <tr><td class="http">POST</td><td class="path">/management/customers</td><td class="method">customerCreate</td><td>redirect:/management/customers/{id}</td><td>顧客を作成し、監査ログを登録する。</td></tr>
+            <tr><td class="http">GET</td><td class="path">/management/customers/{id}</td><td class="method">customerDetail</td><td>management/customer-detail</td><td>指定IDの顧客詳細を表示する。</td></tr>
+            <tr><td class="http">GET</td><td class="path">/management/customers/{id}/edit</td><td class="method">customerEdit</td><td>management/customer-form</td><td>顧客編集フォームを表示する。</td></tr>
+            <tr><td class="http">POST</td><td class="path">/management/customers/{id}</td><td class="method">customerUpdate</td><td>redirect:/management/customers/{id}</td><td>顧客を更新する。氏名、メール、電話、国籍、希望言語、目的、備考を反映し、監査ログを登録する。</td></tr>
+            <tr><td class="http">POST</td><td class="path">/management/customers/{id}/delete</td><td class="method">customerDelete</td><td>redirect:/management/customers</td><td>顧客を論理削除する。予約やレシピで利用中の場合は削除不可メッセージを返す。</td></tr>
+            <tr><td class="http">GET</td><td class="path">/management/recipes</td><td class="method">recipeList</td><td>management/recipe-list</td><td>香りレシピ一覧を表示する。<code>q</code> 指定時はレシピ名で検索する。</td></tr>
+            <tr><td class="http">GET</td><td class="path">/management/recipes/new</td><td class="method">recipeNew</td><td>management/recipe-form</td><td>香りレシピ新規作成フォームを表示する。</td></tr>
+            <tr><td class="http">POST</td><td class="path">/management/recipes</td><td class="method">recipeCreate</td><td>redirect:/management/recipes/{id}</td><td>香りレシピと材料明細を作成し、監査ログを登録する。</td></tr>
+            <tr><td class="http">GET</td><td class="path">/management/recipes/{id}</td><td class="method">recipeDetail</td><td>management/recipe-detail</td><td>指定IDの香りレシピ詳細を表示する。</td></tr>
+            <tr><td class="http">GET</td><td class="path">/management/recipes/{id}/edit</td><td class="method">recipeEdit</td><td>management/recipe-form</td><td>香りレシピ編集フォームを表示する。</td></tr>
+            <tr><td class="http">POST</td><td class="path">/management/recipes/{id}</td><td class="method">recipeUpdate</td><td>redirect:/management/recipes/{id}</td><td>香りレシピ本体と材料明細を更新し、監査ログを登録する。</td></tr>
+            <tr><td class="http">POST</td><td class="path">/management/recipes/{id}/delete</td><td class="method">recipeDelete</td><td>redirect:/management/recipes</td><td>香りレシピを論理削除し、監査ログを登録する。</td></tr>
+            <tr><td class="http">GET</td><td class="path">/management/products</td><td class="method">productList</td><td>management/product-list</td><td>商品一覧を表示する。<code>q</code> 指定時は商品名で検索する。</td></tr>
+            <tr><td class="http">GET</td><td class="path">/management/products/new</td><td class="method">productNew</td><td>management/product-form</td><td>商品新規作成フォームを表示する。</td></tr>
+            <tr><td class="http">POST</td><td class="path">/management/products</td><td class="method">productCreate</td><td>redirect:/management/products/{id}</td><td>商品を作成する。カテゴリと連動する在庫品目も作成・保存し、監査ログを登録する。</td></tr>
+            <tr><td class="http">GET</td><td class="path">/management/products/{id}</td><td class="method">productDetail</td><td>management/product-detail</td><td>指定IDの商品詳細を表示する。</td></tr>
+            <tr><td class="http">GET</td><td class="path">/management/products/{id}/edit</td><td class="method">productEdit</td><td>management/product-form</td><td>商品編集フォームを表示する。</td></tr>
+            <tr><td class="http">POST</td><td class="path">/management/products/{id}</td><td class="method">productUpdate</td><td>redirect:/management/products/{id}</td><td>商品を更新し、連動する在庫品目の名称・カテゴリ等も更新する。</td></tr>
+            <tr><td class="http">POST</td><td class="path">/management/products/{id}/delete</td><td class="method">productDelete</td><td>redirect:/management/products</td><td>商品を論理削除する。連動する在庫品目も可能な範囲で論理削除する。</td></tr>
+            <tr><td class="http">GET</td><td class="path">/management/inventory</td><td class="method">inventoryList</td><td>management/inventory-list</td><td>在庫品目一覧を表示する。<code>q</code> 指定時は品目名で検索する。</td></tr>
+            <tr><td class="http">GET</td><td class="path">/management/inventory/new</td><td class="method">inventoryNew</td><td>management/inventory-form</td><td>在庫品目新規作成フォームを表示する。</td></tr>
+            <tr><td class="http">POST</td><td class="path">/management/inventory</td><td class="method">inventoryCreate</td><td>redirect:/management/inventory/{id}</td><td>在庫品目を作成し、監査ログを登録する。</td></tr>
+            <tr><td class="http">GET</td><td class="path">/management/inventory/{id}</td><td class="method">inventoryDetail</td><td>management/inventory-detail</td><td>指定IDの在庫品目詳細と入出庫履歴を表示する。</td></tr>
+            <tr><td class="http">GET</td><td class="path">/management/inventory/{id}/edit</td><td class="method">inventoryEdit</td><td>management/inventory-form</td><td>在庫品目編集フォームを表示する。</td></tr>
+            <tr><td class="http">POST</td><td class="path">/management/inventory/{id}</td><td class="method">inventoryUpdate</td><td>redirect:/management/inventory/{id}</td><td>在庫品目を更新し、連動する商品情報も必要に応じて更新する。</td></tr>
+            <tr><td class="http">POST</td><td class="path">/management/inventory/{id}/transaction</td><td class="method">inventoryTransaction</td><td>redirect:/management/inventory/{id}</td><td>入庫または出庫を記録し、在庫数量を更新する。</td></tr>
+            <tr><td class="http">POST</td><td class="path">/management/inventory/{id}/delete</td><td class="method">inventoryDelete</td><td>redirect:/management/inventory</td><td>在庫品目を論理削除する。商品やレシピ材料で利用中の場合は削除不可メッセージを返す。</td></tr>
+            <tr><td class="http">GET</td><td class="path">/management/account</td><td class="method">account</td><td>management/account</td><td>ログイン中の管理者アカウント設定を表示する。</td></tr>
+            <tr><td class="http">GET</td><td class="path">/management/account/totp/qr</td><td class="method">totpQrCode</td><td>image/png</td><td>TOTP登録用QRコードをPNGで返却する。</td></tr>
+            <tr><td class="http">POST</td><td class="path">/management/account</td><td class="method">accountUpdate</td><td>redirect:/management/account</td><td>管理者の表示名、メール、通知設定、表示言語、必要に応じてパスワードを更新する。</td></tr>
+            <tr><td class="http">POST</td><td class="path">/management/account/totp/setup</td><td class="method">regenerateTotpSecret</td><td>redirect:/management/account</td><td>TOTP設定用の保留シークレットを再生成する。</td></tr>
+            <tr><td class="http">POST</td><td class="path">/management/account/totp/enable</td><td class="method">enableTotp</td><td>redirect:/management/account</td><td>TOTPコードを検証し、成功時はTOTPを有効化してバックアップコードを生成する。</td></tr>
+            <tr><td class="http">POST</td><td class="path">/management/account/totp/cancel</td><td class="method">cancelTotpSetup</td><td>redirect:/management/account</td><td>TOTP設定中の保留シークレットを破棄する。</td></tr>
+            <tr><td class="http">POST</td><td class="path">/management/account/totp/backup-codes</td><td class="method">regenerateBackupCodes</td><td>redirect:/management/account</td><td>バックアップコードを再生成し、画面に新しいコードを表示する。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="management-exception-handler" class="class-block">
+      <div class="class-title">
+        <strong>ManagementExceptionHandler.java</strong>
+        <span>ManagementController向けの例外ハンドリングを担当するControllerAdvice。</span>
+      </div>
+      <div class="diagram-area">
+        <pre class="diagram">┌──────────────────────────────────────────────────────────────┐
+│                    «ControllerAdvice»                        │
+│                 ManagementExceptionHandler                   │
+├──────────────────────────────────────────────────────────────┤
+│ + handleNoSuchElement(ex, request, redirect): String         │
+│ + handleIllegalState(ex, request, redirect): String          │
+└──────────────────────────────────────────────────────────────┘</pre>
+      </div>
+      <div class="dependency"><strong>対象:</strong> ManagementController。URLマッピングではなく、例外発生時にSpring MVCから呼び出される。</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>HTTP</th><th>URL</th><th>ハンドラ</th><th>表示/遷移</th><th>処理概要</th></tr></thead>
+          <tbody>
+            <tr><td class="http">例外</td><td class="path">NoSuchElementException</td><td class="method">handleNoSuchElement</td><td>redirect:{referer or /management/dashboard}</td><td>対象データが見つからない場合にエラーメッセージをFlash属性へ設定し、参照元の管理画面へ戻す。</td></tr>
+            <tr><td class="http">例外</td><td class="path">IllegalStateException</td><td class="method">handleIllegalState</td><td>redirect:{referer or /management/dashboard}</td><td>処理継続できない状態の例外に対してエラーメッセージを設定し、参照元の管理画面へ戻す。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</body>
+
+</html>

@@ -50,38 +50,15 @@
             <div class="fill-label">ディレクトリ構造 <span class="required">必須</span></div>
             <div class="fill-hint">src/main/java以下のパッケージ構造</div>
             <div class="fill-content">
-              <div class="ascii-diagram">
-                <pre>
-src/main/java/
-└── com.example.taskapp/
-    ├── TaskAppApplication.java        # メインクラス
-    ├── config/
-    │   ├── SecurityConfig.java        # Spring Security設定
-    │   └── WebConfig.java             # Web設定
-    ├── controller/
-    │   ├── TaskController.java        # タスク管理
-    │   ├── UserController.java        # ユーザー管理
-    │   └── LoginController.java       # 認証
-    ├── service/
-    │   ├── TaskService.java           # タスクビジネスロジック
-    │   └── UserService.java           # ユーザービジネスロジック
-    ├── repository/
-    │   ├── TaskMapper.java            # タスクDBアクセス
-    │   └── UserMapper.java            # ユーザーDBアクセス
-    ├── entity/
-    │   ├── Task.java                  # タスクエンティティ
-    │   ├── User.java                  # ユーザーエンティティ
-    │   └── Category.java              # カテゴリエンティティ
-    └── form/
-        ├── TaskForm.java              # タスク入力フォーム
-        └── LoginForm.java             # ログインフォーム
-
-（上記を参考に編集してください）
-                </pre>
-              </div>
+              <iframe class="embedded-html-frame" src="aromatripnippon-controller-class-diagram.html" title="AromaTripNippon Controller クラス図・エンドポイント一覧"
+                style="width: 100%; min-height: 900px;"></iframe>
+              <p class="embedded-doc-link">
+                <a href="aromatripnippon-controller-class-diagram.html" target="_blank"
+                  rel="noopener">aromatripnippon-controller-class-diagram.htmlを別タブで開く</a>
+              </p>
             </div>
           </div>
-
+          <!--
           <div class="fill-block">
             <div class="fill-label">パッケージの役割 <span class="required">必須</span></div>
             <div class="fill-hint">各パッケージの責務を説明</div>
@@ -128,7 +105,7 @@ src/main/java/
                 </tbody>
               </table>
             </div>
-          </div>
+          </div> -->
         </section>
 
         <section class="section" id="sec2">
@@ -226,85 +203,15 @@ src/main/java/
           <h2 class="section-title"><span class="section-icon">3</span> Repository（リポジトリ）</h2>
 
           <div class="fill-block">
-            <div class="fill-label">TaskMapper.java <span class="required">必須</span></div>
-            <div class="fill-hint">タスクリポジトリのインターフェース定義</div>
+            <div class="fill-label">Repository クラス図 <span class="required">必須</span></div>
+            <div class="fill-hint">AromaTripNippon Repository層のクラス図・Mapper一覧</div>
             <div class="fill-content">
-              <div class="ascii-diagram">
-                <pre>
-┌────────────────────────────────────────────────┐
-│              《Interface》                      │
-│               TaskMapper                        │
-│              @Mapper                            │
-├────────────────────────────────────────────────┤
-│ + selectAll(): List&lt;Task&gt;                     │
-│ + selectById(id: Long): Task                   │
-│ + selectByUserId(userId: Long): List&lt;Task&gt;    │
-│ + insert(task: Task): void                     │
-│ + update(task: Task): void                     │
-│ + delete(id: Long): void                       │
-│ + search(keyword: String): List&lt;Task&gt;         │
-└────────────────────────────────────────────────┘
-
-（上記を参考に編集してください）
-                </pre>
-              </div>
-            </div>
-            <div class="fill-content" style="margin-top: 16px;">
-              <table class="doc-table">
-                <thead>
-                  <tr>
-                    <th>メソッド</th>
-                    <th>引数</th>
-                    <th>戻り値</th>
-                    <th>SQL種別</th>
-                    <th>説明</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr class="template-row">
-                    <td>selectAll</td>
-                    <td>なし</td>
-                    <td>List&lt;Task&gt;</td>
-                    <td>SELECT</td>
-                    <td>全件取得</td>
-                  </tr>
-                  <tr class="template-row">
-                    <td>selectById</td>
-                    <td>id: Long</td>
-                    <td>Task</td>
-                    <td>SELECT</td>
-                    <td>ID指定取得</td>
-                  </tr>
-                  <tr class="template-row">
-                    <td>selectByUserId</td>
-                    <td>userId: Long</td>
-                    <td>List&lt;Task&gt;</td>
-                    <td>SELECT</td>
-                    <td>ユーザー別取得</td>
-                  </tr>
-                  <tr class="template-row">
-                    <td>insert</td>
-                    <td>task: Task</td>
-                    <td>void</td>
-                    <td>INSERT</td>
-                    <td>新規登録</td>
-                  </tr>
-                  <tr class="template-row">
-                    <td>update</td>
-                    <td>task: Task</td>
-                    <td>void</td>
-                    <td>UPDATE</td>
-                    <td>更新</td>
-                  </tr>
-                  <tr class="template-row">
-                    <td>delete</td>
-                    <td>id: Long</td>
-                    <td>void</td>
-                    <td>DELETE</td>
-                    <td>削除</td>
-                  </tr>
-                </tbody>
-              </table>
+              <iframe class="embedded-html-frame" src="aromatripnippon-repository-class-diagram.html" title="AromaTripNippon Repository クラス図"
+                style="width: 100%; min-height: 900px;"></iframe>
+              <p class="embedded-doc-link">
+                <a href="aromatripnippon-repository-class-diagram.html" target="_blank"
+                  rel="noopener">aromatripnippon-repository-class-diagram.htmlを別タブで開く</a>
+              </p>
             </div>
           </div>
         </section>
@@ -313,34 +220,15 @@ src/main/java/
           <h2 class="section-title"><span class="section-icon">4</span> Service（サービス）</h2>
 
           <div class="fill-block">
-            <div class="fill-label">TaskService.java <span class="required">必須</span></div>
-            <div class="fill-hint">タスクサービスのクラス定義</div>
+            <div class="fill-label">Service クラス図 <span class="required">必須</span></div>
+            <div class="fill-hint">AromaTripNippon Service層のクラス図・依存関係</div>
             <div class="fill-content">
-              <div class="ascii-diagram">
-                <pre>
-┌────────────────────────────────────────────────────┐
-│                   《Service》                       │
-│                   TaskService                       │
-│                   @Service                          │
-├────────────────────────────────────────────────────┤
-│ - taskMapper: TaskMapper                           │
-├────────────────────────────────────────────────────┤
-│ + findAll(): List&lt;Task&gt;                           │
-│ + findById(id: Long): Task                         │
-│ + findByUserId(userId: Long): List&lt;Task&gt;          │
-│ + create(form: TaskForm, userId: Long): void       │
-│ + update(id: Long, form: TaskForm): void           │
-│ + delete(id: Long): void                           │
-│ + search(keyword: String): List&lt;Task&gt;             │
-│ + changeStatus(id: Long, status: String): void     │
-└────────────────────────────────────────────────────┘
-
-依存関係：
-  TaskService ────▶ TaskMapper （@Autowired）
-
-（上記を参考に編集してください）
-                </pre>
-              </div>
+              <iframe class="embedded-html-frame" src="aromatripnippon-service-class-diagram.html" title="AromaTripNippon Service クラス図"
+                style="width: 100%; min-height: 900px;"></iframe>
+              <p class="embedded-doc-link">
+                <a href="aromatripnippon-service-class-diagram.html" target="_blank"
+                  rel="noopener">aromatripnippon-service-class-diagram.htmlを別タブで開く</a>
+              </p>
             </div>
           </div>
         </section>
@@ -349,87 +237,15 @@ src/main/java/
           <h2 class="section-title"><span class="section-icon">5</span> Controller（コントローラー）</h2>
 
           <div class="fill-block">
-            <div class="fill-label">TaskController.java <span class="required">必須</span></div>
-            <div class="fill-hint">タスクコントローラーのクラス定義</div>
+            <div class="fill-label">Controller クラス図 <span class="required">必須</span></div>
+            <div class="fill-hint">AromaTripNippon Controller層のクラス図・エンドポイント一覧</div>
             <div class="fill-content">
-              <div class="ascii-diagram">
-                <pre>
-┌─────────────────────────────────────────────────────────┐
-│                    《Controller》                        │
-│                    TaskController                        │
-│                    @Controller                           │
-│                    @RequestMapping("/tasks")             │
-├─────────────────────────────────────────────────────────┤
-│ - taskService: TaskService                              │
-├─────────────────────────────────────────────────────────┤
-│ + list(model: Model): String                            │
-│ + show(id: Long, model: Model): String                  │
-│ + createForm(model: Model): String                      │
-│ + create(form: TaskForm, result: BindingResult): String │
-│ + editForm(id: Long, model: Model): String              │
-│ + update(id: Long, form: TaskForm, result): String      │
-│ + delete(id: Long): String                              │
-└─────────────────────────────────────────────────────────┘
-
-（上記を参考に編集してください）
-                </pre>
-              </div>
-            </div>
-            <div class="fill-content" style="margin-top: 16px;">
-              <table class="doc-table">
-                <thead>
-                  <tr>
-                    <th>メソッド</th>
-                    <th>HTTP</th>
-                    <th>URL</th>
-                    <th>説明</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr class="template-row">
-                    <td>list</td>
-                    <td>GET</td>
-                    <td>/tasks</td>
-                    <td>一覧表示</td>
-                  </tr>
-                  <tr class="template-row">
-                    <td>show</td>
-                    <td>GET</td>
-                    <td>/tasks/{id}</td>
-                    <td>詳細表示</td>
-                  </tr>
-                  <tr class="template-row">
-                    <td>createForm</td>
-                    <td>GET</td>
-                    <td>/tasks/new</td>
-                    <td>新規作成フォーム</td>
-                  </tr>
-                  <tr class="template-row">
-                    <td>create</td>
-                    <td>POST</td>
-                    <td>/tasks</td>
-                    <td>新規作成処理</td>
-                  </tr>
-                  <tr class="template-row">
-                    <td>editForm</td>
-                    <td>GET</td>
-                    <td>/tasks/{id}/edit</td>
-                    <td>編集フォーム</td>
-                  </tr>
-                  <tr class="template-row">
-                    <td>update</td>
-                    <td>POST</td>
-                    <td>/tasks/{id}</td>
-                    <td>更新処理</td>
-                  </tr>
-                  <tr class="template-row">
-                    <td>delete</td>
-                    <td>POST</td>
-                    <td>/tasks/{id}/delete</td>
-                    <td>削除処理</td>
-                  </tr>
-                </tbody>
-              </table>
+              <iframe class="embedded-html-frame" src="aromatripnippon-controller-class-diagram.html" title="AromaTripNippon Controller クラス図・エンドポイント一覧"
+                style="width: 100%; min-height: 900px;"></iframe>
+              <p class="embedded-doc-link">
+                <a href="aromatripnippon-controller-class-diagram.html" target="_blank"
+                  rel="noopener">aromatripnippon-controller-class-diagram.htmlを別タブで開く</a>
+              </p>
             </div>
           </div>
         </section>
@@ -439,44 +255,67 @@ src/main/java/
 
           <div class="fill-block">
             <div class="fill-label">依存関係図 <span class="required">必須</span></div>
-            <div class="fill-hint">Controller → Service → Repository → Entity の依存関係</div>
+            <div class="fill-hint">Controller → Form → Service → Repository → Entity → Database と @Autowired によるDI注入関係</div>
             <div class="fill-content">
               <div class="ascii-diagram">
                 <pre>
-┌──────────────────────────────────────────────────────────────────┐
-│                        依存関係図                                  │
-├──────────────────────────────────────────────────────────────────┤
-│                                                                   │
-│   ┌────────────────┐         ┌────────────────┐                  │
-│   │ TaskController │────────▶│  TaskService   │                  │
-│   │ UserController │────────▶│  UserService   │                  │
-│   └────────────────┘         └────────────────┘                  │
-│          │                          │                             │
-│          │ @Autowired               │ @Autowired                  │
-│          ▼                          ▼                             │
-│   ┌────────────────┐         ┌────────────────┐                  │
-│   │   TaskForm     │         │   TaskMapper   │                  │
-│   │   (入力)       │         │   UserMapper   │                  │
-│   └────────────────┘         └────────────────┘                  │
-│                                     │                             │
-│                                     │ MyBatis                     │
-│                                     ▼                             │
-│                              ┌────────────────┐                   │
-│                              │     Task       │                   │
-│                              │     User       │                   │
-│                              │   Category     │                   │
-│                              │   (Entity)     │                   │
-│                              └────────────────┘                   │
-│                                     │                             │
-│                                     ▼                             │
-│                              ┌────────────────┐                   │
-│                              │   Database     │                   │
-│                              │   (MySQL)      │                   │
-│                              └────────────────┘                   │
-│                                                                   │
-└──────────────────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│                 AromaTripNippon クラス間依存関係 / DIコンテナ注入関係                  │
+├────────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                        │
+│  ┌──────────────────────────── Spring DI Container ────────────────────────────────┐   │
+│  │ @Controller / @Service / @Mapper をBeanとして管理し、@Autowiredで依存を注入      │   │
+│  └────────────────────────────────────────────────────────────────────────────────┘   │
+│                                                                                        │
+│  Controller層                                                                          │
+│  ┌──────────────────────┐                         ┌──────────────────────┐             │
+│  │   TaskController     │                         │   UserController     │             │
+│  │   @Controller        │                         │   @Controller        │             │
+│  │   @Autowired         │                         │   @Autowired         │             │
+│  │ - taskService        │                         │ - userService        │             │
+│  └──────────┬───────────┘                         └──────────┬───────────┘             │
+│             │ DI注入: TaskService                            │ DI注入: UserService     │
+│             ▼                                                ▼                         │
+│  Service層 ┌──────────────────────┐              ┌──────────────────────┐              │
+│            │     TaskService      │              │     UserService      │              │
+│            │     @Service         │              │     @Service         │              │
+│            │     @Autowired       │              │     @Autowired       │              │
+│            │ - taskMapper         │              │ - userMapper         │              │
+│            └──────────┬───────────┘              └──────────┬───────────┘              │
+│                       │ DI注入: TaskMapper                  │ DI注入: UserMapper       │
+│                       ▼                                      ▼                          │
+│  Repository層 ┌──────────────────────┐              ┌──────────────────────┐           │
+│               │      TaskMapper      │              │      UserMapper      │           │
+│               │      @Mapper         │              │      @Mapper         │           │
+│               │ + select/insert/...  │              │ + select/insert/...  │           │
+│               └──────────┬───────────┘              └──────────┬───────────┘           │
+│                          │ MyBatis / SQL実行                   │ MyBatis / SQL実行      │
+│                          ▼                                      ▼                       │
+│  Entity      ┌────────────────────────────────────────────────────────────┐             │
+│              │ ┌──────────────┐   ┌──────────────┐   ┌──────────────┐    │             │
+│              │ │     Task     │──▶│   Category   │   │     User     │    │             │
+│              │ │ task data    │   │ category data│   │ user data    │    │             │
+│              │ └──────┬───────┘   └──────┬───────┘   └──────┬───────┘    │             │
+│              └────────┼──────────────────┼──────────────────┼────────────┘             │
+│                       │                  │                  │                          │
+│                       ▼                  ▼                  ▼                          │
+│  Database    ┌────────────────────────────────────────────────────────────┐             │
+│              │ tasks / users / categories テーブル                         │             │
+│              └────────────────────────────────────────────────────────────┘             │
+│                                                                                        │
+│  Form        ┌────────────────────────────────────────────────────────────┐             │
+│              │ TaskForm                                                   │             │
+│              │ - title / content / dueDate / categoryId などの入力値       │             │
+│              └───────────────▲────────────────────────────────────────────┘             │
+│                              │ Controllerが画面入力をバインドしServiceへ渡す             │
+│                              └──────────────────────────────────────────────             │
+│                                                                                        │
+└────────────────────────────────────────────────────────────────────────────────────────┘
 
-（上記を参考に編集してください）
+凡例:
+  DI注入  : Spring DI Container が @Autowired によりBean参照を設定する関係
+  Form    : Controllerがリクエスト入力をTaskFormとして受け取り、Serviceへ渡す関係
+  MyBatis : MapperがDatabaseへアクセスし、Task/User/CategoryなどのEntityへマッピングする関係
                 </pre>
               </div>
             </div>

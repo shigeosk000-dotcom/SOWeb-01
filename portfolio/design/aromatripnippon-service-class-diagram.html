@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AromaTripNippon Service クラス図・メソッド詳細</title>
+  <style>
+    :root {
+      --ink: #1f2933;
+      --muted: #667085;
+      --line: #d9dee7;
+      --panel: #f6f7f9;
+      --head: #050505;
+      --accent: #28756f;
+      --accent-soft: #e7f3f1;
+      --warn-soft: #fff8e6;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #fff;
+      color: var(--ink);
+      font-family: "Yu Gothic", "Meiryo", Arial, sans-serif;
+      line-height: 1.75;
+    }
+
+    main {
+      width: min(1160px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 32px 0 56px;
+    }
+
+    .doc-header {
+      border-bottom: 3px solid var(--ink);
+      padding-bottom: 18px;
+      margin-bottom: 24px;
+    }
+
+    .doc-kicker {
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .08em;
+    }
+
+    h1 {
+      margin: 6px 0 8px;
+      font-size: 30px;
+      line-height: 1.35;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 18px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .summary,
+    .note-box {
+      border-radius: 6px;
+      padding: 14px 16px;
+      margin: 20px 0 24px;
+    }
+
+    .summary {
+      background: var(--accent-soft);
+      border: 1px solid #b8d9d4;
+    }
+
+    .note-box {
+      background: var(--warn-soft);
+      border: 1px solid #ead491;
+    }
+
+    .toc {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 16px 18px;
+      margin-bottom: 28px;
+    }
+
+    .toc-title {
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .toc ol {
+      columns: 2;
+      margin: 0;
+      padding-left: 22px;
+    }
+
+    .toc a {
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .toc a:hover {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+
+    .class-block {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      overflow: hidden;
+      margin-bottom: 28px;
+    }
+
+    .class-title {
+      padding: 12px 16px;
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .class-title strong {
+      display: block;
+      font-size: 16px;
+    }
+
+    .class-title span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .diagram-area {
+      background: var(--panel);
+      padding: 18px;
+      border-bottom: 1px solid var(--line);
+      overflow-x: auto;
+    }
+
+    pre.diagram {
+      display: inline-block;
+      min-width: 620px;
+      margin: 0;
+      color: #1f2933;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 13px;
+      line-height: 1.35;
+      background: #fff;
+      border: 1px dashed #8da09c;
+      padding: 16px 18px;
+    }
+
+    .dependency {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--line);
+      background: #fbfcfd;
+      font-size: 13px;
+    }
+
+    .dependency strong {
+      display: inline-block;
+      margin-right: 8px;
+    }
+
+    .table-wrap {
+      padding: 14px 16px 18px;
+      overflow-x: auto;
+      background: #fff;
+    }
+
+    table {
+      width: 100%;
+      min-width: 980px;
+      border-collapse: collapse;
+      font-size: 13px;
+      table-layout: fixed;
+    }
+
+    th:nth-child(1),
+    td:nth-child(1) {
+      width: 23%;
+    }
+
+    th:nth-child(2),
+    td:nth-child(2) {
+      width: 19%;
+    }
+
+    th:nth-child(3),
+    td:nth-child(3) {
+      width: 13%;
+    }
+
+    th:nth-child(4),
+    td:nth-child(4) {
+      width: 11%;
+    }
+
+    th:nth-child(5),
+    td:nth-child(5) {
+      width: 34%;
+    }
+
+    th {
+      background: var(--head);
+      color: #fff;
+      text-align: left;
+      padding: 10px 12px;
+      white-space: nowrap;
+    }
+
+    td {
+      border: 1px solid var(--line);
+      padding: 10px 12px;
+      vertical-align: top;
+    }
+
+    td.method,
+    td.type,
+    td.sql {
+      font-family: Consolas, "Courier New", monospace;
+      color: #3f4f5f;
+    }
+
+    td.method {
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      line-height: 1.55;
+    }
+
+    td.type,
+    td.sql {
+      white-space: nowrap;
+    }
+
+    td.sql {
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    code {
+      font-family: Consolas, "Courier New", monospace;
+      font-size: .95em;
+    }
+
+    @media (max-width: 720px) {
+      main {
+        width: min(100% - 20px, 1160px);
+        padding-top: 20px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      .toc ol {
+        columns: 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <header class="doc-header">
+      <div class="doc-kicker">DESIGN DOCUMENT</div>
+      <h1>AromaTripNippon Service クラス図・メソッド詳細</h1>
+      <div class="meta">
+        <span>作成日: 2026-06-04</span>
+        <span>対象: com.aromatripnippon.service</span>
+        <span>形式: Spring Service + Spring Data JPA Repository</span>
+      </div>
+    </header>
+
+    <div class="summary">
+      AromaTripNippon プロジェクトの Service クラスを、クラス図風の構造とメソッド詳細表で整理した資料です。
+      このプロジェクトでは <code>TaskMapper</code> のような MyBatis Mapper は使用されておらず、各Serviceは Spring Data JPA の Repository に依存しています。
+      表のSQL種別は、Service内で呼び出すRepository操作から見た代表的なDB操作を記載しています。
+    </div>
+
+    <div class="note-box">
+      <strong>FormからEntityへの変換:</strong>
+      明示的なFormクラスは <code>ReservationRequest</code> です。公開予約では <code>PublicController</code> が
+      <code>ReservationRequest</code> から <code>Customer</code> と <code>Reservation</code> を生成し、
+      <code>ReservationService#createReservation</code> に渡します。管理画面では多くの画面がEntityを直接フォームバインドし、
+      編集時は既存Entityへsetterで入力値を反映してからServiceの <code>save</code> 系メソッドへ渡します。
+    </div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol>
+        <li><a href="#admin-user-service">AdminUserService</a></li>
+        <li><a href="#audit-service">AuditService</a></li>
+        <li><a href="#customer-service">CustomerService</a></li>
+        <li><a href="#experience-program-service">ExperienceProgramService</a></li>
+        <li><a href="#fragrance-recipe-service">FragranceRecipeService</a></li>
+        <li><a href="#inventory-service">InventoryService</a></li>
+        <li><a href="#password-reset-service">PasswordResetService</a></li>
+        <li><a href="#product-service">ProductService</a></li>
+        <li><a href="#reservation-service">ReservationService</a></li>
+        <li><a href="#totp-service">TotpService</a></li>
+      </ol>
+    </nav>
+
+    <section id="admin-user-service" class="class-block">
+      <div class="class-title">
+        <strong>AdminUserService.java</strong>
+        <span>管理者ユーザーの取得、保存、論理削除を担当するService。</span>
+      </div>
+      <div class="diagram-area">
+        <pre class="diagram">┌──────────────────────────────────────────────────────────────┐
+│                         «Service»                            │
+│                      AdminUserService                        │
+├──────────────────────────────────────────────────────────────┤
+│ - admins: AdminUserRepository                                │
+│ - encoder: PasswordEncoder                                   │
+├──────────────────────────────────────────────────────────────┤
+│ + findActive(id: Long): AdminUser                            │
+│ + save(admin: AdminUser, rawPassword: String): AdminUser     │
+│ + softDelete(id: Long): void                                 │
+└──────────────────────────────────────────────────────────────┘</pre>
+      </div>
+      <div class="dependency"><strong>依存Repository/Mapper:</strong> AdminUserRepository, PasswordEncoder。TaskMapper依存なし。</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>メソッド</th><th>引数</th><th>戻り値</th><th>SQL種別</th><th>説明</th></tr></thead>
+          <tbody>
+            <tr><td class="method">findActive</td><td>id: Long</td><td class="type">AdminUser</td><td class="sql">SELECT</td><td>IDに一致する未削除の管理者ユーザーを取得する。</td></tr>
+            <tr><td class="method">save</td><td>admin: AdminUser<br>rawPassword: String</td><td class="type">AdminUser</td><td class="sql">INSERT / UPDATE</td><td><code>@Transactional</code>。rawPasswordが空でない場合はハッシュ化してpasswordHashへ設定し、管理者ユーザーを保存する。新規なら登録、既存なら更新。</td></tr>
+            <tr><td class="method">softDelete</td><td>id: Long</td><td class="type">void</td><td class="sql">SELECT / UPDATE</td><td><code>@Transactional</code>。対象ユーザーを取得し、<code>softDelete()</code> と <code>active=false</code> を設定して保存する。ステータス変更メソッド。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="audit-service" class="class-block">
+      <div class="class-title">
+        <strong>AuditService.java</strong>
+        <span>管理画面操作の監査ログ登録を担当するService。</span>
+      </div>
+      <div class="diagram-area">
+        <pre class="diagram">┌──────────────────────────────────────────────────────────────┐
+│                         «Service»                            │
+│                         AuditService                         │
+├──────────────────────────────────────────────────────────────┤
+│ - admins: AdminUserRepository                                │
+│ - logs: AuditLogRepository                                   │
+├──────────────────────────────────────────────────────────────┤
+│ + record(principal: Principal, actionType: String,           │
+│     targetTable: String, targetId: Long, detail: String): void│
+└──────────────────────────────────────────────────────────────┘</pre>
+      </div>
+      <div class="dependency"><strong>依存Repository/Mapper:</strong> AdminUserRepository, AuditLogRepository。TaskMapper依存なし。</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>メソッド</th><th>引数</th><th>戻り値</th><th>SQL種別</th><th>説明</th></tr></thead>
+          <tbody>
+            <tr><td class="method">record</td><td>principal: Principal<br>actionType: String<br>targetTable: String<br>targetId: Long<br>detail: String</td><td class="type">void</td><td class="sql">SELECT / INSERT</td><td>ログイン中の管理者を取得できる場合は監査ログに紐づけ、操作種別・対象テーブル・対象ID・詳細を設定してログを保存する。<code>@Transactional</code>指定はない。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="customer-service" class="class-block">
+      <div class="class-title">
+        <strong>CustomerService.java</strong>
+        <span>顧客の検索、取得、保存、論理削除を担当するService。</span>
+      </div>
+      <div class="diagram-area">
+        <pre class="diagram">┌──────────────────────────────────────────────────────────────┐
+│                         «Service»                            │
+│                       CustomerService                        │
+├──────────────────────────────────────────────────────────────┤
+│ - customers: CustomerRepository                              │
+├──────────────────────────────────────────────────────────────┤
+│ + search(keyword: String): List&lt;Customer&gt;                    │
+│ + findActive(id: Long): Customer                             │
+│ + save(customer: Customer): Customer                         │
+│ + softDelete(id: Long): void                                 │
+└──────────────────────────────────────────────────────────────┘</pre>
+      </div>
+      <div class="dependency"><strong>依存Repository/Mapper:</strong> CustomerRepository。TaskMapper依存なし。</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>メソッド</th><th>引数</th><th>戻り値</th><th>SQL種別</th><th>説明</th></tr></thead>
+          <tbody>
+            <tr><td class="method">search</td><td>keyword: String</td><td class="type">List&lt;Customer&gt;</td><td class="sql">SELECT</td><td>キーワードが空なら未削除顧客を全件取得し、指定ありなら氏名の部分一致検索を行う。検索メソッド。</td></tr>
+            <tr><td class="method">findActive</td><td>id: Long</td><td class="type">Customer</td><td class="sql">SELECT</td><td>IDに一致する未削除顧客を取得する。</td></tr>
+            <tr><td class="method">save</td><td>customer: Customer</td><td class="type">Customer</td><td class="sql">INSERT / UPDATE</td><td><code>@Transactional</code>。顧客Entityを保存する。管理画面では入力値をEntityへ反映してから呼び出す。</td></tr>
+            <tr><td class="method">softDelete</td><td>id: Long</td><td class="type">void</td><td class="sql">SELECT / UPDATE</td><td><code>@Transactional</code>。顧客を取得して <code>softDelete()</code> を実行し保存する。ステータス変更メソッド。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="experience-program-service" class="class-block">
+      <div class="class-title">
+        <strong>ExperienceProgramService.java</strong>
+        <span>体験プログラムの一覧、予約可能プログラム取得、保存、論理削除を担当するService。</span>
+      </div>
+      <div class="diagram-area">
+        <pre class="diagram">┌──────────────────────────────────────────────────────────────┐
+│                         «Service»                            │
+│                  ExperienceProgramService                    │
+├──────────────────────────────────────────────────────────────┤
+│ - programs: ExperienceProgramRepository                      │
+├──────────────────────────────────────────────────────────────┤
+│ + findActivePrograms(): List&lt;ExperienceProgram&gt;              │
+│ + findActive(id: Long): ExperienceProgram                    │
+│ + findFirstBookableProgram(): ExperienceProgram              │
+│ + save(program: ExperienceProgram): ExperienceProgram        │
+│ + softDelete(id: Long): void                                 │
+└──────────────────────────────────────────────────────────────┘</pre>
+      </div>
+      <div class="dependency"><strong>依存Repository/Mapper:</strong> ExperienceProgramRepository。TaskMapper依存なし。</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>メソッド</th><th>引数</th><th>戻り値</th><th>SQL種別</th><th>説明</th></tr></thead>
+          <tbody>
+            <tr><td class="method">findActivePrograms</td><td>なし</td><td class="type">List&lt;ExperienceProgram&gt;</td><td class="sql">SELECT</td><td>未削除の体験プログラム一覧を取得する。</td></tr>
+            <tr><td class="method">findActive</td><td>id: Long</td><td class="type">ExperienceProgram</td><td class="sql">SELECT</td><td>IDに一致する未削除の体験プログラムを取得する。</td></tr>
+            <tr><td class="method">findFirstBookableProgram</td><td>なし</td><td class="type">ExperienceProgram</td><td class="sql">SELECT</td><td>未削除かつ有効な予約可能プログラムを1件取得する。検索メソッド。</td></tr>
+            <tr><td class="method">save</td><td>program: ExperienceProgram</td><td class="type">ExperienceProgram</td><td class="sql">INSERT / UPDATE</td><td><code>@Transactional</code>。体験プログラムEntityを保存する。</td></tr>
+            <tr><td class="method">softDelete</td><td>id: Long</td><td class="type">void</td><td class="sql">SELECT / UPDATE</td><td><code>@Transactional</code>。体験プログラムを論理削除する。ステータス変更メソッド。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="fragrance-recipe-service" class="class-block">
+      <div class="class-title">
+        <strong>FragranceRecipeService.java</strong>
+        <span>香りレシピの検索、作成、保存、論理削除を担当するService。</span>
+      </div>
+      <div class="diagram-area">
+        <pre class="diagram">┌──────────────────────────────────────────────────────────────┐
+│                         «Service»                            │
+│                   FragranceRecipeService                     │
+├──────────────────────────────────────────────────────────────┤
+│ - recipes: FragranceRecipeRepository                         │
+│ - customers: CustomerRepository                              │
+│ - inventoryItems: InventoryItemRepository                    │
+├──────────────────────────────────────────────────────────────┤
+│ + search(keyword: String): List&lt;FragranceRecipe&gt;             │
+│ + findActive(id: Long): FragranceRecipe                      │
+│ + create(recipe: FragranceRecipe, customerId: Long,          │
+│     materialId: Long, blendRatio: BigDecimal): FragranceRecipe│
+│ + save(recipe: FragranceRecipe): FragranceRecipe             │
+│ + softDelete(id: Long): void                                 │
+└──────────────────────────────────────────────────────────────┘</pre>
+      </div>
+      <div class="dependency"><strong>依存Repository/Mapper:</strong> FragranceRecipeRepository, CustomerRepository, InventoryItemRepository。TaskMapper依存なし。</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>メソッド</th><th>引数</th><th>戻り値</th><th>SQL種別</th><th>説明</th></tr></thead>
+          <tbody>
+            <tr><td class="method">search</td><td>keyword: String</td><td class="type">List&lt;FragranceRecipe&gt;</td><td class="sql">SELECT</td><td>キーワードが空なら未削除レシピ一覧、指定ありならレシピ名の部分一致検索を行う。検索メソッド。</td></tr>
+            <tr><td class="method">findActive</td><td>id: Long</td><td class="type">FragranceRecipe</td><td class="sql">SELECT</td><td>IDに一致する未削除レシピを取得する。</td></tr>
+            <tr><td class="method">create</td><td>recipe: FragranceRecipe<br>customerId: Long<br>materialId: Long<br>blendRatio: BigDecimal</td><td class="type">FragranceRecipe</td><td class="sql">SELECT / INSERT</td><td><code>@Transactional</code>。顧客と在庫品目を取得し、レシピに顧客・総量を設定する。さらに <code>FragranceRecipeMaterial</code> を生成して材料名スナップショット、配合率、数量、表示順を設定し、レシピへ追加して保存する。Entity組み立て処理を含む。</td></tr>
+            <tr><td class="method">save</td><td>recipe: FragranceRecipe</td><td class="type">FragranceRecipe</td><td class="sql">INSERT / UPDATE</td><td><code>@Transactional</code>。香りレシピEntityを保存する。管理画面ではフォーム入力を既存Entityへ反映してから呼び出す。</td></tr>
+            <tr><td class="method">softDelete</td><td>id: Long</td><td class="type">void</td><td class="sql">SELECT / UPDATE</td><td><code>@Transactional</code>。香りレシピを論理削除する。ステータス変更メソッド。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="inventory-service" class="class-block">
+      <div class="class-title">
+        <strong>InventoryService.java</strong>
+        <span>在庫品目の検索、保存、入出庫記録、論理削除を担当するService。</span>
+      </div>
+      <div class="diagram-area">
+        <pre class="diagram">┌──────────────────────────────────────────────────────────────┐
+│                         «Service»                            │
+│                      InventoryService                        │
+├──────────────────────────────────────────────────────────────┤
+│ - inventoryItems: InventoryItemRepository                    │
+│ - transactions: InventoryTransactionRepository               │
+│ - admins: AdminUserRepository                                │
+├──────────────────────────────────────────────────────────────┤
+│ + search(keyword: String): List&lt;InventoryItem&gt;               │
+│ + findActive(id: Long): InventoryItem                        │
+│ + findTransactions(itemId: Long): List&lt;InventoryTransaction&gt; │
+│ + save(item: InventoryItem): InventoryItem                   │
+│ + recordTransaction(itemId: Long, type: String,              │
+│     quantity: BigDecimal, reason: String, principal: Principal│
+│     ): InventoryTransaction                                  │
+│ + softDelete(id: Long): void                                 │
+└──────────────────────────────────────────────────────────────┘</pre>
+      </div>
+      <div class="dependency"><strong>依存Repository/Mapper:</strong> InventoryItemRepository, InventoryTransactionRepository, AdminUserRepository。TaskMapper依存なし。</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>メソッド</th><th>引数</th><th>戻り値</th><th>SQL種別</th><th>説明</th></tr></thead>
+          <tbody>
+            <tr><td class="method">search</td><td>keyword: String</td><td class="type">List&lt;InventoryItem&gt;</td><td class="sql">SELECT</td><td>キーワードが空なら未削除在庫品目一覧、指定ありなら品目名の部分一致検索を行う。検索メソッド。</td></tr>
+            <tr><td class="method">findActive</td><td>id: Long</td><td class="type">InventoryItem</td><td class="sql">SELECT</td><td>IDに一致する未削除の在庫品目を取得する。</td></tr>
+            <tr><td class="method">findTransactions</td><td>itemId: Long</td><td class="type">List&lt;InventoryTransaction&gt;</td><td class="sql">SELECT</td><td>指定在庫品目に紐づく入出庫履歴を取得する。検索メソッド。</td></tr>
+            <tr><td class="method">save</td><td>item: InventoryItem</td><td class="type">InventoryItem</td><td class="sql">INSERT / UPDATE</td><td><code>@Transactional</code>。在庫品目Entityを保存する。商品登録・編集時にProductと連動する在庫品目の保存にも使われる。</td></tr>
+            <tr><td class="method">recordTransaction</td><td>itemId: Long<br>type: String<br>quantity: BigDecimal<br>reason: String<br>principal: Principal</td><td class="type">InventoryTransaction</td><td class="sql">SELECT / UPDATE / INSERT</td><td><code>@Transactional</code>。在庫品目を取得し、typeが <code>OUT</code> なら数量を減算、それ以外は加算する。入庫時は最終入庫日を当日に更新し、入出庫履歴Entityを生成して保存する。ステータス変更メソッド。</td></tr>
+            <tr><td class="method">softDelete</td><td>id: Long</td><td class="type">void</td><td class="sql">SELECT / UPDATE</td><td><code>@Transactional</code>。在庫品目を論理削除する。ステータス変更メソッド。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="password-reset-service" class="class-block">
+      <div class="class-title">
+        <strong>PasswordResetService.java</strong>
+        <span>管理者パスワード再設定トークンの発行、検証、パスワード更新を担当するService。</span>
+      </div>
+      <div class="diagram-area">
+        <pre class="diagram">┌──────────────────────────────────────────────────────────────┐
+│                         «Service»                            │
+│                    PasswordResetService                      │
+├──────────────────────────────────────────────────────────────┤
+│ - admins: AdminUserRepository                                │
+│ - mailSender: JavaMailSender                                 │
+│ - encoder: PasswordEncoder                                   │
+├──────────────────────────────────────────────────────────────┤
+│ + requestReset(loginId: String, email: String): void         │
+│ + isTokenValid(token: String): boolean                       │
+│ + resetPassword(token: String, newPassword: String): boolean │
+└──────────────────────────────────────────────────────────────┘</pre>
+      </div>
+      <div class="dependency"><strong>依存Repository/Mapper:</strong> AdminUserRepository, JavaMailSender, PasswordEncoder。TaskMapper依存なし。</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>メソッド</th><th>引数</th><th>戻り値</th><th>SQL種別</th><th>説明</th></tr></thead>
+          <tbody>
+            <tr><td class="method">requestReset</td><td>loginId: String<br>email: String</td><td class="type">void</td><td class="sql">SELECT / UPDATE</td><td><code>@Transactional</code>。ログインIDとメールアドレスに一致する有効な管理者を検索し、トークンを生成してSHA-256ハッシュと有効期限を保存する。メール送信も行う。ステータス変更メソッド。</td></tr>
+            <tr><td class="method">isTokenValid</td><td>token: String</td><td class="type">boolean</td><td class="sql">SELECT</td><td>トークンをハッシュ化し、有効期限内かつ未削除の管理者が存在するか確認する。検索メソッド。</td></tr>
+            <tr><td class="method">resetPassword</td><td>token: String<br>newPassword: String</td><td class="type">boolean</td><td class="sql">SELECT / UPDATE</td><td><code>@Transactional</code>。有効なトークンの管理者を取得し、新パスワードのハッシュ、ログイン失敗回数、ロック状態、再設定要求、トークン情報を更新する。ステータス変更メソッド。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="product-service" class="class-block">
+      <div class="class-title">
+        <strong>ProductService.java</strong>
+        <span>商品の検索、取得、保存、論理削除を担当するService。</span>
+      </div>
+      <div class="diagram-area">
+        <pre class="diagram">┌──────────────────────────────────────────────────────────────┐
+│                         «Service»                            │
+│                        ProductService                        │
+├──────────────────────────────────────────────────────────────┤
+│ - products: ProductRepository                                │
+├──────────────────────────────────────────────────────────────┤
+│ + search(keyword: String): List&lt;Product&gt;                     │
+│ + findActive(id: Long): Product                              │
+│ + save(product: Product): Product                            │
+│ + softDelete(id: Long): void                                 │
+└──────────────────────────────────────────────────────────────┘</pre>
+      </div>
+      <div class="dependency"><strong>依存Repository/Mapper:</strong> ProductRepository。TaskMapper依存なし。</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>メソッド</th><th>引数</th><th>戻り値</th><th>SQL種別</th><th>説明</th></tr></thead>
+          <tbody>
+            <tr><td class="method">search</td><td>keyword: String</td><td class="type">List&lt;Product&gt;</td><td class="sql">SELECT</td><td>キーワードが空なら未削除商品一覧、指定ありなら商品名の部分一致検索を行う。検索メソッド。</td></tr>
+            <tr><td class="method">findActive</td><td>id: Long</td><td class="type">Product</td><td class="sql">SELECT</td><td>IDに一致する未削除の商品を取得する。</td></tr>
+            <tr><td class="method">save</td><td>product: Product</td><td class="type">Product</td><td class="sql">INSERT / UPDATE</td><td><code>@Transactional</code>。商品Entityを保存する。管理画面ではカテゴリや公開状態などをEntityへ反映してから呼び出す。</td></tr>
+            <tr><td class="method">softDelete</td><td>id: Long</td><td class="type">void</td><td class="sql">SELECT / UPDATE</td><td><code>@Transactional</code>。商品を論理削除する。ステータス変更メソッド。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="reservation-service" class="class-block">
+      <div class="class-title">
+        <strong>ReservationService.java</strong>
+        <span>予約一覧取得、公開予約作成、保存、論理削除を担当するService。</span>
+      </div>
+      <div class="diagram-area">
+        <pre class="diagram">┌──────────────────────────────────────────────────────────────┐
+│                         «Service»                            │
+│                      ReservationService                      │
+├──────────────────────────────────────────────────────────────┤
+│ - customers: CustomerRepository                              │
+│ - programs: ExperienceProgramRepository                      │
+│ - reservations: ReservationRepository                        │
+├──────────────────────────────────────────────────────────────┤
+│ + findActiveReservations(): List&lt;Reservation&gt;                │
+│ + findActive(id: Long): Reservation                          │
+│ + createReservation(reservation: Reservation,                │
+│     customer: Customer): Reservation                         │
+│ + save(reservation: Reservation): Reservation                │
+│ + softDelete(id: Long): void                                 │
+└──────────────────────────────────────────────────────────────┘</pre>
+      </div>
+      <div class="dependency"><strong>依存Repository/Mapper:</strong> CustomerRepository, ExperienceProgramRepository, ReservationRepository。TaskMapper依存なし。</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>メソッド</th><th>引数</th><th>戻り値</th><th>SQL種別</th><th>説明</th></tr></thead>
+          <tbody>
+            <tr><td class="method">findActiveReservations</td><td>なし</td><td class="type">List&lt;Reservation&gt;</td><td class="sql">SELECT</td><td>未削除の予約一覧を来店日降順・時間帯昇順で取得する。検索メソッド。</td></tr>
+            <tr><td class="method">findActive</td><td>id: Long</td><td class="type">Reservation</td><td class="sql">SELECT</td><td>IDに一致する未削除予約を取得する。</td></tr>
+            <tr><td class="method">createReservation</td><td>reservation: Reservation<br>customer: Customer</td><td class="type">Reservation</td><td class="sql">SELECT / INSERT</td><td><code>@Transactional</code>。予約日が当日以降かつ3か月以内か検証し、顧客を保存する。予約可能な体験プログラムを取得し、予約に顧客・プログラム・<code>status=&quot;RESERVED&quot;</code> を設定して保存する。公開予約のForm→Entity変換後に呼び出される。ステータス変更メソッド。</td></tr>
+            <tr><td class="method">save</td><td>reservation: Reservation</td><td class="type">Reservation</td><td class="sql">INSERT / UPDATE</td><td><code>@Transactional</code>。予約Entityを保存する。管理画面編集ではフォーム値を既存予約へ反映し、ステータスも入力値で更新してから呼び出す。</td></tr>
+            <tr><td class="method">softDelete</td><td>id: Long</td><td class="type">void</td><td class="sql">SELECT / UPDATE</td><td><code>@Transactional</code>。予約を論理削除する。ステータス変更メソッド。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="totp-service" class="class-block">
+      <div class="class-title">
+        <strong>TotpService.java</strong>
+        <span>TOTPシークレット生成、認証コード検証、バックアップコード管理を担当するService。</span>
+      </div>
+      <div class="diagram-area">
+        <pre class="diagram">┌──────────────────────────────────────────────────────────────┐
+│                         «Service»                            │
+│                         TotpService                          │
+├──────────────────────────────────────────────────────────────┤
+│ - backupCodes: AdminBackupCodeRepository                     │
+├──────────────────────────────────────────────────────────────┤
+│ + generateSecret(): String                                   │
+│ + buildOtpAuthUri(appName: String, accountName: String,      │
+│     secret: String): String                                  │
+│ + verifyCode(secret: String, code: String): boolean          │
+│ + regenerateBackupCodes(admin: AdminUser): List&lt;String&gt;      │
+│ + consumeBackupCode(admin: AdminUser, plainCode: String): boolean│
+└──────────────────────────────────────────────────────────────┘</pre>
+      </div>
+      <div class="dependency"><strong>依存Repository/Mapper:</strong> AdminBackupCodeRepository。TaskMapper依存なし。</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>メソッド</th><th>引数</th><th>戻り値</th><th>SQL種別</th><th>説明</th></tr></thead>
+          <tbody>
+            <tr><td class="method">generateSecret</td><td>なし</td><td class="type">String</td><td class="sql">なし</td><td>TOTP用のランダムシークレットをBase32で生成する。DBアクセスなし。</td></tr>
+            <tr><td class="method">buildOtpAuthUri</td><td>appName: String<br>accountName: String<br>secret: String</td><td class="type">String</td><td class="sql">なし</td><td>認証アプリ登録用の <code>otpauth://</code> URIを生成する。DBアクセスなし。</td></tr>
+            <tr><td class="method">verifyCode</td><td>secret: String<br>code: String</td><td class="type">boolean</td><td class="sql">なし</td><td>現在時刻前後の許容範囲でTOTPコードを生成し、入力コードと照合する。DBアクセスなし。</td></tr>
+            <tr><td class="method">regenerateBackupCodes</td><td>admin: AdminUser</td><td class="type">List&lt;String&gt;</td><td class="sql">SELECT / UPDATE / INSERT</td><td><code>@Transactional</code>。未使用の既存バックアップコードを論理削除し、新しいコードを10件生成してハッシュ化して保存する。ステータス変更メソッド。</td></tr>
+            <tr><td class="method">consumeBackupCode</td><td>admin: AdminUser<br>plainCode: String</td><td class="type">boolean</td><td class="sql">SELECT / UPDATE</td><td><code>@Transactional</code>。入力バックアップコードをハッシュ化して未使用コードを検索し、見つかれば使用日時を設定して保存する。ステータス変更メソッド。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</body>
+
+</html>

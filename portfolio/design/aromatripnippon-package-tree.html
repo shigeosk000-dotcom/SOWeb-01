@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AromaTripNippon パッケージ構成ツリー</title>
+  <style>
+    :root {
+      --bg: #f7f8f5;
+      --paper: #ffffff;
+      --ink: #1f2723;
+      --muted: #657069;
+      --line: #d8ded7;
+      --accent: #2f6f5e;
+      --accent-soft: #e7f1ed;
+      --code-bg: #fbfcfb;
+      --code-line: #cbd6cf;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Yu Gothic", "Meiryo", Arial, sans-serif;
+      line-height: 1.7;
+    }
+
+    main {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 32px 0 56px;
+    }
+
+    header {
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .doc-label {
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 8px 0 10px;
+      font-size: clamp(25px, 4vw, 40px);
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin: 0 0 16px;
+      font-size: 22px;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 860px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    section {
+      margin-top: 28px;
+      padding: 24px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .tree-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--code-line);
+      border-radius: 8px;
+      background: var(--code-bg);
+    }
+
+    pre.tree {
+      width: max-content;
+      min-width: 100%;
+      margin: 0;
+      padding: 22px;
+      color: #17231f;
+      font: 14px/1.5 Consolas, "Courier New", monospace;
+      white-space: pre;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid var(--line);
+      background: var(--paper);
+    }
+
+    th,
+    td {
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      font-size: 14px;
+    }
+
+    th {
+      background: var(--accent-soft);
+      color: #173c32;
+      white-space: nowrap;
+    }
+
+    code {
+      padding: 2px 5px;
+      border-radius: 4px;
+      background: #eef2ef;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: .92em;
+    }
+
+    @media (max-width: 720px) {
+      main {
+        width: min(100% - 20px, 1120px);
+        padding-top: 18px;
+      }
+
+      section {
+        padding: 18px;
+      }
+
+      pre.tree {
+        font-size: 12px;
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <header>
+      <div class="doc-label">Package Tree / AromaTripNippon</div>
+      <h1>AromaTripNippon パッケージ構成</h1>
+      <p class="lead">
+        <code>src/main/java/com/aromatripnippon</code> 配下の主要パッケージ構成をツリー形式で整理したものです。
+        コメントには各ファイルの主な役割を記載しています。
+      </p>
+    </header>
+
+    <section>
+      <h2>1. ディレクトリ構造</h2>
+      <div class="tree-wrap" aria-label="AromaTripNippon package tree">
+        <pre class="tree">src/main/java/
+`-- com/aromatripnippon/
+    |-- AromaTripNipponApplication.java       # Spring Bootアプリケーションのメインクラス
+    |-- config/                               # 設定クラス
+    |   |-- DataInitializer.java              # 初期データ投入、起動時データ整備
+    |   `-- SecurityConfig.java               # Spring Security、ログイン、認可、PasswordEncoder設定
+    |
+    |-- controller/                           # コントローラー
+    |   |-- PublicController.java             # 公開サイト、予約フォーム、予約完了画面の制御
+    |   |-- LoginController.java              # 管理画面ログイン、パスワード再設定画面の制御
+    |   |-- ManagementController.java         # 管理画面の予約・顧客・商品・在庫・レシピCRUD制御
+    |   `-- ManagementExceptionHandler.java   # 管理画面で発生した例外の共通ハンドリング
+    |
+    |-- service/                              # サービス
+    |   |-- AdminUserService.java             # 管理者ユーザー情報の業務処理
+    |   |-- AuditService.java                 # 管理操作ログの記録処理
+    |   |-- CustomerService.java              # 顧客情報の登録・更新・削除処理
+    |   |-- ExperienceProgramService.java     # 体験プログラム情報の業務処理
+    |   |-- FragranceRecipeService.java       # 調香レシピと材料構成の業務処理
+    |   |-- InventoryService.java             # 在庫数量、入出庫、在庫取引の業務処理
+    |   |-- PasswordResetService.java         # パスワード再設定用トークンと再設定処理
+    |   |-- ProductService.java               # 商品情報とカテゴリの業務処理
+    |   |-- ReservationService.java           # 予約登録、予約日検証、顧客紐付け処理
+    |   `-- TotpService.java                  # TOTP認証、QRコード用シークレット、バックアップコード処理
+    |
+    |-- repository/                           # リポジトリ / Mapper相当
+    |   |-- AdminBackupCodeRepository.java    # 管理者バックアップコードのDBアクセス
+    |   |-- AdminUserRepository.java          # 管理者ユーザーの検索・保存DBアクセス
+    |   |-- AuditLogRepository.java           # 監査ログの検索・保存DBアクセス
+    |   |-- CustomerRepository.java           # 顧客情報の検索・保存・論理削除DBアクセス
+    |   |-- ExperienceProgramRepository.java  # 体験プログラムの検索・保存DBアクセス
+    |   |-- FragranceRecipeRepository.java    # 調香レシピの検索・保存DBアクセス
+    |   |-- FragranceRecipeMaterialRepository.java # レシピ材料明細の検索・保存DBアクセス
+    |   |-- InventoryItemRepository.java      # 在庫品目の検索・保存DBアクセス
+    |   |-- InventoryTransactionRepository.java # 在庫入出庫履歴の検索・保存DBアクセス
+    |   |-- ProductCategoryRepository.java    # 商品カテゴリの検索・保存DBアクセス
+    |   |-- ProductRepository.java            # 商品情報の検索・保存DBアクセス
+    |   `-- ReservationRepository.java        # 予約情報の検索・保存・論理削除DBアクセス
+    |
+    |-- entity/                               # エンティティ
+    |   |-- BaseEntity.java                   # ID、作成日時、更新日時、削除日時などの共通項目
+    |   |-- AdminBackupCode.java              # 管理者バックアップコードのエンティティ
+    |   |-- AdminUser.java                    # 管理者ユーザー、権限、認証状態のエンティティ
+    |   |-- AuditLog.java                     # 管理操作ログのエンティティ
+    |   |-- Customer.java                     # 予約者・顧客情報のエンティティ
+    |   |-- ExperienceProgram.java            # 体験プログラム情報のエンティティ
+    |   |-- FragranceRecipe.java              # 調香レシピのエンティティ
+    |   |-- FragranceRecipeMaterial.java      # 調香レシピ材料明細のエンティティ
+    |   |-- InventoryItem.java                # 在庫品目のエンティティ
+    |   |-- InventoryTransaction.java         # 在庫入出庫履歴のエンティティ
+    |   |-- Product.java                      # 商品情報のエンティティ
+    |   |-- ProductCategory.java              # 商品カテゴリのエンティティ
+    |   `-- Reservation.java                  # 予約情報、来店日、時間帯、人数、状態のエンティティ
+    |
+    `-- form/                                 # フォームクラス
+        `-- ReservationRequest.java           # 公開予約フォームの入力値とバリデーション定義</pre>
+      </div>
+    </section>
+
+    <section>
+      <h2>2. パッケージの役割</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>パッケージ</th>
+            <th>役割</th>
+            <th>主なファイル</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>config</code></td>
+            <td>アプリケーション全体の設定、認証・認可、初期データ整備を担当します。</td>
+            <td><code>SecurityConfig</code>, <code>DataInitializer</code></td>
+          </tr>
+          <tr>
+            <td><code>controller</code></td>
+            <td>HTTPリクエストを受け取り、Model作成、View選択、リダイレクトを行います。</td>
+            <td><code>PublicController</code>, <code>ManagementController</code>, <code>LoginController</code></td>
+          </tr>
+          <tr>
+            <td><code>service</code></td>
+            <td>予約、在庫、商品、顧客、認証補助などの業務ロジックを担当します。</td>
+            <td><code>ReservationService</code>, <code>InventoryService</code>, <code>TotpService</code></td>
+          </tr>
+          <tr>
+            <td><code>repository</code></td>
+            <td>DBへの検索、登録、更新、論理削除を担当します。</td>
+            <td><code>ReservationRepository</code>, <code>ProductRepository</code>, <code>CustomerRepository</code></td>
+          </tr>
+          <tr>
+            <td><code>entity</code></td>
+            <td>DBテーブルに対応するデータモデルを定義します。</td>
+            <td><code>Reservation</code>, <code>Customer</code>, <code>Product</code>, <code>InventoryItem</code></td>
+          </tr>
+          <tr>
+            <td><code>form</code></td>
+            <td>画面入力値と入力チェック項目を保持します。</td>
+            <td><code>ReservationRequest</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+</body>
+
+</html>
