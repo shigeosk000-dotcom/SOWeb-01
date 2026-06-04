@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AromaTripNippon Entity クラス図</title>
+  <style>
+    :root {
+      --ink: #1f2933;
+      --muted: #667085;
+      --line: #d9dee7;
+      --panel: #f6f7f9;
+      --accent: #28756f;
+      --accent-soft: #e7f3f1;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #fff;
+      color: var(--ink);
+      font-family: "Yu Gothic", "Meiryo", Arial, sans-serif;
+      line-height: 1.75;
+    }
+
+    main {
+      width: min(1160px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 32px 0 56px;
+    }
+
+    .doc-header {
+      border-bottom: 3px solid var(--ink);
+      padding-bottom: 18px;
+      margin-bottom: 24px;
+    }
+
+    .doc-kicker {
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .08em;
+    }
+
+    h1 {
+      margin: 6px 0 8px;
+      font-size: 30px;
+      line-height: 1.35;
+    }
+
+    .summary {
+      background: var(--accent-soft);
+      border: 1px solid #b8d9d4;
+      border-radius: 6px;
+      padding: 14px 16px;
+      margin: 20px 0 24px;
+    }
+
+    .class-block {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      overflow: hidden;
+      margin-bottom: 28px;
+    }
+
+    .class-title {
+      padding: 12px 16px;
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .class-title strong {
+      display: block;
+      font-size: 16px;
+    }
+
+    .class-title span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .badge {
+      display: inline-block;
+      margin-left: 8px;
+      padding: 2px 6px;
+      border-radius: 3px;
+      background: #050505;
+      color: #fff;
+      font-size: 12px;
+      line-height: 1.4;
+      vertical-align: text-bottom;
+    }
+
+    .diagram-area {
+      background: var(--panel);
+      padding: 18px;
+      border-bottom: 1px solid var(--line);
+      overflow-x: auto;
+    }
+
+    pre.diagram {
+      display: inline-block;
+      min-width: 620px;
+      margin: 0;
+      color: #1f2933;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 13px;
+      line-height: 1.35;
+      background: #fff;
+      border: 1px dashed #8da09c;
+      padding: 16px 18px;
+    }
+
+    .annotations {
+      padding: 12px 16px;
+      color: var(--muted);
+      font-size: 13px;
+      background: #fbfcfd;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <header class="doc-header">
+      <div class="doc-kicker">DESIGN DOCUMENT</div>
+      <h1>AromaTripNippon Entity クラス図</h1>
+    </header>
+
+    <div class="summary">
+      AromaTripNippon の主要Entityを、BaseEntityから継承する共通項目とあわせて整理したクラス図です。
+    </div>
+
+    <section class="class-block">
+      <div class="class-title">
+        <strong>AdminUser.java <span class="badge">必須</span></strong>
+        <span>管理者ログイン、権限、二要素認証、パスワード再設定情報を保持するEntity。</span>
+      </div>
+      <div class="diagram-area">
+        <pre class="diagram">┌──────────────────────────────────────────────────────────────┐
+│                           «Entity»                           │
+│                          AdminUser                           │
+├──────────────────────────────────────────────────────────────┤
+│ - loginId: String                                            │
+│ - displayName: String                                        │
+│ - email: String                                              │
+│ - passwordHash: String                                       │
+│ - role: String                                               │
+│ - active: Boolean                                            │
+│ - notificationSetting: String                                │
+│ - displayLanguage: String                                    │
+│ - failedLoginAttempts: Integer                               │
+│ - accountLocked: Boolean                                     │
+│ - passwordResetRequired: Boolean                             │
+│ - passwordResetTokenHash: String                             │
+│ - passwordResetTokenExpiresAt: LocalDateTime                 │
+│ - totpEnabled: Boolean                                       │
+│ - totpSecret: String                                         │
+│ - totpPendingSecret: String                                  │
+│ - id / createdAt / updatedAt / deletedAt                     │
+├──────────────────────────────────────────────────────────────┤
+│ + getter/setter (Lombok @Data)                               │
+└──────────────────────────────────────────────────────────────┘</pre>
+      </div>
+      <div class="annotations">Lombok: @Data, @NoArgsConstructor, @AllArgsConstructor</div>
+    </section>
+
+    <section class="class-block">
+      <div class="class-title">
+        <strong>Customer.java <span class="badge">必須</span></strong>
+        <span>予約・香りレシピに紐づく顧客情報を保持するEntity。</span>
+      </div>
+      <div class="diagram-area">
+        <pre class="diagram">┌──────────────────────────────────────────────────────────────┐
+│                           «Entity»                           │
+│                           Customer                           │
+├──────────────────────────────────────────────────────────────┤
+│ - name: String                                               │
+│ - nationality: String                                        │
+│ - email: String                                              │
+│ - phone: String                                              │
+│ - preferredLanguage: String                                  │
+│ - purpose: String                                            │
+│ - notes: String                                              │
+│ - id / createdAt / updatedAt / deletedAt                     │
+├──────────────────────────────────────────────────────────────┤
+│ + getter/setter (Lombok @Data)                               │
+└──────────────────────────────────────────────────────────────┘</pre>
+      </div>
+      <div class="annotations">Lombok: @Data, @NoArgsConstructor, @AllArgsConstructor</div>
+    </section>
+
+    <section class="class-block">
+      <div class="class-title">
+        <strong>Reservation.java <span class="badge">必須</span></strong>
+        <span>来店予約の顧客、体験プログラム、日時、人数、ステータスを保持するEntity。</span>
+      </div>
+      <div class="diagram-area">
+        <pre class="diagram">┌──────────────────────────────────────────────────────────────┐
+│                           «Entity»                           │
+│                         Reservation                          │
+├──────────────────────────────────────────────────────────────┤
+│ - customer: Customer                                         │
+│ - experienceProgram: ExperienceProgram                       │
+│ - visitDate: LocalDate                                       │
+│ - timeSlot: String                                           │
+│ - guestCount: Integer                                        │
+│ - preferredLanguage: String                                  │
+│ - requestNote: String                                        │
+│ - status: String                                             │
+│ - id / createdAt / updatedAt / deletedAt                     │
+├──────────────────────────────────────────────────────────────┤
+│ + getter/setter (Lombok @Data)                               │
+└──────────────────────────────────────────────────────────────┘</pre>
+      </div>
+      <div class="annotations">Lombok: @Data, @NoArgsConstructor, @AllArgsConstructor</div>
+    </section>
+
+    <section class="class-block">
+      <div class="class-title">
+        <strong>ExperienceProgram.java <span class="badge">必須</span></strong>
+        <span>体験プログラムの名称、説明、所要時間、料金、公開状態を保持するEntity。</span>
+      </div>
+      <div class="diagram-area">
+        <pre class="diagram">┌──────────────────────────────────────────────────────────────┐
+│                           «Entity»                           │
+│                       ExperienceProgram                      │
+├──────────────────────────────────────────────────────────────┤
+│ - name: String                                               │
+│ - description: String                                        │
+│ - durationMinutes: Integer                                   │
+│ - price: BigDecimal                                          │
+│ - materialsSummary: String                                   │
+│ - active: Boolean                                            │
+│ - id / createdAt / updatedAt / deletedAt                     │
+├──────────────────────────────────────────────────────────────┤
+│ + getter/setter (Lombok @Data)                               │
+└──────────────────────────────────────────────────────────────┘</pre>
+      </div>
+      <div class="annotations">Lombok: @Data, @NoArgsConstructor, @AllArgsConstructor</div>
+    </section>
+
+    <section class="class-block">
+      <div class="class-title">
+        <strong>Product.java <span class="badge">必須</span></strong>
+        <span>オンラインショップ商品のカテゴリ、名称、価格、説明、公開状態を保持するEntity。</span>
+      </div>
+      <div class="diagram-area">
+        <pre class="diagram">┌──────────────────────────────────────────────────────────────┐
+│                           «Entity»                           │
+│                           Product                            │
+├──────────────────────────────────────────────────────────────┤
+│ - category: ProductCategory                                  │
+│ - productName: String                                        │
+│ - englishName: String                                        │
+│ - price: BigDecimal                                          │
+│ - description: String                                        │
+│ - active: Boolean                                            │
+│ - id / createdAt / updatedAt / deletedAt                     │
+├──────────────────────────────────────────────────────────────┤
+│ + getter/setter (Lombok @Data)                               │
+└──────────────────────────────────────────────────────────────┘</pre>
+      </div>
+      <div class="annotations">Lombok: @Data, @NoArgsConstructor, @AllArgsConstructor</div>
+    </section>
+
+    <section class="class-block">
+      <div class="class-title">
+        <strong>FragranceRecipe.java <span class="badge">必須</span></strong>
+        <span>顧客別の香りレシピと材料構成を保持するEntity。</span>
+      </div>
+      <div class="diagram-area">
+        <pre class="diagram">┌──────────────────────────────────────────────────────────────┐
+│                           «Entity»                           │
+│                       FragranceRecipe                        │
+├──────────────────────────────────────────────────────────────┤
+│ - customer: Customer                                         │
+│ - recipeName: String                                         │
+│ - concept: String                                            │
+│ - totalAmount: BigDecimal                                    │
+│ - memo: String                                               │
+│ - materials: List&lt;FragranceRecipeMaterial&gt;                   │
+│ - id / createdAt / updatedAt / deletedAt                     │
+├──────────────────────────────────────────────────────────────┤
+│ + getter/setter (Lombok @Data)                               │
+└──────────────────────────────────────────────────────────────┘</pre>
+      </div>
+      <div class="annotations">Lombok: @Data, @NoArgsConstructor, @AllArgsConstructor</div>
+    </section>
+
+    <section class="class-block">
+      <div class="class-title">
+        <strong>InventoryItem.java <span class="badge">必須</span></strong>
+        <span>香料・資材の在庫数量、単位、しきい値、保管場所、仕入先を保持するEntity。</span>
+      </div>
+      <div class="diagram-area">
+        <pre class="diagram">┌──────────────────────────────────────────────────────────────┐
+│                           «Entity»                           │
+│                        InventoryItem                         │
+├──────────────────────────────────────────────────────────────┤
+│ - itemName: String                                           │
+│ - englishName: String                                        │
+│ - category: String                                           │
+│ - stockQuantity: BigDecimal                                  │
+│ - unit: String                                               │
+│ - thresholdQuantity: BigDecimal                              │
+│ - storageLocation: String                                    │
+│ - supplier: String                                           │
+│ - lastReceivedDate: LocalDate                                │
+│ - memo: String                                               │
+│ - id / createdAt / updatedAt / deletedAt                     │
+├──────────────────────────────────────────────────────────────┤
+│ + getter/setter (Lombok @Data)                               │
+└──────────────────────────────────────────────────────────────┘</pre>
+      </div>
+      <div class="annotations">Lombok: @Data, @NoArgsConstructor, @AllArgsConstructor</div>
+    </section>
+
+    <section class="class-block">
+      <div class="class-title">
+        <strong>BaseEntity.java</strong>
+        <span>各Entityに共通するID、作成日時、更新日時、論理削除日時を定義する親クラス。</span>
+      </div>
+      <div class="diagram-area">
+        <pre class="diagram">┌──────────────────────────────────────────────────────────────┐
+│                      «MappedSuperclass»                      │
+│                          BaseEntity                          │
+├──────────────────────────────────────────────────────────────┤
+│ - id: Long                                                   │
+│ - createdAt: LocalDateTime                                   │
+│ - updatedAt: LocalDateTime                                   │
+│ - deletedAt: LocalDateTime                                   │
+├──────────────────────────────────────────────────────────────┤
+│ + prePersist(): void                                         │
+│ + preUpdate(): void                                          │
+│ + softDelete(): void                                         │
+│ + isDeleted(): boolean                                       │
+│ + getter/setter                                              │
+└──────────────────────────────────────────────────────────────┘</pre>
+      </div>
+      <div class="annotations">JPA: @MappedSuperclass。各Entityの共通フィールドと論理削除処理をまとめます。</div>
+    </section>
+  </main>
+</body>
+
+</html>

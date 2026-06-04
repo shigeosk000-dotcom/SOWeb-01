@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AromaTripNippon Repository メソッド一覧</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --panel: #f6f7f9;
+      --ink: #1f2933;
+      --muted: #667085;
+      --line: #d9dee7;
+      --head: #050505;
+      --accent: #28756f;
+      --accent-soft: #e7f3f1;
+      --warn-soft: #fff8e6;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Yu Gothic", "Meiryo", Arial, sans-serif;
+      line-height: 1.7;
+    }
+
+    main {
+      width: min(1480px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 44px;
+    }
+
+    .doc-header {
+      border-bottom: 3px solid var(--ink);
+      padding-bottom: 16px;
+      margin-bottom: 22px;
+    }
+
+    .doc-kicker {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+    h1 {
+      margin: 6px 0 8px;
+      font-size: 28px;
+      line-height: 1.35;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 18px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .summary,
+    .note-box {
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin: 18px 0 22px;
+      border: 1px solid var(--line);
+    }
+
+    .summary {
+      background: var(--accent-soft);
+      border-color: #b8d9d4;
+    }
+
+    .note-box {
+      background: var(--warn-soft);
+      border-color: #ead491;
+    }
+
+    .toc {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 22px;
+      background: #fff;
+    }
+
+    .toc-title {
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .toc ol {
+      margin: 0;
+      padding-left: 22px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .toc a {
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .toc a:hover {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+
+    .class-block {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 24px;
+      background: #fff;
+    }
+
+    .class-title {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .class-title strong {
+      display: block;
+      font-size: 16px;
+    }
+
+    .class-title span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .class-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 14px;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .table-wrap {
+      padding: 14px 16px 18px;
+      background: var(--panel);
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      min-width: 1500px;
+      border-collapse: collapse;
+      table-layout: fixed;
+      background: #fff;
+      border: 1px solid var(--line);
+    }
+
+    th, td {
+      border: 1px solid var(--line);
+      padding: 10px 12px;
+      vertical-align: top;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+    }
+
+    thead th {
+      background: var(--head);
+      color: #fff;
+      text-align: left;
+      font-size: 13px;
+    }
+
+    tbody td {
+      font-size: 13px;
+    }
+
+    td.method {
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 12.5px;
+      white-space: nowrap;
+    }
+
+    td.args, td.remark {
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    td.sql {
+      white-space: nowrap;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    td.summary {
+      line-height: 1.65;
+    }
+
+    .footnote {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    code {
+      font-family: Consolas, "Courier New", monospace;
+      font-size: .95em;
+    }
+
+    @media (max-width: 720px) {
+      main {
+        width: min(100% - 18px, 1480px);
+        padding: 18px 0 28px;
+      }
+
+      h1 {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header class="doc-header">
+      <div class="doc-kicker">DESIGN DOCUMENT</div>
+      <h1>AromaTripNippon Repository メソッド一覧</h1>
+      <div class="meta">
+        <span>作成日: 2026-06-04</span>
+        <span>対象: com.aromatripnippon.repository</span>
+        <span>観点: MyBatis 風の一覧表示だが実装は Spring Data JPA 派生クエリ</span>
+      </div>
+    </header>
+
+    <div class="summary">
+      Repository インターフェースで宣言されているメソッドを、SQL 種別と備考つきで一覧化しています。
+      実装は Spring Data JPA の派生クエリと <code>@Query</code> / <code>@Modifying</code> ですが、一覧では読みやすさのため MyBatis 風の観点で整理しています。
+    </div>
+
+    <div class="note-box">
+      <strong>SQL 種別の扱い</strong>
+      派生クエリは基本的に <code>SELECT</code>、<code>@Modifying</code> の更新クエリは <code>UPDATE</code> として記載しています。
+      <code>save</code> や <code>delete</code> など JpaRepository 継承の標準メソッドは、各 Repository に明示的な宣言がないためこの一覧には含めていません。
+    </div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol>
+        <li><a href="#admin-backup-code-repository">AdminBackupCodeRepository</a></li>
+        <li><a href="#admin-user-repository">AdminUserRepository</a></li>
+        <li><a href="#audit-log-repository">AuditLogRepository</a></li>
+        <li><a href="#customer-repository">CustomerRepository</a></li>
+        <li><a href="#experience-program-repository">ExperienceProgramRepository</a></li>
+        <li><a href="#fragrance-recipe-material-repository">FragranceRecipeMaterialRepository</a></li>
+        <li><a href="#fragrance-recipe-repository">FragranceRecipeRepository</a></li>
+        <li><a href="#inventory-item-repository">InventoryItemRepository</a></li>
+        <li><a href="#inventory-transaction-repository">InventoryTransactionRepository</a></li>
+        <li><a href="#product-category-repository">ProductCategoryRepository</a></li>
+        <li><a href="#product-repository">ProductRepository</a></li>
+        <li><a href="#reservation-repository">ReservationRepository</a></li>
+      </ol>
+    </nav>
+
+    <section id="admin-backup-code-repository" class="class-block">
+      <div class="class-title">
+        <strong>AdminBackupCodeRepository</strong>
+        <span>管理者バックアップコードの参照を担当する Repository</span>
+        <div class="class-meta"><span>JPA: AdminBackupCode</span><span>用途: TOTP バックアップコード管理</span></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <colgroup>
+            <col style="width: 14%"><col style="width: 30%"><col style="width: 8%"><col style="width: 12%"><col style="width: 36%">
+          </colgroup>
+          <thead>
+            <tr><th>メソッド名</th><th>引数</th><th>戻り値</th><th>SQL種別</th><th>備考</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="method">findByAdminUserAndDeletedAtIsNullAndUsedAtIsNull</td><td class="args">AdminUser adminUser</td><td>List&lt;AdminBackupCode&gt;</td><td class="sql">SELECT</td><td class="remark">指定管理者の未使用・未削除のバックアップコードを取得する。</td></tr>
+            <tr><td class="method">findByAdminUserAndCodeHashAndDeletedAtIsNullAndUsedAtIsNull</td><td class="args">AdminUser adminUser, String codeHash</td><td>Optional&lt;AdminBackupCode&gt;</td><td class="sql">SELECT</td><td class="remark">ハッシュ一致かつ未使用のコードを 1 件検索する。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="admin-user-repository" class="class-block">
+      <div class="class-title">
+        <strong>AdminUserRepository</strong>
+        <span>管理者ユーザーの参照を担当する Repository</span>
+        <div class="class-meta"><span>JPA: AdminUser</span><span>用途: 認証・アカウント管理</span></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <colgroup>
+            <col style="width: 14%"><col style="width: 32%"><col style="width: 8%"><col style="width: 12%"><col style="width: 34%">
+          </colgroup>
+          <thead><tr><th>メソッド名</th><th>引数</th><th>戻り値</th><th>SQL種別</th><th>備考</th></tr></thead>
+          <tbody>
+            <tr><td class="method">findByIdAndDeletedAtIsNull</td><td class="args">Long id</td><td>Optional&lt;AdminUser&gt;</td><td class="sql">SELECT</td><td class="remark">削除されていない管理者を ID で取得する。</td></tr>
+            <tr><td class="method">findByLoginIdAndDeletedAtIsNullAndActiveTrue</td><td class="args">String loginId</td><td>Optional&lt;AdminUser&gt;</td><td class="sql">SELECT</td><td class="remark">アクティブな管理者を loginId で取得する。</td></tr>
+            <tr><td class="method">findByLoginIdAndDeletedAtIsNull</td><td class="args">String loginId</td><td>Optional&lt;AdminUser&gt;</td><td class="sql">SELECT</td><td class="remark">削除されていない管理者を loginId で取得する。</td></tr>
+            <tr><td class="method">findByLoginIdAndEmailAndDeletedAtIsNull</td><td class="args">String loginId, String email</td><td>Optional&lt;AdminUser&gt;</td><td class="sql">SELECT</td><td class="remark">パスワード再設定対象の管理者をログイン ID とメールで特定する。</td></tr>
+            <tr><td class="method">findByPasswordResetTokenHashAndPasswordResetTokenExpiresAtAfterAndDeletedAtIsNull</td><td class="args">String passwordResetTokenHash, LocalDateTime now</td><td>Optional&lt;AdminUser&gt;</td><td class="sql">SELECT</td><td class="remark">有効期限内のパスワード再設定トークンを持つ管理者を検索する。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="audit-log-repository" class="class-block">
+      <div class="class-title">
+        <strong>AuditLogRepository</strong>
+        <span>監査ログを参照する Repository</span>
+        <div class="class-meta"><span>JPA: AuditLog</span><span>用途: 管理画面ダッシュボード</span></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <colgroup><col style="width: 20%"><col style="width: 30%"><col style="width: 12%"><col style="width: 12%"><col style="width: 26%"></colgroup>
+          <thead><tr><th>メソッド名</th><th>引数</th><th>戻り値</th><th>SQL種別</th><th>備考</th></tr></thead>
+          <tbody>
+            <tr><td class="method">findByDeletedAtIsNullOrderByIdDesc</td><td class="args">なし</td><td>List&lt;AuditLog&gt;</td><td class="sql">SELECT</td><td class="remark">削除されていない監査ログを ID 降順で取得する。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="customer-repository" class="class-block">
+      <div class="class-title">
+        <strong>CustomerRepository</strong>
+        <span>顧客を参照する Repository</span>
+        <div class="class-meta"><span>JPA: Customer</span><span>用途: 顧客検索・重複確認</span></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <colgroup><col style="width: 16%"><col style="width: 29%"><col style="width: 10%"><col style="width: 12%"><col style="width: 33%"></colgroup>
+          <thead><tr><th>メソッド名</th><th>引数</th><th>戻り値</th><th>SQL種別</th><th>備考</th></tr></thead>
+          <tbody>
+            <tr><td class="method">findByIdAndDeletedAtIsNull</td><td class="args">Long id</td><td>Optional&lt;Customer&gt;</td><td class="sql">SELECT</td><td class="remark">削除されていない顧客を ID で取得する。</td></tr>
+            <tr><td class="method">findByDeletedAtIsNullOrderByIdDesc</td><td class="args">なし</td><td>List&lt;Customer&gt;</td><td class="sql">SELECT</td><td class="remark">顧客一覧を ID 降順で取得する。</td></tr>
+            <tr><td class="method">findByDeletedAtIsNullAndNameContainingIgnoreCaseOrderByIdDesc</td><td class="args">String name</td><td>List&lt;Customer&gt;</td><td class="sql">SELECT</td><td class="remark">顧客名の LIKE 検索を行い、ID 降順で返す。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="experience-program-repository" class="class-block">
+      <div class="class-title">
+        <strong>ExperienceProgramRepository</strong>
+        <span>体験プログラムを参照する Repository</span>
+        <div class="class-meta"><span>JPA: ExperienceProgram</span><span>用途: 予約導線・管理画面</span></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <colgroup><col style="width: 16%"><col style="width: 29%"><col style="width: 10%"><col style="width: 12%"><col style="width: 33%"></colgroup>
+          <thead><tr><th>メソッド名</th><th>引数</th><th>戻り値</th><th>SQL種別</th><th>備考</th></tr></thead>
+          <tbody>
+            <tr><td class="method">findByIdAndDeletedAtIsNull</td><td class="args">Long id</td><td>Optional&lt;ExperienceProgram&gt;</td><td class="sql">SELECT</td><td class="remark">削除されていない体験プログラムを ID で取得する。</td></tr>
+            <tr><td class="method">findByDeletedAtIsNullOrderById</td><td class="args">なし</td><td>List&lt;ExperienceProgram&gt;</td><td class="sql">SELECT</td><td class="remark">削除されていない体験プログラムを ID 順で取得する。</td></tr>
+            <tr><td class="method">findFirstByDeletedAtIsNullAndActiveTrueOrderById</td><td class="args">なし</td><td>Optional&lt;ExperienceProgram&gt;</td><td class="sql">SELECT</td><td class="remark">有効な最初の体験プログラムを ID 順で取得する。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="fragrance-recipe-material-repository" class="class-block">
+      <div class="class-title">
+        <strong>FragranceRecipeMaterialRepository</strong>
+        <span>レシピ材料を参照する Repository</span>
+        <div class="class-meta"><span>JPA: FragranceRecipeMaterial</span><span>用途: 配合順・削除制御</span></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <colgroup><col style="width: 19%"><col style="width: 28%"><col style="width: 10%"><col style="width: 12%"><col style="width: 31%"></colgroup>
+          <thead><tr><th>メソッド名</th><th>引数</th><th>戻り値</th><th>SQL種別</th><th>備考</th></tr></thead>
+          <tbody>
+            <tr><td class="method">findByFragranceRecipeIdOrderByDisplayOrderAsc</td><td class="args">Long fragranceRecipeId</td><td>List&lt;FragranceRecipeMaterial&gt;</td><td class="sql">SELECT</td><td class="remark">レシピに紐づく材料を displayOrder 昇順で取得する。</td></tr>
+            <tr><td class="method">existsByDeletedAtIsNullAndFragranceRecipeDeletedAtIsNullAndInventoryItemId</td><td class="args">Long inventoryItemId</td><td>boolean</td><td class="sql">SELECT</td><td class="remark">削除されていないレシピに参照されている在庫があるかを判定する。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="fragrance-recipe-repository" class="class-block">
+      <div class="class-title">
+        <strong>FragranceRecipeRepository</strong>
+        <span>調香レシピを参照する Repository</span>
+        <div class="class-meta"><span>JPA: FragranceRecipe</span><span>用途: レシピ検索・顧客参照確認</span></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <colgroup><col style="width: 18%"><col style="width: 29%"><col style="width: 10%"><col style="width: 12%"><col style="width: 31%"></colgroup>
+          <thead><tr><th>メソッド名</th><th>引数</th><th>戻り値</th><th>SQL種別</th><th>備考</th></tr></thead>
+          <tbody>
+            <tr><td class="method">findByIdAndDeletedAtIsNull</td><td class="args">Long id</td><td>Optional&lt;FragranceRecipe&gt;</td><td class="sql">SELECT</td><td class="remark">削除されていないレシピを ID で取得する。</td></tr>
+            <tr><td class="method">findByDeletedAtIsNullOrderByIdDesc</td><td class="args">なし</td><td>List&lt;FragranceRecipe&gt;</td><td class="sql">SELECT</td><td class="remark">@EntityGraph(attributePaths = &quot;customer&quot;) 付き。顧客を一緒に取得する。</td></tr>
+            <tr><td class="method">findByDeletedAtIsNullAndRecipeNameContainingIgnoreCaseOrderByIdDesc</td><td class="args">String recipeName</td><td>List&lt;FragranceRecipe&gt;</td><td class="sql">SELECT</td><td class="remark">@EntityGraph(attributePaths = &quot;customer&quot;) 付き。レシピ名の LIKE 検索。</td></tr>
+            <tr><td class="method">existsActiveByCustomerId</td><td class="args">@Param(&quot;customerId&quot;) Long customerId</td><td>boolean</td><td class="sql">SELECT</td><td class="remark">@Query で件数判定を行う。削除されていないレシピにその顧客が使われているかを確認する。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="inventory-item-repository" class="class-block">
+      <div class="class-title">
+        <strong>InventoryItemRepository</strong>
+        <span>在庫アイテムを参照する Repository</span>
+        <div class="class-meta"><span>JPA: InventoryItem</span><span>用途: 在庫検索・同期</span></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <colgroup><col style="width: 18%"><col style="width: 28%"><col style="width: 10%"><col style="width: 12%"><col style="width: 32%"></colgroup>
+          <thead><tr><th>メソッド名</th><th>引数</th><th>戻り値</th><th>SQL種別</th><th>備考</th></tr></thead>
+          <tbody>
+            <tr><td class="method">findByIdAndDeletedAtIsNull</td><td class="args">Long id</td><td>Optional&lt;InventoryItem&gt;</td><td class="sql">SELECT</td><td class="remark">削除されていない在庫を ID で取得する。</td></tr>
+            <tr><td class="method">findByDeletedAtIsNullOrderByIdDesc</td><td class="args">なし</td><td>List&lt;InventoryItem&gt;</td><td class="sql">SELECT</td><td class="remark">在庫一覧を ID 降順で取得する。</td></tr>
+            <tr><td class="method">findByDeletedAtIsNullAndItemNameContainingIgnoreCaseOrderByIdDesc</td><td class="args">String itemName</td><td>List&lt;InventoryItem&gt;</td><td class="sql">SELECT</td><td class="remark">在庫名の LIKE 検索を行い、ID 降順で返す。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="inventory-transaction-repository" class="class-block">
+      <div class="class-title">
+        <strong>InventoryTransactionRepository</strong>
+        <span>在庫入出庫履歴を参照する Repository</span>
+        <div class="class-meta"><span>JPA: InventoryTransaction</span><span>用途: 履歴参照</span></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <colgroup><col style="width: 18%"><col style="width: 30%"><col style="width: 10%"><col style="width: 12%"><col style="width: 30%"></colgroup>
+          <thead><tr><th>メソッド名</th><th>引数</th><th>戻り値</th><th>SQL種別</th><th>備考</th></tr></thead>
+          <tbody>
+            <tr><td class="method">findByDeletedAtIsNullOrderByIdDesc</td><td class="args">なし</td><td>List&lt;InventoryTransaction&gt;</td><td class="sql">SELECT</td><td class="remark">削除されていない履歴を ID 降順で取得する。</td></tr>
+            <tr><td class="method">findByDeletedAtIsNullAndInventoryItemIdOrderByTransactionDateDescIdDesc</td><td class="args">Long inventoryItemId</td><td>List&lt;InventoryTransaction&gt;</td><td class="sql">SELECT</td><td class="remark">対象在庫の履歴を transactionDate 降順、ID 降順で取得する。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="product-category-repository" class="class-block">
+      <div class="class-title">
+        <strong>ProductCategoryRepository</strong>
+        <span>商品カテゴリを参照する Repository</span>
+        <div class="class-meta"><span>JPA: ProductCategory</span><span>用途: 商品登録・在庫同期</span></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <colgroup><col style="width: 20%"><col style="width: 28%"><col style="width: 10%"><col style="width: 12%"><col style="width: 30%"></colgroup>
+          <thead><tr><th>メソッド名</th><th>引数</th><th>戻り値</th><th>SQL種別</th><th>備考</th></tr></thead>
+          <tbody>
+            <tr><td class="method">findByCategoryNameAndDeletedAtIsNull</td><td class="args">String categoryName</td><td>Optional&lt;ProductCategory&gt;</td><td class="sql">SELECT</td><td class="remark">カテゴリ名で削除されていないカテゴリを取得する。</td></tr>
+            <tr><td class="method">findByDeletedAtIsNullAndActiveTrueOrderByDisplayOrderAscIdAsc</td><td class="args">なし</td><td>List&lt;ProductCategory&gt;</td><td class="sql">SELECT</td><td class="remark">表示順 → ID 順で有効カテゴリを並べる。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="product-repository" class="class-block">
+      <div class="class-title">
+        <strong>ProductRepository</strong>
+        <span>商品を参照する Repository</span>
+        <div class="class-meta"><span>JPA: Product</span><span>用途: 商品検索・在庫同期</span></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <colgroup><col style="width: 18%"><col style="width: 28%"><col style="width: 10%"><col style="width: 12%"><col style="width: 32%"></colgroup>
+          <thead><tr><th>メソッド名</th><th>引数</th><th>戻り値</th><th>SQL種別</th><th>備考</th></tr></thead>
+          <tbody>
+            <tr><td class="method">findByIdAndDeletedAtIsNull</td><td class="args">Long id</td><td>Optional&lt;Product&gt;</td><td class="sql">SELECT</td><td class="remark">@EntityGraph(attributePaths = &quot;category&quot;) 付き。カテゴリ込みで取得する。</td></tr>
+            <tr><td class="method">findByDeletedAtIsNullOrderByIdDesc</td><td class="args">なし</td><td>List&lt;Product&gt;</td><td class="sql">SELECT</td><td class="remark">@EntityGraph(attributePaths = &quot;category&quot;) 付き。商品一覧を ID 降順で取得する。</td></tr>
+            <tr><td class="method">findByDeletedAtIsNullAndActiveTrueOrderByIdAsc</td><td class="args">なし</td><td>List&lt;Product&gt;</td><td class="sql">SELECT</td><td class="remark">@EntityGraph(attributePaths = &quot;category&quot;) 付き。有効商品を ID 昇順で取得する。</td></tr>
+            <tr><td class="method">findByDeletedAtIsNullAndProductNameContainingIgnoreCaseOrderByIdDesc</td><td class="args">String productName</td><td>List&lt;Product&gt;</td><td class="sql">SELECT</td><td class="remark">@EntityGraph(attributePaths = &quot;category&quot;) 付き。商品名の LIKE 検索を行う。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="reservation-repository" class="class-block">
+      <div class="class-title">
+        <strong>ReservationRepository</strong>
+        <span>予約を参照・論理削除する Repository</span>
+        <div class="class-meta"><span>JPA: Reservation</span><span>用途: 予約一覧・検索・削除</span></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <colgroup><col style="width: 18%"><col style="width: 28%"><col style="width: 10%"><col style="width: 12%"><col style="width: 32%"></colgroup>
+          <thead><tr><th>メソッド名</th><th>引数</th><th>戻り値</th><th>SQL種別</th><th>備考</th></tr></thead>
+          <tbody>
+            <tr><td class="method">findByIdAndDeletedAtIsNull</td><td class="args">Long id</td><td>Optional&lt;Reservation&gt;</td><td class="sql">SELECT</td><td class="remark">削除されていない予約を ID で取得する。</td></tr>
+            <tr><td class="method">findByDeletedAtIsNullOrderByVisitDateDescTimeSlotAsc</td><td class="args">なし</td><td>List&lt;Reservation&gt;</td><td class="sql">SELECT</td><td class="remark">@EntityGraph(attributePaths = {&quot;customer&quot;, &quot;experienceProgram&quot;}) 付き。来訪日降順、時間帯昇順で取得する。</td></tr>
+            <tr><td class="method">findByDeletedAtIsNullAndCustomerNameContainingIgnoreCaseOrderByVisitDateDescTimeSlotAsc</td><td class="args">String customerName</td><td>List&lt;Reservation&gt;</td><td class="sql">SELECT</td><td class="remark">@EntityGraph(attributePaths = {&quot;customer&quot;, &quot;experienceProgram&quot;}) 付き。顧客名の LIKE 検索を行う。</td></tr>
+            <tr><td class="method">findByDeletedAtIsNullAndVisitDateOrderByTimeSlotAsc</td><td class="args">LocalDate visitDate</td><td>List&lt;Reservation&gt;</td><td class="sql">SELECT</td><td class="remark">指定日の予約を時間帯昇順で取得する。</td></tr>
+            <tr><td class="method">existsActiveByCustomerId</td><td class="args">@Param(&quot;customerId&quot;) Long customerId</td><td>boolean</td><td class="sql">SELECT</td><td class="remark">@Query で件数判定を行う。顧客に関連する有効予約があるかを確認する。</td></tr>
+            <tr><td class="method">softDeleteById</td><td class="args">@Param(&quot;id&quot;) Long id, @Param(&quot;deletedAt&quot;) LocalDateTime deletedAt</td><td>int</td><td class="sql">UPDATE</td><td class="remark">@Modifying 付き。削除日時をセットする論理削除更新。戻り値は更新件数。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <div class="footnote">
+      ここに挙げたのは、各 Repository インターフェースで明示的に宣言されているメソッドです。`JpaRepository` の継承メソッドは一覧に含めていません。
+    </div>
+  </main>
+</body>
+</html>

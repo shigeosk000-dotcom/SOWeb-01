@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AromaTripNippon Service メソッド一覧</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --panel: #f6f7f9;
+      --ink: #1f2933;
+      --muted: #667085;
+      --line: #d9dee7;
+      --head: #050505;
+      --accent: #28756f;
+      --accent-soft: #e7f3f1;
+      --warn-soft: #fff8e6;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Yu Gothic", "Meiryo", Arial, sans-serif;
+      line-height: 1.7;
+    }
+
+    main {
+      width: min(1400px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 44px;
+    }
+
+    .doc-header {
+      border-bottom: 3px solid var(--ink);
+      padding-bottom: 16px;
+      margin-bottom: 22px;
+    }
+
+    .doc-kicker {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+    h1 {
+      margin: 6px 0 8px;
+      font-size: 28px;
+      line-height: 1.35;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 18px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .summary,
+    .note-box {
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin: 18px 0 22px;
+      border: 1px solid var(--line);
+    }
+
+    .summary {
+      background: var(--accent-soft);
+      border-color: #b8d9d4;
+    }
+
+    .note-box {
+      background: var(--warn-soft);
+      border-color: #ead491;
+    }
+
+    .toc {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 22px;
+      background: #fff;
+    }
+
+    .toc-title {
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .toc ol {
+      margin: 0;
+      padding-left: 22px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .toc a {
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .toc a:hover {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+
+    .class-block {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 24px;
+      background: #fff;
+    }
+
+    .class-title {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .class-title strong {
+      display: block;
+      font-size: 16px;
+    }
+
+    .class-title span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .class-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 14px;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .table-wrap {
+      padding: 14px 16px 18px;
+      background: var(--panel);
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      min-width: 1480px;
+      border-collapse: collapse;
+      table-layout: fixed;
+      background: #fff;
+      border: 1px solid var(--line);
+    }
+
+    th, td {
+      border: 1px solid var(--line);
+      padding: 10px 12px;
+      vertical-align: top;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+    }
+
+    thead th {
+      background: var(--head);
+      color: #fff;
+      text-align: left;
+      font-size: 13px;
+    }
+
+    tbody td {
+      font-size: 13px;
+    }
+
+    td.method {
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 12.5px;
+      white-space: nowrap;
+    }
+
+    td.args,
+    td.repo {
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    td.tx {
+      white-space: nowrap;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    td.summary {
+      line-height: 1.65;
+    }
+
+    .footnote {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    code {
+      font-family: Consolas, "Courier New", monospace;
+      font-size: .95em;
+    }
+
+    @media (max-width: 720px) {
+      main {
+        width: min(100% - 18px, 1400px);
+        padding: 18px 0 28px;
+      }
+
+      h1 {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header class="doc-header">
+      <div class="doc-kicker">DESIGN DOCUMENT</div>
+      <h1>AromaTripNippon Service メソッド一覧</h1>
+      <div class="meta">
+        <span>作成日: 2026-06-04</span>
+        <span>対象: com.aromatripnippon.service</span>
+        <span>観点: Repository 呼び出しとトランザクション</span>
+      </div>
+    </header>
+
+    <div class="summary">
+      Service クラスをクラス単位でまとめ、各メソッドの引数、戻り値、処理概要、呼び出す Repository メソッド、`@Transactional` の有無を一覧化しています。
+      <code>private</code> の補助メソッドも含めています。
+    </div>
+
+    <div class="note-box">
+      <strong>`@Transactional` の見方</strong>
+      この一覧の Tx 列は、実装上 `@Transactional` が付いているメソッドを <code>@Transactional</code> と表示しています。
+      それ以外は <code>-</code> です。
+    </div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol>
+        <li><a href="#admin-user-service">AdminUserService</a></li>
+        <li><a href="#audit-service">AuditService</a></li>
+        <li><a href="#customer-service">CustomerService</a></li>
+        <li><a href="#experience-program-service">ExperienceProgramService</a></li>
+        <li><a href="#fragrance-recipe-service">FragranceRecipeService</a></li>
+        <li><a href="#inventory-service">InventoryService</a></li>
+        <li><a href="#password-reset-service">PasswordResetService</a></li>
+        <li><a href="#product-service">ProductService</a></li>
+        <li><a href="#reservation-service">ReservationService</a></li>
+        <li><a href="#totp-service">TotpService</a></li>
+      </ol>
+    </nav>
+
+    <section id="admin-user-service" class="class-block">
+      <div class="class-title">
+        <strong>AdminUserService</strong>
+        <span>管理者アカウントの保存・論理削除を担当する Service</span>
+        <div class="class-meta"><span>Repository: AdminUserRepository</span><span>更新系あり</span></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <colgroup>
+            <col style="width: 11%"><col style="width: 28%"><col style="width: 8%"><col style="width: 25%"><col style="width: 18%"><col style="width: 10%">
+          </colgroup>
+          <thead>
+            <tr><th>メソッド名</th><th>引数</th><th>戻り値</th><th>処理概要</th><th>呼び出すRepositoryメソッド</th><th>Tx</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="method">findActive</td><td class="args">Long id</td><td>AdminUser</td><td class="summary">削除されていない管理者を取得する。</td><td class="repo">admins.findByIdAndDeletedAtIsNull(id)</td><td class="tx">-</td></tr>
+            <tr><td class="method">save</td><td class="args">AdminUser admin, String rawPassword</td><td>AdminUser</td><td class="summary">必要に応じてパスワードをハッシュ化して保存する。</td><td class="repo">admins.save(admin)</td><td class="tx">@Transactional</td></tr>
+            <tr><td class="method">softDelete</td><td class="args">Long id</td><td>void</td><td class="summary">管理者を論理削除し、active を false にする。</td><td class="repo">findActive(id) -> admins.findByIdAndDeletedAtIsNull(id), admins.save(admin)</td><td class="tx">@Transactional</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="audit-service" class="class-block">
+      <div class="class-title">
+        <strong>AuditService</strong>
+        <span>監査ログの記録を担当する Service</span>
+        <div class="class-meta"><span>Repository: AdminUserRepository / AuditLogRepository</span><span>更新専用</span></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <colgroup>
+            <col style="width: 16%"><col style="width: 33%"><col style="width: 8%"><col style="width: 26%"><col style="width: 13%"><col style="width: 4%">
+          </colgroup>
+          <thead>
+            <tr><th>メソッド名</th><th>引数</th><th>戻り値</th><th>処理概要</th><th>呼び出すRepositoryメソッド</th><th>Tx</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="method">record</td><td class="args">Principal principal, String actionType, String targetTable, Long targetId, String detail</td><td>void</td><td class="summary">監査ログを組み立てて保存する。</td><td class="repo">admins.findByLoginIdAndDeletedAtIsNullAndActiveTrue(principal.getName())<br>logs.save(log)</td><td class="tx">-</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="customer-service" class="class-block">
+      <div class="class-title">
+        <strong>CustomerService</strong>
+        <span>顧客の検索・保存・論理削除を担当する Service</span>
+        <div class="class-meta"><span>Repository: CustomerRepository</span><span>検索 + 更新</span></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <colgroup>
+            <col style="width: 12%"><col style="width: 25%"><col style="width: 8%"><col style="width: 25%"><col style="width: 22%"><col style="width: 8%">
+          </colgroup>
+          <thead>
+            <tr><th>メソッド名</th><th>引数</th><th>戻り値</th><th>処理概要</th><th>呼び出すRepositoryメソッド</th><th>Tx</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="method">search</td><td class="args">String keyword</td><td>List&lt;Customer&gt;</td><td class="summary">キーワードが空なら全件、ある場合は名前検索で一覧を返す。</td><td class="repo">customers.findByDeletedAtIsNullOrderByIdDesc()<br>customers.findByDeletedAtIsNullAndNameContainingIgnoreCaseOrderByIdDesc(keyword)</td><td class="tx">-</td></tr>
+            <tr><td class="method">findActive</td><td class="args">Long id</td><td>Customer</td><td class="summary">削除されていない顧客を取得する。</td><td class="repo">customers.findByIdAndDeletedAtIsNull(id)</td><td class="tx">-</td></tr>
+            <tr><td class="method">save</td><td class="args">@Valid Customer customer</td><td>Customer</td><td class="summary">顧客を保存する。</td><td class="repo">customers.save(customer)</td><td class="tx">@Transactional</td></tr>
+            <tr><td class="method">softDelete</td><td class="args">Long id</td><td>void</td><td class="summary">顧客を論理削除する。</td><td class="repo">findActive(id) -> customers.findByIdAndDeletedAtIsNull(id), customers.save(customer)</td><td class="tx">@Transactional</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="experience-program-service" class="class-block">
+      <div class="class-title">
+        <strong>ExperienceProgramService</strong>
+        <span>体験プログラムの検索・保存・論理削除を担当する Service</span>
+        <div class="class-meta"><span>Repository: ExperienceProgramRepository</span><span>予約フォームで参照</span></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <colgroup>
+            <col style="width: 16%"><col style="width: 24%"><col style="width: 8%"><col style="width: 24%"><col style="width: 20%"><col style="width: 8%">
+          </colgroup>
+          <thead>
+            <tr><th>メソッド名</th><th>引数</th><th>戻り値</th><th>処理概要</th><th>呼び出すRepositoryメソッド</th><th>Tx</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="method">findActivePrograms</td><td class="args">なし</td><td>List&lt;ExperienceProgram&gt;</td><td class="summary">削除されていない体験プログラム一覧を取得する。</td><td class="repo">programs.findByDeletedAtIsNullOrderById()</td><td class="tx">-</td></tr>
+            <tr><td class="method">findActive</td><td class="args">Long id</td><td>ExperienceProgram</td><td class="summary">削除されていない体験プログラムを取得する。</td><td class="repo">programs.findByIdAndDeletedAtIsNull(id)</td><td class="tx">-</td></tr>
+            <tr><td class="method">findFirstBookableProgram</td><td class="args">なし</td><td>ExperienceProgram</td><td class="summary">予約に使う有効な最初の体験プログラムを取得する。</td><td class="repo">programs.findFirstByDeletedAtIsNullAndActiveTrueOrderById()</td><td class="tx">-</td></tr>
+            <tr><td class="method">save</td><td class="args">@Valid ExperienceProgram program</td><td>ExperienceProgram</td><td class="summary">体験プログラムを保存する。</td><td class="repo">programs.save(program)</td><td class="tx">@Transactional</td></tr>
+            <tr><td class="method">softDelete</td><td class="args">Long id</td><td>void</td><td class="summary">体験プログラムを論理削除する。</td><td class="repo">findActive(id) -> programs.findByIdAndDeletedAtIsNull(id), programs.save(program)</td><td class="tx">@Transactional</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="fragrance-recipe-service" class="class-block">
+      <div class="class-title">
+        <strong>FragranceRecipeService</strong>
+        <span>調香レシピの検索・作成・保存・論理削除を担当する Service</span>
+        <div class="class-meta"><span>Repository: FragranceRecipeRepository / CustomerRepository / InventoryItemRepository</span><span>材料を保持</span></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <colgroup>
+            <col style="width: 12%"><col style="width: 29%"><col style="width: 8%"><col style="width: 24%"><col style="width: 19%"><col style="width: 8%">
+          </colgroup>
+          <thead>
+            <tr><th>メソッド名</th><th>引数</th><th>戻り値</th><th>処理概要</th><th>呼び出すRepositoryメソッド</th><th>Tx</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="method">search</td><td class="args">String keyword</td><td>List&lt;FragranceRecipe&gt;</td><td class="summary">キーワードに応じてレシピ一覧を返す。</td><td class="repo">recipes.findByDeletedAtIsNullOrderByIdDesc()<br>recipes.findByDeletedAtIsNullAndRecipeNameContainingIgnoreCaseOrderByIdDesc(keyword)</td><td class="tx">-</td></tr>
+            <tr><td class="method">findActive</td><td class="args">Long id</td><td>FragranceRecipe</td><td class="summary">削除されていないレシピを取得する。</td><td class="repo">recipes.findByIdAndDeletedAtIsNull(id)</td><td class="tx">-</td></tr>
+            <tr><td class="method">create</td><td class="args">FragranceRecipe recipe, Long customerId, Long materialId, BigDecimal blendRatio</td><td>FragranceRecipe</td><td class="summary">顧客と材料を結び付けて単一材料のレシピを作成する。</td><td class="repo">customers.findByIdAndDeletedAtIsNull(customerId)<br>inventoryItems.findByIdAndDeletedAtIsNull(materialId)<br>recipes.save(recipe)</td><td class="tx">@Transactional</td></tr>
+            <tr><td class="method">save</td><td class="args">@Valid FragranceRecipe recipe</td><td>FragranceRecipe</td><td class="summary">レシピを保存する。</td><td class="repo">recipes.save(recipe)</td><td class="tx">@Transactional</td></tr>
+            <tr><td class="method">softDelete</td><td class="args">Long id</td><td>void</td><td class="summary">レシピを論理削除する。</td><td class="repo">findActive(id) -> recipes.findByIdAndDeletedAtIsNull(id), recipes.save(recipe)</td><td class="tx">@Transactional</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="inventory-service" class="class-block">
+      <div class="class-title">
+        <strong>InventoryService</strong>
+        <span>在庫の検索・保存・入出庫記録・論理削除を担当する Service</span>
+        <div class="class-meta"><span>Repository: InventoryItemRepository / InventoryTransactionRepository / AdminUserRepository</span><span>在庫更新あり</span></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <colgroup>
+            <col style="width: 12%"><col style="width: 28%"><col style="width: 8%"><col style="width: 24%"><col style="width: 20%"><col style="width: 8%">
+          </colgroup>
+          <thead>
+            <tr><th>メソッド名</th><th>引数</th><th>戻り値</th><th>処理概要</th><th>呼び出すRepositoryメソッド</th><th>Tx</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="method">search</td><td class="args">String keyword</td><td>List&lt;InventoryItem&gt;</td><td class="summary">在庫名のキーワード検索を行う。</td><td class="repo">inventoryItems.findByDeletedAtIsNullOrderByIdDesc()<br>inventoryItems.findByDeletedAtIsNullAndItemNameContainingIgnoreCaseOrderByIdDesc(keyword)</td><td class="tx">-</td></tr>
+            <tr><td class="method">findActive</td><td class="args">Long id</td><td>InventoryItem</td><td class="summary">削除されていない在庫を取得する。</td><td class="repo">inventoryItems.findByIdAndDeletedAtIsNull(id)</td><td class="tx">-</td></tr>
+            <tr><td class="method">findTransactions</td><td class="args">Long itemId</td><td>List&lt;InventoryTransaction&gt;</td><td class="summary">指定在庫の入出庫履歴を取得する。</td><td class="repo">transactions.findByDeletedAtIsNullAndInventoryItemIdOrderByTransactionDateDescIdDesc(itemId)</td><td class="tx">-</td></tr>
+            <tr><td class="method">save</td><td class="args">@Valid InventoryItem item</td><td>InventoryItem</td><td class="summary">在庫を保存する。</td><td class="repo">inventoryItems.save(item)</td><td class="tx">@Transactional</td></tr>
+            <tr><td class="method">recordTransaction</td><td class="args">Long itemId, String type, BigDecimal quantity, String reason, Principal principal</td><td>InventoryTransaction</td><td class="summary">入庫・出庫トランザクションを登録し、在庫数も更新する。</td><td class="repo">findActive(itemId) -> inventoryItems.findByIdAndDeletedAtIsNull(itemId)<br>admins.findByLoginIdAndDeletedAtIsNullAndActiveTrue(principal.getName())<br>inventoryItems.save(item)<br>transactions.save(transaction)</td><td class="tx">@Transactional</td></tr>
+            <tr><td class="method">softDelete</td><td class="args">Long id</td><td>void</td><td class="summary">在庫を論理削除する。</td><td class="repo">findActive(id) -> inventoryItems.findByIdAndDeletedAtIsNull(id), inventoryItems.save(item)</td><td class="tx">@Transactional</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="password-reset-service" class="class-block">
+      <div class="class-title">
+        <strong>PasswordResetService</strong>
+        <span>管理者のパスワード再設定を担当する Service</span>
+        <div class="class-meta"><span>Repository: AdminUserRepository</span><span>メール送信あり</span></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <colgroup>
+            <col style="width: 14%"><col style="width: 28%"><col style="width: 8%"><col style="width: 23%"><col style="width: 19%"><col style="width: 8%">
+          </colgroup>
+          <thead>
+            <tr><th>メソッド名</th><th>引数</th><th>戻り値</th><th>処理概要</th><th>呼び出すRepositoryメソッド</th><th>Tx</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="method">requestReset</td><td class="args">String loginId, String email</td><td>void</td><td class="summary">対象管理者に対して再設定トークンを発行し、メール送信する。</td><td class="repo">admins.findByLoginIdAndEmailAndDeletedAtIsNull(loginId, email)<br>admins.save(admin)</td><td class="tx">@Transactional</td></tr>
+            <tr><td class="method">isTokenValid</td><td class="args">String token</td><td>boolean</td><td class="summary">再設定トークンが有効かどうかを確認する。</td><td class="repo">private findByToken(token)</td><td class="tx">-</td></tr>
+            <tr><td class="method">resetPassword</td><td class="args">String token, String newPassword</td><td>boolean</td><td class="summary">トークンで管理者を特定し、パスワードを更新する。</td><td class="repo">private findByToken(token) -> admins.findByPasswordResetTokenHashAndPasswordResetTokenExpiresAtAfterAndDeletedAtIsNull(... )<br>admins.save(admin)</td><td class="tx">@Transactional</td></tr>
+            <tr><td class="method">private findByToken</td><td class="args">String token</td><td>Optional&lt;AdminUser&gt;</td><td class="summary">ハッシュ化したトークンで有効な管理者を検索する。</td><td class="repo">admins.findByPasswordResetTokenHashAndPasswordResetTokenExpiresAtAfterAndDeletedAtIsNull(sha256(token), LocalDateTime.now())</td><td class="tx">-</td></tr>
+            <tr><td class="method">private sendResetMail</td><td class="args">String to, String token</td><td>void</td><td class="summary">再設定 URL を含むメールを送信する。</td><td class="repo">なし (JavaMailSender.send)</td><td class="tx">-</td></tr>
+            <tr><td class="method">private generateToken</td><td class="args">なし</td><td>String</td><td class="summary">URL 安全な再設定トークンを生成する。</td><td class="repo">なし</td><td class="tx">-</td></tr>
+            <tr><td class="method">private sha256</td><td class="args">String value</td><td>String</td><td class="summary">文字列を SHA-256 でハッシュ化する。</td><td class="repo">なし</td><td class="tx">-</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="product-service" class="class-block">
+      <div class="class-title">
+        <strong>ProductService</strong>
+        <span>商品の検索・保存・論理削除を担当する Service</span>
+        <div class="class-meta"><span>Repository: ProductRepository</span><span>在庫と連動</span></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <colgroup>
+            <col style="width: 12%"><col style="width: 25%"><col style="width: 8%"><col style="width: 25%"><col style="width: 22%"><col style="width: 8%">
+          </colgroup>
+          <thead>
+            <tr><th>メソッド名</th><th>引数</th><th>戻り値</th><th>処理概要</th><th>呼び出すRepositoryメソッド</th><th>Tx</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="method">search</td><td class="args">String keyword</td><td>List&lt;Product&gt;</td><td class="summary">キーワードが空なら全件、ある場合は商品名検索で一覧を返す。</td><td class="repo">products.findByDeletedAtIsNullOrderByIdDesc()<br>products.findByDeletedAtIsNullAndProductNameContainingIgnoreCaseOrderByIdDesc(keyword)</td><td class="tx">-</td></tr>
+            <tr><td class="method">findActive</td><td class="args">Long id</td><td>Product</td><td class="summary">削除されていない商品を取得する。</td><td class="repo">products.findByIdAndDeletedAtIsNull(id)</td><td class="tx">-</td></tr>
+            <tr><td class="method">save</td><td class="args">@Valid Product product</td><td>Product</td><td class="summary">商品を保存する。</td><td class="repo">products.save(product)</td><td class="tx">@Transactional</td></tr>
+            <tr><td class="method">softDelete</td><td class="args">Long id</td><td>void</td><td class="summary">商品を論理削除する。</td><td class="repo">findActive(id) -> products.findByIdAndDeletedAtIsNull(id), products.save(product)</td><td class="tx">@Transactional</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="reservation-service" class="class-block">
+      <div class="class-title">
+        <strong>ReservationService</strong>
+        <span>予約の作成・保存・論理削除を担当する Service</span>
+        <div class="class-meta"><span>Repository: ReservationRepository / CustomerRepository / ExperienceProgramRepository</span><span>日付チェックあり</span></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <colgroup>
+            <col style="width: 14%"><col style="width: 27%"><col style="width: 8%"><col style="width: 23%"><col style="width: 20%"><col style="width: 8%">
+          </colgroup>
+          <thead>
+            <tr><th>メソッド名</th><th>引数</th><th>戻り値</th><th>処理概要</th><th>呼び出すRepositoryメソッド</th><th>Tx</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="method">findActiveReservations</td><td class="args">なし</td><td>List&lt;Reservation&gt;</td><td class="summary">削除されていない予約一覧を返す。</td><td class="repo">reservations.findByDeletedAtIsNullOrderByVisitDateDescTimeSlotAsc()</td><td class="tx">-</td></tr>
+            <tr><td class="method">findActive</td><td class="args">Long id</td><td>Reservation</td><td class="summary">削除されていない予約を取得する。</td><td class="repo">reservations.findByIdAndDeletedAtIsNull(id)</td><td class="tx">-</td></tr>
+            <tr><td class="method">createReservation</td><td class="args">Reservation reservation, @Valid Customer customer</td><td>Reservation</td><td class="summary">日付制約を検証し、顧客と体験プログラムを紐付けて予約を作成する。</td><td class="repo">customers.save(customer)<br>programs.findFirstByDeletedAtIsNullAndActiveTrueOrderById()<br>reservations.save(reservation)</td><td class="tx">@Transactional</td></tr>
+            <tr><td class="method">save</td><td class="args">@Valid Reservation reservation</td><td>Reservation</td><td class="summary">予約を保存する。</td><td class="repo">reservations.save(reservation)</td><td class="tx">@Transactional</td></tr>
+            <tr><td class="method">softDelete</td><td class="args">Long id</td><td>void</td><td class="summary">予約を論理削除する。</td><td class="repo">findActive(id) -> reservations.findByIdAndDeletedAtIsNull(id), reservations.save(reservation)</td><td class="tx">@Transactional</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="totp-service" class="class-block">
+      <div class="class-title">
+        <strong>TotpService</strong>
+        <span>TOTP 生成・検証とバックアップコード管理を担当する Service</span>
+        <div class="class-meta"><span>Repository: AdminBackupCodeRepository</span><span>認証補助</span></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <colgroup>
+            <col style="width: 14%"><col style="width: 27%"><col style="width: 8%"><col style="width: 23%"><col style="width: 20%"><col style="width: 8%">
+          </colgroup>
+          <thead>
+            <tr><th>メソッド名</th><th>引数</th><th>戻り値</th><th>処理概要</th><th>呼び出すRepositoryメソッド</th><th>Tx</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="method">generateSecret</td><td class="args">なし</td><td>String</td><td class="summary">TOTP 用のシークレットを生成する。</td><td class="repo">なし</td><td class="tx">-</td></tr>
+            <tr><td class="method">buildOtpAuthUri</td><td class="args">String appName, String accountName, String secret</td><td>String</td><td class="summary">認証アプリ用の otpauth URI を組み立てる。</td><td class="repo">なし</td><td class="tx">-</td></tr>
+            <tr><td class="method">verifyCode</td><td class="args">String secret, String code</td><td>boolean</td><td class="summary">前後のタイムウィンドウを含めて TOTP を検証する。</td><td class="repo">なし</td><td class="tx">-</td></tr>
+            <tr><td class="method">regenerateBackupCodes</td><td class="args">AdminUser admin</td><td>List&lt;String&gt;</td><td class="summary">既存のバックアップコードを無効化して新しいコード群を再生成する。</td><td class="repo">backupCodes.findByAdminUserAndDeletedAtIsNullAndUsedAtIsNull(admin)<br>backupCodes.saveAll(active)<br>backupCodes.saveAll(entities)</td><td class="tx">@Transactional</td></tr>
+            <tr><td class="method">consumeBackupCode</td><td class="args">AdminUser admin, String plainCode</td><td>boolean</td><td class="summary">未使用のバックアップコードを消費済みにする。</td><td class="repo">backupCodes.findByAdminUserAndCodeHashAndDeletedAtIsNullAndUsedAtIsNull(admin, sha256(plainCode.trim()))<br>backupCodes.save(code)</td><td class="tx">@Transactional</td></tr>
+            <tr><td class="method">private generateCode</td><td class="args">String secret, long counter</td><td>String</td><td class="summary">カウンタから 6 桁の TOTP を計算する。</td><td class="repo">なし</td><td class="tx">-</td></tr>
+            <tr><td class="method">private generateBackupCode</td><td class="args">なし</td><td>String</td><td class="summary">バックアップコードを生成する。</td><td class="repo">なし</td><td class="tx">-</td></tr>
+            <tr><td class="method">private sha256</td><td class="args">String value</td><td>String</td><td class="summary">文字列を SHA-256 でハッシュ化する。</td><td class="repo">なし</td><td class="tx">-</td></tr>
+            <tr><td class="method">private urlEncode</td><td class="args">String value</td><td>String</td><td class="summary">URI 用に URL エンコードする。</td><td class="repo">なし</td><td class="tx">-</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <div class="footnote">
+      `private` メソッドも一覧化しています。`PasswordResetService` と `TotpService` は内部ヘルパーも含めて、実際の実装に沿って列挙しています。
+    </div>
+  </main>
+</body>
+</html>

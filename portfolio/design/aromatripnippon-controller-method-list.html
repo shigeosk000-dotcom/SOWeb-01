@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AromaTripNippon Controller メソッド一覧</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --panel: #f6f7f9;
+      --panel-2: #fbfcfd;
+      --ink: #1f2933;
+      --muted: #667085;
+      --line: #d9dee7;
+      --head: #050505;
+      --accent: #28756f;
+      --accent-soft: #e7f3f1;
+      --warn-soft: #fff8e6;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Yu Gothic", "Meiryo", Arial, sans-serif;
+      line-height: 1.7;
+    }
+
+    main {
+      width: min(1320px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 44px;
+    }
+
+    .doc-header {
+      border-bottom: 3px solid var(--ink);
+      padding-bottom: 16px;
+      margin-bottom: 22px;
+    }
+
+    .doc-kicker {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+    h1 {
+      margin: 6px 0 8px;
+      font-size: 28px;
+      line-height: 1.35;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 18px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .summary,
+    .note-box {
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin: 18px 0 22px;
+      border: 1px solid var(--line);
+    }
+
+    .summary {
+      background: var(--accent-soft);
+      border-color: #b8d9d4;
+    }
+
+    .note-box {
+      background: var(--warn-soft);
+      border-color: #ead491;
+    }
+
+    .toc {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 22px;
+      background: #fff;
+    }
+
+    .toc-title {
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .toc ol {
+      margin: 0;
+      padding-left: 22px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .toc a {
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .toc a:hover {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+
+    .class-block {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 24px;
+      background: #fff;
+    }
+
+    .class-title {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .class-title strong {
+      display: block;
+      font-size: 16px;
+    }
+
+    .class-title span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .class-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 14px;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .table-wrap {
+      padding: 14px 16px 18px;
+      background: var(--panel);
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      min-width: 1180px;
+      border-collapse: collapse;
+      table-layout: fixed;
+      background: #fff;
+      border: 1px solid var(--line);
+    }
+
+    th,
+    td {
+      border: 1px solid var(--line);
+      padding: 10px 12px;
+      vertical-align: top;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+    }
+
+    thead th {
+      background: var(--head);
+      color: #fff;
+      text-align: left;
+      font-size: 13px;
+    }
+
+    tbody td {
+      font-size: 13px;
+    }
+
+    td.http {
+      font-weight: 700;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    td.method,
+    td.path,
+    td.args {
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 12.5px;
+    }
+
+    td.summary {
+      line-height: 1.65;
+    }
+
+    .label {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #eef3f6;
+      color: #41505f;
+      font-size: 12px;
+      font-weight: 700;
+      margin-left: 6px;
+    }
+
+    .label.required {
+      background: #e6f3ef;
+      color: #205e56;
+    }
+
+    .footnote {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    @media (max-width: 720px) {
+      main {
+        width: min(100% - 18px, 1320px);
+        padding: 18px 0 28px;
+      }
+
+      h1 {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header class="doc-header">
+      <div class="doc-kicker">DESIGN DOCUMENT</div>
+      <h1>AromaTripNippon Controller メソッド一覧</h1>
+      <div class="meta">
+        <span>作成日: 2026-06-04</span>
+        <span>対象: com.aromatripnippon.controller</span>
+        <span>観点: RESTful CRUD と画面遷移</span>
+      </div>
+    </header>
+
+    <div class="summary">
+      Controller をクラス単位でまとめ、各メソッドの HTTP メソッド、URL、引数、戻り値、処理概要を一覧化したページです。
+      長い引数や説明文はこのページ内で折り返し、親ページでは iframe でそのまま差し込んで使う前提にしています。
+    </div>
+
+    <div class="note-box">
+      <strong>RESTful な URL 設計</strong>
+      一覧は <code>GET /management/{resources}</code>、新規は <code>GET /management/{resources}/new</code>、
+      作成は <code>POST /management/{resources}</code>、詳細は <code>GET /management/{resources}/{id}</code>、
+      編集は <code>GET /management/{resources}/{id}/edit</code>、更新は <code>POST /management/{resources}/{id}</code>、
+      削除は <code>POST /management/{resources}/{id}/delete</code> を基本としています。
+    </div>
+
+    <nav class="toc">
+      <div class="toc-title">目次</div>
+      <ol>
+        <li><a href="#public-controller">PublicController</a></li>
+        <li><a href="#login-controller">LoginController</a></li>
+        <li><a href="#management-controller">ManagementController</a></li>
+      </ol>
+    </nav>
+
+    <section id="public-controller" class="class-block">
+      <div class="class-title">
+        <strong>PublicController</strong>
+        <span>公開ページと予約登録を担当する Controller</span>
+        <div class="class-meta">
+          <span>責務: 公開サイト表示</span>
+          <span>CRUD: 予約作成</span>
+          <span>言語: 日本語 / 英語</span>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <colgroup>
+            <col style="width: 12%">
+            <col style="width: 7%">
+            <col style="width: 15%">
+            <col style="width: 30%">
+            <col style="width: 9%">
+            <col style="width: 27%">
+          </colgroup>
+          <thead>
+            <tr>
+              <th>メソッド名</th>
+              <th>HTTP</th>
+              <th>URL</th>
+              <th>引数</th>
+              <th>戻り値</th>
+              <th>処理概要</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="method">index</td>
+              <td class="http">GET</td>
+              <td class="path">/</td>
+              <td class="args">Model model</td>
+              <td>String</td>
+              <td class="summary">先頭の公開プログラムを Model に詰めて <code>public/index</code> を表示する。</td>
+            </tr>
+            <tr>
+              <td class="method">indexEn</td>
+              <td class="http">GET</td>
+              <td class="path">/en, /en/</td>
+              <td class="args">Model model</td>
+              <td>String</td>
+              <td class="summary">英語版のトップページを表示する。</td>
+            </tr>
+            <tr>
+              <td class="method">experience</td>
+              <td class="http">GET</td>
+              <td class="path">/experience</td>
+              <td class="args">Model model</td>
+              <td>String</td>
+              <td class="summary">体験紹介ページにプログラム情報を追加して表示する。</td>
+            </tr>
+            <tr>
+              <td class="method">experienceEn</td>
+              <td class="http">GET</td>
+              <td class="path">/en/experience</td>
+              <td class="args">Model model</td>
+              <td>String</td>
+              <td class="summary">英語版の体験紹介ページを表示する。</td>
+            </tr>
+            <tr>
+              <td class="method">concept</td>
+              <td class="http">GET</td>
+              <td class="path">/concept</td>
+              <td class="args">なし</td>
+              <td>String</td>
+              <td class="summary">コンセプトページをそのまま返す。</td>
+            </tr>
+            <tr>
+              <td class="method">conceptEn</td>
+              <td class="http">GET</td>
+              <td class="path">/en/concept</td>
+              <td class="args">なし</td>
+              <td>String</td>
+              <td class="summary">英語版コンセプトページを返す。</td>
+            </tr>
+            <tr>
+              <td class="method">reservation</td>
+              <td class="http">GET</td>
+              <td class="path">/reservation</td>
+              <td class="args">Model model</td>
+              <td>String</td>
+              <td class="summary">予約フォーム用の <code>ReservationRequest</code> を初期化し、日付制約とプログラム情報を渡す。</td>
+            </tr>
+            <tr>
+              <td class="method">reservationEn</td>
+              <td class="http">GET</td>
+              <td class="path">/en/reservation</td>
+              <td class="args">Model model</td>
+              <td>String</td>
+              <td class="summary">英語版の予約フォームを初期化して表示する。</td>
+            </tr>
+            <tr>
+              <td class="method">createReservation</td>
+              <td class="http">POST</td>
+              <td class="path">/reservation</td>
+              <td class="args">@Valid @ModelAttribute ReservationRequest reservationRequest, BindingResult errors, Model model, RedirectAttributes redirectAttributes</td>
+              <td>String</td>
+              <td class="summary">入力を検証し、顧客と予約を作成して完了画面へリダイレクトする。</td>
+            </tr>
+            <tr>
+              <td class="method">createReservationEn</td>
+              <td class="http">POST</td>
+              <td class="path">/en/reservation</td>
+              <td class="args">@Valid @ModelAttribute ReservationRequest reservationRequest, BindingResult errors, Model model, RedirectAttributes redirectAttributes</td>
+              <td>String</td>
+              <td class="summary">英語版の入力を検証し、英語メッセージ付きで予約を作成する。</td>
+            </tr>
+            <tr>
+              <td class="method">complete</td>
+              <td class="http">GET</td>
+              <td class="path">/reservation/complete/{id}</td>
+              <td class="args">@PathVariable Long id, Model model</td>
+              <td>String</td>
+              <td class="summary">削除済みでない予約を取得し、完了ページを表示する。</td>
+            </tr>
+            <tr>
+              <td class="method">completeEn</td>
+              <td class="http">GET</td>
+              <td class="path">/en/reservation/complete/{id}</td>
+              <td class="args">@PathVariable Long id, Model model</td>
+              <td>String</td>
+              <td class="summary">英語版の予約完了ページを表示する。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="login-controller" class="class-block">
+      <div class="class-title">
+        <strong>LoginController</strong>
+        <span>管理者ログインとパスワード再設定を担当する Controller</span>
+        <div class="class-meta">
+          <span>責務: 認証導線</span>
+          <span>CRUD: なし</span>
+          <span>TOTP: パスワード再設定で利用</span>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <colgroup>
+            <col style="width: 12%">
+            <col style="width: 7%">
+            <col style="width: 17%">
+            <col style="width: 40%">
+            <col style="width: 8%">
+            <col style="width: 16%">
+          </colgroup>
+          <thead>
+            <tr>
+              <th>メソッド名</th>
+              <th>HTTP</th>
+              <th>URL</th>
+              <th>引数</th>
+              <th>戻り値</th>
+              <th>処理概要</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="method">login</td>
+              <td class="http">GET</td>
+              <td class="path">/management/login</td>
+              <td class="args">なし</td>
+              <td>String</td>
+              <td class="summary">管理画面のログインページを表示する。</td>
+            </tr>
+            <tr>
+              <td class="method">forgotPassword</td>
+              <td class="http">GET</td>
+              <td class="path">/management/forgot-password</td>
+              <td class="args">なし</td>
+              <td>String</td>
+              <td class="summary">パスワード再設定フォームを表示する。</td>
+            </tr>
+            <tr>
+              <td class="method">forgotPasswordSubmit</td>
+              <td class="http">POST</td>
+              <td class="path">/management/forgot-password</td>
+              <td class="args">@RequestParam String loginId, @RequestParam String newPassword, @RequestParam String confirmPassword, @RequestParam(required = false) String totpCode, @RequestParam(required = false) String backupCode, Model model, RedirectAttributes redirectAttributes</td>
+              <td>String</td>
+              <td class="summary">新しいパスワードと TOTP/バックアップコードを検証し、管理者パスワードを更新してログイン画面へ戻す。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="management-controller" class="class-block">
+      <div class="class-title">
+        <strong>ManagementController</strong>
+        <span>管理画面の CRUD とアカウント設定を担当する Controller</span>
+        <div class="class-meta">
+          <span>責務: 管理画面 CRUD</span>
+          <span>CRUD: 予約・顧客・レシピ・商品・在庫</span>
+          <span>補助: TOTP とアカウント設定</span>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <colgroup>
+            <col style="width: 12%">
+            <col style="width: 7%">
+            <col style="width: 16%">
+            <col style="width: 37%">
+            <col style="width: 8%">
+            <col style="width: 20%">
+          </colgroup>
+          <thead>
+            <tr>
+              <th>メソッド名</th>
+              <th>HTTP</th>
+              <th>URL</th>
+              <th>引数</th>
+              <th>戻り値</th>
+              <th>処理概要</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="method">dashboard</td><td class="http">GET</td><td class="path">/management/dashboard</td><td class="args">Model model</td><td>String</td><td class="summary">予約・顧客・レシピ・在庫件数と直近の監査ログを表示する。</td></tr>
+            <tr><td class="method">reservationList</td><td class="http">GET</td><td class="path">/management/reservations</td><td class="args">@RequestParam(required = false) String q, Model model</td><td>String</td><td class="summary">検索条件に応じて予約一覧を表示する。</td></tr>
+            <tr><td class="method">reservationNew</td><td class="http">GET</td><td class="path">/management/reservations/new</td><td class="args">Model model</td><td>String</td><td class="summary">新規予約フォームを顧客一覧とプログラム一覧付きで表示する。</td></tr>
+            <tr><td class="method">reservationCreate</td><td class="http">POST</td><td class="path">/management/reservations</td><td class="args">@ModelAttribute Reservation reservation, BindingResult errors, @RequestParam Long customerId, @RequestParam Long programId, Principal principal, Model model</td><td>String</td><td class="summary">予約を検証し、顧客と体験プログラムを紐付けて保存する。</td></tr>
+            <tr><td class="method">reservationDetail</td><td class="http">GET</td><td class="path">/management/reservations/{id}</td><td class="args">@PathVariable Long id, Model model</td><td>String</td><td class="summary">指定予約の詳細を表示する。</td></tr>
+            <tr><td class="method">reservationEdit</td><td class="http">GET</td><td class="path">/management/reservations/{id}/edit</td><td class="args">@PathVariable Long id, Model model</td><td>String</td><td class="summary">既存予約を編集フォームに読み込む。</td></tr>
+            <tr><td class="method">reservationUpdate</td><td class="http">POST</td><td class="path">/management/reservations/{id}</td><td class="args">@PathVariable Long id, @ModelAttribute Reservation form, BindingResult errors, @RequestParam Long customerId, @RequestParam Long programId, Principal principal, Model model</td><td>String</td><td class="summary">予約を更新し、監査ログを残して詳細画面へ戻す。</td></tr>
+            <tr><td class="method">reservationDelete</td><td class="http">POST</td><td class="path">/management/reservations/{id}/delete</td><td class="args">@PathVariable Long id, Principal principal</td><td>String</td><td class="summary">予約を論理削除して一覧へ戻す。</td></tr>
+            <tr><td class="method">customerList</td><td class="http">GET</td><td class="path">/management/customers</td><td class="args">@RequestParam(required = false) String q, Model model</td><td>String</td><td class="summary">顧客一覧を検索条件付きで表示する。</td></tr>
+            <tr><td class="method">customerNew</td><td class="http">GET</td><td class="path">/management/customers/new</td><td class="args">Model model</td><td>String</td><td class="summary">新規顧客フォームを表示する。</td></tr>
+            <tr><td class="method">customerCreate</td><td class="http">POST</td><td class="path">/management/customers</td><td class="args">@Valid @ModelAttribute Customer customer, BindingResult errors, Principal principal</td><td>String</td><td class="summary">顧客を登録して詳細画面へ遷移する。</td></tr>
+            <tr><td class="method">customerDetail</td><td class="http">GET</td><td class="path">/management/customers/{id}</td><td class="args">@PathVariable Long id, Model model</td><td>String</td><td class="summary">指定顧客の詳細を表示する。</td></tr>
+            <tr><td class="method">customerEdit</td><td class="http">GET</td><td class="path">/management/customers/{id}/edit</td><td class="args">@PathVariable Long id, Model model</td><td>String</td><td class="summary">顧客編集フォームを表示する。</td></tr>
+            <tr><td class="method">customerUpdate</td><td class="http">POST</td><td class="path">/management/customers/{id}</td><td class="args">@PathVariable Long id, @Valid @ModelAttribute Customer form, BindingResult errors, Principal principal</td><td>String</td><td class="summary">顧客情報を更新して詳細画面へ戻す。</td></tr>
+            <tr><td class="method">customerDelete</td><td class="http">POST</td><td class="path">/management/customers/{id}/delete</td><td class="args">@PathVariable Long id, Principal principal, RedirectAttributes redirectAttributes</td><td>String</td><td class="summary">関連データがあれば削除を拒否し、問題なければ顧客を論理削除する。</td></tr>
+            <tr><td class="method">recipeList</td><td class="http">GET</td><td class="path">/management/recipes</td><td class="args">@RequestParam(required = false) String q, Model model</td><td>String</td><td class="summary">レシピ一覧を検索条件付きで表示する。</td></tr>
+            <tr><td class="method">recipeNew</td><td class="http">GET</td><td class="path">/management/recipes/new</td><td class="args">Model model</td><td>String</td><td class="summary">新規レシピフォームを顧客・在庫・商品候補付きで表示する。</td></tr>
+            <tr><td class="method">recipeCreate</td><td class="http">POST</td><td class="path">/management/recipes</td><td class="args">@ModelAttribute FragranceRecipe recipe, BindingResult errors, @RequestParam Long customerId, @RequestParam(name = &quot;materialId&quot;, required = false) List&lt;Long&gt; materialIds, @RequestParam(name = &quot;blendRatio&quot;, required = false) List&lt;BigDecimal&gt; blendRatios, Principal principal, RedirectAttributes redirectAttributes, Model model</td><td>String</td><td class="summary">配合条件を検証し、材料を組み立ててレシピを保存する。</td></tr>
+            <tr><td class="method">recipeDetail</td><td class="http">GET</td><td class="path">/management/recipes/{id}</td><td class="args">@PathVariable Long id, Model model</td><td>String</td><td class="summary">指定レシピの詳細を表示する。</td></tr>
+            <tr><td class="method">recipeEdit</td><td class="http">GET</td><td class="path">/management/recipes/{id}/edit</td><td class="args">@PathVariable Long id, Model model</td><td>String</td><td class="summary">レシピ編集フォームを表示する。</td></tr>
+            <tr><td class="method">recipeUpdate</td><td class="http">POST</td><td class="path">/management/recipes/{id}</td><td class="args">@PathVariable Long id, @ModelAttribute FragranceRecipe form, BindingResult errors, @RequestParam Long customerId, @RequestParam(name = &quot;materialId&quot;, required = false) List&lt;Long&gt; materialIds, @RequestParam(name = &quot;blendRatio&quot;, required = false) List&lt;BigDecimal&gt; blendRatios, Principal principal, RedirectAttributes redirectAttributes, Model model</td><td>String</td><td class="summary">レシピ本体と材料構成を更新し、監査ログを残す。</td></tr>
+            <tr><td class="method">recipeDelete</td><td class="http">POST</td><td class="path">/management/recipes/{id}/delete</td><td class="args">@PathVariable Long id, Principal principal</td><td>String</td><td class="summary">レシピを論理削除する。</td></tr>
+            <tr><td class="method">productList</td><td class="http">GET</td><td class="path">/management/products</td><td class="args">@RequestParam(required = false) String q, Model model</td><td>String</td><td class="summary">商品一覧を検索条件付きで表示する。</td></tr>
+            <tr><td class="method">productNew</td><td class="http">GET</td><td class="path">/management/products/new</td><td class="args">Model model</td><td>String</td><td class="summary">新規商品フォームをカテゴリ一覧付きで表示する。</td></tr>
+            <tr><td class="method">productCreate</td><td class="http">POST</td><td class="path">/management/products</td><td class="args">@Valid @ModelAttribute Product product, BindingResult errors, @RequestParam Long categoryId, Principal principal, Model model</td><td>String</td><td class="summary">商品を登録し、対応する在庫アイテムも作成する。</td></tr>
+            <tr><td class="method">productDetail</td><td class="http">GET</td><td class="path">/management/products/{id}</td><td class="args">@PathVariable Long id, Model model</td><td>String</td><td class="summary">指定商品の詳細を表示する。</td></tr>
+            <tr><td class="method">productEdit</td><td class="http">GET</td><td class="path">/management/products/{id}/edit</td><td class="args">@PathVariable Long id, Model model</td><td>String</td><td class="summary">商品編集フォームを表示する。</td></tr>
+            <tr><td class="method">productUpdate</td><td class="http">POST</td><td class="path">/management/products/{id}</td><td class="args">@PathVariable Long id, @Valid @ModelAttribute Product form, BindingResult errors, @RequestParam Long categoryId, Principal principal, Model model</td><td>String</td><td class="summary">商品情報と連動在庫を同時に更新する。</td></tr>
+            <tr><td class="method">productDelete</td><td class="http">POST</td><td class="path">/management/products/{id}/delete</td><td class="args">@PathVariable Long id, Principal principal, RedirectAttributes redirectAttributes</td><td>String</td><td class="summary">レシピ参照や在庫残量を確認し、問題なければ商品と連動在庫を論理削除する。</td></tr>
+            <tr><td class="method">inventoryList</td><td class="http">GET</td><td class="path">/management/inventory</td><td class="args">@RequestParam(required = false) String q, Model model</td><td>String</td><td class="summary">在庫一覧を検索条件付きで表示する。</td></tr>
+            <tr><td class="method">inventoryNew</td><td class="http">GET</td><td class="path">/management/inventory/new</td><td class="args">Model model</td><td>String</td><td class="summary">新規在庫フォームを表示する。</td></tr>
+            <tr><td class="method">inventoryCreate</td><td class="http">POST</td><td class="path">/management/inventory</td><td class="args">@Valid @ModelAttribute InventoryItem item, BindingResult errors, Principal principal</td><td>String</td><td class="summary">在庫を登録し、対応商品を同期する。</td></tr>
+            <tr><td class="method">inventoryDetail</td><td class="http">GET</td><td class="path">/management/inventory/{id}</td><td class="args">@PathVariable Long id, Model model</td><td>String</td><td class="summary">指定在庫の詳細を表示する。</td></tr>
+            <tr><td class="method">inventoryEdit</td><td class="http">GET</td><td class="path">/management/inventory/{id}/edit</td><td class="args">@PathVariable Long id, Model model</td><td>String</td><td class="summary">在庫編集フォームを表示する。</td></tr>
+            <tr><td class="method">inventoryUpdate</td><td class="http">POST</td><td class="path">/management/inventory/{id}</td><td class="args">@PathVariable Long id, @Valid @ModelAttribute InventoryItem form, BindingResult errors, Principal principal</td><td>String</td><td class="summary">在庫情報を更新し、連動商品にも反映する。</td></tr>
+            <tr><td class="method">inventoryTransaction</td><td class="http">POST</td><td class="path">/management/inventory/{id}/transaction</td><td class="args">@PathVariable Long id, @RequestParam String transactionType, @RequestParam BigDecimal quantity, @RequestParam(required = false) String reason, Principal principal, RedirectAttributes redirectAttributes</td><td>String</td><td class="summary">入出庫トランザクションを記録し、失敗時はエラーを返す。</td></tr>
+            <tr><td class="method">inventoryDelete</td><td class="http">POST</td><td class="path">/management/inventory/{id}/delete</td><td class="args">@PathVariable Long id, Principal principal, RedirectAttributes redirectAttributes</td><td>String</td><td class="summary">レシピで参照中の在庫は削除不可とし、問題なければ在庫と連動商品を論理削除する。</td></tr>
+            <tr><td class="method">account</td><td class="http">GET</td><td class="path">/management/account</td><td class="args">Principal principal, Model model</td><td>String</td><td class="summary">管理者アカウント情報と TOTP 設定状態を表示する。</td></tr>
+            <tr><td class="method">totpQrCode</td><td class="http">GET</td><td class="path">/management/account/totp/qr</td><td class="args">Principal principal</td><td>ResponseEntity&lt;byte[]&gt;</td><td class="summary">TOTP 設定用 QR コード PNG を生成して返す。</td></tr>
+            <tr><td class="method">accountUpdate</td><td class="http">POST</td><td class="path">/management/account</td><td class="args">@ModelAttribute AdminUser form, @RequestParam(required = false) String newPassword, Principal principal</td><td>String</td><td class="summary">表示名・メール・通知設定・言語と任意の新パスワードを更新する。</td></tr>
+            <tr><td class="method">regenerateTotpSecret</td><td class="http">POST</td><td class="path">/management/account/totp/setup</td><td class="args">Principal principal</td><td>String</td><td class="summary">TOTP 設定用の pending secret を再生成する。</td></tr>
+            <tr><td class="method">enableTotp</td><td class="http">POST</td><td class="path">/management/account/totp/enable</td><td class="args">@RequestParam String totpCode, Principal principal, RedirectAttributes redirectAttributes</td><td>String</td><td class="summary">検証コードを確認して TOTP を有効化し、バックアップコードを再発行する。</td></tr>
+            <tr><td class="method">cancelTotpSetup</td><td class="http">POST</td><td class="path">/management/account/totp/cancel</td><td class="args">Principal principal, RedirectAttributes redirectAttributes</td><td>String</td><td class="summary">有効化済みなら pending secret を破棄して TOTP 設定を取り消す。</td></tr>
+            <tr><td class="method">regenerateBackupCodes</td><td class="http">POST</td><td class="path">/management/account/totp/backup-codes</td><td class="args">Principal principal, RedirectAttributes redirectAttributes</td><td>String</td><td class="summary">バックアップコードを再生成する。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <div class="footnote">
+      補足: `ManagementExceptionHandler` は ControllerAdvice なので、この一覧では別扱いにしています。必要なら同じフォーマットで補足表を追加できます。
+    </div>
+  </main>
+</body>
+</html>
