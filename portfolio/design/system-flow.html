@@ -252,7 +252,15 @@ HTML Response
           <div class="fill-label">Form → Entity → DB の変換フロー <span class="required">必須</span></div>
           <div class="fill-hint">画面入力からデータベース保存までのデータ変換の流れ＠ASCII図でなくてもよいです。</div>
           <div class="fill-content">
-            <div class="ascii-diagram">
+            <iframe class="embedded-html-frame" src="aromatripnippon-reservation-dataflow.html"
+              title="AromaTripNippon 予約フォームからEntity、DBへのデータフロー"
+              style="width: 100%; min-height: 1600px;"></iframe>
+            <p class="embedded-doc-link">
+              <a href="aromatripnippon-reservation-dataflow.html" target="_blank" rel="noopener">
+                aromatripnippon-reservation-dataflow.html を別タブで開く
+              </a>
+            </p>
+            <div class="ascii-diagram" style="display: none;">
               <pre>
 ┌────────────────┐ ┌────────────────┐ ┌────────────────┐
 │ TaskForm │ │ Task │ │ tasks │

@@ -31,7 +31,7 @@
 
     .flow-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 16px;
       margin-top: 16px;
     }
@@ -41,6 +41,8 @@
       border: 1px solid var(--border);
       padding: 16px 18px;
       min-height: 100%;
+      color: var(--text);
+      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
     }
 
     .flow-card h3 {
@@ -59,8 +61,26 @@
     .flow-card li {
       border-top: 1px dashed var(--border);
       padding: 8px 0;
+      padding-left: 1.2em;
       font-size: 13px;
       line-height: 1.7;
+      position: relative;
+    }
+
+    .flow-card li::before {
+      content: "・";
+      position: absolute;
+      left: 0;
+      top: 8px;
+      color: var(--black);
+      font-weight: 700;
+    }
+
+    .flow-card code {
+      color: var(--black);
+      background: var(--gray-100);
+      padding: 1px 5px;
+      border-radius: 4px;
     }
 
     .flow-card li:first-child {
@@ -107,6 +127,10 @@
     }
 
     @media (max-width: 768px) {
+      .flow-grid {
+        grid-template-columns: 1fr;
+      }
+
       .doc-header {
         padding: 32px 24px;
       }
@@ -124,14 +148,7 @@
 </head>
 
 <body>
-  <button class="hamburger" aria-label="メニュー">
-    <span></span><span></span><span></span>
-  </button>
-
-  <div class="page-wrapper">
-    <aside class="sidebar" data-nav-level="design"></aside>
-
-    <main class="main-content">
+  <main class="main-content" style="margin-left: 0; width: 100%;">
       <header class="doc-header">
         <div class="doc-category">DESIGN DOCUMENT</div>
         <h1 class="doc-title">AromaTripNippon 予約フォーム→Entity→DB 変換フロー</h1>
@@ -721,10 +738,7 @@
           </div>
         </section>
       </div>
-    </main>
-  </div>
-
-  <script src="../js/main.js"></script>
+  </main>
 </body>
 
 </html>
