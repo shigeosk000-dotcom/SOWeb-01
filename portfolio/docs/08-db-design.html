@@ -28,30 +28,13 @@
           <span><span class="material-symbols-outlined icon-sm">push_pin</span> Ver 1.0</span>
         </div>
         <div class="doc-meta">
-          <span><span class="material-symbols-outlined icon-sm">calendar_today</span> 更新日：2026-05-27</span>
+          <span><span class="material-symbols-outlined icon-sm">calendar_today</span> 更新日：2026-06-05</span>
           <span><span class="material-symbols-outlined icon-sm">person</span> 更新者：尾坂 成紀</span>
-          <span><span class="material-symbols-outlined icon-sm">push_pin</span> Ver 1.1</span>
+          <span><span class="material-symbols-outlined icon-sm">push_pin</span> Ver 1.2</span>
         </div>
       </header>
 
       <div class="doc-body">
-
-        <!-- <div class="external-link-box">
-          <div class="external-link-box-title">
-            <span class="material-symbols-outlined">link</span>
-            詳細ドキュメント（Google スプレッドシート）
-          </div>
-          <div class="external-link-box-desc">
-            このページは概要のみを記載しています。詳細なDB設計書は以下のリンクからご確認ください。
-          </div>
-          <div class="external-link-input">
-            <input type="text" placeholder="https://docs.google.com/spreadsheets/d/xxxxx" id="external-link-08">
-            <a href="#" class="link-btn" onclick="window.open(document.getElementById('external-link-08').value || 'https://docs.google.com', '_blank'); return false;">
-              <span class="material-symbols-outlined">open_in_new</span>
-              開く
-            </a>
-          </div>
-        </div> -->
 
         <div class="toc">
           <div class="toc-title">目次</div>
@@ -67,28 +50,30 @@
           <h2 class="section-title"><span class="section-icon">1</span> ER図</h2>
 
           <div class="fill-block">
-            <div class="fill-label">ER図 <span class="required">必須</span></div>
-            <!-- <div class="fill-hint">テーブル間のリレーション図（テキストベースまたは画像で記載）</div> -->
+            <div class="fill-label">ER図</div>
             <BR>
             <div class="fill-content">
               <section id="er-diagrams">
                 <h2>ER図（Phase1時点 / Phase2時点）</h2>
                 <BR>
                 <section id="phase1-er-diagram">
-                  <h3>Phase1（更新後）ER図</h3>
+                  <h3>Phase1（リリース時点）ER図</h3>
                   <p>
-                    Phase1のDB構造を、商品カテゴリマスタ導入に合わせて更新したERです。
+                    Phase1のDB構造を、現行実装の <code>schema.sql</code> / <code>data.sql</code> に合わせて更新したERです。
                     商品カテゴリは「製品」「素材」「容器」をマスタ管理し、商品登録・編集時はマスタ値から選択します。
+                    商品と在庫品目は <code>products.id</code> が <code>inventory_items.id</code> を参照する共有ID型の1対1関連として管理します。
                   </p>
                   <BR>
-                  <pre><code>【Phase1（更新後）主要リレーション】
+                  <pre><code>【Phase1（リリース時点）主要リレーション】
 
 [customers] 1 ──── * [reservations] * ──── 1 [experience_programs]
   id (PK)                id (PK)                    id (PK)
-  name                   customer_id (FK)           program_name
+  name                   customer_id (FK)           name
   email                  experience_program_id (FK) duration_minutes
   ...                    reservation_date           price
                          reservation_time           ...
+                         number_of_people
+                         preferred_language
                          ...
 
 [customers] 1 ──── * [fragrance_recipes] 1 ──── * [fragrance_recipe_materials]
@@ -100,15 +85,22 @@
                                                     display_order
                                                     ...
 
-[product_categories] 1 ──── * [products] * ──── 1 [inventory_items] 1 ──── * [inventory_transactions]
+[product_categories] 1 ──── * [products] 1 ──── 1 [inventory_items] 1 ──── * [inventory_transactions]
   id (PK)                id (PK)                    id (PK)                 id (PK)
   category_name          category_id (FK)           item_name               inventory_item_id (FK)
   display_order          product_name               category                transaction_type
   is_active              english_name               stock_quantity           quantity
                          price                      threshold_quantity       reason
-                         id = inventory_items.id    storage_location         transaction_date
+                         id = inventory_items.id (FK) storage_location       transaction_date
                          is_active                  ...                      created_by
                          ...                                                 ...
+
+[admin_users] 1 ──── * [admin_backup_codes]
+  id (PK)                id (PK)
+  login_id               admin_user_id (FK)
+  totp_enabled           code_hash
+  totp_secret            used_at
+  ...                    ...
 
 [admin_users] 1 ──── * [audit_logs]
   id (PK)                id (PK)
@@ -118,7 +110,7 @@
                          target_id
                          ...</code></pre>
                   <BR>
-                  <h4>Phase1（更新後）テーブル要約</h4>
+                  <h4>Phase1（リリース時点）テーブル要約</h4>
                   <table class="spec-table">
                     <thead>
                       <tr>
@@ -137,11 +129,11 @@
                         <td><code>products</code></td>
                         <td>商品マスタ。カテゴリは <code>product_categories</code> を外部キー（<code>products.category_id</code>）で参照。
                         </td>
-                        <td><code>product_categories</code> を参照、<code>inventory_items</code> と関連。</td>
+                        <td><code>product_categories</code> を参照。<code>products.id</code> が <code>inventory_items.id</code> を参照する共有IDで在庫品目と1対1。</td>
                       </tr>
                       <tr>
                         <td><code>inventory_items</code></td>
-                        <td>商品単位の在庫実体（在庫数、閾値、保管場所、仕入先、最終入荷日、コメント）。</td>
+                        <td>商品単位の在庫実体（在庫数、閾値、保管場所、仕入先、最終入荷日、メモ）。</td>
                         <td><code>products</code> と1対1、<code>inventory_transactions</code> と1対多。</td>
                       </tr>
                       <tr>
@@ -160,9 +152,9 @@
                         <td>顧客1件に対して予約は複数。</td>
                       </tr>
                       <tr>
-                        <td><code>admin_users</code> / <code>audit_logs</code></td>
-                        <td>管理者認証・監査ログ管理。</td>
-                        <td>管理者1件に対して監査ログは複数。</td>
+                        <td><code>admin_users</code> / <code>admin_backup_codes</code> / <code>audit_logs</code></td>
+                        <td>管理者認証、TOTPバックアップコード、監査ログを管理。</td>
+                        <td>管理者1件に対してバックアップコード・監査ログは複数。</td>
                       </tr>
                     </tbody>
                   </table>
@@ -668,7 +660,7 @@
                     <tr>
                       <td>price</td>
                       <td>料金</td>
-                      <td>INT</td>
+                      <td>NUMERIC(38,2)</td>
                       <td>不可</td>
                       <td>0</td>
                       <td>NOT NULL</td>
@@ -687,9 +679,9 @@
                       <td>is_active</td>
                       <td>公開状態</td>
                       <td>BOOLEAN</td>
-                      <td>不可</td>
-                      <td>TRUE</td>
-                      <td>NOT NULL</td>
+                      <td>可</td>
+                      <td>TRUE（エンティティ初期値）</td>
+                      <td>-</td>
                       <td>公開中かどうか。</td>
                     </tr>
                     <tr>
@@ -788,24 +780,33 @@
                       <td>number_of_people</td>
                       <td>人数</td>
                       <td>INT</td>
+                      <td>不可</td>
+                      <td>なし</td>
+                      <td>NOT NULL, CHECK 1〜4</td>
+                      <td>予約人数。現行予約フォームでは1〜4名を許容する。</td>
+                    </tr>
+                    <tr>
+                      <td>preferred_language</td>
+                      <td>希望言語</td>
+                      <td>VARCHAR(255)</td>
                       <td>可</td>
-                      <td>NULL</td>
+                      <td>'English'（エンティティ初期値）</td>
                       <td>-</td>
-                      <td>予約人数。</td>
+                      <td>予約時の希望案内言語。</td>
                     </tr>
                     <tr>
                       <td>status</td>
                       <td>予約状況</td>
-                      <td>VARCHAR(30)</td>
+                      <td>VARCHAR(255)</td>
                       <td>不可</td>
-                      <td>'RESERVED'</td>
+                      <td>'RESERVED'（エンティティ初期値）</td>
                       <td>NOT NULL</td>
                       <td>予約済、キャンセル、来店済など。</td>
                     </tr>
                     <tr>
                       <td>request_note</td>
                       <td>要望</td>
-                      <td>TEXT</td>
+                      <td>VARCHAR(1000)</td>
                       <td>可</td>
                       <td>NULL</td>
                       <td>-</td>
@@ -880,7 +881,7 @@
                     <tr>
                       <td>recipe_name</td>
                       <td>レシピ名</td>
-                      <td>VARCHAR(100)</td>
+                      <td>VARCHAR(255)</td>
                       <td>不可</td>
                       <td>なし</td>
                       <td>NOT NULL</td>
@@ -889,16 +890,25 @@
                     <tr>
                       <td>concept_note</td>
                       <td>コンセプトメモ</td>
-                      <td>TEXT</td>
+                      <td>VARCHAR(1000)</td>
                       <td>可</td>
                       <td>NULL</td>
                       <td>-</td>
                       <td>香りのコンセプトや体験メモ。</td>
                     </tr>
                     <tr>
+                      <td>memo</td>
+                      <td>管理メモ</td>
+                      <td>VARCHAR(1000)</td>
+                      <td>可</td>
+                      <td>NULL</td>
+                      <td>-</td>
+                      <td>管理画面で入力する補足メモ。</td>
+                    </tr>
+                    <tr>
                       <td>total_amount</td>
                       <td>合計配合量</td>
-                      <td>DECIMAL(10,2)</td>
+                      <td>NUMERIC(38,2)</td>
                       <td>可</td>
                       <td>NULL</td>
                       <td>-</td>
@@ -981,7 +991,7 @@
                     <tr>
                       <td>material_name_snapshot</td>
                       <td>素材名スナップショット</td>
-                      <td>VARCHAR(100)</td>
+                      <td>VARCHAR(255)</td>
                       <td>可</td>
                       <td>NULL</td>
                       <td>-</td>
@@ -990,19 +1000,19 @@
                     <tr>
                       <td>blend_ratio</td>
                       <td>配合率</td>
-                      <td>DECIMAL(5,2)</td>
-                      <td>可</td>
-                      <td>NULL</td>
-                      <td>-</td>
+                      <td>NUMERIC(38,2)</td>
+                      <td>不可</td>
+                      <td>なし</td>
+                      <td>NOT NULL</td>
                       <td>配合率。例：45.00。</td>
                     </tr>
                     <tr>
                       <td>amount</td>
                       <td>配合量</td>
-                      <td>DECIMAL(10,2)</td>
-                      <td>可</td>
-                      <td>NULL</td>
-                      <td>-</td>
+                      <td>NUMERIC(38,2)</td>
+                      <td>不可</td>
+                      <td>0（エンティティ初期値）</td>
+                      <td>NOT NULL</td>
                       <td>実際の配合量。</td>
                     </tr>
                     <tr>
@@ -1031,6 +1041,15 @@
                       <td>CURRENT_TIMESTAMP</td>
                       <td>NOT NULL</td>
                       <td>レコード更新日時。</td>
+                    </tr>
+                    <tr>
+                      <td>deleted_at</td>
+                      <td>削除日時</td>
+                      <td>TIMESTAMP</td>
+                      <td>可</td>
+                      <td>NULL</td>
+                      <td>論理削除</td>
+                      <td>香りレシピ素材を論理削除した日時。</td>
                     </tr>
                   </tbody>
                 </table>
@@ -1065,16 +1084,25 @@
                     <tr>
                       <td>item_name</td>
                       <td>品名</td>
-                      <td>VARCHAR(100)</td>
+                      <td>VARCHAR(255)</td>
                       <td>不可</td>
                       <td>なし</td>
                       <td>NOT NULL</td>
                       <td>香料、素材、容器などの名称。</td>
                     </tr>
                     <tr>
+                      <td>english_name</td>
+                      <td>英語品名</td>
+                      <td>VARCHAR(255)</td>
+                      <td>可</td>
+                      <td>NULL</td>
+                      <td>-</td>
+                      <td>英語表示用の在庫品目名。商品マスタとの同期にも利用する。</td>
+                    </tr>
+                    <tr>
                       <td>category</td>
                       <td>カテゴリ</td>
-                      <td>VARCHAR(30)</td>
+                      <td>VARCHAR(255)</td>
                       <td>不可</td>
                       <td>なし</td>
                       <td>NOT NULL</td>
@@ -1083,7 +1111,7 @@
                     <tr>
                       <td>stock_quantity</td>
                       <td>在庫数</td>
-                      <td>DECIMAL(10,2)</td>
+                      <td>NUMERIC(38,2)</td>
                       <td>不可</td>
                       <td>0.00</td>
                       <td>NOT NULL</td>
@@ -1092,7 +1120,7 @@
                     <tr>
                       <td>unit</td>
                       <td>単位</td>
-                      <td>VARCHAR(10)</td>
+                      <td>VARCHAR(255)</td>
                       <td>不可</td>
                       <td>なし</td>
                       <td>NOT NULL</td>
@@ -1101,7 +1129,7 @@
                     <tr>
                       <td>threshold_quantity</td>
                       <td>在庫警告しきい値</td>
-                      <td>DECIMAL(10,2)</td>
+                      <td>NUMERIC(38,2)</td>
                       <td>可</td>
                       <td>NULL</td>
                       <td>-</td>
@@ -1135,9 +1163,9 @@
                       <td>最後に入荷した日付。</td>
                     </tr>
                     <tr>
-                      <td>note</td>
+                      <td>memo</td>
                       <td>メモ</td>
-                      <td>TEXT</td>
+                      <td>VARCHAR(1000)</td>
                       <td>可</td>
                       <td>NULL</td>
                       <td>-</td>
@@ -1240,9 +1268,9 @@
                       <td>transaction_date</td>
                       <td>処理日</td>
                       <td>DATE</td>
-                      <td>不可</td>
-                      <td>CURRENT_DATE</td>
-                      <td>NOT NULL</td>
+                      <td>可</td>
+                      <td>CURRENT_DATE（エンティティ初期値）</td>
+                      <td>-</td>
                       <td>在庫更新を行った日付。</td>
                     </tr>
                     <tr>
@@ -1272,6 +1300,99 @@
                       <td>NOT NULL</td>
                       <td>履歴更新日時。</td>
                     </tr>
+                    <tr>
+                      <td>deleted_at</td>
+                      <td>削除日時</td>
+                      <td>TIMESTAMP</td>
+                      <td>可</td>
+                      <td>NULL</td>
+                      <td>論理削除</td>
+                      <td>在庫更新履歴を論理削除した日時。</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <BR>
+
+              <!-- product_categories -->
+              <section id="table-product-categories">
+                <h3>product_categories（商品カテゴリ）</h3>
+                <table class="spec-table">
+                  <thead>
+                    <tr>
+                      <th>カラム名</th>
+                      <th>日本語名</th>
+                      <th>データ型</th>
+                      <th>NULL許可</th>
+                      <th>デフォルト値</th>
+                      <th>制約</th>
+                      <th>説明</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>id</td>
+                      <td>商品カテゴリID</td>
+                      <td>BIGINT</td>
+                      <td>不可</td>
+                      <td>自動採番</td>
+                      <td>PK</td>
+                      <td>商品カテゴリを一意に識別するID。</td>
+                    </tr>
+                    <tr>
+                      <td>category_name</td>
+                      <td>カテゴリ名</td>
+                      <td>VARCHAR(255)</td>
+                      <td>不可</td>
+                      <td>なし</td>
+                      <td>NOT NULL, UNIQUE</td>
+                      <td>商品カテゴリ名。初期値は「製品」「素材」「容器」。</td>
+                    </tr>
+                    <tr>
+                      <td>display_order</td>
+                      <td>表示順</td>
+                      <td>INT</td>
+                      <td>不可</td>
+                      <td>なし</td>
+                      <td>NOT NULL</td>
+                      <td>管理画面でのカテゴリ表示順。</td>
+                    </tr>
+                    <tr>
+                      <td>is_active</td>
+                      <td>有効状態</td>
+                      <td>BOOLEAN</td>
+                      <td>可</td>
+                      <td>TRUE（エンティティ初期値）</td>
+                      <td>-</td>
+                      <td>カテゴリを選択候補として利用するかどうか。</td>
+                    </tr>
+                    <tr>
+                      <td>created_at</td>
+                      <td>作成日時</td>
+                      <td>TIMESTAMP</td>
+                      <td>不可</td>
+                      <td>CURRENT_TIMESTAMP</td>
+                      <td>NOT NULL</td>
+                      <td>レコード作成日時。</td>
+                    </tr>
+                    <tr>
+                      <td>updated_at</td>
+                      <td>更新日時</td>
+                      <td>TIMESTAMP</td>
+                      <td>不可</td>
+                      <td>CURRENT_TIMESTAMP</td>
+                      <td>NOT NULL</td>
+                      <td>レコード更新日時。</td>
+                    </tr>
+                    <tr>
+                      <td>deleted_at</td>
+                      <td>削除日時</td>
+                      <td>TIMESTAMP</td>
+                      <td>可</td>
+                      <td>NULL</td>
+                      <td>論理削除</td>
+                      <td>商品カテゴリを論理削除した日時。</td>
+                    </tr>
                   </tbody>
                 </table>
               </section>
@@ -1299,8 +1420,8 @@
                       <td>BIGINT</td>
                       <td>不可</td>
                       <td>自動採番</td>
-                      <td>PK</td>
-                      <td>商品を一意に識別するID。</td>
+                      <td>PK, FK → inventory_items.id</td>
+                      <td>商品を一意に識別するID。在庫品目IDと同じ値で1対1に紐づく。</td>
                     </tr>
                     <tr>
                       <td>category_id</td>
@@ -1314,7 +1435,7 @@
                     <tr>
                       <td>product_name</td>
                       <td>商品名</td>
-                      <td>VARCHAR(100)</td>
+                      <td>VARCHAR(255)</td>
                       <td>不可</td>
                       <td>なし</td>
                       <td>NOT NULL</td>
@@ -1341,7 +1462,7 @@
                     <tr>
                       <td>description</td>
                       <td>商品説明</td>
-                      <td>TEXT</td>
+                      <td>VARCHAR(1000)</td>
                       <td>可</td>
                       <td>NULL</td>
                       <td>-</td>
@@ -1351,9 +1472,9 @@
                       <td>is_active</td>
                       <td>公開状態</td>
                       <td>BOOLEAN</td>
-                      <td>不可</td>
-                      <td>TRUE</td>
-                      <td>NOT NULL</td>
+                      <td>可</td>
+                      <td>FALSE（エンティティ初期値）</td>
+                      <td>-</td>
                       <td>公開中かどうか。</td>
                     </tr>
                     <tr>
@@ -1416,7 +1537,7 @@
                     <tr>
                       <td>login_id</td>
                       <td>ログインID</td>
-                      <td>VARCHAR(100)</td>
+                      <td>VARCHAR(255)</td>
                       <td>不可</td>
                       <td>なし</td>
                       <td>NOT NULL, UNIQUE</td>
@@ -1425,7 +1546,7 @@
                     <tr>
                       <td>name</td>
                       <td>管理者名</td>
-                      <td>VARCHAR(100)</td>
+                      <td>VARCHAR(255)</td>
                       <td>不可</td>
                       <td>なし</td>
                       <td>NOT NULL</td>
@@ -1435,9 +1556,9 @@
                       <td>email</td>
                       <td>メールアドレス</td>
                       <td>VARCHAR(255)</td>
-                      <td>不可</td>
-                      <td>なし</td>
-                      <td>NOT NULL, UNIQUE</td>
+                      <td>可</td>
+                      <td>NULL</td>
+                      <td>-</td>
                       <td>管理者メールアドレス。</td>
                     </tr>
                     <tr>
@@ -1452,7 +1573,7 @@
                     <tr>
                       <td>role</td>
                       <td>権限</td>
-                      <td>VARCHAR(30)</td>
+                      <td>VARCHAR(255)</td>
                       <td>不可</td>
                       <td>'ADMIN'</td>
                       <td>NOT NULL</td>
@@ -1462,10 +1583,100 @@
                       <td>is_active</td>
                       <td>有効状態</td>
                       <td>BOOLEAN</td>
-                      <td>不可</td>
-                      <td>TRUE</td>
-                      <td>NOT NULL</td>
+                      <td>可</td>
+                      <td>TRUE（エンティティ初期値）</td>
+                      <td>-</td>
                       <td>ログイン可能かどうか。</td>
+                    </tr>
+                    <tr>
+                      <td>notification_setting</td>
+                      <td>通知設定</td>
+                      <td>VARCHAR(255)</td>
+                      <td>可</td>
+                      <td>'ON'（エンティティ初期値）</td>
+                      <td>-</td>
+                      <td>管理者アカウント画面で保持する通知設定。</td>
+                    </tr>
+                    <tr>
+                      <td>display_language</td>
+                      <td>表示言語</td>
+                      <td>VARCHAR(255)</td>
+                      <td>可</td>
+                      <td>'Japanese'（エンティティ初期値）</td>
+                      <td>-</td>
+                      <td>管理画面の表示言語設定。</td>
+                    </tr>
+                    <tr>
+                      <td>failed_login_attempts</td>
+                      <td>ログイン失敗回数</td>
+                      <td>INT</td>
+                      <td>不可</td>
+                      <td>0</td>
+                      <td>NOT NULL</td>
+                      <td>アカウントロック判定に利用する失敗回数。</td>
+                    </tr>
+                    <tr>
+                      <td>account_locked</td>
+                      <td>アカウントロック状態</td>
+                      <td>BOOLEAN</td>
+                      <td>不可</td>
+                      <td>FALSE</td>
+                      <td>NOT NULL</td>
+                      <td>ログイン失敗によるロック状態。</td>
+                    </tr>
+                    <tr>
+                      <td>password_reset_required</td>
+                      <td>パスワード再設定必須</td>
+                      <td>BOOLEAN</td>
+                      <td>不可</td>
+                      <td>FALSE</td>
+                      <td>NOT NULL</td>
+                      <td>初回ログイン・再発行後のパスワード変更要求。</td>
+                    </tr>
+                    <tr>
+                      <td>password_reset_token_hash</td>
+                      <td>再設定トークンハッシュ</td>
+                      <td>VARCHAR(255)</td>
+                      <td>可</td>
+                      <td>NULL</td>
+                      <td>-</td>
+                      <td>パスワード再設定URL用トークンのハッシュ値。</td>
+                    </tr>
+                    <tr>
+                      <td>password_reset_token_expires_at</td>
+                      <td>再設定トークン期限</td>
+                      <td>TIMESTAMP</td>
+                      <td>可</td>
+                      <td>NULL</td>
+                      <td>-</td>
+                      <td>パスワード再設定トークンの有効期限。</td>
+                    </tr>
+                    <tr>
+                      <td>totp_enabled</td>
+                      <td>TOTP有効状態</td>
+                      <td>BOOLEAN</td>
+                      <td>不可</td>
+                      <td>FALSE</td>
+                      <td>NOT NULL</td>
+                      <td>管理者2要素認証の有効状態。</td>
+                    </tr>
+                    <tr>
+                      <td>totp_secret</td>
+                      <td>TOTPシークレット</td>
+                      <td>VARCHAR(255)</td>
+                      <td>可</td>
+                      <td>NULL</td>
+                      <td>-</td>
+                      <td>有効化済みTOTPのシークレット。</td>
+                    </tr>
+                    <tr>
+                      <td>totp_pending_secret</td>
+                      <td>TOTP仮シークレット</td>
+                      <td>VARCHAR(255)</td>
+                      <td>可</td>
+                      <td>NULL</td>
+                      <td>-</td>
+                      <td>TOTP有効化確認前の仮シークレット。</td>
                     </tr>
                     <tr>
                       <td>created_at</td>
@@ -1493,6 +1704,90 @@
                       <td>NULL</td>
                       <td>論理削除</td>
                       <td>管理者を論理削除した日時。</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
+              <BR>
+
+              <!-- admin_backup_codes -->
+              <section id="table-admin-backup-codes">
+                <h3>admin_backup_codes（管理者バックアップコード）</h3>
+                <table class="spec-table">
+                  <thead>
+                    <tr>
+                      <th>カラム名</th>
+                      <th>日本語名</th>
+                      <th>データ型</th>
+                      <th>NULL許可</th>
+                      <th>デフォルト値</th>
+                      <th>制約</th>
+                      <th>説明</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>id</td>
+                      <td>バックアップコードID</td>
+                      <td>BIGINT</td>
+                      <td>不可</td>
+                      <td>自動採番</td>
+                      <td>PK</td>
+                      <td>バックアップコードを一意に識別するID。</td>
+                    </tr>
+                    <tr>
+                      <td>admin_user_id</td>
+                      <td>管理者ID</td>
+                      <td>BIGINT</td>
+                      <td>不可</td>
+                      <td>なし</td>
+                      <td>FK → admin_users.id</td>
+                      <td>バックアップコードを所有する管理者ID。</td>
+                    </tr>
+                    <tr>
+                      <td>code_hash</td>
+                      <td>コードハッシュ</td>
+                      <td>VARCHAR(255)</td>
+                      <td>不可</td>
+                      <td>なし</td>
+                      <td>NOT NULL</td>
+                      <td>バックアップコードのハッシュ値。平文コードは保存しない。</td>
+                    </tr>
+                    <tr>
+                      <td>used_at</td>
+                      <td>使用日時</td>
+                      <td>TIMESTAMP</td>
+                      <td>可</td>
+                      <td>NULL</td>
+                      <td>-</td>
+                      <td>バックアップコードを使用した日時。</td>
+                    </tr>
+                    <tr>
+                      <td>created_at</td>
+                      <td>作成日時</td>
+                      <td>TIMESTAMP</td>
+                      <td>不可</td>
+                      <td>CURRENT_TIMESTAMP</td>
+                      <td>NOT NULL</td>
+                      <td>レコード作成日時。</td>
+                    </tr>
+                    <tr>
+                      <td>updated_at</td>
+                      <td>更新日時</td>
+                      <td>TIMESTAMP</td>
+                      <td>不可</td>
+                      <td>CURRENT_TIMESTAMP</td>
+                      <td>NOT NULL</td>
+                      <td>レコード更新日時。</td>
+                    </tr>
+                    <tr>
+                      <td>deleted_at</td>
+                      <td>削除日時</td>
+                      <td>TIMESTAMP</td>
+                      <td>可</td>
+                      <td>NULL</td>
+                      <td>論理削除</td>
+                      <td>バックアップコードを論理削除した日時。</td>
                     </tr>
                   </tbody>
                 </table>
@@ -1536,16 +1831,16 @@
                     <tr>
                       <td>action_type</td>
                       <td>操作種別</td>
-                      <td>VARCHAR(50)</td>
-                      <td>不可</td>
-                      <td>なし</td>
-                      <td>NOT NULL</td>
+                      <td>VARCHAR(255)</td>
+                      <td>可</td>
+                      <td>NULL</td>
+                      <td>-</td>
                       <td>LOGIN、CREATE、UPDATE、DELETEなど。</td>
                     </tr>
                     <tr>
                       <td>target_table</td>
                       <td>対象テーブル</td>
-                      <td>VARCHAR(100)</td>
+                      <td>VARCHAR(255)</td>
                       <td>可</td>
                       <td>NULL</td>
                       <td>-</td>
@@ -1563,7 +1858,7 @@
                     <tr>
                       <td>description</td>
                       <td>操作内容</td>
-                      <td>TEXT</td>
+                      <td>VARCHAR(1000)</td>
                       <td>可</td>
                       <td>NULL</td>
                       <td>-</td>
@@ -1586,6 +1881,15 @@
                       <td>CURRENT_TIMESTAMP</td>
                       <td>NOT NULL</td>
                       <td>ログ更新日時。</td>
+                    </tr>
+                    <tr>
+                      <td>deleted_at</td>
+                      <td>削除日時</td>
+                      <td>TIMESTAMP</td>
+                      <td>可</td>
+                      <td>NULL</td>
+                      <td>論理削除</td>
+                      <td>監査ログを論理削除した日時。</td>
                     </tr>
                   </tbody>
                 </table>
@@ -1982,6 +2286,15 @@
                       <td>CURRENT_TIMESTAMP</td>
                       <td>NOT NULL</td>
                       <td>レコード更新日時。</td>
+                    </tr>
+                    <tr>
+                      <td>deleted_at</td>
+                      <td>削除日時</td>
+                      <td>TIMESTAMP</td>
+                      <td>可</td>
+                      <td>NULL</td>
+                      <td>論理削除</td>
+                      <td>注文明細を論理削除した日時。</td>
                     </tr>
                   </tbody>
                 </table>
@@ -2405,6 +2718,9 @@
 
               <p>
                 インデックスの設計方針として、テーブル定義書をもとに、検索条件、外部キー、ユニーク制約、ソート条件で利用される可能性が高いカラムを対象とした。
+                現行の <code>schema.sql</code> では個別の <code>CREATE INDEX</code> は未定義であり、明示実装済みのユニーク制約は
+                <code>admin_users.login_id</code> と <code>product_categories.category_name</code> である。
+                下表の <code>INDEX</code> は検索要件に基づく設計候補として扱う。
               </p>
               <BR>
               <!-- <table class="spec-table"> -->
@@ -2644,11 +2960,25 @@
                   </tr>
 
                   <tr>
-                    <td>products</td>
-                    <td>idx_products_inventory_item_id</td>
-                    <td>inventory_item_id</td>
+                    <td>product_categories</td>
+                    <td>uk_product_categories_category_name</td>
+                    <td>category_name</td>
+                    <td>UNIQUE</td>
+                    <td>商品カテゴリ名の重複を防ぐため。現行 <code>schema.sql</code> で実装済み。</td>
+                  </tr>
+                  <tr>
+                    <td>product_categories</td>
+                    <td>idx_product_categories_is_active</td>
+                    <td>is_active</td>
                     <td>INDEX</td>
-                    <td>商品と在庫品目を紐づけて取得するため。外部キーカラムでもある。</td>
+                    <td>有効な商品カテゴリのみを取得するための設計候補。</td>
+                  </tr>
+                  <tr>
+                    <td>products</td>
+                    <td>fk_products_inventory_item_id</td>
+                    <td>id</td>
+                    <td>FK制約</td>
+                    <td><code>products.id</code> が <code>inventory_items.id</code> を参照する共有ID型の関連。現行 <code>schema.sql</code> で実装済み。</td>
                   </tr>
                   <tr>
                     <td>products</td>
@@ -2660,7 +2990,7 @@
                   <tr>
                     <td>products</td>
                     <td>idx_products_category</td>
-                    <td>category</td>
+                    <td>category_id</td>
                     <td>INDEX</td>
                     <td>商品カテゴリによる絞り込みで利用するため。</td>
                   </tr>
@@ -2674,7 +3004,7 @@
                   <tr>
                     <td>products</td>
                     <td>idx_products_category_active</td>
-                    <td>category, is_active</td>
+                    <td>category_id, is_active</td>
                     <td>複合INDEX</td>
                     <td>EC商品一覧で、カテゴリ別かつ公開中の商品を取得するため。</td>
                   </tr>
@@ -2702,10 +3032,10 @@
                   </tr>
                   <tr>
                     <td>admin_users</td>
-                    <td>uk_admin_users_email</td>
+                    <td>idx_admin_users_email</td>
                     <td>email</td>
-                    <td>UNIQUE</td>
-                    <td>管理者メールアドレスの重複を防ぐため。ログインIDとして利用する場合もある。</td>
+                    <td>INDEX</td>
+                    <td>メールアドレス検索用の設計候補。現行 <code>schema.sql</code> ではUNIQUE制約は未設定。</td>
                   </tr>
                   <tr>
                     <td>admin_users</td>
@@ -2727,6 +3057,21 @@
                     <td>deleted_at</td>
                     <td>INDEX</td>
                     <td>論理削除済み管理者を除外するため。</td>
+                  </tr>
+
+                  <tr>
+                    <td>admin_backup_codes</td>
+                    <td>idx_admin_backup_codes_admin_user_id</td>
+                    <td>admin_user_id</td>
+                    <td>INDEX</td>
+                    <td>管理者別にバックアップコードを取得するため。外部キーカラムでもある。</td>
+                  </tr>
+                  <tr>
+                    <td>admin_backup_codes</td>
+                    <td>idx_admin_backup_codes_used_at</td>
+                    <td>used_at</td>
+                    <td>INDEX</td>
+                    <td>未使用コードの抽出や使用済みコード確認のための設計候補。</td>
                   </tr>
 
                   <tr>
@@ -3052,7 +3397,10 @@
 
 
                 <h3>更新後INSERT文（優先）</h3>
-                <p>以下はDB更新後構造（products.category_id による商品カテゴリ参照）に対応した初期データ例です。</p>
+                <p>
+                  Phase1実装では <code>AromaTripNippon/main/src/main/resources/data.sql</code> を正とする。
+                  <code>products.id</code> は <code>inventory_items.id</code> を参照するため、商品データは対応する在庫品目の登録後に投入する。
+                </p>
                 <table class="spec-table">
                   <thead>
                     <tr>
@@ -3071,17 +3419,6 @@
                       </td>
                     </tr>
                     <tr>
-                      <td><code>products</code></td>
-                      <td>
-                        <pre><code>INSERT INTO products (
-  id, category_id, product_name, english_name, price, is_active, description, created_at, updated_at
-) VALUES
-(1, 1, 'Aroma Mist 30ml', 'Aroma Mist 30ml', 4200.00, TRUE, '販売用アロマミスト', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-(2, 2, 'Yuzu essential oil', 'Yuzu essential oil', 3200.00, TRUE, '高知産ゆずの精油', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-(3, 3, 'Glass bottle 30ml', 'Glass bottle 30ml', 800.00, TRUE, '30mlガラスボトル', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);</code></pre>
-                      </td>
-                    </tr>
-                    <tr>
                       <td><code>inventory_items</code></td>
                       <td>
                         <pre><code>INSERT INTO inventory_items (
@@ -3090,6 +3427,17 @@
 (1, 'Aroma Mist 30ml', '製品', 'Aroma Mist 30ml', 500.00, 'pcs', 100.00, 'Shelf A', 'Kyushu Botanicals', CURRENT_DATE, '初期在庫', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 (2, 'Yuzu essential oil', '素材', 'Yuzu essential oil', 420.00, 'ml', 80.00, 'Shelf A', 'Aomori Wood Lab', CURRENT_DATE, '初期在庫', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
 (3, 'Glass bottle 30ml', '容器', 'Glass bottle 30ml', 120.00, 'pcs', 30.00, 'Shelf B', 'Tokyo Bottle Works', CURRENT_DATE, '初期在庫', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);</code></pre>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>products</code></td>
+                      <td>
+                        <pre><code>INSERT INTO products (
+  id, category_id, product_name, english_name, price, is_active, description, created_at, updated_at
+) VALUES
+(1, 1, 'Aroma Mist 30ml', 'Aroma Mist 30ml', 4200.00, TRUE, '販売用アロマミスト', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(2, 2, 'Yuzu essential oil', 'Yuzu essential oil', 3200.00, TRUE, '高知産ゆずの精油', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(3, 3, 'Glass bottle 30ml', 'Glass bottle 30ml', 800.00, TRUE, '30mlガラスボトル', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);</code></pre>
                       </td>
                     </tr>
                     <tr>
@@ -3104,6 +3452,10 @@
                     </tr>
                   </tbody>
                 </table>
+                <h3>参考INSERT文（Phase2構想を含む）</h3>
+                <p>
+                  以下は追加テーブルを含む参考データである。Phase1実装で実行する初期データは、上記の更新後INSERT文および現行 <code>data.sql</code> を優先する。
+                </p>
                 <table class="spec-table">
                   <thead>
                     <tr>
@@ -3123,6 +3475,16 @@
   password_hash,
   role,
   is_active,
+  notification_setting,
+  display_language,
+  failed_login_attempts,
+  account_locked,
+  password_reset_required,
+  password_reset_token_hash,
+  password_reset_token_expires_at,
+  totp_enabled,
+  totp_secret,
+  totp_pending_secret,
   created_at,
   updated_at,
   deleted_at
@@ -3134,6 +3496,16 @@
   '$2a$10$7EqJtq98hPqEX7fNZaFWoOHiY7B2TjVq1oyWvN0T0mD7xQe4UoF9K',
   'ADMIN',
   TRUE,
+  'ON',
+  'Japanese',
+  0,
+  FALSE,
+  FALSE,
+  NULL,
+  NULL,
+  FALSE,
+  NULL,
+  NULL,
   CURRENT_TIMESTAMP,
   CURRENT_TIMESTAMP,
   NULL
@@ -3319,13 +3691,14 @@
   id,
   item_name,
   category,
+  english_name,
   stock_quantity,
   unit,
   threshold_quantity,
   storage_location,
   supplier,
   last_stocked_date,
-  note,
+  memo,
   created_at,
   updated_at,
   deleted_at
@@ -3333,7 +3706,8 @@
 (
   1,
   'ゆずエッセンス',
-  '香料',
+  '素材',
+  'Yuzu essence',
   120.00,
   'ml',
   20.00,
@@ -3348,7 +3722,8 @@
 (
   2,
   'ひばエッセンス',
-  '香料',
+  '素材',
+  'Hiba essence',
   95.00,
   'ml',
   20.00,
@@ -3363,7 +3738,8 @@
 (
   3,
   '薄荷エッセンス',
-  '香料',
+  '素材',
+  'Japanese mint essence',
   80.00,
   'ml',
   15.00,
@@ -3379,6 +3755,7 @@
   4,
   '30ml香水ボトル',
   '容器',
+  'Perfume bottle 30ml',
   200.00,
   '個',
   30.00,
@@ -3394,6 +3771,7 @@
   5,
   'ギフトボックス',
   '容器',
+  'Gift box',
   60.00,
   '個',
   10.00,
@@ -3413,9 +3791,9 @@
                       <td>
                         <pre><code>INSERT INTO products (
   id,
-  inventory_item_id,
+  category_id,
   product_name,
-  category,
+  english_name,
   price,
   description,
   is_active,
@@ -3425,33 +3803,33 @@
 ) VALUES
 (
   1,
-  4,
-  '和香ボトル 30ml',
-  '香水',
-  4800,
-  'ひば、ゆず、薄荷を重ねた定番ブレンドの香水。',
-  TRUE,
-  CURRENT_TIMESTAMP,
-  CURRENT_TIMESTAMP,
-  NULL
-),
-(
   2,
-  NULL,
-  'ゆずハンドクリーム',
-  'ハンドクリーム',
-  2400,
-  'ゆずの明るく爽やかな香りを楽しめるハンドクリーム。',
+  'ゆずエッセンス',
+  'Yuzu essence',
+  1200,
+  '柑橘系ブレンド用の香り素材。',
   TRUE,
   CURRENT_TIMESTAMP,
   CURRENT_TIMESTAMP,
   NULL
 ),
 (
+  4,
   3,
+  '30ml香水ボトル',
+  'Perfume bottle 30ml',
+  800,
+  '体験完成品・EC商品用ボトル。',
+  TRUE,
+  CURRENT_TIMESTAMP,
+  CURRENT_TIMESTAMP,
+  NULL
+),
+(
   5,
+  1,
   '香りギフトセット',
-  'ギフト',
+  'Fragrance gift set',
   7800,
   '旅の記憶を贈るギフトセット。',
   TRUE,
@@ -3461,7 +3839,6 @@
 );</code></pre>
                       </td>
                     </tr>
-
                     <tr>
                       <td>reservations（予約）</td>
                       <td>
@@ -3472,6 +3849,7 @@
   reservation_date,
   reservation_time,
   number_of_people,
+  preferred_language,
   status,
   request_note,
   created_at,
@@ -3483,8 +3861,9 @@
   1,
   1,
   DATE '2026-05-20',
-  TIME '13:00:00',
+  '13:00',
   2,
+  'Japanese',
   'RESERVED',
   '英語での案内を希望。',
   CURRENT_TIMESTAMP,
@@ -3496,8 +3875,9 @@
   2,
   2,
   DATE '2026-05-22',
-  TIME '10:00:00',
+  '10:00',
   2,
+  'Japanese',
   'RESERVED',
   'ギフト購入も検討中。',
   CURRENT_TIMESTAMP,
@@ -3515,6 +3895,7 @@
   customer_id,
   recipe_name,
   concept_note,
+  memo,
   total_amount,
   created_at,
   updated_at,
@@ -3525,6 +3906,7 @@
   1,
   '柚子とひばのブレンド',
   '東京旅行の思い出として、爽やかさと落ち着きを両立した香り。',
+  NULL,
   100.00,
   CURRENT_TIMESTAMP,
   CURRENT_TIMESTAMP,
@@ -3535,6 +3917,7 @@
   2,
   '薄荷とゆずのリフレッシュブレンド',
   'ギフト向けに、軽やかで清涼感のある香りを意識。',
+  NULL,
   100.00,
   CURRENT_TIMESTAMP,
   CURRENT_TIMESTAMP,
