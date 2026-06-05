@@ -217,7 +217,7 @@
 │  │ @Mapper          │                         │ @Mapper          │       │
 │  │ select/insert... │                         │ select/insert... │       │
 │  └────────┬─────────┘                         └────────┬─────────┘       │
-│           │ MyBatis / SQL                              │ MyBatis / SQL   │
+│           │ JPA / SQL                                  │ JPA / SQL   │
 │           v                                            v                 │
 │  [Entity]                                                                │
 │  ┌──────────────────┐     ┌──────────────────┐     ┌──────────────────┐ │
@@ -241,7 +241,7 @@
 凡例:
   DI注入  : Spring DI Container が @Autowired によりBean参照を設定する関係
   Form    : Controllerがリクエスト入力をTaskFormとして受け取り、Serviceへ渡す関係
-  MyBatis : MapperがDatabaseへアクセスし、Task/User/CategoryなどのEntityへマッピングする関係
+  JPA     : MapperがDatabaseへアクセスし、Task/User/CategoryなどのEntityへマッピングする関係
                 </pre>
               </div>
             </div>
