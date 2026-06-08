@@ -1,5 +1,6 @@
 package com.aromatripnippon.form;
 
+import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.Max;
@@ -13,27 +14,38 @@ public class ReservationRequest {
   @FutureOrPresent
   @NotNull
   private LocalDate visitDate;
+
   @NotBlank
-  @Size(max = 255, message = "時間帯は255文字以内で入力してください。")
+  @Size(max = 255, message = "Time slot must be 255 characters or fewer.")
   private String timeSlot;
+
   @Min(1)
   @Max(4)
   private Integer guestCount;
+
   @NotBlank
-  @Size(max = 255, message = "お名前は255文字以内で入力してください。")
+  @Size(max = 255, message = "Name must be 255 characters or fewer.")
   private String name;
+
   @Email
   @NotBlank
-  @Size(max = 255, message = "メールアドレスは255文字以内で入力してください。")
+  @Size(max = 255, message = "Email address must be 255 characters or fewer.")
   private String email;
-  @Size(max = 255, message = "電話番号は255文字以内で入力してください。")
+
+  @Size(max = 255, message = "Phone number must be 255 characters or fewer.")
   private String phone;
-  @Size(max = 255, message = "国籍は255文字以内で入力してください。")
+
+  @Size(max = 255, message = "Nationality must be 255 characters or fewer.")
   private String nationality;
-  @Size(max = 255, message = "希望言語は255文字以内で入力してください。")
-  private String preferredLanguage = "英語";
-  @Size(max = 1000, message = "要望・備考は1000文字以内で入力してください。")
+
+  @Size(max = 255, message = "Preferred language must be 255 characters or fewer.")
+  private String preferredLanguage = "Japanese";
+
+  @Size(max = 1000, message = "Requests or notes must be 1000 characters or fewer.")
   private String requestNote;
+
+  @AssertTrue(message = "You must agree to the privacy policy and personal data handling.")
+  private boolean privacyConsent;
 
   public LocalDate getVisitDate() { return visitDate; }
   public void setVisitDate(LocalDate visitDate) { this.visitDate = visitDate; }
@@ -53,4 +65,6 @@ public class ReservationRequest {
   public void setPreferredLanguage(String preferredLanguage) { this.preferredLanguage = preferredLanguage; }
   public String getRequestNote() { return requestNote; }
   public void setRequestNote(String requestNote) { this.requestNote = requestNote; }
+  public boolean isPrivacyConsent() { return privacyConsent; }
+  public void setPrivacyConsent(boolean privacyConsent) { this.privacyConsent = privacyConsent; }
 }

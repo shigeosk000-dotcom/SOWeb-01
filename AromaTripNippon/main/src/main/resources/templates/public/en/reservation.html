@@ -12,26 +12,35 @@
 <body class="site-en">
   <header class="header">
     <div class="container header-inner">
-      <a class="brand" th:href="@{/en/}"><img class="brand-logo" th:src="@{/assets/images/LOGO.png}" alt="Aroma Trip Nippon" /></a>
-      <nav class="nav"><a th:href="@{/en/concept}">Concept</a><a th:href="@{/en/experience}">Experience</a><a th:href="@{/en/reservation}">Booking</a></nav>
-      <div class="header-actions"><div class="lang-switch"><a th:href="@{/reservation}">JP</a><a class="active" th:href="@{/en/reservation}">EN</a></div><a class="btn" th:href="@{/en/reservation}">Book Experience</a></div>
+      <a class="brand" th:href="@{/en/}"><img class="brand-logo" th:src="@{/assets/images/LOGO.png}"
+          alt="Aroma Trip Nippon" /></a>
+      <nav class="nav"><a th:href="@{/en/concept}">Concept</a><a th:href="@{/en/experience}">Experience</a><a
+          th:href="@{/en/reservation}">Booking</a></nav>
+      <div class="header-actions">
+        <div class="lang-switch"><a th:href="@{/reservation}">JP</a><a class="active"
+            th:href="@{/en/reservation}">EN</a></div><a class="btn" th:href="@{/en/reservation}">Book Experience</a>
+      </div>
     </div>
   </header>
 
   <main class="container">
-    <div class="breadcrumbs"><a th:href="@{/en/}">Top</a> / <a th:href="@{/en/experience}">Experience</a> / <span>Booking</span></div>
+    <div class="breadcrumbs"><a th:href="@{/en/}">Top</a> / <a th:href="@{/en/experience}">Experience</a> /
+      <span>Booking</span></div>
     <section class="hero">
       <div class="grid-2">
         <div class="card form-card">
           <div class="kicker">BOOKING</div>
           <p class="jp-note">予約フォーム</p>
           <h1>Book your experience.</h1>
-          <p class="lead">Choose your date, time, and party size. Your booking will be registered in the same reservation
+          <p class="lead">Choose your date, time, and party size. Your booking will be registered in the same
+            reservation
             system as the Japanese site.</p>
           <p class="notice" th:if="${errorMessage}" th:text="${errorMessage}"></p>
           <form th:action="@{/en/reservation}" th:object="${reservationRequest}" method="post" data-reservation-form>
             <input type="hidden" th:if="${_csrf != null}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-            <div class="field"><label for="date">Preferred date</label><input id="date" type="date" th:field="*{visitDate}" th:attr="min=${minDate},max=${maxDate}" lang="en" aria-describedby="date-format" required /><span class="field-hint" id="date-format">Format: YYYY-MM-DD</span></div>
+            <div class="field"><label for="date">Preferred date</label><input id="date" type="date"
+                th:field="*{visitDate}" th:attr="min=${minDate},max=${maxDate}" lang="en" aria-describedby="date-format"
+                required /><span class="field-hint" id="date-format">Format: YYYY-MM-DD</span></div>
             <div class="field"><label for="time">Time</label><select id="time" th:field="*{timeSlot}" required>
                 <option value="10:00">10:00</option>
                 <option value="14:00">14:00</option>
@@ -43,15 +52,36 @@
                 <option value="3">3 guests</option>
                 <option value="4">4 guests</option>
               </select></div>
-            <div class="field"><label for="name">Name</label><input id="name" type="text" th:field="*{name}" maxlength="255" placeholder="Jane Smith" required /></div>
-            <div class="field"><label for="email">Email</label><input id="email" type="email" th:field="*{email}" maxlength="255" placeholder="name@example.com" required /></div>
-            <div class="field"><label for="phone">Phone</label><input id="phone" type="text" th:field="*{phone}" maxlength="255" placeholder="+1 555 123 4567" /></div>
-            <div class="field"><label for="nationality">Nationality</label><input id="nationality" type="text" th:field="*{nationality}" maxlength="255" placeholder="United States" /></div>
-            <div class="field"><label for="lang">Preferred language</label><select id="lang" th:field="*{preferredLanguage}">
+            <div class="field"><label for="name">Name</label><input id="name" type="text" th:field="*{name}"
+                maxlength="255" placeholder="Jane Smith" required /></div>
+            <div class="field"><label for="email">Email</label><input id="email" type="email" th:field="*{email}"
+                maxlength="255" placeholder="name@example.com" required /></div>
+            <div class="field"><label for="phone">Phone</label><input id="phone" type="text" th:field="*{phone}"
+                maxlength="255" placeholder="+1 555 123 4567" /></div>
+            <div class="field"><label for="nationality">Nationality</label><input id="nationality" type="text"
+                th:field="*{nationality}" maxlength="255" placeholder="United States" /></div>
+            <div class="field"><label for="lang">Preferred language</label><select id="lang"
+                th:field="*{preferredLanguage}">
                 <option value="English">English</option>
                 <option value="Japanese">Japanese</option>
               </select></div>
-            <div class="field"><label for="request">Requests or notes</label><textarea id="request" cols="50" rows="3" th:field="*{requestNote}" maxlength="1000" placeholder="Please tell us about allergies, accessibility needs, or anything we should know."></textarea></div>
+            <div class="field"><label for="request">Requests or notes</label><textarea id="request" cols="50" rows="3"
+                th:field="*{requestNote}" maxlength="1000"
+                placeholder="Please tell us about allergies, accessibility needs, or anything we should know."></textarea>
+            </div>
+            <div class="notice" style="margin-top:8px;margin-bottom:6px;line-height:1.6">
+              <strong>Privacy Policy</strong><br />
+              We use the personal information you provide, such as your name, email address, phone number, and
+              nationality, to process your reservation, verify your identity, contact you, and improve our service. We
+              will not provide your information to third parties without your consent, except when required by law.
+            </div>
+            <div class="field" style="margin-top:0">
+              <label style="display:flex;gap:6px;align-items:flex-start;line-height:1.5;width:100%">
+                <input type="checkbox" th:field="*{privacyConsent}" required
+                  style="width:auto;padding:0;border:0;background:transparent;margin:0.18em 0 0;flex:0 0 auto" />
+                <span>I agree to the privacy policy and the handling of my personal information.</span>
+              </label>
+            </div>
             <p class="notice" th:if="${#fields.hasErrors('*')}">Please check the required fields and try again.</p>
             <div class="spacer"></div>
             <button class="btn" type="submit">Submit Reservation</button>
@@ -60,15 +90,22 @@
         <div class="card form-card">
           <h2>Reservation details</h2>
           <div class="review" style="margin-bottom:16px"><span class="pill">Plan</span>
-            <h3 th:text="${program != null ? program.name : 'Fragrance-making experience'}">Fragrance-making experience</h3>
-            <p class="text"><span th:text="${program != null ? program.durationMinutes + ' min' : 'Approx. 90 min'}">Approx. 90 min</span> / <span th:text="${program != null ? 'From ¥' + #numbers.formatDecimal(program.price, 0, 'COMMA', 0, 'POINT') : 'From ¥5,500'}">From ¥5,500</span> / English and Japanese support</p>
+            <h3 th:text="${program != null ? program.name : 'Fragrance-making experience'}">Fragrance-making experience
+            </h3>
+            <p class="text"><span
+                th:text="${program != null ? program.durationMinutes + ' min' : 'Approx. 90 min'}">Approx. 90 min</span>
+              / <span
+                th:text="${program != null ? 'From ¥' + #numbers.formatDecimal(program.price, 0, 'COMMA', 0, 'POINT') : 'From ¥5,500'}">From
+                ¥5,500</span> / English and Japanese support</p>
           </div>
           <div class="review" style="margin-bottom:16px"><span class="pill">Included</span>
-            <p class="text">Ingredient introduction, fragrance blending, finished fragrance bottle, and recipe record.</p>
+            <p class="text">Ingredient introduction, fragrance blending, finished fragrance bottle, and recipe record.
+            </p>
           </div>
           <div class="review"><span class="pill">Before you visit</span>
             <ul class="list">
               <li>Please arrive 10 minutes before your reservation time.</li>
+              <li>Please pay on the day in cash (Japanese yen) or by credit card (Visa, Mastercard, JCB, or UnionPay).</li>
               <li>Tell us in advance if you are sensitive to fragrances.</li>
               <li>English guidance is available.</li>
             </ul>

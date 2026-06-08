@@ -10,7 +10,17 @@
 </head>
 
 <body>
-  <header class="header"><div class="container header-inner"><a class="brand" th:href="@{/}"><img class="brand-logo" th:src="@{/assets/images/LOGO.png}" alt="Aroma Trip Nippon" /></a><nav class="nav"><a th:href="@{/concept}">コンセプト</a><a th:href="@{/experience}">体験詳細</a><a th:href="@{/reservation}">予約</a></nav><div class="header-actions"><div class="lang-switch"><a class="active" th:href="@{/reservation}">JP</a><a th:href="@{/en/reservation}">EN</a></div><a class="btn" th:href="@{/reservation}">予約する</a></div></div></header>
+  <header class="header">
+    <div class="container header-inner"><a class="brand" th:href="@{/}"><img class="brand-logo"
+          th:src="@{/assets/images/LOGO.png}" alt="Aroma Trip Nippon" /></a>
+      <nav class="nav"><a th:href="@{/concept}">コンセプト</a><a th:href="@{/experience}">体験詳細</a><a
+          th:href="@{/reservation}">予約</a></nav>
+      <div class="header-actions">
+        <div class="lang-switch"><a class="active" th:href="@{/reservation}">JP</a><a
+            th:href="@{/en/reservation}">EN</a></div><a class="btn" th:href="@{/reservation}">予約する</a>
+      </div>
+    </div>
+  </header>
   <main class="container">
     <div class="breadcrumbs"><a th:href="@{/}">トップ</a> / <a th:href="@{/experience}">体験詳細</a> / <span>予約</span></div>
     <section class="hero">
@@ -22,29 +32,79 @@
           <p class="notice" th:if="${errorMessage}" th:text="${errorMessage}"></p>
           <form th:action="@{/reservation}" th:object="${reservationRequest}" method="post" data-reservation-form>
             <input type="hidden" th:if="${_csrf != null}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-            <div class="field"><label for="date">日程</label><input id="date" type="date" th:field="*{visitDate}" th:attr="min=${minDate},max=${maxDate}" required /></div>
-            <div class="field"><label for="time">時間</label><select id="time" th:field="*{timeSlot}" required><option value="10:00">10:00</option><option value="14:00">14:00</option><option value="16:00">16:00</option></select></div>
-            <div class="field"><label for="people">人数</label><select id="people" th:field="*{guestCount}" required><option value="1">1名</option><option value="2">2名</option><option value="3">3名</option><option value="4">4名</option></select></div>
-            <div class="field"><label for="name">お名前</label><input id="name" type="text" th:field="*{name}" maxlength="255" placeholder="山田 太郎" required /></div>
-            <div class="field"><label for="email">メールアドレス</label><input id="email" type="email" th:field="*{email}" maxlength="255" placeholder="name@example.com" required /></div>
-            <div class="field"><label for="phone">電話</label><input id="phone" type="text" th:field="*{phone}" maxlength="255" placeholder="090-1234-5678" /></div>
-            <div class="field"><label for="nationality">国籍</label><input id="nationality" type="text" th:field="*{nationality}" maxlength="255" placeholder="日本" /></div>
-            <div class="field"><label for="lang">希望言語</label><select id="lang" th:field="*{preferredLanguage}"><option value="日本語">日本語</option><option value="英語">英語</option></select></div>
-            <div class="field"><label for="request">要望・備考</label><textarea id="request" cols="50" rows="3" th:field="*{requestNote}" maxlength="1000" placeholder="要望があればご入力ください。"></textarea></div>
+            <div class="field"><label for="date">日程</label><input id="date" type="date" th:field="*{visitDate}"
+                th:attr="min=${minDate},max=${maxDate}" required /></div>
+            <div class="field"><label for="time">時間</label><select id="time" th:field="*{timeSlot}" required>
+                <option value="10:00">10:00</option>
+                <option value="14:00">14:00</option>
+                <option value="16:00">16:00</option>
+              </select></div>
+            <div class="field"><label for="people">人数</label><select id="people" th:field="*{guestCount}" required>
+                <option value="1">1名</option>
+                <option value="2">2名</option>
+                <option value="3">3名</option>
+                <option value="4">4名</option>
+              </select></div>
+            <div class="field"><label for="name">お名前</label><input id="name" type="text" th:field="*{name}"
+                maxlength="255" placeholder="山田 太郎" required /></div>
+            <div class="field"><label for="email">メールアドレス</label><input id="email" type="email" th:field="*{email}"
+                maxlength="255" placeholder="name@example.com" required /></div>
+            <div class="field"><label for="phone">電話</label><input id="phone" type="text" th:field="*{phone}"
+                maxlength="255" placeholder="090-1234-5678" /></div>
+            <div class="field"><label for="nationality">国籍</label><input id="nationality" type="text"
+                th:field="*{nationality}" maxlength="255" placeholder="日本" /></div>
+            <div class="field"><label for="lang">希望言語</label><select id="lang" th:field="*{preferredLanguage}">
+                <option value="日本語">日本語</option>
+                <option value="英語">英語</option>
+              </select></div>
+            <div class="field"><label for="request">要望・備考</label><textarea id="request" cols="50" rows="3"
+                th:field="*{requestNote}" maxlength="1000" placeholder="要望があればご入力ください。"></textarea></div>
+            <div class="notice" style="margin-top:8px;margin-bottom:6px;line-height:1.6">
+              <strong>プライバシーポリシー</strong><br />
+              ご入力いただいたお名前、メールアドレス、電話番号、国籍などの個人情報は、予約受付、本人確認、ご連絡、サービス向上のために利用します。法令に基づく場合を除き、ご本人の同意なく第三者に提供することはありません。
+            </div>
+            <div class="field" style="margin-top:0">
+              <label style="display:flex;gap:6px;align-items:flex-start;line-height:1.5;width:100%">
+                <input type="checkbox" th:field="*{privacyConsent}" required
+                  style="width:auto;padding:0;border:0;background:transparent;margin:0.18em 0 0;flex:0 0 auto" />
+                <span>プライバシーポリシーおよび個人情報の取扱いに同意します。</span>
+              </label>
+            </div>
             <p class="notice" th:if="${#fields.hasErrors('*')}">入力内容をご確認ください。</p>
             <div class="spacer"></div><button class="btn" type="submit">予約を確定する</button>
           </form>
         </div>
         <div class="card form-card">
           <h2>予約のご案内</h2>
-          <div class="review" style="margin-bottom:16px"><span class="pill">プラン</span><h3 th:text="${program != null ? program.name : '香りづくり体験'}">香りづくり体験</h3><p class="text"><span th:text="${program != null ? program.durationMinutes + '分' : '約90分'}">約90分</span> / <span th:text="${program != null ? '¥' + #numbers.formatDecimal(program.price, 0, 'COMMA', 0, 'POINT') + '〜' : '¥5,500〜'}">¥5,500〜</span> / EN・JP対応</p></div>
-          <div class="review" style="margin-bottom:16px"><span class="pill">含まれる内容</span><p class="text">素材紹介、調香体験、完成ボトル、レシピ記録。</p></div>
-          <div class="review"><span class="pill">ご来店前のお願い</span><ul class="list"><li>予約時刻の10分前までにご来店ください。</li><li>香りに敏感な方は事前にお知らせください。</li><li>通訳対応可能です。</li></ul></div>
+          <div class="review" style="margin-bottom:16px"><span class="pill">プラン</span>
+            <h3 th:text="${program != null ? program.name : '香りづくり体験'}">香りづくり体験</h3>
+            <p class="text"><span th:text="${program != null ? program.durationMinutes + '分' : '約90分'}">約90分</span> /
+              <span
+                th:text="${program != null ? '¥' + #numbers.formatDecimal(program.price, 0, 'COMMA', 0, 'POINT') + '〜' : '¥5,500〜'}">¥5,500〜</span>
+              / EN・JP対応</p>
+          </div>
+          <div class="review" style="margin-bottom:16px"><span class="pill">含まれる内容</span>
+            <p class="text">素材紹介、調香体験、完成ボトル、レシピ記録。</p>
+          </div>
+          <div class="review"><span class="pill">ご来店前のお願い</span>
+            <ul class="list">
+              <li>予約時刻の10分前までにご来店ください。</li>
+              <li>お支払いは当日、現金又はクレジットカード（Visa、Mastercard、JCB、銀聯）でお支払いください。</li>
+              <li>香りに敏感な方は事前にお知らせください。</li>
+              <li>通訳対応可能です。</li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
   </main>
-  <footer class="footer"><div class="container footer-grid"><div><strong>Aroma Trip Nippon</strong><br>Booking</div><div><a th:href="@{/experience}">体験詳細</a></div><div><a th:href="@{/concept}">コンセプト</a></div></div></footer>
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div><strong>Aroma Trip Nippon</strong><br>Booking</div>
+      <div><a th:href="@{/experience}">体験詳細</a></div>
+      <div><a th:href="@{/concept}">コンセプト</a></div>
+    </div>
+  </footer>
   <script th:src="@{/js/public-nav.js}" defer></script>
 </body>
 
